@@ -21,6 +21,7 @@ class ClassApp():
         self.root = Tk()
         self.root.title("MKWFaraphel Installateur")
         self.root.resizable(False, False)
+        self.root.iconbitmap(bitmap="./icon.ico")
 
         self.frame_game_path = LabelFrame(self.root, text="Jeu original")
         self.frame_game_path.grid(row=1,column=1)
@@ -244,7 +245,6 @@ class ClassApp():
         t.start()
 
 # TODO: Langue
-# TODO: Icones
 # TODO: Update
 # TODO: Changer l'ID
 # TODO: Convertir en ISO / WBFS... après l'installation
