@@ -66,15 +66,16 @@ class ClassApp():
     def patch_file(self):
         with open("./convert_file.json") as f: fc = json.load(f)
         for file in fc["img"]:
+            print(get_filename(file))
             if not(os.path.exists("./file/"+get_filename(file))):
                 subprocess.call(["wimgt", "ENCODE", "./file/"+file, "-x", fc["img"][file]])
 
         for file in fc["bmg"]:
-            if not(os.path.exists("./file/"+get_filename(file))):
+            if not(os.path.exists("./file/"+get_filename(file)+".bmg")):
                 subprocess.call(["wbmgt", "ENCODE", "./file/"+file])
 
-        subprocess.call(["wszst", "NORMALIZE", "./file/Track-WU8/*.wu8", "-d", "./file/Track/", "--szs", "--overwrite",
-                         "--autoadd-path", self.path_mkwf+"/files/Race/Course/"])
+        subprocess.call(["wszst", "NORMALIZE", "./file/Track-WU8/*.wu8", "-d", "./file/Track/%N.szs", "--szs",
+                         "--overwrite", "--autoadd-path", self.path_mkwf+"/files/Race/Course/"])
 
 
     def install_mod(self):
@@ -112,7 +113,7 @@ class ClassApp():
 
         print(extracted_file)
         for file in extracted_file:
-            subprocess.call(["wszst", "CREATE", file+".d", "-d", "file", "--overwrite"])
+            subprocess.call(["wszst", "CREATE", file+".d", "-d", file, "--overwrite"])
             if os.path.exists(file+".d"): shutil.rmtree(file+".d")
 
         subprocess.call(["wstrt", "patch", self.path_mkwf+"/sys/main.dol", "--clean-dol", "--add-lecode"])
