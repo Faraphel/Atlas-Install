@@ -150,7 +150,7 @@ class ClassApp():
 
             if os.path.exists("./file/Track-WU8/"):
                 for i, file in enumerate(os.listdir("./file/Track-WU8/")):
-                    self.Progress(statut=f"Conversion des textes\n({i+1}/{total_track}) {file}", add=1)
+                    self.Progress(statut=f"Conversion des courses\n({i+1}/{total_track}) {file}", add=1)
                     subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "--DEST", "./file/Track/%N.szs",
                                      "--szs", "--overwrite", "--autoadd-path", "./file/auto-add/"])
                 shutil.rmtree("./file/Track-WU8/")
