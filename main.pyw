@@ -74,8 +74,10 @@ class ClassApp():
             if not(os.path.exists("./file/"+get_filename(file)+".bmg")):
                 subprocess.call(["wbmgt", "ENCODE", "./file/"+file])
 
-        subprocess.call(["wszst", "NORMALIZE", "./file/Track-WU8/*.wu8", "-d", "./file/Track/%N.szs", "--szs",
-                         "--overwrite", "--autoadd-path", self.path_mkwf+"/files/Race/Course/"])
+        if os.path.exists("./file/Track-WU8/"):
+            subprocess.call(["wszst", "NORMALIZE", "./file/Track-WU8/*.wu8", "-d", "./file/Track/%N.szs", "--szs",
+                             "--overwrite", "--autoadd-path", self.path_mkwf+"/files/Race/Course/"])
+            shutil.rmtree("./file/Track-WU8/")
 
 
     def install_mod(self):
