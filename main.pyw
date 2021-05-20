@@ -148,12 +148,11 @@ class ClassApp():
             if not(os.path.exists("./file/auto-add/")):
                 subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf+"/files/Race/Course/", "--DEST", "./file/auto-add/"])
 
-            if os.path.exists("./file/Track-WU8/"):
-                for i, file in enumerate(os.listdir("./file/Track-WU8/")):
-                    self.Progress(statut=f"Conversion des courses\n({i+1}/{total_track}) {file}", add=1)
+            for i, file in enumerate(os.listdir("./file/Track-WU8/")):
+                self.Progress(statut=f"Conversion des courses\n({i+1}/{total_track}) {file}", add=1)
+                if not(os.path.exists("./file/Track/"+get_filename(file)+".szs")):
                     subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "--DEST", "./file/Track/%N.szs",
                                      "--szs", "--overwrite", "--autoadd-path", "./file/auto-add/"])
-                shutil.rmtree("./file/Track-WU8/")
 
             self.Progress(show=False)
             self.button_install_mod.grid(row=2,column=1,sticky="NEWS")
