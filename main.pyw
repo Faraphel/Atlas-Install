@@ -11,6 +11,9 @@ def filecopy(src, dst):
         with open(dst, "wb") as f2:
             f2.write(f1.read()) # could be buffered
 
+get_filename = lambda file: ".".join(file.split(".")[:-1])
+if not(os.path.exists("./file/Track/")):
+    os.makedirs("./file/Track/")
 
 class ClassApp():
     def __init__(self):
@@ -47,7 +50,7 @@ class ClassApp():
                 while True:
                     if not(os.path.exists(self.path_mkwf)): break
                     self.path_mkwf, i = os.path.realpath(path + f"/../MKWiiFaraphel ({i})"), i+1
-                subprocess.call(f'wit EXTRACT "{path}" -d "{self.path_mkwf}"', shell=True)
+                subprocess.call(["wit", "EXTRACT", path, "-d", self.path_mkwf])
             else: return messagebox.showerror("Erreur", "Le type de fichier n'est pas reconnu")
             self.frame_action.grid(row=2, column=1,sticky="NEWS")
 
@@ -59,8 +62,25 @@ class ClassApp():
         Button(self.frame_action, text="Installer le mod", relief=RIDGE, command=self.install_mod, width=45
                ).grid(row=1,column=1,sticky="NEWS")
 
+
+    def patch_file(self):
+        with open("./convert_file.json") as f: fc = json.load(f)
+        for file in fc["img"]:
+            if not(os.path.exists("./file/"+get_filename(file))):
+                subprocess.call(["wimgt", "ENCODE", "./file/"+file, "-x", fc["img"][file]])
+
+        for file in fc["bmg"]:
+            if not(os.path.exists("./file/"+get_filename(file))):
+                subprocess.call(["wbmgt", "ENCODE", "./file/"+file])
+
+        subprocess.call(["wszst", "NORMALIZE", "./file/Track-WU8/*.wu8", "-d", "./file/Track/", "--szs", "--overwrite",
+                         "--autoadd-path", self.path_mkwf+"/files/Race/Course/"])
+
+
     def install_mod(self):
-        with open("fs.json") as f: fs = json.load(f)
+        self.patch_file()
+
+        with open("./fs.json") as f: fs = json.load(f)
         extracted_file = []
 
         def replace_file(path, file, subpath="/"):
@@ -69,7 +89,7 @@ class ClassApp():
 
             if extension == "szs":
                 if not(os.path.realpath(path) in extracted_file):
-                    subprocess.call(f'wszst EXTRACT "{path}" -d "{path}.d" --overwrite', shell=True)
+                    subprocess.call(["wszst", "EXTRACT", path, "-d", path+".d", "--overwrite"])
                     extracted_file.append(os.path.realpath(path))
 
                 szs_extract_path = path+".d"
@@ -92,22 +112,25 @@ class ClassApp():
 
         print(extracted_file)
         for file in extracted_file:
-            subprocess.call(f"wszst CREATE \"{file}.d\" -d \"{file}\" --overwrite", shell=True)
+            subprocess.call(["wszst", "CREATE", file+".d", "-d", "file", "--overwrite"])
             if os.path.exists(file+".d"): shutil.rmtree(file+".d")
 
-        subprocess.call(f'wstrt patch "{self.path_mkwf}/sys/main.dol" --clean-dol --add-lecode', shell=True)
+        subprocess.call(["wstrt", "patch", self.path_mkwf+"/sys/main.dol", "--clean-dol", "--add-lecode"])
         subprocess.call(
-            f'wlect patch "./file/lecode-PAL.bin" -od "{self.path_mkwf}/files/rel/lecode-PAL.bin" ' +\
-            f'--track-dir "{self.path_mkwf}/files/Race/Course/" --copy-tracks "./file/Track/" ' +\
-            f'--move-tracks "{self.path_mkwf}/files/Race/Course/" --le-define ' +\
-            f'"./file/CTFILE.txt" --lpar "./file/lpar-default.txt" --overwrite', shell=True)
+            ["wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf+"/files/rel/lecode-PAL.bin",
+            "--track-dir", self.path_mkwf+"/files/Race/Course/", "--copy-tracks", "./file/Track/",
+            "--move-tracks", self.path_mkwf+"/files/Race/Course/", "--le-define",
+            "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"])
 
         messagebox.showinfo("", "L'installation est terminé !")
 
 # TODO: Langue
-# TODO: Le moins de fichier possible nintendo-copyright
 # TODO: Icones
 # TODO: Wiimm's tools fournis
-# TODO:
+# TODO: Update
+# TODO: Warning : Already Patched
+# TODO: Progress bar
+# TODO: Changer l'ID
+# TODO: use Shutil to copyfile
 App = ClassApp()
 mainloop()
