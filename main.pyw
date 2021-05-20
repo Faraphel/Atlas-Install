@@ -15,7 +15,6 @@ def filecopy(src, dst):
 get_filename = lambda file: ".".join(file.split(".")[:-1])
 get_nodir = lambda file: file.split("/")[-1].split("\\")[-1]
 get_extension = lambda file: file.split(".")[-1]
-if not(os.path.exists("./file/Track/")): os.makedirs("./file/Track/")
 
 class ClassApp():
     def __init__(self):
@@ -59,7 +58,7 @@ class ClassApp():
                         self.path_mkwf, i = os.path.realpath(path + f"/../MKWiiFaraphel ({i})"), i+1
 
                     self.Progress(show=True, indeter=True, statut="Extraction du jeu...")
-                    subprocess.call(["./tools/wit/wit", "EXTRACT", path, "-d", self.path_mkwf])
+                    subprocess.call(["./tools/wit/wit", "EXTRACT", path, "--DEST", self.path_mkwf])
                     self.Progress(show=False)
 
                 else:
@@ -146,11 +145,14 @@ class ClassApp():
                 if not(os.path.exists("./file/"+get_filename(file)+".bmg")):
                     subprocess.call(["./tools/szs/wbmgt", "ENCODE", "./file/"+file])
 
+            if not(os.path.exists("./file/auto-add/")):
+                subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf+"/files/Race/Course/", "--DEST", "./file/auto-add/"])
+
             if os.path.exists("./file/Track-WU8/"):
                 for i, file in enumerate(os.listdir("./file/Track-WU8/")):
                     self.Progress(statut=f"Conversion des textes\n({i+1}/{total_track}) {file}", add=1)
-                    subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "-d", "./file/Track/%N.szs",
-                                     "--szs", "--overwrite"])
+                    subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "--DEST", "./file/Track/%N.szs",
+                                     "--szs", "--overwrite", "--autoadd-path", "./file/auto-add/"])
                 shutil.rmtree("./file/Track-WU8/")
 
             self.Progress(show=False)
@@ -244,7 +246,6 @@ class ClassApp():
 # TODO: Langue
 # TODO: Icones
 # TODO: Update
-# TODO: Progress bar
 # TODO: Changer l'ID
 # TODO: Convertir en ISO / WBFS... après l'installation
 App = ClassApp()
