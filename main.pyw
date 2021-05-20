@@ -47,11 +47,18 @@ class ClassApp():
                     self.path_mkwf = os.path.realpath(path + "/../../")
             elif extension.upper() in ["ISO", "WBFS", "WIA", "CSIO"]:
                 self.path_mkwf, i = os.path.realpath(path + "/../MKWiiFaraphel"), 1
+
                 while True:
                     if not(os.path.exists(self.path_mkwf)): break
                     self.path_mkwf, i = os.path.realpath(path + f"/../MKWiiFaraphel ({i})"), i+1
-                subprocess.call(["wit", "EXTRACT", path, "-d", self.path_mkwf])
+                subprocess.call(["./tools/wit/wit", "EXTRACT", path, "-d", self.path_mkwf])
+
             else: return messagebox.showerror("Erreur", "Le type de fichier n'est pas reconnu")
+
+            if os.path.exists(self.path_mkwf + "/files/rel/lecode-PAL.bin"):
+                messagebox.showwarning("Attention", "Cette ROM est déjà moddé,"+\
+                                                    "il est déconseillé de l'utiliser pour installer le mod")
+
             self.frame_action.grid(row=2, column=1,sticky="NEWS")
 
         Button(self.frame_game_path, text="Extraire le fichier", relief=RIDGE, command=use_path)\
@@ -68,14 +75,14 @@ class ClassApp():
         for file in fc["img"]:
             print(get_filename(file))
             if not(os.path.exists("./file/"+get_filename(file))):
-                subprocess.call(["wimgt", "ENCODE", "./file/"+file, "-x", fc["img"][file]])
+                subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/"+file, "-x", fc["img"][file]])
 
         for file in fc["bmg"]:
             if not(os.path.exists("./file/"+get_filename(file)+".bmg")):
-                subprocess.call(["wbmgt", "ENCODE", "./file/"+file])
+                subprocess.call(["./tools/szs/wbmgt", "ENCODE", "./file/"+file])
 
         if os.path.exists("./file/Track-WU8/"):
-            subprocess.call(["wszst", "NORMALIZE", "./file/Track-WU8/*.wu8", "-d", "./file/Track/%N.szs", "--szs",
+            subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/*.wu8", "-d", "./file/Track/%N.szs", "--szs",
                              "--overwrite", "--autoadd-path", self.path_mkwf+"/files/Race/Course/"])
             shutil.rmtree("./file/Track-WU8/")
 
@@ -92,7 +99,7 @@ class ClassApp():
 
             if extension == "szs":
                 if not(os.path.realpath(path) in extracted_file):
-                    subprocess.call(["wszst", "EXTRACT", path, "-d", path+".d", "--overwrite"])
+                    subprocess.call(["./tools/szs/wszst", "EXTRACT", path, "-d", path+".d", "--overwrite"])
                     extracted_file.append(os.path.realpath(path))
 
                 szs_extract_path = path+".d"
@@ -115,12 +122,12 @@ class ClassApp():
 
         print(extracted_file)
         for file in extracted_file:
-            subprocess.call(["wszst", "CREATE", file+".d", "-d", file, "--overwrite"])
+            subprocess.call(["./tools/szs/wszst", "CREATE", file+".d", "-d", file, "--overwrite"])
             if os.path.exists(file+".d"): shutil.rmtree(file+".d")
 
-        subprocess.call(["wstrt", "patch", self.path_mkwf+"/sys/main.dol", "--clean-dol", "--add-lecode"])
+        subprocess.call(["./tools/szs/wstrt", "patch", self.path_mkwf+"/sys/main.dol", "--clean-dol", "--add-lecode"])
         subprocess.call(
-            ["wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf+"/files/rel/lecode-PAL.bin",
+            ["./tools/szs/wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf+"/files/rel/lecode-PAL.bin",
             "--track-dir", self.path_mkwf+"/files/Race/Course/", "--copy-tracks", "./file/Track/",
             "--move-tracks", self.path_mkwf+"/files/Race/Course/", "--le-define",
             "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"])
@@ -129,11 +136,8 @@ class ClassApp():
 
 # TODO: Langue
 # TODO: Icones
-# TODO: Wiimm's tools fournis
 # TODO: Update
-# TODO: Warning : Already Patched
 # TODO: Progress bar
 # TODO: Changer l'ID
-# TODO: use Shutil to copyfile
 App = ClassApp()
 mainloop()
