@@ -172,6 +172,7 @@ class ClassApp():
             max_step, step = 0, 0
 
             def count_rf(path, file, subpath="/"):
+                nonlocal max_step
                 max_step += 1
                 extension = get_extension(path)
                 if extension == "szs":
@@ -195,8 +196,8 @@ class ClassApp():
 
 
             def replace_file(path, file, subpath="/"):
-                self.Progress(statut=f"Modification de {get_nodir(path)+subpath+file}", add=1)
-                print(path, subpath, file)
+                self.Progress(statut=f"Modification de\n{get_nodir(path)+subpath+file}", add=1)
+                #print(path, subpath, file)
                 extension = get_extension(path)
 
                 if extension == "szs":
@@ -223,7 +224,7 @@ class ClassApp():
 
 
             for file in extracted_file:
-                self.Progress(statut=f"Recompilation de {file}", add=1)
+                self.Progress(statut=f"Recompilation de\n{file}", add=1)
                 subprocess.call(["./tools/szs/wszst", "CREATE", file+".d", "-d", file, "--overwrite"])
                 if os.path.exists(file+".d"): shutil.rmtree(file+".d")
 
