@@ -193,12 +193,32 @@ class ClassApp():
                 subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf+"/files/Race/Course/", "--DEST",
                                  "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
 
+            max_process = 8
+            process_list = {}
+
             for i, file in enumerate(os.listdir("./file/Track-WU8/")):
-                self.Progress(statut=f"Conversion des courses\n({i+1}/{total_track}) {file}", add=1)
-                if not(os.path.exists("./file/Track/"+get_filename(file)+".szs")):
-                    subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "--DEST",
-                                     "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
-                                     "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
+                while True:
+                    if len(process_list) < max_process:
+                        process_list[file] = None
+                        self.Progress(statut=f"Conversion des courses\n({i + 1}/{total_track})\n" +
+                                     "\n".join(process_list.keys()), add=1)
+
+                        if not(os.path.exists("./file/Track/"+get_filename(file)+".szs")):
+                            process_list[file] = subprocess.Popen([
+                                "./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "--DEST",
+                                "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
+                                "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
+                        break
+                    else:
+                        for process in process_list:
+                            if process_list[process] is not None:
+                                if not(process_list[process].poll() is None):
+                                    process_list.pop(process)
+                                    break
+                            else:
+                                process_list.pop(process)
+                                break
+
 
             self.Progress(show=False)
             self.button_install_mod.grid(row=2,column=1,sticky="NEWS")
@@ -309,6 +329,5 @@ class ClassApp():
 
 # TODO: Langue
 # TODO: Use config.json to create CT-FILE
-# TODO: Convert multiple race at the same time
 App = ClassApp()
 mainloop()
