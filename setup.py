@@ -3,31 +3,31 @@ import sys
 import glob
 
 include_files = [
-            "./icon.ico",
-            "./LICENSE",
-            "./README.md",
-            "./version",
-            "./convert_file.json",
-            "./fs.json",
+    "./icon.ico",
+    "./LICENSE",
+    "./README.md",
+    "./version",
+    "./convert_file.json",
+    "./fs.json",
 
-            "./tools",
+    "./tools",
 
-            "./file/Track-WU8",
-            "./file/video.thp",
-            "./file/Back.brctr",
-            "./file/cup_icon_64x64_common.brlyt",
-            "./file/CupSelectCup.brctr",
-            "./file/CourseSelectCup.brctr",
-            "./file/course_name.brlyt",
-            "./file/lecode-PAL.bin",
-            "./file/itemBoxNiseRtpa.brres",
-            "./file/RKRace.breff",
-            sys.exec_prefix + "\\DLLs\\tcl86t.dll",
-            sys.exec_prefix + "\\DLLs\\tk86t.dll",
-        ]
+    ("./file/Track-WU8","./file/Track-WU8"),
+    ("./file/video.thp","./file/video.thp"),
+    ("./file/Back.brctr","./file/Back.brctr"),
+    ("./file/cup_icon_64x64_common.brlyt","./file/cup_icon_64x64_common.brlyt"),
+    ("./file/CupSelectCup.brctr","./file/CupSelectCup.brctr"),
+    ("./file/CourseSelectCup.brctr","./file/CourseSelectCup.brctr"),
+    ("./file/course_name.brlyt","./file/course_name.brlyt"),
+    ("./file/lecode-PAL.bin","./file/lecode-PAL.bin"),
+    ("./file/itemBoxNiseRtpa.brres","./file/itemBoxNiseRtpa.brres"),
+    ("./file/RKRace.breff","./file/RKRace.breff"),
+    sys.exec_prefix + "\\DLLs\\tcl86t.dll",
+    sys.exec_prefix + "\\DLLs\\tk86t.dll",
+]
 
-include_files.extend(["./file/"+x for x in glob.glob("./file/*.txt")])
-include_files.extend(["./file/"+x for x in glob.glob("./file/*.png")])
+include_files.extend([("./file/"+x, "./file/"+x) for x in glob.glob("./file/*.txt")])
+include_files.extend([("./file/"+x, "./file/"+x) for x in glob.glob("./file/*.png")])
 
 
 options = {
