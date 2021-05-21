@@ -309,5 +309,6 @@ class ClassApp():
 
 # TODO: Langue
 # TODO: Use config.json to create CT-FILE
+# TODO: Convert multiple race at the same time
 App = ClassApp()
 mainloop()
