@@ -198,7 +198,7 @@ class ClassApp():
             if os.path.exists("./file/Track-WU8/"): total_track = len(os.listdir("./file/Track-WU8/"))
             else: total_track = 0
             with open("./convert_file.json") as f: fc = json.load(f)
-            max_step = len(fc["img"])+len(fc["bmg"])+total_track
+            max_step = len(fc["img"])+len(fc["bmg"])+total_track+1
             self.Progress(show=True, indeter=False, statut="Conversion des fichiers", max=max_step, step=0)
 
             for i, file in enumerate(fc["img"]):
@@ -243,6 +243,8 @@ class ClassApp():
                                 process_list.pop(process)
                                 break
 
+            self.Progress(statut="Création de LE-CODE", add=1)
+            self.create_lecode_config()
 
             self.Progress(show=False)
             self.button_install_mod.grid(row=2,column=1,sticky="NEWS")
@@ -325,7 +327,6 @@ class ClassApp():
                              "--add-lecode"], creationflags=CREATE_NO_WINDOW)
 
             self.Progress(statut=f"Patch lecode-PAL.bin", add=1)
-            self.create_lecode_config()
 
             subprocess.call(
                 ["./tools/szs/wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf+"/files/rel/lecode-PAL.bin",
