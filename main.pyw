@@ -3,6 +3,7 @@ from tkinter import messagebox, filedialog, ttk
 from threading import Thread
 import subprocess
 import requests
+import zipfile
 import shutil
 import json
 import glob
