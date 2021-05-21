@@ -280,6 +280,7 @@ class ClassApp():
 # TODO: Langue
 # TODO: Update
 # TODO: Changer l'ID
+# TODO: Use config.json to create CT-FILE
 # TODO: Convertir en ISO / WBFS... après l'installation
 App = ClassApp()
 mainloop()
