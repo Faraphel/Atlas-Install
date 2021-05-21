@@ -3,8 +3,8 @@ Cet outil vous permet d'installer Mario Kart Wii Faraphel sans avoir à modifier
 
 ## Prérequis
 - Une ROM de Mario Kart Wii dumpé depuis votre console avec votre propre copie (en CISO, ISO, WBFS, FST (Dossier))
-- L'installateur disponible dans https://github.com/Faraphel/MKWF-Install/releases en .exe, ou utiliser la
-source si vous avez python 3.8 et la librairie requests
+- L'installateur disponible dans https://github.com/Faraphel/MKWF-Install/releases en dans MKWF.v0.1.zip en .exe,
+ou utiliser la source si vous avez python 3.8 et la librairie requests
 
 ## Installations
 - Lancer l'application MKWF-Install.exe / MKWF-Install.py
