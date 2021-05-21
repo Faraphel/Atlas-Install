@@ -355,6 +355,5 @@ class ClassApp():
         t.start()
 
 # TODO: Langue
-# TODO: Use config.json to create CT-FILE
 App = ClassApp()
 mainloop()
