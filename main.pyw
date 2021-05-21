@@ -169,6 +169,30 @@ class ClassApp():
             else: widget.config(state=DISABLED)
 
 
+    def create_lecode_config(self):
+        with open("./ct_config.json") as f: ctconfig = json.load(f)
+        with open("./file/CTFILE.txt", "w") as ctfile:
+            ctfile.write(
+                "#CT-CODE\n"+
+                "[RACING-TRACK-LIST]\n"+
+                "%LE-FLAGS=1\n"+
+                "%WIIMM-CUP=1\n"+
+                "N N$SWAP | N$F_WII\n\n")
+
+            for cup in ctconfig["cup"]:
+                _cup_config = ctconfig["cup"][cup]
+                if int(cup) >= 9: # Course qui ne sont ni les originales, ni les courses aléatoires.
+                    ctfile.write(f'\nC "C{_cup_config["name"]}"')
+
+                    for course in _cup_config["courses"]:
+                        _course_config = _cup_config["courses"][course]
+                        ctfile.write(f'T {_course_config["music"]}; '+
+                                     f'{_course_config["special"]}; '+
+                                     f'{"0x01" if _course_config["new"] else "0x00"}; '+
+                                     f'"{_course_config["name"]}"; "{_course_config["name"]}"; '+
+                                     f'"-"')
+
+
     def patch_file(self):
         def func():
             if os.path.exists("./file/Track-WU8/"): total_track = len(os.listdir("./file/Track-WU8/"))
@@ -299,7 +323,10 @@ class ClassApp():
             self.Progress(statut=f"Patch main.dol", add=1)
             subprocess.call(["./tools/szs/wstrt", "patch", self.path_mkwf+"/sys/main.dol", "--clean-dol",
                              "--add-lecode"], creationflags=CREATE_NO_WINDOW)
+
             self.Progress(statut=f"Patch lecode-PAL.bin", add=1)
+            self.create_lecode_config()
+
             subprocess.call(
                 ["./tools/szs/wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf+"/files/rel/lecode-PAL.bin",
                 "--track-dir", self.path_mkwf+"/files/Race/Course/", "--copy-tracks", "./file/Track/",
