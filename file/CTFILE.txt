@@ -244,7 +244,7 @@ T 177; 0x15; 0x01; "Bandit Plains"; "Bandit Plains"; "3cada03824e2643b86b93c86c9
 
 C "CT40"
 T 137; 0xe; 0x01; "Barren Badlands"; "Barren Badlands"; "3a474ebdf90df000cf6f0718730e7b14bd40a06e"
-T 169; 0x12; 0x01; "Bash'n'Dash'n'Bash"; "Bash'n'Dash'n'Bash"; "ee8cf5674a0e5ed91c64bdf565d7ba8c128c857a"
+T 169; 0x12; 0x01; "BashnDashnBash"; "BashnDashnBash"; "ee8cf5674a0e5ed91c64bdf565d7ba8c128c857a"
 T 139; 0x3; 0x01; "BassBasher City"; "BassBasher City"; "cbbf8849b8008e53558949912fb0bc40a3654433"
 T 133; 0xf; 0x01; "Bayside Boulevard"; "Bayside Boulevard"; "391c24b2c9732bf85e9b105be4ab05d3478c28db"
 
