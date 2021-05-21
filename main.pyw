@@ -182,7 +182,7 @@ class ClassApp():
             for cup in ctconfig["cup"]:
                 _cup_config = ctconfig["cup"][cup]
                 if int(cup) >= 9: # Course qui ne sont ni les originales, ni les courses aléatoires.
-                    ctfile.write(f'\nC "C{_cup_config["name"]}"')
+                    ctfile.write(f'\nC "{_cup_config["name"]}"\n')
 
                     for course in _cup_config["courses"]:
                         _course_config = _cup_config["courses"][course]
@@ -190,7 +190,7 @@ class ClassApp():
                                      f'{_course_config["special"]}; '+
                                      f'{"0x01" if _course_config["new"] else "0x00"}; '+
                                      f'"{_course_config["name"]}"; "{_course_config["name"]}"; '+
-                                     f'"-"')
+                                     f'"-"\n')
 
 
     def patch_file(self):
