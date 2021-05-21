@@ -26,8 +26,8 @@ include_files = [
             sys.exec_prefix + "\\DLLs\\tk86t.dll",
         ]
 
-include_files.extend(glob.glob("./file/*.txt"))
-include_files.extend(glob.glob("./file/*.png"))
+include_files.extend(["./file/"+x for x in glob.glob("./file/*.txt")])
+include_files.extend(["./file/"+x for x in glob.glob("./file/*.png")])
 
 
 options = {
