@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox, filedialog, ttk
 from threading import Thread
 import subprocess
+import requests
 import shutil
 import json
 import glob
@@ -16,6 +17,37 @@ get_filename = lambda file: ".".join(file.split(".")[:-1])
 get_nodir = lambda file: file.split("/")[-1].split("\\")[-1]
 get_extension = lambda file: file.split(".")[-1]
 
+VERSION_FILE_URL = "https://raw.githubusercontent.com/Faraphel/MKWF-Install/master/version"
+def check_update():
+    try:
+        gitversion = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
+        with open("version", "rb") as f:
+            locversion = json.load(f)
+
+        if gitversion["version"] != locversion["version"]:
+            if messagebox.askyesno("Mise à jour disponible !", "Une mise à jour est disponible, souhaitez-vous l'installer ?\n\n"+ \
+                                f"Version : {locversion['version']}.{locversion['subversion']} -> {gitversion['version']}.{gitversion['subversion']}\n"+\
+                                f"Changelog :\n{gitversion['changelog']}"):
+
+                if not(os.path.exists("./Updater/Updater.exe")):
+                    dl = requests.get(gitversion["updater_bin"], allow_redirects=True)
+                    with open("./download.zip", "wb") as file:
+                        print(f"Téléchargement de Updater en cours...")
+                        file.write(dl.content)
+                        print("fin du téléchargement, début de l'extraction...")
+
+                    with zipfile.ZipFile("./download.zip") as file:
+                        file.extractall("./Updater/")
+                        print("fin de l'extraction")
+
+                    os.remove("./download.zip")
+                    print("lancement de l'application...")
+                    os.startfile(os.path.realpath("./Updater/Updater.exe"))
+                    sys.exit()
+
+    except Exception as e:
+        print(e)
+
 class ClassApp():
     def __init__(self):
         self.root = Tk()
@@ -26,6 +58,7 @@ class ClassApp():
         self.frame_game_path = LabelFrame(self.root, text="Jeu original")
         self.frame_game_path.grid(row=1,column=1)
 
+        check_update()
         self.path_mkwf = None
 
         entry_game_path = Entry(self.frame_game_path,width=50)
@@ -238,7 +271,7 @@ class ClassApp():
                 "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"])
 
             self.Progress(show=False)
-            messagebox.showinfo("", "L'installation est terminé !")
+            messagebox.showinfo("Fin", "L'installation est terminé !")
 
         t = Thread(target=func)
         t.setDaemon(True)
