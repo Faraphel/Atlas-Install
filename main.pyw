@@ -19,6 +19,8 @@ get_nodir = lambda file: file.split("/")[-1].split("\\")[-1]
 get_extension = lambda file: file.split(".")[-1]
 
 VERSION_FILE_URL = "https://raw.githubusercontent.com/Faraphel/MKWF-Install/master/version"
+CREATE_NO_WINDOW = 0x08000000
+
 def check_update():
     try:
         gitversion = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
@@ -93,7 +95,8 @@ class ClassApp():
                         self.path_mkwf, i = os.path.realpath(path + f"/../MKWiiFaraphel ({i})"), i+1
 
                     self.Progress(show=True, indeter=True, statut="Extraction du jeu...")
-                    subprocess.call(["./tools/wit/wit", "EXTRACT", path, "--DEST", self.path_mkwf])
+                    subprocess.call(["./tools/wit/wit", "EXTRACT", path, "--DEST", self.path_mkwf]
+                                    ,creationflags=CREATE_NO_WINDOW)
                     self.Progress(show=False)
 
                 else:
@@ -177,21 +180,25 @@ class ClassApp():
             for i, file in enumerate(fc["img"]):
                 self.Progress(statut=f"Conversion des images\n({i+1}/{len(fc['img'])}) {file}", add=1)
                 if not(os.path.exists("./file/"+get_filename(file))):
-                    subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/"+file, "-x", fc["img"][file]])
+                    subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/"+file, "-x", fc["img"][file]]
+                                    ,creationflags=CREATE_NO_WINDOW)
 
             for i, file in enumerate(fc["bmg"]):
                 self.Progress(statut=f"Conversion des textes\n({i+1}/{len(fc['bmg'])}) {file}", add=1)
                 if not(os.path.exists("./file/"+get_filename(file)+".bmg")):
-                    subprocess.call(["./tools/szs/wbmgt", "ENCODE", "./file/"+file])
+                    subprocess.call(["./tools/szs/wbmgt", "ENCODE", "./file/"+file]
+                                    ,creationflags=CREATE_NO_WINDOW)
 
             if not(os.path.exists("./file/auto-add/")):
-                subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf+"/files/Race/Course/", "--DEST", "./file/auto-add/"])
+                subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf+"/files/Race/Course/", "--DEST",
+                                 "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
 
             for i, file in enumerate(os.listdir("./file/Track-WU8/")):
                 self.Progress(statut=f"Conversion des courses\n({i+1}/{total_track}) {file}", add=1)
                 if not(os.path.exists("./file/Track/"+get_filename(file)+".szs")):
-                    subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "--DEST", "./file/Track/%N.szs",
-                                     "--szs", "--overwrite", "--autoadd-path", "./file/auto-add/"])
+                    subprocess.call(["./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/"+file, "--DEST",
+                                     "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
+                                     "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
 
             self.Progress(show=False)
             self.button_install_mod.grid(row=2,column=1,sticky="NEWS")
@@ -241,7 +248,8 @@ class ClassApp():
 
                 if extension == "szs":
                     if not(os.path.realpath(path) in extracted_file):
-                        subprocess.call(["./tools/szs/wszst", "EXTRACT", path, "-d", path+".d", "--overwrite"])
+                        subprocess.call(["./tools/szs/wszst", "EXTRACT", path, "-d", path+".d", "--overwrite"]
+                                        ,creationflags=CREATE_NO_WINDOW)
                         extracted_file.append(os.path.realpath(path))
 
                     szs_extract_path = path+".d"
@@ -264,17 +272,19 @@ class ClassApp():
 
             for file in extracted_file:
                 self.Progress(statut=f"Recompilation de\n{get_nodir(file)}", add=1)
-                subprocess.call(["./tools/szs/wszst", "CREATE", file+".d", "-d", file, "--overwrite"])
+                subprocess.call(["./tools/szs/wszst", "CREATE", file+".d", "-d", file,
+                                 "--overwrite"], creationflags=CREATE_NO_WINDOW)
                 if os.path.exists(file+".d"): shutil.rmtree(file+".d")
 
             self.Progress(statut=f"Patch main.dol", add=1)
-            subprocess.call(["./tools/szs/wstrt", "patch", self.path_mkwf+"/sys/main.dol", "--clean-dol", "--add-lecode"])
+            subprocess.call(["./tools/szs/wstrt", "patch", self.path_mkwf+"/sys/main.dol", "--clean-dol",
+                             "--add-lecode"], creationflags=CREATE_NO_WINDOW)
             self.Progress(statut=f"Patch lecode-PAL.bin", add=1)
             subprocess.call(
                 ["./tools/szs/wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf+"/files/rel/lecode-PAL.bin",
                 "--track-dir", self.path_mkwf+"/files/Race/Course/", "--copy-tracks", "./file/Track/",
                 "--move-tracks", self.path_mkwf+"/files/Race/Course/", "--le-define",
-                "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"])
+                "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"], creationflags=CREATE_NO_WINDOW)
 
             outputformat=self.listbox_outputformat.get()
             self.Progress(statut=f"Conversion en {outputformat}", add=1)
@@ -282,11 +292,13 @@ class ClassApp():
             if outputformat in ["ISO", "WBFS", "CISO"]:
                 self.path_mkwf_format = os.path.realpath(self.path_mkwf+"/../MKWFaraphel."+outputformat.lower())
                 subprocess.call(["./tools/wit/wit", "COPY", self.path_mkwf, "--DEST",
-                                 self.path_mkwf_format, f"--{outputformat.lower()}", "--overwrite"])
+                                 self.path_mkwf_format, f"--{outputformat.lower()}", "--overwrite"]
+                                ,creationflags=CREATE_NO_WINDOW)
                 shutil.rmtree(self.path_mkwf)
 
                 self.Progress(statut=f"Changement de l'ID du jeu", add=1)
-                subprocess.call(["./tools/wit/wit", "EDIT", self.path_mkwf_format, "--id", "RMCP60"])
+                subprocess.call(["./tools/wit/wit", "EDIT", self.path_mkwf_format, "--id", "RMCP60"]
+                                ,creationflags=CREATE_NO_WINDOW)
 
             self.Progress(show=False)
             messagebox.showinfo("Fin", "L'installation est terminé !")
