@@ -31,3 +31,5 @@ try:
 except Exception as e:
     print(f"Impossible d'effectuer la mise à jour :\n\n{str(e)}")
     input("Appuyez pour continuer...")
+
+# TODO: Utiliser un buffer pour éviter de consommer trop de RAM pendant le téléchargement
