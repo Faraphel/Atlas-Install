@@ -102,7 +102,7 @@ class ClassApp():
                     return
 
                 if os.path.exists(self.path_mkwf + "/files/rel/lecode-PAL.bin"):
-                    messagebox.showwarning("Attention", "Cette ROM est déjà moddé,"+\
+                    messagebox.showwarning("Attention", "Cette ROM est déjà moddé, "+\
                                                         "il est déconseillé de l'utiliser pour installer le mod")
 
                 self.frame_action.grid(row=2, column=1,sticky="NEWS")
@@ -120,8 +120,10 @@ class ClassApp():
         self.frame_action = LabelFrame(self.root, text="Action")
 
         self.button_prepare_file = Button(self.frame_action, text="Preparer les fichiers", relief=RIDGE, command=self.patch_file, width=45)
-        self.button_prepare_file.grid(row=1, column=1, sticky="NEWS")
-        self.button_install_mod = Button(self.frame_action, text="Installer le mod", relief=RIDGE, command=self.install_mod, width=45)
+        self.button_prepare_file.grid(row=1, column=1, columnspan=2, sticky="NEWS")
+        self.button_install_mod = Button(self.frame_action, text="Installer le mod", relief=RIDGE, command=self.install_mod, width=35)
+        self.listbox_outputformat = ttk.Combobox(self.frame_action, values=["Dossier", "ISO", "WBFS", "CISO"], width=5)
+        self.listbox_outputformat.set("Dossier")
         # Le boutton d'installation du mod n'est affiché qu'après avoir préparer les fichiers
 
         self.progressbar = ttk.Progressbar(self.root)
@@ -132,7 +134,9 @@ class ClassApp():
         if indeter == True:
             self.progressbar.config(mode="indeterminate")
             self.progressbar.start(50)
-        elif indeter == False: self.progressbar.config(mode="determinate")
+        elif indeter == False:
+            self.progressbar.config(mode="determinate")
+            self.progressbar.stop()
         if show == True:
             self.StateButton(enable=False)
             self.progressbar.grid(row=100, column=1, sticky="NEWS")
@@ -191,6 +195,7 @@ class ClassApp():
 
             self.Progress(show=False)
             self.button_install_mod.grid(row=2,column=1,sticky="NEWS")
+            self.listbox_outputformat.grid(row=2, column=2, sticky="NEWS")
 
         t=Thread(target=func)
         t.setDaemon(True)
@@ -203,7 +208,7 @@ class ClassApp():
 
             ### This part is used to estimate the max_step
             extracted_file = []
-            max_step, step = 0, 0
+            max_step, step = 1, 0
 
             def count_rf(path, file, subpath="/"):
                 nonlocal max_step
@@ -224,13 +229,13 @@ class ClassApp():
                                 for ffp in fs[fp][nf]: count_rf(path=f, subpath=nf, file=ffp)
             ###
             extracted_file = []
-            max_step += 2 # PATCH main.dol et PATCH lecode.bin
+            max_step += 4 # PATCH main.dol et PATCH lecode.bin, conversion, changement d'ID
             self.Progress(show=True, indeter=False, statut="Installation du mod", max=max_step, step=0)
 
 
 
             def replace_file(path, file, subpath="/"):
-                self.Progress(statut=f"Modification de\n{get_nodir(path)+subpath+file}", add=1)
+                self.Progress(statut=f"Modification de\n{get_nodir(path)}", add=1)
                 #print(path, subpath, file)
                 extension = get_extension(path)
 
@@ -258,7 +263,7 @@ class ClassApp():
 
 
             for file in extracted_file:
-                self.Progress(statut=f"Recompilation de\n{file}", add=1)
+                self.Progress(statut=f"Recompilation de\n{get_nodir(file)}", add=1)
                 subprocess.call(["./tools/szs/wszst", "CREATE", file+".d", "-d", file, "--overwrite"])
                 if os.path.exists(file+".d"): shutil.rmtree(file+".d")
 
@@ -271,6 +276,18 @@ class ClassApp():
                 "--move-tracks", self.path_mkwf+"/files/Race/Course/", "--le-define",
                 "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"])
 
+            outputformat=self.listbox_outputformat.get()
+            self.Progress(statut=f"Conversion en {outputformat}", add=1)
+
+            if outputformat in ["ISO", "WBFS", "CISO"]:
+                self.path_mkwf_format = os.path.realpath(self.path_mkwf+"/../MKWFaraphel."+outputformat.lower())
+                subprocess.call(["./tools/wit/wit", "COPY", self.path_mkwf, "--DEST",
+                                 self.path_mkwf_format, f"--{outputformat.lower()}", "--overwrite"])
+                shutil.rmtree(self.path_mkwf)
+
+                self.Progress(statut=f"Changement de l'ID du jeu", add=1)
+                subprocess.call(["./tools/wit/wit", "EDIT", self.path_mkwf_format, "--id", "RMCP60"])
+
             self.Progress(show=False)
             messagebox.showinfo("Fin", "L'installation est terminé !")
 
@@ -279,9 +296,6 @@ class ClassApp():
         t.start()
 
 # TODO: Langue
-# TODO: Update
-# TODO: Changer l'ID
 # TODO: Use config.json to create CT-FILE
-# TODO: Convertir en ISO / WBFS... après l'installation
 App = ClassApp()
 mainloop()
