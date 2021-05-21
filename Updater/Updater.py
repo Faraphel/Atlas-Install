@@ -14,10 +14,10 @@ try:
     gitversion = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
     URL = gitversion["download_bin"]
 
-    dl = requests.get(URL, allow_redirects=True)
+    dl = requests.get(URL, allow_redirects=True, stream=True)
     with open("./download.zip", "wb") as file:
         print(f"Téléchargement de la version {gitversion['version']}.{gitversion['subversion']} en cours...")
-        file.write(dl.content)
+        for chunk in dl.iter_content(chunk_size=1024): file.write(chunk)
         print("fin du téléchargement, début de l'extraction...")
 
     with zipfile.ZipFile("./download.zip") as file:
@@ -31,5 +31,3 @@ try:
 except Exception as e:
     print(f"Impossible d'effectuer la mise à jour :\n\n{str(e)}")
     input("Appuyez pour continuer...")
-
-# TODO: Utiliser un buffer pour éviter de consommer trop de RAM pendant le téléchargement
