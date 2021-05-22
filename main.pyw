@@ -189,7 +189,8 @@ class ClassApp():
                         ctfile.write(f'T {_course_config["music"]}; '+
                                      f'{_course_config["special"]}; '+
                                      f'{"0x01" if _course_config["new"] else "0x00"}; '+
-                                     f'"{_course_config["name"]}"; "{_course_config["name"]}"; '+
+                                     f'"{_course_config["name"]}"; '+
+                                     f'"{_course_config["name"]}"; '+
                                      f'"-"\n')
 
 
@@ -356,5 +357,6 @@ class ClassApp():
         t.start()
 
 # TODO: Langue
+# TODO: Split Code into multiple file
 App = ClassApp()
 mainloop()
