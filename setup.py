@@ -7,6 +7,7 @@ include_files = [
     "./LICENSE",
     "./README.md",
     "./version",
+    "./ct_config.json",
     "./convert_file.json",
     "./fs.json",
 
