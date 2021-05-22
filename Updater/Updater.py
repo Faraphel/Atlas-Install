@@ -15,9 +15,18 @@ try:
     URL = gitversion["download_bin"]
 
     dl = requests.get(URL, allow_redirects=True, stream=True)
+    dl_size = int(dl.headers["Content-Length"])
+
     with open("./download.zip", "wb") as file:
         print(f"Téléchargement de la version {gitversion['version']}.{gitversion['subversion']} en cours...")
-        for chunk in dl.iter_content(chunk_size=1024): file.write(chunk)
+        chunk_size = 1024
+        for i, chunk in enumerate(dl.iter_content(chunk_size=chunk_size)):
+            progress = int((i * chunk_size * 100) / dl_size)
+            print("("+str(progress)+"%) | " + "#" * (progress//5) + "_"* (20 - (progress//5)) + " | " +
+                  str(round(i*chunk_size/1000000,1)) + "Mo/" + str(round(dl_size/1000000,1)) + "Mo", end="\r")
+            file.write(chunk)
+            file.flush()
+
         print("fin du téléchargement, début de l'extraction...")
 
     with zipfile.ZipFile("./download.zip") as file:
