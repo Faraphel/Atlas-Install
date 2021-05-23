@@ -1,7 +1,7 @@
 import json
 
 def translate(self, text):
-    with open("./translation.json") as f:
+    with open("./translation.json", encoding="utf-8") as f:
         translation = json.load(f)
     if self.language in translation:
         _lang_trad = translation[self.language]
