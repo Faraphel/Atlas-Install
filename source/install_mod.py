@@ -95,7 +95,7 @@ def install_mod(self):
              "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"], creationflags=CREATE_NO_WINDOW)
 
         outputformat = self.listbox_outputformat.get()
-        self.Progress(statut=self.translate("Conversion en")+" {outputformat}", add=1)
+        self.Progress(statut=self.translate("Conversion en")+f" {outputformat}", add=1)
 
         if outputformat in ["ISO", "WBFS", "CISO"]:
             self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
