@@ -22,6 +22,5 @@ class ClassApp():
 
 
 # TODO: Langue
-# TODO: Split Code into multiple file
 App = ClassApp()
 mainloop()
