@@ -18,7 +18,7 @@ def install_mod(self):
         extracted_file = []
         max_step, step = 1, 0
 
-        def count_rf(path, file, subpath="/"):
+        def count_rf(path):
             nonlocal max_step
             max_step += 1
             extension = get_extension(path)
@@ -30,20 +30,20 @@ def install_mod(self):
         for fp in fs:
             for f in glob.glob(self.path_mkwf + "/files/" + fp, recursive=True):
                 if type(fs[fp]) == str:
-                    count_rf(path=f, file=fs[fp])
+                    count_rf(path=f)
                 elif type(fs[fp]) == dict:
                     for nf in fs[fp]:
                         if type(fs[fp][nf]) == str:
-                            count_rf(path=f, subpath=nf, file=fs[fp][nf])
+                            count_rf(path=f)
                         elif type(fs[fp][nf]) == list:
-                            for ffp in fs[fp][nf]: count_rf(path=f, subpath=nf, file=ffp)
+                            for ffp in fs[fp][nf]: count_rf(path=f)
         ###
         extracted_file = []
         max_step += 4  # PATCH main.dol et PATCH lecode.bin, conversion, changement d'ID
-        self.Progress(show=True, indeter=False, statut="Installation du mod", max=max_step, step=0)
+        self.Progress(show=True, indeter=False, statut=self.translate("Installation du mod"), max=max_step, step=0)
 
         def replace_file(path, file, subpath="/"):
-            self.Progress(statut=f"Modification de\n{get_nodir(path)}", add=1)
+            self.Progress(statut=self.translate("Modification de")+f"\n{get_nodir(path)}", add=1)
             # print(path, subpath, file)
             extension = get_extension(path)
 
@@ -77,16 +77,16 @@ def install_mod(self):
                             for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
 
         for file in extracted_file:
-            self.Progress(statut=f"Recompilation de\n{get_nodir(file)}", add=1)
+            self.Progress(statut=self.translate("Recompilation de")+f"\n{get_nodir(file)}", add=1)
             subprocess.call(["./tools/szs/wszst", "CREATE", file + ".d", "-d", file,
                              "--overwrite"], creationflags=CREATE_NO_WINDOW)
             if os.path.exists(file + ".d"): shutil.rmtree(file + ".d")
 
-        self.Progress(statut=f"Patch main.dol", add=1)
+        self.Progress(statut=self.translate("Patch main.dol"), add=1)
         subprocess.call(["./tools/szs/wstrt", "patch", self.path_mkwf + "/sys/main.dol", "--clean-dol",
                          "--add-lecode"], creationflags=CREATE_NO_WINDOW)
 
-        self.Progress(statut=f"Patch lecode-PAL.bin", add=1)
+        self.Progress(statut=self.translate("Patch lecode-PAL.bin"), add=1)
 
         subprocess.call(
             ["./tools/szs/wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf + "/files/rel/lecode-PAL.bin",
@@ -95,7 +95,7 @@ def install_mod(self):
              "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"], creationflags=CREATE_NO_WINDOW)
 
         outputformat = self.listbox_outputformat.get()
-        self.Progress(statut=f"Conversion en {outputformat}", add=1)
+        self.Progress(statut=self.translate("Conversion en")+" {outputformat}", add=1)
 
         if outputformat in ["ISO", "WBFS", "CISO"]:
             self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
@@ -104,12 +104,12 @@ def install_mod(self):
                             , creationflags=CREATE_NO_WINDOW)
             shutil.rmtree(self.path_mkwf)
 
-            self.Progress(statut=f"Changement de l'ID du jeu", add=1)
+            self.Progress(statut=self.translate("Changement de l'ID du jeu"), add=1)
             subprocess.call(["./tools/wit/wit", "EDIT", self.path_mkwf_format, "--id", "RMCP60"]
                             , creationflags=CREATE_NO_WINDOW)
 
         self.Progress(show=False)
-        messagebox.showinfo("Fin", "L'installation est terminé !")
+        messagebox.showinfo(self.translate("Fin"), self.translate("L'installation est terminé !"))
 
     t = Thread(target=func)
     t.setDaemon(True)

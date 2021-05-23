@@ -1,0 +1,39 @@
+{
+  "en": {
+    "MKWFaraphel Installateur": "MKWFaraphel Installer",
+    "Jeu Wii": "Wii game",
+    "Jeu original": "Original game",
+    "Erreur": "Error",
+    "Le chemin de fichier est invalide": "The file path in invalid",
+    "Attention": "Warning",
+    "Ce dossier sera écrasé si vous installer le mod !\nÊtes-vous sûr de vouloir l'utiliser ?": "This directory will be overwritten if you install the mod !\nAre you sure you want to use it ?",
+    "Extraction du jeu...": "Extracting the game...",
+    "Le type de fichier n'est pas reconnu": "This file type is not supported",
+    "Cette ROM est déjà moddé, il est déconseillé de l'utiliser pour installer le mod": "This game is already modded, it is not recommended to use it to install the mod",
+    "Extraire le fichier": "Extract file",
+    "Preparer les fichiers": "Prepare files",
+    "Action": "Action",
+    "Installer le mod": "Install mod",
+    "Dossier": "Directory",
+
+    "Mise à jour disponible !": "Update available !",
+    "Une mise à jour est disponible, souhaitez-vous l'installer ?": "An update is available, do you want to install it ?",
+    "Téléchargement de Updater en cours...": "Downloading the Updater...",
+    "fin du téléchargement, début de l'extraction...": "end of the download, extracting...",
+    "fin de l'extraction": "finished extracting",
+    "lancement de l'application...": "starting application...",
+
+    "Modification de": "Modifying",
+    "Recompilation de": "Recompilating",
+    "Conversion en": "Converting to",
+    "Changement de l'ID du jeu": "editing game's ID",
+    "Fin": "End",
+    "L'installation est terminé !": "The mod has been installed !",
+
+    "Conversion des fichiers": "Converting files",
+    "Conversion des images": "Converting images",
+    "Conversion des textes": "Converting texts",
+    "Conversion des courses": "Converting races",
+    "Configuration de LE-CODE": "Configurating LE-CODE"
+  }
+}

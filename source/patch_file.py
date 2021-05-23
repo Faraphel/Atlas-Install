@@ -15,16 +15,16 @@ def patch_file(self):
         with open("./convert_file.json") as f:
             fc = json.load(f)
         max_step = len(fc["img"]) + len(fc["bmg"]) + total_track + 1
-        self.Progress(show=True, indeter=False, statut="Conversion des fichiers", max=max_step, step=0)
+        self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
 
         for i, file in enumerate(fc["img"]):
-            self.Progress(statut=f"Conversion des images\n({i + 1}/{len(fc['img'])}) {file}", add=1)
+            self.Progress(statut=self.translate("Conversion des images")+f"\n({i + 1}/{len(fc['img'])}) {file}", add=1)
             if not (os.path.exists("./file/" + get_filename(file))):
                 subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/" + file, "-x", fc["img"][file]]
                                 , creationflags=CREATE_NO_WINDOW)
 
         for i, file in enumerate(fc["bmg"]):
-            self.Progress(statut=f"Conversion des textes\n({i + 1}/{len(fc['bmg'])}) {file}", add=1)
+            self.Progress(statut=self.translate("Conversion des textes")+f"\n({i + 1}/{len(fc['bmg'])}) {file}", add=1)
             if not (os.path.exists("./file/" + get_filename(file) + ".bmg")):
                 subprocess.call(["./tools/szs/wbmgt", "ENCODE", "./file/" + file]
                                 , creationflags=CREATE_NO_WINDOW)
@@ -40,7 +40,7 @@ def patch_file(self):
             while True:
                 if len(process_list) < max_process:
                     process_list[file] = None
-                    self.Progress(statut=f"Conversion des courses\n({i + 1}/{total_track})\n" +
+                    self.Progress(statut=self.translate("Conversion des courses")+f"\n({i + 1}/{total_track})\n" +
                                          "\n".join(process_list.keys()), add=1)
 
                     if not (os.path.exists("./file/Track/" + get_filename(file) + ".szs")):
@@ -59,7 +59,7 @@ def patch_file(self):
                             process_list.pop(process)
                             break
 
-        self.Progress(statut="Création de LE-CODE", add=1)
+        self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
         self.create_lecode_config()
 
         self.Progress(show=False)

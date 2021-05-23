@@ -10,11 +10,12 @@ import glob
 import os
 
 from source.definition import *
-from source.check_update import *
 
 class ClassApp():
     from source.__init__ import __init__
+    from source.translate import translate
     from source.Progress import Progress
+    from source.check_update import check_update
     from source.StateButton import StateButton
     from source.create_lecode_config import create_lecode_config
     from source.patch_file import patch_file
@@ -22,5 +23,7 @@ class ClassApp():
 
 
 # TODO: Langue
+# TODO: Wiki Github
+# TODO: Autogénération des bmg
 App = ClassApp()
 mainloop()
