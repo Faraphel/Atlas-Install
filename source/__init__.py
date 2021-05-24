@@ -8,20 +8,30 @@ from .definition import *
 from .check_update import check_update
 from .translate import translate
 
-
 def __init__(self):
-    self.language = "fr"
+    self.language = self.get_language()
 
     self.root = Tk()
     self.root.title(self.translate("MKWFaraphel Installateur"))
     self.root.resizable(False, False)
     self.root.iconbitmap(bitmap="./icon.ico")
 
-    self.frame_game_path = LabelFrame(self.root, text=self.translate("Jeu original"))
-    self.frame_game_path.grid(row=1, column=1)
-
     self.check_update()
     self.path_mkwf = None
+
+    self.frame_language = Frame(self.root)
+    self.frame_language.grid(row=1, column=1, sticky="E")
+
+    Label(self.frame_language, text=self.translate("Langage : ")).grid(row=1, column=1)
+    self.listbox_language = ttk.Combobox(self.frame_language, values=["fr", "en"], width=5)
+    self.listbox_language.set(self.language)
+    self.listbox_language.grid(row=1, column=2)
+
+
+    self.listbox_language.bind("<<ComboboxSelected>>", lambda x: self.change_language())
+
+    self.frame_game_path = LabelFrame(self.root, text=self.translate("Jeu original"))
+    self.frame_game_path.grid(row=2, column=1)
 
     entry_game_path = Entry(self.frame_game_path, width=50)
     entry_game_path.grid(row=1, column=1, sticky="NEWS")
@@ -71,7 +81,7 @@ def __init__(self):
                                        self.translate("Cette ROM est déjà moddé, " +
                                                       "il est déconseillé de l'utiliser pour installer le mod"))
 
-            self.frame_action.grid(row=2, column=1, sticky="NEWS")
+            self.frame_action.grid(row=3, column=1, sticky="NEWS")
             self.Progress(show=False)
 
         t = Thread(target=func)
