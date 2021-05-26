@@ -4,7 +4,8 @@ import json
 def create_lecode_config(self):
     with open("./ct_config.json") as f:
         ctconfig = json.load(f)
-    with open("./file/CTFILE.txt", "w") as ctfile, open("./file/RCTFILE.txt", "w") as rctfile:
+    with open("./file/CTFILE.txt", "w", encoding="utf-8") as ctfile, \
+         open("./file/RCTFILE.txt", "w", encoding="utf-8") as rctfile:
 
         header = "#CT-CODE\n" +\
                  "[RACING-TRACK-LIST]\n" +\
