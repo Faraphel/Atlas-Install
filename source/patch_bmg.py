@@ -16,6 +16,72 @@ bmgID_track_move = {
     "T81": 0x7018, "T82": 0x7016, "T83": 0x7013, "T84": 0x701c,
 }
 
+trackname_color = {
+    "MSRDS ": "\c{green}MSRDS\c{off} ",
+    "CTR ": "\c{YOR4}CTR\c{off} ",
+    "CTTR ": "\c{YOR5}CTTR\c{off} ",
+    "CNR ": "\c{YOR5}CNR\c{off} ",
+    "DKR ": "\c{YOR6}DKR\c{off} ",
+    "LCP ": "\c{green}LCP\c{off} ",
+    "LEGO-R ": "\c{red2}LEGO-R\c{off} ",
+    "MP9 ": "\c{YOR0}MP9\c{off} ",
+    "MSUSA ": "\c{green}MSUSA\c{off} ",
+    "FZMV ": "\c{YOR2}FZMV\c{off} ",
+    "KAR ": "\c{green}KAR\c{off} ",
+    "KO ": "\c{YOR5}KO\c{off} ",
+    "FZ ": "\c{YOR2}FZ\c{off} ",
+    "RV ": "\c{white}RV\c{off} ",
+    "SADX ": "\c{blue2}SADX\c{off} ",
+    "SCR ": "\c{YOR2}SCR\c{off} ",
+    "SH ": "\c{red}SH\c{off} ",
+    "SM64 ": "\c{red1}SM64\c{off} ",
+    "SMB1 ": "\c{red2}SMB1\c{off} ",
+    "SMB2 ": "\c{red3}SMB2\c{off} ",
+    "SSBB ": "\c{red4}SSBB\c{off} ",
+    "SMS ": "\c{YOR6}SMS\c{off} ",
+    "SMO ": "\c{YOR7}SMO\c{off} ",
+    "VVVVVV ": "\c{blue}VVVVVV\c{off} ",
+    "WF ": "\c{green}WF\c{off} ",
+    "WP ": "\c{yellow}WP\c{off} ",
+    "Zelda OoT ": "\c{green}Zelda OoT\c{off} ",
+    "Zelda TP ": "\c{green}Zelda TP\c{off} ",
+    "Zelda WW ": "\c{green}Zelda WW\c{off} ",
+    "PMWR ": "\c{yellow}PMWR\c{off} ",
+    "SHR ": "\c{green}SHR\c{off} ",
+    "SK64 ": "\c{green}SK64\c{off} ",
+    "SMG ": "\c{red2}SMG\c{off} ",
+    "Spyro 1 ": "\c{blue}Spyro 1\c{off} ",
+
+    "Aléatoire: ": "\c{white}Aléatoire: ",
+    "Random: ": "\c{white}Random: ",
+    "Zufällig: ": "\c{white}Zufällig: ",
+    "Casuale: ": "\c{white}Casuale: ",
+    "Aleatorio: ": "\c{white}Aleatorio: ",
+
+    "Wii U ": "WiiU ",
+    "Wii ": "\c{blue}Wii\c{off} ",
+    "WiiU ": "\c{red4}Wii U\c{off} ", # Permet d'éviter que Wii et Wii U se mélange
+
+    "3DS ": "\c{YOR3}3DS\c{off} ",
+    "DS ": "\c{white}DS\c{off} ",
+    "GCN ": "\c{blue2}GCN\c{off} ",
+    "GBA ": "\c{blue1}GBA\c{off} ",
+    "N64 ": "\c{red}N64\c{off} ",
+    "SNES ": "\c{green}SNES\c{off} ",
+    "RMX ": "\c{YOR4}RMX\c{off} ",
+    "MKT ": "\c{YOR5}MKT\c{off} ",
+    "GP ": "\c{YOR6}GP\c{off} ",
+
+    "(Boost)": "\c{YOR3}(Boost)\c{off}",
+    "(Nuit)": "\c{white}(Nuit)\c{off}",
+    "(Jour)": "\c{white}(Jour)\c{off}",
+    "(Vide)": "\c{white}(Vide)\c{off}",
+
+    "★★★ ": "\c{YOR2}★★★ \c{off}",
+    "★★☆ ": "\c{YOR2}★★☆ \c{off}",
+    "★☆☆ ": "\c{YOR2}★☆☆ \c{off}",
+}
+
 
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
     bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
@@ -58,21 +124,19 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
     bmgtext = subprocess.check_output(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/CTFILE.txt",
                                        "--patch-bmg", "OVERWRITE=" + gamefile + ".d/message/Common.bmg",
                                        "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
-                                      creationflags=CREATE_NO_WINDOW)
+                                      creationflags=CREATE_NO_WINDOW).decode()
     rbmgtext = subprocess.check_output(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/RCTFILE.txt",
                                         "--patch-bmg", "OVERWRITE=" + gamefile + ".d/message/Common.bmg",
                                         "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
-                                       creationflags=CREATE_NO_WINDOW)
+                                       creationflags=CREATE_NO_WINDOW).decode()
     shutil.rmtree(gamefile + ".d")
     os.remove("./file/ExtraCommon.txt")
 
-    common_file = f"./file/Common_{bmglang}.txt"
-    rcommon_file = f"./file/Common_R{bmglang}.txt"
-    with open(common_file, "w", encoding="utf-8") as f:
-        f.write(bmgtext.decode())
-    with open(rcommon_file, "w", encoding="utf-8") as f:
-        f.write(rbmgtext.decode())
-    subprocess.call(["./tools/szs/wbmgt", "ENCODE", common_file, "--overwrite"])
-    subprocess.call(["./tools/szs/wbmgt", "ENCODE", rcommon_file, "--overwrite"])
-    os.remove(common_file)
-    os.remove(rcommon_file)
+    def finalise(common_file, bmgtext):
+        for console in trackname_color: bmgtext = bmgtext.replace(console, trackname_color[console])
+        with open(common_file, "w", encoding="utf-8") as f: f.write(bmgtext)
+        subprocess.call(["./tools/szs/wbmgt", "ENCODE", common_file, "--overwrite"])
+        os.remove(common_file)
+
+    finalise(f"./file/Common_{bmglang}.txt", bmgtext)
+    finalise(f"./file/Common_R{bmglang}.txt", rbmgtext)

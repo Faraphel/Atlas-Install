@@ -25,6 +25,5 @@ class ClassApp():
 
 
 # TODO: Wiki Github
-# TODO: Autogénération des bmg
 App = ClassApp()
 App.root.mainloop()
