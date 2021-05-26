@@ -15,7 +15,7 @@ def patch_file(self):
             total_track = 0
         with open("./convert_file.json") as f:
             fc = json.load(f)
-        max_step = len(fc["img"]) + total_track + 1 # + len(fc["bmg"])
+        max_step = len(fc["img"]) + total_track + 1 + len("EGFIS")
         self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
 
         self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)

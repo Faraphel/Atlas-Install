@@ -6,6 +6,9 @@ from .definition import *
 
 
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
+    bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
+    self.Progress(statut=self.translate("Patch des textes " + bmglang), add=1)
+
     subprocess.call(["./tools/szs/wszst", "EXTRACT", gamefile, "-d", gamefile + ".d", "--overwrite"]
                     , creationflags=CREATE_NO_WINDOW)
 
@@ -14,7 +17,6 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
     trackheader = "#--- standard track names"
     trackend = "2328"
     bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
-    bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
 
     with open("./file/ExtraCommon.txt", "w") as f:
         f.write("#BMG\n\n"
@@ -22,7 +24,6 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
                 f"  703f\t= {self.translate('Aléatoire: Pistes Originales', lang=bmglang)}\n"
                 f"  7040\t= {self.translate('Aléatoire: Custom Tracks', lang=bmglang)}\n"
                 f"  7041\t= {self.translate('Aléatoire: Pistes Nouvelles', lang=bmglang)}\n")
-
 
 
         for bmgtrack in bmgtracks.split("\n"):
