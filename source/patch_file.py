@@ -18,6 +18,9 @@ def patch_file(self):
         max_step = len(fc["img"]) + total_track + 1 # + len(fc["bmg"])
         self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
 
+        self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
+        self.create_lecode_config()
+
         for i, file in enumerate(fc["img"]):
             self.Progress(statut=self.translate("Conversion des images")+f"\n({i + 1}/{len(fc['img'])}) {file}", add=1)
             if not (os.path.exists("./file/" + get_filename(file))):
@@ -63,9 +66,6 @@ def patch_file(self):
                         else:
                             process_list.pop(process)
                             break
-
-        self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
-        self.create_lecode_config()
 
         self.Progress(show=False)
         self.button_install_mod.grid(row=2, column=1, sticky="NEWS")

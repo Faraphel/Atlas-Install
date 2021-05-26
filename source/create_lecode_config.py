@@ -38,5 +38,6 @@ def create_lecode_config(self):
                     rctfile.write(f'  T {_course_config["music"]}; ' +
                                   f'{_course_config["special"]}; ' +
                                   f'{"0x01" if _course_config["new"] else "0x00"}; ' +
+                                  f'"-"; ' +
                                   f'"{star}{_course_config["name"]}\\n{_course_config["author"]}"; ' +
                                   f'"-"\n')
