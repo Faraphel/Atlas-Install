@@ -19,6 +19,7 @@ class ClassApp():
     from source.StateButton import StateButton
     from source.create_lecode_config import create_lecode_config
     from source.patch_file import patch_file
+    from source.patch_bmg import patch_bmg
     from source.install_mod import install_mod
     from source.restart import restart
 
