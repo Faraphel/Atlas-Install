@@ -1,19 +1,21 @@
 import subprocess
 import shutil
+import os
+
 from .definition import *
 
 
-def patch_bmg(self, bmgfileszs):
-    subprocess.call(["./tools/szs/wszst", "EXTRACT", bmgfileszs, "-d", bmgfileszs + ".d", "--overwrite"]
+def patch_bmg(self, gamefile): # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
+    subprocess.call(["./tools/szs/wszst", "EXTRACT", gamefile, "-d", gamefile+".d", "--overwrite"]
                     , creationflags=CREATE_NO_WINDOW)
 
-    bmgfile = "./file/" + get_nodir(bmgfileszs) + ".bmg"
-    print(bmgfile)
-    filecopy(bmgfileszs + ".d/message/Common.bmg", bmgfile)
-    shutil.rmtree(bmgfileszs + ".d")
+    bmglang = gamefile[-len("E.txt"):-len(".txt")] # Langue du fichier
+    bmgtext = subprocess.check_output(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/CTFILE.txt",
+                                       "--patch-bmg", "OVERWRITE="+gamefile+".d/message/Common.bmg"]
+                                      , creationflags=CREATE_NO_WINDOW)
+    shutil.rmtree(gamefile+".d")
 
-    bmgtext = subprocess.check_output(["tools/szs/wctct", "--le-code", "--long", "BMG", "./file/CTFILE.txt",
-                                       "--patch-bmg", "REPLACE="+bmgfile], creationflags=CREATE_NO_WINDOW)
-    with open(bmgfile+".txt", "w", encoding="utf-8") as f: f.write(bmgtext.decode())
-    subprocess.call(["./tools/szs/wbmgt", "ENCODE", bmgfile+".txt", "--overwrite"])
-    #os.remove(bmgfile+".txt")
+    common_file = f"./file/Common_{bmglang}.txt"
+    with open(common_file, "w", encoding="utf-8") as f: f.write(bmgtext.decode())
+    subprocess.call(["./tools/szs/wbmgt", "ENCODE", common_file, "--overwrite"])
+    os.remove(common_file)
