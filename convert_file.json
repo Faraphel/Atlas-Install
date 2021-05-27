@@ -34,17 +34,5 @@
     "strapB_608x456it.png": "TEX.RGB565",
     "savebanner.tpl.png": "TPL.RGB565",
     "ct_icons.tpl.png": "TPL.CMPR"
-  },
-  "bmg": [
-    "Common_E.txt",
-    "Common_F.txt",
-    "Common_G.txt",
-    "Common_I.txt",
-    "Common_S.txt",
-    "Common_RE.txt",
-    "Common_RF.txt",
-    "Common_RG.txt",
-    "Common_RI.txt",
-    "Common_RS.txt"
-  ]
+  }
 }

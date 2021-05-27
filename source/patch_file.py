@@ -1,6 +1,7 @@
 from threading import Thread
 import subprocess
 import json
+import glob
 import os
 
 from .definition import *
@@ -14,20 +15,25 @@ def patch_file(self):
             total_track = 0
         with open("./convert_file.json") as f:
             fc = json.load(f)
-        max_step = len(fc["img"]) + len(fc["bmg"]) + total_track + 1
+        max_step = len(fc["img"]) + total_track + 3 + len("EGFIS")
         self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
+
+        self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
+        self.create_lecode_config()
+
+        self.Progress(statut=self.translate("Création de ct_icon.png"), add=1)
+        self.patch_ct_icon()
+
+        self.Progress(statut=self.translate("Création des images descriptives"), add=1)
+        self.patch_img_desc()
 
         for i, file in enumerate(fc["img"]):
             self.Progress(statut=self.translate("Conversion des images")+f"\n({i + 1}/{len(fc['img'])}) {file}", add=1)
-            if not (os.path.exists("./file/" + get_filename(file))):
-                subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/" + file, "-x", fc["img"][file]]
-                                , creationflags=CREATE_NO_WINDOW)
+            subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/" + file, "-x", fc["img"][file], "--overwrite"]
+                            , creationflags=CREATE_NO_WINDOW)
 
-        for i, file in enumerate(fc["bmg"]):
-            self.Progress(statut=self.translate("Conversion des textes")+f"\n({i + 1}/{len(fc['bmg'])}) {file}", add=1)
-            if not (os.path.exists("./file/" + get_filename(file) + ".bmg")):
-                subprocess.call(["./tools/szs/wbmgt", "ENCODE", "./file/" + file]
-                                , creationflags=CREATE_NO_WINDOW)
+        for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
+            self.patch_bmg(file)
 
         if not (os.path.exists("./file/auto-add/")):
             subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf + "/files/Race/Course/", "--DEST",
@@ -58,9 +64,6 @@ def patch_file(self):
                         else:
                             process_list.pop(process)
                             break
-
-        self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
-        self.create_lecode_config()
 
         self.Progress(show=False)
         self.button_install_mod.grid(row=2, column=1, sticky="NEWS")

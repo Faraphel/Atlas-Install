@@ -44,7 +44,6 @@ def install_mod(self):
 
         def replace_file(path, file, subpath="/"):
             self.Progress(statut=self.translate("Modification de")+f"\n{get_nodir(path)}", add=1)
-            # print(path, subpath, file)
             extension = get_extension(path)
 
             if extension == "szs":
