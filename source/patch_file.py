@@ -15,7 +15,7 @@ def patch_file(self):
             total_track = 0
         with open("./convert_file.json") as f:
             fc = json.load(f)
-        max_step = len(fc["img"]) + total_track + 1 + len("EGFIS")
+        max_step = len(fc["img"]) + total_track + 2 + len("EGFIS")
         self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
 
         self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
@@ -27,15 +27,11 @@ def patch_file(self):
                 subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/" + file, "-x", fc["img"][file]]
                                 , creationflags=CREATE_NO_WINDOW)
 
+        self.Progress(statut=self.translate("Création des images descriptives"), add=1)
+        self.patch_img_desc()
+
         for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
             self.patch_bmg(file)
-
-        # for i, file in enumerate(fc["bmg"]):
-            # self.Progress(statut=self.translate("Conversion des textes")+f"\n({i + 1}/{len(fc['bmg'])}) {file}", add=1)
-            # if not (os.path.exists("./file/" + get_filename(file) + ".bmg")):
-            #     subprocess.call(["./tools/szs/wbmgt", "ENCODE", "./file/" + file]
-            #                     , creationflags=CREATE_NO_WINDOW)
-
 
         if not (os.path.exists("./file/auto-add/")):
             subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf + "/files/Race/Course/", "--DEST",

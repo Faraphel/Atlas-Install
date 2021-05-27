@@ -1,4 +1,5 @@
 from tkinter import *
+from PIL import Image, ImageFont
 from tkinter import messagebox, filedialog, ttk
 from threading import Thread
 import subprocess
@@ -22,6 +23,7 @@ class ClassApp():
     from source.patch_bmg import patch_bmg
     from source.install_mod import install_mod
     from source.restart import restart
+    from source.patch_img_desc import patch_img_desc
 
 
 # TODO: Wiki Github
