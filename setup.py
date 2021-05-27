@@ -9,12 +9,18 @@ include_files = [
     "./version",
     "./ct_config.json",
     "./convert_file.json",
+    "./translation.json",
     "./fs.json",
 
     "./tools",
+    "./source",
 
     ("./file/Track-WU8","./file/Track-WU8"),
+    ("./file/cup_icon","./file/cup_icon"),
+    ("./file/img_desc","./file/img_desc"),
     ("./file/video.thp","./file/video.thp"),
+    ("./file/SuperMario256.ttf","./file/SuperMario256.ttf"),
+
     ("./file/Back.brctr","./file/Back.brctr"),
     ("./file/cup_icon_64x64_common.brlyt","./file/cup_icon_64x64_common.brlyt"),
     ("./file/CupSelectCup.brctr","./file/CupSelectCup.brctr"),
@@ -26,9 +32,6 @@ include_files = [
     sys.exec_prefix + "\\DLLs\\tcl86t.dll",
     sys.exec_prefix + "\\DLLs\\tk86t.dll",
 ]
-
-include_files.extend([(x, x) for x in glob.glob("./file/*.txt")])
-include_files.extend([(x, x) for x in glob.glob("./file/*.png")])
 
 
 options = {
@@ -43,7 +46,7 @@ options = {
 setup(
     options=options,
     name='MKWF-Install',
-    version='0.1',
+    version='0.3',
     url='https://github.com/Faraphel/MKWF-Install',
     license='Apache-2.0',
     author='Faraphel',

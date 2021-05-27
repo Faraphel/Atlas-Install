@@ -1,7 +1,7 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "subversion": "0",
-  "changelog": "- CTFILE.txt est maintenant automatiquement créé depuis ct_config.json, rendant le jeu plus simple pour moi à mettre à jour.\n- La conversion des courses peut maintenant être effectué en parallèle.\n- Les mises à jours affichent à présent une barre de chargement.\n- Les mises à jours sont à présent enregistré par chunk pour soulager la RAM.",
-  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.2/MKWF.v0.2.zip",
+  "changelog": "",
+  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.3/MKWF.v0.3.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
