@@ -15,7 +15,7 @@ def patch_file(self):
             total_track = 0
         with open("./convert_file.json") as f:
             fc = json.load(f)
-        max_step = len(fc["img"]) + total_track + 2 + len("EGFIS")
+        max_step = len(fc["img"]) + total_track + 3 + len("EGFIS")
         self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
 
         self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
@@ -29,6 +29,9 @@ def patch_file(self):
 
         self.Progress(statut=self.translate("Création des images descriptives"), add=1)
         self.patch_img_desc()
+
+        self.Progress(statut=self.translate("Création de ct_icon.png"), add=1)
+        self.patch_ct_icon()
 
         for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
             self.patch_bmg(file)

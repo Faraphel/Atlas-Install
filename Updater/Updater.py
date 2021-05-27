@@ -40,3 +40,6 @@ try:
 except Exception as e:
     print(f"Impossible d'effectuer la mise à jour :\n\n{str(e)}")
     input("Appuyez pour continuer...")
+
+# TODO: Use requests.get("https://api.github.com/repos/Faraphel/MKWF-Install/git/trees/master?recursive=1") to avoid
+# redownloading the same files again and again
