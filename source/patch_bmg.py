@@ -135,7 +135,7 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
     def finalise(common_file, bmgtext):
         for console in trackname_color: bmgtext = bmgtext.replace(console, trackname_color[console])
         with open(common_file, "w", encoding="utf-8") as f: f.write(bmgtext)
-        subprocess.call(["./tools/szs/wbmgt", "ENCODE", common_file, "--overwrite"])
+        subprocess.call(["./tools/szs/wbmgt", "ENCODE", common_file, "--overwrite"], creationflags=CREATE_NO_WINDOW)
         os.remove(common_file)
 
     finalise(f"./file/Common_{bmglang}.txt", bmgtext)
