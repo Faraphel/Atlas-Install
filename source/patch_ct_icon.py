@@ -13,7 +13,6 @@ def patch_ct_icon(self):
     for i, id in enumerate(files):
         if os.path.exists(f"./file/cup_icon/{id}.png"):
             cup_icon = Image.open(f"./file/cup_icon/{id}.png").resize((128, 128))
-            ct_icon.paste(cup_icon, (0, i * 128))
 
         else:
             cup_icon = Image.new("RGBA", (128, 128))
@@ -32,6 +31,7 @@ def patch_ct_icon(self):
             draw.text((5 + 2, 80 + 2), "%03i" % (i-10), (0, 0, 0), font=font)
 
             draw.text((5, 80), "%03i" % (i-10), (255, 165, 0), font=font)
-            ct_icon.paste(cup_icon, (0, i * 128))
+
+        ct_icon.paste(cup_icon, (0, i * 128))
 
     ct_icon.save("./file/ct_icons.tpl.png")
