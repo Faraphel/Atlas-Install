@@ -5,7 +5,7 @@ import os
 
 def patch_ct_icon(self):
     with open("./ct_config.json") as f: config = json.load(f)
-    ct_icon = Image.new("RGBA", (128, 128 * len(config["cup"])))
+    ct_icon = Image.new("RGBA", (128, 128 * (len(config["cup"]) + 2)))
 
     files = ["left", "right"]
     files.extend(config["cup"].keys())
