@@ -29,9 +29,8 @@ def patch_file(self):
 
         for i, file in enumerate(fc["img"]):
             self.Progress(statut=self.translate("Conversion des images")+f"\n({i + 1}/{len(fc['img'])}) {file}", add=1)
-            if not (os.path.exists("./file/" + get_filename(file))):
-                subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/" + file, "-x", fc["img"][file], "--overwrite"]
-                                , creationflags=CREATE_NO_WINDOW)
+            subprocess.call(["./tools/szs/wimgt", "ENCODE", "./file/" + file, "-x", fc["img"][file], "--overwrite"]
+                            , creationflags=CREATE_NO_WINDOW)
 
         for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
             self.patch_bmg(file)
