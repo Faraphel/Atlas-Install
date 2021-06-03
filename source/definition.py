@@ -3,6 +3,7 @@ get_nodir = lambda file: file.split("/")[-1].split("\\")[-1]
 get_extension = lambda file: file.split(".")[-1]
 
 CREATE_NO_WINDOW = 0x08000000
+VERSION = "0.7"
 
 def filecopy(src, dst):
     with open(src, "rb") as f1:
