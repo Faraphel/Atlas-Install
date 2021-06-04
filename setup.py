@@ -1,5 +1,6 @@
 from cx_Freeze import setup, Executable
 import sys
+import json
 
 include_files = [
     "./icon.ico",
@@ -53,10 +54,13 @@ options = {
     }
 }
 
+with open("./version") as f:
+    version = json.load(f)
+
 setup(
     options=options,
     name='MKWF-Install',
-    version='0.3',
+    version=version["version"],
     url='https://github.com/Faraphel/MKWF-Install',
     license='Apache-2.0',
     author='Faraphel',

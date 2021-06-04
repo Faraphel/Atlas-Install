@@ -1,14 +1,18 @@
 from PIL import Image, ImageFont, ImageDraw
 import json
+import math
 import os
 
 
 def patch_ct_icon(self):
-    with open("./ct_config.json") as f: config = json.load(f)
-    ct_icon = Image.new("RGBA", (128, 128 * (len(config["cup"]) + 2)))
+    with open("./ct_config.json", encoding="utf8") as f: config = json.load(f)
+
+    cup_number = len(config["cup"]) + math.ceil(len(config["tracks_list"]) / 4)
+    ct_icon = Image.new("RGBA", (128, 128 * (cup_number + 2)))
 
     files = ["left", "right"]
     files.extend(config["cup"].keys())
+    files.extend(["_"] * ((len(config["tracks_list"]) // 4) + 1))
 
     for i, id in enumerate(files):
         if os.path.exists(f"./file/cup_icon/{id}.png"):
