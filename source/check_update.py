@@ -22,7 +22,8 @@ def check_update(self):
                     with open("./download.zip", "wb") as file:
                         print(self.translate("Téléchargement de Updater en cours..."))
                         file.write(dl.content)
-                        print(self.translate("fin du téléchargement, début de l'extraction..."))
+                        print(self.translate("fin du téléchargement, "
+                                             "début de l'extraction..."))
 
                     with zipfile.ZipFile("./download.zip") as file:
                         file.extractall("./Updater/")
