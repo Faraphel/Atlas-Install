@@ -1,7 +1,7 @@
 {
   "version": "0.4",
   "subversion": "0",
-  "changelog": "- Une coupe etait dupliquee\n- Les courses '(Vide)' ont ete remplace par des courses sans nom pour eviter des problemes de traductions\n- Ajout de 350 courses (total : 760 -> 1100) originaux non comptes",
+  "changelog": "- Une coupe etait dupliquee\n- Les courses (Vide) ont ete remplace par des courses sans nom pour eviter des problemes de traductions\n- Ajout de 350 courses (total : 760 -> 1100) originaux non comptes",
   "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.4/MKWF.v0.4.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
