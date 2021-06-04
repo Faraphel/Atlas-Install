@@ -15,7 +15,6 @@ bmgID_track_move = {
     "T71": 0x7015, "T72": 0x701e, "T73": 0x701d, "T74": 0x7011,
     "T81": 0x7018, "T82": 0x7016, "T83": 0x7013, "T84": 0x701c,
 }
-
 trackname_color = {
     "MSRDS ": "\c{green}MSRDS\c{off} ",
     "CTR ": "\c{YOR4}CTR\c{off} ",
@@ -82,7 +81,6 @@ trackname_color = {
     "★☆☆ ": "\c{YOR2}★☆☆ \c{off}",
 }
 
-
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
     bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
     self.Progress(statut=self.translate("Patch des textes " + bmglang), add=1)
@@ -90,6 +88,7 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
     subprocess.call(["./tools/szs/wszst", "EXTRACT", gamefile, "-d", gamefile + ".d", "--overwrite"]
                     , creationflags=CREATE_NO_WINDOW)
 
+    # Common.bmg
     bmgtracks = subprocess.check_output(["./tools/szs/wbmgt", "CAT", gamefile + ".d/message/Common.bmg"],
                                         creationflags=CREATE_NO_WINDOW)
     bmgtracks = bmgtracks.decode()
@@ -130,6 +129,7 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
                                         "--patch-bmg", "OVERWRITE=" + gamefile + ".d/message/Common.bmg",
                                         "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
                                        creationflags=CREATE_NO_WINDOW).decode()
+
     shutil.rmtree(gamefile + ".d")
     os.remove("./file/ExtraCommon.txt")
 
