@@ -12,7 +12,7 @@ def check_update(self):
         with open("version", "rb") as f:
             locversion = json.load(f)
 
-        if float(gitversion["version"]) > float(locversion["version"]):
+        if gitversion["version"] != locversion["version"]:
             if messagebox.askyesno(self.translate("Mise à jour disponible !"), self.translate("Une mise à jour est disponible, souhaitez-vous l'installer ?") +
                                 f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> {gitversion['version']}.{gitversion['subversion']}\n"+\
                                 f"Changelog :\n{gitversion['changelog']}"):
@@ -22,7 +22,8 @@ def check_update(self):
                     with open("./download.zip", "wb") as file:
                         print(self.translate("Téléchargement de Updater en cours..."))
                         file.write(dl.content)
-                        print(self.translate("fin du téléchargement, début de l'extraction..."))
+                        print(self.translate("fin du téléchargement, "
+                                             "début de l'extraction..."))
 
                     with zipfile.ZipFile("./download.zip") as file:
                         file.extractall("./Updater/")
