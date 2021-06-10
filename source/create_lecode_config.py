@@ -62,5 +62,5 @@ def create_lecode_config(self):
             rctfile.write(get_rctfile_text(_course_config))
 
         for _ in range(1, 4-(i%4)):  # Complete cup if track are missing
-            ctfile.write(f'  T 13; 147; 0x00; "_"; ""; "-"\n')
-            rctfile.write(f'  T 13; 147; 0x00; "_"; ""; "-"\n')
+            ctfile.write(f'  T T44; T44; 0x00; "_"; ""; "-"\n')
+            rctfile.write(f'  T T44; T44; 0x00; "_"; ""; "-"\n')
