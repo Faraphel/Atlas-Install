@@ -12,7 +12,7 @@ def check_update(self):
         with open("version", "rb") as f:
             locversion = json.load(f)
 
-        if gitversion["version"] != locversion["version"]:
+        if float(gitversion["version"]) > float(locversion["version"]):
             if messagebox.askyesno(self.translate("Mise à jour disponible !"), self.translate("Une mise à jour est disponible, souhaitez-vous l'installer ?") +
                                 f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> {gitversion['version']}.{gitversion['subversion']}\n"+\
                                 f"Changelog :\n{gitversion['changelog']}"):
