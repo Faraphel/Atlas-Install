@@ -5,186 +5,186 @@
 {"name": "Circuit Luigi", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
 {"name": "Prairie Meuh Meuh", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "1": 
 {"name": "Coupe Carapace", "locked": true, "courses": {"0": 
-{"name": "GCN Plage Peach", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
-{"name": "DS Cascades Yoshi", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
-{"name": "SNES Vallée Fantôme 2", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
-{"name": "N64 Autodrome Mario", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "2": 
+{"prefix": "GCN", "name": "Plage Peach", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1":
+{"prefix": "DS", "name": "Cascades Yoshi", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2":
+{"prefix": "SNES", "name": "Vallée Fantôme 2", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3":
+{"prefix": "N64", "name": "Autodrome Mario", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "2":
 {"name": "Coupe Fleur", "locked": true, "courses": {"0": 
 {"name": "Circuit Mario", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
 {"name": "Supermarché Coco", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
 {"name": "Pic DK", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
 {"name": "Mine Wario", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "3": 
 {"name": "Coupe Banane", "locked": true, "courses": {"0": 
-{"name": "N64 Royaume Sorbet", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
-{"name": "GBA Plage Maskass", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
-{"name": "DS Quartier Delfino", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
-{"name": "GCN Stade Waluigi", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "4": 
-{"name": "Coupe Etoile", "locked": true, "courses": {"0": 
+{"prefix": "N64", "name": "Royaume Sorbet", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1":
+{"prefix": "GBA", "name": "Plage Maskass", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2":
+{"prefix": "DS", "name": "Quartier Delfino", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3":
+{"prefix": "GCN", "name": "Stade Waluigi", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "4":
+{"name": "Coupe Etoile", "locked": true, "courses": {"0":
 {"name": "Circuit Daisy", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
 {"name": "Cap Koopa", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
 {"name": "Bois Vermeil", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
 {"name": "Volcan Grondant", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "5": 
 {"name": "Coupe Feuille", "locked": true, "courses": {"0": 
-{"name": "DS Désert du Soleil", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
-{"name": "GBA Château de Bowser 3", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
-{"name": "N64 Jungle DK", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
-{"name": "GCN Circuit Mario", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "6": 
+{"prefix": "DS", "name": "Désert du Soleil", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1":
+{"prefix": "GBA", "name": "Château de Bowser 3", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2":
+{"prefix": "N64", "name": "Jungle DK", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3":
+{"prefix": "GCN", "name": "Circuit Mario", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "6":
 {"name": "Coupe Couronne", "locked": true, "courses": {"0": 
 {"name": "Ruines Sec Sec", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
 {"name": "Route Clair de Lune", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
 {"name": "Château de Bowser", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
 {"name": "Route Arc-en-Ciel", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "7": 
 {"name": "Coupe Eclair", "locked": true, "courses": {"0": 
-{"name": "SNES Circuit Mario 3", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
-{"name": "DS Jardin Peach", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
-{"name": "GCN Montagne DK", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
-{"name": "N64 Château de Bowser", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "8": 
+{"prefix": "SNES", "name": "Circuit Mario 3", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1":
+{"prefix": "DS", "name": "Jardin Peach", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2":
+{"prefix": "GCN", "name": "Montagne DK", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3":
+{"prefix": "N64", "name": "Château de Bowser", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "8":
 {"name": "Aléatoire", "locked": true, "courses": {"0": 
 {"name": "Aléatoire: Toutes les pistes", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "1": 
 {"name": "Aléatoire: Pistes Originales", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "2": 
 {"name": "Aléatoire: Custom Tracks", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}, "3": 
 {"name": "Aléatoire: Pistes Nouvelles", "music": null, "special": null, "new": false, "author": "Nintendo", "since_version": "0.1"}}}, "9": 
 {"name": "Switch1", "locked": false, "courses": {"0": 
-{"name": "Wii U Excitebike adventure", "music": "T64", "special": "T64", "new": false, "score": 2, "author": "Seeky", "since_version": "0.1"}, "1": 
-{"name": "Wii U Mario Kart Stadium", "music": "T11", "special": "T11", "new": false, "score": 1, "author": "Yosh", "since_version": "0.1"}, "2": 
-{"name": "Wii U Sweet Sweet Canyon", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "HackStarz", "since_version": "0.1"}, "3": 
-{"name": "Wii U Thwomp Ruins", "music": "T33", "special": "T33", "new": false, "score": 3, "author": "Degeso", "since_version": "0.1"}}}, "10": 
+{"prefix": "Wii U", "name": "Excitebike adventure", "music": "T64", "special": "T64", "new": false, "score": 2, "author": "Seeky", "since_version": "0.1"}, "1":
+{"prefix": "Wii U", "name": "Mario Kart Stadium", "music": "T11", "special": "T11", "new": false, "score": 1, "author": "Yosh", "since_version": "0.1"}, "2":
+{"prefix": "Wii U", "name": "Sweet Sweet Canyon", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "HackStarz", "since_version": "0.1"}, "3":
+{"prefix": "Wii U", "name": "Thwomp Ruins", "music": "T33", "special": "T33", "new": false, "score": 3, "author": "Degeso", "since_version": "0.1"}}}, "10":
 {"name": "Switch2", "locked": false, "courses": {"0": 
-{"name": "Wii U Water Park", "music": "T32", "special": "T32", "new": false, "score": 1, "author": "Yosh", "since_version": "0.1"}, "1": 
-{"name": "Wii U Dolphin Shoals", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "MrFluffy", "since_version": "0.1"}, "2": 
+{"prefix": "Wii U", "name": "Water Park", "music": "T32", "special": "T32", "new": false, "score": 1, "author": "Yosh", "since_version": "0.1"}, "1":
+{"prefix": "Wii U", "name": "Dolphin Shoals", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "MrFluffy", "since_version": "0.1"}, "2":
 {"name": "_", "music": "T32", "special": "T32", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}, "3": 
 {"name": "_", "music": "T32", "special": "T32", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}}}, "11": 
 {"name": "DS31", "locked": false, "courses": {"0": 
-{"name": "3DS Toad Circuit", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "Bri", "since_version": "0.1"}, "1": 
-{"name": "3DS Daisy Hills", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "2": 
-{"name": "3DS Cheep Cheep Lagoon", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "3": 
-{"name": "3DS Shy Guy Bazaar", "music": "T22", "special": "T22", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}}}, "12": 
+{"prefix": "3DS", "name": "Toad Circuit", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "Bri", "since_version": "0.1"}, "1":
+{"prefix": "3DS", "name": "Daisy Hills", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "2":
+{"prefix": "3DS", "name": "Cheep Cheep Lagoon", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "3":
+{"prefix": "3DS", "name": "Shy Guy Bazaar", "music": "T22", "special": "T22", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}}}, "12":
 {"name": "DS32", "locked": false, "courses": {"0": 
-{"name": "3DS Wuhu Loop", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "FunkyDude15, Riidefi, Zachruff", "since_version": "0.1"}, "1": 
-{"name": "3DS Mario Circuit", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "Bri", "since_version": "0.1"}, "2": 
-{"name": "3DS Music Park", "music": "T44", "special": "T44", "new": false, "score": 2, "author": "Atlas", "since_version": "0.1"}, "3": 
-{"name": "3DS Rock Rock Mountain", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "MrKoeikoei, zilly", "since_version": "0.1"}}}, "13": 
+{"prefix": "3DS", "name": "Wuhu Loop", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "FunkyDude15, Riidefi, Zachruff", "since_version": "0.1"}, "1":
+{"prefix": "3DS", "name": "Mario Circuit", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "Bri", "since_version": "0.1"}, "2":
+{"prefix": "3DS", "name": "Music Park", "music": "T44", "special": "T44", "new": false, "score": 2, "author": "Atlas", "since_version": "0.1"}, "3":
+{"prefix": "3DS", "name": "Rock Rock Mountain", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "MrKoeikoei, zilly", "since_version": "0.1"}}}, "13":
 {"name": "DS33", "locked": false, "courses": {"0": 
-{"name": "3DS Piranha Plant Slide", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "1": 
-{"name": "3DS Wario Shipyard", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "2": 
-{"name": "3DS Neo Bowser City", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "3": 
-{"name": "3DS Maka Wuhu", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "FunkyDude15, Wexos", "since_version": "0.1"}}}, "14": 
+{"prefix": "3DS", "name": "Piranha Plant Slide", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "1":
+{"prefix": "3DS", "name": "Wario Shipyard", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "2":
+{"prefix": "3DS", "name": "Neo Bowser City", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "3":
+{"prefix": "3DS", "name": "Maka Wuhu", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "FunkyDude15, Wexos", "since_version": "0.1"}}}, "14":
 {"name": "DS34", "locked": false, "courses": {"0": 
-{"name": "3DS DK Jungle", "music": "T73", "special": "T73", "new": false, "score": 3, "author": "Skipper93653", "since_version": "0.1"}, "1": 
-{"name": "3DS Rosalina's Ice World", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "MysterE99, Skipper93653", "since_version": "0.1"}, "2": 
-{"name": "3DS Bowser's Castle", "music": "T43", "special": "T43", "new": false, "score": 3, "author": "Wexos, Atlas", "since_version": "0.1"}, "3": 
-{"name": "3DS Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "bugsy", "since_version": "0.1"}}}, "15": 
+{"prefix": "3DS", "name": "DK Jungle", "music": "T73", "special": "T73", "new": false, "score": 3, "author": "Skipper93653", "since_version": "0.1"}, "1":
+{"prefix": "3DS", "name": "Rosalina's Ice World", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "MysterE99, Skipper93653", "since_version": "0.1"}, "2":
+{"prefix": "3DS", "name": "Bowser's Castle", "music": "T43", "special": "T43", "new": false, "score": 3, "author": "Wexos, Atlas", "since_version": "0.1"}, "3":
+{"prefix": "3DS", "name": "Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "bugsy", "since_version": "0.1"}}}, "15":
 {"name": "DS1", "locked": false, "courses": {"0": 
-{"name": "DS Figure-8 Circuit", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "Quajeek99, Sniki", "since_version": "0.1"}, "1": 
-{"name": "DS Cheep Cheep Beach", "music": "T51", "special": "T51", "new": false, "score": 3, "author": "Jasperr, ZPL, Golden RS", "since_version": "0.1"}, "2": 
-{"name": "DS Luigi's Mansion", "music": "T53", "special": "T11", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3": 
-{"name": "DS Waluigi Pinball", "music": "T64", "special": "T61", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}}}, "16": 
+{"prefix": "DS", "name": "Figure-8 Circuit", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "Quajeek99, Sniki", "since_version": "0.1"}, "1":
+{"prefix": "DS", "name": "Cheep Cheep Beach", "music": "T51", "special": "T51", "new": false, "score": 3, "author": "Jasperr, ZPL, Golden RS", "since_version": "0.1"}, "2":
+{"prefix": "DS", "name": "Luigi's Mansion", "music": "T53", "special": "T11", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3":
+{"prefix": "DS", "name": "Waluigi Pinball", "music": "T64", "special": "T61", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}}}, "16":
 {"name": "DS2", "locked": false, "courses": {"0": 
-{"name": "DS Shroom Ridge", "music": "T42", "special": "T42", "new": false, "score": 2, "author": "Sniki", "since_version": "0.1"}, "1": 
-{"name": "DS DK Pass", "music": "T23", "special": "T23", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2": 
-{"name": "DS Tick-Tock Clock", "music": "T14", "special": "T14", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3": 
-{"name": "DS Mario Circuit (Nuit)", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}}}, "17": 
+{"prefix": "DS", "name": "Shroom Ridge", "music": "T42", "special": "T42", "new": false, "score": 2, "author": "Sniki", "since_version": "0.1"}, "1":
+{"prefix": "DS", "name": "DK Pass", "music": "T23", "special": "T23", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2":
+{"prefix": "DS", "name": "Tick-Tock Clock", "music": "T14", "special": "T14", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3":
+{"prefix": "DS", "name": "Mario Circuit (Nuit)", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}}}, "17":
 {"name": "DS3", "locked": false, "courses": {"0": 
-{"name": "DS Airship Fortress", "music": "T43", "special": "T43", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}, "1": 
-{"name": "DS Wario Stadium", "music": "T64", "special": "T64", "new": false, "score": 3, "author": "Skipper93653", "since_version": "0.1"}, "2": 
-{"name": "DS Bowser Castle", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}, "3": 
-{"name": "DS Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "HackStarz", "since_version": "0.1"}}}, "18": 
+{"prefix": "DS", "name": "Airship Fortress", "music": "T43", "special": "T43", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}, "1":
+{"prefix": "DS", "name": "Wario Stadium", "music": "T64", "special": "T64", "new": false, "score": 3, "author": "Skipper93653", "since_version": "0.1"}, "2":
+{"prefix": "DS", "name": "Bowser Castle", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}, "3":
+{"prefix": "DS", "name": "Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "HackStarz", "since_version": "0.1"}}}, "18":
 {"name": "GCN1", "locked": false, "courses": {"0": 
-{"name": "GCN Luigi Circuit", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "1": 
-{"name": "GCN Baby Park", "music": "T81", "special": "T81", "new": false, "score": 3, "author": "maczkopeti", "since_version": "0.1"}, "2": 
-{"name": "GCN Dry Dry Desert", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "Riidefi, Hlorenzi", "since_version": "0.1"}, "3": 
-{"name": "GCN Mushroom Bridge", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}}}, "19": 
+{"prefix": "GCN", "name": "Luigi Circuit", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "1":
+{"prefix": "GCN", "name": "Baby Park", "music": "T81", "special": "T81", "new": false, "score": 3, "author": "maczkopeti", "since_version": "0.1"}, "2":
+{"prefix": "GCN", "name": "Dry Dry Desert", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "Riidefi, Hlorenzi", "since_version": "0.1"}, "3":
+{"prefix": "GCN", "name": "Mushroom Bridge", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}}}, "19":
 {"name": "GCN2", "locked": false, "courses": {"0": 
-{"name": "GCN Daisy Cruiser", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "FunkyDude15, Riidefi, Cotni", "since_version": "0.1"}, "1": 
-{"name": "GCN Sherbet Land", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "2": 
-{"name": "GCN Mushroom City", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3": 
-{"name": "GCN Yoshi Circuit", "music": "T74", "special": "T74", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}}}, "20": 
+{"prefix": "GCN", "name": "Daisy Cruiser", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "FunkyDude15, Riidefi, Cotni", "since_version": "0.1"}, "1":
+{"prefix": "GCN", "name": "Sherbet Land", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "2":
+{"prefix": "GCN", "name": "Mushroom City", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3":
+{"prefix": "GCN", "name": "Yoshi Circuit", "music": "T74", "special": "T74", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}}}, "20":
 {"name": "GCN3", "locked": false, "courses": {"0": 
-{"name": "GCN Wario Colosseum", "music": "T64", "special": "T64", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "1": 
-{"name": "GCN Dino Dino Jungle", "music": "T83", "special": "T83", "new": false, "score": 3, "author": "Riidefi, Tock", "since_version": "0.1"}, "2": 
-{"name": "GCN Bowser's Castle", "music": "T43", "special": "T43", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3": 
-{"name": "GCN Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Caron", "since_version": "0.1"}}}, "21": 
+{"prefix": "GCN", "name": "Wario Colosseum", "music": "T64", "special": "T64", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "1":
+{"prefix": "GCN", "name": "Dino Dino Jungle", "music": "T83", "special": "T83", "new": false, "score": 3, "author": "Riidefi, Tock", "since_version": "0.1"}, "2":
+{"prefix": "GCN", "name": "Bowser's Castle", "music": "T43", "special": "T43", "new": false, "score": 3, "author": "Tock", "since_version": "0.1"}, "3":
+{"prefix": "GCN", "name": "Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Caron", "since_version": "0.1"}}}, "21":
 {"name": "GBA1", "locked": false, "courses": {"0": 
-{"name": "GBA Peach Circuit", "music": "T51", "special": "T51", "new": false, "score": 2, "author": "Floyd", "since_version": "0.1"}, "1": 
-{"name": "GBA Riverside Park", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "DarkWolf658", "since_version": "0.1"}, "2": 
-{"name": "GBA Bowser Castle 1", "music": "T72", "special": "T72", "new": false, "score": 2, "author": "Bri", "since_version": "0.1"}, "3": 
-{"name": "GBA Mario Circuit", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "MysterE99", "since_version": "0.1"}}}, "22": 
+{"prefix": "GBA", "name": "Peach Circuit", "music": "T51", "special": "T51", "new": false, "score": 2, "author": "Floyd", "since_version": "0.1"}, "1":
+{"prefix": "GBA", "name": "Riverside Park", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "DarkWolf658", "since_version": "0.1"}, "2":
+{"prefix": "GBA", "name": "Bowser Castle 1", "music": "T72", "special": "T72", "new": false, "score": 2, "author": "Bri", "since_version": "0.1"}, "3":
+{"prefix": "GBA", "name": "Mario Circuit", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "MysterE99", "since_version": "0.1"}}}, "22":
 {"name": "GBA2", "locked": false, "courses": {"0": 
-{"name": "GBA Boo Lake", "music": "T53", "special": "T53", "new": false, "score": 2, "author": "ChaosShadow23", "since_version": "0.1"}, "1": 
-{"name": "GBA Cheese Land", "music": "T71", "special": "T71", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2": 
-{"name": "GBA Bowser Castle 2", "music": "T72", "special": "T72", "new": false, "score": 2, "author": "Natani", "since_version": "0.1"}, "3": 
-{"name": "GBA Luigi Circuit", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "zilly", "since_version": "0.1"}}}, "23": 
+{"prefix": "GBA", "name": "Boo Lake", "music": "T53", "special": "T53", "new": false, "score": 2, "author": "ChaosShadow23", "since_version": "0.1"}, "1":
+{"prefix": "GBA", "name": "Cheese Land", "music": "T71", "special": "T71", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2":
+{"prefix": "GBA", "name": "Bowser Castle 2", "music": "T72", "special": "T72", "new": false, "score": 2, "author": "Natani", "since_version": "0.1"}, "3":
+{"prefix": "GBA", "name": "Luigi Circuit", "music": "T21", "special": "T21", "new": false, "score": 3, "author": "zilly", "since_version": "0.1"}}}, "23":
 {"name": "GBA3", "locked": false, "courses": {"0": 
-{"name": "GBA Sky Garden", "music": "T82", "special": "T82", "new": false, "score": 3, "author": "tZ", "since_version": "0.1"}, "1": 
-{"name": "GBA Cheep-Cheep Island", "music": "T51", "special": "T51", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}, "2": 
-{"name": "GBA Sunset Wilds", "music": "T71", "special": "T71", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}, "3": 
-{"name": "GBA Snow Land", "music": "T23", "special": "T23", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}}}, "24": 
+{"prefix": "GBA", "name": "Sky Garden", "music": "T82", "special": "T82", "new": false, "score": 3, "author": "tZ", "since_version": "0.1"}, "1":
+{"prefix": "GBA", "name": "Cheep-Cheep Island", "music": "T51", "special": "T51", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}, "2":
+{"prefix": "GBA", "name": "Sunset Wilds", "music": "T71", "special": "T71", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}, "3":
+{"prefix": "GBA", "name": "Snow Land", "music": "T23", "special": "T23", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}}}, "24":
 {"name": "GBA4", "locked": false, "courses": {"0": 
-{"name": "GBA Ribbon Road", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "Gabriela", "since_version": "0.1"}, "1": 
-{"name": "GBA Yoshi Desert", "music": "T41", "special": "T41", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2": 
-{"name": "GBA Lakeside Park", "music": "T73", "special": "T73", "new": false, "score": 3, "author": "DarkWolf658", "since_version": "0.1"}, "3": 
-{"name": "GBA Broken Pier", "music": "T53", "special": "T53", "new": false, "score": 2, "author": "ChaosShadow23", "since_version": "0.1"}}}, "25": 
+{"prefix": "GBA", "name": "Ribbon Road", "music": "T31", "special": "T31", "new": false, "score": 3, "author": "Gabriela", "since_version": "0.1"}, "1":
+{"prefix": "GBA", "name": "Yoshi Desert", "music": "T41", "special": "T41", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2":
+{"prefix": "GBA", "name": "Lakeside Park", "music": "T73", "special": "T73", "new": false, "score": 3, "author": "DarkWolf658", "since_version": "0.1"}, "3":
+{"prefix": "GBA", "name": "Broken Pier", "music": "T53", "special": "T53", "new": false, "score": 2, "author": "ChaosShadow23", "since_version": "0.1"}}}, "25":
 {"name": "GBA5", "locked": false, "courses": {"0": 
-{"name": "GBA Bowser Castle 4", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}, "1": 
-{"name": "GBA Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 2, "author": "NiAlBlack", "since_version": "0.1"}, "2": 
+{"prefix": "GBA", "name": "Bowser Castle 4", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}, "1":
+{"prefix": "GBA", "name": "Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 2, "author": "NiAlBlack", "since_version": "0.1"}, "2":
 {"name": "_", "music": "T44", "special": "T44", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}, "3": 
 {"name": "_", "music": "T44", "special": "T44", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}}}, "26": 
 {"name": "N641", "locked": false, "courses": {"0": 
-{"name": "N64 Luigi Raceway", "music": "T54", "special": "T54", "new": false, "score": 3, "author": "ZPL, Skipper93653", "since_version": "0.1"}, "1": 
-{"name": "N64 Moo Moo Farm", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "Yoshidude4, Ermelber", "since_version": "0.1"}, "2": 
-{"name": "N64 Koopa Troopa Beach", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "Rex", "since_version": "0.1"}, "3": 
-{"name": "N64 Kalimari Desert", "music": "T71", "special": "T42", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}}}, "27": 
+{"prefix": "N64", "name": "Luigi Raceway", "music": "T54", "special": "T54", "new": false, "score": 3, "author": "ZPL, Skipper93653", "since_version": "0.1"}, "1":
+{"prefix": "N64", "name": "Moo Moo Farm", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "Yoshidude4, Ermelber", "since_version": "0.1"}, "2":
+{"prefix": "N64", "name": "Koopa Troopa Beach", "music": "T32", "special": "T32", "new": false, "score": 3, "author": "Rex", "since_version": "0.1"}, "3":
+{"prefix": "N64", "name": "Kalimari Desert", "music": "T71", "special": "T42", "new": false, "score": 3, "author": "Sniki", "since_version": "0.1"}}}, "27":
 {"name": "N642", "locked": false, "courses": {"0": 
-{"name": "N64 Toad's Turnpike (Nuit)", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "NintenYoshi", "since_version": "0.1"}, "1": 
-{"name": "N64 Frappe Snowland", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "NintenYoshi", "since_version": "0.1"}, "2": 
-{"name": "N64 Choco Mountain", "music": "T83", "special": "T83", "new": false, "score": 2, "author": "Yoshidude4, FunkyDude15", "since_version": "0.1"}, "3": 
-{"name": "N64 Wario Stadium", "music": "T64", "special": "T64", "new": false, "score": 3, "author": "zilly", "since_version": "0.1"}}}, "28": 
+{"prefix": "N64", "name": "Toad's Turnpike (Nuit)", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "NintenYoshi", "since_version": "0.1"}, "1":
+{"prefix": "N64", "name": "Frappe Snowland", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "NintenYoshi", "since_version": "0.1"}, "2":
+{"prefix": "N64", "name": "Choco Mountain", "music": "T83", "special": "T83", "new": false, "score": 2, "author": "Yoshidude4, FunkyDude15", "since_version": "0.1"}, "3":
+{"prefix": "N64", "name": "Wario Stadium", "music": "T64", "special": "T64", "new": false, "score": 3, "author": "zilly", "since_version": "0.1"}}}, "28":
 {"name": "N643", "locked": false, "courses": {"0": 
-{"name": "N64 Royal Raceway", "music": "T74", "special": "T74", "new": false, "score": 3, "author": "Baoulettes", "since_version": "0.1"}, "1": 
-{"name": "N64 Yoshi Valley", "music": "T62", "special": "T62", "new": false, "score": 2, "author": "MKDasher", "since_version": "0.1"}, "2": 
-{"name": "N64 Banshee Boardwalk", "music": "T53", "special": "T53", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "3": 
-{"name": "N64 Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Skipper93653", "since_version": "0.1"}}}, "29": 
+{"prefix": "N64", "name": "Royal Raceway", "music": "T74", "special": "T74", "new": false, "score": 3, "author": "Baoulettes", "since_version": "0.1"}, "1":
+{"prefix": "N64", "name": "Yoshi Valley", "music": "T62", "special": "T62", "new": false, "score": 2, "author": "MKDasher", "since_version": "0.1"}, "2":
+{"prefix": "N64", "name": "Banshee Boardwalk", "music": "T53", "special": "T53", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "3":
+{"prefix": "N64", "name": "Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Skipper93653", "since_version": "0.1"}}}, "29":
 {"name": "SNES1", "locked": false, "courses": {"0": 
-{"name": "SNES Mario Circuit 1", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "ZPL, Jasperr", "since_version": "0.1"}, "1": 
-{"name": "SNES Donut Plains 1", "music": "T81", "special": "T81", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2": 
-{"name": "SNES Ghost Valley 1", "music": "T53", "special": "T53", "new": false, "score": 2, "author": "Toxic Prime", "since_version": "0.1"}, "3": 
-{"name": "SNES Bowser Castle 1", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "Bruh de la Boi", "since_version": "0.1"}}}, "30": 
+{"prefix": "SNES", "name": "Mario Circuit 1", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "ZPL, Jasperr", "since_version": "0.1"}, "1":
+{"prefix": "SNES", "name": "Donut Plains 1", "music": "T81", "special": "T81", "new": false, "score": 3, "author": "ZPL", "since_version": "0.1"}, "2":
+{"prefix": "SNES", "name": "Ghost Valley 1", "music": "T53", "special": "T53", "new": false, "score": 2, "author": "Toxic Prime", "since_version": "0.1"}, "3":
+{"prefix": "SNES", "name": "Bowser Castle 1", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "Bruh de la Boi", "since_version": "0.1"}}}, "30":
 {"name": "SNES2", "locked": false, "courses": {"0": 
-{"name": "SNES Mario Circuit 2", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "ZPL", "since_version": "0.1"}, "1": 
-{"name": "SNES Choco Island 1", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "Luca", "since_version": "0.1"}, "2": 
-{"name": "SNES Donut Plains 2", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "Luca", "since_version": "0.1"}, "3": 
-{"name": "SNES Bowser Castle 2", "music": "T72", "special": "T21", "new": false, "score": 2, "author": "MKDasher", "since_version": "0.1"}}}, "31": 
+{"prefix": "SNES", "name": "Mario Circuit 2", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "ZPL", "since_version": "0.1"}, "1":
+{"prefix": "SNES", "name": "Choco Island 1", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "Luca", "since_version": "0.1"}, "2":
+{"prefix": "SNES", "name": "Donut Plains 2", "music": "T61", "special": "T61", "new": false, "score": 3, "author": "Luca", "since_version": "0.1"}, "3":
+{"prefix": "SNES", "name": "Bowser Castle 2", "music": "T72", "special": "T21", "new": false, "score": 2, "author": "MKDasher", "since_version": "0.1"}}}, "31":
 {"name": "SNES3", "locked": false, "courses": {"0": 
-{"name": "SNES Koopa Beach 1", "music": "T62", "special": "T51", "new": false, "score": 3, "author": "Luca", "since_version": "0.1"}, "1": 
-{"name": "SNES Choco Island 2", "music": "T83", "special": "T83", "new": false, "score": 2, "author": "Retrostyle12", "since_version": "0.1"}, "2": 
-{"name": "SNES Vanilla Lake 1", "music": "T61", "special": "T61", "new": false, "score": 1, "author": "James", "since_version": "0.1"}, "3": 
-{"name": "SNES Bowser Castle 3", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}}}, "32": 
+{"prefix": "SNES", "name": "Koopa Beach 1", "music": "T62", "special": "T51", "new": false, "score": 3, "author": "Luca", "since_version": "0.1"}, "1":
+{"prefix": "SNES", "name": "Choco Island 2", "music": "T83", "special": "T83", "new": false, "score": 2, "author": "Retrostyle12", "since_version": "0.1"}, "2":
+{"prefix": "SNES", "name": "Vanilla Lake 1", "music": "T61", "special": "T61", "new": false, "score": 1, "author": "James", "since_version": "0.1"}, "3":
+{"prefix": "SNES", "name": "Bowser Castle 3", "music": "T72", "special": "T72", "new": false, "score": 3, "author": "ChaosShadow23", "since_version": "0.1"}}}, "32":
 {"name": "SNES4", "locked": false, "courses": {"0": 
-{"name": "SNES Mario Circuit 4", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "NiAlBlack", "since_version": "0.1"}, "1": 
-{"name": "SNES Donut Plains 3 (Nuit)", "music": "T81", "special": "T81", "new": false, "score": 3, "author": "Bear, ZPL", "since_version": "0.1"}, "2": 
-{"name": "SNES Koopa Beach 2", "music": "T51", "special": "T51", "new": false, "score": 2, "author": "Luca", "since_version": "0.1"}, "3": 
-{"name": "SNES Ghost Valley 3", "music": "T53", "special": "T53", "new": false, "score": 1, "author": "NintenYoshi", "since_version": "0.1"}}}, "33": 
+{"prefix": "SNES", "name": "Mario Circuit 4", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "NiAlBlack", "since_version": "0.1"}, "1":
+{"prefix": "SNES", "name": "Donut Plains 3 (Nuit)", "music": "T81", "special": "T81", "new": false, "score": 3, "author": "Bear, ZPL", "since_version": "0.1"}, "2":
+{"prefix": "SNES", "name": "Koopa Beach 2", "music": "T51", "special": "T51", "new": false, "score": 2, "author": "Luca", "since_version": "0.1"}, "3":
+{"prefix": "SNES", "name": "Ghost Valley 3", "music": "T53", "special": "T53", "new": false, "score": 1, "author": "NintenYoshi", "since_version": "0.1"}}}, "33":
 {"name": "SNES5", "locked": false, "courses": {"0": 
-{"name": "SNES Vanilla Lake 2", "music": "T61", "special": "T61", "new": false, "score": 1, "author": "Likesorange", "since_version": "0.1"}, "1": 
-{"name": "SNES Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Bear, ZPL", "since_version": "0.1"}, "2": 
+{"prefix": "SNES", "name": "Vanilla Lake 2", "music": "T61", "special": "T61", "new": false, "score": 1, "author": "Likesorange", "since_version": "0.1"}, "1":
+{"prefix": "SNES", "name": "Rainbow Road", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Bear, ZPL", "since_version": "0.1"}, "2":
 {"name": "_", "music": "T44", "special": "T44", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}, "3": 
 {"name": "_", "music": "T44", "special": "T44", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}}}, "34": 
 {"name": "MKT1", "locked": false, "courses": {"0": 
-{"name": "MKT Kalimari Desert 2", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "Bruh de la Boi", "since_version": "0.1"}, "1": 
-{"name": "MKT New York Minute", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "HackStarz", "since_version": "0.1"}, "2": 
-{"name": "RMX Choco Island 1", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "Toxic Prime", "since_version": "0.1"}, "3": 
-{"name": "RMX Mario Circuit 1", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "Atlas", "since_version": "0.1"}}}, "35": 
+{"prefix": "RKT", "name": "Kalimari Desert 2", "music": "T42", "special": "T42", "new": false, "score": 3, "author": "Bruh de la Boi", "since_version": "0.1"}, "1":
+{"prefix": "RKT", "name": "New York Minute", "music": "T11", "special": "T11", "new": false, "score": 3, "author": "HackStarz", "since_version": "0.1"}, "2":
+{"prefix": "RMX", "name": "Choco Island 1", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "Toxic Prime", "since_version": "0.1"}, "3":
+{"prefix": "RMX", "name": "Mario Circuit 1", "music": "T81", "special": "T81", "new": false, "score": 2, "author": "Atlas", "since_version": "0.1"}}}, "35":
 {"name": "MKT2", "locked": false, "courses": {"0": 
-{"name": "RMX Rainbow Road 1", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Luca, Toxic Prime", "since_version": "0.1"}, "1": 
-{"name": "RMX Rainbow Road 2", "music": "T44", "special": "T44", "new": false, "score": 2, "author": "Bruh de la Boi", "since_version": "0.1"}, "2": 
+{"prefix": "RMX", "name": "Rainbow Road 1", "music": "T44", "special": "T44", "new": false, "score": 3, "author": "Luca, Toxic Prime", "since_version": "0.1"}, "1":
+{"prefix": "RMX", "name": "Rainbow Road 2", "music": "T44", "special": "T44", "new": false, "score": 2, "author": "Bruh de la Boi", "since_version": "0.1"}, "2":
 {"name": "_", "music": "T44", "special": "T44", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}, "3": 
 {"name": "_", "music": "T44", "special": "T44", "new": false, "score": 0, "author": "MrFluffy", "since_version": "0.1"}}}, "36": 
 {"name": "DX1", "locked": false, "courses": {"0": 
-{"name": "GP Diamond City", "music": "T22", "special": "T22", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "1": 
-{"name": "GP DK Jungle", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "Pointy Pighead Games", "since_version": "0.1"}, "2": 
-{"name": "GP Mario Beach", "music": "T74", "special": "T74", "new": false, "score": 3, "author": "SuperMario64DS", "since_version": "0.1"}, "3": 
-{"name": "GP Pac Mountain", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "Riidefi", "since_version": "0.1"}}}}, "tracks_list": [
-{"name": "3DS Rosalina's World (Boost)", "music": "T61", "special": "T61", "new": true, "score": 2, "author": "MRbuttCHINSx11T7", "since_version": "0.1", "sha1": "9a3ab8692bdd1465549cebf7cb8aa87be200b624"}, 
+{"prefix": "GP", "name": "Diamond City", "music": "T22", "special": "T22", "new": false, "score": 3, "author": "Atlas", "since_version": "0.1"}, "1":
+{"prefix": "GP", "name": "DK Jungle", "music": "T73", "special": "T73", "new": false, "score": 2, "author": "Pointy Pighead Games", "since_version": "0.1"}, "2":
+{"prefix": "GP", "name": "Mario Beach", "music": "T74", "special": "T74", "new": false, "score": 3, "author": "SuperMario64DS", "since_version": "0.1"}, "3":
+{"prefix": "GP", "name": "Pac Mountain", "music": "T12", "special": "T12", "new": false, "score": 3, "author": "Riidefi", "since_version": "0.1"}}}}, "tracks_list": [
+{"prefix": "3DS", "name": "Rosalina's World", "suffix": "Boost", "music": "T61", "special": "T61", "new": true, "score": 2, "author": "MRbuttCHINSx11T7", "since_version": "0.1", "sha1": "9a3ab8692bdd1465549cebf7cb8aa87be200b624"},
 {"name": "A Drive Through Miniville", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Man-O-Wii", "since_version": "0.1", "sha1": "794fef8f33b27b0de4f9853414e778b885bb89f7"}, 
 {"name": "Abandoned Boardwalk", "music": "T53", "special": "T53", "new": true, "score": 3, "author": "ChaosShadow23, Renegade Ciara", "since_version": "0.1", "sha1": "8c4eeed505f0862cbb490a0ac0bd334515895710"}, 
 {"name": "Abandoned Pipeyard", "music": "T43", "special": "T43", "new": true, "score": 1, "author": "BillyNoodles, DeathKick3", "since_version": "0.1", "sha1": "50a9ff366f7e867c9ca17f133ea585a87ce06f87"}, 
@@ -224,7 +224,7 @@
 {"name": "Autumn Raceway", "music": "T33", "special": "T33", "new": true, "score": 2, "author": "iNelom", "since_version": "0.1", "sha1": "1b56369818a4f498a232f50d90a49a28a4220841"}, 
 {"name": "Autumn Treeway", "music": "T33", "special": "T33", "new": true, "score": 3, "author": "Odie5776, Maximiliano", "since_version": "0.1", "sha1": "394bb6781399c3d6905985bfc56a4ccdf982def3"}, 
 {"name": "Bandit Plains", "music": "T71", "special": "T71", "new": true, "score": 1, "author": "RCPlanes59", "since_version": "0.1", "sha1": "4922a67f7aadf4eb7e86158999d64343f4130c2b"}, 
-{"name": "Banshee Boardwalk (Boost)", "music": "T53", "special": "T53", "new": true, "score": 1, "author": "Baoulettes", "since_version": "0.1", "sha1": "00addc12e4ff25a187b70388aab2510b24597c0a"}, 
+{"name": "Banshee Boardwalk", "suffix": "Boost", "music": "T53", "special": "T53", "new": true, "score": 1, "author": "Baoulettes", "since_version": "0.1", "sha1": "00addc12e4ff25a187b70388aab2510b24597c0a"},
 {"name": "Barren Badlands", "music": "T41", "special": "T41", "new": true, "score": 2, "author": "Hman6516", "since_version": "0.1", "sha1": "e659f666cd26168675cc7320863b2918db5d6955"}, 
 {"name": "BashnDashnBash", "music": "T64", "special": "T64", "new": true, "score": 2, "author": "Sucht93a", "since_version": "0.1", "sha1": "a72727cc9c1f7fac80c26cdbfa2d84a7e9195891"}, 
 {"name": "BassBasher City", "music": "T34", "special": "T34", "new": true, "score": 1, "author": "Scye, SpyKid", "since_version": "0.1", "sha1": "b797a6e527be1517ec7bf3b2bad2b17ab6c49d9c"}, 
@@ -268,17 +268,17 @@
 {"name": "Bullet Tower", "music": "T72", "special": "T72", "new": true, "score": 1, "author": "Bulzeeb", "since_version": "0.1", "sha1": "c13607debe50795164f2fd0298d25bbbedc07814"}, 
 {"name": "Bulzeeb's Dim. Circuit", "music": "T43", "special": "T43", "new": true, "score": 1, "author": "Bulzeeb", "since_version": "0.1", "sha1": "8189e012b12f604141d5da01e5dcee7946031ba7"}, 
 {"name": "Bumper's Roundabout", "music": "T71", "special": "T71", "new": true, "score": 2, "author": "Brawlboxgaming", "since_version": "0.1", "sha1": "61bd73b006faa27ab0571b284d10bb22b850ea64"}, 
-{"name": "CNR Outer Space Chase", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Atlas", "since_version": "0.1", "sha1": "e27f056e4a973db63b1967aa31d44f56657a8a1d"}, 
-{"name": "CTR Blizzard Bluff", "music": "T23", "special": "T23", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "15711129f1e146ef8cdc17632f6179c5f6bf88f7"}, 
-{"name": "CTR Cortex Castle", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "84eb3599f6993e5f42e69f42d9ae14ce82db9749"}, 
-{"name": "CTR Hot Air Skyway", "music": "T13", "special": "T13", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "ac557f98ee5b528cc7fd5484844cc4be20154e43"}, 
-{"name": "CTR N. Gin Labs", "music": "T72", "special": "T72", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "159c469cfc0d47f565907f8b66171301d2e10360"}, 
-{"name": "CTR Slide Coliseum", "music": "T64", "special": "T64", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "38117fc8ba9c850a549aa678f89221756df2c959"}, 
-{"name": "CTR Tiny Arena", "music": "T64", "special": "T64", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "c6734ddb51f3a4fe7fcd99a8fe295a4c2f809f08"}, 
-{"name": "CTTR Track and the Beanstalk", "music": "T41", "special": "T41", "new": true, "score": 3, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "dc41f934c89eb77700a770c280f0ae48deaa3e84"}, 
+{"prefix": "CTR", "name": "Outer Space Chase", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Atlas", "since_version": "0.1", "sha1": "e27f056e4a973db63b1967aa31d44f56657a8a1d"},
+{"prefix": "CTR", "name": "Blizzard Bluff", "music": "T23", "special": "T23", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "15711129f1e146ef8cdc17632f6179c5f6bf88f7"},
+{"prefix": "CTR", "name": "Cortex Castle", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "84eb3599f6993e5f42e69f42d9ae14ce82db9749"},
+{"prefix": "CTR", "name": "Hot Air Skyway", "music": "T13", "special": "T13", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "ac557f98ee5b528cc7fd5484844cc4be20154e43"},
+{"prefix": "CTR", "name": "N. Gin Labs", "music": "T72", "special": "T72", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "159c469cfc0d47f565907f8b66171301d2e10360"},
+{"prefix": "CTR", "name": "Slide Coliseum", "music": "T64", "special": "T64", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "38117fc8ba9c850a549aa678f89221756df2c959"},
+{"prefix": "CTR", "name": "Tiny Arena", "music": "T64", "special": "T64", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "c6734ddb51f3a4fe7fcd99a8fe295a4c2f809f08"},
+{"prefix": "CTTR", "name": "Track and the Beanstalk", "music": "T41", "special": "T41", "new": true, "score": 3, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "dc41f934c89eb77700a770c280f0ae48deaa3e84"},
 {"name": "Cacti Desert", "music": "T41", "special": "T11", "new": true, "score": 1, "author": "Man-O-Wii", "since_version": "0.1", "sha1": "02cf397df92e9a2afa59b6e6a698be6df5ee5398"}, 
 {"name": "Camp Kartigan", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "MrFluffy", "since_version": "0.1", "sha1": "f6dbefdcf16edde5b5367b17ea3d4625a8ffa0b0"}, 
-{"name": "Camp Kartigan (Boost)", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "MrFluffy", "since_version": "0.1", "sha1": "8bd477e25f6bd0116130cec329868f4b3ff1ba01"}, 
+{"name": "Camp Kartigan", "suffix": "Boost", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "MrFluffy", "since_version": "0.1", "sha1": "8bd477e25f6bd0116130cec329868f4b3ff1ba01"},
 {"name": "Canary Bay", "music": "T31", "special": "T31", "new": true, "score": 2, "author": "NinYoda1", "since_version": "0.1", "sha1": "608c20fe05d4d5ace037ca95ab279c2b0e76b891"}, 
 {"name": "Candy Bay", "music": "T64", "special": "T64", "new": true, "score": 3, "author": "ChisSilver64, ANoob", "since_version": "0.1", "sha1": "4965dd4eaf9e8df24f56bcce81f4aeee41269c8f"}, 
 {"name": "Candy Cane Circuit", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Crile", "since_version": "0.1", "sha1": "197314a625c0ea7a9c1af2387283620ad9c7cc47"}, 
@@ -314,14 +314,14 @@
 {"name": "Christmas Dream 2", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "iNelom", "since_version": "0.1", "sha1": "b61a91c08f6dc89cd0b82806b9bae19ceaac8ed9"}, 
 {"name": "Christmas Wish", "music": "T23", "special": "T23", "new": true, "score": 3, "author": "Jiyuu", "since_version": "0.1", "sha1": "3ddcd33f9499d96a3092288a20a6165202bf4593"}, 
 {"name": "Circuit Speedway", "music": "T11", "special": "T11", "new": true, "score": 3, "author": "EdwardJW", "since_version": "0.1", "sha1": "fa63e65f509df71fdad95a86e32fe91fed7fc443"}, 
-{"name": "Citro's Wedding Altar", "music": "T82", "special": "T82", "new": true, "score": 2, "author": "SpyKid", "since_version": "0.1", "sha1": "7530d04d7ef75472eea29a6cc7a52b756d8708e9"}, 
-{"name": "Cityside Nature (Jour)", "music": "T82", "special": "T82", "new": true, "score": 3, "author": "Rz", "since_version": "0.1", "sha1": "2bb530726ee73664e59536983f181e2c25b00018"}, 
+{"name": "Citro's Wedding Altar", "music": "T82", "special": "T82", "new": true, "score": 2, "author": "SpyKid", "since_version": "0.1", "sha1": "7530d04d7ef75472eea29a6cc7a52b756d8708e9"},
+{"name": "Cityside Nature", "suffix": "Jour", "music": "T82", "special": "T82", "new": true, "score": 3, "author": "Rz", "since_version": "0.1", "sha1": "2bb530726ee73664e59536983f181e2c25b00018"},
 {"name": "Cliffside Circuit", "music": "T13", "special": "T13", "new": true, "score": 3, "author": "NintenYoshi", "since_version": "0.1", "sha1": "23bc34db83e357d57564599ce476343b494305aa"}, 
 {"name": "Cliffside Court", "music": "T11", "special": "T84", "new": true, "score": 3, "author": "Luke Chandler", "since_version": "0.1", "sha1": "85ecabd33052a39556bc500d1c02f9b677ed2ed9"}, 
 {"name": "Cliffside Falls", "music": "T13", "special": "T13", "new": true, "score": 3, "author": "Jasperr, ZPL", "since_version": "0.1", "sha1": "cfe5b318e83c2a73fde8a9ce4dbe274d645f897d"}, 
 {"name": "Cliffview Keep", "music": "T74", "special": "T74", "new": true, "score": 2, "author": "Terrorhenk", "since_version": "0.1", "sha1": "2a1cc3802670a85ba862ee10bbe08632247a5df5"}, 
 {"name": "Coastal Island", "music": "T52", "special": "T52", "new": true, "score": 2, "author": "YellowYoshi", "since_version": "0.1", "sha1": "b42eae62d9a993dfaaf7b534a4a0de20466a9c0e"}, 
-{"name": "Coastal Island (Boost)", "music": "T32", "special": "T32", "new": true, "score": 2, "author": "YellowYoshi", "since_version": "0.1", "sha1": "ff236d884064e0d6d87cf40e9f74f4c7c4e335ef"}, 
+{"name": "Coastal Island", "suffix": "Boost", "music": "T32", "special": "T32", "new": true, "score": 2, "author": "YellowYoshi", "since_version": "0.1", "sha1": "ff236d884064e0d6d87cf40e9f74f4c7c4e335ef"},
 {"name": "Coastal Pathway", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Potatoman44", "since_version": "0.1", "sha1": "765faa043286a0b6e3ac15c523e6e3b304bb8305"}, 
 {"name": "Codename BIGBOX", "music": "T31", "special": "T31", "new": true, "score": 1, "author": "Guilmon", "since_version": "0.1", "sha1": "f9cff3bf1421beb64f8226b89fb1a6f60b224afd"}, 
 {"name": "Coin Heaven", "music": "T13", "special": "T13", "new": true, "score": 3, "author": "TacoJosh", "since_version": "0.1", "sha1": "14262c4deea6d224a1aa3e40dbb412e4dad5b263"}, 
@@ -354,13 +354,13 @@
 {"name": "Cycling Road GP", "music": "T31", "special": "T31", "new": true, "score": 3, "author": "RFirestone", "since_version": "0.1", "sha1": "04b144c50e0799b56f71b7b0b9edafe4fcc54fe5"}, 
 {"name": "DK Jungle Tour", "music": "T73", "special": "T73", "new": true, "score": 2, "author": "HelloImYourMind", "since_version": "0.1", "sha1": "14de5ee6e7fa882a83268b3a1b1d4c5041a4d48d"}, 
 {"name": "DK Jungle Tour II", "music": "T73", "special": "T73", "new": true, "score": 2, "author": "HelloImYourMind", "since_version": "0.1", "sha1": "705a835056e8ac5987c2a67b32254c6ca788da15"}, 
-{"name": "DKR Ancient Lake", "music": "T83", "special": "T83", "new": true, "score": 3, "author": "DJ Lowgey, Mewtwo2000", "since_version": "0.1", "sha1": "2a19d661bd2f6184208965ae93d0ad241185a8e5"}, 
-{"name": "DKR Haunted Woods", "music": "T53", "special": "T53", "new": true, "score": 2, "author": "nodrazir", "since_version": "0.1", "sha1": "9f6fb24fca93df8e887dcd9bf4d16c10a240e614"}, 
-{"name": "DKR Jungle Falls", "music": "T73", "special": "T73", "new": true, "score": 3, "author": "MrKoeikoei", "since_version": "0.1", "sha1": "313ec0c5333d8a14e52c1da74ed3563043b71589"}, 
-{"name": "DKR Spaceport Alpha", "music": "T44", "special": "T44", "new": true, "score": 2, "author": "MrMartley64", "since_version": "0.1", "sha1": "7ccbfc760b4c330fba85647a992b3ca9b03a4977"}, 
-{"name": "DKR Star City", "music": "T31", "special": "T31", "new": true, "score": 3, "author": "Mewtwo2000", "since_version": "0.1", "sha1": "698ca4e3c45cc049e98b96a0500bffe0c0474943"}, 
-{"name": "DS Airship Fortress (Boost)", "music": "T43", "special": "T43", "new": true, "score": 2, "author": "metaknight2550, MKDasher", "since_version": "0.1", "sha1": "91a46e83b86026bb31ad1a96080abd3b207fbc24"}, 
-{"name": "DS Luigi's Mansion (Boost)", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "4TLPati", "since_version": "0.1", "sha1": "0da12d22d599118c91e959931f619e04f6dadc32"}, 
+{"prefix": "DKR", "name": "Ancient Lake", "music": "T83", "special": "T83", "new": true, "score": 3, "author": "DJ Lowgey, Mewtwo2000", "since_version": "0.1", "sha1": "2a19d661bd2f6184208965ae93d0ad241185a8e5"},
+{"prefix": "DKR", "name": "Haunted Woods", "music": "T53", "special": "T53", "new": true, "score": 2, "author": "nodrazir", "since_version": "0.1", "sha1": "9f6fb24fca93df8e887dcd9bf4d16c10a240e614"},
+{"prefix": "DKR", "name": "Jungle Falls", "music": "T73", "special": "T73", "new": true, "score": 3, "author": "MrKoeikoei", "since_version": "0.1", "sha1": "313ec0c5333d8a14e52c1da74ed3563043b71589"},
+{"prefix": "DKR", "name": "Spaceport Alpha", "music": "T44", "special": "T44", "new": true, "score": 2, "author": "MrMartley64", "since_version": "0.1", "sha1": "7ccbfc760b4c330fba85647a992b3ca9b03a4977"},
+{"prefix": "DKR", "name": "Star City", "music": "T31", "special": "T31", "new": true, "score": 3, "author": "Mewtwo2000", "since_version": "0.1", "sha1": "698ca4e3c45cc049e98b96a0500bffe0c0474943"},
+{"prefix": "DS", "name": "Airship Fortress", "suffix": "Boost", "music": "T43", "special": "T43", "new": true, "score": 2, "author": "metaknight2550, MKDasher", "since_version": "0.1", "sha1": "91a46e83b86026bb31ad1a96080abd3b207fbc24"},
+{"prefix": "DS", "name": "Luigi's Mansion", "suffix": "Boost", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "4TLPati", "since_version": "0.1", "sha1": "0da12d22d599118c91e959931f619e04f6dadc32"},
 {"name": "Daisy Gardens", "music": "T82", "special": "T82", "new": true, "score": 3, "author": "xBlue98", "since_version": "0.1", "sha1": "fb7958d9b7681dac3f0e8b483f1a817b397af0c4"}, 
 {"name": "Daisy's Garden", "music": "T54", "special": "T54", "new": true, "score": 1, "author": "Twister, EC2Joshi", "since_version": "0.1", "sha1": "e78a5f06ff2ece2f51cea28accf22431e0f8009b"}, 
 {"name": "Daisy's Island", "music": "T31", "special": "T31", "new": true, "score": 2, "author": "Super-Daisy55", "since_version": "0.1", "sha1": "beb8072d7b6c8323269544056b33bf4059b44858"}, 
@@ -375,14 +375,14 @@
 {"name": "Delfino Bay", "music": "T63", "special": "T63", "new": true, "score": 3, "author": "BillyNoodles", "since_version": "0.1", "sha1": "79386f5e6099b3db70b827f011faf03ca0adc697"}, 
 {"name": "Delfino Circuit", "music": "T63", "special": "T63", "new": true, "score": 2, "author": "Björn", "since_version": "0.1", "sha1": "f78da31da93dc45d3d9de5c2a12184eb2b76cf33"}, 
 {"name": "Delfino Island", "music": "T63", "special": "T63", "new": true, "score": 2, "author": "Vulcanus2", "since_version": "0.1", "sha1": "15ea2870d52bf8761bf17bcf70a1efc3670a719a"}, 
-{"name": "Delfino Island (Boost)", "music": "T63", "special": "T63", "new": true, "score": 1, "author": "Vulcanus2", "since_version": "0.1", "sha1": "2ddb4b7b489d44cbebc53d34aae786c9f2a4c09d"}, 
+{"name": "Delfino Island", "suffix": "Boost", "music": "T63", "special": "T63", "new": true, "score": 1, "author": "Vulcanus2", "since_version": "0.1", "sha1": "2ddb4b7b489d44cbebc53d34aae786c9f2a4c09d"},
 {"name": "Delfino Park", "music": "T63", "special": "T63", "new": true, "score": 2, "author": "NinYoda1", "since_version": "0.1", "sha1": "276df89e5e8411ee314bf01816080481e93ac3bc"}, 
 {"name": "Delfino Sky", "music": "T63", "special": "T63", "new": true, "score": 1, "author": "TAS Rhys, Zef", "since_version": "0.1", "sha1": "0a3c065812df95e8397c30811ee4b7c4c5aea535"}, 
 {"name": "Delfino Town", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "KevinVG207", "since_version": "0.1", "sha1": "9f295da6c6b19cf226df1b8f327ea7cb1f81d557"}, 
-{"name": "Delfino Village (Boost)", "music": "T63", "special": "T63", "new": true, "score": 1, "author": "WiiLuigi", "since_version": "0.1", "sha1": "44dd27f54069c2635e3ba4e40180d74b321f6fd5"}, 
+{"name": "Delfino Village", "suffix": "Boost", "music": "T63", "special": "T63", "new": true, "score": 1, "author": "WiiLuigi", "since_version": "0.1", "sha1": "44dd27f54069c2635e3ba4e40180d74b321f6fd5"},
 {"name": "Desert Badlands", "music": "T71", "special": "T71", "new": true, "score": 3, "author": "ishiyama263", "since_version": "0.1", "sha1": "f6fbc203fabbdec3fad6e5e5288d3956ef4db7c6"}, 
 {"name": "Desert Bone", "music": "T41", "special": "T41", "new": true, "score": 2, "author": "Putinas", "since_version": "0.1", "sha1": "edfae662f9a8d788a74eed3d1ad3c0393a73dd7a"}, 
-{"name": "Desert Bone (Boost)", "music": "T41", "special": "T41", "new": true, "score": 2, "author": "Putinas", "since_version": "0.1", "sha1": "f124bc3590c8f85e103595fd36c2fce5fa577627"}, 
+{"name": "Desert Bone", "suffix": "Boost", "music": "T41", "special": "T41", "new": true, "score": 2, "author": "Putinas", "since_version": "0.1", "sha1": "f124bc3590c8f85e103595fd36c2fce5fa577627"},
 {"name": "Desert Castle Raceway", "music": "T71", "special": "T71", "new": true, "score": 3, "author": "lgmb", "since_version": "0.1", "sha1": "44076849c003028a977a49e37e7681e754d4c7c9"}, 
 {"name": "Desert Course", "music": "T71", "special": "T71", "new": true, "score": 2, "author": "tZ", "since_version": "0.1", "sha1": "e6eed997cf12f628ae392b68339cbb3ee056b703"}, 
 {"name": "Desert Creek", "music": "T41", "special": "T41", "new": true, "score": 3, "author": "Okin", "since_version": "0.1", "sha1": "637bfe926068af11a7908235e1abd776703d8a28"}, 
@@ -431,18 +431,18 @@
 {"name": "Evening Harbor", "music": "T11", "special": "T11", "new": true, "score": 3, "author": "Jiyuu", "since_version": "0.1", "sha1": "b8b72d1396a097e818cb021a91f42e42323131c3"}, 
 {"name": "Exiled Campsite", "music": "T41", "special": "T41", "new": true, "score": 1, "author": "Chrome", "since_version": "0.1", "sha1": "cfd32295315e62395931997fde507d1367dfea06"}, 
 {"name": "F Boats", "music": "T11", "special": "T11", "new": true, "score": 3, "author": "igorseabra4, SCEI", "since_version": "0.1", "sha1": "a224a8b14189813934c3fbb282b176bfe6fc69b4"}, 
-{"name": "FZ Big Blue", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Jefe", "since_version": "0.1", "sha1": "7d2b154b852cba9fa503202c96df95b73b783828"}, 
-{"name": "FZ Mute City I", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "88f0c32ad47938e42373a89a8293027b4749beeb"}, 
-{"name": "FZ Port Town", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "NinYoda1", "since_version": "0.1", "sha1": "67831726d2839598c6d73f4198cdd90e50b593f7"}, 
-{"name": "FZ White Land I", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Toxic Prime", "since_version": "0.1", "sha1": "f309063df488cf20e272f669c7c3f979d25b2ee8"}, 
-{"name": "FZ White Land II", "music": "T61", "special": "T61", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "6da1e050d04cb6cdbf8f06574c580470ec3bc292"}, 
-{"name": "FZMV Cloud Carpet", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "TacoJosh", "since_version": "0.1", "sha1": "5f8ad0620feb14c8d79776428ac5f6cc8520644e"}, 
+{"prefix": "FZ", "name": "Big Blue", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Jefe", "since_version": "0.1", "sha1": "7d2b154b852cba9fa503202c96df95b73b783828"},
+{"prefix": "FZ", "name": "Mute City I", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "88f0c32ad47938e42373a89a8293027b4749beeb"},
+{"prefix": "FZ", "name": "Port Town", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "NinYoda1", "since_version": "0.1", "sha1": "67831726d2839598c6d73f4198cdd90e50b593f7"},
+{"prefix": "FZ", "name": "White Land I", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Toxic Prime", "since_version": "0.1", "sha1": "f309063df488cf20e272f669c7c3f979d25b2ee8"},
+{"prefix": "FZ", "name": "White Land II", "music": "T61", "special": "T61", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "6da1e050d04cb6cdbf8f06574c580470ec3bc292"},
+{"prefix": "FZMV", "name": "Cloud Carpet", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "TacoJosh", "since_version": "0.1", "sha1": "5f8ad0620feb14c8d79776428ac5f6cc8520644e"},
 {"name": "Farm Road", "music": "T12", "special": "T12", "new": true, "score": 3, "author": "EdwardJW", "since_version": "0.1", "sha1": "d6805e44a26b13ac5fccf470af7b28d755ea8b59"}, 
 {"name": "Festival Town", "music": "T63", "special": "T63", "new": true, "score": 3, "author": "WiiLuigi", "since_version": "0.1", "sha1": "58aabf96417775a3ac94e056ea0b5ca0f912da77"}, 
 {"name": "Fiery Kinoko Cave", "music": "T13", "special": "T13", "new": true, "score": 3, "author": "marionose1", "since_version": "0.1", "sha1": "0e5c058ee582850acfe159861dc82bf39ab771ec"}, 
 {"name": "Final Grounds", "music": "T43", "special": "T43", "new": true, "score": 3, "author": "MEGAKart69", "since_version": "0.1", "sha1": "17f6c6b4143eea9067ce7ee2c8dd6f2de759c833"}, 
 {"name": "Fishdom Island", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "Jasperr", "since_version": "0.1", "sha1": "2e713297f5655aaa116d5c2c5b505477774898d6"}, 
-{"name": "Fishdom Island (Boost)", "music": "T32", "special": "T32", "new": true, "score": 1, "author": "BigOto2", "since_version": "0.1", "sha1": "ff1120484b7437009c6f6df68f505e9f0707462e"}, 
+{"name": "Fishdom Island", "suffix": "Boost", "music": "T32", "special": "T32", "new": true, "score": 1, "author": "BigOto2", "since_version": "0.1", "sha1": "ff1120484b7437009c6f6df68f505e9f0707462e"},
 {"name": "Flooded Cavern", "music": "T73", "special": "T73", "new": true, "score": 3, "author": "Teamuge", "since_version": "0.1", "sha1": "685873bb85e589a59e6f60268ffe58ee92cda776"}, 
 {"name": "Flowery Greenhouse", "music": "T12", "special": "T82", "new": true, "score": 3, "author": "Sniki", "since_version": "0.1", "sha1": "a3c99bd31855b7e6c8f606208ab7e40e84834723"}, 
 {"name": "Flying Kingdom", "music": "T44", "special": "T44", "new": true, "score": 3, "author": "SpyKid", "since_version": "0.1", "sha1": "6ecc148406333f251aa2675b9e7b7e364c23e3a8"}, 
@@ -457,13 +457,13 @@
 {"name": "Frigid Freezeway", "music": "T23", "special": "T23", "new": true, "score": 3, "author": "ZPL", "since_version": "0.1", "sha1": "67042a2cdae43b006da1387078d5ba78d81b0e4f"}, 
 {"name": "Frozen Valley", "music": "T61", "special": "T61", "new": true, "score": 1, "author": "Warwick92xD", "since_version": "0.1", "sha1": "5fa2dbce4a602e8ca6706fb8dc5976fc14fc9363"}, 
 {"name": "Fungal Jungle", "music": "T73", "special": "T73", "new": true, "score": 3, "author": "TacoJosh", "since_version": "0.1", "sha1": "037db896dd4377d4e6b09f36050525f531110dc9"}, 
-{"name": "GBA Luigi Circuit (Boost)", "music": "T21", "special": "T21", "new": true, "score": 1, "author": "MRbuttCHINSx11T7", "since_version": "0.1", "sha1": "1064e186917929bddac175363f4038084ea976e8"}, 
-{"name": "GCN Bowser's Castle (Boost)", "music": "T42", "special": "T42", "new": true, "score": 2, "author": "Baoulettes", "since_version": "0.1", "sha1": "f23398fa7fd3d04e5911218411ced398db640cda"}, 
-{"name": "GCN Luigi Circuit (Boost)", "music": "T74", "special": "T74", "new": true, "score": 3, "author": "Torran", "since_version": "0.1", "sha1": "9d967138bcd0480af382430a54a5ef48ed8ccd0b"}, 
-{"name": "GCN Mushroom Bridge (Boost)", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "Torran", "since_version": "0.1", "sha1": "16cabeb2f2d280e4836d63d9254b8c26b0fbd021"}, 
-{"name": "GCN Sherbet Land (Boost)", "music": "T23", "special": "T23", "new": true, "score": 2, "author": "Tock", "since_version": "0.1", "sha1": "05a9f3d3adb93c0e12807a254dd182aac7f6dc6c"}, 
-{"name": "GCN Wario Colosseum (Boost)", "music": "T64", "special": "T64", "new": true, "score": 3, "author": "MKDasher", "since_version": "0.1", "sha1": "568276bacef74f12c38d26ad9e6204675a45f7f1"}, 
-{"name": "GCN Yoshi Circuit (Boost)", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Baoulettes", "since_version": "0.1", "sha1": "d0fe93fc6f4279bd700f59a2c36dcd8461c7ea7e"}, 
+{"prefix": "GBA", "name": "Luigi Circuit", "suffix": "Boost", "music": "T21", "special": "T21", "new": true, "score": 1, "author": "MRbuttCHINSx11T7", "since_version": "0.1", "sha1": "1064e186917929bddac175363f4038084ea976e8"},
+{"prefix": "GCN", "name": "Bowser's Castle", "suffix": "Boost", "music": "T42", "special": "T42", "new": true, "score": 2, "author": "Baoulettes", "since_version": "0.1", "sha1": "f23398fa7fd3d04e5911218411ced398db640cda"},
+{"prefix": "GCN", "name": "Luigi Circuit", "suffix": "Boost", "music": "T74", "special": "T74", "new": true, "score": 3, "author": "Torran", "since_version": "0.1", "sha1": "9d967138bcd0480af382430a54a5ef48ed8ccd0b"},
+{"prefix": "GCN", "name": "Mushroom Bridge", "suffix": "Boost", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "Torran", "since_version": "0.1", "sha1": "16cabeb2f2d280e4836d63d9254b8c26b0fbd021"},
+{"prefix": "GCN", "name": "Sherbet Land", "suffix": "Boost", "music": "T23", "special": "T23", "new": true, "score": 2, "author": "Tock", "since_version": "0.1", "sha1": "05a9f3d3adb93c0e12807a254dd182aac7f6dc6c"},
+{"prefix": "GCN", "name": "Wario Colosseum", "suffix": "Boost", "music": "T64", "special": "T64", "new": true, "score": 3, "author": "MKDasher", "since_version": "0.1", "sha1": "568276bacef74f12c38d26ad9e6204675a45f7f1"},
+{"prefix": "GCN", "name": "Yoshi Circuit", "suffix": "Boost", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Baoulettes", "since_version": "0.1", "sha1": "d0fe93fc6f4279bd700f59a2c36dcd8461c7ea7e"},
 {"name": "Galvarny Falls", "music": "T83", "special": "T83", "new": true, "score": 3, "author": "wiimaster35000vr, Baoulettes", "since_version": "0.1", "sha1": "f05b571459c51dcfb4c48079fd8d8d7fcf381b10"}, 
 {"name": "Garden of Dreams", "music": "T82", "special": "T82", "new": true, "score": 3, "author": "Jiyuu", "since_version": "0.1", "sha1": "4d2e222fc3686804a1f3165f4598310aca0647db"}, 
 {"name": "Gingivitis is Bad", "music": "T24", "special": "T24", "new": true, "score": 3, "author": "BillyNoodles, Team", "since_version": "0.1", "sha1": "6d7cf8e5cce0e420b5ef1a81eee0893c9fdfa93c"}, 
@@ -481,7 +481,7 @@
 {"name": "Halloween Ruins", "music": "T53", "special": "T53", "new": true, "score": 1, "author": "Warwick92xD", "since_version": "0.1", "sha1": "65ba434fb042234529777b1a14ae82edd566b618"}, 
 {"name": "Halogen Highway", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "BigOto2", "since_version": "0.1", "sha1": "e2dc3b9538740330959546ef192c3a49064b6e42"}, 
 {"name": "Haunted Gardens", "music": "T53", "special": "T82", "new": true, "score": 2, "author": "Hollend", "since_version": "0.1", "sha1": "49c457d8a5aefb65e9affcc9d735fe5d4de7b115"}, 
-{"name": "Haunted Woods (Boost)", "music": "T33", "special": "T33", "new": true, "score": 1, "author": "Thondam", "since_version": "0.1", "sha1": "5f9f854efa4f9f0d1fe0aaacab25cff552752fa6"}, 
+{"name": "Haunted Woods", "suffix": "Boost", "music": "T33", "special": "T33", "new": true, "score": 1, "author": "Thondam", "since_version": "0.1", "sha1": "5f9f854efa4f9f0d1fe0aaacab25cff552752fa6"},
 {"name": "Haunter's Mansion", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "Warwick92xD", "since_version": "0.1", "sha1": "9f2e89d8d65eb5709c7b7750c172916fab70ba69"}, 
 {"name": "Heart of China", "music": "T13", "special": "T13", "new": true, "score": 3, "author": "Wingcapman", "since_version": "0.1", "sha1": "921bceec0c240de299493eb3712180e75ac0b6bc"}, 
 {"name": "Helado Mountain", "music": "T34", "special": "T34", "new": true, "score": 3, "author": "ChaosShadow23, Renegade Ciara", "since_version": "0.1", "sha1": "5017eb98918df58be3a0385daf0e39b3f040759c"}, 
@@ -514,7 +514,7 @@
 {"name": "KO Teknik's Incendia Castle", "music": "T34", "special": "T34", "new": true, "score": 1, "author": "MrBean35000vr, Chadderz", "since_version": "0.1", "sha1": "adb657e35ddb3124d864ba4d625193565f97549a"}, 
 {"name": "Kamek's Library", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "775223fce1562a9b827e336d5896794f18592880"}, 
 {"name": "Kartwood Creek", "music": "T12", "special": "T12", "new": true, "score": 2, "author": "TokukuMKW, Riidefi", "since_version": "0.1", "sha1": "f668c133516ff347d5abe4f127da1b0100475577"}, 
-{"name": "Kartwood Creek (Boost)", "music": "T74", "special": "T74", "new": true, "score": 3, "author": "TokukuMKW, Riidefi", "since_version": "0.1", "sha1": "0b4f37e6c060a9d1c4244c3fa8a0fad4d0df6792"}, 
+{"name": "Kartwood Creek", "suffix": "Boost", "music": "T74", "special": "T74", "new": true, "score": 3, "author": "TokukuMKW, Riidefi", "since_version": "0.1", "sha1": "0b4f37e6c060a9d1c4244c3fa8a0fad4d0df6792"},
 {"name": "Kinoko Cave", "music": "T13", "special": "T13", "new": true, "score": 2, "author": "Sucht93a, Wingcapman", "since_version": "0.1", "sha1": "0995edd37c5265d4267fe80f1c2538d9d70a50c9"}, 
 {"name": "Kirio Raceway", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Super blooper kirio", "since_version": "0.1", "sha1": "d2654fd18fbdf7a7c86c44076aa0d35207eb1dbf"}, 
 {"name": "Koopa Shell Pipeland", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "12daeacfb566800a3408eb0b783b59d80a5f5962"}, 
@@ -540,16 +540,16 @@
 {"name": "Lunar Lights", "music": "T44", "special": "T44", "new": true, "score": 3, "author": "Sniki", "since_version": "0.1", "sha1": "4261e45f89014ef14ccee507e0862c3b1c0eb137"}, 
 {"name": "Lunar Speedway", "music": "T44", "special": "T44", "new": true, "score": 3, "author": "BigOto2", "since_version": "0.1", "sha1": "a8507c9e27cc13e6c34bf6df48829448371e36f4"}, 
 {"name": "Luncheon Tour", "music": "T11", "special": "T11", "new": true, "score": 3, "author": "Luke Chandler", "since_version": "0.1", "sha1": "fe5a30c3c82011080dafe9a0eda364c00c0d36ad"}, 
-{"name": "MP9 Snow Go", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "JorisMKW", "since_version": "0.1", "sha1": "ba62d7316f1e20adfbda37e84ffba79f69509d19"}, 
-{"name": "MP9 Toad Road", "music": "T11", "special": "T11", "new": true, "score": 3, "author": "Thed0ra7z, Sniki", "since_version": "0.1", "sha1": "49025adc33e055ca49771beb48f70770251fbd97"}, 
-{"name": "MSRDS Greenwoods Park", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "5e677dbe3729409588bf1c0ca2dee7e0b923e3fa"}, 
-{"name": "MSRDS MySims Raceway", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "d9eeef57a8baf0ad130833d26859310e92b19f73"}, 
-{"name": "MSUSA Alaska", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Hollend", "since_version": "0.1", "sha1": "7d923783c9d95c2bce297176fad4401eadbfc960"}, 
-{"name": "MSUSA Chicago", "music": "T84", "special": "T84", "new": true, "score": 2, "author": "Hollend", "since_version": "0.1", "sha1": "1191125356c143369f98eccc6ec4ebf694f0e67c"}, 
-{"name": "MSUSA Colorado", "music": "T61", "special": "T61", "new": true, "score": 3, "author": "Hollend", "since_version": "0.1", "sha1": "9cbc8d878894241b0d48ef4c6dde9d9183b5cb45"}, 
-{"name": "MSUSA Grand Canyon", "music": "T71", "special": "T71", "new": true, "score": 3, "author": "Hollend", "since_version": "0.1", "sha1": "1e5741be5fdf145e644fe1646c494e9f919060a2"}, 
-{"name": "MSUSA Indianapolis", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Hollend", "since_version": "0.1", "sha1": "aff03da95eef65cea36a892278bd279a6ceab549"}, 
-{"name": "MSUSA Philadelphia", "music": "T51", "special": "T51", "new": true, "score": 2, "author": "Hollend", "since_version": "0.1", "sha1": "20a3d7a80ca6996ea88b13706eefaaa7f81f800b"}, 
+{"prefix": "MP9", "name": "Snow Go", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "JorisMKW", "since_version": "0.1", "sha1": "ba62d7316f1e20adfbda37e84ffba79f69509d19"},
+{"prefix": "MP9", "name": "Toad Road", "music": "T11", "special": "T11", "new": true, "score": 3, "author": "Thed0ra7z, Sniki", "since_version": "0.1", "sha1": "49025adc33e055ca49771beb48f70770251fbd97"},
+{"prefix": "MSRDS", "name": "Greenwoods Park", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "5e677dbe3729409588bf1c0ca2dee7e0b923e3fa"},
+{"prefix": "MSRDS", "name": "MySims Raceway", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "d9eeef57a8baf0ad130833d26859310e92b19f73"},
+{"prefix": "MSUSA", "name": "Alaska", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Hollend", "since_version": "0.1", "sha1": "7d923783c9d95c2bce297176fad4401eadbfc960"},
+{"prefix": "MSUSA", "name": "Chicago", "music": "T84", "special": "T84", "new": true, "score": 2, "author": "Hollend", "since_version": "0.1", "sha1": "1191125356c143369f98eccc6ec4ebf694f0e67c"},
+{"prefix": "MSUSA", "name": "Colorado", "music": "T61", "special": "T61", "new": true, "score": 3, "author": "Hollend", "since_version": "0.1", "sha1": "9cbc8d878894241b0d48ef4c6dde9d9183b5cb45"},
+{"prefix": "MSUSA", "name": "Grand Canyon", "music": "T71", "special": "T71", "new": true, "score": 3, "author": "Hollend", "since_version": "0.1", "sha1": "1e5741be5fdf145e644fe1646c494e9f919060a2"},
+{"prefix": "MSUSA", "name": "Indianapolis", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Hollend", "since_version": "0.1", "sha1": "aff03da95eef65cea36a892278bd279a6ceab549"},
+{"prefix": "MSUSA", "name": "Philadelphia", "music": "T51", "special": "T51", "new": true, "score": 2, "author": "Hollend", "since_version": "0.1", "sha1": "20a3d7a80ca6996ea88b13706eefaaa7f81f800b"},
 {"name": "Magic Track", "music": "T44", "special": "T44", "new": true, "score": 2, "author": "Warwick92xD", "since_version": "0.1", "sha1": "a075b56d69d16c4184d1aaa5ff6b540234b8e315"}, 
 {"name": "Magmatic Sanctuary", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "ZPL, Jasperr, Terron", "since_version": "0.1", "sha1": "d346b7d8986d63344a007f95eee5858d351eef33"}, 
 {"name": "Mansion of Madness", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Sucht93a", "since_version": "0.1", "sha1": "01fbd9368f461520d371b6f755129020948193b7"}, 
@@ -585,8 +585,8 @@
 {"name": "Orbital Outpost", "music": "T44", "special": "T44", "new": true, "score": 3, "author": "Ferv, TacoJosh", "since_version": "0.1", "sha1": "8c9fd87216acdc05c74504bb887b0691b4f89dbf"}, 
 {"name": "Origami Arts", "music": "T12", "special": "T12", "new": true, "score": 2, "author": "Warwick92xD", "since_version": "0.1", "sha1": "40684fecb2c974b11a8cebe099ba67c1053688b2"}, 
 {"name": "Overgrown Temple", "music": "T73", "special": "T73", "new": true, "score": 2, "author": "JoeyMK", "since_version": "0.1", "sha1": "b0c59d9624d0ab7e334609516a4e38b5e2040d84"}, 
-{"name": "PMWR Cloud Garden", "music": "T73", "special": "T73", "new": true, "score": 3, "author": "Atlas", "since_version": "0.1", "sha1": "14ec039c28c0bc7727fa5c692daf796aa7ab4616"}, 
-{"name": "PMWR King's Kourse", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "Oh ok", "since_version": "0.1", "sha1": "7b00e4343cb031ce427434427c9abad71959938a"}, 
+{"prefix": "PMWR", "name": "Cloud Garden", "music": "T73", "special": "T73", "new": true, "score": 3, "author": "Atlas", "since_version": "0.1", "sha1": "14ec039c28c0bc7727fa5c692daf796aa7ab4616"},
+{"prefix": "PMWR", "name": "King's Kourse", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "Oh ok", "since_version": "0.1", "sha1": "7b00e4343cb031ce427434427c9abad71959938a"},
 {"name": "Papyrophobia", "music": "T72", "special": "T72", "new": true, "score": 1, "author": "Toxic Prime", "since_version": "0.1", "sha1": "b1f2a0bd6cf5f8cd72ea6b281c12e88441269c93"}, 
 {"name": "Park Cruise", "music": "T82", "special": "T82", "new": true, "score": 2, "author": "EdwardJW", "since_version": "0.1", "sha1": "f80d616496e6a39f769aba0d6d1767ffaf967afd"}, 
 {"name": "Peach's Ruined Castle", "music": "T84", "special": "T84", "new": true, "score": 2, "author": "YoRemco, Oh ok", "since_version": "0.1", "sha1": "64dbfb6958a83a76b0a25ae7049b8aa4be993696"}, 
@@ -601,58 +601,58 @@
 {"name": "Puppy Play Park", "music": "T12", "special": "T12", "new": true, "score": 3, "author": "TAS Rhys, Mystic", "since_version": "0.1", "sha1": "4a4936b7dbd1e856f07407024a9113f874788f85"}, 
 {"name": "Purple Route", "music": "T44", "special": "T44", "new": true, "score": 3, "author": "Rukasudo90", "since_version": "0.1", "sha1": "44f719b4e621fe6099ceff1330b4d9a540026e3d"}, 
 {"name": "Quaking Mad Cliffs", "music": "T83", "special": "T83", "new": true, "score": 3, "author": "MrFluffy", "since_version": "0.1", "sha1": "db6421cc8c691da89d666acb54994adbc69f7d40"}, 
-{"name": "RV Botanical Garden", "music": "T74", "special": "T74", "new": true, "score": 3, "author": "MK Mier", "since_version": "0.1", "sha1": "9d4feb5731d0c1f6d699fa67ff48e138aba61123"}, 
-{"name": "RV Rooftops", "music": "T21", "special": "T21", "new": true, "score": 3, "author": "MK Mier", "since_version": "0.1", "sha1": "7fd36d116897d9e77be91518adcbd762a39b745c"}, 
-{"name": "RV Supermarket 2", "music": "T22", "special": "T22", "new": true, "score": 2, "author": "MK Mier", "since_version": "0.1", "sha1": "034de38c44469833b0772c7e4cb31673d93d39f7"}, 
-{"name": "Raceway District (Boost)", "music": "T54", "special": "T54", "new": true, "score": 1, "author": "Thed0ra7z", "since_version": "0.1", "sha1": "80eac128552269071d4551b23f14a09725209150"}, 
+{"prefix": "RV", "name": "Botanical Garden", "music": "T74", "special": "T74", "new": true, "score": 3, "author": "MK Mier", "since_version": "0.1", "sha1": "9d4feb5731d0c1f6d699fa67ff48e138aba61123"},
+{"prefix": "RV", "name": "Rooftops", "music": "T21", "special": "T21", "new": true, "score": 3, "author": "MK Mier", "since_version": "0.1", "sha1": "7fd36d116897d9e77be91518adcbd762a39b745c"},
+{"prefix": "RV", "name": "Supermarket 2", "music": "T22", "special": "T22", "new": true, "score": 2, "author": "MK Mier", "since_version": "0.1", "sha1": "034de38c44469833b0772c7e4cb31673d93d39f7"},
+{"name": "Raceway District", "suffix": "Boost", "music": "T54", "special": "T54", "new": true, "score": 1, "author": "Thed0ra7z", "since_version": "0.1", "sha1": "80eac128552269071d4551b23f14a09725209150"},
 {"name": "Rainbow Bridge", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Doumdoum", "since_version": "0.1", "sha1": "88133b7e461ba46d774285d07f55e78f23b5a123"}, 
 {"name": "Rainbow Labyrinth", "music": "T44", "special": "T44", "new": true, "score": 1, "author": "Rz, Maximiliano", "since_version": "0.1", "sha1": "2db6dc0a078729d0451a68090ee9c49d67286ab2"}, 
 {"name": "Rainbow River", "music": "T44", "special": "T44", "new": true, "score": 1, "author": "TAS Rhys", "since_version": "0.1", "sha1": "14131b897bf59f416592a6749041f11d0693222b"}, 
 {"name": "Rainbow Road DX", "music": "T44", "special": "T44", "new": true, "score": 2, "author": "HackStarz", "since_version": "0.1", "sha1": "b666fe758b56c4c0cc61705203454220cf2c2e07"}, 
 {"name": "Retro Raceway", "music": "T54", "special": "T54", "new": true, "score": 1, "author": "wiimaster35000vr, Björn, LuigiM", "since_version": "0.1", "sha1": "da89c2c3da1282543f3bd66f28696d0b41306747"}, 
 {"name": "Rezway II", "music": "T21", "special": "T21", "new": true, "score": 1, "author": "Trent Rez", "since_version": "0.1", "sha1": "ae02c28e97f118dd015f2dbd24c79b59e4442ee5"}, 
-{"name": "Rezway II (Boost)", "music": "T21", "special": "T21", "new": true, "score": 1, "author": "Trent Rez", "since_version": "0.1", "sha1": "4c5baf1055873e80c0125696a66e590136067515"}, 
+{"name": "Rezway II", "suffix": "Boost", "music": "T21", "special": "T21", "new": true, "score": 1, "author": "Trent Rez", "since_version": "0.1", "sha1": "4c5baf1055873e80c0125696a66e590136067515"},
 {"name": "River Path", "music": "T13", "special": "T13", "new": true, "score": 2, "author": "Warwick92xD", "since_version": "0.1", "sha1": "24d368ecad4b535f370b52a822942a313a2c04aa"}, 
 {"name": "River of Dreams", "music": "T51", "special": "T51", "new": true, "score": 3, "author": "xBlue98", "since_version": "0.1", "sha1": "08126db47848ef76c7a5e6aef34f41675a82d918"}, 
 {"name": "Riverside City", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "MysterE99", "since_version": "0.1", "sha1": "4958ebb1e52b3ac8bbb00dc4d727ced92d21e629"}, 
 {"name": "Rockside River", "music": "T82", "special": "T82", "new": true, "score": 2, "author": "Ermelber", "since_version": "0.1", "sha1": "70f6a678ad73255d687762bd02ba8da2491106fb"}, 
 {"name": "Rocky Snake", "music": "T24", "special": "T24", "new": true, "score": 1, "author": "Warwick92xD", "since_version": "0.1", "sha1": "b02270b6ec868c4579387d04e6ab14a6dc9b0df3"}, 
-{"name": "Rooster Island (Boost)", "music": "T51", "special": "T51", "new": true, "score": 2, "author": "Jefe", "since_version": "0.1", "sha1": "cecf0be85b31865ec641e63d3d4f6ba0c7c60693"}, 
-{"name": "Rooster Island (Nuit)", "music": "T31", "special": "T31", "new": true, "score": 3, "author": "Jefe", "since_version": "0.1", "sha1": "822f8447ce26ee70bf24d2fcab49298c25b84d79"}, 
+{"name": "Rooster Island", "suffix": "Boost", "music": "T51", "special": "T51", "new": true, "score": 2, "author": "Jefe", "since_version": "0.1", "sha1": "cecf0be85b31865ec641e63d3d4f6ba0c7c60693"},
+{"name": "Rooster Island", "suffix": "Nuit", "music": "T31", "special": "T31", "new": true, "score": 3, "author": "Jefe", "since_version": "0.1", "sha1": "822f8447ce26ee70bf24d2fcab49298c25b84d79"},
 {"name": "Ruin Labyrinth", "music": "T41", "special": "T41", "new": true, "score": 2, "author": "EC2Joshi", "since_version": "0.1", "sha1": "b15f7b260fa2379a2f055345abd91524e556b41f"}, 
 {"name": "Rush City Run", "music": "T63", "special": "T63", "new": true, "score": 2, "author": "GredMega", "since_version": "0.1", "sha1": "3789b48ddaa2ae42527f442a97cf37482a9bc1c6"}, 
-{"name": "SADX Twinkle Circuit", "music": "T14", "special": "T14", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "28c3bc97a2cf320c08d9f10356f50cacde9a1543"}, 
-{"name": "SADX Twinkle Circuit 2", "music": "T81", "special": "T81", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "6a18f7c744a729258a01cc0584415d58205c8722"}, 
-{"name": "SADX Twinkle Circuit 3", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "23856e267bccdbb806a3e5d5fbd0036998a08698"}, 
-{"name": "SADX Twinkle Circuit 4", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "38684fb241bc6ea50f3f2a84bb9b3661b9a61b97"}, 
-{"name": "SADX Twinkle Circuit 5", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "0beed3113f3c85718e01829f4fe776b825f9e603"}, 
-{"name": "SADX Twinkle Circuit 6", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "e7aba4246cae7f5233f96894992046f0fa692434"}, 
-{"name": "SCR Mountain Coaster", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "alexth91", "since_version": "0.1", "sha1": "17ff09137f9ef497d3e55fd574346e80dad48bdc"}, 
-{"name": "SCR Simple Circuit", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "687d31baedfef88edaba332d1b3834d829b2f013"}, 
-{"name": "SH Casino Park", "music": "T22", "special": "T22", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "3eafce69c47ecfc126b0a9c4d335abfabf66b784"}, 
-{"name": "SH Grand Metropolis", "music": "T63", "special": "T63", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "6281574a73f1d202398beeb6bda3b649331bb59b"}, 
-{"name": "SHR Level 1 Bonus", "music": "T71", "special": "T71", "new": true, "score": 1, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "e78863da3372c076cfbe1f09a1a28b640ea75ae3"}, 
-{"name": "SK64 Ninja Land", "music": "T33", "special": "T33", "new": true, "score": 3, "author": "Sniki", "since_version": "0.1", "sha1": "5fac92533bc9d48792b1c2cdd851ebb6f92d0db4"}, 
-{"name": "SM64 Castle Grounds", "music": "T83", "special": "T83", "new": true, "score": 2, "author": "zilly", "since_version": "0.1", "sha1": "77ccd8378f2164481264c648b7c8fdf0bf5d9919"}, 
-{"name": "SM64 Cool, Cool Mountain Slide", "music": "T23", "special": "T23", "new": true, "score": 3, "author": "YellowYoshi", "since_version": "0.1", "sha1": "87e1c31415164f897aed8e8742ef1d0ab40a86ff"}, 
-{"name": "SM64 Inside the Ancient Pyramid", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Nodrazir", "since_version": "0.1", "sha1": "112695a44a2b0ff6a63003586ef16f680d39ca50"}, 
-{"name": "SM64 Whomp's Fortress", "music": "T54", "special": "T54", "new": true, "score": 2, "author": "Reedy94", "since_version": "0.1", "sha1": "742535c6a43b07f966f46eb5226af0495aaab221"}, 
-{"name": "SMB1 Aqua Offroad", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "22683f0a6ad2ca315cf9b19c5881cb10c7408484"}, 
-{"name": "SMB1 Frozen Highway", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Retrostyle12", "since_version": "0.1", "sha1": "b5a469becd6e078e95fc421534c66c16c2b7f8cc"}, 
-{"name": "SMB1 Speed Desert", "music": "T71", "special": "T71", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "ffd3537ac467fd6f6ac49a31cbdd3e8a1422d59f"}, 
-{"name": "SMB2 Charming Banana Road", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "5142d138f501ab59390e881dbed291c81bfcc611"}, 
-{"name": "SMB2 Clock Tower Hill", "music": "T31", "special": "T31", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "0e2564fb27abfcaf3f744034369cd40a3f538239"}, 
-{"name": "SMB2 Lovely Heart Ring", "music": "T31", "special": "T31", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "981a2c09add73dc05ba25e8fd4c7458cd1b561c9"}, 
-{"name": "SMB2 Starlight Highway", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "5faf53525d17fef273fcd6b5287014ec3f2c5357"}, 
-{"name": "SMB2 Submarine Street", "music": "T33", "special": "T33", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "b1c336779d816ebc93c25896b62cfb8d1a846e2f"}, 
-{"name": "SMG Ghostly Gate", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Man-O-Wii", "since_version": "0.1", "sha1": "1dd95c1b666f29803ac63e8944998fa874001d10"}, 
-{"name": "SMG Sea Slide Galaxy", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "Torran", "since_version": "0.1", "sha1": "858d7246f7eaa90011c4b9c9986ae096ff4f72f2"}, 
-{"name": "SMO RC Car Circuit", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Atlas", "since_version": "0.1", "sha1": "ef831500c31b3c478fa60330884f5918dc4f11ce"}, 
-{"name": "SMS Blooper Surfing Safari", "music": "T32", "special": "T32", "new": true, "score": 2, "author": "Atlas", "since_version": "0.1", "sha1": "24b7cacbaf435d3be9245050fbfddce93839ad9a"}, 
-{"name": "SMS Delfino Plaza", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "ChisSilver64, ANoob", "since_version": "0.1", "sha1": "44124ccd380083adfc7de54a0ca17fdf858a02f1"}, 
-{"name": "SMS Sirena Beach", "music": "T51", "special": "T51", "new": true, "score": 2, "author": "Super-Daisy55", "since_version": "0.1", "sha1": "0089d20186d72e94f8791bee6124cb1f354af5b2"}, 
-{"name": "SSBB Mario Circuit", "music": "T54", "special": "T54", "new": true, "score": 1, "author": "AwesomeToad", "since_version": "0.1", "sha1": "3240b3beffc6250e79213988d6e0e4ec9ebbf020"}, 
-{"name": "SSBB Port Town Aero Dive", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Sucht93a", "since_version": "0.1", "sha1": "617f5531a32282335f4604d96ead50cd3bd06f82"}, 
+{"prefix": "SHR", "name": "Twinkle Circuit", "music": "T14", "special": "T14", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "28c3bc97a2cf320c08d9f10356f50cacde9a1543"},
+{"prefix": "SHR", "name": "Twinkle Circuit 2", "music": "T81", "special": "T81", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "6a18f7c744a729258a01cc0584415d58205c8722"},
+{"prefix": "SHR", "name": "Twinkle Circuit 3", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "23856e267bccdbb806a3e5d5fbd0036998a08698"},
+{"prefix": "SHR", "name": "Twinkle Circuit 4", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "38684fb241bc6ea50f3f2a84bb9b3661b9a61b97"},
+{"prefix": "SHR", "name": "Twinkle Circuit 5", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "0beed3113f3c85718e01829f4fe776b825f9e603"},
+{"prefix": "SADX", "name": "Twinkle Circuit 6", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "igorseabra4", "since_version": "0.1", "sha1": "e7aba4246cae7f5233f96894992046f0fa692434"},
+{"prefix": "SCR", "name": "Mountain Coaster", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "alexth91", "since_version": "0.1", "sha1": "17ff09137f9ef497d3e55fd574346e80dad48bdc"},
+{"prefix": "SCR", "name": "Simple Circuit", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "687d31baedfef88edaba332d1b3834d829b2f013"},
+{"prefix": "SH", "name": "Casino Park", "music": "T22", "special": "T22", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "3eafce69c47ecfc126b0a9c4d335abfabf66b784"},
+{"prefix": "SH", "name": "Grand Metropolis", "music": "T63", "special": "T63", "new": true, "score": 3, "author": "igorseabra4", "since_version": "0.1", "sha1": "6281574a73f1d202398beeb6bda3b649331bb59b"},
+{"prefix": "SHR", "name": "Level 1 Bonus", "music": "T71", "special": "T71", "new": true, "score": 1, "author": "EmmanuelBoom", "since_version": "0.1", "sha1": "e78863da3372c076cfbe1f09a1a28b640ea75ae3"},
+{"prefix": "SK64", "name": "Ninja Land", "music": "T33", "special": "T33", "new": true, "score": 3, "author": "Sniki", "since_version": "0.1", "sha1": "5fac92533bc9d48792b1c2cdd851ebb6f92d0db4"},
+{"prefix": "SM64", "name": "Castle Grounds", "music": "T83", "special": "T83", "new": true, "score": 2, "author": "zilly", "since_version": "0.1", "sha1": "77ccd8378f2164481264c648b7c8fdf0bf5d9919"},
+{"prefix": "SM64", "name": "Cool, Cool Mountain Slide", "music": "T23", "special": "T23", "new": true, "score": 3, "author": "YellowYoshi", "since_version": "0.1", "sha1": "87e1c31415164f897aed8e8742ef1d0ab40a86ff"},
+{"prefix": "SM64", "name": "Inside the Ancient Pyramid", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Nodrazir", "since_version": "0.1", "sha1": "112695a44a2b0ff6a63003586ef16f680d39ca50"},
+{"prefix": "SM64", "name": "Whomp's Fortress", "music": "T54", "special": "T54", "new": true, "score": 2, "author": "Reedy94", "since_version": "0.1", "sha1": "742535c6a43b07f966f46eb5226af0495aaab221"},
+{"prefix": "SMB1", "name": "Aqua Offroad", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "22683f0a6ad2ca315cf9b19c5881cb10c7408484"},
+{"prefix": "SMB1", "name": "Frozen Highway", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Retrostyle12", "since_version": "0.1", "sha1": "b5a469becd6e078e95fc421534c66c16c2b7f8cc"},
+{"prefix": "SMB1", "name": "Speed Desert", "music": "T71", "special": "T71", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "ffd3537ac467fd6f6ac49a31cbdd3e8a1422d59f"},
+{"prefix": "SMB2", "name": "Charming Banana Road", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "5142d138f501ab59390e881dbed291c81bfcc611"},
+{"prefix": "SMB2", "name": "Clock Tower Hill", "music": "T31", "special": "T31", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "0e2564fb27abfcaf3f744034369cd40a3f538239"},
+{"prefix": "SMB2", "name": "Lovely Heart Ring", "music": "T31", "special": "T31", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "981a2c09add73dc05ba25e8fd4c7458cd1b561c9"},
+{"prefix": "SMB2", "name": "Starlight Highway", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "5faf53525d17fef273fcd6b5287014ec3f2c5357"},
+{"prefix": "SMB2", "name": "Submarine Street", "music": "T33", "special": "T33", "new": true, "score": 1, "author": "Retrostyle12", "since_version": "0.1", "sha1": "b1c336779d816ebc93c25896b62cfb8d1a846e2f"},
+{"prefix": "SMG", "name": "Ghostly Gate", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "Man-O-Wii", "since_version": "0.1", "sha1": "1dd95c1b666f29803ac63e8944998fa874001d10"},
+{"prefix": "SMG", "name": "Sea Slide Galaxy", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "Torran", "since_version": "0.1", "sha1": "858d7246f7eaa90011c4b9c9986ae096ff4f72f2"},
+{"prefix": "SMO", "name": "RC Car Circuit", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Atlas", "since_version": "0.1", "sha1": "ef831500c31b3c478fa60330884f5918dc4f11ce"},
+{"prefix": "SMS", "name": "Blooper Surfing Safari", "music": "T32", "special": "T32", "new": true, "score": 2, "author": "Atlas", "since_version": "0.1", "sha1": "24b7cacbaf435d3be9245050fbfddce93839ad9a"},
+{"prefix": "SMS", "name": "Delfino Plaza", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "ChisSilver64, ANoob", "since_version": "0.1", "sha1": "44124ccd380083adfc7de54a0ca17fdf858a02f1"},
+{"prefix": "SMS", "name": "Sirena Beach", "music": "T51", "special": "T51", "new": true, "score": 2, "author": "Super-Daisy55", "since_version": "0.1", "sha1": "0089d20186d72e94f8791bee6124cb1f354af5b2"},
+{"prefix": "SSBB", "name": "Mario Circuit", "music": "T54", "special": "T54", "new": true, "score": 1, "author": "AwesomeToad", "since_version": "0.1", "sha1": "3240b3beffc6250e79213988d6e0e4ec9ebbf020"},
+{"prefix": "SSBB", "name": "Port Town Aero Dive", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Sucht93a", "since_version": "0.1", "sha1": "617f5531a32282335f4604d96ead50cd3bd06f82"},
 {"name": "Sacred Fogcoast", "music": "T13", "special": "T13", "new": true, "score": 2, "author": "YellowYoshi", "since_version": "0.1", "sha1": "0c74a3072819a679b99afef34650e1d91951bbbf"}, 
 {"name": "Sahara Hideout", "music": "T34", "special": "T34", "new": true, "score": 3, "author": "ZPL, Jasperr, Golden RS", "since_version": "0.1", "sha1": "fab5db0f26e1c2bfbaa9f778846a3ce734e0a7b6"}, 
 {"name": "Sakura Sanctuary", "music": "T82", "special": "T82", "new": true, "score": 3, "author": "Terron, Jasperr", "since_version": "0.1", "sha1": "d690ee9566cc1945ec13cfb776b96d968b65e272"}, 
@@ -662,9 +662,9 @@
 {"name": "Sandy Citadel", "music": "T51", "special": "T51", "new": true, "score": 3, "author": "JDS, SlipperyMac", "since_version": "0.1", "sha1": "053f969de38310911701135a3dcd98e5dc7a3ac5"}, 
 {"name": "Sarasa Kingdom", "music": "T31", "special": "T31", "new": true, "score": 3, "author": "NintenYoshi", "since_version": "0.1", "sha1": "19bb2ff0ff7f501020155dafe7a8122148594b88"}, 
 {"name": "Sea Stadium", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "Zatchi", "since_version": "0.1", "sha1": "504849019bfec8588ed092e88dbaf0ace27892b8"}, 
-{"name": "Seaside Circuit (Nuit)", "music": "T31", "special": "T31", "new": true, "score": 2, "author": "Super blooper kirio", "since_version": "0.1", "sha1": "263e60e8d0254573d0f85d4dd332e579ee984441"}, 
+{"name": "Seaside Circuit", "suffix": "Nuit", "music": "T31", "special": "T31", "new": true, "score": 2, "author": "Super blooper kirio", "since_version": "0.1", "sha1": "263e60e8d0254573d0f85d4dd332e579ee984441"},
 {"name": "Seaside Resort", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "LuigiM", "since_version": "0.1", "sha1": "296d4871320dfe2e241c12efa62d6e5858ca693c"}, 
-{"name": "Seaside Resort (Boost)", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "LuigiM", "since_version": "0.1", "sha1": "612741806f05d8f4ddcabf139c3b0f194d3929a0"}, 
+{"name": "Seaside Resort", "suffix": "Boost", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "LuigiM", "since_version": "0.1", "sha1": "612741806f05d8f4ddcabf139c3b0f194d3929a0"},
 {"name": "Seasonal Circuit", "music": "T31", "special": "T31", "new": true, "score": 3, "author": "Bear, Lovelifeandtpose024", "since_version": "0.1", "sha1": "a379f048ed454abd1d95022e41f907432d96d18b"}, 
 {"name": "Seaway", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "Okin", "since_version": "0.1", "sha1": "48ef6c8b95b2f4655cabc06724a668adb8f82cce"}, 
 {"name": "Secluded Island", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "Caron", "since_version": "0.1", "sha1": "ead99ea431fc1e8f89578c99f5096dda2e2aa96d"}, 
@@ -686,7 +686,7 @@
 {"name": "Snowland Freeze", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Potatoman44", "since_version": "0.1", "sha1": "1347373df364d1bd1facaabf5cfda67cc83584fe"}, 
 {"name": "Snowy Circuit", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Putinas", "since_version": "0.1", "sha1": "cac74214bdccb8cf728ab609d3fbdcaa644cca41"}, 
 {"name": "Snowy Circuit II", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "Putinas", "since_version": "0.1", "sha1": "b651a29eef7b17cf45c1e1d56eec29196f7f4ee0"}, 
-{"name": "Snowy Circuit II (Boost)", "music": "T23", "special": "T23", "new": true, "score": 2, "author": "Putinas", "since_version": "0.1", "sha1": "d0af90e137609b1fb53cfec9a29948612db19ebc"}, 
+{"name": "Snowy Circuit II", "suffix": "Boost", "music": "T23", "special": "T23", "new": true, "score": 2, "author": "Putinas", "since_version": "0.1", "sha1": "d0af90e137609b1fb53cfec9a29948612db19ebc"},
 {"name": "Snowy Drive", "music": "T61", "special": "T61", "new": true, "score": 3, "author": "EdwardJW", "since_version": "0.1", "sha1": "cf16a90b595c5777148ab8047b55bad66ef52843"}, 
 {"name": "Something Circuit", "music": "T23", "special": "T23", "new": true, "score": 1, "author": "BillyNoodles", "since_version": "0.1", "sha1": "114a51706be50dcb413588991dfe2d48c6f39b1a"}, 
 {"name": "Space Race Castle", "music": "T44", "special": "T44", "new": true, "score": 3, "author": "MysterE99, Ugotowned35000vr", "since_version": "0.1", "sha1": "1dd78cb7dac219e95462983fd461f96b67441fec"}, 
@@ -695,7 +695,7 @@
 {"name": "Spectral Station", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "MrFluffy", "since_version": "0.1", "sha1": "a864ca9d9bd8d515a683c50d6b34fa3fd977b463"}, 
 {"name": "Spike Desert", "music": "T71", "special": "T71", "new": true, "score": 2, "author": "Sniki", "since_version": "0.1", "sha1": "998725106a56303ac7b03512a80c2d4ad3ddee53"}, 
 {"name": "Spooky Swamp", "music": "T53", "special": "T53", "new": true, "score": 3, "author": "EdwardJW", "since_version": "0.1", "sha1": "acbb5650d6df4bde34d8cf50bfb58a3d5a03991a"}, 
-{"name": "Spyro 1 Gnasty Gnorc's Lair", "music": "T24", "special": "T24", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "5832473b04cbb96dd5e41c14cbf28a636cb167c4"}, 
+{"prefix": "Spyro 1", "name": "Gnasty Gnorc's Lair", "music": "T24", "special": "T24", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "5832473b04cbb96dd5e41c14cbf28a636cb167c4"},
 {"name": "Star Festival", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "TheGamingBram", "since_version": "0.1", "sha1": "1e53fece58cf56938b800846264fb781db30a460"}, 
 {"name": "Stargaze Summit", "music": "T23", "special": "T23", "new": true, "score": 2, "author": "Ferv", "since_version": "0.1", "sha1": "0eb529b77084f9fe1bd044283bddafc9189f33ca"}, 
 {"name": "Steel Structure", "music": "T14", "special": "T14", "new": true, "score": 1, "author": "Warwick92xD", "since_version": "0.1", "sha1": "ec72b21a03d4fce1e75f1fa5a0d9ec23696e36f6"}, 
@@ -718,9 +718,9 @@
 {"name": "The Void", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "tZ", "since_version": "0.1", "sha1": "cb5fed8699eb9930f88331f51bed22c4ba6f82af"}, 
 {"name": "Thunder Canyon", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "bugsy", "since_version": "0.1", "sha1": "e7eca49e6727ec823dbbae64d8d65699dc22a7a0"}, 
 {"name": "Thunder City", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "BigOto2", "since_version": "0.1", "sha1": "52432f67d8c0f98cc744e2884ae5cca8cebafd83"}, 
-{"name": "Thunder City (Boost)", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "BigOto2", "since_version": "0.1", "sha1": "e963611d4f744e3e74bff45d112a9bfb46b6621d"}, 
+{"name": "Thunder City", "suffix": "Boost", "music": "T81", "special": "T81", "new": true, "score": 2, "author": "BigOto2", "since_version": "0.1", "sha1": "e963611d4f744e3e74bff45d112a9bfb46b6621d"},
 {"name": "Thwomp Factory", "music": "T14", "special": "T14", "new": true, "score": 1, "author": "igorseabra4", "since_version": "0.1", "sha1": "daa5de95f306fe141d22ced8a1ae5d79074a64e0"}, 
-{"name": "Thwomp Factory (Boost)", "music": "T14", "special": "T14", "new": true, "score": 1, "author": "igorseabra4", "since_version": "0.1", "sha1": "c92e7ad81f1b18f0bddfef7f6a2d2537e4572f71"}, 
+{"name": "Thwomp Factory", "suffix": "Boost", "music": "T14", "special": "T14", "new": true, "score": 1, "author": "igorseabra4", "since_version": "0.1", "sha1": "c92e7ad81f1b18f0bddfef7f6a2d2537e4572f71"},
 {"name": "Thwomp Swamp", "music": "T53", "special": "T53", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "0b8327d1f32a7591e55fffcbaeb4d7df6221efeb"}, 
 {"name": "Toad Town", "music": "T42", "special": "T42", "new": true, "score": 1, "author": "Suigetsu", "since_version": "0.1", "sha1": "331036f04b137d67561a88e51052c9921fc85215"}, 
 {"name": "Toad Valley", "music": "T73", "special": "T73", "new": true, "score": 1, "author": "CrisDark64", "since_version": "0.1", "sha1": "4f2acce578c46ba41f4bb060a8e7775ca37058b4"}, 
@@ -739,7 +739,7 @@
 {"name": "Universe Sandsoil", "music": "T24", "special": "T24", "new": true, "score": 2, "author": "ZPL, MysterE99", "since_version": "0.1", "sha1": "d9b24646baad7cbc0bce578e178b21b0e4947742"}, 
 {"name": "Unnamed Town", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "Bladestorm227", "since_version": "0.1", "sha1": "eadc733d126dffa2fcb950c95fcd541319dcb680"}, 
 {"name": "Unnamed Valley", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "Scye, Sucht93a", "since_version": "0.1", "sha1": "cb49b497af671fc174f8d9565122d0d0c85bd9a7"}, 
-{"name": "VVVVVV Circuit 3", "music": "T72", "special": "T72", "new": true, "score": 2, "author": "TheZACAtac", "since_version": "0.1", "sha1": "96c9a17ecd815b9b6c3e981aec094b5e26f6a3d1"}, 
+{"prefix": "VVVVVV", "name": "Circuit 3", "music": "T72", "special": "T72", "new": true, "score": 2, "author": "TheZACAtac", "since_version": "0.1", "sha1": "96c9a17ecd815b9b6c3e981aec094b5e26f6a3d1"},
 {"name": "Vaporwave Voyage", "music": "T44", "special": "T44", "new": true, "score": 1, "author": "KartoffelKorps", "since_version": "0.1", "sha1": "2229ae4a0fbdf81dd9131c069785cc680e6b2efa"}, 
 {"name": "Varemi's Circle Circuit", "music": "T11", "special": "T11", "new": true, "score": 1, "author": "varemi", "since_version": "0.1", "sha1": "5226c657ce9cd822b1cf496ce0298cc510402716"}, 
 {"name": "Varemi's Garden 2", "music": "T83", "special": "T83", "new": true, "score": 1, "author": "varemi", "since_version": "0.1", "sha1": "6a8f36eb7fa64d2650a9ac20e9caa22bfd0b4ea2"}, 
@@ -749,7 +749,7 @@
 {"name": "Volcanic Loop", "music": "T34", "special": "T34", "new": true, "score": 2, "author": "NinYoda1", "since_version": "0.1", "sha1": "138e18f3db9049c35b282bcca8a7bbfc1b4af56c"}, 
 {"name": "Volcanic Pipeyard", "music": "T34", "special": "T34", "new": true, "score": 2, "author": "ChaosShadow23", "since_version": "0.1", "sha1": "f7cd64a034f04074dcfdffb7e203fcd3ab56e800"}, 
 {"name": "Volcanic Skyway", "music": "T32", "special": "T32", "new": true, "score": 2, "author": "Toxic Prime, Rosalina Speedruns", "since_version": "0.1", "sha1": "6db1dff98594fac8771783c220ded267d386df8e"}, 
-{"name": "Volcanic Skyway (Boost)", "music": "T34", "special": "T34", "new": true, "score": 2, "author": "BigOto2", "since_version": "0.1", "sha1": "c68c290ea7b9377229b89bce98c5f23ec2c0b234"}, 
+{"name": "Volcanic Skyway", "suffix": "Boost", "music": "T34", "special": "T34", "new": true, "score": 2, "author": "BigOto2", "since_version": "0.1", "sha1": "c68c290ea7b9377229b89bce98c5f23ec2c0b234"},
 {"name": "Volcanic Skyway II", "music": "T34", "special": "T34", "new": true, "score": 2, "author": "BigOto2", "since_version": "0.1", "sha1": "65e4d2ddc5202115aa88703b33a756b2325e7b7f"}, 
 {"name": "Volcanic Valley", "music": "T34", "special": "T34", "new": true, "score": 2, "author": "MEGAKart69", "since_version": "0.1", "sha1": "e540444646a90132d642880d7dc2de05d26ce6bd"}, 
 {"name": "Volcano Bay", "music": "T34", "special": "T34", "new": true, "score": 2, "author": "NinYoda1", "since_version": "0.1", "sha1": "0b05717ff5cdf431068c1a428209ffdb00501d0e"}, 
@@ -759,19 +759,19 @@
 {"name": "Volcano Loop", "music": "T34", "special": "T34", "new": true, "score": 1, "author": "RoGamer", "since_version": "0.1", "sha1": "512e157cc8be9f5135229e22ded4183969b71cca"}, 
 {"name": "Volcano Valley", "music": "T43", "special": "T43", "new": true, "score": 3, "author": "NikoPlays", "since_version": "0.1", "sha1": "6b963e1d72370875deceb0b9c98aff0e601d0f4d"}, 
 {"name": "Vulcan Mine", "music": "T34", "special": "T34", "new": true, "score": 1, "author": "NinYoda1", "since_version": "0.1", "sha1": "5b29d5d95a55cca019fd4ee595c26110e59d3328"}, 
-{"name": "WF Wuhu Island", "music": "T22", "special": "T22", "new": true, "score": 3, "author": "lgmb", "since_version": "0.1", "sha1": "b65610b19892bf8a3fd02fe25796867153337e15"}, 
-{"name": "WP Wii Tanks", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "Brawlboxgaming", "since_version": "0.1", "sha1": "313742849b6924f43119c346514cf544e2667e7f"}, 
+{"prefix": "WF", "name": "Wuhu Island", "music": "T22", "special": "T22", "new": true, "score": 3, "author": "lgmb", "since_version": "0.1", "sha1": "b65610b19892bf8a3fd02fe25796867153337e15"},
+{"prefix": "WP", "name": "Wii Tanks", "music": "T42", "special": "T42", "new": true, "score": 3, "author": "Brawlboxgaming", "since_version": "0.1", "sha1": "313742849b6924f43119c346514cf544e2667e7f"},
 {"name": "Wacky Rooftop Run", "music": "T81", "special": "T81", "new": true, "score": 3, "author": "SpyKid, rusoX", "since_version": "0.1", "sha1": "ac67ddd41e686d5aa0d21f9170ea0fea98b9cf56"}, 
 {"name": "Waluigi's Choco Factory", "music": "T21", "special": "T21", "new": true, "score": 3, "author": "MysterE99", "since_version": "0.1", "sha1": "35667934efc5ee293eca55ae28fdec8cc3bc1dfb"}, 
 {"name": "Waluigi's Motocross", "music": "T64", "special": "T64", "new": true, "score": 2, "author": "wiimaster35000vr", "since_version": "0.1", "sha1": "9cb1c06f6978c2b16732578e54c95cfa3f989a7f"}, 
 {"name": "Wario Circuit", "music": "T21", "special": "T21", "new": true, "score": 2, "author": "MysterE99", "since_version": "0.1", "sha1": "a66e7e5d8f342f2ce3733daad4e71201ac72a633"}, 
 {"name": "Wario's Cosmic Construction", "music": "T44", "special": "T44", "new": true, "score": 3, "author": "NintenYoshi, JadenMKW", "since_version": "0.1", "sha1": "488f6888c8bb61e7d515bb6d8bb659e6054b54a7"}, 
 {"name": "Wario's Lair", "music": "T32", "special": "T32", "new": true, "score": 2, "author": "Thondam", "since_version": "0.1", "sha1": "8bad1c25367a6e9e2b7517ef052977ab301a776f"}, 
-{"name": "Wario's Lair (Boost)", "music": "T32", "special": "T32", "new": true, "score": 1, "author": "Thondam", "since_version": "0.1", "sha1": "c61c83ea4ab002a6dc48de0ddd65931165e202ff"}, 
+{"name": "Wario's Lair", "suffix": "Boost", "music": "T32", "special": "T32", "new": true, "score": 1, "author": "Thondam", "since_version": "0.1", "sha1": "c61c83ea4ab002a6dc48de0ddd65931165e202ff"},
 {"name": "Warp Pipe Island", "music": "T32", "special": "T32", "new": true, "score": 3, "author": "Wingcapman, Luke Chandler", "since_version": "0.1", "sha1": "9b9adfd746006c504b7e4540c1ce4aa23ed93b9d"}, 
 {"name": "Water Circuit", "music": "T32", "special": "T32", "new": true, "score": 1, "author": "CoolTAFTime", "since_version": "0.1", "sha1": "954d2249a1ff6c99cd05840a8114880881b993b9"}, 
 {"name": "Water Island", "music": "T31", "special": "T31", "new": true, "score": 2, "author": "LuigiM", "since_version": "0.1", "sha1": "f3316db784c926a5a88b7dd928c5611532d8b58b"}, 
-{"name": "Water Island (Boost)", "music": "T31", "special": "T31", "new": true, "score": 2, "author": "LuigiM", "since_version": "0.1", "sha1": "298c3daebd826df180bd46df68691601478715d9"}, 
+{"name": "Water Island", "suffix": "Boost", "music": "T31", "special": "T31", "new": true, "score": 2, "author": "LuigiM", "since_version": "0.1", "sha1": "298c3daebd826df180bd46df68691601478715d9"},
 {"name": "Water Road", "music": "T63", "special": "T63", "new": true, "score": 1, "author": "NikoPlays", "since_version": "0.1", "sha1": "0ee746fabe39dcd3646bbf62342c853410b4dc1e"}, 
 {"name": "Water Rock World", "music": "T32", "special": "T32", "new": true, "score": 1, "author": "Thed0ra7z", "since_version": "0.1", "sha1": "dec54c458cb5fdc6ce0a04e362067e41b4b4504d"}, 
 {"name": "Water Temple", "music": "T41", "special": "T41", "new": true, "score": 1, "author": "Heiko", "since_version": "0.1", "sha1": "3751b69d4a7c74b2143039e8c587ea78ef2d6a9e"}, 
@@ -805,11 +805,11 @@
 {"name": "Yoshi's Magic Yarn Basket", "music": "T21", "special": "T21", "new": true, "score": 2, "author": "Cotni, Trushi", "since_version": "0.1", "sha1": "d30abc7b51c8743903d16a37ea853576589d1766"}, 
 {"name": "Yoshi's Pyramid", "music": "T41", "special": "T41", "new": true, "score": 2, "author": "Thed0ra7z", "since_version": "0.1", "sha1": "15d7b593cadc992d5ae88061e7246a0c74e4aac9"}, 
 {"name": "Yoshi's Woolly Raceway", "music": "T82", "special": "T82", "new": true, "score": 3, "author": "Aidan190903, ANoob", "since_version": "0.1", "sha1": "be22349f60643a04345908c22eb5241afb8ab889"}, 
-{"name": "Zelda OoT Lon Lon Ranch", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Retrostyle12", "since_version": "0.1", "sha1": "f0be3207d2eec36849b75725ccfdc343d8994b67"}, 
-{"name": "Zelda TP Kakariko Village", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Jopojelly", "since_version": "0.1", "sha1": "6a6ef7799c4d36a608e8a840fb420624a84ef355"}, 
-{"name": "Zelda WW Forest of Fairies", "music": "T33", "special": "T33", "new": true, "score": 1, "author": "Rukasudo90", "since_version": "0.1", "sha1": "d1f4b715bd0d5248d94cf49ea52250e5faee9d26"}, 
-{"name": "Zelda WW Hyrule Castle", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Rukasudo90", "since_version": "0.1", "sha1": "8337bf42c1c319a70cd04358050ddd265df2f764"}, 
-{"name": "Zelda WW Outset Island", "music": "T12", "special": "T12", "new": true, "score": 3, "author": "WhiteMEX, Rukasudo90", "since_version": "0.1", "sha1": "6f32bc3a64d5994dc217ceb15cbbc1c160b1f50d"}, 
+{"prefix": "Zelda OoT", "name": "Lon Lon Ranch", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Retrostyle12", "since_version": "0.1", "sha1": "f0be3207d2eec36849b75725ccfdc343d8994b67"},
+{"prefix": "Zelda TP", "name": "Kakariko Village", "music": "T11", "special": "T11", "new": true, "score": 2, "author": "Jopojelly", "since_version": "0.1", "sha1": "6a6ef7799c4d36a608e8a840fb420624a84ef355"},
+{"prefix": "Zelda WW", "name": "Forest of Fairies", "music": "T33", "special": "T33", "new": true, "score": 1, "author": "Rukasudo90", "since_version": "0.1", "sha1": "d1f4b715bd0d5248d94cf49ea52250e5faee9d26"},
+{"prefix": "Zelda WW", "name": "Hyrule Castle", "music": "T81", "special": "T81", "new": true, "score": 1, "author": "Rukasudo90", "since_version": "0.1", "sha1": "8337bf42c1c319a70cd04358050ddd265df2f764"},
+{"prefix": "Zelda WW", "name": "Outset Island", "music": "T12", "special": "T12", "new": true, "score": 3, "author": "WhiteMEX, Rukasudo90", "since_version": "0.1", "sha1": "6f32bc3a64d5994dc217ceb15cbbc1c160b1f50d"},
 {"name": "Ziggurat Bay", "music": "T84", "special": "T84", "new": true, "score": 3, "author": "NinYoda1", "since_version": "0.1", "sha1": "604a73b4c157967a07b91b19906b14e7c56258ba"}, 
 {"name": "8'n Infinite Race", "author": "Bulzeeb", "special": "T11", "music": "T21", "score": 2, "new": true, "since_version": "0.7", "sha1": "3566c3453af382ac13b9db813d8b44286d1e281f"}, 
 {"name": "A Small Course 2", "author": "KiwiPowerGreen", "special": "T52", "music": "T52", "score": 2, "new": true, "since_version": "0.7", "sha1": "cf4f5ca8ceca4b21ef327f05d32d82fc2dbf8b13"}, 
@@ -875,17 +875,17 @@
 {"name": "Frost Fun Stadium", "author": "Bulzeeb", "special": "T23", "music": "T23", "score": 2, "new": true, "since_version": "0.7", "sha1": "524b729211ca8213045e7dcb4dce28afacbde6a7"}, 
 {"name": "Frosty Mountains", "author": "Toxic Prime", "special": "T23", "music": "T23", "score": 2, "new": true, "since_version": "0.7", "sha1": "856fbf75eaaa9f5aad75c836c259bb415a9cbc9c"}, 
 {"name": "Fuego Castle", "author": "Ptpix1", "special": "T43", "music": "T43", "score": 2, "new": true, "since_version": "0.7", "sha1": "09c4862e15e219d0b39efd718ca0f402d9ae6584"}, 
-{"name": "SCR Full-Course Course", "author": "EmmanuelBoom", "special": "T11", "music": "T11", "score": 2, "new": true, "since_version": "0.7", "sha1": "d35c9a129743ccf235e63d0697728ab1b9daa911"}, 
+{"prefix": "SCR", "name": "Full-Course Course", "author": "EmmanuelBoom", "special": "T11", "music": "T11", "score": 2, "new": true, "since_version": "0.7", "sha1": "d35c9a129743ccf235e63d0697728ab1b9daa911"},
 {"name": "Funky's Dream", "author": "Alex97", "special": "T64", "music": "T64", "score": 3, "new": true, "since_version": "0.7", "sha1": "6534d1263a77a4db67b9e0eab94eeea0f64902dd"}, 
-{"name": "GK2 Bowser's Castle", "author": "Kinopiokuppa", "special": "T84", "music": "T84", "score": 1, "new": true, "since_version": "0.7", "sha1": "b176792e55cbe14c7ba65f86cf106be5feeb8455"}, 
-{"name": "GK2 Rainbow Road", "author": "Kinopiokuppa", "special": "T44", "music": "T44", "score": 1, "new": true, "since_version": "0.7", "sha1": "a3fbec09978238c2c9691baa14abb88f2ff7b0b2"}, 
-{"name": "GK2 Rainbow Shortroad", "author": "Kinopiokuppa", "special": "T44", "music": "T44", "score": 1, "new": true, "since_version": "0.7", "sha1": "bfee5a8525b80436fb1a70846c0e56617e95334f"}, 
-{"name": "GK3 Koopa Castle 1", "author": "Kinopiokuppa", "special": "T72", "music": "T72", "score": 1, "new": true, "since_version": "0.7", "sha1": "5d6c21dc61e077abf5cc617dc7d9bb59df9a3a4f"}, 
-{"name": "GK3 Koopa Castle 4", "author": "Kinopiokuppa", "special": "T72", "music": "T72", "score": 1, "new": true, "since_version": "0.7", "sha1": "f316c732d57e53249e71e4da22ef6b8c545e633d"}, 
-{"name": "GK7 Baby Circuit", "author": "Kinopiokuppa", "special": "T11", "music": "T21", "score": 1, "new": true, "since_version": "0.7", "sha1": "54dca27ad2746a01af80a19aceee54a6a11f9679"}, 
-{"name": "GK7 Bowser's Castle", "author": "Kinopiokuppa", "special": "T43", "music": "T43", "score": 1, "new": true, "since_version": "0.7", "sha1": "31393a6df57b0f85f917dc3e6e5a6582e862c656"}, 
-{"name": "GK7 Dry Bones Circuit", "author": "Kinopiokuppa", "special": "T21", "music": "T21", "score": 1, "new": true, "since_version": "0.7", "sha1": "cb19c5e418494e2075f4981556c62c32949d1ab3"}, 
-{"name": "GK7 Rainbow Road", "author": "Kinopiokuppa", "special": "T44", "music": "T44", "score": 1, "new": true, "since_version": "0.7", "sha1": "086d5dca56dc2cb9744bee8a8eed837e0d2af6a2"}, 
+{"prefix": "GK2", "name": "Bowser's Castle", "author": "Kinopiokuppa", "special": "T84", "music": "T84", "score": 1, "new": true, "since_version": "0.7", "sha1": "b176792e55cbe14c7ba65f86cf106be5feeb8455"},
+{"prefix": "GK2", "name": "Rainbow Road", "author": "Kinopiokuppa", "special": "T44", "music": "T44", "score": 1, "new": true, "since_version": "0.7", "sha1": "a3fbec09978238c2c9691baa14abb88f2ff7b0b2"},
+{"prefix": "GK2", "name": "Rainbow Shortroad", "author": "Kinopiokuppa", "special": "T44", "music": "T44", "score": 1, "new": true, "since_version": "0.7", "sha1": "bfee5a8525b80436fb1a70846c0e56617e95334f"},
+{"prefix": "GK3", "name": "Koopa Castle 1", "author": "Kinopiokuppa", "special": "T72", "music": "T72", "score": 1, "new": true, "since_version": "0.7", "sha1": "5d6c21dc61e077abf5cc617dc7d9bb59df9a3a4f"},
+{"prefix": "GK3", "name": "Koopa Castle 4", "author": "Kinopiokuppa", "special": "T72", "music": "T72", "score": 1, "new": true, "since_version": "0.7", "sha1": "f316c732d57e53249e71e4da22ef6b8c545e633d"},
+{"prefix": "GK7", "name": "Baby Circuit", "author": "Kinopiokuppa", "special": "T11", "music": "T21", "score": 1, "new": true, "since_version": "0.7", "sha1": "54dca27ad2746a01af80a19aceee54a6a11f9679"},
+{"prefix": "GK7", "name": "Bowser's Castle", "author": "Kinopiokuppa", "special": "T43", "music": "T43", "score": 1, "new": true, "since_version": "0.7", "sha1": "31393a6df57b0f85f917dc3e6e5a6582e862c656"},
+{"prefix": "GK7", "name": "Dry Bones Circuit", "author": "Kinopiokuppa", "special": "T21", "music": "T21", "score": 1, "new": true, "since_version": "0.7", "sha1": "cb19c5e418494e2075f4981556c62c32949d1ab3"},
+{"prefix": "GK7", "name": "Rainbow Road", "author": "Kinopiokuppa", "special": "T44", "music": "T44", "score": 1, "new": true, "since_version": "0.7", "sha1": "086d5dca56dc2cb9744bee8a8eed837e0d2af6a2"},
 {"name": "Galactic Tube", "author": "Bulzeeb", "special": "T74", "music": "T74", "score": 2, "new": true, "since_version": "0.7", "sha1": "24a28e473a8099a4fe2432735c48ac46c3a4b80c"}, 
 {"name": "Galaxy Base", "author": "SpyKid", "special": "T44", "music": "T44", "score": 2, "new": true, "since_version": "0.7", "sha1": "1a16d325382f8931b2c3e4693838801f6a6c1246"}, 
 {"name": "Ghastly Abyss", "author": "Warwick92xD", "special": "T53", "music": "T53", "score": 2, "new": true, "since_version": "0.7", "sha1": "2e3cdc52da994cd6e040d098f97dd4e5fd1dae7b"}, 
@@ -1014,8 +1014,7 @@
 {"name": "Nocturnal Coast", "author": "Yoshivert99", "special": "T42", "music": "T42", "score": 3, "new": true, "since_version": "0.7", "sha1": "d8c3bb4df0c1f5c2da557536a2ccc9f916766f20"}, 
 {"name": "ONI Training Place", "author": "Dao Ibuki", "special": "T43", "music": "T43", "score": 3, "new": true, "since_version": "0.7", "sha1": "eee1c589503acc7879fd641f2e37eeac7616a62e"}, 
 {"name": "Obsidian Lair", "author": "NinYoda1", "special": "T34", "music": "T34", "score": 2, "new": true, "since_version": "0.7", "sha1": "1720e8527616330bd94dba5ac1b0745e87cec953"}, 
-{"name": "Ocean Circuit Defi", "author": "Keiichi1996, NinYoda1", "special": "T21", "music": "T21", "score": 1, "new": true, "since_version": "0.7", "sha1": "d0fad1f40af9725ce0737a84efd23021f440651a"}, 
-{"name": "Office Rush", "author": "Supershyguy", "special": "T23", "music": "T23", "score": 1, "new": true, "since_version": "0.7", "sha1": "7f01d41043ac190d40cf24c0d5c3dfe67f87d4c8"}, 
+{"name": "Office Rush", "author": "Supershyguy", "special": "T23", "music": "T23", "score": 1, "new": true, "since_version": "0.7", "sha1": "7f01d41043ac190d40cf24c0d5c3dfe67f87d4c8"},
 {"name": "Old Churches", "author": "Toxic Prime", "special": "T82", "music": "T82", "score": 2, "new": true, "since_version": "0.7", "sha1": "b5cc800c26d5a686025021058181a6df508a503f"}, 
 {"name": "Overnight Road", "author": "BillyNoodles", "special": "T44", "music": "T44", "score": 3, "new": true, "since_version": "0.7", "sha1": "accc6044a99be5d2bf1dae24c9a3deb7660b43d4"}, 
 {"name": "Pac-Track", "author": "ANoob", "special": "T32", "music": "T32", "score": 2, "new": true, "since_version": "0.7", "sha1": "e1bfe4a20e5c148b901e6a68e83fb205d3adefa9"}, 
@@ -1081,7 +1080,7 @@
 {"name": "Ruin Factory", "author": "NinYoda1", "special": "T14", "music": "T14", "score": 3, "new": true, "since_version": "0.7", "sha1": "4798aaa84df902f4baae8df208a9826f8d6262c7"}, 
 {"name": "Ruins Raceway", "author": "Hman6516", "special": "T33", "music": "T33", "score": 2, "new": true, "since_version": "0.7", "sha1": "dcea0c938356fb7908a2ff899ef2bf9e04c032da"}, 
 {"name": "Rural Raceway", "author": "NewSuperMoiWii", "special": "T74", "music": "T74", "score": 2, "new": true, "since_version": "0.7", "sha1": "8ac3359cd0d54ebaf9a871a9b75b7325a2b746a4"}, 
-{"name": "SM64 Bob-Omb Battlefield", "author": "SuperMario64DS", "special": "T83", "music": "T83", "score": 3, "new": true, "since_version": "0.7", "sha1": "a7c89d17b7e00a0a32eeedb55fe48f17a1fa5e74"}, 
+{"prefix": "SM64", "name": "Bob-Omb Battlefield", "author": "SuperMario64DS", "special": "T83", "music": "T83", "score": 3, "new": true, "since_version": "0.7", "sha1": "a7c89d17b7e00a0a32eeedb55fe48f17a1fa5e74"},
 {"name": "Sacred Woods", "author": "xBlue98, FunkyDude15", "special": "T33", "music": "T33", "score": 3, "new": true, "since_version": "0.7", "sha1": "d592152364bb951f72325c854a12e0218a627ae0"}, 
 {"name": "Sand Speedway II", "author": "NinYoda1", "special": "T41", "music": "T41", "score": 3, "new": true, "since_version": "0.7", "sha1": "f21ca6e3f1c2baace14dc7c8ed58c05e05a553c6"}, 
 {"name": "Sandcastle Beach", "author": "wabajeffy", "special": "T62", "music": "T62", "score": 2, "new": true, "since_version": "0.7", "sha1": "139d02d9f2fb966b9bdb1828d3c527225911ddbc"}, 
@@ -1172,7 +1171,7 @@
 {"name": "Unknown Dungeon", "author": "varemi", "special": "T73", "music": "T73", "score": 2, "new": true, "since_version": "0.7", "sha1": "3e0bc715c74f1d42c2926f36234c9c29bcf70332"}, 
 {"name": "Unsuspicious Lair", "author": "Man-O-Wii", "special": "T11", "music": "T11", "score": 2, "new": true, "since_version": "0.7", "sha1": "c35e3b41b96f247a21a5940c500472e03487b002"}, 
 {"name": "Upstream Wasteway", "author": "BillyNoodles", "special": "T14", "music": "T14", "score": 3, "new": true, "since_version": "0.7", "sha1": "6e466ac018980de427dd0710065c780d7665273d"}, 
-{"name": "VVVVVV Circuit 2", "author": "TheZACAtac", "special": "T72", "music": "T72", "score": 2, "new": true, "since_version": "0.7", "sha1": "bda21910e1ca9b2869c06360dce513299e688b6d"}, 
+{"prefix": "VVVVVV", "name": "Circuit 2", "author": "TheZACAtac", "special": "T72", "music": "T72", "score": 2, "new": true, "since_version": "0.7", "sha1": "bda21910e1ca9b2869c06360dce513299e688b6d"},
 {"name": "Vaporwave Vibeway", "author": "ChisSilver64", "special": "T11", "music": "T11", "score": 2, "new": true, "since_version": "0.7", "sha1": "3a1d52f363bd33e02603d0d56c3dd3bacbb38757"}, 
 {"name": "Varemi's Garden", "author": "varemi", "special": "T31", "music": "T31", "score": 2, "new": true, "since_version": "0.7", "sha1": "bc192fcc200deeb9616e5e18fa774e700f61c6b8"}, 
 {"name": "Varemi's Garden 3", "author": "varemi", "special": "T31", "music": "T31", "score": 2, "new": true, "since_version": "0.7", "sha1": "7f5e57d9deb990c79aa09ffc5e28718597e272a9"}, 
@@ -1248,4 +1247,53 @@
 {"name": "Wiggler Anthill", "author": "Ouroz", "special": "T83", "music": "T83", "score": 1, "new": true, "since_version": "0.8", "sha1": "264d13ebb6d08008ca90114ce451d6f7370af58a"}, 
 {"name": "Wii Sports Resort", "author": "CarryOn", "special": "T31", "music": "T31", "score": 2, "new": true, "since_version": "0.8", "sha1": "661dfe94fa0a486953cb69c5877360b8d4e79444"}, 
 {"name": "Wizard Way", "author": "Man-O-Wii", "special": "T82", "music": "T82", "score": 2, "new": true, "since_version": "0.8", "sha1": "5bc16b941a58faa8c78485ea03a0745617a3dfba"}, 
-{"name": "Wood Circuit", "author": "NikoPlays", "special": "T52", "music": "T52", "score": 1, "new": true, "since_version": "0.8", "sha1": "d2f813d7b0833e30040a1451362003f0f6ff64b9"}]}
+{"name": "Wood Circuit", "author": "NikoPlays", "special": "T52", "music": "T52", "score": 1, "new": true, "since_version": "0.8", "sha1": "d2f813d7b0833e30040a1451362003f0f6ff64b9"},
+{"name": "Autumn Mountain Ascension", "author": "Toxic Prime", "special": "T33", "music": "T33", "new": true, "score": 2, "since_version": "0.8", "sha1": "12c4f935840bbd556a7a8c2c04ee20f9c32444db"},
+{"name": "Beware of Bouldergeist", "author": "CarryOn", "special": "T53", "music": "T53", "new": true, "score": 2, "since_version": "0.8", "sha1": "0f7ce2e3763ec6a17403e6126babfd73cf07f0c4"},
+{"name": "Bigmouth Bay", "author": "Man-O-Wii", "special": "T42", "music": "T42", "new": true, "score": -2, "since_version": "0.8", "sha1": "4848f9247c9c61915d660955c59ac383a671def1"},
+{"name": "Bunning's Warehouse", "author": "JDS", "special": "T22", "music": "T22", "new": true, "score": 1, "since_version": "0.8", "sha1": "f7ef2afb35fbed56c2a78b5f212bc6d41be79fba"},
+{"name": "Carpet Spires", "author": "Toxic Prime", "special": "T84", "music": "T84", "new": true, "score": 3, "since_version": "0.8", "sha1": "f1775a6eeeaa919e787e423a72f797f66721d0e3"},
+{"name": "Cliff Village", "author": "SpyKid", "special": "T31", "music": "T31", "new": true, "score": 1, "since_version": "0.8", "sha1": "3edacd7e4b0476187990ff3e563d8ae0f565604e"},
+{"name": "Cosmic Cascade", "author": "Bear, Riidefi", "special": "T32", "music": "T32", "new": true, "score": 3, "since_version": "0.8", "sha1": "bcb39e42677732c9b444d18eb23669c00237f995"},
+{"name": "Cossland", "author": "Maurice6912", "special": "T42", "music": "T42", "new": true, "score": -2, "since_version": "0.8", "sha1": "379d36d97ec945cd6467cec942d577db65879851"},
+{"name": "Dark Forest Path", "author": "Citrus", "special": "T33", "music": "T33", "new": true, "score": 1, "since_version": "0.8", "sha1": "8063274fd61ed6d17052ad1e6bf8ae69b4a6ee11"},
+{"name": "Dusk Tower Isles", "author": "Hman6516, BillyNoodles", "special": "T63", "music": "T63", "new": true, "score": 3, "since_version": "0.8", "sha1": "64b3e05e70a8dc76a517f8130503733c04301ea0"},
+{"name": "Dwight Loop", "author": "Toxic Prime", "special": "T72", "music": "T72", "new": true, "score": 1, "since_version": "0.8", "sha1": "3c598e53922f93d8370e1b2a45dc81b977f61df0"},
+{"name": "Floating Fortress", "author": "bugsy", "special": "T42", "music": "T42", "new": true, "score": -2, "since_version": "0.8", "sha1": "060331524481c8fa37ae527e012da5f0cec2f409"},
+{"name": "Hideous Hallucinations", "author": "TL", "special": "T11", "music": "T11", "new": true, "score": 1, "since_version": "0.8", "sha1": "39bbb7ad061a5a7e92e9f84bb7aa50abd3738355", "note": "infinite respawn, bad IA"},
+{"name": "In a Days", "author": "kierio04, Hman6516", "special": "T64", "music": "T64", "new": true, "score": 3, "since_version": "0.8", "sha1": "b251676e3b94cbcf86fe8606405d75c2b92cfb0f"},
+{"name": "Inordinate Instrumental", "author": "Ayoraster", "special": "T22", "music": "T22", "new": true, "score": 1, "since_version": "0.8", "sha1": "cadabd9188ffddad303f5073dd5797f9f06bfcad"},
+{"name": "Laketop City", "author": "wg93589", "special": "T63", "music": "T63", "new": true, "score": 1, "since_version": "0.8", "sha1": "4c1df6f0a687b60d756230e4104ae5182eef2c1a"},
+{"name": "Lavaquatic", "author": "Yoshivert99", "special": "T13", "music": "T13", "new": true, "score": 2, "since_version": "0.8", "sha1": "9d1fe01e83c371ac0021855934711de0c179f469"},
+{"name": "Mahogony Rose Forest", "author": "Natani", "special": "T33", "music": "T33", "new": true, "score": 2, "since_version": "0.8", "sha1": "e3c8176a01df60db3b16aae0343908f764284f91"},
+{"name": "Mario Circuit - RTX On", "author": "Lovelifeandtpose024", "special": "T21", "music": "T21", "new": true, "score": 3, "since_version": "0.8", "sha1": "919b5bcedef610ef513d5f1279d87f79f50f2afa"},
+{"name": "Mushroom Grove", "author": "Lovelifeandtpose024, Potatoman44", "special": "T13", "music": "T13", "new": true, "score": 3, "since_version": "0.8", "sha1": "45cee4f2f14b9e5c50f97590e76dee521de9d763"},
+{"name": "Mystery Island", "author": "Wexos", "special": "T42", "music": "T42", "new": true, "score": -2, "since_version": "0.8", "sha1": "13e3afd2f59ef1881419a4f779e4511affa9bc39"},
+{"name": "Mystical Marsh", "author": "Jasperr", "special": "T33", "music": "T33", "new": true, "score": 3, "since_version": "0.8", "sha1": "f8b4038ee76852d752a2e5058754444c30e20661"},
+{"name": "Nintendo Raceway", "author": "Bulzeeb", "special": "T72", "music": "T72", "new": true, "score": 1, "since_version": "0.8", "sha1": "bc28dd3321acd7e5c6b47d98a5b595a86069ce4e", "note": "IA buggé"},
+{"name": "Ocean Circuit", "author": "Wine, Keiichi1996", "special": "T32", "music": "T32", "new": true, "score": 2, "since_version": "0.8", "sha1": "30350ff513e0f89d903a521593502f9f44483a84"},
+{"name": "Oddity Orbit", "author": "Man-O-Wii", "special": "T64", "music": "T64", "new": true, "score": 2, "since_version": "0.8", "sha1": "185a38e96fe26a28a3d04e2acca58f704fe598ba"},
+{"name": "Pianta Plaza", "author": "JadenMKW", "special": "T63", "music": "T63", "new": true, "score": 3, "since_version": "0.8", "sha1": "7afcf338d21afa7b0b000edb906471b84bcb6727"},
+{"name": "Red Sector B", "author": "BillyNoodles", "special": "T14", "music": "T14", "new": true, "score": 3, "since_version": "0.8", "sha1": "553a4e608148c9781c1985d8cf5bd9dec2b650f9", "note": "infinite respawn"},
+{"name": "Rox Raceway", "author": "RoxDesigns", "special": "T11", "music": "T21", "new": true, "score": 2, "since_version": "0.8", "sha1": "1e90c699fb9b89b7ffd688dc0d9c7bb82ef1ac51"},
+{"name": "Sherbet Ice Shelf", "author": "Lovelifeandtpose024", "special": "T61", "music": "T61", "new": true, "score": 2, "since_version": "0.8", "sha1": "8b4c75fcba60f398a822a7d469bd2c210e3f227c"},
+{"name": "Spelunker Sanctuary", "author": "Bear, JDS", "special": "T73", "music": "T73", "new": true, "score": 2, "since_version": "0.8", "sha1": "ee08dcf4aaa754a81c9ff82b446047e8f30bcead", "note": "no checkpoint, missing some colission"},
+{"name": "Spooky Circuit", "author": "ANoob", "special": "T53", "music": "T53", "new": true, "score": 2, "since_version": "0.8", "sha1": "8f64865e2298138d62409b1c90399afb3498ca52"},
+{"name": "Stadium Scramble", "author": "Man-O-Wii", "special": "T64", "music": "T64", "new": true, "score": 3, "since_version": "0.8", "sha1": "50ecf2817dab71507173fe7a8b3d8a20684d8fcd"},
+{"name": "Sunset Sewer", "author": "Aidan190903, Oh ok", "special": "T32", "music": "T32", "new": true, "score": 2, "since_version": "0.8", "sha1": "4291ea94c7bf92f4f3bfdc2354699007cbec4b1d"},
+{"name": "Sweet Sweet Universe", "author": "Zai", "special": "T33", "music": "T33", "new": true, "score": 2, "since_version": "0.8", "sha1": "b8fb96e4a3bca91ff453eac42d5a994c4529493e"},
+{"name": "Temple Bay", "author": "NinYoda1", "special": "T73", "music": "T73", "new": true, "score": 1, "since_version": "0.8", "sha1": "b6ade94afdcd1fca8137723de47c0e19c6c545f6"},
+{"name": "Temple Elemental", "author": "CarryOn", "special": "T12", "music": "T12", "new": true, "score": -2, "since_version": "0.8", "sha1": "6f11f86ab0fed52e848cdbfdf94d31d55fa8e25b"},
+{"name": "The Queen Peach", "author": "JimmyKaz", "special": "T14", "music": "T14", "new": true, "score": 1, "since_version": "0.8", "sha1": "3114e6d6a81caff21560799a3f8ed4af77e9ea5e"},
+{"name": "Timeshift Temple", "author": "Citrus, Riidefi", "special": "T41", "music": "T41", "new": true, "score": 3, "since_version": "0.8", "sha1": "f8647aa473d59b844f720f97da9807128836218b"},
+{"name": "Treetop Tour", "author": "QBob64", "special": "T33", "music": "T33", "score": -2, "new": true, "since_version": "0.8", "sha1": "6d3646ff2beaee90514d195bb8f11eca4317dee6"},
+{"name": "Tumbleweed Traverse", "author": "Man-O-Wii", "special": "T24", "music": "T24", "new": true, "score": 2, "since_version": "0.8", "sha1": "2bbdb074a53d72ef3ebb12187a8f55d40483776f"},
+{"name": "Twilight Fantasy", "author": "JDS", "special": "T31", "music": "T31", "new": true, "score": 2, "since_version": "0.8", "sha1": "901b9ed66f541a02185be4cb3257528e9f6f235e"},
+{"name": "Twilight Jungle", "author": "SlipperyMac", "special": "T73", "music": "T73", "new": true, "score": 1, "since_version": "0.8", "sha1": "22f1a65c4b480e89bd1f2b0f5731f699867ae608"},
+{"name": "Under the Dreadnought", "author": "Lovelifeandtpose024", "special": "T44", "music": "T44", "new": true, "score": 1, "since_version": "0.8", "sha1": "8b3367bbeb5237c2c74e5d5d5e00cf307d9cf5ef"},
+{"name": "Utopian Fantasia", "author": "Toxic Prime", "special": "T81", "music": "T81", "new": true, "score": 3, "since_version": "0.8", "sha1": "3db7b1e794641299fd23ab50671d4729c7b31ef3"},
+{"name": "Vellumental Trail", "author": "Man-O-Wii", "special": "T43", "music": "T43", "new": true, "score": 3, "since_version": "0.8", "sha1": "e53bae05fe007a899d7d2effbf5545e45b317a16"},
+{"name": "Violin Route", "author": "Lovelifeandtpose024", "special": "T22", "music": "T22", "new": true, "score": 2, "since_version": "0.8", "sha1": "18f1e8b267ddc3b1412c614ac3117080a0058d47"},
+{"name": "Wario's Collapsing Castle", "author": "Man-O-Wii", "special": "T43", "music": "T43", "new": true, "score": 3, "since_version": "0.8", "sha1": "4aa61ae87803833ef747574fbe28b391edef08d9", "note":  "minor colission issue"},
+{"name": "Wario's Commodity Chase", "author": "Man-O-Wii", "special": "T54", "music": "T54", "new": true, "score": 2, "since_version": "0.8", "sha1": "01dd916df84df3845fd9f84c2eda2b13de906f24"}
+]}
