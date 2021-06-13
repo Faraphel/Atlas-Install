@@ -79,6 +79,12 @@ trackname_color = {
     "★★★ ": "\c{YOR2}★★★ \c{off}",
     "★★☆ ": "\c{YOR2}★★☆ \c{off}",
     "★☆☆ ": "\c{YOR2}★☆☆ \c{off}",
+    "★★★! ": "\c{YOR4}★★★ \c{off}",
+    "★★☆! ": "\c{YOR4}★★☆ \c{off}",
+    "★☆☆! ": "\c{YOR4}★☆☆ \c{off}",
+    "★★★!! ": "\c{YOR6}★★★ \c{off}",
+    "★★☆!! ": "\c{YOR6}★★☆ \c{off}",
+    "★☆☆!! ": "\c{YOR6}★☆☆ \c{off}",
 }
 
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu

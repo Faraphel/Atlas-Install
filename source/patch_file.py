@@ -72,3 +72,4 @@ def patch_file(self):
     t = Thread(target=func)
     t.setDaemon(True)
     t.start()
+    return t

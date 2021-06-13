@@ -113,3 +113,4 @@ def install_mod(self):
     t = Thread(target=func)
     t.setDaemon(True)
     t.start()
+    return t

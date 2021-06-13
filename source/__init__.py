@@ -45,6 +45,10 @@ def __init__(self):
 
     Button(self.frame_game_path, text="...", relief=RIDGE, command=select_path).grid(row=1, column=2, sticky="NEWS")
 
+    self.frame_game_path_action = Frame(self.frame_game_path)  # Action Extraire & Tout faire
+    self.frame_game_path_action.grid(row=2, column=1, columnspan=2, sticky="NEWS")
+    self.frame_game_path_action.columnconfigure(1, weight=1)
+
     def use_path():
         def func():
             self.frame_action.grid_forget()
@@ -87,10 +91,28 @@ def __init__(self):
         t = Thread(target=func)
         t.setDaemon(True)
         t.start()
+        return t
 
-    self.button_game_extract = Button(self.frame_game_path, text=self.translate("Extraire le fichier"),
+    self.button_game_extract = Button(self.frame_game_path_action, text=self.translate("Extraire le fichier"),
                                       relief=RIDGE, command=use_path)
-    self.button_game_extract.grid(row=2, column=1, columnspan=2, sticky="NEWS")
+    self.button_game_extract.grid(row=1, column=1, sticky="NEWS")
+
+    def do_everything():
+        def func():
+            use_path().join()
+            self.patch_file().join()
+            self.install_mod().join()
+
+        if messagebox.askyesno("Fonctionnalité expérimentale", "Cette action va extraire / utiliser la ROM sélectionné,"
+            " préparer les fichiers et installer le mod. Voulez-vous continuer ?"):
+            t = Thread(target=func)
+            t.setDaemon(True)
+            t.start()
+
+    self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Tout faire"),
+                                      relief=RIDGE, command=do_everything)
+    self.button_do_everything.grid(row=1, column=2, sticky="NEWS")
+
 
     self.frame_action = LabelFrame(self.root, text=self.translate("Action"))
 
