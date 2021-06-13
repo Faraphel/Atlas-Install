@@ -72,19 +72,16 @@ trackname_color = {
     "GP ": "\c{YOR6}GP\c{off} ",
 
     "(Boost)": "\c{YOR3}(Boost)\c{off}",
-    "(Nuit)": "\c{white}(Nuit)\c{off}",
-    "(Jour)": "\c{white}(Jour)\c{off}",
-    "(Vide)": "\c{white}(Vide)\c{off}",
 
-    "★★★ ": "\c{YOR2}★★★ \c{off}",
-    "★★☆ ": "\c{YOR2}★★☆ \c{off}",
-    "★☆☆ ": "\c{YOR2}★☆☆ \c{off}",
-    "★★★! ": "\c{YOR4}★★★ \c{off}",
-    "★★☆! ": "\c{YOR4}★★☆ \c{off}",
-    "★☆☆! ": "\c{YOR4}★☆☆ \c{off}",
-    "★★★!! ": "\c{YOR6}★★★ \c{off}",
-    "★★☆!! ": "\c{YOR6}★★☆ \c{off}",
-    "★☆☆!! ": "\c{YOR6}★☆☆ \c{off}",
+    "★★★ ": "\c{YOR2}★★★\c{off} ",
+    "★★☆ ": "\c{YOR2}★★☆\c{off} ",
+    "★☆☆ ": "\c{YOR2}★☆☆\c{off} ",
+    "★★★! ": "\c{YOR4}★★★\c{off} ",
+    "★★☆! ": "\c{YOR4}★★☆\c{off} ",
+    "★☆☆! ": "\c{YOR4}★☆☆\c{off} ",
+    "★★★!! ": "\c{YOR6}★★★\c{off} ",
+    "★★☆!! ": "\c{YOR6}★★☆\c{off} ",
+    "★☆☆!! ": "\c{YOR6}★☆☆\c{off} ",
 }
 
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
