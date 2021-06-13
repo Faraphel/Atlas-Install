@@ -8,23 +8,29 @@ def create_lecode_config(self):
                 return "★" * track["score"] + "☆" * (3 - track["score"]) + " "
         return ""
 
-    def get_ctfile_text(track):
+    def get_ctfile_text(track, race=False):
         track_name = track["name"].replace("_", "")
-        return f'  T {track["music"]}; ' + \
-               f'{track["special"]}; ' + \
-               f'{"0x01" if track["new"] else "0x00"}; ' + \
-               f'"{track["name"]}"; ' + \
-               f'"{get_star_text(track)}{track_name}"; ' + \
-               f'"-"\n'
 
-    def get_rctfile_text(track):
-        track_name = track["name"].replace("_", "")
-        return f'  T {track["music"]}; ' + \
-               f'{track["special"]}; ' + \
-               f'{"0x01" if track["new"] else "0x00"}; ' + \
-               f'"-"; ' + \
-               f'"{get_star_text(track)}{track_name}\\n{track["author"]}"; ' + \
-               f'"-"\n'
+        if "prefix" in track: prefix = f"{track['prefix']} "
+        else: prefix = ""
+
+        if "suffix" in track: suffix = f" ({track['suffix']})"
+        else: suffix = ""
+
+        if race:
+            return f'  T {track["music"]}; ' + \
+                   f'{track["special"]}; ' + \
+                   f'{"0x01" if track["new"] else "0x00"}; ' + \
+                   f'"-"; ' + \
+                   f'"{get_star_text(track)}{prefix}{track_name}{suffix}\\n{track["author"]}"; ' + \
+                   f'"-"\n'
+        else:
+            return f'  T {track["music"]}; ' + \
+                   f'{track["special"]}; ' + \
+                   f'{"0x01" if track["new"] else "0x00"}; ' + \
+                   f'"{prefix}{track["name"]}{suffix}"; ' + \
+                   f'"{get_star_text(track)}{prefix}{track_name}{suffix}"; ' + \
+                   f'"-"\n'
 
     with open("./ct_config.json", encoding="utf-8") as f:
         ctconfig = json.load(f)
@@ -49,8 +55,8 @@ def create_lecode_config(self):
 
                 for course in _cup_config["courses"]:
                     _course_config = _cup_config["courses"][course]
-                    ctfile.write(get_ctfile_text(_course_config))
-                    rctfile.write(get_rctfile_text(_course_config))
+                    ctfile.write(get_ctfile_text(_course_config, race=False))
+                    rctfile.write(get_ctfile_text(_course_config, race=True))
 
         for i, _course_config in enumerate(ctconfig["tracks_list"]):  # undefined cup section
             if i % 4 == 0:
@@ -58,8 +64,8 @@ def create_lecode_config(self):
                 ctfile.write(cup)
                 rctfile.write(cup)
 
-            ctfile.write(get_ctfile_text(_course_config))
-            rctfile.write(get_rctfile_text(_course_config))
+            ctfile.write(get_ctfile_text(_course_config, race=False))
+            rctfile.write(get_ctfile_text(_course_config, race=True))
 
         for _ in range(1, 4-(i%4)):  # Complete cup if track are missing
             ctfile.write(f'  T T44; T44; 0x00; "_"; ""; "-"\n')
