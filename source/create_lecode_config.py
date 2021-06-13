@@ -3,9 +3,12 @@ import json
 
 def create_lecode_config(self):
     def get_star_text(track):
+        if "warning" in track: warning = "!" * track["warning"]
+        else: warning = ""
+
         if "score" in track:
             if track["score"] > 0:
-                return "★" * track["score"] + "☆" * (3 - track["score"]) + " "
+                return "★" * track["score"] + "☆" * (3 - track["score"]) + warning + " "
         return ""
 
     def get_ctfile_text(track, race=False):
@@ -13,7 +16,6 @@ def create_lecode_config(self):
 
         if "prefix" in track: prefix = f"{track['prefix']} "
         else: prefix = ""
-
         if "suffix" in track: suffix = f" ({track['suffix']})"
         else: suffix = ""
 
