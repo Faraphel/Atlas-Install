@@ -103,8 +103,9 @@ def __init__(self):
             self.patch_file().join()
             self.install_mod().join()
 
-        if messagebox.askyesno("Fonctionnalité expérimentale", "Cette action va extraire / utiliser la ROM sélectionné,"
-            " préparer les fichiers et installer le mod. Voulez-vous continuer ?"):
+        if messagebox.askyesno(self.translate("Fonctionnalité expérimentale"),
+            self.translate("Cette action va extraire / utiliser la ROM sélectionné,"
+            " préparer les fichiers et installer le mod. Voulez-vous continuer ?")):
             t = Thread(target=func)
             t.setDaemon(True)
             t.start()
