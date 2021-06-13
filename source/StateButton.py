@@ -1,10 +1,12 @@
 from tkinter import *
 
+
 def StateButton(self, enable=True):
     button = [
         self.button_game_extract,
         self.button_install_mod,
-        self.button_prepare_file
+        self.button_prepare_file,
+        self.button_do_everything
     ]
     for widget in button:
         if enable:
