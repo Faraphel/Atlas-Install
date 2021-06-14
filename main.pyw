@@ -28,6 +28,5 @@ class ClassApp():
     from source.patch_ct_icon import patch_ct_icon
 
 
-# TODO: Wiki Github
 App = ClassApp()
 App.root.mainloop()
