@@ -66,13 +66,14 @@ def __init__(self):
                                                               "Êtes-vous sûr de vouloir l'utiliser ?")):
                             self.path_mkwf = os.path.realpath(path + "/../../")
                     elif extension.upper() in ["ISO", "WBFS", "WIA", "CSIO"]:
+                        # Fiding a directory name that dosen't already exist
                         directory_name, i = "MKWiiFaraphel", 1
-
                         while True:
                             self.path_mkwf = os.path.realpath(path + f"/../{directory_name}")
                             if not(os.path.exists(self.path_mkwf)): break
                             directory_name, i = f"MKWiiFaraphel ({i})", i + 1
 
+                        if os.path.exists(self.path_mkwf + "/DATA/"): self.path_mkwf += "/DATA/"
 
                         self.Progress(show=True, indeter=True, statut=self.translate("Extraction du jeu..."))
                         subprocess.call(["./tools/wit/wit", "EXTRACT", get_nodir(path), "--DEST", directory_name]
