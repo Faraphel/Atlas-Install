@@ -91,7 +91,7 @@ def install_mod(self):
             self.Progress(statut=self.translate("Patch lecode-PAL.bin"), add=1)
 
             shutil.copytree("./file/Track/", self.path_mkwf+"/files/Race/Course/", dirs_exist_ok=True)
-            if not(os.path.exists(self.path_mkwf+"/tmp/CTFILE.txt")): os.makedirs(self.path_mkwf+"/tmp/CTFILE.txt")
+            if not(os.path.exists(self.path_mkwf+"/tmp/")): os.makedirs(self.path_mkwf+"/tmp/")
             filecopy("./file/CTFILE.txt", self.path_mkwf+"/tmp/CTFILE.txt")
             filecopy("./file/lpar-default.txt", self.path_mkwf + "/tmp/lpar-default.txt")
             filecopy("./file/lecode-PAL.bin", self.path_mkwf + "/tmp/lecode-PAL.bin")
