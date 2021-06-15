@@ -36,7 +36,7 @@ def patch_file(self):
             for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
                 self.patch_bmg(file)
 
-            if not (os.path.exists("./file/auto-add/")):
+            if not(os.path.exists("./file/auto-add/")):
                 subprocess.call(["./tools/szs/wszst", "AUTOADD", self.path_mkwf + "/files/Race/Course/", "--DEST",
                                  "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
 
