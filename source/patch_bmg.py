@@ -84,17 +84,19 @@ trackname_color = {
     "★☆☆!! ": "\c{YOR6}★☆☆\c{off} ",
 }
 
+
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
     try:
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
         self.Progress(statut=self.translate("Patch des textes " + bmglang), add=1)
 
-        subprocess.call(["./tools/szs/wszst", "EXTRACT", get_nodir(gamefile), "-d", get_nodir(gamefile) + ".d",
-                         "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile))
+        subprocess.run(["./tools/szs/wszst", "EXTRACT", get_nodir(gamefile), "-d", get_nodir(gamefile) + ".d",
+                       "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile))
 
         # Common.bmg
-        bmgtracks = subprocess.check_output(["./tools/szs/wbmgt", "CAT", get_nodir(gamefile) + ".d/message/Common.bmg"],
-                                            creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile))
+        bmgtracks = subprocess.run(["./tools/szs/wbmgt", "CAT", get_nodir(gamefile) + ".d/message/Common.bmg"],
+                                   creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile),
+                                   check=True, stdout=subprocess.PIPE).stdout
         bmgtracks = bmgtracks.decode()
         trackheader = "#--- standard track names"
         trackend = "2328"
@@ -128,14 +130,12 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
         if not(os.path.exists("./file/tmp/")): os.makedirs("./file/tmp/")
 
         filecopy(gamefile+".d/message/Common.bmg", "./file/tmp/Common.bmg")
-        bmgtext = subprocess.check_output(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/CTFILE.txt",
-                                           "--patch-bmg", "OVERWRITE=./file/tmp/Common.bmg",
-                                           "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
-                                          creationflags=CREATE_NO_WINDOW).decode()
-        rbmgtext = subprocess.check_output(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/RCTFILE.txt",
-                                            "--patch-bmg", "OVERWRITE=./file/tmp/Common.bmg",
-                                            "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
-                                           creationflags=CREATE_NO_WINDOW).decode()
+        bmgtext = subprocess.run(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/CTFILE.txt", "--patch-bmg",
+                                 "OVERWRITE=./file/tmp/Common.bmg", "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
+                                 creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE).stdout.decode()
+        rbmgtext = subprocess.run(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/RCTFILE.txt", "--patch-bmg",
+                                  "OVERWRITE=./file/tmp/Common.bmg", "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
+                                  creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE).stdout.decode()
 
         shutil.rmtree(gamefile + ".d")
         os.remove("./file/tmp/Common.bmg")
@@ -144,8 +144,8 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
         def finalise(common_file, bmgtext):
             for console in trackname_color: bmgtext = bmgtext.replace(console, trackname_color[console])
             with open(common_file, "w", encoding="utf-8") as f: f.write(bmgtext)
-            subprocess.call(["./tools/szs/wbmgt", "ENCODE", get_nodir(common_file), "--overwrite"],
-                            creationflags=CREATE_NO_WINDOW, cwd=get_dir(common_file))
+            subprocess.run(["./tools/szs/wbmgt", "ENCODE", get_nodir(common_file), "--overwrite"],
+                           creationflags=CREATE_NO_WINDOW, cwd=get_dir(common_file))
             os.remove(common_file)
 
         finalise(f"./file/Common_{bmglang}.txt", bmgtext)
