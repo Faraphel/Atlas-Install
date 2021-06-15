@@ -102,7 +102,6 @@ def install_mod(self):
                  "./tmp/CTFILE.txt", "--lpar", "./tmp/lpar-default.txt", "--overwrite"],
                 creationflags=CREATE_NO_WINDOW, cwd=self.path_mkwf)
 
-            shutil.rmtree(self.path_mkwf + "/files/Race/Course/")
             shutil.rmtree(self.path_mkwf + "/tmp/")
 
             outputformat = self.listbox_outputformat.get()
