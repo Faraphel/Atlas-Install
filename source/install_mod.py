@@ -49,8 +49,9 @@ def install_mod(self):
 
                 if extension == "szs":
                     if not (os.path.realpath(path) in extracted_file):
-                        subprocess.call(["./tools/szs/wszst", "EXTRACT", path, "-d", path + ".d", "--overwrite"]
-                                        , creationflags=CREATE_NO_WINDOW)
+                        subprocess.check_output(["./tools/szs/wszst", "EXTRACT", get_nodir(path), "-d",
+                                                 get_nodir(path) + ".d", "--overwrite"],
+                                                creationflags=CREATE_NO_WINDOW, cwd=get_dir(path))
                         extracted_file.append(os.path.realpath(path))
 
                     szs_extract_path = path + ".d"
@@ -78,42 +79,50 @@ def install_mod(self):
 
             for file in extracted_file:
                 self.Progress(statut=self.translate("Recompilation de")+f"\n{get_nodir(file)}", add=1)
-                subprocess.call(["./tools/szs/wszst", "CREATE", file + ".d", "-d", file,
-                                 "--overwrite"], creationflags=CREATE_NO_WINDOW)
+                subprocess.check_output(["./tools/szs/wszst", "CREATE", get_nodir(file) + ".d", "-d", get_nodir(file),
+                                 "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(file))
                 if os.path.exists(file + ".d"): shutil.rmtree(file + ".d")
 
             self.Progress(statut=self.translate("Patch main.dol"), add=1)
-            subprocess.call(["./tools/szs/wstrt", "patch", self.path_mkwf + "/sys/main.dol", "--clean-dol",
-                             "--add-lecode"], creationflags=CREATE_NO_WINDOW)
+            subprocess.check_output(["./tools/szs/wstrt", "patch", get_nodir(self.path_mkwf) + "/sys/main.dol",
+                                     "--clean-dol", "--add-lecode"], creationflags=CREATE_NO_WINDOW,
+                                    cwd=get_dir(self.path_mkwf))
 
             self.Progress(statut=self.translate("Patch lecode-PAL.bin"), add=1)
 
-            subprocess.call(
-                ["./tools/szs/wlect", "patch", "./file/lecode-PAL.bin", "-od", self.path_mkwf +
-                 "/files/rel/lecode-PAL.bin", "--track-dir", self.path_mkwf + "/files/Race/Course/", "--copy-tracks",
-                 "./file/Track/", "--move-tracks", self.path_mkwf + "/files/Race/Course/", "--le-define",
-                 "./file/CTFILE.txt", "--lpar", "./file/lpar-default.txt", "--overwrite"]
-                , creationflags=CREATE_NO_WINDOW)
+            shutil.copytree("./file/Track/", self.path_mkwf+"/files/Race/Course/", dirs_exist_ok=True)
+            if not(os.path.exists(self.path_mkwf+"/tmp/CTFILE.txt")): os.makedirs(self.path_mkwf+"/tmp/CTFILE.txt")
+            filecopy("./file/CTFILE.txt", self.path_mkwf+"/tmp/CTFILE.txt")
+            filecopy("./file/lpar-default.txt", self.path_mkwf + "/tmp/lpar-default.txt")
+            filecopy("./file/lecode-PAL.bin", self.path_mkwf + "/tmp/lecode-PAL.bin")
+
+            subprocess.check_output(
+                ["./tools/szs/wlect", "patch", "./tmp/lecode-PAL.bin", "-od", "./files/rel/lecode-PAL.bin",
+                 "--track-dir", "./files/Race/Course/", "--move-tracks", "./files/Race/Course/", "--le-define",
+                 "./tmp/CTFILE.txt", "--lpar", "./tmp/lpar-default.txt", "--overwrite"],
+                creationflags=CREATE_NO_WINDOW, cwd=self.path_mkwf)
+
+            shutil.rmtree(self.path_mkwf + "/files/Race/Course/")
+            shutil.rmtree(self.path_mkwf + "/tmp/")
 
             outputformat = self.listbox_outputformat.get()
             self.Progress(statut=self.translate("Conversion en")+f" {outputformat}", add=1)
 
             if outputformat in ["ISO", "WBFS", "CISO"]:
                 self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
-                subprocess.call(["./tools/wit/wit", "COPY", self.path_mkwf, "--DEST",
-                                 self.path_mkwf_format, f"--{outputformat.lower()}", "--overwrite"]
-                                , creationflags=CREATE_NO_WINDOW)
+                subprocess.check_output(["./tools/wit/wit", "COPY", get_nodir(self.path_mkwf), "--DEST",
+                                         get_nodir(self.path_mkwf_format), f"--{outputformat.lower()}", "--overwrite"],
+                                        creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf))
                 shutil.rmtree(self.path_mkwf)
 
                 self.Progress(statut=self.translate("Changement de l'ID du jeu"), add=1)
-                subprocess.call(["./tools/wit/wit", "EDIT", self.path_mkwf_format, "--id", "RMCP60"]
-                                , creationflags=CREATE_NO_WINDOW)
+                subprocess.check_output(["./tools/wit/wit", "EDIT", get_dir(self.path_mkwf_format), "--id", "RMCP60"],
+                                        creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf_format))
 
-            self.Progress(show=False)
             messagebox.showinfo(self.translate("Fin"), self.translate("L'installation est terminé !"))
 
-        except:
-            self.log_error()
+        except: self.log_error()
+        finally: self.Progress(show=False)
 
     t = Thread(target=func)
     t.setDaemon(True)

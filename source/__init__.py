@@ -52,42 +52,47 @@ def __init__(self):
 
         def use_path():
             def func():
-                self.frame_action.grid_forget()
-                path = entry_game_path.get()
-                if not (os.path.exists(path)):
-                    messagebox.showerror(self.translate("Erreur"), self.translate("Le chemin de fichier est invalide"))
-                    return
+                try:
+                    self.frame_action.grid_forget()
+                    path = entry_game_path.get()
+                    if not (os.path.exists(path)):
+                        messagebox.showerror(self.translate("Erreur"), self.translate("Le chemin de fichier est invalide"))
+                        return
 
-                extension = get_extension(path)
-                if extension.upper() == "DOL":
-                    if messagebox.askyesno(self.translate("Attention"),
-                                           self.translate("Ce dossier sera écrasé si vous installer le mod !\n" +
-                                                          "Êtes-vous sûr de vouloir l'utiliser ?")):
-                        self.path_mkwf = os.path.realpath(path + "/../../")
-                elif extension.upper() in ["ISO", "WBFS", "WIA", "CSIO"]:
-                    self.path_mkwf, i = os.path.realpath(path + "/../MKWiiFaraphel"), 1
+                    extension = get_extension(path)
+                    if extension.upper() == "DOL":
+                        if messagebox.askyesno(self.translate("Attention"),
+                                               self.translate("Ce dossier sera écrasé si vous installer le mod !\n" +
+                                                              "Êtes-vous sûr de vouloir l'utiliser ?")):
+                            self.path_mkwf = os.path.realpath(path + "/../../")
+                    elif extension.upper() in ["ISO", "WBFS", "WIA", "CSIO"]:
+                        directory_name, i = "MKWiiFaraphel", 1
 
-                    while True:
-                        if not (os.path.exists(self.path_mkwf)): break
-                        self.path_mkwf, i = os.path.realpath(path + f"/../MKWiiFaraphel ({i})"), i + 1
+                        while True:
+                            self.path_mkwf = os.path.realpath(path + f"/../{directory_name}")
+                            if not(os.path.exists(self.path_mkwf)): break
+                            directory_name, i = f"MKWiiFaraphel ({i})", i + 1
 
-                    self.Progress(show=True, indeter=True, statut=self.translate("Extraction du jeu..."))
-                    subprocess.call(["./tools/wit/wit", "EXTRACT", path, "--DEST", self.path_mkwf]
-                                    , creationflags=CREATE_NO_WINDOW)
+
+                        self.Progress(show=True, indeter=True, statut=self.translate("Extraction du jeu..."))
+                        subprocess.call(["./tools/wit/wit", "EXTRACT", get_nodir(path), "--DEST", directory_name]
+                                        , creationflags=CREATE_NO_WINDOW, cwd=get_dir(path))
+                        self.Progress(show=False)
+
+                    else:
+                        messagebox.showerror(self.translate("Erreur"), self.translate("Le type de fichier n'est pas reconnu"))
+                        self.Progress(show=False)
+                        return
+
+                    if os.path.exists(self.path_mkwf + "/files/rel/lecode-PAL.bin"):
+                        messagebox.showwarning(self.translate("Attention"),
+                                               self.translate("Cette ROM est déjà moddé, " +
+                                                              "il est déconseillé de l'utiliser pour installer le mod"))
+
+                except: self.log_error()
+                finally:
+                    self.frame_action.grid(row=3, column=1, sticky="NEWS")
                     self.Progress(show=False)
-
-                else:
-                    messagebox.showerror(self.translate("Erreur"), self.translate("Le type de fichier n'est pas reconnu"))
-                    self.Progress(show=False)
-                    return
-
-                if os.path.exists(self.path_mkwf + "/files/rel/lecode-PAL.bin"):
-                    messagebox.showwarning(self.translate("Attention"),
-                                           self.translate("Cette ROM est déjà moddé, " +
-                                                          "il est déconseillé de l'utiliser pour installer le mod"))
-
-                self.frame_action.grid(row=3, column=1, sticky="NEWS")
-                self.Progress(show=False)
 
             t = Thread(target=func)
             t.setDaemon(True)
