@@ -1,7 +1,7 @@
 {
   "version": "0.5",
-  "subversion": "1",
-  "changelog": "- les courses Mario Kart Tour ne fonctionnaient pas",
-  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.5.1/MKWF.v0.5.1.zip",
+  "subversion": "2",
+  "changelog": "",
+  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.5.2/MKWF.v0.5.2.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
