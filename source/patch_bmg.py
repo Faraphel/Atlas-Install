@@ -84,63 +84,72 @@ trackname_color = {
     "★☆☆!! ": "\c{YOR6}★☆☆\c{off} ",
 }
 
+
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
-    bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
-    self.Progress(statut=self.translate("Patch des textes " + bmglang), add=1)
+    try:
+        bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
+        self.Progress(statut=self.translate("Patch des textes " + bmglang), add=1)
 
-    subprocess.call(["./tools/szs/wszst", "EXTRACT", gamefile, "-d", gamefile + ".d", "--overwrite"]
-                    , creationflags=CREATE_NO_WINDOW)
+        subprocess.run(["./tools/szs/wszst", "EXTRACT", get_nodir(gamefile), "-d", get_nodir(gamefile) + ".d",
+                       "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile))
 
-    # Common.bmg
-    bmgtracks = subprocess.check_output(["./tools/szs/wbmgt", "CAT", gamefile + ".d/message/Common.bmg"],
-                                        creationflags=CREATE_NO_WINDOW)
-    bmgtracks = bmgtracks.decode()
-    trackheader = "#--- standard track names"
-    trackend = "2328"
-    bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
+        # Common.bmg
+        bmgtracks = subprocess.run(["./tools/szs/wbmgt", "CAT", get_nodir(gamefile) + ".d/message/Common.bmg"],
+                                   creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile),
+                                   check=True, stdout=subprocess.PIPE).stdout
+        bmgtracks = bmgtracks.decode()
+        trackheader = "#--- standard track names"
+        trackend = "2328"
+        bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
 
-    with open("./file/ExtraCommon.txt", "w") as f:
-        f.write("#BMG\n\n"
-                f"  703e\t= {self.translate('Aléatoire: Toutes les pistes', lang=bmglang)}\n"
-                f"  703f\t= {self.translate('Aléatoire: Pistes Originales', lang=bmglang)}\n"
-                f"  7040\t= {self.translate('Aléatoire: Custom Tracks', lang=bmglang)}\n"
-                f"  7041\t= {self.translate('Aléatoire: Pistes Nouvelles', lang=bmglang)}\n")
+        with open("./file/ExtraCommon.txt", "w") as f:
+            f.write("#BMG\n\n"
+                    f"  703e\t= {self.translate('Aléatoire: Toutes les pistes', lang=bmglang)}\n"
+                    f"  703f\t= {self.translate('Aléatoire: Pistes Originales', lang=bmglang)}\n"
+                    f"  7040\t= {self.translate('Aléatoire: Custom Tracks', lang=bmglang)}\n"
+                    f"  7041\t= {self.translate('Aléatoire: Pistes Nouvelles', lang=bmglang)}\n")
 
-        for bmgtrack in bmgtracks.split("\n"):
-            if "=" in bmgtrack:
+            for bmgtrack in bmgtracks.split("\n"):
+                if "=" in bmgtrack:
 
-                prefix = ""
-                if "T" in bmgtrack[:bmgtrack.find("=")]:
-                    sTid = bmgtrack.find("T")
-                    Tid = bmgtrack[sTid:sTid + 3]
-                    if Tid[1] in "1234": prefix = "Wii " # Si la course est original à la wii
-                    Tid = hex(bmgID_track_move[Tid])[2:]
+                    prefix = ""
+                    if "T" in bmgtrack[:bmgtrack.find("=")]:
+                        sTid = bmgtrack.find("T")
+                        Tid = bmgtrack[sTid:sTid + 3]
+                        if Tid[1] in "1234": prefix = "Wii " # Si la course est original à la wii
+                        Tid = hex(bmgID_track_move[Tid])[2:]
 
-                else: # Arena
-                    sTid = bmgtrack.find("U") + 1
-                    Tid = bmgtrack[sTid:sTid + 2]
-                    Tid = hex((int(Tid[0]) - 1) * 5 + (int(Tid[1]) - 1) + 0x7020)[2:]
+                    else: # Arena
+                        sTid = bmgtrack.find("U") + 1
+                        Tid = bmgtrack[sTid:sTid + 2]
+                        Tid = hex((int(Tid[0]) - 1) * 5 + (int(Tid[1]) - 1) + 0x7020)[2:]
 
-                Tname = bmgtrack[bmgtrack.find("= ") + 2:]
-                f.write(f"  {Tid}\t= {prefix}{Tname}\n")
+                    Tname = bmgtrack[bmgtrack.find("= ") + 2:]
+                    f.write(f"  {Tid}\t= {prefix}{Tname}\n")
 
-    bmgtext = subprocess.check_output(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/CTFILE.txt",
-                                       "--patch-bmg", "OVERWRITE=" + gamefile + ".d/message/Common.bmg",
-                                       "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
-                                      creationflags=CREATE_NO_WINDOW).decode()
-    rbmgtext = subprocess.check_output(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/RCTFILE.txt",
-                                        "--patch-bmg", "OVERWRITE=" + gamefile + ".d/message/Common.bmg",
-                                        "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
-                                       creationflags=CREATE_NO_WINDOW).decode()
+        if not(os.path.exists("./file/tmp/")): os.makedirs("./file/tmp/")
 
-    shutil.rmtree(gamefile + ".d")
-    os.remove("./file/ExtraCommon.txt")
+        filecopy(gamefile+".d/message/Common.bmg", "./file/tmp/Common.bmg")
+        bmgtext = subprocess.run(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/CTFILE.txt", "--patch-bmg",
+                                 "OVERWRITE=./file/tmp/Common.bmg", "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
+                                 creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE).stdout.decode()
+        rbmgtext = subprocess.run(["tools/szs/wctct", "bmg", "--le-code", "--long", "./file/RCTFILE.txt", "--patch-bmg",
+                                  "OVERWRITE=./file/tmp/Common.bmg", "--patch-bmg", "OVERWRITE=./file/ExtraCommon.txt"],
+                                  creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE).stdout.decode()
 
-    def finalise(common_file, bmgtext):
-        for console in trackname_color: bmgtext = bmgtext.replace(console, trackname_color[console])
-        with open(common_file, "w", encoding="utf-8") as f: f.write(bmgtext)
-        subprocess.call(["./tools/szs/wbmgt", "ENCODE", common_file, "--overwrite"], creationflags=CREATE_NO_WINDOW)
-        os.remove(common_file)
+        shutil.rmtree(gamefile + ".d")
+        os.remove("./file/tmp/Common.bmg")
+        os.remove("./file/ExtraCommon.txt")
 
-    finalise(f"./file/Common_{bmglang}.txt", bmgtext)
-    finalise(f"./file/Common_R{bmglang}.txt", rbmgtext)
+        def finalise(common_file, bmgtext):
+            for console in trackname_color: bmgtext = bmgtext.replace(console, trackname_color[console])
+            with open(common_file, "w", encoding="utf-8") as f: f.write(bmgtext)
+            subprocess.run(["./tools/szs/wbmgt", "ENCODE", get_nodir(common_file), "--overwrite"],
+                           creationflags=CREATE_NO_WINDOW, cwd=get_dir(common_file))
+            os.remove(common_file)
+
+        finalise(f"./file/Common_{bmglang}.txt", bmgtext)
+        finalise(f"./file/Common_R{bmglang}.txt", rbmgtext)
+
+    except:
+        self.log_error()

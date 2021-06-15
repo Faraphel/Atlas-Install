@@ -3,6 +3,7 @@ from PIL import Image, ImageFont, ImageDraw
 from tkinter import messagebox, filedialog, ttk
 from threading import Thread
 import subprocess
+import traceback
 import requests
 import zipfile
 import shutil
@@ -26,6 +27,7 @@ class ClassApp():
     from source.restart import restart
     from source.patch_img_desc import patch_img_desc
     from source.patch_ct_icon import patch_ct_icon
+    from source.log_error import log_error
 
 
 App = ClassApp()

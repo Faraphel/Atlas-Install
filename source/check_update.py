@@ -6,13 +6,17 @@ import sys
 import os
 
 VERSION_FILE_URL = "https://raw.githubusercontent.com/Faraphel/MKWF-Install/master/version"
+
+
 def check_update(self):
     try:
         gitversion = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
-        with open("version", "rb") as f:
+        with open("./version", "rb") as f:
             locversion = json.load(f)
 
-        if float(gitversion["version"]) > float(locversion["version"]):
+        if ((float(gitversion["version"]) > float(locversion["version"])) or
+           (float(gitversion["version"]) == float(locversion["version"])) and
+                float(gitversion["subversion"]) > float(locversion["subversion"])):
             if messagebox.askyesno(self.translate("Mise à jour disponible !"), self.translate("Une mise à jour est disponible, souhaitez-vous l'installer ?") +
                                 f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> {gitversion['version']}.{gitversion['subversion']}\n"+\
                                 f"Changelog :\n{gitversion['changelog']}"):
@@ -34,5 +38,5 @@ def check_update(self):
                     os.startfile(os.path.realpath("./Updater/Updater.exe"))
                     sys.exit()
 
-    except Exception as e:
-        print(e)
+    except:
+        self.log_error()

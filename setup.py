@@ -49,8 +49,9 @@ options = {
     "build_exe": {
         "include_files": include_files,
         "includes": ["tkinter", "requests"],
+        "include_msvcr": True,
         "packages": [],
-        "excludes": []
+        "excludes": [],
     }
 }
 
