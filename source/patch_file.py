@@ -1,6 +1,7 @@
 from tkinter import messagebox
 from threading import Thread
 import subprocess
+import shutil
 import json
 import glob
 import os
@@ -37,10 +38,14 @@ def patch_file(self):
             for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
                 self.patch_bmg(file)
 
-            if not(os.path.exists("./file/auto-add/")):
-                subprocess.run(["./tools/szs/wszst", "AUTOADD", get_nodir(self.path_mkwf) + "/files/Race/Course/",
-                                "--DEST", "./file/auto-add/"], creationflags=CREATE_NO_WINDOW,
-                               cwd=get_dir(self.path_mkwf), check=True, stdout=subprocess.PIPE)
+            shutil.rmtree("./file/auto-add")
+            if not(os.path.exists(self.path_mkwf + "/tmp/")): os.makedirs(self.path_mkwf + "/tmp/")
+            subprocess.run(["./tools/szs/wszst", "AUTOADD", get_nodir(self.path_mkwf) + "/files/Race/Course/",
+                           "--DEST", get_nodir(self.path_mkwf) + "/tmp/auto-add/"],
+                           creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
+                           check=True, stdout=subprocess.PIPE)
+            shutil.move(self.path_mkwf + "/tmp/auto-add/", "./file/auto-add/")
+            shutil.rmtree(self.path_mkwf + "/tmp/")
 
             max_process = 8
             process_list = {}
@@ -53,46 +58,55 @@ def patch_file(self):
                         self.Progress(statut=self.translate("Conversion des courses")+f"\n({i + 1}/{total_track})\n" +
                                              "\n".join(process_list.keys()), add=1)
 
-                        if not(os.path.exists("./file/Track/" + get_filename(file) + ".szs")):
+                        track_szs_file = f"./file/Track/{get_filename(file)}.szs"
+                        if os.path.exists(track_szs_file):
+                            if os.path.getsize(track_szs_file) < 1000:  # File under this size are corrupted
+                                os.remove(track_szs_file)
+
+                        if not(os.path.exists(track_szs_file)):
                             process_list[file] = subprocess.Popen([
                                 "./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/" + file, "--DEST",
                                 "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
-                                "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
+                                "./file/auto-add/"], creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
                         break
                     else:
                         for process in process_list:
                             if process_list[process] is not None:
                                 returncode = process_list[process].poll()
-                                if not(returncode == 0):
-                                    process_list.pop(process)
-                                    break
-                                else:
-                                    process_list.pop(process)
-                                    os.remove(f"./file/Track/{get_filename(process)}.szs")
-                                    error_count += 1
-                                    if error_count > error_max:
-                                        messagebox.showerror(
-                                            self.translate("Erreur"),
-                                            self.translate("Trop de course ont eu une erreur de conversion."))
-                                        return
+                                if returncode is None: pass  # if the process is still running
+                                else: # process ended
+                                    stderr = process_list[process].stderr.read()
+                                    if b"wszst: ERROR" in stderr:  # Error occured
+                                        process_list.pop(process)
+                                        os.remove(f"./file/Track/{get_filename(process)}.szs")
+                                        error_count += 1
+                                        if error_count > error_max:  # Too much track wasn't correctly converted
+                                            messagebox.showerror(
+                                                self.translate("Erreur"),
+                                                self.translate("Trop de course ont eu une erreur de conversion."))
+                                            return
+                                        else: # if the error max hasn't been reach
+                                            messagebox.showwarning(
+                                                self.translate("Attention"),
+                                                self.translate("La course ") +
+                                                process +
+                                                self.translate(" n'a pas été correctement converti. (") +
+                                                str(error_count) + "/"+str(error_max)+")")
+                                            break
+
                                     else:
-                                        messagebox.showwarning(
-                                            self.translate("Attention"),
-                                            self.translate("La course ") +
-                                            process +
-                                            self.translate(" n'a pas été correctement converti. (") +
-                                            str(error_count) + "/"+str(error_max)+")")
+                                        process_list.pop(process)
                                         break
                             else:
                                 process_list.pop(process)
                                 break
 
-            self.Progress(show=False)
             self.button_install_mod.grid(row=2, column=1, sticky="NEWS")
             self.listbox_outputformat.grid(row=2, column=2, sticky="NEWS")
 
-        except:
-            self.log_error()
+        except: self.log_error()
+        finally: self.Progress(show=False)
+
 
     t = Thread(target=func)
     t.setDaemon(True)
