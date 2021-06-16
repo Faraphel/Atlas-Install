@@ -113,7 +113,7 @@ def install_mod(self):
                 self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
                 subprocess.run(["./tools/wit/wit", "COPY", get_nodir(self.path_mkwf), "--DEST",
                                 get_nodir(self.path_mkwf_format), f"--{outputformat.lower()}", "--overwrite"],
-                               CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
+                               creationflag=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
                                check=True, stdout=subprocess.PIPE)
                 shutil.rmtree(self.path_mkwf)
 
