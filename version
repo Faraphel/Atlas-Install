@@ -1,7 +1,7 @@
 {
-  "version": "0.5",
-  "subversion": "1",
-  "changelog": "disabled update while fixing a bug with 0.6",
+  "version": "0.6",
+  "subversion": "0",
+  "changelog": "- The image of the score system explanation now have explain the star's color\n- Microsoft Visual C++ should now be included with the installer, avoiding an error with vcruntime140.dll\n- Update will now be detected by the installer when changing subversion (0.5.1 -> 0.5.2 will be detected)\n- A new file named \"error.log\" can now be generated when an error is occurring, helping debugging\n- Updated cx_freeze so that having special character in path don't cause issue (.exe version)\n- Fixed an issue where having a dump with a DATA directory would cause the installer to not work",
   "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.6/MKWF.v0.6.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
