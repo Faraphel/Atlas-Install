@@ -102,7 +102,7 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
         trackend = "2328"
         bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
 
-        with open("./file/ExtraCommon.txt", "w") as f:
+        with open("./file/ExtraCommon.txt", "w", encoding="utf8") as f:
             f.write("#BMG\n\n"
                     f"  703e\t= {self.translate('Aléatoire: Toutes les pistes', lang=bmglang)}\n"
                     f"  703f\t= {self.translate('Aléatoire: Pistes Originales', lang=bmglang)}\n"
