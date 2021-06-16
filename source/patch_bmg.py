@@ -116,10 +116,10 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
                     if "T" in bmgtrack[:bmgtrack.find("=")]:
                         sTid = bmgtrack.find("T")
                         Tid = bmgtrack[sTid:sTid + 3]
-                        if Tid[1] in "1234": prefix = "Wii " # Si la course est original à la wii
+                        if Tid[1] in "1234": prefix = "Wii "  # Si la course est original à la wii
                         Tid = hex(bmgID_track_move[Tid])[2:]
 
-                    else: # Arena
+                    else:  # Arena
                         sTid = bmgtrack.find("U") + 1
                         Tid = bmgtrack[sTid:sTid + 2]
                         Tid = hex((int(Tid[0]) - 1) * 5 + (int(Tid[1]) - 1) + 0x7020)[2:]
