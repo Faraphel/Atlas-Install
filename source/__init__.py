@@ -73,11 +73,12 @@ def __init__(self):
                             if not(os.path.exists(self.path_mkwf)): break
                             directory_name, i = f"MKWiiFaraphel ({i})", i + 1
 
-                        if os.path.exists(self.path_mkwf + "/DATA/"): self.path_mkwf += "/DATA/"
-
                         self.Progress(show=True, indeter=True, statut=self.translate("Extraction du jeu..."))
                         subprocess.call(["./tools/wit/wit", "EXTRACT", get_nodir(path), "--DEST", directory_name]
                                         , creationflags=CREATE_NO_WINDOW, cwd=get_dir(path))
+
+                        if os.path.exists(self.path_mkwf + "/DATA"): self.path_mkwf += "/DATA"
+
                         self.Progress(show=False)
 
                     else:

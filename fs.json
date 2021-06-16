@@ -25,16 +25,22 @@
 
 
   "Scene/UI/*_E.szs": {"/message/Common.bmg": "Common_E.bmg"},
+  "Scene/UI/*_U.szs": {"/message/Common.bmg": "Common_E.bmg"},
   "Scene/UI/*_F.szs": {"/message/Common.bmg": "Common_F.bmg"},
+  "Scene/UI/*_Q.szs": {"/message/Common.bmg": "Common_F.bmg"},
   "Scene/UI/*_G.szs": {"/message/Common.bmg": "Common_G.bmg"},
   "Scene/UI/*_I.szs": {"/message/Common.bmg": "Common_I.bmg"},
   "Scene/UI/*_S.szs": {"/message/Common.bmg": "Common_S.bmg"},
+  "Scene/UI/*_M.szs": {"/message/Common.bmg": "Common_S.bmg"},
 
   "Scene/UI/Race_E.szs": {"/message/Common.bmg": "Common_RE.bmg"},
+  "Scene/UI/Race_U.szs": {"/message/Common.bmg": "Common_RE.bmg"},
   "Scene/UI/Race_F.szs": {"/message/Common.bmg": "Common_RF.bmg"},
+  "Scene/UI/Race_Q.szs": {"/message/Common.bmg": "Common_RF.bmg"},
   "Scene/UI/Race_G.szs": {"/message/Common.bmg": "Common_RG.bmg"},
   "Scene/UI/Race_I.szs": {"/message/Common.bmg": "Common_RI.bmg"},
   "Scene/UI/Race_S.szs": {"/message/Common.bmg": "Common_RS.bmg"},
+  "Scene/UI/Race_M.szs": {"/message/Common.bmg": "Common_RS.bmg"},
 
   "Boot/Strap/eu/Dutch.szs": {
     "/Textures(NW4R)/strapA_16_9_832x456": "strapA_16_9_832x456de",
@@ -48,7 +54,19 @@
     "/Textures(NW4R)/strapA_608x456": "strapA_608x456en",
     "/Textures(NW4R)/strapB_608x456": "strapA_608x456en"
   },
+  "Boot/Strap/us/English.szs": {
+    "/Textures(NW4R)/strapA_16_9_832x456": "strapA_16_9_832x456en",
+    "/Textures(NW4R)/strapB_16_9_832x456": "strapA_16_9_832x456en",
+    "/Textures(NW4R)/strapA_608x456": "strapA_608x456en",
+    "/Textures(NW4R)/strapB_608x456": "strapA_608x456en"
+  },
   "Boot/Strap/eu/French.szs": {
+    "/Textures(NW4R)/strapA_16_9_832x456": "strapA_16_9_832x456fr",
+    "/Textures(NW4R)/strapB_16_9_832x456": "strapA_16_9_832x456fr",
+    "/Textures(NW4R)/strapA_608x456": "strapA_608x456fr",
+    "/Textures(NW4R)/strapB_608x456": "strapA_608x456fr"
+  },
+  "Boot/Strap/us/French.szs": {
     "/Textures(NW4R)/strapA_16_9_832x456": "strapA_16_9_832x456fr",
     "/Textures(NW4R)/strapB_16_9_832x456": "strapA_16_9_832x456fr",
     "/Textures(NW4R)/strapA_608x456": "strapA_608x456fr",
@@ -67,6 +85,12 @@
     "/Textures(NW4R)/strapB_608x456": "strapA_608x456it"
   },
   "Boot/Strap/eu/Spanish_EU.szs": {
+    "/Textures(NW4R)/strapA_16_9_832x456": "strapA_16_9_832x456es",
+    "/Textures(NW4R)/strapB_16_9_832x456": "strapA_16_9_832x456es",
+    "/Textures(NW4R)/strapA_608x456": "strapA_608x456es",
+    "/Textures(NW4R)/strapB_608x456": "strapA_608x456es"
+  },
+  "Boot/Strap/eu/Spanish_US.szs": {
     "/Textures(NW4R)/strapA_16_9_832x456": "strapA_16_9_832x456es",
     "/Textures(NW4R)/strapB_16_9_832x456": "strapA_16_9_832x456es",
     "/Textures(NW4R)/strapA_608x456": "strapA_608x456es",
