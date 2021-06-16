@@ -1,3 +1,4 @@
+from tkinter import messagebox
 from threading import Thread
 import subprocess
 import json
@@ -31,17 +32,19 @@ def patch_file(self):
             for i, file in enumerate(fc["img"]):
                 self.Progress(statut=self.translate("Conversion des images")+f"\n({i + 1}/{len(fc['img'])}) {file}", add=1)
                 subprocess.run(["./tools/szs/wimgt", "ENCODE", "./file/" + file, "-x", fc["img"][file], "--overwrite"],
-                               creationflags=CREATE_NO_WINDOW)
+                               creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
 
             for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
                 self.patch_bmg(file)
 
             if not(os.path.exists("./file/auto-add/")):
-                subprocess.run(["./tools/szs/wszst", "AUTOADD", self.path_mkwf + "/files/Race/Course/", "--DEST",
-                               "./file/auto-add/"], creationflags=CREATE_NO_WINDOW)
+                subprocess.run(["./tools/szs/wszst", "AUTOADD", get_nodir(self.path_mkwf) + "/files/Race/Course/",
+                                "--DEST", "./file/auto-add/"], creationflags=CREATE_NO_WINDOW,
+                               cwd=get_dir(self.path_mkwf), check=True, stdout=subprocess.PIPE)
 
             max_process = 8
             process_list = {}
+            error_count, error_max = 0, 3
 
             for i, file in enumerate(os.listdir("./file/Track-WU8/")):
                 while True:
@@ -50,7 +53,7 @@ def patch_file(self):
                         self.Progress(statut=self.translate("Conversion des courses")+f"\n({i + 1}/{total_track})\n" +
                                              "\n".join(process_list.keys()), add=1)
 
-                        if not (os.path.exists("./file/Track/" + get_filename(file) + ".szs")):
+                        if not(os.path.exists("./file/Track/" + get_filename(file) + ".szs")):
                             process_list[file] = subprocess.Popen([
                                 "./tools/szs/wszst", "NORMALIZE", "./file/Track-WU8/" + file, "--DEST",
                                 "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
@@ -59,9 +62,27 @@ def patch_file(self):
                     else:
                         for process in process_list:
                             if process_list[process] is not None:
-                                if not (process_list[process].poll() is None):
+                                returncode = process_list[process].poll()
+                                if not(returncode == None):
                                     process_list.pop(process)
                                     break
+                                else:
+                                    process_list.pop(process)
+                                    os.remove(f"./file/Track/{get_filename(process)}.szs")
+                                    error_count += 1
+                                    if error_count > error_max:
+                                        messagebox.showerror(
+                                            self.translate("Erreur"),
+                                            self.translate("Trop de course ont eu une erreur de conversion."))
+                                        return
+                                    else:
+                                        messagebox.showwarning(
+                                            self.translate("Attention"),
+                                            self.translate("La course ") +
+                                            process +
+                                            self.translate(" n'a pas été correctement converti. (") +
+                                            str(error_count) + "/"+str(error_max)+")")
+                                        break
                             else:
                                 process_list.pop(process)
                                 break
