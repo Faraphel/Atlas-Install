@@ -1,7 +1,7 @@
 {
   "version": "0.6",
   "subversion": "1",
-  "changelog": "",
-  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.6/MKWF.v0.6.zip",
+  "changelog": "- JAP, USA and KOR version are now supported by the installer !",
+  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.6.1/MKWF.v0.6.1.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
