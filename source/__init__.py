@@ -78,7 +78,6 @@ def __init__(self):
                                         , creationflags=CREATE_NO_WINDOW, cwd=get_dir(path))
 
                         if os.path.exists(self.path_mkwf + "/DATA"): self.path_mkwf += "/DATA"
-                        print(self.path_mkwf, get_nodir(self.path_mkwf), get_dir(self.path_mkwf))
 
                         self.Progress(show=False)
 
