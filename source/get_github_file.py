@@ -13,6 +13,7 @@ def get_github_file(self, file):
                     file.flush()
             return 0
         else:
+            print(f"error {dl.status_code} {file}")
             return -1
     except:
         self.log_error()
