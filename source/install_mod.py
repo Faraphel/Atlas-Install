@@ -112,9 +112,9 @@ def install_mod(self):
             if outputformat in ["ISO", "WBFS", "CISO"]:
                 self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
                 subprocess.run(["./tools/wit/wit", "COPY", get_nodir(self.path_mkwf), "--DEST",
-                                get_nodir(self.path_mkwf_format), f"--{outputformat.lower()}", "--overwrite"],
-                                creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
-                                check=True, stdout=subprocess.PIPE)
+                               get_nodir(self.path_mkwf_format), f"--{outputformat.lower()}", "--overwrite"],
+                               creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
+                               check=True, stdout=subprocess.PIPE)
                 shutil.rmtree(self.path_mkwf)
 
                 self.Progress(statut=self.translate("Changement de l'ID du jeu"), add=1)
