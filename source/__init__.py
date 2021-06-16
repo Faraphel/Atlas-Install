@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox, filedialog, ttk
 from threading import Thread
 import subprocess
+import glob
 import os
 
 from .definition import *
@@ -46,7 +47,7 @@ def __init__(self):
 
         Button(self.frame_game_path, text="...", relief=RIDGE, command=select_path).grid(row=1, column=2, sticky="NEWS")
 
-        self.frame_game_path_action = Frame(self.frame_game_path)  # Action Extraire & Tout faire
+        self.frame_game_path_action = Frame(self.frame_game_path)  # Extract and do everything button
         self.frame_game_path_action.grid(row=2, column=1, columnspan=2, sticky="NEWS")
         self.frame_game_path_action.columnconfigure(1, weight=1)
 
@@ -65,6 +66,7 @@ def __init__(self):
                                                self.translate("Ce dossier sera écrasé si vous installer le mod !\n" +
                                                               "Êtes-vous sûr de vouloir l'utiliser ?")):
                             self.path_mkwf = os.path.realpath(path + "/../../")
+                        else: return
                     elif extension.upper() in ["ISO", "WBFS", "WIA", "CSIO"]:
                         # Fiding a directory name that dosen't already exist
                         directory_name, i = "MKWiiFaraphel", 1
@@ -86,14 +88,33 @@ def __init__(self):
                         self.Progress(show=False)
                         return
 
-                    if os.path.exists(self.path_mkwf + "/files/rel/lecode-PAL.bin"):
+                    if glob.glob(self.path_mkwf + "/files/rel/lecode-???.bin"): # if a LECODE file is already here
                         messagebox.showwarning(self.translate("Attention"),
                                                self.translate("Cette ROM est déjà moddé, " +
                                                               "il est déconseillé de l'utiliser pour installer le mod"))
 
+                    region_ID = {
+                        "J": "JAP",
+                        "P": "PAL",
+                        "K": "KOR",
+                        "E": "USA"
+                    }
+                    try:
+                        with open(self.path_mkwf + "/setup.txt") as f: setup = f.read()
+                        setup = setup[setup.find("!part-id = ")+len("!part-id = "):]
+                        self.original_game_ID = setup[:setup.find("\n")]
+                    except:
+                        messagebox.showwarning(self.translate("Attention"),
+                                               self.transate("Impossible de trouver la région de votre jeu.\n"
+                                                             "la région PAL sera utilisé par défaut."))
+                        self.original_game_ID = "RMCP01"
+                    try: self.original_region = region_ID[self.original_game_ID[3]]
+                    except: self.original_region = "PAL"
+
+                    self.frame_action.grid(row=3, column=1, sticky="NEWS")
+
                 except: self.log_error()
                 finally:
-                    self.frame_action.grid(row=3, column=1, sticky="NEWS")
                     self.Progress(show=False)
 
             t = Thread(target=func)
