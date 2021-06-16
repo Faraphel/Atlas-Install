@@ -63,7 +63,7 @@ def patch_file(self):
                         for process in process_list:
                             if process_list[process] is not None:
                                 returncode = process_list[process].poll()
-                                if not(returncode == None):
+                                if not(returncode == 0):
                                     process_list.pop(process)
                                     break
                                 else:
