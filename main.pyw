@@ -28,6 +28,7 @@ class ClassApp():
     from source.patch_img_desc import patch_img_desc
     from source.patch_ct_icon import patch_ct_icon
     from source.log_error import log_error
+    from source.get_github_file import get_github_file
 
 
 App = ClassApp()
