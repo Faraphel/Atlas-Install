@@ -89,18 +89,19 @@ def install_mod(self):
                             "--add-lecode"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
                            check=True, stdout=subprocess.PIPE)
 
-            self.Progress(statut=self.translate("Patch lecode-PAL.bin"), add=1)
+            self.Progress(statut=self.translate("Patch lecode.bin"), add=1)
 
             shutil.copytree("./file/Track/", self.path_mkwf+"/files/Race/Course/", dirs_exist_ok=True)
             if not(os.path.exists(self.path_mkwf+"/tmp/")): os.makedirs(self.path_mkwf+"/tmp/")
             filecopy("./file/CTFILE.txt", self.path_mkwf+"/tmp/CTFILE.txt")
             filecopy("./file/lpar-default.txt", self.path_mkwf + "/tmp/lpar-default.txt")
-            filecopy("./file/lecode-PAL.bin", self.path_mkwf + "/tmp/lecode-PAL.bin")
+            filecopy(f"./file/lecode-{self.original_region}.bin", self.path_mkwf + f"/tmp/lecode-{self.original_region}.bin")
 
             subprocess.run(
-                ["./tools/szs/wlect", "patch", "./tmp/lecode-PAL.bin", "-od", "./files/rel/lecode-PAL.bin",
-                 "--track-dir", "./files/Race/Course/", "--move-tracks", "./files/Race/Course/", "--le-define",
-                 "./tmp/CTFILE.txt", "--lpar", "./tmp/lpar-default.txt", "--overwrite"],
+                ["./tools/szs/wlect", "patch", f"./tmp/lecode-{self.original_region}.bin", "-od",
+                 f"./files/rel/lecode-{self.original_region}.bin", "--track-dir", "./files/Race/Course/",
+                 "--move-tracks", "./files/Race/Course/", "--le-define", "./tmp/CTFILE.txt", "--lpar",
+                 "./tmp/lpar-default.txt", "--overwrite"],
                 creationflags=CREATE_NO_WINDOW, cwd=self.path_mkwf, check=True, stdout=subprocess.PIPE)
 
             shutil.rmtree(self.path_mkwf + "/tmp/")
@@ -111,13 +112,13 @@ def install_mod(self):
             if outputformat in ["ISO", "WBFS", "CISO"]:
                 self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
                 subprocess.run(["./tools/wit/wit", "COPY", get_nodir(self.path_mkwf), "--DEST",
-                                get_nodir(self.path_mkwf_format), f"--{outputformat.lower()}", "--overwrite"],
-                               CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
+                               get_nodir(self.path_mkwf_format), f"--{outputformat.lower()}", "--overwrite"],
+                               creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
                                check=True, stdout=subprocess.PIPE)
                 shutil.rmtree(self.path_mkwf)
 
                 self.Progress(statut=self.translate("Changement de l'ID du jeu"), add=1)
-                subprocess.run(["./tools/wit/wit", "EDIT", get_dir(self.path_mkwf_format), "--id", "RMCP60"],
+                subprocess.run(["./tools/wit/wit", "EDIT", get_nodir(self.path_mkwf_format), "--id", "RMCP60"], # see to maybe change ID to MKWF
                                creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf_format),
                                check=True, stdout=subprocess.PIPE)
 

@@ -20,18 +20,6 @@
     "strapA_608x456fr.png": "TEX.RGB565",
     "strapA_608x456ge.png": "TEX.RGB565",
     "strapA_608x456it.png": "TEX.RGB565",
-    "strapB_16_9_832x456de.png": "TEX.RGB565",
-    "strapB_16_9_832x456en.png": "TEX.RGB565",
-    "strapB_16_9_832x456es.png": "TEX.RGB565",
-    "strapB_16_9_832x456fr.png": "TEX.RGB565",
-    "strapB_16_9_832x456ge.png": "TEX.RGB565",
-    "strapB_16_9_832x456it.png": "TEX.RGB565",
-    "strapB_608x456de.png": "TEX.RGB565",
-    "strapB_608x456en.png": "TEX.RGB565",
-    "strapB_608x456es.png": "TEX.RGB565",
-    "strapB_608x456fr.png": "TEX.RGB565",
-    "strapB_608x456ge.png": "TEX.RGB565",
-    "strapB_608x456it.png": "TEX.RGB565",
     "savebanner.tpl.png": "TPL.RGB565",
     "ct_icons.tpl.png": "TPL.CMPR"
   }
