@@ -27,7 +27,7 @@ def patch_file(self):
             tracks.extend(ctconfig["tracks_list"])
             total_track = len(tracks)
 
-            max_step = len(fc["img"]) + (total_track * 2) + 3 + len("EGFIS")
+            max_step = len(fc["img"]) + total_track + 3 + len("EGFIS")
             self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
 
             self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
@@ -93,9 +93,8 @@ def patch_file(self):
                                 os.remove(track_szs_file)
 
                         if not(os.path.exists(track_szs_file)):
-                            print(f"convert {track_szs_file}")
                             process_list[track_szs_file] = subprocess.Popen([
-                                "./tools/szs/wszst", "NORMALIZE", track_file, "--DEST",
+                                "./tools/szs/wszst", "NORMALIZE", track_wu8_file, "--DEST",
                                 "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
                                 "./file/auto-add/"], creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
                         break
@@ -108,6 +107,7 @@ def patch_file(self):
                                     stderr = process_list[process].stderr.read()
                                     if b"wszst: ERROR" in stderr:  # Error occured
                                         process_list.pop(process)
+                                        print(process, stderr)
                                         os.remove(process)
                                         error_count += 1
                                         if error_count > error_max:  # Too much track wasn't correctly converted
