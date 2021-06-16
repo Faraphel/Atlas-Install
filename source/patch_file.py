@@ -38,7 +38,7 @@ def patch_file(self):
             for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"):
                 self.patch_bmg(file)
 
-            shutil.rmtree("./file/auto-add")
+            if os.path.exists("./file/auto-add"): shutil.rmtree("./file/auto-add")
             if not(os.path.exists(self.path_mkwf + "/tmp/")): os.makedirs(self.path_mkwf + "/tmp/")
             subprocess.run(["./tools/szs/wszst", "AUTOADD", get_nodir(self.path_mkwf) + "/files/Race/Course/",
                            "--DEST", get_nodir(self.path_mkwf) + "/tmp/auto-add/"],
