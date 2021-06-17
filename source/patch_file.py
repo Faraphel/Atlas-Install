@@ -30,7 +30,6 @@ def patch_file(self):
         except: self.log_error()
         finally: self.Progress(show=False)
 
-
     t = Thread(target=func)
     t.setDaemon(True)
     t.start()
