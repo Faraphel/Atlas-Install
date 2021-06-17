@@ -96,8 +96,7 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
         # Common.bmg
         bmgtracks = subprocess.run(["./tools/szs/wbmgt", "CAT", get_nodir(gamefile) + ".d/message/Common.bmg"],
                                    creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile),
-                                   check=True, stdout=subprocess.PIPE).stdout
-        bmgtracks = bmgtracks.decode()
+                                   check=True, stdout=subprocess.PIPE).stdout.decode()
         trackheader = "#--- standard track names"
         trackend = "2328"
         bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
