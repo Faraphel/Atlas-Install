@@ -13,6 +13,8 @@ def translate(self, text, lang = None):
     if lang in translation:
         _lang_trad = translation[lang]
         if text in _lang_trad: return _lang_trad[text]
+    else:
+        print(f"no translation for : \"{text}\"")
     return text
 
 
