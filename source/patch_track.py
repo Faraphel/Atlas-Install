@@ -46,6 +46,11 @@ def patch_track(self, tracks, total_track="?"):
                 self.Progress(statut=self.translate("Conversion des courses") + f"\n({i + 1}/{total_track})\n" +
                                      "\n".join([get_nodir(file) for file in process_list.keys()]), add=1)
 
+                for track_file in [track_szs_file, track_wu8_file]:
+                    if os.path.exists(track_file):
+                        if os.path.getsize(track_file) < 1000:  # File under this size are corrupted
+                            os.remove(track_file)
+
                 if not (os.path.exists(track_wu8_file)):
                     dl_code = self.get_github_file(track_wu8_file)
                     if dl_code == -1:
@@ -60,10 +65,6 @@ def patch_track(self, tracks, total_track="?"):
                                                    self.translate(
                                                        "Impossible de télécharger cette course ! (") +
                                                    str(error_count) + "/" + str(error_max) + ")")
-
-                if os.path.exists(track_szs_file):
-                    if os.path.getsize(track_szs_file) < 1000:  # File under this size are corrupted
-                        os.remove(track_szs_file)
 
                 if not (os.path.exists(track_szs_file)):
                     process_list[track_szs_file] = subprocess.Popen([
