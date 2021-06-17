@@ -9,6 +9,7 @@ from .definition import *
 from .check_update import check_update
 from .translate import translate
 
+
 def __init__(self):
     try:
         self.language = self.get_language()
@@ -20,6 +21,35 @@ def __init__(self):
 
         self.check_update()
         self.path_mkwf = None
+
+
+        self.menu_bar = Menu(self.root)
+        self.root.config(menu=self.menu_bar)
+
+        self.menu_language = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label="Langage", menu=self.menu_language)
+        self.menu_language.add_radiobutton(label="Français")
+        self.menu_language.add_radiobutton(label="English")
+
+        self.menu_format = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label="Format", menu=self.menu_format)
+        self.menu_format.add_radiobutton(label="FST (Dossier)")
+        self.menu_format.add_radiobutton(label="ISO")
+        self.menu_format.add_radiobutton(label="CISO")
+        self.menu_format.add_radiobutton(label="WBFS")
+
+        self.menu_advanced = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label="Avancé", menu=self.menu_advanced)
+        self.menu_advanced.add_checkbutton(label="Désactiver les téléchargements")
+        self.menu_advanced.add_checkbutton(label="Supprimer les courses wu8 après conversion en szs")
+        self.menu_advanced.add_checkbutton(label="Ne pas vérifier les mises à jour")
+        self.menu_advanced.add_separator()
+        self.menu_advanced.add_command(label="Nombre de processus de conversion de course :")
+        self.menu_advanced.add_radiobutton(label="1 processus")
+        self.menu_advanced.add_radiobutton(label="2 processus")
+        self.menu_advanced.add_radiobutton(label="4 processus")
+        self.menu_advanced.add_radiobutton(label="8 processus")
+
 
         self.frame_language = Frame(self.root)
         self.frame_language.grid(row=1, column=1, sticky="E")
