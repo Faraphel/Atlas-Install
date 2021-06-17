@@ -1,12 +1,7 @@
-from tkinter import messagebox
 from threading import Thread
-import subprocess
-import shutil
 import json
 import glob
 import os
-
-from .definition import *
 
 
 def patch_file(self):
