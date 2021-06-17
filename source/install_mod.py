@@ -22,8 +22,7 @@ def install_mod(self):
             def count_rf(path):
                 nonlocal max_step
                 max_step += 1
-                extension = get_extension(path)
-                if extension == "szs":
+                if get_extension(path) == "szs":
                     if not (os.path.realpath(path) in extracted_file):
                         extracted_file.append(os.path.realpath(path))
                         max_step += 1
