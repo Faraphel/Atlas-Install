@@ -15,7 +15,7 @@ include_files = [
     "./tools",
     "./source",
 
-    ("./file/Track-WU8", "./file/Track-WU8"),
+    # ("./file/Track-WU8", "./file/Track-WU8"),
     ("./file/cup_icon", "./file/cup_icon"),
     ("./file/img_desc", "./file/img_desc"),
     ("./file/video.thp", "./file/video.thp"),
