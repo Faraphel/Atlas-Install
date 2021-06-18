@@ -88,7 +88,7 @@ trackname_color = {
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
     try:
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
-        self.Progress(statut=self.translate("Patch des textes " + bmglang), add=1)
+        self.Progress(statut=self.translate("Patch des textes ") + bmglang, add=1)
 
         subprocess.run(["./tools/szs/wszst", "EXTRACT", get_nodir(gamefile), "-d", get_nodir(gamefile) + ".d",
                        "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile))
