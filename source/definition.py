@@ -1,3 +1,6 @@
+CREATE_NO_WINDOW = 0x08000000
+VERSION = "0.8.1"
+
 get_filename = lambda file: ".".join(file.split(".")[:-1])
 get_nodir = lambda file: file.replace("\\", "/").split("/")[-1]
 get_dir = lambda file: "/".join(file.replace("\\", "/").split("/")[:-1])
@@ -16,8 +19,8 @@ def get_trackname(name=None, prefix=None, suffix=None, track=None):
     return name
 
 
-CREATE_NO_WINDOW = 0x08000000
-VERSION = "0.8.1"
+def get_trackctname(name=None, prefix=None, suffix=None, track=None):
+    return get_trackname(name=name, prefix=prefix, suffix=suffix, track=track).replace("_", "")
 
 
 def filecopy(src, dst):
