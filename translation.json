@@ -1,5 +1,6 @@
 {
   "en": {
+    "Impossible de convertir la course.\nRéactiver le téléchargement des courses et réessayer.": "Impossible to convert track.\nEnable track download and retry.",
     "Langage": "Language",
     "Format": "Format",
     "FST (Dossier)": "FST (Directory)",
