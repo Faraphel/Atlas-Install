@@ -44,7 +44,7 @@ def patch_track(self, tracks, total_track="?"):
             if len(process_list) < max_process:
                 process_list[(track_szs_file, track_wu8_file)] = None
                 self.Progress(statut=self.translate("Conversion des courses") + f"\n({i + 1}/{total_track})\n" +
-                              "\n".join([get_nodir(file) for file in process_list.keys()]), add=1)
+                              "\n".join([get_nodir(process[0]) for process in process_list]), add=1)
 
                 for track_file in [track_szs_file, track_wu8_file]:
                     if os.path.exists(track_file):
@@ -72,7 +72,7 @@ def patch_track(self, tracks, total_track="?"):
                         "./file/auto-add/"], creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
                 break
             else:
-                for (track_szs_file, track_wu8_file), process in process_list.items:
+                for (track_szs_file, track_wu8_file), process in process_list.items():
                     if process_list[process] is not None:
                         returncode = process_list[process].poll()
                         if returncode is None:
@@ -81,7 +81,7 @@ def patch_track(self, tracks, total_track="?"):
                             stderr = process_list[process].stderr.read()
                             if b"wszst: ERROR" in stderr:  # Error occured
                                 process_list.pop(process)
-                                os.remove(process)
+                                os.remove(track_szs_file)
                                 error_count += 1
                                 if error_count > error_max:  # Too much track wasn't correctly converted
                                     messagebox.showerror(
