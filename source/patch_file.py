@@ -22,7 +22,7 @@ def patch_file(self):
             self.patch_image(fc)
             for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
             self.patch_autoadd()
-            self.patch_track(tracks, total_track)
+            if self.patch_track(tracks, total_track) != 0: return
 
             self.button_install_mod.grid(row=2, column=1, columnspan=2, sticky="NEWS")
 
