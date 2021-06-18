@@ -61,8 +61,7 @@ def patch_track(self, tracks, total_track="?"):
                         return
                     else:
                         messagebox.showwarning(self.translate("Attention"),
-                                               self.translate(
-                                                   "Impossible de télécharger cette course ! (") +
+                                               self.translate("Impossible de télécharger cette course ! (") +
                                                str(error_count) + "/" + str(error_max) + ")")
 
                 if not (os.path.exists(track_szs_file)):
@@ -73,14 +72,15 @@ def patch_track(self, tracks, total_track="?"):
                 break
             else:
                 for (track_szs_file, track_wu8_file), process in process_list.items():
-                    if process_list[process] is not None:
-                        returncode = process_list[process].poll()
+                    key = (track_szs_file, track_wu8_file)
+                    if process is not None:
+                        returncode = process.poll()
                         if returncode is None:
                             pass  # if the process is still running
                         else:  # process ended
-                            stderr = process_list[process].stderr.read()
+                            stderr = process.stderr.read()
                             if b"wszst: ERROR" in stderr:  # Error occured
-                                process_list.pop(process)
+                                process_list.pop(key)
                                 os.remove(track_szs_file)
                                 error_count += 1
                                 if error_count > error_max:  # Too much track wasn't correctly converted
@@ -92,15 +92,15 @@ def patch_track(self, tracks, total_track="?"):
                                     messagebox.showwarning(
                                         self.translate("Attention"),
                                         self.translate("La course ") +
-                                        process +
+                                        track_wu8_file +
                                         self.translate(" n'a pas été correctement converti. (") +
                                         str(error_count) + "/" + str(error_max) + ")")
                                     break
 
                             else:
                                 if self.boolvar_del_track_after_conv.get(): os.remove(track_wu8_file)
-                                process_list.pop(process)
+                                process_list.pop(key)
                                 break
                     else:
-                        process_list.pop(process)
+                        process_list.pop(key)
                         break
