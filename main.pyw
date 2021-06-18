@@ -16,7 +16,7 @@ from source.definition import *
 
 class ClassApp():
     from source.__init__ import __init__
-    from source.translate import translate, change_language, get_language
+    from source.translate import translate
     from source.Progress import Progress
     from source.check_update import check_update
     from source.StateButton import StateButton
@@ -31,6 +31,7 @@ class ClassApp():
     from source.get_github_file import get_github_file
     from source.patch_track import count_track, patch_track, patch_autoadd
     from source.patch_image import patch_image
+    from source.option import load_option, change_option
 
 
 App = ClassApp()
