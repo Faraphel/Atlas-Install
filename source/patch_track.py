@@ -29,7 +29,7 @@ def patch_autoadd(self):
 
 
 def patch_track(self, tracks, total_track="?"):
-    max_process = 8
+    max_process = self.intvar_process_track.get()
     process_list = {}
     error_count, error_max = 0, 3
 
@@ -42,7 +42,7 @@ def patch_track(self, tracks, total_track="?"):
 
         while True:
             if len(process_list) < max_process:
-                process_list[track_szs_file] = None
+                process_list[(track_szs_file, track_wu8_file)] = None
                 self.Progress(statut=self.translate("Conversion des courses") + f"\n({i + 1}/{total_track})\n" +
                               "\n".join([get_nodir(file) for file in process_list.keys()]), add=1)
 
@@ -66,13 +66,13 @@ def patch_track(self, tracks, total_track="?"):
                                                str(error_count) + "/" + str(error_max) + ")")
 
                 if not (os.path.exists(track_szs_file)):
-                    process_list[track_szs_file] = subprocess.Popen([
+                    process_list[(track_szs_file, track_wu8_file)] = subprocess.Popen([
                         "./tools/szs/wszst", "NORMALIZE", track_wu8_file, "--DEST",
                         "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
                         "./file/auto-add/"], creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
                 break
             else:
-                for process in process_list:
+                for (track_szs_file, track_wu8_file), process in process_list.items:
                     if process_list[process] is not None:
                         returncode = process_list[process].poll()
                         if returncode is None:
@@ -98,6 +98,7 @@ def patch_track(self, tracks, total_track="?"):
                                     break
 
                             else:
+                                if self.boolvar_del_track_after_conv.get(): os.remove(track_wu8_file)
                                 process_list.pop(process)
                                 break
                     else:

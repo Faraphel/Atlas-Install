@@ -6,6 +6,8 @@ root = "https://raw.githubusercontent.com/Faraphel/MKWF-Install/master/"
 
 def get_github_file(self, file):
     try:
+        if self.boolvar_disable_download.get(): return 2
+
         dl = requests.get(root+file, allow_redirects=True, stream=True)
         if os.path.exists(file):
             if int(dl.headers['Content-Length']) == os.path.getsize(file):

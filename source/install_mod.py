@@ -105,7 +105,7 @@ def install_mod(self):
 
             shutil.rmtree(self.path_mkwf + "/tmp/")
 
-            outputformat = self.listbox_outputformat.get()
+            outputformat = self.stringvar_game_format.get()
             self.Progress(statut=self.translate("Conversion en")+f" {outputformat}", add=1)
 
             if outputformat in ["ISO", "WBFS", "CISO"]:

@@ -24,8 +24,7 @@ def patch_file(self):
             self.patch_autoadd()
             self.patch_track(tracks, total_track)
 
-            self.button_install_mod.grid(row=2, column=1, sticky="NEWS")
-            self.listbox_outputformat.grid(row=2, column=2, sticky="NEWS")
+            self.button_install_mod.grid(row=2, column=1, columnspan=2, sticky="NEWS")
 
         except: self.log_error()
         finally: self.Progress(show=False)
