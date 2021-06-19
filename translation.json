@@ -1,5 +1,6 @@
 {
   "en": {
+    "Impossible de se connecter à internet. Le téléchargement sera automatiquement désactivé.": "Can't connect to internet, download will automatically be disabled.",
     "Patch main.dol": "Patch main.dol",
     "Patch lecode.bin": "Patch lecode.bin",
     "Installation du mod": "Installing mod",
