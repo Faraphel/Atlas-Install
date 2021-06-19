@@ -5,7 +5,7 @@ import json
 import sys
 import os
 
-VERSION_FILE_URL = "https://raw.githubusercontent.com/Faraphel/MKWF-Install/master/version"
+from .definition import *
 
 
 def check_update(self):
