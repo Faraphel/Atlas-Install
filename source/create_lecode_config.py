@@ -1,4 +1,5 @@
 import json
+from .definition import *
 
 
 def create_lecode_config(self):
@@ -13,26 +14,19 @@ def create_lecode_config(self):
             return ""
 
         def get_ctfile_text(track, race=False):
-            track_name = track["name"].replace("_", "")
-
-            if "prefix" in track: prefix = f"{track['prefix']} "
-            else: prefix = ""
-            if "suffix" in track: suffix = f" ({track['suffix']})"
-            else: suffix = ""
-
             if race:
                 return f'  T {track["music"]}; ' + \
                        f'{track["special"]}; ' + \
                        f'{"0x01" if track["new"] else "0x00"}; ' + \
                        f'"-"; ' + \
-                       f'"{get_star_text(track)}{prefix}{track_name}{suffix}\\n{track["author"]}"; ' + \
+                       f'"{get_star_text(track)}{get_trackctname(track=track)}\\n{track["author"]}"; ' + \
                        f'"-"\n'
             else:
                 return f'  T {track["music"]}; ' + \
                        f'{track["special"]}; ' + \
                        f'{"0x01" if track["new"] else "0x00"}; ' + \
-                       f'"{prefix}{track["name"]}{suffix}"; ' + \
-                       f'"{get_star_text(track)}{prefix}{track_name}{suffix}"; ' + \
+                       f'"{get_trackctname(track=track)}"; ' + \
+                       f'"{get_star_text(track)}{get_trackctname(track=track)}"; ' + \
                        f'"-"\n'
 
         with open("./ct_config.json", encoding="utf-8") as f:

@@ -88,7 +88,7 @@ trackname_color = {
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
     try:
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
-        self.Progress(statut=self.translate("Patch des textes " + bmglang), add=1)
+        self.Progress(statut=self.translate("Patch des textes ") + bmglang, add=1)
 
         subprocess.run(["./tools/szs/wszst", "EXTRACT", get_nodir(gamefile), "-d", get_nodir(gamefile) + ".d",
                        "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile))
@@ -96,8 +96,7 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
         # Common.bmg
         bmgtracks = subprocess.run(["./tools/szs/wbmgt", "CAT", get_nodir(gamefile) + ".d/message/Common.bmg"],
                                    creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile),
-                                   check=True, stdout=subprocess.PIPE).stdout
-        bmgtracks = bmgtracks.decode()
+                                   check=True, stdout=subprocess.PIPE).stdout.decode()
         trackheader = "#--- standard track names"
         trackend = "2328"
         bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
@@ -116,10 +115,10 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
                     if "T" in bmgtrack[:bmgtrack.find("=")]:
                         sTid = bmgtrack.find("T")
                         Tid = bmgtrack[sTid:sTid + 3]
-                        if Tid[1] in "1234": prefix = "Wii " # Si la course est original à la wii
+                        if Tid[1] in "1234": prefix = "Wii "  # Si la course est original à la wii
                         Tid = hex(bmgID_track_move[Tid])[2:]
 
-                    else: # Arena
+                    else:  # Arena
                         sTid = bmgtrack.find("U") + 1
                         Tid = bmgtrack[sTid:sTid + 2]
                         Tid = hex((int(Tid[0]) - 1) * 5 + (int(Tid[1]) - 1) + 0x7020)[2:]

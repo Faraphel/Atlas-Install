@@ -11,26 +11,55 @@ from .translate import translate
 
 def __init__(self):
     try:
-        self.language = self.get_language()
 
         self.root = Tk()
+
+        self.load_option()
+        self.stringvar_language = StringVar(value=self.option["language"])
+        self.stringvar_game_format = StringVar(value=self.option["format"])
+        self.boolvar_disable_download = BooleanVar(value=self.option["disable_download"])
+        self.boolvar_del_track_after_conv = BooleanVar(value=self.option["del_track_after_conv"])
+        self.boolvar_dont_check_for_update = BooleanVar(value=self.option["dont_check_for_update"])
+        self.intvar_process_track = IntVar(value=self.option["process_track"])
+
         self.root.title(self.translate("MKWFaraphel Installateur"))
         self.root.resizable(False, False)
         self.root.iconbitmap(bitmap="./icon.ico")
 
-        self.check_update()
+        if not(self.boolvar_dont_check_for_update.get()): self.check_update()
         self.path_mkwf = None
+
+
+        self.menu_bar = Menu(self.root)
+        self.root.config(menu=self.menu_bar)
+
+        self.menu_language = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Langage"), menu=self.menu_language)
+        self.menu_language.add_radiobutton(label="Français", variable=self.stringvar_language, value="fr", command=lambda: self.change_option("language", "fr", restart=True))
+        self.menu_language.add_radiobutton(label="English", variable=self.stringvar_language, value="en", command=lambda: self.change_option("language", "en", restart=True))
+
+        self.menu_format = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Format"), menu=self.menu_format)
+        self.menu_format.add_radiobutton(label=self.translate("FST (Dossier)"), variable=self.stringvar_game_format, value="FST", command=lambda: self.change_option("format", "FST"))
+        self.menu_format.add_radiobutton(label="ISO", variable=self.stringvar_game_format, value="ISO", command=lambda: self.change_option("format", "ISO"))
+        self.menu_format.add_radiobutton(label="CISO", variable=self.stringvar_game_format, value="CISO", command=lambda: self.change_option("format", "CISO"))
+        self.menu_format.add_radiobutton(label="WBFS", variable=self.stringvar_game_format, value="WBFS", command=lambda: self.change_option("format", "WBFS"))
+
+        self.menu_advanced = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Avancé"), menu=self.menu_advanced)
+        self.menu_advanced.add_checkbutton(label=self.translate("Désactiver les téléchargements"), variable=self.boolvar_disable_download, command=lambda: self.change_option("disable_download", self.boolvar_disable_download))
+        self.menu_advanced.add_checkbutton(label=self.translate("Supprimer les courses wu8 après conversion en szs"), variable=self.boolvar_del_track_after_conv, command=lambda: self.change_option("del_track_after_conv", self.boolvar_del_track_after_conv))
+        self.menu_advanced.add_checkbutton(label=self.translate("Ne pas vérifier les mises à jour"), variable=self.boolvar_dont_check_for_update, command=lambda: self.change_option("dont_check_for_update", self.boolvar_dont_check_for_update))
+        self.menu_advanced.add_separator()
+        self.menu_advanced.add_command(label=self.translate("Nombre de processus de conversion de course :"))
+        self.menu_advanced.add_radiobutton(label=self.translate("1 processus"), variable=self.intvar_process_track, value=1, command=lambda: self.change_option("process_track", 1))
+        self.menu_advanced.add_radiobutton(label=self.translate("2 processus"), variable=self.intvar_process_track, value=2, command=lambda: self.change_option("process_track", 2))
+        self.menu_advanced.add_radiobutton(label=self.translate("4 processus"), variable=self.intvar_process_track, value=4, command=lambda: self.change_option("process_track", 4))
+        self.menu_advanced.add_radiobutton(label=self.translate("8 processus"), variable=self.intvar_process_track, value=8, command=lambda: self.change_option("process_track", 8))
+
 
         self.frame_language = Frame(self.root)
         self.frame_language.grid(row=1, column=1, sticky="E")
-
-        Label(self.frame_language, text=self.translate("Langage : ")).grid(row=1, column=1)
-        self.listbox_language = ttk.Combobox(self.frame_language, values=["fr", "en"], width=5)
-        self.listbox_language.set(self.language)
-        self.listbox_language.grid(row=1, column=2)
-
-
-        self.listbox_language.bind("<<ComboboxSelected>>", lambda x: self.change_language())
 
         self.frame_game_path = LabelFrame(self.root, text=self.translate("Jeu original"))
         self.frame_game_path.grid(row=2, column=1)
@@ -67,7 +96,7 @@ def __init__(self):
                                                               "Êtes-vous sûr de vouloir l'utiliser ?")):
                             self.path_mkwf = os.path.realpath(path + "/../../")
                         else: return
-                    elif extension.upper() in ["ISO", "WBFS", "WIA", "CSIO"]:
+                    elif extension.upper() in ["ISO", "WBFS", "CSIO"]:
                         # Fiding a directory name that dosen't already exist
                         directory_name, i = "MKWiiFaraphel", 1
                         while True:
@@ -150,10 +179,7 @@ def __init__(self):
                                           command=self.patch_file, width=45)
         self.button_prepare_file.grid(row=1, column=1, columnspan=2, sticky="NEWS")
         self.button_install_mod = Button(self.frame_action, text=self.translate("Installer le mod"), relief=RIDGE,
-                                         command=self.install_mod, width=35)
-        self.listbox_outputformat = ttk.Combobox(self.frame_action, values=[self.translate("Dossier"),
-                                                                            "ISO", "WBFS", "CISO"], width=5)
-        self.listbox_outputformat.set(self.translate("Dossier"))
+                                         command=self.install_mod, width=45)
         # Le boutton d'installation du mod n'est affiché qu'après avoir préparer les fichiers
 
         self.progressbar = ttk.Progressbar(self.root)

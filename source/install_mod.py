@@ -22,8 +22,7 @@ def install_mod(self):
             def count_rf(path):
                 nonlocal max_step
                 max_step += 1
-                extension = get_extension(path)
-                if extension == "szs":
+                if get_extension(path) == "szs":
                     if not (os.path.realpath(path) in extracted_file):
                         extracted_file.append(os.path.realpath(path))
                         max_step += 1
@@ -106,7 +105,7 @@ def install_mod(self):
 
             shutil.rmtree(self.path_mkwf + "/tmp/")
 
-            outputformat = self.listbox_outputformat.get()
+            outputformat = self.stringvar_game_format.get()
             self.Progress(statut=self.translate("Conversion en")+f" {outputformat}", add=1)
 
             if outputformat in ["ISO", "WBFS", "CISO"]:

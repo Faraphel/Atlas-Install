@@ -17,9 +17,11 @@ def check_update(self):
         if ((float(gitversion["version"]) > float(locversion["version"])) or
            (float(gitversion["version"]) == float(locversion["version"])) and
                 float(gitversion["subversion"]) > float(locversion["subversion"])):
-            if messagebox.askyesno(self.translate("Mise à jour disponible !"), self.translate("Une mise à jour est disponible, souhaitez-vous l'installer ?") +
-                                f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> {gitversion['version']}.{gitversion['subversion']}\n"+\
-                                f"Changelog :\n{gitversion['changelog']}"):
+            if messagebox.askyesno(
+                    self.translate("Mise à jour disponible !"),
+                    self.translate("Une mise à jour est disponible, souhaitez-vous l'installer ?") +
+                    f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> {gitversion['version']}.{gitversion['subversion']}\n"
+                    f"Changelog :\n{gitversion['changelog']}"):
 
                 if not(os.path.exists("./Updater/Updater.exe")):
                     dl = requests.get(gitversion["updater_bin"], allow_redirects=True)
