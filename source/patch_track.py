@@ -80,6 +80,7 @@ def patch_track(self, tracks, total_track="?"):
         for track_file, process in process_list.copy().items():
             if process is not None:
                 if process.poll() is None:
+                    print("still running...")
                     pass  # if the process is still running
                 else:  # process ended
                     process_list.pop(track_file)
@@ -103,9 +104,10 @@ def patch_track(self, tracks, total_track="?"):
                         if self.boolvar_del_track_after_conv.get(): os.remove(get_track_wu8(track_file))
             else:
                 process_list.pop(track_file)
-
                 if not(any(process_list.values())): return 1  # si il n'y a plus de processus
-        return 0
+
+        if len(process_list): return 1
+        else: return 0
 
     for i, track in enumerate(tracks):
         track_file = get_trackname(track=track)
