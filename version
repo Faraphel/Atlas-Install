@@ -1,7 +1,7 @@
 {
-  "version": "0.7",
+  "version": "0.8",
   "subversion": "0",
-  "changelog": "- \"CNR Outer Space Chase\" avait le préfix \"CTR\", rendant la course inutilisable\n- \"SADX Twinkle Circuit\" avaient le préfix \"SHR\", rendant les courses inutilisables\n- Si une course n'est pas trouvée, elle sera téléchargée depuis le github -> les mises à jour seront bien plus légère car vous ne devrez pas retélécharger toutes les courses. Elles seront également retéléchargées si leur taille ne correspond pas à leur version github\n- le code patch_file.py a été divisé en plusieurs fichier pour simplifier le code\n- Update.exe a été recompilé avec la nouvelle version de cx_freeze pour corriger le problème des dossiers non-ASCII\n- Correction de traduction oubliée\n- Ajout d'une barre de menus, où a été déplacé le langage, le format de sortie et de nouvelles options avancé\n\n- \"CNR Outer Space Chase\" had \"CTR\" prefix, making the map unusable\n- \"SADX Twinkle Circuit\" all had \"SHR\" prefix, making the tracks unusable\n- If a track is not found, the program will download it from the github -> update could be much lighter because you won't have to redownload all tracks. They will also be redownloaded if their size doesn't match with their github one\n- Splitted patch_file.py into multiple file to make the code more readable\n- Recompiled Update.exe with new cx_freeze version to fix issue with non-ASCII directory\n- Fixed missing translation\n- Added a menu bar, moved it language, output format and added new advanced option",
-  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.7/MKWF.v0.7.zip",
+  "changelog": "",
+  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.8/MKWF.v0.8.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
