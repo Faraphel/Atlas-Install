@@ -114,8 +114,14 @@ def patch_track(self, tracks, total_track="?"):
         track_file = get_trackname(track=track)
         while True:
             if len(process_list) < max_process:
-                if add_process(track_file) == 0: break
-            else: clean_process()
-    while clean_process() != 1: pass  # End the process if all process ended
+                returncode = add_process(track_file)
+                if returncode == 0: break
+                elif returncode == -1: return -1  # if error occur, stop function
+            elif clean_process() == -1: return -1
+
+    while True:
+        returncode = clean_process()
+        if returncode == 1: break  # End the process if all process ended
+        elif returncode == -1: return
 
     return 0
