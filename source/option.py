@@ -3,7 +3,7 @@ import os
 
 default_option = {
     "language": "en",
-    "format": "WBFS",
+    "format": "FST",
     "disable_download": False,
     "del_track_after_conv": False,
     "dont_check_for_update": False,
