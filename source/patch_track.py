@@ -77,7 +77,7 @@ def patch_track(self, tracks, total_track="?"):
     def clean_process():
         nonlocal error_count, error_max, process_list
 
-        for track_file, process in process_list.items():
+        for track_file, process in process_list.copy().items():
             if process is not None:
                 if process.poll() is None:
                     pass  # if the process is still running
