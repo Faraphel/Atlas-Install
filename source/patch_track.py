@@ -99,16 +99,12 @@ def patch_track(self, tracks, total_track="?"):
                                 get_track_wu8(track_file) +
                                 self.translate(" n'a pas été correctement converti. (") +
                                 str(error_count) + "/" + str(error_max) + ")")
-                            return 0
-
                     else:
                         if self.boolvar_del_track_after_conv.get(): os.remove(get_track_wu8(track_file))
-                        return 0
             else:
                 process_list.pop(track_file)
 
-                if any(process_list.values()): return 0  # si il y a encore des processus
-                else: return 1  # si il n'y a plus de processus
+                if not(any(process_list.values())): return 1  # si il n'y a plus de processus
         return 0
 
     for i, track in enumerate(tracks):
