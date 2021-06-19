@@ -109,6 +109,7 @@ def patch_track(self, tracks, total_track="?"):
 
                 if any(process_list.values()): return 0  # si il y a encore des processus
                 else: return 1  # si il n'y a plus de processus
+        return 0
 
     for i, track in enumerate(tracks):
         track_file = get_trackname(track=track)
@@ -122,6 +123,7 @@ def patch_track(self, tracks, total_track="?"):
     while True:
         returncode = clean_process()
         if returncode == 1: break  # End the process if all process ended
-        elif returncode == -1: return
+        elif returncode == 0: pass
+        else: return -1
 
     return 0
