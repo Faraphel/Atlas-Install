@@ -122,12 +122,6 @@ def __init__(self):
                                                self.translate("Cette ROM est déjà moddé, " +
                                                               "il est déconseillé de l'utiliser pour installer le mod"))
 
-                    region_ID = {
-                        "J": "JAP",
-                        "P": "PAL",
-                        "K": "KOR",
-                        "E": "USA"
-                    }
                     try:
                         with open(self.path_mkwf + "/setup.txt") as f: setup = f.read()
                         setup = setup[setup.find("!part-id = ")+len("!part-id = "):]
@@ -137,7 +131,9 @@ def __init__(self):
                                                self.transate("Impossible de trouver la région de votre jeu.\n"
                                                              "la région PAL sera utilisé par défaut."))
                         self.original_game_ID = "RMCP01"
-                    try: self.original_region = region_ID[self.original_game_ID[3]]
+                    try:
+                        self.original_region_ID = self.original_game_ID[3]
+                        self.original_region = region_ID[self.original_region_ID]
                     except: self.original_region = "PAL"
 
                     self.frame_action.grid(row=3, column=1, sticky="NEWS")
