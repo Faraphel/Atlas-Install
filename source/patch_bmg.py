@@ -91,12 +91,16 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
         MAINMENU_REPLACE = f"MKWFaraphel {self.VERSION}"
         menu_replacement = {
             "CWF de Nintendo": NINTENDO_CWF_REPLACE,
+            "Wi-Fi Nintendo": NINTENDO_CWF_REPLACE,
             "CWF Nintendo": NINTENDO_CWF_REPLACE,
             "Nintendo WFC": NINTENDO_CWF_REPLACE,
+            "Wi-Fi": NINTENDO_CWF_REPLACE,
+            "インターネット": NINTENDO_CWF_REPLACE,
 
             "Menu principal": MAINMENU_REPLACE,
             "Menú principal": MAINMENU_REPLACE,
             "Main Menu": MAINMENU_REPLACE,
+            "トップメニュー": MAINMENU_REPLACE,
 
             "Mario Kart Wii": MAINMENU_REPLACE,
         }
