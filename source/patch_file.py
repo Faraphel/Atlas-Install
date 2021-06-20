@@ -26,6 +26,7 @@ def patch_file(self):
             if self.patch_track(tracks, total_track) != 0: return
 
             self.button_install_mod.grid(row=2, column=1, columnspan=2, sticky="NEWS")
+            self.button_install_mod.config(text=f'{self.translate("Installer le mod")} (v{self.VERSION})')
 
         except: self.log_error()
         finally: self.Progress(show=False)
