@@ -21,6 +21,7 @@ def patch_file(self):
             self.patch_img_desc()
             self.patch_image(fc)
             for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
+            # MenuSingle could be any other file, Common and Menu are all the same in all other files.
             self.patch_autoadd()
             if self.patch_track(tracks, total_track) != 0: return
 
