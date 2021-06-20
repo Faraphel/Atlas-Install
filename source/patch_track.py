@@ -8,8 +8,7 @@ import os
 
 def count_track(self):
     tracks = []
-    with open("./ct_config.json", encoding="utf-8") as f:
-        ctconfig = json.load(f)
+    with open("./ct_config.json", encoding="utf-8") as f: ctconfig = json.load(f)
     self.VERSION = ctconfig["version"]
     for cup in ctconfig["cup"].values():
         if not (cup["locked"]): tracks.extend(cup["courses"].values())
