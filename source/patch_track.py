@@ -10,6 +10,7 @@ def count_track(self):
     tracks = []
     with open("./ct_config.json", encoding="utf-8") as f:
         ctconfig = json.load(f)
+    self.VERSION = ctconfig["version"]
     for cup in ctconfig["cup"].values():
         if not (cup["locked"]): tracks.extend(cup["courses"].values())
     tracks.extend(ctconfig["tracks_list"])
@@ -39,7 +40,7 @@ def patch_track(self, tracks, total_track="?"):
 
         process_list[track_file] = None  # Used for
         self.Progress(statut=self.translate("Conversion des courses") + f"\n({i + 1}/{total_track})\n" +
-                             "\n".join(process_list.keys()), add=1)
+                      "\n".join(process_list.keys()), add=1)
 
         for _track in [get_track_szs(track_file), get_track_wu8(track_file)]:
             if os.path.exists(_track):
@@ -80,7 +81,6 @@ def patch_track(self, tracks, total_track="?"):
         for track_file, process in process_list.copy().items():
             if process is not None:
                 if process.poll() is None:
-                    print("still running...")
                     pass  # if the process is still running
                 else:  # process ended
                     process_list.pop(track_file)
