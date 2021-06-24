@@ -30,7 +30,9 @@ def get_github_file(self, file):
         return -1
 
 
-def check_track_sha1(file, excepted_sha1):
-    sha1 = subprocess.run(["./tools/szs/wszst", "SHA1", file]).stdout.decode().split(" ")[0]
+def check_track_sha1(self, file, excepted_sha1):
+    sha1 = subprocess.run(["./tools/szs/wszst", "SHA1", file, "--autoadd-path", "./file/auto-add/"],
+                          check=True, creationflags=CREATE_NO_WINDOW,
+                          stdout=subprocess.PIPE).stdout.decode().split(" ")[0]
     if excepted_sha1 == sha1: return 0
     else: return -1
