@@ -1,4 +1,5 @@
 import requests
+import subprocess
 import os
 
 from .definition import *
@@ -27,3 +28,9 @@ def get_github_file(self, file):
     except:
         self.log_error()
         return -1
+
+
+def check_track_sha1(file, excepted_sha1):
+    sha1 = subprocess.run(["./tools/szs/wszst", "SHA1", file]).stdout.decode().split(" ")[0]
+    if excepted_sha1 == sha1: return 0
+    else: return -1
