@@ -1,5 +1,6 @@
 {
   "en": {
+    "Ne pas vérifier le sha1 des courses": "Don't check for track's sha1",
     "Impossible de se connecter à internet. Le téléchargement sera automatiquement désactivé.": "Can't connect to internet, download will automatically be disabled.",
     "Patch main.dol": "Patch main.dol",
     "Patch lecode.bin": "Patch lecode.bin",
