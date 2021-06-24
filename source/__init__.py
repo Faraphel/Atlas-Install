@@ -20,6 +20,7 @@ def __init__(self):
         self.boolvar_disable_download = BooleanVar(value=self.option["disable_download"])
         self.boolvar_del_track_after_conv = BooleanVar(value=self.option["del_track_after_conv"])
         self.boolvar_dont_check_for_update = BooleanVar(value=self.option["dont_check_for_update"])
+        self.boolvar_dont_check_track_sha1 = BooleanVar(value=self.option["dont_check_track_sha1"])
         self.intvar_process_track = IntVar(value=self.option["process_track"])
 
         self.root.title(self.translate("MKWFaraphel Installateur"))
@@ -50,6 +51,8 @@ def __init__(self):
         self.menu_advanced.add_checkbutton(label=self.translate("Désactiver les téléchargements"), variable=self.boolvar_disable_download, command=lambda: self.change_option("disable_download", self.boolvar_disable_download))
         self.menu_advanced.add_checkbutton(label=self.translate("Supprimer les courses wu8 après conversion en szs"), variable=self.boolvar_del_track_after_conv, command=lambda: self.change_option("del_track_after_conv", self.boolvar_del_track_after_conv))
         self.menu_advanced.add_checkbutton(label=self.translate("Ne pas vérifier les mises à jour"), variable=self.boolvar_dont_check_for_update, command=lambda: self.change_option("dont_check_for_update", self.boolvar_dont_check_for_update))
+        self.menu_advanced.add_checkbutton(label=self.translate("Ne pas vérifier le sha1 des courses"), variable=self.boolvar_dont_check_track_sha1, command=lambda: self.change_option("dont_check_track_sha1",self.boolvar_dont_check_track_sha1))
+
         self.menu_advanced.add_separator()
         self.menu_advanced.add_command(label=self.translate("Nombre de processus de conversion de course :"))
         self.menu_advanced.add_radiobutton(label=self.translate("1 processus"), variable=self.intvar_process_track, value=1, command=lambda: self.change_option("process_track", 1))
