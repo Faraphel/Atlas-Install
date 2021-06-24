@@ -34,7 +34,9 @@ def patch_track(self, tracks, total_track="?"):
     process_list = {}
     error_count, error_max = 0, 3
 
-    def add_process(track_file):
+
+    def add_process(track):
+        track_file = get_trackname(track=track)
         nonlocal error_count, error_max, process_list
 
         process_list[track_file] = None  # Used for
@@ -46,18 +48,35 @@ def patch_track(self, tracks, total_track="?"):
                 if os.path.getsize(_track) < 1000:  # File under this size are corrupted
                     os.remove(_track)
 
-        download_returncode = self.get_github_file(get_track_wu8(track_file))
-        if download_returncode == -1:  # can't download
-            error_count += 1
-            if error_count > error_max:  # Too much track wasn't correctly converted
-                messagebox.showerror(
-                    self.translate("Erreur"),
-                    self.translate("Trop de course ont eu une erreur du téléchargement."))
-                return -1
-            else:
-                messagebox.showwarning(self.translate("Attention"),
-                                       self.translate("Impossible de télécharger cette course ! (") +
-                                       str(error_count) + "/" + str(error_max) + ")")
+        while True:
+            download_returncode = self.get_github_file(get_track_wu8(track_file))
+            if download_returncode == -1:  # can't download
+                error_count += 1
+                if error_count > error_max:  # Too much track wasn't correctly converted
+                    messagebox.showerror(
+                        self.translate("Erreur"),
+                        self.translate("Trop de course ont eu une erreur du téléchargement."))
+                    return -1
+                else:
+                    messagebox.showwarning(self.translate("Attention"),
+                                           self.translate("Impossible de télécharger cette course ! (") +
+                                           str(error_count) + "/" + str(error_max) + ")")
+
+            if "sha1" in track:
+                if not self.boolvar_dont_check_track_sha1.get():
+                    if self.check_track_sha1(get_track_wu8(track_file), track["sha1"]) == 0:  # La course est correct
+                        print(f"correct sha1 for track {track_file}")
+                    else:
+                        print(f"incorrect sha1 for track {track_file}")
+                        error_count += 1
+                        if error_count > error_max:  # Too much track wasn't correctly converted
+                            messagebox.showerror(
+                                self.translate("Erreur"),
+                                self.translate("Trop de course ont eu une erreur de vérification de sha1."))
+                            return -1
+                        continue
+
+            break
 
         if not (os.path.exists(
                 get_track_szs(track_file))) or download_returncode == 3:  # returncode 3 is track has been updated
@@ -109,10 +128,9 @@ def patch_track(self, tracks, total_track="?"):
         else: return 0
 
     for i, track in enumerate(tracks):
-        track_file = get_trackname(track=track)
         while True:
             if len(process_list) < max_process:
-                returncode = add_process(track_file)
+                returncode = add_process(track)
                 if returncode == 0: break
                 elif returncode == -1: return -1  # if error occur, stop function
             elif clean_process() == -1: return -1
