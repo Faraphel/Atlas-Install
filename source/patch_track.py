@@ -61,13 +61,11 @@ def patch_track(self, tracks, total_track="?"):
                     messagebox.showwarning(self.translate("Attention"),
                                            self.translate("Impossible de télécharger cette course ! (") +
                                            str(error_count) + "/" + str(error_max) + ")")
+            elif download_returncode == 2: break  # Si le téléchargement est désactivé, ne pas checker le sha1
 
             if "sha1" in track:
                 if not self.boolvar_dont_check_track_sha1.get():
-                    if self.check_track_sha1(get_track_wu8(track_file), track["sha1"]) == 0:  # La course est correct
-                        print(f"correct sha1 for track {track_file}")
-                    else:
-                        print(f"incorrect sha1 for track {track_file}")
+                    if not self.check_track_sha1(get_track_wu8(track_file), track["sha1"]) == 0:  # La course est correcte
                         error_count += 1
                         if error_count > error_max:  # Too much track wasn't correctly converted
                             messagebox.showerror(
