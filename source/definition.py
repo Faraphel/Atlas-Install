@@ -1,5 +1,7 @@
 CREATE_NO_WINDOW = 0x08000000
-VERSION = "0.8.1"
+GITHUB_REPOSITORY = "Faraphel/MKWF-Install"
+GITHUB_CONTENT_ROOT = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
+VERSION_FILE_URL = GITHUB_CONTENT_ROOT + "version"
 
 get_filename = lambda file: ".".join(file.split(".")[:-1])
 get_nodir = lambda file: file.replace("\\", "/").split("/")[-1]
@@ -7,6 +9,13 @@ get_dir = lambda file: "/".join(file.replace("\\", "/").split("/")[:-1])
 get_extension = lambda file: file.split(".")[-1]
 get_track_wu8 = lambda track: f"./file/Track-WU8/{track}.wu8"
 get_track_szs = lambda track: f"./file/Track/{track}.szs"
+
+region_ID = {
+    "J": "JAP",
+    "P": "PAL",
+    "K": "KOR",
+    "E": "USA"
+}
 
 
 def get_trackname(name=None, prefix=None, suffix=None, track=None):

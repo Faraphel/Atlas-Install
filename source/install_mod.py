@@ -117,7 +117,9 @@ def install_mod(self):
                 shutil.rmtree(self.path_mkwf)
 
                 self.Progress(statut=self.translate("Changement de l'ID du jeu"), add=1)
-                subprocess.run(["./tools/wit/wit", "EDIT", get_nodir(self.path_mkwf_format), "--id", "RMCP60"], # see to maybe change ID to MKWF
+                subprocess.run(["./tools/wit/wit", "EDIT", get_nodir(self.path_mkwf_format), "--id",
+                                f"RMC{self.original_region_ID}60", "--name", f"Mario Kart Wii Faraphel {self.VERSION}",
+                                "--modify", "ALL"],
                                creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf_format),
                                check=True, stdout=subprocess.PIPE)
 

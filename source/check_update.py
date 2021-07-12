@@ -1,11 +1,11 @@
-from . import *
+from tkinter import messagebox
 import requests
 import zipfile
 import json
 import sys
 import os
 
-VERSION_FILE_URL = "https://raw.githubusercontent.com/Faraphel/MKWF-Install/master/version"
+from .definition import *
 
 
 def check_update(self):
@@ -39,6 +39,12 @@ def check_update(self):
                     print(self.translate("lancement de l'application..."))
                     os.startfile(os.path.realpath("./Updater/Updater.exe"))
                     sys.exit()
+
+    except requests.ConnectionError:
+        messagebox.showwarning(self.translate("Attention"),
+                               self.translate("Impossible de se connecter à internet. Le téléchargement sera "
+                                              "automatiquement désactivé."))
+        self.option["disable_download"] = True
 
     except:
         self.log_error()
