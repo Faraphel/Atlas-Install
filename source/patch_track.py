@@ -40,8 +40,8 @@ def patch_track(self, tracks, total_track="?"):
         nonlocal error_count, error_max, process_list
 
         process_list[track_file] = None  # Used for
-        self.Progress(statut=self.translate("Conversion des courses") + f"\n({i + 1}/{total_track})\n" +
-                      "\n".join(process_list.keys()), add=1)
+        self.Progress(statut=self.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
+                      "\n".join(process_list.keys())), add=1)
 
         for _track in [get_track_szs(track_file), get_track_wu8(track_file)]:
             if os.path.exists(_track):
@@ -54,14 +54,14 @@ def patch_track(self, tracks, total_track="?"):
                 error_count += 1
                 if error_count > error_max:  # Too much track wasn't correctly converted
                     messagebox.showerror(
-                        self.translate("Erreur"),
-                        self.translate("Trop de course ont eu une erreur du téléchargement."))
+                        self.translate("Error"),
+                        self.translate("Too much tracks had a download issue."))
                     return -1
                 else:
-                    messagebox.showwarning(self.translate("Attention"),
-                                           self.translate("Impossible de télécharger cette course ! (") +
-                                           str(error_count) + "/" + str(error_max) + ")")
-            elif download_returncode == 2: break  # Si le téléchargement est désactivé, ne pas checker le sha1
+                    messagebox.showwarning(self.translate("Warning"),
+                                           self.translate("Can't download this track !",
+                                                          f" ({error_count} / {error_max})"))
+            elif download_returncode == 2: break  # if download is disabled, don't check sha1
 
             if "sha1" in track:
                 if not self.boolvar_dont_check_track_sha1.get():
@@ -69,8 +69,8 @@ def patch_track(self, tracks, total_track="?"):
                         error_count += 1
                         if error_count > error_max:  # Too much track wasn't correctly converted
                             messagebox.showerror(
-                                self.translate("Erreur"),
-                                self.translate("Trop de course ont eu une erreur de vérification de sha1."))
+                                self.translate("Error"),
+                                self.translate("Too much tracks had an issue during sha1 check."))
                             return -1
                         continue
 
@@ -84,9 +84,8 @@ def patch_track(self, tracks, total_track="?"):
                     "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
                     "./file/auto-add/"], creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
             else:
-                messagebox.showerror(self.translate("Erreur"),
-                                     self.translate("Impossible de convertir la course.\n"
-                                                    "Réactiver le téléchargement des courses et réessayer."))
+                messagebox.showerror(self.translate("Erreor"),
+                                     self.translate("Can't convert track.\nEnable track download and retry."))
                 return -1
         elif self.boolvar_del_track_after_conv.get(): os.remove(get_track_wu8(track_file))
         return 0
@@ -106,16 +105,15 @@ def patch_track(self, tracks, total_track="?"):
                         error_count += 1
                         if error_count > error_max:  # Too much track wasn't correctly converted
                             messagebox.showerror(
-                                self.translate("Erreur"),
-                                self.translate("Trop de course ont eu une erreur de conversion."))
+                                self.translate("Error"),
+                                self.translate("Too much track had a conversion issue."))
                             return -1
                         else:  # if the error max hasn't been reach
                             messagebox.showwarning(
-                                self.translate("Attention"),
-                                self.translate("La course ") +
-                                get_track_wu8(track_file) +
-                                self.translate(" n'a pas été correctement converti. (") +
-                                str(error_count) + "/" + str(error_max) + ")")
+                                self.translate("Warning"),
+                                self.translate("The track", " ", get_track_wu8(track_file),
+                                               "do not have been properly converted.",
+                                               f" ({error_count} / {error_max})"))
                     else:
                         if self.boolvar_del_track_after_conv.get(): os.remove(get_track_wu8(track_file))
             else:

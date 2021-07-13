@@ -1,3 +1,5 @@
+import json
+
 CREATE_NO_WINDOW = 0x08000000
 GITHUB_REPOSITORY = "Faraphel/MKWF-Install"
 GITHUB_CONTENT_ROOT = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
@@ -16,6 +18,9 @@ region_ID = {
     "K": "KOR",
     "E": "USA"
 }
+
+with open("./translation.json", encoding="utf-8") as f:
+    translation_dict = json.load(f)
 
 
 def get_trackname(name=None, prefix=None, suffix=None, track=None):

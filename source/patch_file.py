@@ -12,12 +12,12 @@ def patch_file(self):
             tracks, total_track = self.count_track()
             max_step = len(fc["img"]) + total_track + 3 + len("EGFIS")
 
-            self.Progress(show=True, indeter=False, statut=self.translate("Conversion des fichiers"), max=max_step, step=0)
-            self.Progress(statut=self.translate("Configuration de LE-CODE"), add=1)
+            self.Progress(show=True, indeter=False, statut=self.translate("Converting files"), max=max_step, step=0)
+            self.Progress(statut=self.translate("Configurating LE-CODE"), add=1)
             self.create_lecode_config()
-            self.Progress(statut=self.translate("Création de ct_icon.png"), add=1)
+            self.Progress(statut=self.translate("Creating ct_icon.png"), add=1)
             self.patch_ct_icon()
-            self.Progress(statut=self.translate("Création des images descriptives"), add=1)
+            self.Progress(statut=self.translate("Creating descriptive images"), add=1)
             self.patch_img_desc()
             self.patch_image(fc)
             for file in glob.glob(self.path_mkwf+"/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
@@ -26,7 +26,7 @@ def patch_file(self):
             if self.patch_track(tracks, total_track) != 0: return
 
             self.button_install_mod.grid(row=2, column=1, columnspan=2, sticky="NEWS")
-            self.button_install_mod.config(text=f'{self.translate("Installer le mod")} (v{self.VERSION})')
+            self.button_install_mod.config(text=self.translate("Install mod", " (v", self.VERSION, ")"))
 
         except: self.log_error()
         finally: self.Progress(show=False)

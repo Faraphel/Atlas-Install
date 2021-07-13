@@ -106,7 +106,7 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
         }
 
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
-        self.Progress(statut=self.translate("Patch des textes ") + bmglang, add=1)
+        self.Progress(statut=self.translate("Patching text", " ", bmglang), add=1)
 
         subprocess.run(["./tools/szs/wszst", "EXTRACT", get_nodir(gamefile), "-d", get_nodir(gamefile) + ".d",
                        "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(gamefile))
@@ -126,10 +126,10 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
 
         with open("./file/ExtraCommon.txt", "w", encoding="utf8") as f:
             f.write("#BMG\n\n"
-                    f"  703e\t= {self.translate('Aléatoire: Toutes les pistes', lang=bmglang)}\n"
-                    f"  703f\t= {self.translate('Aléatoire: Pistes Originales', lang=bmglang)}\n"
-                    f"  7040\t= {self.translate('Aléatoire: Custom Tracks', lang=bmglang)}\n"
-                    f"  7041\t= {self.translate('Aléatoire: Pistes Nouvelles', lang=bmglang)}\n")
+                    f"  703e\t= {self.translate('Random: All tracks', lang=bmglang)}\n"
+                    f"  703f\t= {self.translate('Random: Original tracks', lang=bmglang)}\n"
+                    f"  7040\t= {self.translate('Random: Custom Tracks', lang=bmglang)}\n"
+                    f"  7041\t= {self.translate('Random: New tracks', lang=bmglang)}\n")
 
             for bmgtrack in bmgtracks.split("\n"):
                 if "=" in bmgtrack:

@@ -18,32 +18,31 @@ def check_update(self):
            (float(gitversion["version"]) == float(locversion["version"])) and
                 float(gitversion["subversion"]) > float(locversion["subversion"])):
             if messagebox.askyesno(
-                    self.translate("Mise à jour disponible !"),
-                    self.translate("Une mise à jour est disponible, souhaitez-vous l'installer ?") +
-                    f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> {gitversion['version']}.{gitversion['subversion']}\n"
-                    f"Changelog :\n{gitversion['changelog']}"):
+                    self.translate("Update available !"),
+                    self.translate("An update is available, do you want to install it ?",
+                    f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> "
+                    f"{gitversion['version']}.{gitversion['subversion']}\n"
+                    f"Changelog :\n{gitversion['changelog']}")):
 
                 if not(os.path.exists("./Updater/Updater.exe")):
                     dl = requests.get(gitversion["updater_bin"], allow_redirects=True)
                     with open("./download.zip", "wb") as file:
-                        print(self.translate("Téléchargement de Updater en cours..."))
+                        print(self.translate("Downloading the Updater..."))
                         file.write(dl.content)
-                        print(self.translate("fin du téléchargement, "
-                                             "début de l'extraction..."))
+                        print(self.translate("end of the download, extracting..."))
 
                     with zipfile.ZipFile("./download.zip") as file:
                         file.extractall("./Updater/")
-                        print(self.translate("fin de l'extraction"))
+                        print(self.translate("finished extracting"))
 
                     os.remove("./download.zip")
-                    print(self.translate("lancement de l'application..."))
+                    print(self.translate("starting application..."))
                     os.startfile(os.path.realpath("./Updater/Updater.exe"))
                     sys.exit()
 
     except requests.ConnectionError:
-        messagebox.showwarning(self.translate("Attention"),
-                               self.translate("Impossible de se connecter à internet. Le téléchargement sera "
-                                              "automatiquement désactivé."))
+        messagebox.showwarning(self.translate("Warning"),
+                               self.translate("Can't connect to internet. Download will be disabled."))
         self.option["disable_download"] = True
 
     except:

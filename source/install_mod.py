@@ -39,11 +39,11 @@ def install_mod(self):
                                 for ffp in fs[fp][nf]: count_rf(path=f)
             ###
             extracted_file = []
-            max_step += 4  # PATCH main.dol et PATCH lecode.bin, conversion, changement d'ID
-            self.Progress(show=True, indeter=False, statut=self.translate("Installation du mod"), max=max_step, step=0)
+            max_step += 4  # PATCH main.dol and PATCH lecode.bin, converting, changing ID
+            self.Progress(show=True, indeter=False, statut=self.translate("Installing mod"), max=max_step, step=0)
 
             def replace_file(path, file, subpath="/"):
-                self.Progress(statut=self.translate("Modification de")+f"\n{get_nodir(path)}", add=1)
+                self.Progress(statut=self.translate("Editing", "\n", get_nodir(path)), add=1)
                 extension = get_extension(path)
 
                 if extension == "szs":
@@ -77,7 +77,7 @@ def install_mod(self):
                                 for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
 
             for file in extracted_file:
-                self.Progress(statut=self.translate("Recompilation de")+f"\n{get_nodir(file)}", add=1)
+                self.Progress(statut=self.translate("Recompilating", "\n", get_nodir(file)), add=1)
                 subprocess.run(["./tools/szs/wszst", "CREATE", get_nodir(file) + ".d", "-d", get_nodir(file),
                                 "--overwrite"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(file),
                                check=True, stdout=subprocess.PIPE)
@@ -106,7 +106,7 @@ def install_mod(self):
             shutil.rmtree(self.path_mkwf + "/tmp/")
 
             outputformat = self.stringvar_game_format.get()
-            self.Progress(statut=self.translate("Conversion en")+f" {outputformat}", add=1)
+            self.Progress(statut=self.translate("Converting to", " ", outputformat), add=1)
 
             if outputformat in ["ISO", "WBFS", "CISO"]:
                 self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
@@ -116,14 +116,14 @@ def install_mod(self):
                                check=True, stdout=subprocess.PIPE)
                 shutil.rmtree(self.path_mkwf)
 
-                self.Progress(statut=self.translate("Changement de l'ID du jeu"), add=1)
+                self.Progress(statut=self.translate("Changing game's ID"), add=1)
                 subprocess.run(["./tools/wit/wit", "EDIT", get_nodir(self.path_mkwf_format), "--id",
                                 f"RMC{self.original_region_ID}60", "--name", f"Mario Kart Wii Faraphel {self.VERSION}",
                                 "--modify", "ALL"],
                                creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf_format),
                                check=True, stdout=subprocess.PIPE)
 
-            messagebox.showinfo(self.translate("Fin"), self.translate("L'installation est terminé !"))
+            messagebox.showinfo(self.translate("End"), self.translate("The mod has been installed !"))
 
         except: self.log_error()
         finally: self.Progress(show=False)
