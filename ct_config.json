@@ -9243,18 +9243,6 @@
          "sha1":"cab037dba5f5ce86abcaa74de7fc51a30497b2b7"
       },
       {
-         "name":"Red Sector B",
-         "author":"BillyNoodles",
-         "special":"T14",
-         "music":"T14",
-         "new":true,
-         "score":3,
-         "since_version":"0.8",
-         "sha1":"553a4e608148c9781c1985d8cf5bd9dec2b650f9",
-         "note":"infinite respawn",
-         "warning":2
-      },
-      {
          "name":"Relic Fortress",
          "author":"ZPL",
          "special":"T71",
@@ -13127,19 +13115,9 @@
          "special":"T32",
          "music":"T32",
          "new":true,
-         "score":0,
+         "score":2,
          "since_version":"0.8",
          "sha1":"92a393233f83d9351838a3deb72ef3054baeb456"
-      },
-      {
-         "name":"Super Bell Circuit",
-         "author":"Squadaloo",
-         "special":"T54",
-         "music":"T54",
-         "new":true,
-         "score":0,
-         "since_version":"0.9",
-         "sha1":"f89c0770e2c691e513d28c7de5fb2a5d9980a4cb"
       },
       {
          "name":"Sweet Galaxy Canyon",
@@ -13170,6 +13148,137 @@
          "score":1,
          "since_version":"0.9",
          "sha1":"d04e8e61055f0892d721544d16ec2899bfa48431"
+      },
+      {
+         "name":"The Nether Fortress",
+         "author":"Doumdoum",
+         "special":"T11",
+         "music":"T11",
+         "new":true,
+         "score":1,
+         "since_version":"0.9",
+         "sha1":"6389d56d8d4e680de3d2a0fe1070577fedefde98"
+      },
+      {
+         "name":"Wacker's Rainbow Road",
+         "author":"Wacker",
+         "special":"T44",
+         "music":"T44",
+         "new":true,
+         "score":1,
+         "since_version":"0.9",
+         "sha1":"75a3f59fd815c24bced939fdd59d8db465b7f547"
+      },
+      {
+         "name":"Blowy Breezeway",
+         "author":"Bri911",
+         "special":"T13",
+         "music":"T13",
+         "new":true,
+         "score":2,
+         "since_version":"0.9",
+         "sha1":"5d42841dbcc51a483a71b17aeecddf8b2e654575"
+      },
+      {
+         "name":"Bowsers Challenge",
+         "author":"Torran, HIYM, SpyKid",
+         "special":"T84",
+         "music":"T84",
+         "new":true,
+         "score":1,
+         "since_version":"0.9",
+         "sha1":"2c11b7bcd4c1c5b063c80879fdae8687dd606d54"
+      },
+      {
+         "name": "Coco Park",
+         "author": "Bruh de la Boi",
+         "special": "T11",
+         "music":"T21",
+         "new":true,
+         "score":3,
+         "since_version":"0.9",
+         "sha1":"f049f5a96b321152c39d77d9b8b80e6169ca90fe"
+      },
+      {
+         "name":"Electro Raceway",
+         "author":"SpyKid",
+         "special":"T54",
+         "music":"T54",
+         "new":true,
+         "score":2,
+         "since_version":"0.9",
+         "sha1":"ca7cdde57a2a3445d5f0427dbc536e98d1550480"
+      },
+      {
+         "name":"Town",
+         "author":"Toxic Amaranth, Bruh de la Boi",
+         "special":"T63",
+         "music":"T63",
+         "new":true,
+         "score":1,
+         "since_version":"0.9",
+         "sha1":"6720135bdc166cdb35dae113a974ff2bf12fd4df"
+      },
+      {
+         "name":"Nexuz Road",
+         "author":"4IT★Lecce",
+         "special":"T21",
+         "music":"T21",
+         "new":true,
+         "score":2,
+         "since_version":"0.9",
+         "sha1":"75f0e860a04fab081b99f1c14186124a91e84733"
+      },
+      {
+         "name":"Red Sector A",
+         "author":"BillyNoodles",
+         "special":"T44",
+         "music":"T44",
+         "new":true,
+         "score":3,
+         "since_version":"0.9",
+         "sha1":"4c619c879c0e4872dd5bb98c70c21d6d7502ea66"
+      },
+      {
+         "name":"Ring of Fire",
+         "author":"Hman6516, Sheale",
+         "special":"T34",
+         "music":"T34",
+         "new":true,
+         "score":3,
+         "since_version":"0.9",
+         "sha1":"7de82a0c8077eae4ba30863293e9402be425a48d"
+      },
+      {
+         "name":"Speedwagon Speedway",
+         "author":"Toxic Amaranth",
+         "special":"T21",
+         "music":"T21",
+         "new":true,
+         "score":2,
+         "since_version":"0.9",
+         "sha1":"96ea88f8989a5371784a40108a8fa6d870ac426a",
+         "note": "is that a JoJo reference ?"
+      },
+      {
+         "name":"Swine Canyon",
+         "author":"Pointy Pighead Games",
+         "special":"T11",
+         "music":"T11",
+         "new":true,
+         "score":2,
+         "since_version":"0.9",
+         "sha1":"55838911a043e2b3db430ed84b0df8752cc46d10"
+      },
+      {
+         "name":"The Grand Oak",
+         "author":"CarryOn",
+         "special":"T23",
+         "music":"T23",
+         "new":true,
+         "score":2,
+         "since_version":"0.9",
+         "sha1":"d05f37745d4bf1e6903f2123186bc0b7804ca760"
       }
    ]
 }
