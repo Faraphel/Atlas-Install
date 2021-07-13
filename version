@@ -1,7 +1,7 @@
 {
-  "version": "0.8",
+  "version": "0.9",
   "subversion": "0",
   "changelog": "",
-  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.8/MKWF.v0.8.zip",
+  "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.9/MKWF.v0.9.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
