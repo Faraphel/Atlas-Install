@@ -15,6 +15,8 @@ def __init__(self):
         self.root = Tk()
 
         self.load_option()
+        self.load_ct_config()
+
         self.stringvar_language = StringVar(value=self.option["language"])
         self.stringvar_game_format = StringVar(value=self.option["format"])
         self.boolvar_disable_download = BooleanVar(value=self.option["disable_download"])
@@ -25,6 +27,7 @@ def __init__(self):
         self.boolvar_use_1star_track = BooleanVar(value=True)
         self.boolvar_use_2star_track = BooleanVar(value=True)
         self.boolvar_use_3star_track = BooleanVar(value=True)
+        self.stringvar_mark_track_from_version = StringVar(value="None")
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -54,6 +57,12 @@ def __init__(self):
         self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 1 ","star"), variable=self.boolvar_use_1star_track)
         self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 2 ","stars"), variable=self.boolvar_use_2star_track)
         self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 3 ","stars"), variable=self.boolvar_use_3star_track)
+        self.menu_trackselection.add_separator()
+        self.menu_marktrackversion = Menu(self.menu_trackselection, tearoff=0)
+        self.menu_trackselection.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
+        self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
+        for version in self.ALL_VERSION:
+            self.menu_marktrackversion.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
 
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)

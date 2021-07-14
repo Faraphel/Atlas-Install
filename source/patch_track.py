@@ -6,16 +6,25 @@ import json
 import os
 
 
-def count_track(self):
+def load_ct_config(self):
     tracks = []
     with open("./ct_config.json", encoding="utf-8") as f: ctconfig = json.load(f)
-    self.VERSION = ctconfig["version"]
-    for cup in ctconfig["cup"].values():
+
+    for cup in ctconfig["cup"].values():  # defined order tracks
         if not (cup["locked"]): tracks.extend(cup["courses"].values())
-    tracks.extend(ctconfig["tracks_list"])
-    tracks = [dict(t) for t in {tuple(d.items()) for d in tracks}]
-    total_track = len(tracks)
-    return tracks, total_track
+
+    tracks.extend(ctconfig["tracks_list"])  # unordered tracks
+
+    self.TRACKS = [dict(t) for t in {tuple(d.items()) for d in tracks}]  # removing duplicate
+    self.TOTAL_TRACK = len(tracks)
+
+    self.VERSION = ctconfig["version"]
+
+    self.ALL_VERSION = []
+    for track in self.TRACKS:
+        if not track.get("since_version") in self.ALL_VERSION:
+            self.ALL_VERSION.append(track["since_version"])
+    self.ALL_VERSION.sort()
 
 
 def patch_autoadd(self):
@@ -29,7 +38,7 @@ def patch_autoadd(self):
     shutil.rmtree(self.path_mkwf + "/tmp/")
 
 
-def patch_track(self, tracks, total_track="?"):
+def patch_track(self):
     max_process = self.intvar_process_track.get()
     process_list = {}
     error_count, error_max = 0, 3
@@ -40,7 +49,7 @@ def patch_track(self, tracks, total_track="?"):
         nonlocal error_count, error_max, process_list
 
         process_list[track_file] = None  # Used for
-        self.Progress(statut=self.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
+        self.Progress(statut=self.translate("Converting tracks", f"\n({i + 1}/{self.TOTAL_TRACK})\n",
                       "\n".join(process_list.keys())), add=1)
 
         for _track in [get_track_szs(track_file), get_track_wu8(track_file)]:
@@ -123,7 +132,7 @@ def patch_track(self, tracks, total_track="?"):
         if len(process_list): return 1
         else: return 0
 
-    for i, track in enumerate(tracks):
+    for i, track in enumerate(self.TRACKS):
         while True:
             if len(process_list) < max_process:
                 returncode = add_process(track)
