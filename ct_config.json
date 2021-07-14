@@ -13279,6 +13279,16 @@
          "score":2,
          "since_version":"0.9",
          "sha1":"d05f37745d4bf1e6903f2123186bc0b7804ca760"
+      },
+      {
+         "name":"Haunted Library",
+         "author":"zatchi",
+         "special":"T53",
+         "music":"T53",
+         "new":true,
+         "score":3,
+         "since_version":"0.9",
+         "sha1":"c30094fa6718b7d1544225e0d23cbb6696e807aa"
       }
    ]
 }
