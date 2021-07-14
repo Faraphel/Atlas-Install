@@ -45,5 +45,5 @@ def check_update(self):
                                self.translate("Can't connect to internet. Download will be disabled."))
         self.option["disable_download"] = True
 
-    except:
-        self.log_error()
+    except SystemExit: pass
+    except: self.log_error()
