@@ -22,6 +22,9 @@ def __init__(self):
         self.boolvar_dont_check_for_update = BooleanVar(value=self.option["dont_check_for_update"])
         self.boolvar_dont_check_track_sha1 = BooleanVar(value=self.option["dont_check_track_sha1"])
         self.intvar_process_track = IntVar(value=self.option["process_track"])
+        self.boolvar_use_1star_track = BooleanVar(value=True)
+        self.boolvar_use_2star_track = BooleanVar(value=True)
+        self.boolvar_use_3star_track = BooleanVar(value=True)
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -45,6 +48,12 @@ def __init__(self):
         self.menu_format.add_radiobutton(label="ISO", variable=self.stringvar_game_format, value="ISO", command=lambda: self.change_option("format", "ISO"))
         self.menu_format.add_radiobutton(label="CISO", variable=self.stringvar_game_format, value="CISO", command=lambda: self.change_option("format", "CISO"))
         self.menu_format.add_radiobutton(label="WBFS", variable=self.stringvar_game_format, value="WBFS", command=lambda: self.change_option("format", "WBFS"))
+
+        self.menu_trackselection = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Track selection"), menu=self.menu_trackselection)
+        self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 1 ","star"), variable=self.boolvar_use_1star_track)
+        self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 2 ","stars"), variable=self.boolvar_use_2star_track)
+        self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 3 ","stars"), variable=self.boolvar_use_3star_track)
 
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)

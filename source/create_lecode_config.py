@@ -9,7 +9,7 @@ def create_lecode_config(self):
             else: warning = ""
 
             if "score" in track:
-                if track["score"] > 0:
+                if 0 < track["score"] <= 3:
                     return "★" * track["score"] + "☆" * (3 - track["score"]) + warning + " "
             return ""
 
@@ -43,9 +43,9 @@ def create_lecode_config(self):
             ctfile.write(header)
             rctfile.write(header)
 
-            for cup in ctconfig["cup"]: # defined cup section
+            for cup in ctconfig["cup"]:  # defined cup section
                 _cup_config = ctconfig["cup"][cup]
-                if int(cup) >= 9:  # Course qui ne sont ni les originales, ni les courses aléatoires.
+                if int(cup) >= 9:  # Track that are not original and not random selection
                     cup = f'\nC "{_cup_config["name"]}"\n'
                     ctfile.write(cup)
                     rctfile.write(cup)
@@ -55,7 +55,16 @@ def create_lecode_config(self):
                         ctfile.write(get_ctfile_text(_course_config, race=False))
                         rctfile.write(get_ctfile_text(_course_config, race=True))
 
-            for i, _course_config in enumerate(ctconfig["tracks_list"]):  # undefined cup section
+            tracks_list = ctconfig["tracks_list"]
+            if not self.boolvar_use_1star_track.get():  # if 1 star track are disabled, remove them
+                tracks_list = list(filter(lambda track: track.get("score") != 1, tracks_list))
+            if not self.boolvar_use_2star_track.get():  # if 2 stars track are disabled, remove them
+                tracks_list = list(filter(lambda track: track.get("score") != 2, tracks_list))
+            if not self.boolvar_use_3star_track.get():  # if 3 stars track are disabled, remove them
+                tracks_list = list(filter(lambda track: track.get("score") != 3, tracks_list))
+            #  using dict.get allow track that with no "score" attribute to not raise an exception by returning None
+
+            for i, _course_config in enumerate(tracks_list):  # undefined cup section
                 if i % 4 == 0:
                     cup = f'\nC "TL{i//4}"\n'
                     ctfile.write(cup)
@@ -65,8 +74,8 @@ def create_lecode_config(self):
                 rctfile.write(get_ctfile_text(_course_config, race=True))
 
             for _ in range(1, 4-(i%4)):  # Complete cup if track are missing
-                ctfile.write(f'  T T44; T44; 0x00; "_"; ""; "-"\n')
-                rctfile.write(f'  T T44; T44; 0x00; "_"; ""; "-"\n')
+                ctfile.write(EMPTY_TRACK)
+                rctfile.write(EMPTY_TRACK)
 
     except:
         self.log_error()

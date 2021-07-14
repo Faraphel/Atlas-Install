@@ -84,7 +84,7 @@ def patch_track(self, tracks, total_track="?"):
                     "./file/Track/%N.szs", "--szs", "--overwrite", "--autoadd-path",
                     "./file/auto-add/"], creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
             else:
-                messagebox.showerror(self.translate("Erreor"),
+                messagebox.showerror(self.translate("Error"),
                                      self.translate("Can't convert track.\nEnable track download and retry."))
                 return -1
         elif self.boolvar_del_track_after_conv.get(): os.remove(get_track_wu8(track_file))

@@ -61,7 +61,11 @@
     "Can't convert track.\nEnable track download and retry.": "Impossible de convertir la course.\nRéactiver le téléchargement des courses et réessayer.",
     "Too much track had a conversion issue.": "Trop de course ont eu une erreur de conversion.",
     "La course": "The track",
-    "do not have been properly converted.": "n'a pas été correctement converti."
+    "do not have been properly converted.": "n'a pas été correctement converti.",
+    "Track selection": "Sélection de course",
+    "Select": "Sélectionner",
+    "star": "étoile",
+    "stars": "étoiles"
   },
   "ge": {
     "Random: All tracks": "Zufällig: Alle Spuren",

@@ -19,6 +19,8 @@ region_ID = {
     "E": "USA"
 }
 
+EMPTY_TRACK = '  T T44; T44; 0x00; "_"; ""; "-"\n'
+
 with open("./translation.json", encoding="utf-8") as f:
     translation_dict = json.load(f)
 
