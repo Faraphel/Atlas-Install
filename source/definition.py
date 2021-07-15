@@ -70,13 +70,7 @@ trackname_color = {
    "SK64": "\\\\c{green}SK64\\\\c{off}",
    "SMG": "\\\\c{red2}SMG\\\\c{off}",
    "Spyro 1": "\\\\c{blue}Spyro 1\\\\c{off}",
-
-   "Aléatoire:": "\\\\c{white}Aléatoire:",
-   "Random:": "\\\\c{white}Random:",
-   "Zufällig:": "\\\\c{white}Zufällig:",
-   "Casuale:": "\\\\c{white}Casuale:",
-   "Aleatorio:": "\\\\c{white}Aleatorio:",
-
+    
    "Wii U": "\\\\c{red4}Wii U\\\\c{off}",
    "Wii": "\\\\c{blue}Wii\\\\c{off}",
 

@@ -46,10 +46,10 @@ def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /
 
         with open("./file/ExtraCommon.txt", "w", encoding="utf8") as f:
             f.write("#BMG\n\n"
-                    f"  703e\t= {self.translate('Random: All tracks', lang=bmglang)}\n"
-                    f"  703f\t= {self.translate('Random: Original tracks', lang=bmglang)}\n"
-                    f"  7040\t= {self.translate('Random: Custom Tracks', lang=bmglang)}\n"
-                    f"  7041\t= {self.translate('Random: New tracks', lang=bmglang)}\n")
+                    f"  703e\t= \\\\c{{white}}{self.translate('Random: All tracks', lang=bmglang)}\n"
+                    f"  703f\t= \\\\c{{white}}{self.translate('Random: Original tracks', lang=bmglang)}\n"
+                    f"  7040\t= \\\\c{{white}}{self.translate('Random: Custom Tracks', lang=bmglang)}\n"
+                    f"  7041\t= \\\\c{{white}}{self.translate('Random: New tracks', lang=bmglang)}\n")
 
             for bmgtrack in bmgtracks.split("\n"):
                 if "=" in bmgtrack:
