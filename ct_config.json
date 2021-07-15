@@ -4660,7 +4660,8 @@
       "sha1":"e40e14387208969dec44dc4c424d1008dee7828b"
     },
     {
-      "name":"Digitally Enhanced (Boost)",
+      "name":"Digitally Enhanced",
+      "suffix": "Boost",
       "music":"T41",
       "special":"T41",
       "new":true,
