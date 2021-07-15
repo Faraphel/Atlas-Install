@@ -17,5 +17,3 @@ def translate(self, *texts, lang=None):
         return translated_text
 
     return "".join(texts)  # if no translation language is found
-
-
