@@ -5,29 +5,28 @@ from .definition import *
 def create_lecode_config(self):
     try:
         def get_star_text(track):
-            if "warning" in track: warning = "!" * track["warning"]
-            else: warning = ""
 
             if "score" in track:
                 if 0 < track["score"] <= 3:
-                    return "★" * track["score"] + "☆" * (3 - track["score"]) + warning + " "
+                    star_text = "★" * track["score"] + "☆" * (3 - track["score"])
+                    return trackname_color[star_text] + " "
             return ""
 
         def get_ctfile_text(track, race=False):
             if race:
-                return f'  T {track["music"]}; ' + \
-                       f'{track["special"]}; ' + \
-                       f'{"0x01" if track["new"] else "0x00"}; ' + \
-                       f'"-"; ' + \
-                       f'"{get_star_text(track)}{get_trackctname(track=track)}\\n{track["author"]}"; ' + \
-                       f'"-"\n'
+                return (f'  T {track["music"]}; '
+                        f'{track["special"]}; '
+                        f'{"0x01" if track["new"] else "0x00"}; '
+                        f'"-"; '
+                        f'"{get_star_text(track)}{self.get_trackctname(track=track, color=True)}\\n{track["author"]}"; '
+                        f'"-"\n')
             else:
-                return f'  T {track["music"]}; ' + \
-                       f'{track["special"]}; ' + \
-                       f'{"0x01" if track["new"] else "0x00"}; ' + \
-                       f'"{get_trackctname(track=track)}"; ' + \
-                       f'"{get_star_text(track)}{get_trackctname(track=track)}"; ' + \
-                       f'"-"\n'
+                return (f'  T {track["music"]}; '
+                        f'{track["special"]}; '
+                        f'{"0x01" if track["new"] else "0x00"}; '
+                        f'"{self.get_trackctname(track=track)}"; '
+                        f'"{get_star_text(track)}{self.get_trackctname(track=track, color=True)}"; '
+                        f'"-"\n')
 
         with open("./ct_config.json", encoding="utf-8") as f:
             ctconfig = json.load(f)
@@ -35,11 +34,11 @@ def create_lecode_config(self):
         with open("./file/CTFILE.txt", "w", encoding="utf-8") as ctfile, \
              open("./file/RCTFILE.txt", "w", encoding="utf-8") as rctfile:
 
-            header = "#CT-CODE\n" +\
-                     "[RACING-TRACK-LIST]\n" +\
-                     "%LE-FLAGS=1\n" +\
-                     "%WIIMM-CUP=1\n" +\
-                     "N N$SWAP | N$F_WII\n\n"
+            header = ("#CT-CODE\n"
+                      "[RACING-TRACK-LIST]\n"
+                      "%LE-FLAGS=1\n"
+                      "%WIIMM-CUP=1\n"
+                      "N N$SWAP | N$F_WII\n\n")
             ctfile.write(header)
             rctfile.write(header)
 

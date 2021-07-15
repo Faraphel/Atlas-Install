@@ -6,6 +6,35 @@ import json
 import os
 
 
+def get_trackname(self, track, color=False):
+    hl_prefix, hl_suffix = "", ""
+    if color:
+        if track.get("since_version") == self.stringvar_mark_track_from_version.get():
+            hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"
+
+    name = track["name"]
+    name = hl_prefix + name + hl_suffix
+
+    if "prefix" in track:
+        prefix = track["prefix"]
+        if color:
+            if prefix in trackname_color:
+                prefix = trackname_color[prefix]
+        name = prefix + " " + name
+    if "suffix" in track:
+        suffix = track["suffix"]
+        if color:
+            if suffix in trackname_color:
+                suffix = trackname_color[suffix]
+        name = name + " (" + suffix + ")"
+
+    return name
+
+
+def get_trackctname(self, *args, **kwargs):
+    return self.get_trackname(*args, **kwargs).replace("_", "")
+
+
 def load_ct_config(self):
     tracks = []
     with open("./ct_config.json", encoding="utf-8") as f: ctconfig = json.load(f)
@@ -43,9 +72,8 @@ def patch_track(self):
     process_list = {}
     error_count, error_max = 0, 3
 
-
     def add_process(track):
-        track_file = get_trackname(track=track)
+        track_file = self.get_trackname(track=track)
         nonlocal error_count, error_max, process_list
 
         process_list[track_file] = None  # Used for
