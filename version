@@ -1,7 +1,7 @@
 {
   "version": "0.9",
   "subversion": "0",
-  "changelog": "",
+  "changelog": "- Updated GBA Sky Garden, Quag Beach -> Pokemon Beach, Rainbow Mountain Fortress, Sarasa Kingdom, Sunset Sewer, Torrential Flood Lake, Red Sector B -> Red Sector A.\n- Added 33 new tracks.\n\n- Added a page in the github wiki about forking the project to make your own ISO patcher based on MKWF-Install (https://github.com/Faraphel/MKWF-Install/wiki/Customizing-the-installer)\n- Reworked translation code.\n- English is now used in the program instead of French to make the code easier to read for everyone !\n- Reworked prefix and suffix code, now only them can be colored (the name will no longer be colored if it contains N64 for example)\n\n- You can now color track from a specific version (for example, if you only want to play on new track)\n- Added a \"track selection\" menu allowing you to only patch game for track with a certain amount of stars. (This does not apply for track from other Mario Kart like SNES, GBA, GCN, ...)\n\n- An error occurred with the updater making it unusable. If you had it, please delete ./Updater directory.\n- Fixed an error occurring when trying to update.",
   "download_bin": "https://github.com/Faraphel/MKWF-Install/releases/download/0.9/MKWF.v0.9.zip",
   "updater_bin": "https://github.com/Faraphel/MKWF-Install/raw/master/Updater/Updater.zip"
 }
