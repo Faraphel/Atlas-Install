@@ -16,7 +16,7 @@ setup(
     license='GPL-3.0',
     author='Faraphel',
     author_email='rc60650@hotmail.com',
-    description='Logiciel de mise à jour pour MKWF-Install.',
+    description='MKWF-Install Updater.',
     executables = [Executable("./Updater.py",
                               target_name = "Updater.exe",
                               shortcut_name = "MKWF-Install Updater",
