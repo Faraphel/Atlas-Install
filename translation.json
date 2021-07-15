@@ -65,7 +65,9 @@
     "Track selection": "Sélection de course",
     "Select": "Sélectionner",
     "star": "étoile",
-    "stars": "étoiles"
+    "stars": "étoiles",
+    "Mark all tracks from version": "Marquer toutes les courses de la version",
+    "None": "Aucune"
   },
   "ge": {
     "Random: All tracks": "Zufällig: Alle Spuren",
