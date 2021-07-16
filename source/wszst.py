@@ -28,3 +28,7 @@ def normalize(src_file: str, dest_dir: str = "./file/Track/", dest_name: str = "
         autoadd_path], creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
     return 0
 
+
+def extract(file: str, dest_dir: str):
+    subprocess.call(["./tools/wit/wit", "EXTRACT", get_nodir(file), "--DEST", dest_dir],
+                    creationflags=CREATE_NO_WINDOW, cwd=get_dir(file))
