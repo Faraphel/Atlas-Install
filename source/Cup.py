@@ -4,7 +4,7 @@ from .patch_ct_icon import get_cup_icon
 
 
 class Cup:
-    def __init__(self, name: str, id: int,
+    def __init__(self, name: str,
                  track1: Track = EMPTY_TRACK,
                  track2: Track = EMPTY_TRACK,
                  track3: Track = EMPTY_TRACK,
@@ -12,15 +12,22 @@ class Cup:
                  icon: Image = None):
 
         self.name = name
-        self.track1 = track1
-        self.track2 = track2
-        self.track3 = track3
-        self.track4 = track4
-        self.icon = icon if icon else create_cup_icon(id)
-        self.id = id                # cup number
+        self.tracks = [track1, track2, track3, track4]
+        self.icon = icon
 
-    def get_ctfile_cup(self):
-        pass
+    def get_ctfile_cup(self, race=False):
+        """
+        :param race: is it a text used for Race_*.szs ?
+        :return: ctfile definition for the cup
+        """
+        ctfile_cup = f'\nC "{self.name}"\n'
+        for track in self.tracks:
+            ctfile_cup += track.get_ctfile_track(race)
+        return ctfile_cup
 
-    def get_tracks(self):
-        return self.track1, self.track2, self.track3, self.track4
+    def get_icon(self, id: int):
+        """
+        :param id: cup number
+        :return: icon of the cup
+        """
+        return self.icon if self.icon else get_cup_icon(id)

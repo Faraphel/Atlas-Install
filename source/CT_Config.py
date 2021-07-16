@@ -37,7 +37,7 @@ class CT_Config:
 
     def add_ordered_cup(self, cup: Cup):
         self.ordered_cups.append(cup)
-        for track in cup.get_tracks():
+        for track in cup.tracks:
             self.all_version.add(track.since_version)
 
     def add_unordered_track(self, track: Track):
@@ -63,8 +63,29 @@ class CT_Config:
     def get_total_tracks_count(self):
         return (len(self.ordered_cups) * 4) + len(self.unordered_tracks)
 
-    def create_ctfile(self):
-        pass
+    def create_ctfile(self, directory="./file/"):
+        with open(directory+"CTFILE.txt", "w", encoding="utf-8") as ctfile, \
+             open(directory+"RCTFILE.txt", "w", encoding="utf-8") as rctfile:
+            header = (
+                "#CT-CODE\n"
+                "[RACING-TRACK-LIST]\n"
+                "%LE-FLAGS=1\n"
+                "%WIIMM-CUP=1\n"
+                "N N$SWAP | N$F_WII\n\n")
+            ctfile.write(header); rctfile.write(header)
+
+            # generate cup for undefined track
+            unordered_cups = []
+            for i, track in enumerate(self.unordered_tracks):
+                if i % 4 == 0:
+                    _actual_cup = Cup(name=f"TL{i // 4}")
+                    unordered_cups.append(_actual_cup)
+                _actual_cup.tracks[i % 4] = track
+
+            # all cups
+            for cup in self.ordered_cups + unordered_cups:
+                ctfile.write(cup.get_ctfile_cup(race=False))
+                rctfile.write(cup.get_ctfile_cup(race=True))
 
     def get_cticon(self):
         """
@@ -84,4 +105,4 @@ class CT_Config:
             cup_icon = get_cup_icon(i)
             ct_icon.paste(cup_icon, (0, i * CT_ICON_WIDTH))
 
-        return ct_icon  #ct_icon.save("./file/ct_icons.tpl.png")
+        return ct_icon  # ct_icon.save("./file/ct_icons.tpl.png")

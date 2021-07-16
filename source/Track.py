@@ -1,5 +1,4 @@
 from .definition import *
-import subprocess
 import source.wszst
 
 
@@ -43,7 +42,7 @@ class Track:
 
         if self.score:
             if 0 < self.score <= 3:
-                star_text = "★" * track["score"] + "☆" * (3 - track["score"])
+                star_text = "★" * self.score + "☆" * (3 - self.score)
                 star_text = trackname_color[star_text] + " "
 
         if self.since_version == highlight_track_from_version:
@@ -67,7 +66,29 @@ class Track:
         if source.wszst.sha1(self.file_wu8) == self.sha1: return 0
         else: return -1
 
-    def get_ct_file_track(self): pass
+    def get_ctfile_track(self, race=False):
+        """
+        :param race: is it a text used for Race_*.szs ?
+        :return: ctfile definition for the track
+        """
+        ctfile_text = (
+            f'  T {self.music}; '
+            f'{self.special}; '
+            f'{"0x01" if self.new else "0x00"}; '
+        )
+        if not race:
+            ctfile_text += (
+                f'"{self.get_track_name()}"; '              # track path
+                f'"{self.get_track_formatted_name()}"; '    # track text shown ig
+                f'"-"\n')                                   # sha1, useless for now.
+        else:
+            ctfile_text += (
+                f'"-"; '                                    # track path, not used in Race_*.szs, save a bit of space
+                f'"{self.get_track_formatted_name()}\\n{self.author}"; '  # only in race show author's name
+                f'"-"\n'                                    # sha1, useless for now.
+            )
+
+        return ctfile_text
 
 
 EMPTY_TRACK = Track("_")
