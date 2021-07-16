@@ -6,17 +6,17 @@ import os
 
 class Game:
     def __init__(self, path: str, region: str = "PAL", game_ID: str = "RMCP01"):
+        self.extension = get_extension(path)
         self.path = path
         self.region_ID = region_ID[region]
         self.region = region
         self.game_ID = game_ID
 
     def extract_game(self):
-        extension = get_extension(self.path)
-        if extension.upper() == "DOL":
+        if self.extension.upper() == "DOL":
             self.path = os.path.realpath(self.path + "/../../")  # main.dol is in PATH/sys/, so go back 2 dir upper
 
-        elif extension.upper() in ["ISO", "WBFS", "CSIO"]:
+        elif self.extension.upper() in ["ISO", "WBFS", "CSIO"]:
             # Fiding a directory name that doesn't already exist
             directory_name, i = "MKWiiFaraphel", 1
             while True:
@@ -26,6 +26,7 @@ class Game:
 
             wszst.extract(self.path, self.path)
             if os.path.exists(self.path + "/DATA"): self.path += "/DATA"
+            self.extension = "DOL"
 
         else:
             raise Exception("This format is not supported !")

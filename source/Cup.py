@@ -4,16 +4,30 @@ from .patch_ct_icon import get_cup_icon
 
 
 class Cup:
-    def __init__(self, name: str,
-                 track1: Track = EMPTY_TRACK,
-                 track2: Track = EMPTY_TRACK,
-                 track3: Track = EMPTY_TRACK,
-                 track4: Track = EMPTY_TRACK,
-                 icon: Image = None):
+    def __init__(self, name: str = None,
+                 track1: Track = None,
+                 track2: Track = None,
+                 track3: Track = None,
+                 track4: Track = None,
+                 icon: Image = None, locked: bool = False,
+                 *args, **kwargs):
 
         self.name = name
-        self.tracks = [track1, track2, track3, track4]
+        self.tracks = [
+            track1 if track1 else Track(),
+            track2 if track2 else Track(),
+            track3 if track3 else Track(),
+            track4 if track4 else Track()
+        ]
         self.icon = icon
+        self.locked = locked
+
+    def load_from_json(self, cup: dict):
+        for key, value in cup.items():  # load all value in the json as class attribute
+            if key != "tracks": setattr(self, key, value)
+            else:  # if the key is tracks
+                for i, track_json in value.items():  # load all tracks from their json
+                    self.tracks[int(i)].load_from_json(track_json)
 
     def get_ctfile_cup(self, race=False):
         """

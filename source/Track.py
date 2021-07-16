@@ -3,9 +3,9 @@ import source.wszst
 
 
 class Track:
-    def __init__(self, name: str, file_wu8: str = None, file_szs: str = None, prefix: str = None, suffix: str = None,
+    def __init__(self, name: str = "_", file_wu8: str = None, file_szs: str = None, prefix: str = None, suffix: str = None,
                  author="Nintendo", special="T11", music="T11", new=True, sha1: str = None, since_version: str = None,
-                 score: int = 0, warning: int = 0, note: str = ""):
+                 score: int = 0, warning: int = 0, note: str = "", *args, **kwargs):
 
         self.name = name                    # Track name
         self.prefix = prefix                # Prefix, often used for game or original console like Wii U, DS, ...
@@ -16,11 +16,14 @@ class Track:
         self.music = music                  # Music of the track
         self.new = new                      # Is the track new
         self.since_version = since_version  # Since which version is this track available
-        self.file_wu8 = file_wu8
-        self.file_szs = file_szs
         self.score = score                  # Track score between 1 and 3 stars
         self.warning = warning              # Track bug level (1 = minor, 2 = major)
         self.note = note                    # Note about the track
+        self.file_wu8 = file_wu8
+        self.file_szs = file_szs
+
+    def __repr__(self):
+        return f"{self.get_track_name()} sha1={self.sha1}"
 
     def get_track_name(self):
         prefix = self.prefix + " " if self.prefix else ""
@@ -28,6 +31,10 @@ class Track:
 
         name = (prefix + self.name + suffix)
         return name
+
+    def load_from_json(self, track: dict):
+        for key, value in track.items():    # load all value in the json as class attribute
+            setattr(self, key, value)
 
     def get_track_formatted_name(self, highlight_track_from_version: str = None):
         """
@@ -89,6 +96,3 @@ class Track:
             )
 
         return ctfile_text
-
-
-EMPTY_TRACK = Track("_")

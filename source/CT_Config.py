@@ -5,8 +5,8 @@ import os
 
 
 def get_cup_icon(i):
-    if os.path.exists(f"./file/cup_icon/{id}.png"):
-        cup_icon = Image.open(f"./file/cup_icon/{id}.png").resize((128, 128))
+    if os.path.exists(f"./file/cup_icon/{i}.png"):
+        cup_icon = Image.open(f"./file/cup_icon/{i}.png").resize((128, 128))
 
     else:
         cup_icon = Image.new("RGBA", (128, 128))
@@ -19,51 +19,105 @@ def get_cup_icon(i):
         draw.text((4, 4), "CT", (255, 165, 0), font=font)
 
         font = ImageFont.truetype("./file/SuperMario256.ttf", 60)
-        draw.text((5 - 2, 80 - 2), "%03i" % (i - 10), (0, 0, 0), font=font)  # i-10 because first 8 cup are not
-        draw.text((5 + 2, 80 - 2), "%03i" % (i - 10), (0, 0, 0), font=font)  # counted as new, random cup,
-        draw.text((5 - 2, 80 + 2), "%03i" % (i - 10), (0, 0, 0), font=font)  # left and right arrow
-        draw.text((5 + 2, 80 + 2), "%03i" % (i - 10), (0, 0, 0), font=font)
+        draw.text((5 - 2, 80 - 2), "%03i" % i, (0, 0, 0), font=font)
+        draw.text((5 + 2, 80 - 2), "%03i" % i, (0, 0, 0), font=font)
+        draw.text((5 - 2, 80 + 2), "%03i" % i, (0, 0, 0), font=font)
+        draw.text((5 + 2, 80 + 2), "%03i" % i, (0, 0, 0), font=font)
 
-        draw.text((5, 80), "%03i" % (i - 10), (255, 165, 0), font=font)
-        return cup_icon
+        draw.text((5, 80), "%03i" % i, (255, 165, 0), font=font)
+    return cup_icon
 
 
 class CT_Config:
-    def __init__(self, version):
+    def __init__(self, version: str = None):
         self.version = version
         self.ordered_cups = []
         self.unordered_tracks = []
+        self.all_tracks = []
         self.all_version: set = {version}
 
+    def load_ctconfig_json(self, ctconfig_json: dict):
+        """
+        :param ctconfig_json: json of the ctconfig to load
+        :return: ?
+        """
+        self.ordered_cups = []
+        self.unordered_tracks = []
+        self.all_tracks = []
+
+        for cup_json in ctconfig_json["cup"].values():  # tracks with defined order
+            cup = Cup()
+            cup.load_from_json(cup_json)
+            if not cup.locked:           # locked cup are not useful (they are original track or random track)
+                self.ordered_cups.append(cup)
+                self.all_tracks.extend(cup.tracks)
+
+        for track_json in ctconfig_json["tracks_list"]:  # unordered tracks
+            track = Track()
+            track.load_from_json(track_json)
+            self.unordered_tracks.append(track)
+            self.all_tracks.append(track)
+
+        self.version = ctconfig_json["version"]
+
+        self.all_version = set()
+        for track in self.all_tracks:
+            self.all_version.add(track.since_version)
+        self.all_version = sorted(self.all_version)
+
+    def load_ctconfig_file(self, ctconfig_file: str = "./ct_config.json"):
+        """
+        :param ctconfig_file: path to the ctconfig file
+        :return: ?
+        """
+        with open(ctconfig_file, encoding="utf-8") as f:
+            ctconfig_json = json.load(f)
+        self.load_ctconfig_json(ctconfig_json)
+
     def add_ordered_cup(self, cup: Cup):
+        """
+        :param cup: a Cup object to add as an ordered cup
+        :return: ?
+        """
         self.ordered_cups.append(cup)
         for track in cup.tracks:
             self.all_version.add(track.since_version)
+            self.all_tracks.append(track)
 
     def add_unordered_track(self, track: Track):
+        """
+        :param track: a Track object to add as an unordered tracks
+        :return: ?
+        """
         self.unordered_tracks.append(track)
         self.all_version.add(track.since_version)
+        self.all_tracks.append(track)
 
-    def get_tracks(self):
+    def search_tracks(self, values_list=False, not_value=False, **kwargs):
         """
-        :return: all tracks from the CT_Config
+        :param values_list: search track with a value list instead of a single value
+        :param not_value: search track that does not have value
+        :param kwargs: any track property = any value
+        :return: track list respecting condition
         """
-        tracks = []
-        for cup in self.ordered_cups:
-            tracks.extend(*cup.get_tracks())
-        tracks.extend(self.unordered_tracks)
+        track = self.all_tracks.copy()
 
-        return tracks
+        if values_list:
+            if not_value: filter_func = lambda track: getattr(track, keyword) not in value
+            else: filter_func = lambda track: getattr(track, keyword) in value
+        else:
+            if not_value: filter_func = lambda track: getattr(track, keyword) != value
+            else: filter_func = lambda track: getattr(track, keyword) == value
 
-    def search_tracks(self, **kwargs):
-        tracks = self.get_tracks()
         for keyword, value in kwargs.items():
-            filter(lambda track: getattr(track, keyword) == value, tracks)
-
-    def get_total_tracks_count(self):
-        return (len(self.ordered_cups) * 4) + len(self.unordered_tracks)
+            track = list(filter(filter_func, track))
+        return track
 
     def create_ctfile(self, directory="./file/"):
+        """
+        :param directory: create CTFILE.txt and RCTFILE.txt in this directory
+        :return: None
+        """
         with open(directory+"CTFILE.txt", "w", encoding="utf-8") as ctfile, \
              open(directory+"RCTFILE.txt", "w", encoding="utf-8") as rctfile:
             header = (
@@ -95,10 +149,10 @@ class CT_Config:
         CT_ICON_WIDTH = 128
         icon_files = ["left", "right"]
 
-        total_cup_count = math.ceil(self.get_total_tracks_count() / 4)
+        total_cup_count = math.ceil(len(self.all_tracks) / 4)
         ct_icon = Image.new("RGBA", (CT_ICON_WIDTH, CT_ICON_WIDTH * (total_cup_count + 2)))  # +2 because of left and right arrow
 
-        icon_files.extend([cup.id for cup in self.ordered_cups])             # adding ordered cup id
+        icon_files.extend([str(i) for i, cup in enumerate(self.ordered_cups)])  # adding ordered cup id
         icon_files.extend(["_"] * ((len(self.unordered_tracks) // 4) + 1))   # creating unordered track icon
 
         for i, id in enumerate(icon_files):
