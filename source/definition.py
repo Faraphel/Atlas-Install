@@ -24,6 +24,7 @@ bmgID_track_move = {
     "T71": 0x7015, "T72": 0x701e, "T73": 0x701d, "T74": 0x7011,
     "T81": 0x7018, "T82": 0x7016, "T83": 0x7013, "T84": 0x701c,
 }
+
 trackname_color = {
     "MSRDS": "\\\\c{green}MSRDS\\\\c{off}",
     "CTR": "\\\\c{YOR4}CTR\\\\c{off}",

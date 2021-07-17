@@ -62,3 +62,12 @@ def edit(): pass
 
 
 def autoadd(): pass
+
+
+def bmg_decode(): pass
+
+
+def bmg_encode(): pass
+
+
+def wctct_bmg(): pass
