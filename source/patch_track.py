@@ -1,19 +1,5 @@
-from .definition import *
 from tkinter import messagebox
-import subprocess
-import shutil
 import os
-
-
-def patch_autoadd(self):
-    if os.path.exists("./file/auto-add"): shutil.rmtree("./file/auto-add")
-    if not os.path.exists(self.game.path + "/tmp/"): os.makedirs(self.game.path + "/tmp/")
-    subprocess.run(["./tools/szs/wszst", "AUTOADD", get_nodir(self.game.path) + "/files/Race/Course/",
-                    "--DEST", get_nodir(self.game.path) + "/tmp/auto-add/"],
-                   creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.game.path),
-                   check=True, stdout=subprocess.PIPE)
-    shutil.move(self.game.path + "/tmp/auto-add/", "./file/auto-add/")
-    shutil.rmtree(self.game.path + "/tmp/")
 
 
 def patch_track(self):
@@ -35,42 +21,43 @@ def patch_track(self):
                 if os.path.getsize(_track) < 1000:  # File under this size are corrupted
                     os.remove(_track)
 
-        while True:
-            download_returncode = self.get_github_file(track.file_wu8)
-            if download_returncode == -1:  # can't download
-                error_count += 1
-                if error_count > error_max:  # Too much track wasn't correctly converted
-                    messagebox.showerror(
-                        self.translate("Error"),
-                        self.translate("Too much tracks had a download issue."))
-                    return -1
+        if not self.boolvar_disable_download.get():
+            while True:
+                download_returncode = track.download_wu8()
+                if download_returncode == -1:  # can't download
+                    error_count += 1
+                    if error_count > error_max:  # Too much track wasn't correctly converted
+                        messagebox.showerror(
+                            self.translate("Error"),
+                            self.translate("Too much tracks had a download issue."))
+                        return -1
+                    else:
+                        messagebox.showwarning(self.translate("Warning"),
+                                               self.translate("Can't download this track !",
+                                                              f" ({error_count} / {error_max})"))
+                elif download_returncode == 2: break  # if download is disabled, don't check sha1
+
+                if track.sha1:
+                    if not self.boolvar_dont_check_track_sha1.get():
+                        if not track.check_sha1():  # Check si le sha1 du fichier est le bon
+                            error_count += 1
+                            if error_count > error_max:  # Too much track wasn't correctly converted
+                                messagebox.showerror(
+                                    self.translate("Error"),
+                                    self.translate("Too much tracks had an issue during sha1 check."))
+                                return -1
+                            continue
+
+                break
+
+            if not (os.path.exists(track.file_szs)) or download_returncode == 3:  # returncode 3 is track has been updated
+                if os.path.exists(track.file_wu8):
+                    process_list[track_file] = track.convert_wu8_to_szs()
                 else:
-                    messagebox.showwarning(self.translate("Warning"),
-                                           self.translate("Can't download this track !",
-                                                          f" ({error_count} / {error_max})"))
-            elif download_returncode == 2: break  # if download is disabled, don't check sha1
-
-            if track.sha1:
-                if not self.boolvar_dont_check_track_sha1.get():
-                    if not track.check_sha1():  # Check si le sha1 du fichier est le bon
-                        error_count += 1
-                        if error_count > error_max:  # Too much track wasn't correctly converted
-                            messagebox.showerror(
-                                self.translate("Error"),
-                                self.translate("Too much tracks had an issue during sha1 check."))
-                            return -1
-                        continue
-
-            break
-
-        if not (os.path.exists(track.file_szs)) or download_returncode == 3:  # returncode 3 is track has been updated
-            if os.path.exists(track.file_wu8):
-                process_list[track_file] = track.convert_wu8_to_szs()
-            else:
-                messagebox.showerror(self.translate("Error"),
-                                     self.translate("Can't convert track.\nEnable track download and retry."))
-                return -1
-        elif self.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
+                    messagebox.showerror(self.translate("Error"),
+                                         self.translate("Can't convert track.\nEnable track download and retry."))
+                    return -1
+            elif self.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
         return 0
 
     def clean_process():
@@ -94,7 +81,7 @@ def patch_track(self):
                         else:  # if the error max hasn't been reach
                             messagebox.showwarning(
                                 self.translate("Warning"),
-                                self.translate("The track", " ", get_track_wu8(track_file),
+                                self.translate("The track", " ", track.file_wu8,
                                                "do not have been properly converted.",
                                                f" ({error_count} / {error_max})"))
                     else:

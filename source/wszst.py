@@ -32,6 +32,11 @@ def normalize(src_file: str, dest_dir: str = "./file/Track/", dest_name: str = "
 
 
 def extract(file: str, dest_dir: str):
+    """
+    :param file: game's file to extract (can be WBFS, ISO, CISO)
+    :param dest_dir: where to extract the game
+    :return: ?
+    """
     subprocess.run(["./tools/wit/wit", "EXTRACT", get_nodir(file), "--DEST", dest_dir],
                     creationflags=CREATE_NO_WINDOW, cwd=get_dir(file))
 
@@ -51,3 +56,9 @@ def wlect_patch(file: str,
                 ctfile_path: str = "./tmp/CTFILE.txt",
                 lpar_path: str = "./tmp/lpar-default.txt"):
     pass
+
+
+def edit(): pass
+
+
+def autoadd(): pass

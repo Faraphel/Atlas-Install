@@ -1,11 +1,14 @@
 from .definition import *
 import source.wszst
+import requests
+import os
 
 
 class Track:
     def __init__(self, name: str = "_", file_wu8: str = None, file_szs: str = None, prefix: str = None, suffix: str = None,
                  author="Nintendo", special="T11", music="T11", new=True, sha1: str = None, since_version: str = None,
-                 score: int = 0, warning: int = 0, note: str = "", *args, **kwargs):
+                 score: int = 0, warning: int = 0, note: str = "", track_wu8_dir: str = "./file/Track-WU8/",
+                 track_szs_dir: str = "./file/Track/", *args, **kwargs):
 
         self.name = name                    # Track name
         self.prefix = prefix                # Prefix, often used for game or original console like Wii U, DS, ...
@@ -19,8 +22,8 @@ class Track:
         self.score = score                  # Track score between 1 and 3 stars
         self.warning = warning              # Track bug level (1 = minor, 2 = major)
         self.note = note                    # Note about the track
-        self.file_wu8 = f"./file/Track-WU8/{self.get_track_name()}.wu8"
-        self.file_szs = f"./file/Track/{self.get_track_name()}.szs"
+        self.file_wu8 = f"{track_wu8_dir}/{self.get_track_name()}.wu8"
+        self.file_szs = f"{track_szs_dir}/{self.get_track_name()}.szs"
 
     def __repr__(self):
         return f"{self.get_track_name()} sha1={self.sha1} score={self.score}"
@@ -32,8 +35,8 @@ class Track:
         name = (prefix + self.name + suffix)
         return name
 
-    def load_from_json(self, track: dict):
-        for key, value in track.items():    # load all value in the json as class attribute
+    def load_from_json(self, track_json: dict):
+        for key, value in track_json.items():    # load all value in the json as class attribute
             setattr(self, key, value)
 
     def get_track_formatted_name(self, highlight_track_from_version: str = None):
@@ -67,7 +70,24 @@ class Track:
     def convert_wu8_to_szs(self):
         return source.wszst.normalize(src_file=self.file_wu8, use_popen=True)
 
-    def download_wu8(self): pass
+    def download_wu8(self):
+        returncode = 0
+
+        dl = requests.get(get_github_content_root(self) + self.file_wu8, allow_redirects=True, stream=True)
+        if os.path.exists(self.file_wu8):
+            if int(dl.headers['Content-Length']) == os.path.getsize(self.file_wu8): return 1
+            else: returncode = 3
+
+        if dl.status_code == 200:  # if page is found
+            with open(self.file_wu8, "wb") as file:
+                chunk_size = 4096
+                for i, chunk in enumerate(dl.iter_content(chunk_size=chunk_size)):
+                    file.write(chunk)
+                    file.flush()
+            return returncode
+        else:
+            print(f"error {dl.status_code} {self.file_wu8}")
+            return -1
 
     def check_sha1(self):
         if source.wszst.sha1(self.file_wu8) == self.sha1: return 0

@@ -1,4 +1,7 @@
-from .option import translation_dict
+import json
+
+with open("./translation.json", encoding="utf-8") as f:
+    translation_dict = json.load(f)
 
 
 def translate(self, *texts, lang=None):

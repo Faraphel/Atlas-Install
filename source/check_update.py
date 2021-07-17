@@ -46,6 +46,6 @@ def check_update(self):
     except requests.ConnectionError:
         messagebox.showwarning(self.translate("Warning"),
                                self.translate("Can't connect to internet. Download will be disabled."))
-        self.option["disable_download"] = True
+        self.option.disable_download = True
 
     except: self.log_error()
