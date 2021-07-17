@@ -28,7 +28,7 @@ def install_mod(self):
                         max_step += 1
 
             for fp in fs:
-                for f in glob.glob(self.path_mkwf + "/files/" + fp, recursive=True):
+                for f in glob.glob(self.game.path + "/files/" + fp, recursive=True):
                     if type(fs[fp]) == str:
                         count_rf(path=f)
                     elif type(fs[fp]) == dict:
@@ -66,7 +66,7 @@ def install_mod(self):
                     filecopy(f"./file/{file}", path)
 
             for fp in fs:
-                for f in glob.glob(self.path_mkwf + "/files/" + fp, recursive=True):
+                for f in glob.glob(self.game.path + "/files/" + fp, recursive=True):
                     if type(fs[fp]) == str:
                         replace_file(path=f, file=fs[fp])
                     elif type(fs[fp]) == dict:
@@ -84,43 +84,44 @@ def install_mod(self):
                 if os.path.exists(file + ".d"): shutil.rmtree(file + ".d")
 
             self.Progress(statut=self.translate("Patch main.dol"), add=1)
-            subprocess.run(["./tools/szs/wstrt", "patch", get_nodir(self.path_mkwf) + "/sys/main.dol", "--clean-dol",
-                            "--add-lecode"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
+            subprocess.run(["./tools/szs/wstrt", "patch", get_nodir(self.game.path) + "/sys/main.dol", "--clean-dol",
+                            "--add-lecode"], creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.game.path),
                            check=True, stdout=subprocess.PIPE)
 
             self.Progress(statut=self.translate("Patch lecode.bin"), add=1)
 
-            shutil.copytree("./file/Track/", self.path_mkwf+"/files/Race/Course/", dirs_exist_ok=True)
-            if not(os.path.exists(self.path_mkwf+"/tmp/")): os.makedirs(self.path_mkwf+"/tmp/")
-            filecopy("./file/CTFILE.txt", self.path_mkwf+"/tmp/CTFILE.txt")
-            filecopy("./file/lpar-default.txt", self.path_mkwf + "/tmp/lpar-default.txt")
-            filecopy(f"./file/lecode-{self.original_region}.bin", self.path_mkwf + f"/tmp/lecode-{self.original_region}.bin")
+            shutil.copytree("./file/Track/", self.game.path+"/files/Race/Course/", dirs_exist_ok=True)
+            if not(os.path.exists(self.game.path+"/tmp/")): os.makedirs(self.game.path+"/tmp/")
+            filecopy("./file/CTFILE.txt", self.game.path+"/tmp/CTFILE.txt")
+            filecopy("./file/lpar-default.txt", self.game.path + "/tmp/lpar-default.txt")
+            filecopy(f"./file/lecode-{self.game.region}.bin", self.game.path + f"/tmp/lecode-{self.game.region}.bin")
 
             subprocess.run(
-                ["./tools/szs/wlect", "patch", f"./tmp/lecode-{self.original_region}.bin", "-od",
-                 f"./files/rel/lecode-{self.original_region}.bin", "--track-dir", "./files/Race/Course/",
+                ["./tools/szs/wlect", "patch", f"./tmp/lecode-{self.game.region}.bin", "-od",
+                 f"./files/rel/lecode-{self.game.region}.bin", "--track-dir", "./files/Race/Course/",
                  "--move-tracks", "./files/Race/Course/", "--le-define", "./tmp/CTFILE.txt", "--lpar",
                  "./tmp/lpar-default.txt", "--overwrite"],
-                creationflags=CREATE_NO_WINDOW, cwd=self.path_mkwf, check=True, stdout=subprocess.PIPE)
+                creationflags=CREATE_NO_WINDOW, cwd=self.game.path, check=True, stdout=subprocess.PIPE)
 
-            shutil.rmtree(self.path_mkwf + "/tmp/")
+            shutil.rmtree(self.game.path + "/tmp/")
 
             outputformat = self.stringvar_game_format.get()
             self.Progress(statut=self.translate("Converting to", " ", outputformat), add=1)
 
             if outputformat in ["ISO", "WBFS", "CISO"]:
-                self.path_mkwf_format = os.path.realpath(self.path_mkwf + "/../MKWFaraphel." + outputformat.lower())
-                subprocess.run(["./tools/wit/wit", "COPY", get_nodir(self.path_mkwf), "--DEST",
-                               get_nodir(self.path_mkwf_format), f"--{outputformat.lower()}", "--overwrite"],
-                               creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf),
+                path_game_format: str = os.path.realpath(self.game.path + "/../MKWFaraphel." + outputformat.lower())
+                subprocess.run(["./tools/wit/wit", "COPY", get_nodir(self.game.path), "--DEST",
+                               get_nodir(path_game_format), f"--{outputformat.lower()}", "--overwrite"],
+                               creationflags=CREATE_NO_WINDOW, cwd=get_dir(path_game_format),
                                check=True, stdout=subprocess.PIPE)
-                shutil.rmtree(self.path_mkwf)
+                shutil.rmtree(self.game.path)
+                self.game.path = path_game_format
 
                 self.Progress(statut=self.translate("Changing game's ID"), add=1)
-                subprocess.run(["./tools/wit/wit", "EDIT", get_nodir(self.path_mkwf_format), "--id",
-                                f"RMC{self.original_region_ID}60", "--name", f"Mario Kart Wii Faraphel {self.VERSION}",
-                                "--modify", "ALL"],
-                               creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.path_mkwf_format),
+                subprocess.run(["./tools/wit/wit", "EDIT", get_nodir(self.game.path), "--id",
+                                f"RMC{self.game.region_ID}60", "--name",
+                                f"Mario Kart Wii Faraphel {self.ctconfig.version}", "--modify", "ALL"],
+                               creationflags=CREATE_NO_WINDOW, cwd=get_dir(self.game.path),
                                check=True, stdout=subprocess.PIPE)
 
             messagebox.showinfo(self.translate("End"), self.translate("The mod has been installed !"))

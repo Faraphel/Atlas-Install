@@ -1,16 +1,15 @@
 def Progress(self, show=None, indeter=None, step=None, statut=None, max=None, add=None):
-    if indeter == True:
+    if indeter is True:
         self.progressbar.config(mode="indeterminate")
         self.progressbar.start(50)
-    elif indeter == False:
+    elif indeter is False:
         self.progressbar.config(mode="determinate")
         self.progressbar.stop()
-    if show == True:
+    if show is True:
         self.StateButton(enable=False)
         self.progressbar.grid(row=100, column=1, sticky="NEWS")
         self.progresslabel.grid(row=101, column=1, sticky="NEWS")
-
-    elif show == False:
+    elif show is False:
         self.StateButton(enable=True)
         self.progressbar.grid_forget()
         self.progresslabel.grid_forget()

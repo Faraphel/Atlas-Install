@@ -8,14 +8,16 @@ import os
 from .definition import *
 from .check_update import check_update
 from .translate import translate
+from .CT_Config import *
+from .Game import *
 
 def __init__(self):
     try:
-
         self.root = Tk()
 
         self.load_option()
-        self.load_ct_config()
+        self.ctconfig = CT_Config()
+        self.ctconfig.load_ctconfig_file("./ct_config.json")
 
         self.stringvar_language = StringVar(value=self.option["language"])
         self.stringvar_game_format = StringVar(value=self.option["format"])
@@ -61,7 +63,7 @@ def __init__(self):
         self.menu_marktrackversion = Menu(self.menu_trackselection, tearoff=0)
         self.menu_trackselection.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
         self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
-        for version in self.ALL_VERSION:
+        for version in self.ctconfig.all_version:
             self.menu_marktrackversion.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
 
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
@@ -103,62 +105,18 @@ def __init__(self):
 
         def use_path():
             def func():
+                self.frame_action.grid_forget()
                 try:
-                    self.frame_action.grid_forget()
-                    path = entry_game_path.get()
-                    if not (os.path.exists(path)):
-                        messagebox.showerror(self.translate("Error"), self.translate("The file path in invalid"))
-                        return
-
-                    extension = get_extension(path)
-                    if extension.upper() == "DOL":
-                        if messagebox.askyesno(self.translate("Warning"),
-                                               self.translate("This directory will be overwritten if you install the "
-                                                              "mod !\n Are you sure you want to use it ?")):
-                            self.path_mkwf = os.path.realpath(path + "/../../")
-                        else: return
-                    elif extension.upper() in ["ISO", "WBFS", "CSIO"]:
-                        # Fiding a directory name that dosen't already exist
-                        directory_name, i = "MKWiiFaraphel", 1
-                        while True:
-                            self.path_mkwf = os.path.realpath(path + f"/../{directory_name}")
-                            if not(os.path.exists(self.path_mkwf)): break
-                            directory_name, i = f"MKWiiFaraphel ({i})", i + 1
-
-                        self.Progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
-                        subprocess.call(["./tools/wit/wit", "EXTRACT", get_nodir(path), "--DEST", directory_name]
-                                        , creationflags=CREATE_NO_WINDOW, cwd=get_dir(path))
-
-                        if os.path.exists(self.path_mkwf + "/DATA"): self.path_mkwf += "/DATA"
-
-                        self.Progress(show=False)
-
-                    else:
-                        messagebox.showerror(self.translate("Error"), self.translate("This file type is not supported"))
-                        self.Progress(show=False)
-                        return
-
-                    if glob.glob(self.path_mkwf + "/files/rel/lecode-???.bin"): # if a LECODE file is already here
-                        messagebox.showwarning(self.translate("Warning"),
-                                               self.translate("This game is already modded, it is not recommended to "
-                                                              "use it to install the mod"))
-
-                    try:
-                        with open(self.path_mkwf + "/setup.txt") as f: setup = f.read()
-                        setup = setup[setup.find("!part-id = ")+len("!part-id = "):]
-                        self.original_game_ID = setup[:setup.find("\n")]
-                    except:
-                        messagebox.showwarning(self.translate("Warning"),
-                                               self.transate("Can't find game region.\nPAL region will be used."))
-                        self.original_game_ID = "RMCP01"
-                    try:
-                        self.original_region_ID = self.original_game_ID[3]
-                        self.original_region = region_ID[self.original_region_ID]
-                    except: self.original_region = "PAL"
-
+                    self.game = Game(path = entry_game_path.get())
+                    self.Progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
+                    self.game.extract_game()
                     self.frame_action.grid(row=3, column=1, sticky="NEWS")
-
-                except: self.log_error()
+                except InvalidGamePath:
+                    messagebox.showerror(self.translate("Error"), self.translate("The file path in invalid"))
+                except InvalidFormat:
+                    messagebox.showerror(self.translate("Error"), self.translate("This game's format is invalid"))
+                except:
+                    self.log_error()
                 finally:
                     self.Progress(show=False)
 

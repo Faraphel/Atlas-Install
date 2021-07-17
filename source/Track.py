@@ -19,11 +19,11 @@ class Track:
         self.score = score                  # Track score between 1 and 3 stars
         self.warning = warning              # Track bug level (1 = minor, 2 = major)
         self.note = note                    # Note about the track
-        self.file_wu8 = file_wu8
-        self.file_szs = file_szs
+        self.file_wu8 = f"./file/Track-WU8/{self.get_track_name()}.wu8"
+        self.file_szs = f"./file/Track/{self.get_track_name()}.szs"
 
     def __repr__(self):
-        return f"{self.get_track_name()} sha1={self.sha1}"
+        return f"{self.get_track_name()} sha1={self.sha1} score={self.score}"
 
     def get_track_name(self):
         prefix = self.prefix + " " if self.prefix else ""
@@ -61,11 +61,11 @@ class Track:
             suffix = "(" + trackname_color[self.suffix] + ")"
 
         name = (star_text + prefix + hl_prefix + self.name + hl_suffix + suffix)
-        name = name.replace("_", "")
+        name = name.replace("_", " ")
         return name
 
     def convert_wu8_to_szs(self):
-        source.wszst.normalize(src_file=self.file_wu8)
+        return source.wszst.normalize(src_file=self.file_wu8, use_popen=True)
 
     def download_wu8(self): pass
 
@@ -96,3 +96,5 @@ class Track:
             )
 
         return ctfile_text
+
+# TODO: code download_wu8

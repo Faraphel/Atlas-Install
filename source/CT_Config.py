@@ -1,30 +1,37 @@
 from .Cup import *
 import math
 from PIL import Image, ImageFont, ImageDraw
+import json
 import os
 
 
-def get_cup_icon(i):
-    if os.path.exists(f"./file/cup_icon/{i}.png"):
-        cup_icon = Image.open(f"./file/cup_icon/{i}.png").resize((128, 128))
+def get_cup_icon(cup_id, font_path: str = "./file/SuperMario256.ttf", cup_icon_dir: str = "./file/cup_icon"):
+    """
+    :param cup_icon_dir: directory to cup icon
+    :param font_path: path to the font used to generate icon
+    :param cup_id: id of the cup
+    :return: cup icon
+    """
+    if os.path.exists(f"{cup_icon_dir}/{cup_id}.png"):
+        cup_icon = Image.open(f"{cup_icon_dir}/{cup_id}.png").resize((128, 128))
 
     else:
         cup_icon = Image.new("RGBA", (128, 128))
         draw = ImageDraw.Draw(cup_icon)
-        font = ImageFont.truetype("./file/SuperMario256.ttf", 90)
+        font = ImageFont.truetype(font_path, 90)
         draw.text((4 - 2, 4 - 2), "CT", (0, 0, 0), font=font)
         draw.text((4 + 2, 4 - 2), "CT", (0, 0, 0), font=font)
         draw.text((4 - 2, 4 + 2), "CT", (0, 0, 0), font=font)
         draw.text((4 + 2, 4 + 2), "CT", (0, 0, 0), font=font)
         draw.text((4, 4), "CT", (255, 165, 0), font=font)
 
-        font = ImageFont.truetype("./file/SuperMario256.ttf", 60)
-        draw.text((5 - 2, 80 - 2), "%03i" % i, (0, 0, 0), font=font)
-        draw.text((5 + 2, 80 - 2), "%03i" % i, (0, 0, 0), font=font)
-        draw.text((5 - 2, 80 + 2), "%03i" % i, (0, 0, 0), font=font)
-        draw.text((5 + 2, 80 + 2), "%03i" % i, (0, 0, 0), font=font)
+        font = ImageFont.truetype(font_path, 60)
+        draw.text((5 - 2, 80 - 2), "%03i" % cup_id, (0, 0, 0), font=font)
+        draw.text((5 + 2, 80 - 2), "%03i" % cup_id, (0, 0, 0), font=font)
+        draw.text((5 - 2, 80 + 2), "%03i" % cup_id, (0, 0, 0), font=font)
+        draw.text((5 + 2, 80 + 2), "%03i" % cup_id, (0, 0, 0), font=font)
 
-        draw.text((5, 80), "%03i" % i, (255, 165, 0), font=font)
+        draw.text((5, 80), "%03i" % cup_id, (255, 165, 0), font=font)
     return cup_icon
 
 

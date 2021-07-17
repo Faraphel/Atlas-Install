@@ -2,7 +2,6 @@ from tkinter import messagebox
 import requests
 import zipfile
 import json
-import sys
 import os
 
 from .definition import *
@@ -38,12 +37,10 @@ def check_update(self):
                     os.remove("./download.zip")
                     print(self.translate("starting application..."))
                     os.startfile(os.path.realpath("./Updater/Updater.exe"))
-                    sys.exit()
 
     except requests.ConnectionError:
         messagebox.showwarning(self.translate("Warning"),
                                self.translate("Can't connect to internet. Download will be disabled."))
         self.option["disable_download"] = True
 
-    except SystemExit: pass
     except: self.log_error()

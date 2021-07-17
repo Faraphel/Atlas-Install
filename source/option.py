@@ -11,6 +11,9 @@ default_option = {
     "process_track": 8
 }
 
+with open("./translation.json", encoding="utf-8") as f:
+    translation_dict = json.load(f)
+
 
 def change_option(self, option, value, restart=False):
     if type(value) in [str, int, bool]: self.option[option] = value

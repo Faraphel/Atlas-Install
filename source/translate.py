@@ -1,4 +1,4 @@
-from .definition import translation_dict
+from .option import translation_dict
 
 
 def translate(self, *texts, lang=None):

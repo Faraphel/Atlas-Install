@@ -8,7 +8,7 @@ from .definition import *
 def patch_bmg(self, gamefile):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
     try:
         NINTENDO_CWF_REPLACE = "Wiimmfi"
-        MAINMENU_REPLACE = f"MKWFaraphel {self.VERSION}"
+        MAINMENU_REPLACE = f"MKWFaraphel {self.ctconfig.version}"
         menu_replacement = {
             "CWF de Nintendo": NINTENDO_CWF_REPLACE,
             "Wi-Fi Nintendo": NINTENDO_CWF_REPLACE,
