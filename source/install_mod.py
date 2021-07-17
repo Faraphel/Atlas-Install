@@ -133,3 +133,5 @@ def install_mod(self):
     t.setDaemon(True)
     t.start()
     return t
+
+# TODO: use wszst module instead of subprocess

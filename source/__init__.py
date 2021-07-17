@@ -19,6 +19,7 @@ def __init__(self):
         self.ctconfig = CT_Config()
         self.ctconfig.load_ctconfig_file("./ct_config.json")
 
+        self.is_dev_version = False  # Is this installer version a dev ?
         self.stringvar_language = StringVar(value=self.option["language"])
         self.stringvar_game_format = StringVar(value=self.option["format"])
         self.boolvar_disable_download = BooleanVar(value=self.option["disable_download"])
@@ -36,8 +37,6 @@ def __init__(self):
         self.root.iconbitmap(bitmap="./icon.ico")
 
         if not(self.boolvar_dont_check_for_update.get()): self.check_update()
-        self.path_mkwf = None
-
 
         self.menu_bar = Menu(self.root)
         self.root.config(menu=self.menu_bar)

@@ -9,7 +9,7 @@ def get_github_file(self, file):
         returncode = 0
         if self.boolvar_disable_download.get(): return 2
 
-        dl = requests.get(GITHUB_CONTENT_ROOT+file, allow_redirects=True, stream=True)
+        dl = requests.get(get_github_content_root(self)+file, allow_redirects=True, stream=True)
         if os.path.exists(file):
             if int(dl.headers['Content-Length']) == os.path.getsize(file): return 1
             else: returncode = 3

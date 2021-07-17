@@ -1,7 +1,10 @@
 CREATE_NO_WINDOW = 0x08000000
 GITHUB_REPOSITORY = "Faraphel/MKWF-Install"
-GITHUB_CONTENT_ROOT = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
-VERSION_FILE_URL = GITHUB_CONTENT_ROOT + "version"
+GITHUB_MASTER_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
+GITHUB_DEV_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/dev/"
+VERSION_FILE_URL = GITHUB_MASTER_BRANCH + "version"
+
+get_github_content_root = lambda self: GITHUB_DEV_BRANCH if self.is_dev_version else GITHUB_MASTER_BRANCH
 
 get_filename = lambda file: ".".join(file.split(".")[:-1])
 get_nodir = lambda file: file.replace("\\", "/").split("/")[-1]
