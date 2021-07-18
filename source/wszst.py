@@ -71,3 +71,6 @@ def bmg_encode(): pass
 
 
 def wctct_bmg(): pass
+
+
+def wit_copy(): pass
