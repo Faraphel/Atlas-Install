@@ -1,10 +1,10 @@
 from tkinter import filedialog, ttk
 from tkinter import *
-import zipfile
+import subprocess
 import traceback
 import requests
+import zipfile
 
-from source.CT_Config import CT_Config
 from source.Option import Option
 from source.Game import *
 
@@ -24,8 +24,8 @@ class Gui:
 
         self.option = Option()
         self.option.load_from_file("./option.json")
-        self.ctconfig = CT_Config()
-        self.ctconfig.load_ctconfig_file("./ct_config.json")
+        self.game = Game(gui=self)
+        self.game.ctconfig.load_ctconfig_file("./ct_config.json")
 
         self.is_dev_version = False  # Is this installer version a dev ?
         self.stringvar_language = StringVar(value=self.option.language)
@@ -70,7 +70,7 @@ class Gui:
         self.menu_marktrackversion = Menu(self.menu_trackselection, tearoff=0)
         self.menu_trackselection.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
         self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
-        for version in self.ctconfig.all_version:
+        for version in self.game.ctconfig.all_version:
             self.menu_marktrackversion.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
 
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
@@ -109,53 +109,48 @@ class Gui:
         self.frame_game_path_action.grid(row=2, column=1, columnspan=2, sticky="NEWS")
         self.frame_game_path_action.columnconfigure(1, weight=1)
 
+        @in_thread
         def use_path():
-            def func():
-                self.frame_action.grid_forget()
-                try:
-                    self.game = Game(path=entry_game_path.get(), gui=self)
-                    self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
-                    self.game.extract()
-                    self.frame_action.grid(row=3, column=1, sticky="NEWS")
-                except InvalidGamePath:
-                    messagebox.showerror(self.translate("Error"), self.translate("The file path in invalid"))
-                except InvalidFormat:
-                    messagebox.showerror(self.translate("Error"), self.translate("This game's format is invalid"))
-                except:
-                    self.log_error()
-                finally:
-                    self.progress(show=False)
-
-            t = Thread(target=func)
-            t.setDaemon(True)
-            t.start()
-            return t
+            self.frame_action.grid_forget()
+            try:
+                self.game.set_path(entry_game_path.get())
+                self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
+                self.game.extract()
+                self.frame_action.grid(row=3, column=1, sticky="NEWS")
+            except RomAlreadyPatched:
+                messagebox.showerror(self.translate("Error"), self.translate("This game is already modded"))
+            except InvalidGamePath:
+                messagebox.showerror(self.translate("Error"), self.translate("The file path in invalid"))
+            except InvalidFormat:
+                messagebox.showerror(self.translate("Error"), self.translate("This game's format is invalid"))
+            except:
+                self.log_error()
+            finally:
+                self.progress(show=False)
 
         self.button_game_extract = Button(self.frame_game_path_action, text=self.translate("Extract file"),
                                           relief=RIDGE, command=use_path)
         self.button_game_extract.grid(row=1, column=1, sticky="NEWS")
 
+        @in_thread
         def do_everything():
-            def func():
-                use_path().join()
-                self.game.patch_file(self).join()
-                self.game.install_mod(self).join()
+            use_path().join()
+            self.game.patch_file().join()
+            self.game.install_mod().join()
 
             if messagebox.askyesno(self.translate("Experimental functionality"),
                 self.translate("This will extract the selected ROM, prepare files and install mod. "
                                "Do you wish to continue ?")):
-                t = Thread(target=func)
-                t.setDaemon(True)
-                t.start()
+                do_everything()
 
         self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Do everything"), relief=RIDGE, command=do_everything)
         self.button_do_everything.grid(row=1, column=2, sticky="NEWS")
 
         self.frame_action = LabelFrame(self.root, text=self.translate("Action"))
 
-        self.button_prepare_file = Button(self.frame_action, text=self.translate("Prepare files"), relief=RIDGE, command=lambda: self.game.patch_file(self), width=45)
+        self.button_prepare_file = Button(self.frame_action, text=self.translate("Prepare files"), relief=RIDGE, command=lambda: self.game.patch_file(), width=45)
         self.button_prepare_file.grid(row=1, column=1, columnspan=2, sticky="NEWS")
-        self.button_install_mod = Button(self.frame_action, text=self.translate("Install mod"), relief=RIDGE, command=lambda: self.game.install_mod(self), width=45)
+        self.button_install_mod = Button(self.frame_action, text=self.translate("Install mod"), relief=RIDGE, command=lambda: self.game.install_mod(), width=45)
         # Install mod button will only appear after prepare file step
 
         self.progressbar = ttk.Progressbar(self.root)

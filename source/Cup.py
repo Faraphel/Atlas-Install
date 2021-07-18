@@ -1,4 +1,4 @@
-from source.Track import Track
+from .Track import Track
 
 
 class Cup:

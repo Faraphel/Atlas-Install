@@ -79,8 +79,7 @@ class CT_Config:
                 "%LE-FLAGS=1\n"
                 "%WIIMM-CUP=1\n"
                 "N N$SWAP | N$F_WII\n\n")
-            ctfile.write(header);
-            rctfile.write(header)
+            ctfile.write(header); rctfile.write(header)
 
             # generate cup for undefined track
             unordered_cups = []

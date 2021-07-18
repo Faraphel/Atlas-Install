@@ -1,3 +1,5 @@
+from threading import Thread
+
 CREATE_NO_WINDOW = 0x08000000
 GITHUB_REPOSITORY = "Faraphel/MKWF-Install"
 GITHUB_MASTER_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
@@ -94,7 +96,18 @@ region_id_to_name = {
     "E": "USA"
 }
 
+
 def filecopy(src, dst):
     with open(src, "rb") as f1:
         with open(dst, "wb") as f2:
             f2.write(f1.read())  # could be buffered
+
+
+def in_thread(func):
+    def wrapped_func(*args, **kwargs):
+        thread = Thread(target=func, args=args, kwargs=kwargs)
+        thread.setDaemon(True)
+        thread.start()
+        return thread
+
+    return wrapped_func
