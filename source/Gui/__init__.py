@@ -1,27 +1,15 @@
-from tkinter import *
 from tkinter import messagebox, filedialog, ttk
 from threading import Thread
-import subprocess
-import traceback
-import glob
+from tkinter import *
 import os
 
-from .definition import *
-from .CT_Config import *
-from .Option import *
-from .Game import *
+from source.CT_Config import CT_Config
+from source.Game.exception import *
+from source.Option import Option
+from source.Game import Game
 
 
-with open("./translation.json", encoding="utf-8") as f:
-    translation_dict = json.load(f)
-
-
-def restart():
-    subprocess.Popen([sys.executable] + sys.argv, creationflags=CREATE_NO_WINDOW, cwd=os.getcwd())
-    exit()
-
-
-class Gui():
+class Gui:
     def __init__(self):
         self.root = Tk()
 
@@ -54,8 +42,8 @@ class Gui():
 
         self.menu_language = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Language"), menu=self.menu_language)
-        self.menu_language.add_radiobutton(label="Français", variable=self.stringvar_language, value="fr", command=lambda: self.option.edit("language", "fr", restart=True))
-        self.menu_language.add_radiobutton(label="English", variable=self.stringvar_language, value="en", command=lambda: self.option.edit("language", "en", restart=True))
+        self.menu_language.add_radiobutton(label="Français", variable=self.stringvar_language, value="fr", command=lambda: self.option.edit("language", "fr", need_restart=True))
+        self.menu_language.add_radiobutton(label="English", variable=self.stringvar_language, value="en", command=lambda: self.option.edit("language", "en", need_restart=True))
 
         self.menu_format = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Format"), menu=self.menu_format)
@@ -90,7 +78,6 @@ class Gui():
         self.menu_advanced.add_radiobutton(label=self.translate("4 ", "process"), variable=self.intvar_process_track, value=4, command=lambda: self.option.edit("process_track", 4))
         self.menu_advanced.add_radiobutton(label=self.translate("8 ", "process"), variable=self.intvar_process_track, value=8, command=lambda: self.option.edit("process_track", 8))
 
-
         self.frame_language = Frame(self.root)
         self.frame_language.grid(row=1, column=1, sticky="E")
 
@@ -119,7 +106,7 @@ class Gui():
                 try:
                     self.game = Game(path = entry_game_path.get())
                     self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
-                    self.game.extract_game()
+                    self.game.extract()
                     self.frame_action.grid(row=3, column=1, sticky="NEWS")
                 except InvalidGamePath:
                     messagebox.showerror(self.translate("Error"), self.translate("The file path in invalid"))
@@ -142,7 +129,7 @@ class Gui():
         def do_everything():
             def func():
                 use_path().join()
-                self.game.patch_file(gui).join()
+                self.game.patch_file(self).join()
                 self.game.install_mod(self).join()
 
             if messagebox.askyesno(self.translate("Experimental functionality"),
@@ -155,7 +142,6 @@ class Gui():
         self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Do everything"), relief=RIDGE, command=do_everything)
         self.button_do_everything.grid(row=1, column=2, sticky="NEWS")
 
-
         self.frame_action = LabelFrame(self.root, text=self.translate("Action"))
 
         self.button_prepare_file = Button(self.frame_action, text=self.translate("Prepare files"), relief=RIDGE, command=lambda: self.game.patch_file(self), width=45)
@@ -166,120 +152,9 @@ class Gui():
         self.progressbar = ttk.Progressbar(self.root)
         self.progresslabel = Label(self.root)
 
-
-    def check_update(self):
-        try:
-            gitversion = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
-            with open("./version", "rb") as f:
-                locversion = json.load(f)
-
-            if ((float(gitversion["version"]) > float(locversion["version"])) or  # if github version is newer than
-                    (float(gitversion["version"]) == float(locversion["version"])) and  # local version
-                    float(gitversion["subversion"]) > float(locversion["subversion"])):
-                if messagebox.askyesno(
-                        self.translate("Update available !"),
-                        self.translate("An update is available, do you want to install it ?",
-                                       f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> "
-                                       f"{gitversion['version']}.{gitversion['subversion']}\n"
-                                       f"Changelog :\n{gitversion['changelog']}")):
-
-                    if not (os.path.exists("./Updater/Updater.exe")):
-                        dl = requests.get(gitversion["updater_bin"], allow_redirects=True)
-                        with open("./download.zip", "wb") as file:
-                            print(self.translate("Downloading the Updater..."))
-                            file.write(dl.content)
-                            print(self.translate("end of the download, extracting..."))
-
-                        with zipfile.ZipFile("./download.zip") as file:
-                            file.extractall("./Updater/")
-                            print(self.translate("finished extracting"))
-
-                        os.remove("./download.zip")
-                        print(self.translate("starting application..."))
-                        os.startfile(os.path.realpath("./Updater/Updater.exe"))
-
-                if ((float(gitversion["version"]) < float(locversion["version"])) or  # if local version is newer than
-                        (float(gitversion["version"]) == float(locversion["version"])) and  # github version
-                        float(gitversion["subversion"]) < float(locversion["subversion"])):
-                    self.is_dev_version = True
-
-        except requests.ConnectionError:
-            messagebox.showwarning(self.translate("Warning"),
-                                   self.translate("Can't connect to internet. Download will be disabled."))
-            self.option.disable_download = True
-
-        except:
-            self.log_error()
-
-
-    def log_error(func):
-        try:
-            func()
-        except Exception:
-            error = traceback.format_exc()
-            with open("./error.log", "a") as f:
-                f.write(f"---\n{error}\n")
-            messagebox.showerror(self.translate("Error"), self.translate("An error occured", " :", "\n", error, "\n\n"))
-
-
-    def translate(self, *texts, lang=None):
-        if lang is None:
-            lang = self.stringvar_language.get()
-        elif lang == "F":
-            lang = "fr"
-        elif lang == "G":
-            lang = "ge"
-        elif lang == "I":
-            lang = "it"
-        elif lang == "S":
-            lang = "sp"
-
-        if lang in translation_dict:
-            _lang_trad = translation_dict[lang]
-            translated_text = ""
-            for text in texts:
-                if text in _lang_trad:
-                    translated_text += _lang_trad[text]
-                else:
-                    translated_text += text
-            return translated_text
-
-        return "".join(texts)  # if no translation language is found
-
-
-    def progress(self, show=None, indeter=None, step=None, statut=None, max=None, add=None):
-        if indeter is True:
-            self.progressbar.config(mode="indeterminate")
-            self.progressbar.start(50)
-        elif indeter is False:
-            self.progressbar.config(mode="determinate")
-            self.progressbar.stop()
-        if show is True:
-            self.state_button(enable=False)
-            self.progressbar.grid(row=100, column=1, sticky="NEWS")
-            self.progresslabel.grid(row=101, column=1, sticky="NEWS")
-        elif show is False:
-            self.state_button(enable=True)
-            self.progressbar.grid_forget()
-            self.progresslabel.grid_forget()
-
-        if statut: self.progresslabel.config(text=statut)
-        if step: self.progressbar["value"] = step
-        if max:
-            self.progressbar["maximum"] = max
-            self.progressbar["value"] = 0
-        if add: self.progressbar.step(add)
-
-
-    def state_button(self, enable=True):
-        button = [
-            self.button_game_extract,
-            self.button_install_mod,
-            self.button_prepare_file,
-            self.button_do_everything
-        ]
-        for widget in button:
-            if enable:
-                widget.config(state=NORMAL)
-            else:
-                widget.config(state=DISABLED)
+    from .check_update import check_update
+    from .log_error import log_error
+    from .progress import progress
+    from .restart import restart
+    from .state_button import state_button
+    from .translate import translate

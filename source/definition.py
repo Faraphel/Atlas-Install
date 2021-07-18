@@ -87,6 +87,12 @@ trackname_color = {
     "★☆☆!!": "\\\\c{YOR6}★☆☆\\\\c{off}",
 }
 
+region_id_to_name = {
+    "J": "JAP",
+    "P": "PAL",
+    "K": "KO",
+    "E": "USA"
+}
 
 def filecopy(src, dst):
     with open(src, "rb") as f1:
