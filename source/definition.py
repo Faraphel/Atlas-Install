@@ -6,8 +6,6 @@ GITHUB_MASTER_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/m
 GITHUB_DEV_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/dev/"
 VERSION_FILE_URL = GITHUB_MASTER_BRANCH + "version"
 
-get_github_content_root = lambda self: GITHUB_DEV_BRANCH if self.is_dev_version else GITHUB_MASTER_BRANCH
-
 get_filename = lambda file: ".".join(file.split(".")[:-1])
 get_nodir = lambda file: file.replace("\\", "/").split("/")[-1]
 get_dir = lambda file: "/".join(file.replace("\\", "/").split("/")[:-1])

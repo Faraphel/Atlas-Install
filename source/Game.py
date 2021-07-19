@@ -373,7 +373,8 @@ class Game:
 
             if not self.gui.boolvar_disable_download.get():
                 while True:
-                    download_returncode = track.download_wu8()
+                    download_returncode = track.download_wu8(
+                        GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
                     if download_returncode == -1:  # can't download
                         error_count += 1
                         if error_count > error_max:  # Too much track wasn't correctly converted

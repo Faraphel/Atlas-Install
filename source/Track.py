@@ -38,10 +38,10 @@ class Track:
     def convert_wu8_to_szs(self):
         return wszst.normalize(src_file=self.file_wu8, use_popen=True)
 
-    def download_wu8(self):
+    def download_wu8(self, github_content_root: str):
         returncode = 0
 
-        dl = requests.get(get_github_content_root(self) + self.file_wu8, allow_redirects=True, stream=True)
+        dl = requests.get(github_content_root + self.file_wu8, allow_redirects=True, stream=True)
         if os.path.exists(self.file_wu8):
             if int(dl.headers['Content-Length']) == os.path.getsize(self.file_wu8):
                 return 1
