@@ -253,22 +253,25 @@ class Game:
                 if "=" in bmgtrack:
 
                     prefix = ""
+                    track_name = bmgtrack[bmgtrack.find("= ") + 2:]
+
                     if "T" in bmgtrack[:bmgtrack.find("=")]:
-                        sTid = bmgtrack.find("T")
-                        Tid = bmgtrack[sTid:sTid + 3]
-                        if Tid[1] in "1234":
-                            prefix = trackname_color["Wii"] + " "  # Si la course est original à la wii
-                        Tid = hex(bmgID_track_move[Tid])[2:]
-
+                        start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
+                        track_id = bmgtrack[start_track_id:start_track_id + 3]
+                        if track_id[1] in "1234":  # if the track is a original track from the wii
+                            prefix = trackname_color["Wii"] + " "
+                        elif track_id[1] in "5678":  # if the track is a retro track from the original game
+                            for color_prefix, rep_color_prefix in trackname_color.items():  # color retro track prefix
+                                track_name = track_name.replace(color_prefix, rep_color_prefix)
+                        track_id = hex(bmgID_track_move[track_id])[2:]
                     else:  # Arena
-                        sTid = bmgtrack.find("U") + 1
-                        Tid = bmgtrack[sTid:sTid + 2]
-                        Tid = hex((int(Tid[0]) - 1) * 5 + (int(Tid[1]) - 1) + 0x7020)[2:]
+                        start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
+                        track_id = bmgtrack[start_track_id:start_track_id + 2]
+                        track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
 
-                    Tname = bmgtrack[bmgtrack.find("= ") + 2:]
-                    f.write(f"  {Tid}\t= {prefix}{Tname}\n")
+                    f.write(f"  {track_id}\t= {prefix}{track_name}\n")
 
-        if not (os.path.exists("./file/tmp/")): os.makedirs("./file/tmp/")
+        if not os.path.exists("./file/tmp/"): os.makedirs("./file/tmp/")
 
         filecopy(gamefile + ".d/message/Common.bmg", "./file/tmp/Common.bmg")
         bmgcommon = wszst.ctc_patch_bmg(ctfile="./file/CTFILE.txt",
