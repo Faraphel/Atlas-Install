@@ -59,7 +59,7 @@ class Track:
             print(f"error {dl.status_code} {self.file_wu8}")
             return -1
 
-    def get_ctfile(self, race=False):
+    def get_ctfile(self, race=False, *args, **kwargs):
         """
         :param race: is it a text used for Race_*.szs ?
         :return: ctfile definition for the track
@@ -72,20 +72,20 @@ class Track:
         if not race:
             ctfile_text += (
                 f'"{self.get_track_name()}"; '  # track path
-                f'"{self.get_track_formatted_name()}"; '  # track text shown ig
+                f'"{self.get_track_formatted_name(*args, **kwargs)}"; '  # track text shown ig
                 f'"-"\n')  # sha1, useless for now.
         else:
             ctfile_text += (
                 f'"-"; '  # track path, not used in Race_*.szs, save a bit of space
-                f'"{self.get_track_formatted_name()}\\n{self.author}"; '  # only in race show author's name
+                f'"{self.get_track_formatted_name(*args, **kwargs)}\\n{self.author}"; '  # only in race show author's name
                 f'"-"\n'  # sha1, useless for now.
             )
 
         return ctfile_text
 
-    def get_track_formatted_name(self, highlight_track_from_version: str = None):
+    def get_track_formatted_name(self, highlight_version: str = None):
         """
-        :param highlight_track_from_version: if a specific version need to be highlighted.
+        :param highlight_version: if a specific version need to be highlighted.
         :return: the name of the track with colored prefix, suffix
         """
         hl_prefix = ""
@@ -99,7 +99,7 @@ class Track:
                 star_text = "★" * self.score + "☆" * (3 - self.score)
                 star_text = trackname_color[star_text] + " "
 
-        if self.since_version == highlight_track_from_version:
+        if self.since_version == highlight_version:
             hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"
 
         if self.prefix in trackname_color:

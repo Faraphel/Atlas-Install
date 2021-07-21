@@ -9,6 +9,7 @@ from .Track import Track
 
 def get_cup_icon(id, font_path: str = "./file/SuperMario256.ttf", cup_icon_dir: str = "./file/cup_icon"):
     """
+    :param id:
     :param cup_icon_dir: directory to cup icon
     :param font_path: path to the font used to generate icon
     :return: cup icon
@@ -54,8 +55,9 @@ class CT_Config:
         self.all_version.add(track.since_version)
         self.all_tracks.append(track)
 
-    def create_ctfile(self, directory="./file/"):
+    def create_ctfile(self, directory="./file/", highlight_version=None):
         """
+        :param highlight_version:
         :param directory: create CTFILE.txt and RCTFILE.txt in this directory
         :return: None
         """
@@ -79,8 +81,8 @@ class CT_Config:
 
             # all cups
             for cup in self.ordered_cups + unordered_cups:
-                ctfile.write(cup.get_ctfile_cup(race=False))
-                rctfile.write(cup.get_ctfile_cup(race=True))
+                ctfile.write(cup.get_ctfile_cup(race=False, highlight_version=highlight_version))
+                rctfile.write(cup.get_ctfile_cup(race=True, highlight_version=highlight_version))
 
     def get_cticon(self):
         """
