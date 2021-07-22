@@ -23,6 +23,8 @@ class Track:
         self.score = score                  # Track score between 1 and 3 stars
         self.warning = warning              # Track bug level (1 = minor, 2 = major)
         self.note = note                    # Note about the track
+        self.track_wu8_dir = track_wu8_dir
+        self.track_szs_dir = track_szs_dir
         self.file_wu8 = f"{track_wu8_dir}/{self.get_track_name()}.wu8"
         self.file_szs = f"{track_szs_dir}/{self.get_track_name()}.szs"
 
@@ -30,13 +32,12 @@ class Track:
         return f"{self.get_track_name()} sha1={self.sha1} score={self.score}"
 
     def check_sha1(self):
-        if wszst.sha1(self.file_wu8) == self.sha1:
-            return 0
-        else:
-            return -1
+        ws = wszst.sha1(self.file_wu8)
+        if wszst.sha1(self.file_wu8) == self.sha1: return 0
+        else: return -1
 
     def convert_wu8_to_szs(self):
-        return wszst.normalize(src_file=self.file_wu8, use_popen=True)
+        return wszst.normalize(src_file=self.file_wu8)
 
     def download_wu8(self, github_content_root: str):
         returncode = 0
@@ -50,7 +51,7 @@ class Track:
 
         if dl.status_code == 200:  # if page is found
             with open(self.file_wu8, "wb") as file:
-                chunk_size = 4096
+                chunk_size = 524288
                 for i, chunk in enumerate(dl.iter_content(chunk_size=chunk_size)):
                     file.write(chunk)
                     file.flush()
@@ -121,3 +122,6 @@ class Track:
     def load_from_json(self, track_json: dict):
         for key, value in track_json.items():  # load all value in the json as class attribute
             setattr(self, key, value)
+
+        self.file_wu8 = f"{self.track_wu8_dir}/{self.get_track_name()}.wu8"
+        self.file_szs = f"{self.track_szs_dir}/{self.get_track_name()}.szs"

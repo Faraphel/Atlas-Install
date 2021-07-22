@@ -357,17 +357,11 @@ class Game:
 
     def patch_tracks(self):
         max_process = self.gui.intvar_process_track.get()
-        process_list = {}
+        thread_list = {}
         error_count, error_max = 0, 3
 
         def add_process(track):
-            nonlocal error_count, error_max, process_list
-            track_file = track.get_track_name()
-            total_track = len(self.ctconfig.all_tracks)
-
-            process_list[track_file] = None  # Used for showing track in progress even if there's no process
-            self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
-                                              "\n".join(process_list.keys())), add=1)
+            nonlocal error_count, error_max, thread_list
 
             for _track in [track.file_szs, track.file_wu8]:
                 if os.path.exists(_track):
@@ -394,7 +388,7 @@ class Game:
 
                     if track.sha1:
                         if not self.gui.boolvar_dont_check_track_sha1.get():
-                            if not track.check_sha1():  # Check si le sha1 du fichier est le bon
+                            if track.check_sha1() != 0:  # if track sha1 is not the one excepted
                                 error_count += 1
                                 if error_count > error_max:  # Too much track wasn't correctly converted
                                     messagebox.showerror(
@@ -408,7 +402,7 @@ class Game:
                 if not (os.path.exists(track.file_szs)) or download_returncode == 3:
                     # returncode 3 is track has been updated
                     if os.path.exists(track.file_wu8):
-                        process_list[track_file] = track.convert_wu8_to_szs()
+                        track.convert_wu8_to_szs()
                     else:
                         messagebox.showerror(self.gui.translate("Error"),
                             self.gui.translate("Can't convert track.\nEnable track download and retry."))
@@ -418,58 +412,46 @@ class Game:
             return 0
 
         def clean_process():
-            nonlocal error_count, error_max, process_list
+            nonlocal error_count, error_max, thread_list
 
-            for track_file, process in process_list.copy().items():
-                if process is not None:
-                    if process.poll() is None:
-                        pass  # if the process is still running
-                    else:  # process ended
-                        process_list.pop(track_file)
-                        stderr = process.stderr.read()
-                        if b"wszst: ERROR" in stderr:  # Error occured
-                            os.remove(track.file_szs)
-                            error_count += 1
-                            if error_count > error_max:  # Too much track wasn't correctly converted
-                                messagebox.showerror(
-                                    self.gui.translate("Error"),
-                                    self.gui.translate("Too much track had a conversion issue."))
-                                raise CantConvertTrack()
-                            else:  # if the error max hasn't been reach
-                                messagebox.showwarning(
-                                    self.gui.translate("Warning"),
-                                    self.gui.translate("The track", " ", track.file_wu8,
-                                                       "do not have been properly converted.",
-                                                       f" ({error_count} / {error_max})"))
-                        else:
-                            if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
-                else:
-                    process_list.pop(track_file)
-                    if not (any(process_list.values())): return 1  # if there is no more process
+            for track_key, thread in thread_list.copy().items():
+                if not thread.is_alive():  # if conversion ended
+                    thread_list.pop(track_key)
+                    """stderr = thread.stderr.read()
+                    if b"wszst: ERROR" in stderr:  # Error occured
+                        os.remove(track.file_szs)
+                        error_count += 1
+                        if error_count > error_max:  # Too much track wasn't correctly converted
+                            messagebox.showerror(
+                                self.gui.translate("Error"),
+                                self.gui.translate("Too much track had a conversion issue."))
+                            raise CantConvertTrack()
+                        else:  # if the error max hasn't been reach
+                            messagebox.showwarning(
+                                self.gui.translate("Warning"),
+                                self.gui.translate("The track", " ", track.file_wu8,
+                                                   "do not have been properly converted.",
+                                                   f" ({error_count} / {error_max})"))
+                    else:
+                        if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)"""
+                if not (any(thread_list.values())): return 1  # if there is no more process
 
-            if len(process_list):
-                return 1
-            else:
-                return 0
+            if len(thread_list): return 1
+            else: return 0
 
+        total_track = len(self.ctconfig.all_tracks)
         for i, track in enumerate(self.ctconfig.all_tracks):
             while True:
-                if len(process_list) < max_process:
-                    returncode = add_process(track)
-                    if returncode == 0:
-                        break
-                    elif returncode == -1:
-                        return -1  # if error occur, stop function
-                elif clean_process() == -1:
-                    return -1
+                if len(thread_list) < max_process:
+                    thread_list[track.file_wu8] = Thread(target=add_process, args=[track])
+                    thread_list[track.file_wu8].setDaemon(True)
+                    thread_list[track.file_wu8].start()
+                    self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
+                                                                "\n".join(thread_list.keys())), add=1)
+                    break
+                clean_process()
 
-        while True:
-            returncode = clean_process()
-            if returncode == 1:
-                break  # End the process if all process ended
-            elif returncode == 0:
-                pass
-            else:
-                return -1
+        while clean_process() != 1:
+            pass  # End the process if all process ended
 
         return 0
