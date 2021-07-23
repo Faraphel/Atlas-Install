@@ -29,12 +29,13 @@ def get_cup_icon(id, font_path: str = "./file/SuperMario256.ttf", cup_icon_dir: 
 
 
 class CT_Config:
-    def __init__(self, version: str = None):
+    def __init__(self, version: str = None, gui=None):
         self.version = version
         self.ordered_cups = []
         self.unordered_tracks = []
         self.all_tracks = []
         self.all_version = {version}
+        self.gui = gui
 
     def add_ordered_cup(self, cup: Cup):
         """
@@ -73,7 +74,16 @@ class CT_Config:
 
             # generate cup for undefined track
             unordered_cups = []
-            for i, track in enumerate(self.unordered_tracks):
+
+            star_value = []
+            if not self.gui.boolvar_use_1star_track.get(): star_value.append(1)
+            if not self.gui.boolvar_use_2star_track.get(): star_value.append(2)
+            if not self.gui.boolvar_use_3star_track.get(): star_value.append(3)
+
+            track_list = self.search_tracks(not_value=True, values_list=True,
+                                            only_unordered_track=True, score=star_value)
+
+            for i, track in enumerate(track_list):
                 if i % 4 == 0:
                     _actual_cup = Cup(name=f"TL{i // 4}")
                     unordered_cups.append(_actual_cup)
@@ -142,25 +152,22 @@ class CT_Config:
             self.all_version.add(track.since_version)
         self.all_version = sorted(self.all_version)
 
-    def search_tracks(self, values_list=False, not_value=False, **kwargs):
+    def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs):
         """
+        :param only_unordered_track: only search in unordered track
         :param values_list: search track with a value list instead of a single value
         :param not_value: search track that does not have value
         :param kwargs: any track property = any value
         :return: track list respecting condition
         """
-        track = self.all_tracks.copy()
+        track = self.all_tracks.copy() if not only_unordered_track else self.unordered_tracks.copy()
 
         if values_list:
-            if not_value:
-                filter_func = lambda track: getattr(track, keyword) not in value
-            else:
-                filter_func = lambda track: getattr(track, keyword) in value
+            if not_value: filter_func = lambda track: getattr(track, keyword) not in value
+            else: filter_func = lambda track: getattr(track, keyword) in value
         else:
-            if not_value:
-                filter_func = lambda track: getattr(track, keyword) != value
-            else:
-                filter_func = lambda track: getattr(track, keyword) == value
+            if not_value: filter_func = lambda track: getattr(track, keyword) != value
+            else: filter_func = lambda track: getattr(track, keyword) == value
 
         for keyword, value in kwargs.items():
             track = list(filter(filter_func, track))

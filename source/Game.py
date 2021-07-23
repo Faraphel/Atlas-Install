@@ -50,7 +50,7 @@ class Game:
         self.region_ID = region_ID
         self.game_ID = game_ID
         self.gui = gui
-        self.ctconfig = CT_Config()
+        self.ctconfig = CT_Config(gui=gui)
 
     def set_path(self, path):
         self.extension = get_extension(path).upper()
@@ -443,9 +443,10 @@ class Game:
         for i, track in enumerate(self.ctconfig.all_tracks):
             while True:
                 if len(thread_list) < max_process:
-                    thread_list[track.file_wu8] = Thread(target=add_process, args=[track])
-                    thread_list[track.file_wu8].setDaemon(True)
-                    thread_list[track.file_wu8].start()
+                    track_name = track.get_track_name()
+                    thread_list[track_name] = Thread(target=add_process, args=[track])
+                    thread_list[track_name].setDaemon(True)
+                    thread_list[track_name].start()
                     self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
                                                                 "\n".join(thread_list.keys())), add=1)
                     break
