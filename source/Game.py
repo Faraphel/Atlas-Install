@@ -1,4 +1,4 @@
-from tkinter import messagebox
+from tkinter import messagebox, StringVar, BooleanVar, IntVar
 from PIL import Image
 import shutil
 import glob
@@ -40,8 +40,32 @@ class CantConvertTrack(Exception):
         super().__init__("Can't convert track, check if download are enabled.")
 
 
+class NoGui:
+    """
+    'fake' gui if no gui are used for compatibility.
+    """
+    def progression(self, *args, **kwargs): print(args, kwargs)
+    def translate(self, *args, **kwargs): return ""
+    def log_error(self, *args, **kwargs): print(args, kwargs)
+
+    is_dev_version = False
+
+    stringvar_game_format = StringVar()
+    boolvar_disable_download = BooleanVar()
+    intvar_process_track = IntVar()
+    boolvar_dont_check_track_sha1 = BooleanVar()
+    boolvar_del_track_after_conv = BooleanVar()
+
+
 class Game:
     def __init__(self, path: str = "", region_ID: str = "P", game_ID: str = "RMCP01", gui=None):
+        """
+        Class about the game code and its treatment.
+        :param path: path of the game file / directory
+        :param region_ID: game's region id (P for PAL, K for KOR, ...)
+        :param game_ID: game's id (RMCP01 for PAL, ...)
+        :param gui: gui class used by the program
+        """
         if not os.path.exists(path) and path: raise InvalidGamePath()
         self.extension = None
         self.path = path
@@ -49,17 +73,21 @@ class Game:
         self.region = region_id_to_name[region_ID]
         self.region_ID = region_ID
         self.game_ID = game_ID
-        self.gui = gui
+        self.gui = gui if gui else NoGui
         self.ctconfig = CT_Config(gui=gui)
 
-    def set_path(self, path):
+    def set_path(self, path: str) -> None:
+        """
+        Change game path
+        :param path: game's file
+        """
         self.extension = get_extension(path).upper()
         self.path = path
 
-    def convert_to(self, format: str = "FST"):
+    def convert_to(self, format: str = "FST") -> None:
         """
+        Convert game to an another format
         :param format: game format (ISO, WBFS, ...)
-        :return: converted game path
         """
         if format in ["ISO", "WBFS", "CISO"]:
             path_game_format: str = os.path.realpath(self.path + "/../MKWFaraphel." + format.lower())
@@ -70,7 +98,10 @@ class Game:
             self.gui.progress(statut=self.gui.translate("Changing game's ID"), add=1)
             wszst.edit(self.path, region_ID=self.region_ID, name=f"Mario Kart Wii Faraphel {self.ctconfig.version}")
 
-    def extract(self):
+    def extract(self) -> None:
+        """
+        Extract game file in the same directory.
+        """
         if self.extension == "DOL":
             self.path = os.path.realpath(self.path + "/../../")  # main.dol is in PATH/sys/, so go back 2 dir upper
 
@@ -104,6 +135,9 @@ class Game:
 
     @in_thread
     def install_mod(self):
+        """
+        Patch the game to install the mod
+        """
         try:
             with open("./fs.json") as f:
                 fs = json.load(f)
@@ -204,14 +238,22 @@ class Game:
         finally:
             self.gui.progress(show=False)
 
-    def patch_autoadd(self, auto_add_dir: str = "./file/auto-add"):
+    def patch_autoadd(self, auto_add_dir: str = "./file/auto-add") -> None:
+        """
+        Create the autoadd directory used to convert wbz track into szs
+        :param auto_add_dir: autoadd directory
+        """
         if os.path.exists(auto_add_dir): shutil.rmtree(auto_add_dir)
         if not os.path.exists(self.path + "/tmp/"): os.makedirs(self.path + "/tmp/")
         wszst.autoadd(self.path, get_nodir(self.path) + "/tmp/auto-add/")
         shutil.move(self.path + "/tmp/auto-add/", auto_add_dir)
         shutil.rmtree(self.path + "/tmp/")
 
-    def patch_bmg(self, gamefile: str):  # gamefile est le fichier .szs trouvé dans le /files/Scene/UI/ du jeu
+    def patch_bmg(self, gamefile: str) -> None:
+        """
+        Patch bmg file (text file)
+        :param gamefile: an .szs file where file will be patched
+        """
         NINTENDO_CWF_REPLACE = "Wiimmfi"
         MAINMENU_REPLACE = f"MKWFaraphel {self.ctconfig.version}"
         menu_replacement = {
@@ -297,6 +339,9 @@ class Game:
 
     @in_thread
     def patch_file(self):
+        """
+        Prepare all files to install the mod (track, bmg text, descriptive image, ...)
+        """
         try:
             if not (os.path.exists("./file/Track-WU8/")): os.makedirs("./file/Track-WU8/")
             with open("./convert_file.json") as f:
@@ -329,13 +374,24 @@ class Game:
         finally:
             self.gui.progress(show=False)
 
-    def patch_image(self, fc):
+    def patch_image(self, fc) -> None:
+        """
+        Convert .png image into the format wrote in convert_file
+        :param fc:
+        :return:
+        """
         for i, file in enumerate(fc["img"]):
             self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fc['img'])}) {file}",
                               add=1)
             wszst.img_encode("./file/" + file, fc["img"][file])
 
-    def patch_img_desc(self, img_desc_path: str = "./file/img_desc", dest_dir: str = "./file"):
+    def patch_img_desc(self, img_desc_path: str = "./file/img_desc", dest_dir: str = "./file") -> None:
+        """
+        patch descriptive image used when the game boot
+        :param img_desc_path: directory where original part of the image are stored
+        :param dest_dir: directory where patched image will be saved
+        :return:
+        """
         il = Image.open(img_desc_path + "/illustration.png")
         il_16_9 = il.resize((832, 456))
         il_4_3 = il.resize((608, 456))
@@ -355,12 +411,21 @@ class Game:
             new_4_3.paste(img_lang_4_3, (0, 0), img_lang_4_3)
             new_4_3.save(dest_dir + f"/strapA_608x456{get_filename(get_nodir(file_lang))}.png")
 
-    def patch_tracks(self):
+    def patch_tracks(self) -> int:
+        """
+        Download track's wu8 file and convert them to szs
+        :return: 0 if no error occured
+        """
         max_process = self.gui.intvar_process_track.get()
         thread_list = {}
         error_count, error_max = 0, 3
 
-        def add_process(track):
+        def add_process(track) -> int:
+            """
+            a "single thread" to download, check sha1 and convert a track
+            :param track: the track that will be patched
+            :return: 0 if no error occured
+            """
             nonlocal error_count, error_max, thread_list
 
             for _track in [track.file_szs, track.file_wu8]:
@@ -370,21 +435,21 @@ class Game:
 
             if not self.gui.boolvar_disable_download.get():
                 while True:
-                    download_returncode = track.download_wu8(
-                        GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
-                    if download_returncode == -1:  # can't download
-                        error_count += 1
-                        if error_count > error_max:  # Too much track wasn't correctly converted
-                            messagebox.showerror(
-                                self.gui.translate("Error"),
-                                self.gui.translate("Too much tracks had a download issue."))
-                            raise TooMuchDownloadFailed()
-                        else:
-                            messagebox.showwarning(self.gui.translate("Warning"),
-                                                   self.gui.translate("Can't download this track !",
-                                                                      f" ({error_count} / {error_max})"))
-                    elif download_returncode == 2:
-                        break  # if download is disabled, do not check sha1
+                    download_returncode = 0
+                    if not os.path.exists(track.file_wu8):
+                        download_returncode = track.download_wu8(
+                            GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
+                        if download_returncode == -1:  # can't download
+                            error_count += 1
+                            if error_count > error_max:  # Too much track wasn't correctly converted
+                                messagebox.showerror(
+                                    self.gui.translate("Error"),
+                                    self.gui.translate("Too much tracks had a download issue."))
+                                raise TooMuchDownloadFailed()
+                            else:
+                                messagebox.showwarning(self.gui.translate("Warning"),
+                                                       self.gui.translate("Can't download this track !",
+                                                                          f" ({error_count} / {error_max})"))
 
                     if track.sha1:
                         if not self.gui.boolvar_dont_check_track_sha1.get():
@@ -399,7 +464,7 @@ class Game:
 
                     break
 
-                if not (os.path.exists(track.file_szs)) or download_returncode == 3:
+                if not os.path.exists(track.file_szs) or download_returncode == 3:
                     # returncode 3 is track has been updated
                     if os.path.exists(track.file_wu8):
                         track.convert_wu8_to_szs()
@@ -411,29 +476,17 @@ class Game:
                     os.remove(track.file_wu8)
             return 0
 
-        def clean_process():
+        def clean_process() -> int:
+            """
+            Check if a track conversion ended, and remove them from thread_list
+            :return: 0 if thread_list is empty, else 1
+            """
             nonlocal error_count, error_max, thread_list
 
             for track_key, thread in thread_list.copy().items():
                 if not thread.is_alive():  # if conversion ended
                     thread_list.pop(track_key)
-                    """stderr = thread.stderr.read()
-                    if b"wszst: ERROR" in stderr:  # Error occured
-                        os.remove(track.file_szs)
-                        error_count += 1
-                        if error_count > error_max:  # Too much track wasn't correctly converted
-                            messagebox.showerror(
-                                self.gui.translate("Error"),
-                                self.gui.translate("Too much track had a conversion issue."))
-                            raise CantConvertTrack()
-                        else:  # if the error max hasn't been reach
-                            messagebox.showwarning(
-                                self.gui.translate("Warning"),
-                                self.gui.translate("The track", " ", track.file_wu8,
-                                                   "do not have been properly converted.",
-                                                   f" ({error_count} / {error_max})"))
-                    else:
-                        if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)"""
+                    if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
                 if not (any(thread_list.values())): return 1  # if there is no more process
 
             if len(thread_list): return 1
@@ -441,7 +494,7 @@ class Game:
 
         total_track = len(self.ctconfig.all_tracks)
         for i, track in enumerate(self.ctconfig.all_tracks):
-            while True:
+            while error_count <= error_max:
                 if len(thread_list) < max_process:
                     track_name = track.get_track_name()
                     thread_list[track_name] = Thread(target=add_process, args=[track])

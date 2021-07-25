@@ -20,6 +20,9 @@ def restart():
 
 class Gui:
     def __init__(self):
+        """
+        Initialize program Gui
+        """
         self.root = Tk()
 
         self.option = Option()
@@ -156,7 +159,10 @@ class Gui:
         self.progressbar = ttk.Progressbar(self.root)
         self.progresslabel = Label(self.root)
 
-    def check_update(self):
+    def check_update(self) -> None:
+        """
+        Check if an update is available
+        """
         try:
             gitversion = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
             with open("./version", "rb") as f:
@@ -200,13 +206,26 @@ class Gui:
         except:
             self.log_error()
 
-    def log_error(self):
+    def log_error(self) -> None:
+        """
+        When an error occur, will show it in a messagebox and write it in error.log
+        """
         error = traceback.format_exc()
         with open("./error.log", "a") as f:
             f.write(f"---\n{error}\n")
         messagebox.showerror(self.translate("Error"), self.translate("An error occured", " :", "\n", error, "\n\n"))
 
-    def progress(self, show=None, indeter=None, step=None, statut=None, max=None, add=None):
+    def progress(self, show: bool = None, indeter: bool = None, step: int = None,
+                 statut: str = None, max: int = None, add: int = None) -> None:
+        """
+        configure the progress bar shown when doing a task
+        :param show: show or hide the progress bar
+        :param indeter: if indeter, the progress bar will do a infinite loop animation
+        :param step: set the progress of the bar
+        :param statut: text shown under the progress bar
+        :param max: set the maximum step
+        :param add: add to step of the progress bar
+        """
         if indeter is True:
             self.progressbar.config(mode="indeterminate")
             self.progressbar.start(50)
@@ -229,7 +248,11 @@ class Gui:
             self.progressbar["value"] = 0
         if add: self.progressbar.step(add)
 
-    def state_button(self, enable=True):
+    def state_button(self, enable: bool = True) -> None:
+        """
+        used to enable or disable button when doing task
+        :param enable: are the button enabled ?
+        """
         button = [
             self.button_game_extract,
             self.button_install_mod,
@@ -242,17 +265,18 @@ class Gui:
             else:
                 widget.config(state=DISABLED)
 
-    def translate(self, *texts, lang=None):
-        if lang is None:
-            lang = self.stringvar_language.get()
-        elif lang == "F":
-            lang = "fr"
-        elif lang == "G":
-            lang = "ge"
-        elif lang == "I":
-            lang = "it"
-        elif lang == "S":
-            lang = "sp"
+    def translate(self, *texts, lang: str = None) -> str:
+        """
+        translate text into an another language in translation.json file
+        :param texts: all text to convert
+        :param lang: force a destination language to convert track
+        :return: translated text
+        """
+        if lang is None: lang = self.stringvar_language.get()
+        elif lang == "F": lang = "fr"
+        elif lang == "G": lang = "ge"
+        elif lang == "I": lang = "it"
+        elif lang == "S": lang = "sp"
 
         if lang in translation_dict:
             _lang_trad = translation_dict[lang]

@@ -6,10 +6,31 @@ from . import wszst
 
 
 class Track:
-    def __init__(self, name: str = "_", file_wu8: str = None, file_szs: str = None, prefix: str = None, suffix: str = None,
+    def __init__(self, name: str = "_", prefix: str = None, suffix: str = None,
                  author="Nintendo", special="T11", music="T11", new=True, sha1: str = None, since_version: str = None,
                  score: int = 0, warning: int = 0, note: str = "", track_wu8_dir: str = "./file/Track-WU8/",
                  track_szs_dir: str = "./file/Track/", *args, **kwargs):
+        """
+        Track class
+        :param name: track name
+        :param file_wu8: path to its wu8 file
+        :param file_szs: path to its szs file
+        :param prefix: track prefix (often original console or game)
+        :param suffix: track suffix (often for variation like Boost or Night)
+        :param author: track creator
+        :param special: track special slot
+        :param music: track music slot
+        :param new: is the track original or from an older game
+        :param sha1: track sha1
+        :param since_version: since when version did the track got added to the mod
+        :param score: what it the score of the track
+        :param warning: what is the warn level of the track (0 = none, 1 = minor bug, 2 = major bug)
+        :param note: note about the track
+        :param track_wu8_dir: where is stored the track wu8
+        :param track_szs_dir: where is stored the track szs
+        :param args: /
+        :param kwargs: /
+        """
 
         self.name = name                    # Track name
         self.prefix = prefix                # Prefix, often used for game or original console like Wii U, DS, ...
@@ -28,18 +49,35 @@ class Track:
         self.file_wu8 = f"{track_wu8_dir}/{self.get_track_name()}.wu8"
         self.file_szs = f"{track_szs_dir}/{self.get_track_name()}.szs"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        track representation when printed
+        :return: track information
+        """
         return f"{self.get_track_name()} sha1={self.sha1} score={self.score}"
 
-    def check_sha1(self):
+    def check_sha1(self) -> int:
+        """
+        check if track wu8's sha1 is correct
+        :return: 0 if yes, -1 if no
+        """
         ws = wszst.sha1(self.file_wu8)
         if wszst.sha1(self.file_wu8) == self.sha1: return 0
         else: return -1
 
-    def convert_wu8_to_szs(self):
+    def convert_wu8_to_szs(self) -> str:
+        """
+        convert track to szs
+        :return: path to szs track
+        """
         return wszst.normalize(src_file=self.file_wu8)
 
-    def download_wu8(self, github_content_root: str):
+    def download_wu8(self, github_content_root: str) -> int:
+        """
+        download track wu8 from github
+        :param github_content_root: url to github project root
+        :return: 0 if correctly downloaded, 1 if no need to download, 3 if track size is incorrect, -1 if error
+        """
         returncode = 0
 
         dl = requests.get(github_content_root + self.file_wu8, allow_redirects=True, stream=True)
@@ -60,8 +98,9 @@ class Track:
             print(f"error {dl.status_code} {self.file_wu8}")
             return -1
 
-    def get_ctfile(self, race=False, *args, **kwargs):
+    def get_ctfile(self, race=False, *args, **kwargs) -> str:
         """
+        get ctfile text to create CTFILE.txt and RCTFILE.txt
         :param race: is it a text used for Race_*.szs ?
         :return: ctfile definition for the track
         """
@@ -84,8 +123,9 @@ class Track:
 
         return ctfile_text
 
-    def get_track_formatted_name(self, highlight_version: str = None):
+    def get_track_formatted_name(self, highlight_version: str = None) -> str:
         """
+        get the track name with score, color, ...
         :param highlight_version: if a specific version need to be highlighted.
         :return: the name of the track with colored prefix, suffix
         """
@@ -112,14 +152,22 @@ class Track:
         name = name.replace("_", " ")
         return name
 
-    def get_track_name(self):
+    def get_track_name(self) -> str:
+        """
+        get the track name without score, color...
+        :return: track name
+        """
         prefix = (self.prefix + " ") if self.prefix else ""
         suffix = (" (" + self.suffix + ")") if self.suffix else ""
 
         name = (prefix + self.name + suffix)
         return name
 
-    def load_from_json(self, track_json: dict):
+    def load_from_json(self, track_json: dict) -> None:
+        """
+        load the track from a dictionary
+        :param track_json: track's dictionnary
+        """
         for key, value in track_json.items():  # load all value in the json as class attribute
             setattr(self, key, value)
 
