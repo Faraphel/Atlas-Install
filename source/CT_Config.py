@@ -7,9 +7,9 @@ from .Cup import Cup
 from .Track import Track
 
 
-def get_cup_icon(id, font_path: str = "./file/SuperMario256.ttf", cup_icon_dir: str = "./file/cup_icon"):
+def get_cup_icon(id, font_path: str = "./file/SuperMario256.ttf", cup_icon_dir: str = "./file/cup_icon") -> Image:
     """
-    :param id:
+    :param id: id of the cup
     :param cup_icon_dir: directory to cup icon
     :param font_path: path to the font used to generate icon
     :return: cup icon
@@ -37,8 +37,9 @@ class CT_Config:
         self.all_version = {version}
         self.gui = gui
 
-    def add_ordered_cup(self, cup: Cup):
+    def add_ordered_cup(self, cup: Cup) -> None:
         """
+        add a cup to the config
         :param cup: a Cup object to add as an ordered cup
         :return: ?
         """
@@ -47,8 +48,9 @@ class CT_Config:
             self.all_version.add(track.since_version)
             self.all_tracks.append(track)
 
-    def add_unordered_track(self, track: Track):
+    def add_unordered_track(self, track: Track) -> None:
         """
+        add a single track to the config
         :param track: a Track object to add as an unordered tracks
         :return: ?
         """
@@ -56,9 +58,10 @@ class CT_Config:
         self.all_version.add(track.since_version)
         self.all_tracks.append(track)
 
-    def create_ctfile(self, directory="./file/", highlight_version=None):
+    def create_ctfile(self, directory: str = "./file/", highlight_version: str = None) -> None:
         """
-        :param highlight_version:
+        create a ctfile configuration in a directory
+        :param highlight_version: highlight a specific version in light blue
         :param directory: create CTFILE.txt and RCTFILE.txt in this directory
         :return: None
         """
@@ -94,7 +97,7 @@ class CT_Config:
                 ctfile.write(cup.get_ctfile_cup(race=False, highlight_version=highlight_version))
                 rctfile.write(cup.get_ctfile_cup(race=True, highlight_version=highlight_version))
 
-    def get_cticon(self):
+    def get_cticon(self) -> Image:
         """
         get all cup icon into a single image
         :return: ct_icon image
@@ -114,19 +117,19 @@ class CT_Config:
 
         return ct_icon
 
-    def load_ctconfig_file(self, ctconfig_file: str = "./ct_config.json"):
+    def load_ctconfig_file(self, ctconfig_file: str = "./ct_config.json") -> None:
         """
+        load a ctconfig from a json file
         :param ctconfig_file: path to the ctconfig file
-        :return: ?
         """
         with open(ctconfig_file, encoding="utf-8") as f:
             ctconfig_json = json.load(f)
         self.load_ctconfig_json(ctconfig_json)
 
-    def load_ctconfig_json(self, ctconfig_json: dict):
+    def load_ctconfig_json(self, ctconfig_json: dict) -> None:
         """
+        load ctconfig from a dictionnary
         :param ctconfig_json: json of the ctconfig to load
-        :return: ?
         """
         self.ordered_cups = []
         self.unordered_tracks = []
@@ -152,7 +155,7 @@ class CT_Config:
             self.all_version.add(track.since_version)
         self.all_version = sorted(self.all_version)
 
-    def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs):
+    def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs) -> list:
         """
         :param only_unordered_track: only search in unordered track
         :param values_list: search track with a value list instead of a single value

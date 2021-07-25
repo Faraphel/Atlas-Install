@@ -1,4 +1,4 @@
-from tkinter import messagebox, StringVar, BooleanVar, IntVar
+from tkinter import messagebox
 from PIL import Image
 import shutil
 import glob
@@ -7,6 +7,7 @@ import os
 
 from .CT_Config import CT_Config
 from .definition import *
+from .Gui import NoGui
 from . import wszst
 
 
@@ -38,23 +39,6 @@ class TooMuchSha1CheckFailed(Exception):
 class CantConvertTrack(Exception):
     def __init__(self):
         super().__init__("Can't convert track, check if download are enabled.")
-
-
-class NoGui:
-    """
-    'fake' gui if no gui are used for compatibility.
-    """
-    def progression(self, *args, **kwargs): print(args, kwargs)
-    def translate(self, *args, **kwargs): return ""
-    def log_error(self, *args, **kwargs): print(args, kwargs)
-
-    is_dev_version = False
-
-    stringvar_game_format = StringVar()
-    boolvar_disable_download = BooleanVar()
-    intvar_process_track = IntVar()
-    boolvar_dont_check_track_sha1 = BooleanVar()
-    boolvar_del_track_after_conv = BooleanVar()
 
 
 class Game:
@@ -170,7 +154,13 @@ class Game:
             self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Installing mod"), max=max_step,
                              step=0)
 
-            def replace_file(path, file, subpath="/"):
+            def replace_file(path, file, subpath="/") -> None:
+                """
+                Replace subfile in the .szs file
+                :param path: path to the .szs file
+                :param file: file to replace
+                :param subpath: directory between .szs file and file inside to replace
+                """
                 self.gui.progress(statut=self.gui.translate("Editing", "\n", get_nodir(path)), add=1)
                 extension = get_extension(path)
 
@@ -182,14 +172,14 @@ class Game:
                     szs_extract_path = path + ".d"
                     if os.path.exists(szs_extract_path + subpath):
                         if subpath[-1] == "/":
-                            filecopy(f"./file/{file}", szs_extract_path + subpath + file)
+                            shutil.copyfile(f"./file/{file}", szs_extract_path + subpath + file)
                         else:
-                            filecopy(f"./file/{file}", szs_extract_path + subpath)
+                            shutil.copyfile(f"./file/{file}", szs_extract_path + subpath)
 
                 elif path[-1] == "/":
-                    filecopy(f"./file/{file}", path + file)
+                    shutil.copyfile(f"./file/{file}", path + file)
                 else:
-                    filecopy(f"./file/{file}", path)
+                    shutil.copyfile(f"./file/{file}", path)
 
             for fp in fs:
                 for f in glob.glob(self.path + "/files/" + fp, recursive=True):
@@ -215,9 +205,9 @@ class Game:
 
             shutil.copytree("./file/Track/", self.path + "/files/Race/Course/", dirs_exist_ok=True)
             if not (os.path.exists(self.path + "/tmp/")): os.makedirs(self.path + "/tmp/")
-            filecopy("./file/CTFILE.txt", self.path + "/tmp/CTFILE.txt")
-            filecopy("./file/lpar-default.txt", self.path + "/tmp/lpar-default.txt")
-            filecopy(f"./file/lecode-{self.region}.bin", self.path + f"/tmp/lecode-{self.region}.bin")
+            shutil.copyfile("./file/CTFILE.txt", self.path + "/tmp/CTFILE.txt")
+            shutil.copyfile("./file/lpar-default.txt", self.path + "/tmp/lpar-default.txt")
+            shutil.copyfile(f"./file/lecode-{self.region}.bin", self.path + f"/tmp/lecode-{self.region}.bin")
 
             wszst.lec_patch(
                 self.path,
@@ -315,7 +305,7 @@ class Game:
 
         if not os.path.exists("./file/tmp/"): os.makedirs("./file/tmp/")
 
-        filecopy(gamefile + ".d/message/Common.bmg", "./file/tmp/Common.bmg")
+        shutil.copyfile(gamefile + ".d/message/Common.bmg", "./file/tmp/Common.bmg")
         bmgcommon = wszst.ctc_patch_bmg(ctfile="./file/CTFILE.txt",
             bmgs=["./file/tmp/Common.bmg", "./file/ExtraCommon.txt"])
         rbmgcommon = wszst.ctc_patch_bmg(ctfile="./file/RCTFILE.txt",
@@ -374,11 +364,10 @@ class Game:
         finally:
             self.gui.progress(show=False)
 
-    def patch_image(self, fc) -> None:
+    def patch_image(self, fc: dict) -> None:
         """
         Convert .png image into the format wrote in convert_file
-        :param fc:
-        :return:
+        :param fc: file convert, a dictionnary indicating which format a file need to be converted
         """
         for i, file in enumerate(fc["img"]):
             self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fc['img'])}) {file}",
@@ -390,7 +379,6 @@ class Game:
         patch descriptive image used when the game boot
         :param img_desc_path: directory where original part of the image are stored
         :param dest_dir: directory where patched image will be saved
-        :return:
         """
         il = Image.open(img_desc_path + "/illustration.png")
         il_16_9 = il.resize((832, 456))

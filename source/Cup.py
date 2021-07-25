@@ -6,20 +6,33 @@ class Cup:
                  track1: Track = None,
                  track2: Track = None,
                  track3: Track = None,
-                 track4: Track = None, locked: bool = False,
+                 track4: Track = None,
+                 locked: bool = False,
                  *args, **kwargs):
+        """
+        class of a cup
+        :param name: name of the cup
+        :param track1: first track
+        :param track2: second track
+        :param track3: third track
+        :param track4: fourth track
+        :param locked: is the track locked (used to load ctconfig in CT_Config)
+        :param args: other args that I could add in the future
+        :param kwargs: other kwargs that I could add in the future
+        """
 
         self.name = name
+        self.locked = locked
         self.tracks = [
             track1 if track1 else Track(),
             track2 if track2 else Track(),
             track3 if track3 else Track(),
             track4 if track4 else Track()
         ]
-        self.locked = locked
 
-    def get_ctfile_cup(self, *args, **kwargs):
+    def get_ctfile_cup(self, *args, **kwargs) -> str:
         """
+        get the ctfile definition for the cup
         :param race: is it a text used for Race_*.szs ?
         :return: ctfile definition for the cup
         """
@@ -28,7 +41,11 @@ class Cup:
             ctfile_cup += track.get_ctfile(*args, **kwargs)
         return ctfile_cup
 
-    def load_from_json(self, cup: dict):
+    def load_from_json(self, cup: dict) -> None:
+        """
+        load the cup from a dictionnary
+        :param cup: dictionnary cup
+        """
         for key, value in cup.items():  # load all value in the json as class attribute
             if key != "tracks":
                 setattr(self, key, value)

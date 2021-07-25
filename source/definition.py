@@ -95,14 +95,19 @@ region_id_to_name = {
 }
 
 
-def filecopy(src, dst):
-    with open(src, "rb") as f1:
-        with open(dst, "wb") as f2:
-            f2.write(f1.read())  # could be buffered
-
-
 def in_thread(func):
-    def wrapped_func(*args, **kwargs):
+    """
+    instead of calling a function, this will start it in a thread
+    :param func: function to thread
+    :return: threaded function
+    """
+    def wrapped_func(*args, **kwargs) -> Thread:
+        """
+        function that will be returned instead of the function, will call it in a thread
+        :param args: args of the original function
+        :param kwargs: kwargs of the original function
+        :return: thread object to the function
+        """
         thread = Thread(target=func, args=args, kwargs=kwargs)
         thread.setDaemon(True)
         thread.start()

@@ -65,12 +65,11 @@ class Track:
         if wszst.sha1(self.file_wu8) == self.sha1: return 0
         else: return -1
 
-    def convert_wu8_to_szs(self) -> str:
+    def convert_wu8_to_szs(self) -> None:
         """
         convert track to szs
-        :return: path to szs track
         """
-        return wszst.normalize(src_file=self.file_wu8)
+        wszst.normalize(src_file=self.file_wu8)
 
     def download_wu8(self, github_content_root: str) -> int:
         """
