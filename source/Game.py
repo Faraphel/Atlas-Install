@@ -75,12 +75,12 @@ class Game:
         """
         if format in ["ISO", "WBFS", "CISO"]:
             path_game_format: str = os.path.realpath(self.path + "/../MKWFaraphel." + format.lower())
-            wszst.wit_copy(self.path, path_game_format, format)
+            wszst.wit.copy(self.path, path_game_format, format)
             shutil.rmtree(self.path)
             self.path = path_game_format
 
             self.gui.progress(statut=self.gui.translate("Changing game's ID"), add=1)
-            wszst.edit(self.path, region_ID=self.region_ID, name=f"Mario Kart Wii Faraphel {self.ctconfig.version}")
+            wszst.wit.edit(self.path, region_ID=self.region_ID, name=f"Mario Kart Wii Faraphel {self.ctconfig.version}")
 
     def extract(self) -> None:
         """
@@ -97,7 +97,7 @@ class Game:
                 if not (os.path.exists(path_dir)): break
                 directory_name, i = f"MKWiiFaraphel ({i})", i + 1
 
-            wszst.wit_extract(self.path, path_dir)
+            wszst.wit.extract(self.path, path_dir)
 
             self.path = path_dir
             if os.path.exists(self.path + "/DATA"): self.path += "/DATA"
@@ -166,7 +166,7 @@ class Game:
 
                 if extension == "szs":
                     if not (os.path.realpath(path) in extracted_file):
-                        wszst.szs_extract(path, get_nodir(path))
+                        wszst.szs.extract(path, get_nodir(path))
                         extracted_file.append(os.path.realpath(path))
 
                     szs_extract_path = path + ".d"
@@ -194,12 +194,12 @@ class Game:
 
             for file in extracted_file:
                 self.gui.progress(statut=self.gui.translate("Recompilating", "\n", get_nodir(file)), add=1)
-                wszst.create(file)
+                wszst.szs.create(file)
                 if os.path.exists(file + ".d"):
                     shutil.rmtree(file + ".d")
 
             self.gui.progress(statut=self.gui.translate("Patch main.dol"), add=1)
-            wszst.str_patch(self.path)
+            wszst.wstrt.patch(self.path)
 
             self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
 
@@ -209,7 +209,7 @@ class Game:
             shutil.copyfile("./file/lpar-default.txt", self.path + "/tmp/lpar-default.txt")
             shutil.copyfile(f"./file/lecode-{self.region}.bin", self.path + f"/tmp/lecode-{self.region}.bin")
 
-            wszst.lec_patch(
+            wszst.lec.patch(
                 self.path,
                 lecode_file=f"./tmp/lecode-{self.region}.bin",
                 dest_lecode_file=f"./files/rel/lecode-{self.region}.bin",
@@ -235,7 +235,7 @@ class Game:
         """
         if os.path.exists(auto_add_dir): shutil.rmtree(auto_add_dir)
         if not os.path.exists(self.path + "/tmp/"): os.makedirs(self.path + "/tmp/")
-        wszst.autoadd(self.path, get_nodir(self.path) + "/tmp/auto-add/")
+        wszst.szs.autoadd(self.path, get_nodir(self.path) + "/tmp/auto-add/")
         shutil.move(self.path + "/tmp/auto-add/", auto_add_dir)
         shutil.rmtree(self.path + "/tmp/")
 
@@ -265,10 +265,10 @@ class Game:
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
         self.gui.progress(statut=self.gui.translate("Patching text", " ", bmglang), add=1)
 
-        wszst.szs_extract(gamefile, get_nodir(gamefile))
+        wszst.szs.extract(gamefile, get_nodir(gamefile))
 
-        bmgmenu = wszst.bmg_cat(gamefile, ".d/message/Menu.bmg")  # Menu.bmg
-        bmgtracks = wszst.bmg_cat(gamefile, ".d/message/Common.bmg")  # Common.bmg
+        bmgmenu = wszst.bmg.cat(gamefile, ".d/message/Menu.bmg")  # Menu.bmg
+        bmgtracks = wszst.bmg.cat(gamefile, ".d/message/Common.bmg")  # Common.bmg
 
         trackheader = "#--- standard track names"
         trackend = "2328"
@@ -306,9 +306,9 @@ class Game:
         if not os.path.exists("./file/tmp/"): os.makedirs("./file/tmp/")
 
         shutil.copyfile(gamefile + ".d/message/Common.bmg", "./file/tmp/Common.bmg")
-        bmgcommon = wszst.ctc_patch_bmg(ctfile="./file/CTFILE.txt",
+        bmgcommon = wszst.ctc.patch_bmg(ctfile="./file/CTFILE.txt",
             bmgs=["./file/tmp/Common.bmg", "./file/ExtraCommon.txt"])
-        rbmgcommon = wszst.ctc_patch_bmg(ctfile="./file/RCTFILE.txt",
+        rbmgcommon = wszst.ctc.patch_bmg(ctfile="./file/RCTFILE.txt",
             bmgs=["./file/tmp/Common.bmg", "./file/ExtraCommon.txt"])
 
         shutil.rmtree(gamefile + ".d")
@@ -320,7 +320,7 @@ class Game:
                 for text, colored_text in replacement_list.items(): bmgtext = bmgtext.replace(text, colored_text)
             with open(file, "w", encoding="utf-8") as f:
                 f.write(bmgtext)
-            wszst.bmg_encode(file)
+            wszst.bmg.encode(file)
             os.remove(file)
 
         finalise(f"./file/Menu_{bmglang}.txt", bmgmenu, menu_replacement)
@@ -372,7 +372,7 @@ class Game:
         for i, file in enumerate(fc["img"]):
             self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fc['img'])}) {file}",
                               add=1)
-            wszst.img_encode("./file/" + file, fc["img"][file])
+            wszst.img.encode("./file/" + file, fc["img"][file])
 
     def patch_img_desc(self, img_desc_path: str = "./file/img_desc", dest_dir: str = "./file") -> None:
         """

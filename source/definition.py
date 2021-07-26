@@ -1,6 +1,5 @@
 from threading import Thread
 
-CREATE_NO_WINDOW = 0x08000000
 GITHUB_REPOSITORY = "Faraphel/MKWF-Install"
 GITHUB_MASTER_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
 GITHUB_DEV_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/dev/"

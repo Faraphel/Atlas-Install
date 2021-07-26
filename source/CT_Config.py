@@ -41,7 +41,6 @@ class CT_Config:
         """
         add a cup to the config
         :param cup: a Cup object to add as an ordered cup
-        :return: ?
         """
         self.ordered_cups.append(cup)
         for track in cup.tracks:
@@ -52,7 +51,6 @@ class CT_Config:
         """
         add a single track to the config
         :param track: a Track object to add as an unordered tracks
-        :return: ?
         """
         self.unordered_tracks.append(track)
         self.all_version.add(track.since_version)
@@ -63,7 +61,6 @@ class CT_Config:
         create a ctfile configuration in a directory
         :param highlight_version: highlight a specific version in light blue
         :param directory: create CTFILE.txt and RCTFILE.txt in this directory
-        :return: None
         """
         with open(directory + "CTFILE.txt", "w", encoding="utf-8") as ctfile, \
                 open(directory + "RCTFILE.txt", "w", encoding="utf-8") as rctfile:

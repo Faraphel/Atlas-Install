@@ -14,7 +14,10 @@ with open("./translation.json", encoding="utf-8") as f:
 
 
 def restart():
-    subprocess.Popen([sys.executable] + sys.argv, creationflags=CREATE_NO_WINDOW, cwd=os.getcwd())
+    """
+    restart the application
+    """
+    subprocess.Popen([sys.executable] + sys.argv, creationflags=subprocess.CREATE_NO_WINDOW, cwd=os.getcwd())
     exit()
 
 
