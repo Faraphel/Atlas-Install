@@ -1,7 +1,6 @@
 from distutils.version import StrictVersion
 from tkinter import filedialog, ttk, messagebox
 from tkinter import *
-import subprocess
 import traceback
 import requests
 import zipfile
@@ -14,36 +13,6 @@ from source.Option import Option
 
 with open("./translation.json", encoding="utf-8") as f:
     translation_dict = json.load(f)
-
-
-def restart():
-    """
-    restart the application
-    """
-    subprocess.Popen([sys.executable] + sys.argv, creationflags=subprocess.CREATE_NO_WINDOW, cwd=os.getcwd())
-    exit()
-
-
-class NoGui:
-    """
-    'fake' gui if no gui are used for compatibility.
-    """
-    class NoButton:
-        def grid(self, *args, **kwargs): pass
-        def config(self, *args, **kwargs): pass
-
-    def progress(*args, **kwargs): print(args, kwargs)
-    def translate(*args, **kwargs): return ""
-    def log_error(*args, **kwargs): print(args, kwargs)
-    def restart(self): restart()
-
-    is_dev_version = False
-    button_install_mod = NoButton()
-    stringvar_game_format = StringVar()
-    boolvar_disable_download = BooleanVar()
-    intvar_process_track = IntVar()
-    boolvar_dont_check_track_sha1 = BooleanVar()
-    boolvar_del_track_after_conv = BooleanVar()
 
 
 class Gui:

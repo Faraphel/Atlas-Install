@@ -1,4 +1,7 @@
 from threading import Thread
+import subprocess
+import sys
+import os
 
 GITHUB_REPOSITORY = "Faraphel/MKWF-Install"
 GITHUB_MASTER_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
@@ -92,6 +95,14 @@ region_id_to_name = {
     "K": "KO",
     "E": "USA"
 }
+
+
+def restart():
+    """
+    restart the application
+    """
+    subprocess.Popen([sys.executable] + sys.argv, creationflags=subprocess.CREATE_NO_WINDOW, cwd=os.getcwd())
+    exit()
 
 
 def in_thread(func):

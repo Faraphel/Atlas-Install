@@ -1,5 +1,4 @@
 import requests
-import os
 
 from .definition import *
 from . import wszst

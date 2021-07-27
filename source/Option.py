@@ -1,6 +1,8 @@
 import json
 import os
 
+from .definition import restart
+
 
 class Option:
     def __init__(self):
@@ -28,7 +30,7 @@ class Option:
         else:
             setattr(self, option, value.get())
         self.save_to_file()
-        if need_restart: gui.restart()
+        if need_restart: restart()
 
     def load_from_file(self, option_file: str = "./option.json") -> None:
         """

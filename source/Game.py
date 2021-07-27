@@ -3,11 +3,9 @@ from PIL import Image
 import shutil
 import glob
 import json
-import os
 
 from .CT_Config import CT_Config
 from .definition import *
-from .Gui import NoGui
 from . import wszst
 
 
@@ -39,6 +37,37 @@ class TooMuchSha1CheckFailed(Exception):
 class CantConvertTrack(Exception):
     def __init__(self):
         super().__init__("Can't convert track, check if download are enabled.")
+
+
+class NoGui:
+    """
+    'fake' gui if no gui are used for compatibility.
+    """
+    class NoButton:
+        def grid(self, *args, **kwargs): pass
+        def config(self, *args, **kwargs): pass
+
+    class NoVariable:
+        def __init__(self, value=None):
+            self.value = None
+
+        def set(self, value):
+            self.value = value
+
+        def get(self):
+            return self.value
+
+    def progress(*args, **kwargs): print(args, kwargs)
+    def translate(*args, **kwargs): return ""
+    def log_error(*args, **kwargs): print(args, kwargs)
+
+    is_dev_version = False
+    button_install_mod = NoButton()
+    stringvar_game_format = NoVariable()
+    boolvar_disable_download = NoVariable()
+    intvar_process_track = NoVariable()
+    boolvar_dont_check_track_sha1 = NoVariable()
+    boolvar_del_track_after_conv = NoVariable()
 
 
 class Game:
