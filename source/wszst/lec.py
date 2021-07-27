@@ -6,8 +6,8 @@ def patch(path: str,
           dest_lecode_file: str = f"./files/rel/lecode-PAL.bin",
           game_track_path: str = "./files/Race/Course/",
           move_track_path: str = "./files/Race/Course/",
-          ctfile_path: str = "./tmp/CTFILE.txt",
-          lpar_path: str = "./tmp/lpar-default.txt") -> None:
+          ctfile_path: str = "./file/CTFILE.txt",
+          lpar_path: str = "./file/lpar-default.txt") -> None:
     """
     Patch the file with a lecode file (this is the adding track part)
     :param path: path to the game file

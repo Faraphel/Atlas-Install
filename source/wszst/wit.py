@@ -23,7 +23,7 @@ def edit(file: str, region_ID: str = "P", name: str = "Mario Kart Wii") -> None:
         creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
 
 
-def copy(src_path, dst_path, format: str = "ISO") -> None:
+def copy(src_path: str, dst_path: str, format: str = "ISO") -> None:
     """
     Copy the game into an another format
     :param src_path: original game path

@@ -1,12 +1,13 @@
 import subprocess
 
 
-def extract(file: str, dest_dir: str) -> None:
+def extract(file: str, dest_dir: str = None) -> None:
     """
     Extract an szs in a directory
     :param file: .szs file
     :param dest_dir: directory where to extract the file
     """
+    if dest_dir is None: dest_dir = file
     subprocess.run(["./tools/szs/wszst", "EXTRACT", file, "--DEST", dest_dir + ".d"],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 

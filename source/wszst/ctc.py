@@ -1,7 +1,7 @@
 import subprocess
 
 
-def ctc_patch_bmg(bmgs: list, ctfile: str = "./file/CTFILE.txt"):
+def patch_bmg(bmgs: list, ctfile: str = "./file/CTFILE.txt"):
     """
     Patch a bmg file with a ctfile with OVERWRITE option
     :param bmgs: all bmg files
