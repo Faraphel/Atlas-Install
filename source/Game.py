@@ -291,7 +291,7 @@ class Game:
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
         self.gui.progress(statut=self.gui.translate("Patching text", " ", bmglang), add=1)
 
-        szs.extract(gamefile, get_nodir(gamefile))
+        szs.extract(file=gamefile)
 
         bmgmenu = bmg.cat(gamefile, ".d/message/Menu.bmg")  # Menu.bmg
         bmgtracks = bmg.cat(gamefile, ".d/message/Common.bmg")  # Common.bmg
