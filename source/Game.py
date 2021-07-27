@@ -234,10 +234,7 @@ class Game:
         :param auto_add_dir: autoadd directory
         """
         if os.path.exists(auto_add_dir): shutil.rmtree(auto_add_dir)
-        if not os.path.exists(self.path + "/tmp/"): os.makedirs(self.path + "/tmp/")
-        wszst.szs.autoadd(self.path, get_nodir(self.path) + "/tmp/auto-add/")
-        shutil.move(self.path + "/tmp/auto-add/", auto_add_dir)
-        shutil.rmtree(self.path + "/tmp/")
+        wszst.szs.autoadd(self.path, auto_add_dir)
 
     def patch_bmg(self, gamefile: str) -> None:
         """
@@ -303,16 +300,12 @@ class Game:
 
                     f.write(f"  {track_id}\t= {prefix}{track_name}\n")
 
-        if not os.path.exists("./file/tmp/"): os.makedirs("./file/tmp/")
-
-        shutil.copyfile(gamefile + ".d/message/Common.bmg", "./file/tmp/Common.bmg")
         bmgcommon = wszst.ctc.patch_bmg(ctfile="./file/CTFILE.txt",
-            bmgs=["./file/tmp/Common.bmg", "./file/ExtraCommon.txt"])
+                                        bmgs=[gamefile + ".d/message/Common.bmg", "./file/ExtraCommon.txt"])
         rbmgcommon = wszst.ctc.patch_bmg(ctfile="./file/RCTFILE.txt",
-            bmgs=["./file/tmp/Common.bmg", "./file/ExtraCommon.txt"])
+                                         bmgs=[gamefile + ".d/message/Common.bmg", "./file/ExtraCommon.txt"])
 
         shutil.rmtree(gamefile + ".d")
-        os.remove("./file/tmp/Common.bmg")
         os.remove("./file/ExtraCommon.txt")
 
         def finalise(file, bmgtext, replacement_list=None):

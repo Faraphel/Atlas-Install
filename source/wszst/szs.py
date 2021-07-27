@@ -1,7 +1,7 @@
 from . import *
 
 
-def szs_extract(file: str, dest_dir: str) -> None:
+def extract(file: str, dest_dir: str) -> None:
     """
     Extract an szs in a directory
     :param file: .szs file
