@@ -1,4 +1,4 @@
-from . import *
+import subprocess
 
 
 def ctc_patch_bmg(bmgs: list, ctfile: str = "./file/CTFILE.txt"):
@@ -12,4 +12,4 @@ def ctc_patch_bmg(bmgs: list, ctfile: str = "./file/CTFILE.txt"):
     for bmg in bmgs: bmg_cmd.extend(["--patch-bmg", f"OVERWRITE={bmg}"])
     return subprocess.run(
         ["tools/szs/wctct", "bmg", "--le-code", "--long", ctfile, *bmg_cmd],
-        creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE).stdout.decode()
+        creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE).stdout.decode()

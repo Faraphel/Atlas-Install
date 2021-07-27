@@ -1,4 +1,4 @@
-from . import *
+import subprocess
 
 
 def patch(path: str,
@@ -21,4 +21,4 @@ def patch(path: str,
     subprocess.run(
         ["./tools/szs/wlect", "patch", lecode_file, "-od", dest_lecode_file, "--track-dir", game_track_path,
          "--move-tracks", move_track_path, "--le-define", ctfile_path, "--lpar", lpar_path, "--overwrite"],
-        creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
+        creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)

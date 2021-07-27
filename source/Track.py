@@ -1,7 +1,7 @@
 import requests
 
 from .definition import *
-from . import wszst
+from .wszst import *
 
 
 class Track:
@@ -60,14 +60,14 @@ class Track:
         check if track wu8's sha1 is correct
         :return: 0 if yes, -1 if no
         """
-        if wszst.szs.sha1(self.file_wu8) == self.sha1: return 0
+        if szs.sha1(self.file_wu8) == self.sha1: return 0
         else: return -1
 
     def convert_wu8_to_szs(self) -> None:
         """
         convert track to szs
         """
-        wszst.szs.normalize(src_file=self.file_wu8)
+        szs.normalize(src_file=self.file_wu8)
 
     def download_wu8(self, github_content_root: str) -> int:
         """

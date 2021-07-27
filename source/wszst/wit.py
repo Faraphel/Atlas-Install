@@ -1,4 +1,4 @@
-from . import *
+import subprocess
 
 
 def extract(file: str, dest_dir: str) -> None:
@@ -8,7 +8,7 @@ def extract(file: str, dest_dir: str) -> None:
     :param dest_dir: where to extract the game
     """
     subprocess.run(["./tools/wit/wit", "EXTRACT", file, "--DEST", dest_dir],
-                   creationflags=CREATE_NO_WINDOW)
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def edit(file: str, region_ID: str = "P", name: str = "Mario Kart Wii") -> None:
@@ -20,7 +20,7 @@ def edit(file: str, region_ID: str = "P", name: str = "Mario Kart Wii") -> None:
     """
     subprocess.run(
         ["./tools/wit/wit", "EDIT", file, "--id", f"RMC{region_ID}60", "--name", name, "--modify", "ALL"],
-        creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
+        creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
 
 
 def copy(src_path, dst_path, format: str = "ISO") -> None:
@@ -31,4 +31,4 @@ def copy(src_path, dst_path, format: str = "ISO") -> None:
     :param format: format for the new game
     """
     subprocess.run(["./tools/wit/wit", "COPY", src_path, "--DEST", dst_path, f"--{format.lower()}", "--overwrite"],
-                   creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
+                   creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)

@@ -1,4 +1,4 @@
-from . import *
+import subprocess
 
 
 def encode(file: str) -> None:
@@ -7,7 +7,7 @@ def encode(file: str) -> None:
     :param file: txt file to convert
     """
     subprocess.run(["./tools/szs/wbmgt", "ENCODE", file, "--overwrite"],
-                   creationflags=CREATE_NO_WINDOW)
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def cat(path: str, subfile: str = ".d/message/Common.bmg") -> str:
@@ -18,5 +18,5 @@ def cat(path: str, subfile: str = ".d/message/Common.bmg") -> str:
     :return: bmg definition
     """
     return subprocess.run(["./tools/szs/wbmgt", "CAT", path + subfile],
-                          creationflags=CREATE_NO_WINDOW,
+                          creationflags=subprocess.CREATE_NO_WINDOW,
                           check=True, stdout=subprocess.PIPE).stdout.decode()

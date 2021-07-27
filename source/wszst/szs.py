@@ -1,4 +1,4 @@
-from . import *
+import subprocess
 
 
 def extract(file: str, dest_dir: str) -> None:
@@ -8,7 +8,7 @@ def extract(file: str, dest_dir: str) -> None:
     :param dest_dir: directory where to extract the file
     """
     subprocess.run(["./tools/szs/wszst", "EXTRACT", file, "--DEST", dest_dir + ".d"],
-                   creationflags=CREATE_NO_WINDOW)
+                   creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 def sha1(file, autoadd_path: str = "./file/auto-add/") -> str:
@@ -18,7 +18,7 @@ def sha1(file, autoadd_path: str = "./file/auto-add/") -> str:
     :return: track's sha1
     """
     return subprocess.run(["./tools/szs/wszst", "SHA1", file, "--autoadd-path", autoadd_path],
-                          check=True, creationflags=CREATE_NO_WINDOW,
+                          check=True, creationflags=subprocess.CREATE_NO_WINDOW,
                           stdout=subprocess.PIPE).stdout.decode().split(" ")[0]
 
 
@@ -34,7 +34,7 @@ def normalize(src_file: str, dest_dir: str = "./file/Track/", dest_name: str = "
     """
     subprocess.run(["./tools/szs/wszst", "NORMALIZE", src_file, "--DEST", dest_dir + dest_name, "--" + output_format,
                     "--overwrite", "--autoadd-path", autoadd_path],
-                   creationflags=CREATE_NO_WINDOW, stderr=subprocess.PIPE)
+                   creationflags=subprocess.CREATE_NO_WINDOW, stderr=subprocess.PIPE)
 
 
 def create(file: str) -> None:
@@ -43,7 +43,7 @@ def create(file: str) -> None:
     :param file: create a .szs file from the directory {file}.d
     """
     subprocess.run(["./tools/szs/wszst", "CREATE", file + ".d", "-d", file, "--overwrite"],
-                   creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
+                   creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
 
 
 def autoadd(file: str, dest_dir: str) -> None:
@@ -53,4 +53,4 @@ def autoadd(file: str, dest_dir: str) -> None:
     :param dest_dir: directory where to store autoadd file
     """
     subprocess.run(["./tools/szs/wszst", "AUTOADD", file + "/files/Race/Course/", "--DEST", dest_dir],
-                   creationflags=CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
+                   creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
