@@ -1,12 +1,15 @@
-from tkinter import filedialog, ttk
+from distutils.version import StrictVersion
+from tkinter import filedialog, ttk, messagebox
 from tkinter import *
 import subprocess
 import traceback
 import requests
 import zipfile
+import json
+import os
 
+from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat, in_thread, VERSION_FILE_URL
 from source.Option import Option
-from source.Game import *
 
 
 with open("./translation.json", encoding="utf-8") as f:
@@ -189,22 +192,21 @@ class Gui:
         Check if an update is available
         """
         try:
-            gitversion = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
-            with open("./version", "rb") as f:
-                locversion = json.load(f)
+            github_version_data = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
+            with open("./version", "rb") as f: local_version_data = json.load(f)
 
-            if ((float(gitversion["version"]) > float(locversion["version"])) or  # if github version is newer than
-                    (float(gitversion["version"]) == float(locversion["version"])) and  # local version
-                    float(gitversion["subversion"]) > float(locversion["subversion"])):
+            local_version = StrictVersion(f"{local_version_data['version']}.{local_version_data['subversion']}")
+            github_version = StrictVersion(f"{github_version_data['version']}.{github_version_data['subversion']}")
+
+            if github_version > local_version: # if github version is newer than local version
                 if messagebox.askyesno(
                         self.translate("Update available !"),
                         self.translate("An update is available, do you want to install it ?",
-                                       f"\n\nVersion : {locversion['version']}.{locversion['subversion']} -> "
-                                       f"{gitversion['version']}.{gitversion['subversion']}\n"
-                                       f"Changelog :\n{gitversion['changelog']}")):
+                                       f"\n\nVersion : {local_version} -> {github_version}\n"
+                                       f"Changelog :\n{github_version_data['changelog']}")):
 
                     if not (os.path.exists("./Updater/Updater.exe")):
-                        dl = requests.get(gitversion["updater_bin"], allow_redirects=True)
+                        dl = requests.get(github_version_data["updater_bin"], allow_redirects=True)
                         with open("./download.zip", "wb") as file:
                             print(self.translate("Downloading the Updater..."))
                             file.write(dl.content)
@@ -218,10 +220,8 @@ class Gui:
                         print(self.translate("starting application..."))
                         os.startfile(os.path.realpath("./Updater/Updater.exe"))
 
-                if ((float(gitversion["version"]) < float(locversion["version"])) or  # if local version is newer than
-                        (float(gitversion["version"]) == float(locversion["version"])) and  # github version
-                        float(gitversion["subversion"]) < float(locversion["subversion"])):
-                    self.is_dev_version = True
+            elif local_version > github_version:
+                self.is_dev_version = True
 
         except requests.ConnectionError:
             messagebox.showwarning(self.translate("Warning"),
