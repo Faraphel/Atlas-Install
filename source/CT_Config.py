@@ -7,15 +7,16 @@ from .Cup import Cup
 from .Track import Track
 
 
-def get_cup_icon(id, font_path: str = "./file/SuperMario256.ttf", cup_icon_dir: str = "./file/cup_icon") -> Image:
+def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf",
+                 cup_icon_dir: str = "./file/cup_icon") -> Image:
     """
-    :param id: id of the cup
+    :param cup_id: id of the cup
     :param cup_icon_dir: directory to cup icon
     :param font_path: path to the font used to generate icon
     :return: cup icon
     """
-    if os.path.exists(f"{cup_icon_dir}/{id}.png"):
-        cup_icon = Image.open(f"{cup_icon_dir}/{id}.png").resize((128, 128))
+    if os.path.exists(f"{cup_icon_dir}/{cup_id}.png"):
+        cup_icon = Image.open(f"{cup_icon_dir}/{cup_id}.png").resize((128, 128))
 
     else:
         cup_icon = Image.new("RGBA", (128, 128))
@@ -23,7 +24,7 @@ def get_cup_icon(id, font_path: str = "./file/SuperMario256.ttf", cup_icon_dir: 
         font = ImageFont.truetype(font_path, 90)
         draw.text((4, 4), "CT", (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
         font = ImageFont.truetype(font_path, 60)
-        draw.text((5, 80), "%03i" % id, (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
+        draw.text((5, 80), "%03i" % cup_id, (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
 
     return cup_icon
 
@@ -108,8 +109,9 @@ class CT_Config:
 
         icon_files.extend(range(total_cup_count))
 
-        for index, id in enumerate(icon_files):  # index is a number, id can be string or number ("left", 0, 12, ...)
-            cup_icon = get_cup_icon(id)
+        for index, cup_id in enumerate(icon_files):
+            # index is a number, id can be string or number ("left", 0, 12, ...)
+            cup_icon = get_cup_icon(cup_id)
             ct_icon.paste(cup_icon, (0, index * CT_ICON_WIDTH))
 
         return ct_icon
