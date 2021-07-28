@@ -4,6 +4,7 @@ import shutil
 import glob
 import json
 
+from .Track import CantDownloadTrack
 from .CT_Config import CT_Config
 from .definition import *
 from .wszst import *
@@ -57,9 +58,9 @@ class NoGui:
         def get(self):
             return self.value
 
-    def progress(*args, **kwargs): print(args, kwargs)
-    def translate(*args, **kwargs): return ""
-    def log_error(*args, **kwargs): print(args, kwargs)
+    def progress(self, *args, **kwargs): print(args, kwargs)
+    def translate(self, *args, **kwargs): return ""
+    def log_error(self, *args, **kwargs): print(args, kwargs)
 
     is_dev_version = False
     button_install_mod = NoButton()
@@ -427,7 +428,7 @@ class Game:
         thread_list = {}
         error_count, error_max = 0, 3
 
-        def add_process(track) -> int:
+        def add_process(track) -> None:
             """
             a "single thread" to download, check sha1 and convert a track
             :param track: the track that will be patched
@@ -441,47 +442,28 @@ class Game:
                         os.remove(_track)
 
             if not self.gui.boolvar_disable_download.get():
-                while True:
-                    download_returncode = 0
-                    if not os.path.exists(track.file_wu8):
-                        download_returncode = track.download_wu8(
-                            GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
-                        if download_returncode == -1:  # can't download
-                            error_count += 1
-                            if error_count > error_max:  # Too much track wasn't correctly converted
-                                messagebox.showerror(
-                                    self.gui.translate("Error"),
-                                    self.gui.translate("Too much tracks had a download issue."))
-                                raise TooMuchDownloadFailed()
-                            else:
-                                messagebox.showwarning(self.gui.translate("Warning"),
-                                                       self.gui.translate("Can't download this track !",
-                                                                          f" ({error_count} / {error_max})"))
+                if not os.path.exists(track.file_wu8):
+                    try: track.download_wu8(GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
+                    except CantDownloadTrack:
+                        error_count += 1
+                        if error_count > error_max:  # Too much track wasn't correctly converted
+                            messagebox.showerror(
+                                self.gui.translate("Error"),
+                                self.gui.translate("Too much tracks had a download issue."))
+                            raise TooMuchDownloadFailed()
+                        else:
+                            messagebox.showwarning(self.gui.translate("Warning"),
+                                                   self.gui.translate("Can't download this track !",
+                                                                      f" ({error_count} / {error_max})"))
 
-                    if track.sha1:
-                        if not self.gui.boolvar_dont_check_track_sha1.get():
-                            if track.check_sha1() != 0:  # if track sha1 is not the one excepted
-                                error_count += 1
-                                if error_count > error_max:  # Too much track wasn't correctly converted
-                                    messagebox.showerror(
-                                        self.gui.translate("Error"),
-                                        self.gui.translate("Too much tracks had an issue during sha1 check."))
-                                    raise TooMuchSha1CheckFailed()
-                                continue
-
-                    break
-
-                if not os.path.exists(track.file_szs) or download_returncode == 3:
-                    # returncode 3 is track has been updated
-                    if os.path.exists(track.file_wu8):
-                        track.convert_wu8_to_szs()
-                    else:
-                        messagebox.showerror(self.gui.translate("Error"),
-                            self.gui.translate("Can't convert track.\nEnable track download and retry."))
-                        raise CantConvertTrack()
-                elif self.gui.boolvar_del_track_after_conv.get():
-                    os.remove(track.file_wu8)
-            return 0
+            if not track.check_szs_sha1():  # if sha1 of track's szs is incorrect or track's szs does not exist
+                if os.path.exists(track.file_wu8): track.convert_wu8_to_szs()
+                else:
+                    messagebox.showerror(self.gui.translate("Error"),
+                        self.gui.translate("Can't convert track.\nEnable track download and retry."))
+                    raise CantConvertTrack()
+            elif self.gui.boolvar_del_track_after_conv.get():
+                os.remove(track.file_wu8)
 
         def clean_process() -> int:
             """
