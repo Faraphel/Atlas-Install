@@ -1,13 +1,13 @@
 import subprocess
 
 
-def extract(file: str, dest_dir: str) -> None:
+def extract(file: str, dst_dir: str) -> None:
     """
     extract the game into a directory
     :param file: game's file to extract (can be WBFS, ISO, CISO)
-    :param dest_dir: where to extract the game
+    :param dst_dir: where to extract the game
     """
-    subprocess.run(["./tools/wit/wit", "EXTRACT", file, "--DEST", dest_dir],
+    subprocess.run(["./tools/wit/wit", "EXTRACT", file, "--DEST", dst_dir],
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 

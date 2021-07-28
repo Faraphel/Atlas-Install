@@ -47,11 +47,11 @@ def create(file: str) -> None:
                    creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
 
 
-def autoadd(file: str, dest_dir: str) -> None:
+def autoadd(path: str, dest_dir: str) -> None:
     """
     Create an auto_add directory from a game file
-    :param file: the game's path
+    :param path: the game's path
     :param dest_dir: directory where to store autoadd file
     """
-    subprocess.run(["./tools/szs/wszst", "AUTOADD", file + "/files/Race/Course/", "--DEST", dest_dir],
+    subprocess.run(["./tools/szs/wszst", "AUTOADD", path + "/files/Race/Course/", "--DEST", dest_dir],
                    creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)

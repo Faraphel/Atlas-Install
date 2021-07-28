@@ -60,7 +60,7 @@ class Track:
         check if track wu8's sha1 is correct
         :return: 0 if yes, -1 if no
         """
-        if szs.sha1(self.file_wu8) == self.sha1: return 0
+        if szs.sha1(file=self.file_wu8) == self.sha1: return 0
         else: return -1
 
     def convert_wu8_to_szs(self) -> None:
