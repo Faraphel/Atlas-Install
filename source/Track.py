@@ -4,6 +4,11 @@ from .definition import *
 from .wszst import *
 
 
+class CantDownloadTrack(Exception):
+    def __init__(self, track, http_error=404):
+        super().__init__(f"Can't download track {track.get_track_name()} (error {http_error}) !")
+
+
 class Track:
     def __init__(self, name: str = "_", prefix: str = None, suffix: str = None,
                  author="Nintendo", special="T11", music="T11", new=True, sha1: str = None, since_version: str = None,
@@ -60,6 +65,7 @@ class Track:
         check if track wu8's sha1 is correct
         :return: 0 if yes, -1 if no
         """
+        if not os.path.exists(self.file_wu8): return -1
         if szs.sha1(file=self.file_wu8) == self.sha1: return 0
         else: return -1
 
@@ -73,16 +79,12 @@ class Track:
         """
         download track wu8 from github
         :param github_content_root: url to github project root
-        :return: 0 if correctly downloaded, 1 if no need to download, 3 if track size is incorrect, -1 if error
+        :return: 0 if correctly downloaded
         """
-        returncode = 0
+
+        if self.check_sha1(): return 0  # if sha1 correct, do not try to download track
 
         dl = requests.get(github_content_root + self.file_wu8, allow_redirects=True, stream=True)
-        if os.path.exists(self.file_wu8):
-            if int(dl.headers['Content-Length']) == os.path.getsize(self.file_wu8):
-                return 1
-            else:
-                returncode = 3
 
         if dl.status_code == 200:  # if page is found
             with open(self.file_wu8, "wb") as file:
@@ -90,10 +92,9 @@ class Track:
                 for i, chunk in enumerate(dl.iter_content(chunk_size=chunk_size)):
                     file.write(chunk)
                     file.flush()
-            return returncode
+            return 0
         else:
-            print(f"error {dl.status_code} {self.file_wu8}")
-            return -1
+            raise CantDownloadTrack(track=self, http_error=dl.status_code)
 
     def get_ctfile(self, race=False, *args, **kwargs) -> str:
         """
