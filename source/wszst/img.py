@@ -4,7 +4,7 @@ import subprocess
 def encode(file: str, format: str) -> None:
     """
     Encode an .png image into a new format
-    :param src_file: .png image
+    :param file: .png image
     :param format: new image format
     """
     subprocess.run(["./tools/szs/wimgt", "ENCODE", file, "-x", format, "--overwrite"],
