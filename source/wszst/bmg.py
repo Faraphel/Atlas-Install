@@ -19,4 +19,4 @@ def cat(path: str, subfile: str = ".d/message/Common.bmg") -> str:
     """
     return subprocess.run(["./tools/szs/wbmgt", "CAT", path + subfile],
                           creationflags=subprocess.CREATE_NO_WINDOW,
-                          check=True, stdout=subprocess.PIPE).stdout.decode()
+                          check=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL).stdout.decode()
