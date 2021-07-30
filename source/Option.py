@@ -14,7 +14,6 @@ class Option:
         self.disable_download = False
         self.del_track_after_conv = False
         self.dont_check_for_update = False
-        self.dont_check_track_sha1 = False
         self.process_track = 8
 
     def edit(self, option: str, value: any, need_restart: bool = False, gui=None) -> None:

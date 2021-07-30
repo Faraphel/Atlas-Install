@@ -33,7 +33,6 @@ class Gui:
         self.boolvar_disable_download = BooleanVar(value=self.option.disable_download)
         self.boolvar_del_track_after_conv = BooleanVar(value=self.option.del_track_after_conv)
         self.boolvar_dont_check_for_update = BooleanVar(value=self.option.dont_check_for_update)
-        self.boolvar_dont_check_track_sha1 = BooleanVar(value=self.option.dont_check_track_sha1)
         self.intvar_process_track = IntVar(value=self.option.process_track)
         self.boolvar_use_1star_track = BooleanVar(value=True)
         self.boolvar_use_2star_track = BooleanVar(value=True)
@@ -78,7 +77,6 @@ class Gui:
         self.menu_advanced.add_checkbutton(label=self.translate("Disable downloads"), variable=self.boolvar_disable_download, command=lambda: self.option.edit("disable_download", self.boolvar_disable_download))
         self.menu_advanced.add_checkbutton(label=self.translate("Delete track after wu8 to szs conversion"), variable=self.boolvar_del_track_after_conv, command=lambda: self.option.edit("del_track_after_conv", self.boolvar_del_track_after_conv))
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
-        self.menu_advanced.add_checkbutton(label=self.translate("Don't check track's sha1"), variable=self.boolvar_dont_check_track_sha1, command=lambda: self.option.edit("dont_check_track_sha1",self.boolvar_dont_check_track_sha1))
 
         self.menu_advanced.add_separator()
         self.menu_advanced.add_command(label=self.translate("Number of track conversion process", " :"))

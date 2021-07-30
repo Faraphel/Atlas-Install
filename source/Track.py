@@ -98,7 +98,6 @@ class Track:
         :param github_content_root: url to github project root
         :return: 0 if correctly downloaded
         """
-
         if self.check_wu8_sha1(): return  # if sha1 correct, do not try to download track
         for _ in range(3):
             dl = requests.get(github_content_root + self.file_wu8, allow_redirects=True, stream=True)
