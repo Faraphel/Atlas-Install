@@ -421,7 +421,7 @@ class Game:
             new_4_3.paste(img_lang_4_3, (0, 0), img_lang_4_3)
             new_4_3.save(dest_dir + f"/strapA_608x456{get_filename(get_nodir(file_lang))}.png")
 
-    def patch_all_tracks(self):
+    def patch_tracks_zip(self):
         all_tracks_zip_url = (ZIPBALL_DEV_BRANCH if self.gui.is_dev_version
                               else ZIPBALL_MASTER_BRANCH) + "file/Track-WU8"
 
@@ -445,7 +445,7 @@ class Game:
 
         for track in self.ctconfig.all_tracks:
             if os.path.exists(track.file_wu8) and not track.check_szs_sha1(): track.convert_wu8_to_szs()
-            else: pass  # error
+            else: raise CantConvertTrack()
 
     def patch_tracks(self) -> int:
         """
@@ -522,7 +522,6 @@ class Game:
                     break
                 clean_process()
 
-        while clean_process() != 1:
-            pass  # End the process if all process ended
+        while clean_process() != 1: pass  # End the process if all process ended
 
         return 0
