@@ -6,7 +6,11 @@ import os
 GITHUB_REPOSITORY = "Faraphel/MKWF-Install"
 GITHUB_MASTER_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/master/"
 GITHUB_DEV_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/dev/"
+ZIPBALL_MASTER_BRANCH = f"https://github.com/{GITHUB_REPOSITORY}/zipball/master/"
+ZIPBALL_DEV_BRANCH = f"https://github.com/{GITHUB_REPOSITORY}/zipball/dev/"
 VERSION_FILE_URL = GITHUB_MASTER_BRANCH + "version"
+
+CHUNK_SIZE: int = 524288  # chunk size used to download file
 
 get_filename = lambda file: ".".join(file.split(".")[:-1])
 get_nodir = lambda file: file.replace("\\", "/").split("/")[-1]

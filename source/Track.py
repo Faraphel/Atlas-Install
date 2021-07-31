@@ -3,8 +3,6 @@ import requests
 from .definition import *
 from .wszst import *
 
-CHUNK_SIZE = 524288
-
 
 class CantDownloadTrack(Exception):
     def __init__(self, track, http_error: [str, int]):
