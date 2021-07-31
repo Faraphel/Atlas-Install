@@ -204,7 +204,11 @@ class Gui:
         """
         error = traceback.format_exc()
         with open("./error.log", "a") as f:
-            f.write(f"---\n{error}\n")
+            f.write(f"---\n"
+                    f"For game version : {self.game.ctconfig.version}\n"
+                    f"./file/ directory : {os.listdir('./file/')}"
+                    f"GAME/files/ information : {self.game.path, self.game.region}"
+                    f"{error}\n")
         messagebox.showerror(self.translate("Error"), self.translate("An error occured", " :", "\n", error, "\n\n"))
 
     def progress(self, show: bool = None, indeter: bool = None, step: int = None,
