@@ -71,7 +71,9 @@ def draw_model(scene_scale, scene_trans, scene):
         for face in mesh.faces:
             for vertex_i in face:
                 height = scene.vertices[vertex_i][color_axe]
-                color = (height - min_height) / max_height
+                color = 1
+                if max_height != 0:
+                    color = (height - min_height) / max_height
 
                 glColor3f(color, color, color)
                 glVertex3f(*scene.vertices[vertex_i])
