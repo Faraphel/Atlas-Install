@@ -50,7 +50,7 @@ async def on_ready():
     old_sha1 = set()
 
     message: discord.Message
-    async for message in track_channel.history(limit=-1):
+    async for message in track_channel.history(limit=5000):
         if message.author.id == bot.user.id:
             for field in message.embeds[0].fields:
                 if "sha1" in field.name:
@@ -61,46 +61,50 @@ async def on_ready():
     ct_config.load_ctconfig_file("./ct_config.json")
 
     for track in ct_config.all_tracks:
-        if track.name == "_": continue
+        try:
+            if track.name == "_": continue
 
-        embed = discord.Embed(title=f"**{track.get_track_name()}**",
-                              description="", url=f"https://ct.wiimm.de/i/{track.sha1}")
+            embed = discord.Embed(title=f"**{track.get_track_name()}**",
+                                  description="", url=f"https://ct.wiimm.de/i/{track.sha1}")
 
-        author_link = ""
-        if "," not in track.author: author_link = "http://wiki.tockdom.com/wiki/" + track.author
-        embed.set_author(name=track.author, url=author_link)
+            author_link = ""
+            if "," not in track.author: author_link = "http://wiki.tockdom.com/wiki/" + track.author
+            embed.set_author(name=track.author, url=author_link)
 
-        with io.BytesIO() as image_binary:
-            image = get_track_minimap(track)
-            image.save(image_binary, "PNG")
-            image_binary.seek(0)
+            with io.BytesIO() as image_binary:
+                image = get_track_minimap(track)
+                image.save(image_binary, "PNG")
+                image_binary.seek(0)
 
-            message_minimap = await data_channel.send(file=discord.File(fp=image_binary, filename="minimap.png"))
-        embed.set_thumbnail(url=message_minimap.attachments[0].url)
+                message_minimap = await data_channel.send(file=discord.File(fp=image_binary, filename="minimap.png"))
+            embed.set_thumbnail(url=message_minimap.attachments[0].url)
 
-        if hasattr(track, "score"):
-            embed.add_field(name="Track Score", value=track.score)  # TODO
-        if hasattr(track, "warning"):
-            embed.add_field(name="Warning level", value=warning_level_message[track.warning])
-        if hasattr(track, "since_version"):
-            embed.add_field(name="Here since version", value=track.since_version)  # TODO
+            if hasattr(track, "score"):
+                embed.add_field(name="Track Score", value=track.score)  # TODO
+            if hasattr(track, "warning"):
+                embed.add_field(name="Warning level", value=warning_level_message[track.warning])
+            if hasattr(track, "since_version"):
+                embed.add_field(name="Here since version", value=track.since_version)  # TODO
 
-        embed.add_field(name="Lap count", value="3")  # TODO
-        embed.add_field(name="Speed multiplier", value="x1.0")  # TODO
+            embed.add_field(name="Lap count", value="3")  # TODO
+            embed.add_field(name="Speed multiplier", value="x1.0")  # TODO
 
-        embed.set_image(url=placeholder_image_url)  # TODO
+            embed.set_image(url=placeholder_image_url)  # TODO
 
-        if hasattr(track, "sha1"):
-            embed.add_field(name="sha1", value=track.sha1)
-
-        if track.sha1 not in old_sha1:
-            message = await track_channel.send(embed=embed)
-            await message.add_reaction(bot.get_emoji(EMOTE_1STAR))
-            await message.add_reaction(bot.get_emoji(EMOTE_2STAR))
-            await message.add_reaction(bot.get_emoji(EMOTE_3STAR))
-            await message.add_reaction("❌")
-        else:
             if hasattr(track, "sha1"):
-                await message_from_sha1[track.sha1].edit(embed=embed)
+                embed.add_field(name="sha1", value=track.sha1)
+
+            if track.sha1 not in old_sha1:
+                message = await track_channel.send(embed=embed)
+                await message.add_reaction(bot.get_emoji(EMOTE_1STAR))
+                await message.add_reaction(bot.get_emoji(EMOTE_2STAR))
+                await message.add_reaction(bot.get_emoji(EMOTE_3STAR))
+                await message.add_reaction("❌")
+            else:
+                if hasattr(track, "sha1"):
+                    await message_from_sha1[track.sha1].edit(embed=embed)
+
+        except Exception as e:
+            print(f'error in track {track.name} : {str(e)}')
 
 bot.run(os.environ['DISCORD_GR_TOKEN'])
