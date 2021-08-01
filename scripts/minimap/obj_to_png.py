@@ -44,6 +44,10 @@ def get_display(scene_data: tuple) -> Image:
 
     pix = glReadPixels(0, 0, *display, GL_RGB, GL_UNSIGNED_BYTE)
     image = Image.frombytes(mode="RGB", size=display, data=pix)
+
+    pygame.display.quit()
+    pygame.quit()
+
     return image
 
 
@@ -65,7 +69,7 @@ def draw_model(scene_scale, scene_trans, scene):
                 elif height < min_height:
                     min_height = height
 
-        min_height -= (max_height - min_height) // 4
+        min_height -= (max_height - min_height) // 3
 
         glBegin(GL_TRIANGLES)
         for face in mesh.faces:
