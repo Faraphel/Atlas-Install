@@ -69,6 +69,8 @@ def draw_model(scene_scale, scene_trans, scene):
                 elif height < min_height:
                     min_height = height
 
+        min_height += (max_height - min_height) // 3
+
         glBegin(GL_TRIANGLES)
         for face in mesh.faces:
             for vertex_i in face:
