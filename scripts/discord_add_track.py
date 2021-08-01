@@ -61,6 +61,8 @@ async def on_ready():
     ct_config.load_ctconfig_file("./ct_config.json")
 
     for track in ct_config.all_tracks:
+        if track.name == "_": continue
+
         embed = discord.Embed(title=f"**{track.get_track_name()}**",
                               description="", url=f"https://ct.wiimm.de/i/{track.sha1}")
 
