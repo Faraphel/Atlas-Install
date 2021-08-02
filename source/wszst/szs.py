@@ -12,6 +12,24 @@ def extract(file: str, dest_dir: str = None) -> None:
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
+def analyze(file: str) -> dict:
+    """
+    return dictionnary with information about the track
+    :param file: track file
+    :return: directory
+    """
+    ana_track = subprocess.run(["./tools/szs/wszst", "ANALYZE", file], check=True,
+                               creationflags=subprocess.CREATE_NO_WINDOW, stdout=subprocess.PIPE).stdout.decode()
+
+    dict_track = {}
+    for line in ana_track.split("\n"):
+        if "=" in line:
+            key, value = line.split("=", maxsplit=1)
+            dict_track[key] = value.strip()
+
+    return dict_track
+
+
 def sha1(file, autoadd_path: str = "./file/auto-add/") -> str:
     """
     :param autoadd_path: directory where is autoadd directory
