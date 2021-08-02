@@ -34,7 +34,7 @@ def get_display(scene_data: tuple) -> Image:
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
     gluPerspective(45, (display[0] / display[1]), 1, 500.0)
     glTranslatef(0.0, 0.0, -6.5)
-    glRotatef(90, 1, 0, 0)
+    glRotatef(-90, 1, 0, 0)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -70,7 +70,7 @@ def draw_model(scene_scale, scene_trans, scene):
                 elif height < min_height:
                     min_height = height
 
-        min_height += (max_height - min_height) // 3
+        min_height -= (max_height - min_height) // 3
 
         glBegin(GL_TRIANGLES)
         for face in mesh.faces:
@@ -78,7 +78,7 @@ def draw_model(scene_scale, scene_trans, scene):
                 height = scene.vertices[vertex_i][color_axe]
                 color = 1
                 if max_height != 0:
-                    color = 1 - ((height - min_height) / max_height)
+                    color = ((height - min_height) / max_height)
 
                 glColor3f(color, color, color)
                 glVertex3f(*scene.vertices[vertex_i])
