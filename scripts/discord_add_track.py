@@ -117,9 +117,8 @@ async def on_ready():
                     image = get_track_minimap(track)
                     image.save(image_binary, "PNG")
                     image_binary.seek(0)
-
                     message_minimap = await data_channel.send(
-                        file=discord.File(fp=image_binary, filename="minimap.png"))
+                        file=discord.File(fp=image_binary, filename=f"minimap {track.sha1}.png"))
                 embed.set_thumbnail(url=message_minimap.attachments[0].url)
 
                 message = await track_channel.send(embed=embed)
@@ -129,11 +128,10 @@ async def on_ready():
                 await message.add_reaction("❌")
 
             else:
-                if hasattr(track, "sha1"):
-                    message = message_from_sha1[track.sha1]
-                    await message.edit(embed=embed)
+                message = message_from_sha1[track.sha1]
+                await message.edit(embed=embed)
 
         except Exception as e:
-                print(f"error for track {track.name} : {str(e)}")
+            print(f"error for track {track.name} : {str(e)}")
 
 bot.run(os.environ['DISCORD_GR_TOKEN'])
