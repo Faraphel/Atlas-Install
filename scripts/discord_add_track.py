@@ -59,6 +59,7 @@ async def on_ready():
 
     async for message in old_track_channel.history(limit=5000):
         if message.author.id == bot.user.id:
+            if "_" in message.content: continue
             sha1 = message.content.split("ct.wiimm.de/i/")[-1].replace("|", "").strip()
             old_message_from_sha1[sha1] = message
 
