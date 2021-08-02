@@ -49,7 +49,6 @@ async def on_ready():
 
     message_from_sha1 = {}
     old_message_from_sha1 = {}
-    old_sha1 = set()
 
     message: discord.Message
     async for message in track_channel.history(limit=5000):
@@ -57,7 +56,6 @@ async def on_ready():
             for field in message.embeds[0].fields:
                 if "sha1" in field.name:
                     message_from_sha1[field.value] = message
-                    old_sha1.add(field.value)
 
     async for message in old_track_channel.history(limit=5000):
         if message.author.id == bot.user.id:
@@ -71,8 +69,12 @@ async def on_ready():
         try:
             if track.name == "_": continue
 
-            embed = discord.Embed(title=f"**{track.get_track_name()}**",
-                                  description="", url=f"https://ct.wiimm.de/i/{track.sha1}")
+            if track.sha1 in message_from_sha1:
+                embed = message_from_sha1[track.sha1].embeds[0]
+            else:
+                embed = discord.Embed(title=f"**{track.get_track_name()}**",
+                                      description="", url=f"https://ct.wiimm.de/i/{track.sha1}")
+                for _ in range(6): embed.add_field(name="empty", value="empty")
 
             author_link = ""
             if "," not in track.author: author_link = "http://wiki.tockdom.com/wiki/" + track.author
@@ -82,38 +84,34 @@ async def on_ready():
 
             if hasattr(track, "score"):
                 scores = [track.score]
-                if hasattr(track, "sha1"):
-                    if track.sha1 in old_message_from_sha1:
-                        for reaction in old_message_from_sha1[track.sha1].reactions:
-                            if hasattr(reaction, "id"):
-                                if reaction.emoji.id == EMOTE_1STAR: scores.extend([1] * (reaction.count - 1))
-                                elif reaction.emoji.id == EMOTE_2STAR: scores.extend([2] * (reaction.count - 1))
-                                elif reaction.emoji.id == EMOTE_3STAR: scores.extend([3] * (reaction.count - 1))
+                if track.sha1 in old_message_from_sha1:
+                    for reaction in old_message_from_sha1[track.sha1].reactions:
+                        if str(EMOTE_1STAR) in str(reaction.emoji): scores.extend([1] * (reaction.count - 1))
+                        elif str(EMOTE_2STAR) in str(reaction.emoji): scores.extend([2] * (reaction.count - 1))
+                        elif str(EMOTE_3STAR) in str(reaction.emoji): scores.extend([3] * (reaction.count - 1))
 
-                    if track.sha1 in message_from_sha1:
-                        for reaction in message_from_sha1[track.sha1].reactions:
-                            if hasattr(reaction, "id"):
-                                if reaction.emoji.id == EMOTE_1STAR: scores.extend([1] * (reaction.count - 1))
-                                elif reaction.emoji.id == EMOTE_2STAR: scores.extend([2] * (reaction.count - 1))
-                                elif reaction.emoji.id == EMOTE_3STAR: scores.extend([3] * (reaction.count - 1))
+                if track.sha1 in message_from_sha1:
+                    for reaction in message_from_sha1[track.sha1].reactions:
+                        if str(EMOTE_1STAR) in str(reaction.emoji): scores.extend([1] * (reaction.count - 1))
+                        elif str(EMOTE_2STAR) in str(reaction.emoji): scores.extend([2] * (reaction.count - 1))
+                        elif str(EMOTE_3STAR) in str(reaction.emoji): scores.extend([3] * (reaction.count - 1))
 
                 moy_score = round(sum(scores) / len(scores), 2)
 
-                embed.add_field(name="Track Score", value=f"{moy_score} (vote : {len(scores)})")
+                embed.set_field_at(index=0, name="Track Score", value=f"{moy_score} (vote : {len(scores)})")
             if hasattr(track, "warning"):
-                embed.add_field(name="Warning level", value=warning_level_message[track.warning])
+                embed.set_field_at(index=1, name="Warning level", value=warning_level_message[track.warning])
             if hasattr(track, "since_version"):
-                embed.add_field(name="Here since version", value=track.since_version)
+                embed.set_field_at(index=2, name="Here since version", value=track.since_version)
 
-            embed.add_field(name="Lap count", value=track_technical_data["lap_count"])
-            embed.add_field(name="Speed multiplier", value=track_technical_data["speed_factor"])
+            embed.set_field_at(index=3, name="Lap count", value=track_technical_data["lap_count"])
+            embed.set_field_at(index=4, name="Speed multiplier", value=track_technical_data["speed_factor"])
 
             embed.set_image(url=placeholder_image_url)  # TODO
 
-            if hasattr(track, "sha1"):
-                embed.add_field(name="sha1", value=track.sha1)
+            embed.set_field_at(index=5, name="sha1", value=track.sha1)
 
-            if track.sha1 not in old_sha1:
+            if track.sha1 not in message_from_sha1:
 
                 with io.BytesIO() as image_binary:
                     image = get_track_minimap(track)
@@ -132,9 +130,10 @@ async def on_ready():
 
             else:
                 if hasattr(track, "sha1"):
-                    await message_from_sha1[track.sha1].edit(embed=embed)
+                    message = message_from_sha1[track.sha1]
+                    await message.edit(embed=embed)
 
         except Exception as e:
-            print(f"error for track {track.name} : {str(e)}")
+                print(f"error for track {track.name} : {str(e)}")
 
 bot.run(os.environ['DISCORD_GR_TOKEN'])
