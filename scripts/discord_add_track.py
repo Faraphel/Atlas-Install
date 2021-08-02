@@ -25,7 +25,6 @@ EMOTE_2STAR = 843109881385058325
 EMOTE_3STAR = 843109892330881107
 
 placeholder_image_url = "https://media.discordapp.net/attachments/871469647617216652/871487829023289404/Placeholder.png"
-download_icon_url = "https://media.discordapp.net/attachments/842865834090037310/871467284009480202/img_68704.png"
 
 
 def get_track_minimap(track: Track):
@@ -71,23 +70,17 @@ async def on_ready():
             if "," not in track.author: author_link = "http://wiki.tockdom.com/wiki/" + track.author
             embed.set_author(name=track.author, url=author_link)
 
-            with io.BytesIO() as image_binary:
-                image = get_track_minimap(track)
-                image.save(image_binary, "PNG")
-                image_binary.seek(0)
-
-                message_minimap = await data_channel.send(file=discord.File(fp=image_binary, filename="minimap.png"))
-            embed.set_thumbnail(url=message_minimap.attachments[0].url)
+            track_technical_data = szs.analyze(track.file_szs)
 
             if hasattr(track, "score"):
                 embed.add_field(name="Track Score", value=track.score)  # TODO
             if hasattr(track, "warning"):
                 embed.add_field(name="Warning level", value=warning_level_message[track.warning])
             if hasattr(track, "since_version"):
-                embed.add_field(name="Here since version", value=track.since_version)  # TODO
+                embed.add_field(name="Here since version", value=track.since_version)
 
-            embed.add_field(name="Lap count", value="3")  # TODO
-            embed.add_field(name="Speed multiplier", value="x1.0")  # TODO
+            embed.add_field(name="Lap count", value=track_technical_data["lap_count"])
+            embed.add_field(name="Speed multiplier", value=track_technical_data["speed_factor"])
 
             embed.set_image(url=placeholder_image_url)  # TODO
 
@@ -95,11 +88,23 @@ async def on_ready():
                 embed.add_field(name="sha1", value=track.sha1)
 
             if track.sha1 not in old_sha1:
+
+                with io.BytesIO() as image_binary:
+                    image = get_track_minimap(track)
+                    image.save(image_binary, "PNG")
+                    image_binary.seek(0)
+
+                    message_minimap = await data_channel.send(
+                        file=discord.File(fp=image_binary, filename="minimap.png"))
+                embed.set_thumbnail(url=message_minimap.attachments[0].url)
+
                 message = await track_channel.send(embed=embed)
                 await message.add_reaction(bot.get_emoji(EMOTE_1STAR))
                 await message.add_reaction(bot.get_emoji(EMOTE_2STAR))
                 await message.add_reaction(bot.get_emoji(EMOTE_3STAR))
                 await message.add_reaction("❌")
+
+
             else:
                 if hasattr(track, "sha1"):
                     await message_from_sha1[track.sha1].edit(embed=embed)
