@@ -25,7 +25,7 @@ def analyze(file: str) -> dict:
     for line in ana_track.split("\n"):
         if "=" in line:
             key, value = line.split("=", maxsplit=1)
-            dict_track[key] = value.strip()
+            dict_track[key.strip()] = value.strip()
 
     return dict_track
 
