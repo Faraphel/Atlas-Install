@@ -48,7 +48,6 @@ def get_display(scene_data: tuple) -> Image:
     pygame.display.quit()
     pygame.quit()
 
-    image = image.rotate(180)
     return image
 
 
