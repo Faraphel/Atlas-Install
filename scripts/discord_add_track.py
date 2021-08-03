@@ -1,3 +1,7 @@
+"""
+This script allow you to update a discord channel with the ct_config.json
+"""
+
 import discord
 import subprocess
 import shutil
