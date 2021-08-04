@@ -24,8 +24,7 @@ driver.execute_script("var element = arguments[0]; element.parentNode.removeChil
                       driver.find_element_by_id("Panel"))
 
 tracks = glob.iglob("../file/Track/*.szs")
-track = next(tracks)
-shutil.copy(track, "./map preview/tmp/" + get_nodir(track))
+track = "none.png"
 
 
 def save_screenshot():
@@ -36,7 +35,8 @@ def save_screenshot():
 
 def skip_to_next():
     global track
-    os.remove("./map preview/tmp/" + get_nodir(track))
+    if os.path.exists("./map preview/tmp/" + get_nodir(track)):
+        os.remove("./map preview/tmp/" + get_nodir(track))
 
     track = next(tracks)
     while os.path.exists(f"./map preview/image/{get_filename(get_nodir(track))}.png"):
@@ -45,6 +45,7 @@ def skip_to_next():
     shutil.copy(track, "./map preview/tmp/" + get_nodir(track))
 
 
+skip_to_next()
 keyboard.add_hotkey('h', save_screenshot)
 
 while True:
