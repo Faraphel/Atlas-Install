@@ -3,3 +3,4 @@ pygame
 PyOpenGL
 pywavefront
 selenium
+keyboard
