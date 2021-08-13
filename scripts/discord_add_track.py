@@ -8,6 +8,8 @@ import shutil
 import os
 import io
 
+from PIL import Image
+
 from source.CT_Config import CT_Config
 from source.Track import Track
 from source.wszst import szs
@@ -29,7 +31,14 @@ EMOTE_1STAR = 843109869107413012
 EMOTE_2STAR = 843109881385058325
 EMOTE_3STAR = 843109892330881107
 
-placeholder_image_url = "https://media.discordapp.net/attachments/871469647617216652/871487829023289404/Placeholder.png"
+placeholder_image_url = "https://media.discordapp.net/attachments/842865834090037310/875817942200238111/Placeholder.png"
+
+
+get_norm_color_value = lambda x: int((x if x >= 0 else 0) if x <= 255 else 255)
+get_R = lambda x: get_norm_color_value(-510 * x + 1021)
+get_G = lambda x: get_norm_color_value(255 * x - 510)
+get_B = lambda x: get_norm_color_value(254 * x - 127 if x < 1.5 else -254 * x + 890)
+get_color_from_score = lambda x: (get_R(x), get_G(x), get_B(x))
 
 
 def get_track_minimap(track: Track):
@@ -101,9 +110,10 @@ async def on_ready():
                         elif str(EMOTE_2STAR) in str(reaction.emoji): scores.extend([2] * (reaction.count - 1))
                         elif str(EMOTE_3STAR) in str(reaction.emoji): scores.extend([3] * (reaction.count - 1))
 
-                moy_score = round(sum(scores) / len(scores), 2)
+                average_score = round(sum(scores) / len(scores), 2)
+                embed.colour = discord.Color.from_rgb(*get_color_from_score(average_score))
 
-                embed.set_field_at(index=0, name="Track Score", value=f"{moy_score} (vote : {len(scores)})")
+                embed.set_field_at(index=0, name="Track Score", value=f"{average_score} (vote : {len(scores)})")
             if hasattr(track, "warning"):
                 embed.set_field_at(index=1, name="Warning level", value=warning_level_message[track.warning])
             if hasattr(track, "since_version"):
@@ -112,11 +122,20 @@ async def on_ready():
             embed.set_field_at(index=3, name="Lap count", value=track_technical_data["lap_count"])
             embed.set_field_at(index=4, name="Speed multiplier", value=track_technical_data["speed_factor"])
 
-            embed.set_image(url=placeholder_image_url)  # TODO
-
             embed.set_field_at(index=5, name="sha1", value=track.sha1)
 
             if track.sha1 not in message_from_sha1:
+                with io.BytesIO() as image_binary:
+                    track_img_path = f"./scripts/map preview/image/{track.get_track_name()}.png"
+                    if os.path.exists(track_img_path):
+                        image = Image.open(track_img_path)
+                        image.save(image_binary, "PNG")
+                        image_binary.seek(0)
+                        message_map_preview = await data_channel.send(
+                            file=discord.File(fp=image_binary, filename=f"map preview {track.sha1}.png"))
+                        url_map_preview = message_map_preview.attachments[0].url
+                    else: url_map_preview = placeholder_image_url
+                embed.set_image(url=url_map_preview)
 
                 with io.BytesIO() as image_binary:
                     image = get_track_minimap(track)
