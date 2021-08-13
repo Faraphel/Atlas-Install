@@ -71,10 +71,10 @@
     "None": "Aucune"
   },
   "ge": {
-    "Random: All tracks": "Zufällig: Alle Spuren",
-    "Random: Original tracks": "Zufällig: Original-Spuren",
+    "Random: All tracks": "Zufällig: Alle Tracks",
+    "Random: Original tracks": "Zufällig: Original-Tracks",
     "Random: Custom Tracks": "Zufällig: Custom Tracks",
-    "Random: New tracks": "Zufällig: Neue Spuren"
+    "Random: New tracks": "Zufällig: Neue Tracks"
   },
   "it": {
     "Random: All tracks": "Casuale: Tutte le tracce",
