@@ -157,7 +157,7 @@ class Track:
         if self.prefix in trackname_color:
             prefix = trackname_color[self.prefix] + " "
         if self.suffix in trackname_color:
-            suffix = "(" + trackname_color[self.suffix] + ")"
+            suffix = " (" + trackname_color[self.suffix] + ")"
 
         name = (star_text + prefix + hl_prefix + self.name + hl_suffix + suffix)
         name = name.replace("_", " ")
