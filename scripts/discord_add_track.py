@@ -42,13 +42,16 @@ get_color_from_score = lambda x: (get_R(x), get_G(x), get_B(x))
 
 
 def get_track_minimap(track: Track):
-    if os.path.exists("./scripts/tmp/"): shutil.rmtree("./scripts/tmp/")
-    if not os.path.exists("./scripts/tmp/"): os.makedirs("./scripts/tmp/")
+    tmp_dir = f"./scripts/tmp/{track.sha1}/"
+    if not os.path.exists(tmp_dir): os.makedirs(tmp_dir)
 
-    szs.extract(track.file_szs, "./scripts/tmp/track.szs")
-    subprocess.run(["abmatt", "convert", "./scripts/tmp/track.szs.d/map_model.brres",
-                    "to", "./scripts/tmp/map_model.obj"])
-    image = obj_to_png.render_top_view(obj_file="./scripts/tmp/map_model.obj")
+    szs.extract(track.file_szs, tmp_dir + "track.szs")
+    subprocess.run(["abmatt", "convert", tmp_dir + "track.szs.d/map_model.brres",
+                    "to", tmp_dir + "map_model.obj"])
+    image = obj_to_png.render_top_view(obj_file=tmp_dir + "map_model.obj")
+
+    try: shutil.rmtree(tmp_dir)
+    except: print(f"can't remove tmp directory for {track.name}")
 
     return image
 
@@ -91,8 +94,10 @@ async def on_ready():
                 for _ in range(6): embed.add_field(name="empty", value="empty")
 
             author_link = ""
-            if "," not in track.author: author_link = "http://wiki.tockdom.com/wiki/" + track.author
-            embed.set_author(name=track.author, url=author_link)
+            if "," not in track.author:
+                author_link = "http://wiki.tockdom.com/wiki/" + track.author.replace(" ", "_")
+            try: embed.set_author(name=track.author, url=author_link)
+            except: embed.set_author(name=track.author)
 
             track_technical_data = szs.analyze(track.file_szs)
 
