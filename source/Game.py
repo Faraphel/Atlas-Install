@@ -421,31 +421,6 @@ class Game:
             new_4_3.paste(img_lang_4_3, (0, 0), img_lang_4_3)
             new_4_3.save(dest_dir + f"/strapA_608x456{get_filename(get_nodir(file_lang))}.png")
 
-    def patch_tracks_zip(self):
-        all_tracks_zip_url = (ZIPBALL_DEV_BRANCH if self.gui.is_dev_version
-                              else ZIPBALL_MASTER_BRANCH) + "file/Track-WU8"
-
-        dl = requests.get(all_tracks_zip_url, allow_redirects=True, stream=True)
-        dl_size = int(dl.headers["Content-Length"])
-
-        if dl.status_code == 200:  # if page is found
-            with open("./file/Track-WU8.zip", "wb") as TrackWU8_zip:
-                for i, chunk in enumerate(dl.iter_content(chunk_size=CHUNK_SIZE)):
-                    TrackWU8_zip.write(chunk)
-                    TrackWU8_zip.flush()
-
-                    self.gui.progress(
-                        statut=self.gui.translate(
-                            "Downloading all tracks",
-                            f"{i * CHUNK_SIZE}/{dl_size} ({int(i * CHUNK_SIZE/dl_size * 100)}%)"),
-                        indeter=True)
-
-        with zipfile.ZipFile("./file/Track-WU8.zip") as TrackWU8_zip:
-            TrackWU8_zip.extractall("./file/Track-WU8/")
-
-        for track in self.ctconfig.all_tracks:
-            if os.path.exists(track.file_wu8) and not track.check_szs_sha1(): track.convert_wu8_to_szs()
-            else: raise CantConvertTrack()
 
     def patch_tracks(self) -> int:
         """
@@ -518,7 +493,7 @@ class Game:
                     thread_list[track_name].setDaemon(True)
                     thread_list[track_name].start()
                     self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
-                                                                "\n".join(thread_list.keys())), add=1)
+                                                                "\n".join(thread_list.keys())), add=1, indeter=False)
                     break
                 clean_process()
 
