@@ -1,7 +1,5 @@
 from tkinter import messagebox
 from PIL import Image
-import requests
-import zipfile
 import shutil
 import glob
 import json
