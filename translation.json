@@ -68,7 +68,9 @@
     "star": "étoile",
     "stars": "étoiles",
     "Mark all tracks from version": "Marquer toutes les courses de la version",
-    "None": "Aucune"
+    "None": "Aucune",
+    "MB": "Mo",
+    "GB": "Go"
   },
   "ge": {
     "Random: All tracks": "Zufällig: Alle Tracks",
