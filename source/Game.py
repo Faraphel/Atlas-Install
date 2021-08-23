@@ -148,7 +148,9 @@ class Game:
         self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
 
     @in_thread
-    def install_mod(self):
+    def install_mod(self): self.nothread_install_mod()
+
+    def nothread_install_mod(self):
         """
         Patch the game to install the mod
         """
@@ -348,7 +350,9 @@ class Game:
         finalise(f"./file/Common_R{bmglang}.txt", rbmgcommon)
 
     @in_thread
-    def patch_file(self):
+    def patch_file(self): self.nothread_patch_file()
+
+    def nothread_patch_file(self):
         """
         Prepare all files to install the mod (track, bmg text, descriptive image, ...)
         """

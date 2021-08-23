@@ -108,7 +108,9 @@ class Gui:
         self.frame_game_path_action.columnconfigure(1, weight=1)
 
         @in_thread
-        def use_path():
+        def use_path(): nothread_use_path()
+
+        def nothread_use_path():
             self.frame_action.grid_forget()
             try:
                 self.game.set_path(entry_game_path.get())
@@ -132,14 +134,9 @@ class Gui:
 
         @in_thread
         def do_everything():
-            use_path().join()
-            self.game.patch_file().join()
-            self.game.install_mod().join()
-
-            if messagebox.askyesno(self.translate("Experimental functionality"),
-                self.translate("This will extract the selected ROM, prepare files and install mod. "
-                               "Do you wish to continue ?")):
-                do_everything()
+            nothread_use_path()
+            self.game.nothread_patch_file()
+            self.game.nothread_install_mod()
 
         self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Do everything"), relief=RIDGE, command=do_everything)
         self.button_do_everything.grid(row=1, column=2, sticky="NEWS")
