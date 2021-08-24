@@ -119,12 +119,16 @@ class Gui:
                 self.frame_action.grid(row=3, column=1, sticky="NEWS")
             except RomAlreadyPatched:
                 messagebox.showerror(self.translate("Error"), self.translate("This game is already modded"))
+                raise RomAlreadyPatched
             except InvalidGamePath:
                 messagebox.showerror(self.translate("Error"), self.translate("The file path in invalid"))
+                raise InvalidGamePath
             except InvalidFormat:
                 messagebox.showerror(self.translate("Error"), self.translate("This game's format is invalid"))
+                raise InvalidFormat
             except:
                 self.log_error()
+                raise Exception
             finally:
                 self.progress(show=False)
 
