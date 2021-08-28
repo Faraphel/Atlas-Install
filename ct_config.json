@@ -381,7 +381,7 @@
           "special":"T64",
           "music":"T64",
           "new":false,
-          "score":0,
+          "score":2,
           "since_version":"0.10",
           "sha1":"608aca91319006e95e3b26526125823acf02e580"
         },
@@ -403,7 +403,7 @@
           "special":"T13",
           "music":"T13",
           "new":false,
-          "score":0,
+          "score":2,
           "since_version":"0.10",
           "sha1":"ec987228866efdbe2ae9e746080597f34022d18c"
         }
@@ -902,7 +902,7 @@
           "special":"T74",
           "music":"T74",
           "new":false,
-          "score":0,
+          "score":3,
           "since_version":"0.10",
           "sha1":"564a22ac241838164243b1e1918bc439f028b61b"
         }
@@ -1317,7 +1317,7 @@
           "special":"T54",
           "music":"T54",
           "new":false,
-          "score":0,
+          "score":3,
           "since_version":"0.10",
           "sha1":"3eb9922bb859df1b2b9c3c19ee55bdde86e74ec2"
         },
@@ -3644,6 +3644,7 @@
       "special":"T13",
       "new":true,
       "score":3,
+      "warning":1,
       "author":"Jasperr, ZPL",
       "since_version":"0.1",
       "sha1":"cfe5b318e83c2a73fde8a9ce4dbe274d645f897d"
