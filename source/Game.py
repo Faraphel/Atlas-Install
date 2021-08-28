@@ -251,6 +251,7 @@ class Game:
             self.convert_to(output_format)
 
             messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod has been installed !"))
+            exit()
 
         except:
             self.gui.log_error()
