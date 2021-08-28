@@ -380,7 +380,7 @@
           "author":"TheGamingBram",
           "special":"T64",
           "music":"T64",
-          "new":true,
+          "new":false,
           "score":0,
           "since_version":"0.10",
           "sha1":"608aca91319006e95e3b26526125823acf02e580"
@@ -391,7 +391,7 @@
           "author":"TheGamingBram",
           "special":"T11",
           "music":"T11",
-          "new":true,
+          "new":false,
           "score":3,
           "since_version":"0.10",
           "sha1":"d0eeb368229f942fb08abd5b31f6d949a3043ff2"
@@ -402,7 +402,7 @@
           "author":"TheGamingBram",
           "special":"T13",
           "music":"T13",
-          "new":true,
+          "new":false,
           "score":0,
           "since_version":"0.10",
           "sha1":"ec987228866efdbe2ae9e746080597f34022d18c"
@@ -413,18 +413,18 @@
       "name":"Switch2",
       "locked":false,
       "tracks":{
-        "0":{
+        "1":{
           "prefix": "Wii U",
           "name":"Water Park",
           "author":"TheGamingBram",
           "special":"T32",
           "music":"T32",
-          "new":true,
+          "new":false,
           "score":2,
           "since_version":"0.10",
           "sha1":"cc288d56e37dae4e16095fd5e8fa88a0ec19273f"
         },
-        "1":{
+        "2":{
           "prefix":"Wii U",
           "name":"Dolphin Shoals",
           "music":"T32",
@@ -435,15 +435,16 @@
           "since_version":"0.1",
           "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1"
         },
-        "2":{
-          "name":"_",
-          "music":"T32",
-          "special":"T32",
+        "0":{
+          "name":"Mario Circuit",
+          "prefix": "Wii U",
+          "author":"TGB",
+          "special":"T21",
+          "music":"T21",
           "new":false,
-          "score":0,
-          "author":"MrFluffy",
-          "since_version":"0.1",
-          "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1"
+          "score":2,
+          "since_version":"0.10",
+          "sha1":"a1bf675e64104b074fa39bb3549ddfce425d581e"
         },
         "3":{
           "name":"_",
@@ -1067,7 +1068,7 @@
           "author":"Squadaloo",
           "special":"T82",
           "music":"T82",
-          "new":true,
+          "new":false,
           "score":3,
           "since_version":"0.10",
           "sha1":"d9105f328644965af30dae869b5a157baec41584"
@@ -1281,16 +1282,16 @@
           "since_version":"0.1",
           "sha1":"a82fd8ff3f286b9ac8f01c5ab6c0e624aa157f95"
         },
-        "2":{
-          "prefix":"N64",
+        "2": {
           "name":"Choco Mountain",
-          "music":"T83",
+          "prefix": "N64",
+          "author":"TacoJosh",
           "special":"T83",
+          "music":"T83",
           "new":false,
-          "score":2,
-          "author":"Yoshidude4, FunkyDude15",
-          "since_version":"0.1",
-          "sha1":"030fa240fa8f33d53f6147aa2e5ce4d93c8978e9"
+          "score":3,
+          "since_version":"0.10",
+          "sha1":"7a7da2d0f10441fa8b4df0e8a7683ed17b220b79"
         },
         "3":{
           "prefix":"N64",
@@ -1315,7 +1316,7 @@
           "author":"ZPL",
           "special":"T54",
           "music":"T54",
-          "new":true,
+          "new":false,
           "score":0,
           "since_version":"0.10",
           "sha1":"3eb9922bb859df1b2b9c3c19ee55bdde86e74ec2"
@@ -1326,7 +1327,7 @@
           "author":"SquireTurnbolt",
           "special":"T24",
           "music":"T24",
-          "new":true,
+          "new":false,
           "score":3,
           "since_version":"0.10",
           "sha1":"858de1f40c710e7fad69e757a0a147ddd3596597"
@@ -1381,16 +1382,16 @@
           "since_version":"0.1",
           "sha1":"d34826c73d49c58c297224f30fb5930bf7c46a92"
         },
-        "2":{
-          "prefix":"SNES",
+        "2": {
           "name":"Ghost Valley 1",
-          "music":"T53",
+          "prefix": "SNES",
+          "author":"Slimeserver",
           "special":"T53",
+          "music":"T53",
           "new":false,
           "score":2,
-          "author":"Toxic Prime",
-          "since_version":"0.1",
-          "sha1":"37c3bb7864a2c829509eb8a03da5e7772c2955b6"
+          "since_version":"0.10",
+          "sha1":"60170ac752b2b18024ba1495a5d4edc733272aff"
         },
         "3":{
           "prefix":"SNES",
@@ -1410,15 +1411,15 @@
       "locked":false,
       "tracks":{
         "0":{
-          "prefix":"SNES",
           "name":"Mario Circuit 2",
-          "music":"T81",
-          "special":"T81",
-          "new":false,
-          "score":2,
+          "prefix": "SNES",
           "author":"ZPL",
-          "since_version":"0.1",
-          "sha1":"a7d28cfe98c26c4b4c80e1703c2f5812d05a903a"
+          "special":"T81",
+          "music":"T81",
+          "new":false,
+          "score":3,
+          "since_version":"0.10",
+          "sha1":"b675802a1470bfe20ade45bf9c1b6e0255af40d8"
         },
         "1":{
           "prefix":"SNES",
@@ -13240,7 +13241,7 @@
       "sha1":"7c37bf079c5d3bc38e99a3a7ef3c1af4b8800fd9"
     },
     {
-      "name":"CTR1 Nin Clan Road",
+      "name":"CTR Nin Clan Road",
       "author":"HackStarz",
       "special":"T11",
       "music":"T11",
@@ -13460,16 +13461,6 @@
       "sha1":"fa60cda275d39fb23ecd8ee135b77b2bde999c32"
     },
     {
-      "name":"Choco Mountain",
-      "author":"TacoJosh",
-      "special":"T83",
-      "music":"T83",
-      "new":true,
-      "score":3,
-      "since_version":"0.10",
-      "sha1":"7a7da2d0f10441fa8b4df0e8a7683ed17b220b79"
-    },
-    {
       "name":"Nebula Lava Factory",
       "author":"SpyKid, WiiLuigi, Florian",
       "special":"T43",
@@ -13517,7 +13508,7 @@
       "special":"T44",
       "music":"T44",
       "new":true,
-      "score":3,
+      "score":-2,
       "since_version":"0.10",
       "sha1":"c495616dd9235712cd476d5a68de7327c0912ff2"
     },
@@ -13622,26 +13613,6 @@
       "score":2,
       "since_version":"0.10",
       "sha1":"65e78fe7f5977624536bdc2b1ae5fefdd133bb7e"
-    },
-    {
-      "name":"Ghost Valley 1",
-      "author":"Slimeserver",
-      "special":"T53",
-      "music":"T53",
-      "new":true,
-      "score":2,
-      "since_version":"0.10",
-      "sha1":"60170ac752b2b18024ba1495a5d4edc733272aff"
-    },
-    {
-      "name":"Mario Circuit 2",
-      "author":"ZPL",
-      "special":"T81",
-      "music":"T81",
-      "new":true,
-      "score":3,
-      "since_version":"0.10",
-      "sha1":"b675802a1470bfe20ade45bf9c1b6e0255af40d8"
     },
     {
       "name":"Snowpeak Summit",
@@ -13780,7 +13751,7 @@
       "author": "Jopojelly",
       "special": "T11",
       "music": "T11",
-      "new": true,
+      "new":true,
       "score": 2,
       "warning": 1,
       "note": "bad kcl",
@@ -13836,17 +13807,6 @@
       "score":3,
       "since_version":"0.10",
       "sha1":"1537dacfafa987ab14e66c8d3386db8dcc59bc75"
-    },
-    {
-      "name":"Mario Circuit",
-      "prefix": "Wii U",
-      "author":"TGB",
-      "special":"T21",
-      "music":"T21",
-      "new":true,
-      "score":2,
-      "since_version":"0.10",
-      "sha1":"a1bf675e64104b074fa39bb3549ddfce425d581e"
     }
   ]
 }
