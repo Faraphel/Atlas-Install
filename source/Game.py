@@ -58,9 +58,9 @@ class NoGui:
         def get(self):
             return self.value
 
-    def progress(self, *args, **kwargs): print(args, kwargs)
-    def translate(self, *args, **kwargs): return ""
-    def log_error(self, *args, **kwargs): print(args, kwargs)
+    def progress(*args, **kwargs): print(args, kwargs)
+    def translate(*args, **kwargs): return ""
+    def log_error(*args, **kwargs): print(args, kwargs)
 
     is_dev_version = False
     button_install_mod = NoButton()
@@ -148,7 +148,9 @@ class Game:
         self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
 
     @in_thread
-    def install_mod(self):
+    def install_mod(self): self.nothread_install_mod()
+
+    def nothread_install_mod(self):
         """
         Patch the game to install the mod
         """
@@ -348,7 +350,9 @@ class Game:
         finalise(f"./file/Common_R{bmglang}.txt", rbmgcommon)
 
     @in_thread
-    def patch_file(self):
+    def patch_file(self): self.nothread_patch_file()
+
+    def nothread_patch_file(self):
         """
         Prepare all files to install the mod (track, bmg text, descriptive image, ...)
         """
@@ -373,7 +377,7 @@ class Game:
             for file in glob.glob(self.path + "/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
             # MenuSingle could be any other file, Common and Menu are all the same in all other files.
             self.patch_autoadd()
-            if self.patch_tracks() != 0: return
+            self.patch_tracks()
 
             self.gui.button_install_mod.grid(row=2, column=1, columnspan=2, sticky="NEWS")
             self.gui.button_install_mod.config(
@@ -419,11 +423,9 @@ class Game:
             new_4_3.paste(img_lang_4_3, (0, 0), img_lang_4_3)
             new_4_3.save(dest_dir + f"/strapA_608x456{get_filename(get_nodir(file_lang))}.png")
 
-
-    def patch_tracks(self) -> int:
+    def patch_tracks(self) -> None:
         """
         Download track's wu8 file and convert them to szs
-        :return: 0 if no error occured
         """
         max_process = self.gui.intvar_process_track.get()
         thread_list = {}
@@ -496,5 +498,3 @@ class Game:
                 clean_process()
 
         while clean_process() != 1: pass  # End the process if all process ended
-
-        return 0
