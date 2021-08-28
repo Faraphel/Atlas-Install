@@ -251,12 +251,12 @@ class Game:
             self.convert_to(output_format)
 
             messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod has been installed !"))
-            exit()
 
         except:
             self.gui.log_error()
         finally:
             self.gui.progress(show=False)
+            exit()
 
     def patch_autoadd(self, auto_add_dir: str = "./file/auto-add") -> None:
         """
@@ -486,6 +486,8 @@ class Game:
             else: return 0
 
         total_track = len(self.ctconfig.all_tracks)
+        self.gui.progress(max=total_track, indeter=False, show=True)
+
         for i, track in enumerate(self.ctconfig.all_tracks):
             while error_count <= error_max:
                 if len(thread_list) < max_process:
@@ -494,7 +496,7 @@ class Game:
                     thread_list[track_name].setDaemon(True)
                     thread_list[track_name].start()
                     self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
-                                                                "\n".join(thread_list.keys())), add=1, indeter=False)
+                                                                "\n".join(thread_list.keys())), add=1)
                     break
                 clean_process()
 
