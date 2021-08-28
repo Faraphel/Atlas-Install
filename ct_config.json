@@ -13261,16 +13261,6 @@
       "sha1":"b9fb1d5c35b50c719973f07860d5c37f46b66950"
     },
     {
-      "name":"Disney World Mayhem",
-      "author":"Lovelifeandtpose024",
-      "special":"T51",
-      "music":"T51",
-      "new":true,
-      "score":-2,
-      "since_version":"0.10",
-      "sha1":"c74f5d8cb1a91ab41bcfbf9cb7e47928df7a321f"
-    },
-    {
       "name":"Docking Bay",
       "author":"TL",
       "special":"T52",
@@ -13508,7 +13498,7 @@
       "special":"T44",
       "music":"T44",
       "new":true,
-      "score":-2,
+      "score":3,
       "since_version":"0.10",
       "sha1":"7207cb7f7a63160d187e90c9c6f371fe88fd410e"
     },
