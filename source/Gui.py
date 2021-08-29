@@ -11,7 +11,6 @@ from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat,
 from source.Option import Option
 from source.definition import sort_version_func
 
-
 with open("./translation.json", encoding="utf-8") as f:
     translation_dict = json.load(f)
 
@@ -27,6 +26,8 @@ class Gui:
         self.option.load_from_file("./option.json")
         self.game = Game(gui=self)
         self.game.ctconfig.load_ctconfig_file("./ct_config.json")
+        self.game.ctconfig.all_version.sort(key=sort_version_func)
+        latest_version: str = self.game.ctconfig.all_version[-1]
 
         self.is_dev_version = False  # Is this installer version a dev ?
         self.stringvar_language = StringVar(value=self.option.language)
@@ -38,7 +39,7 @@ class Gui:
         self.boolvar_use_1star_track = BooleanVar(value=True)
         self.boolvar_use_2star_track = BooleanVar(value=True)
         self.boolvar_use_3star_track = BooleanVar(value=True)
-        self.stringvar_mark_track_from_version = StringVar(value="None")
+        self.stringvar_mark_track_from_version = StringVar(value=latest_version)
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -70,7 +71,7 @@ class Gui:
         self.menu_marktrackversion = Menu(self.menu_trackselection, tearoff=0)
         self.menu_trackselection.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
         self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
-        for version in sorted(self.game.ctconfig.all_version, key=sort_version_func):
+        for version in self.game.ctconfig.all_version:
             self.menu_marktrackversion.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
 
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
