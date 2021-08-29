@@ -9,6 +9,7 @@ import os
 
 from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat, in_thread, VERSION_FILE_URL
 from source.Option import Option
+from source.definition import sort_version_func
 
 
 with open("./translation.json", encoding="utf-8") as f:
@@ -69,7 +70,7 @@ class Gui:
         self.menu_marktrackversion = Menu(self.menu_trackselection, tearoff=0)
         self.menu_trackselection.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
         self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
-        for version in self.game.ctconfig.all_version:
+        for version in sorted(self.game.ctconfig.all_version, key=sort_version_func):
             self.menu_marktrackversion.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
 
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
@@ -79,11 +80,10 @@ class Gui:
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
 
         self.menu_advanced.add_separator()
-        self.menu_advanced.add_command(label=self.translate("Number of track conversion process", " :"))
-        self.menu_advanced.add_radiobutton(label=self.translate("1 ", "process"), variable=self.intvar_process_track, value=1, command=lambda: self.option.edit("process_track", 1))
-        self.menu_advanced.add_radiobutton(label=self.translate("2 ", "process"), variable=self.intvar_process_track, value=2, command=lambda: self.option.edit("process_track", 2))
-        self.menu_advanced.add_radiobutton(label=self.translate("4 ", "process"), variable=self.intvar_process_track, value=4, command=lambda: self.option.edit("process_track", 4))
-        self.menu_advanced.add_radiobutton(label=self.translate("8 ", "process"), variable=self.intvar_process_track, value=8, command=lambda: self.option.edit("process_track", 8))
+        self.menu_trackconvprocess = Menu(self.menu_advanced, tearoff=0)
+        self.menu_advanced.add_cascade(label=self.translate("Number of track conversion process"), menu=self.menu_trackconvprocess)
+        for cpu in range(1, 9):
+            self.menu_trackconvprocess.add_radiobutton(label=self.translate(str(cpu), " ", "process"), variable=self.intvar_process_track, value=cpu, command=lambda: self.option.edit("process_track", self.intvar_process_track))
 
         self.frame_language = Frame(self.root)
         self.frame_language.grid(row=1, column=1, sticky="E")
