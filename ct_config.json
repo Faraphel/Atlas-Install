@@ -587,13 +587,13 @@
         "2":{
           "prefix":"3DS",
           "name":"Neo Bowser City",
-          "music":"T21",
+          "author":"ZPL",
           "special":"T21",
-          "new":false,
+          "music":"T21",
+          "new":true,
           "score":3,
-          "author":"Atlas",
-          "since_version":"0.1",
-          "sha1":"0a226160d53c887f5604520cab6ad4c7c20a3f20"
+          "since_version":"0.10",
+          "sha1":"ecdc38493f25083373ca0cea23e67aa4617ebf14"
         },
         "3":{
           "prefix":"3DS",
@@ -8597,16 +8597,6 @@
       "new":true,
       "since_version":"0.7",
       "sha1":"2ba8daf473f7a4053c3aaff54a84f60313b84001"
-    },
-    {
-      "name":"Neo Bowser City",
-      "author":"ZPL",
-      "special":"T21",
-      "music":"T21",
-      "new":true,
-      "score":3,
-      "since_version":"0.10",
-      "sha1":"ecdc38493f25083373ca0cea23e67aa4617ebf14"
     },
     {
       "name":"Neon Dimension",
