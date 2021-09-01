@@ -1538,7 +1538,7 @@
           "music":"T51",
           "special":"T51",
           "new":false,
-          "score":2,
+          "score":3,
           "author":"Luca",
           "since_version":"0.1",
           "sha1":"581762fee3bd1946a30b7c92d646ef39d97ac54f"
@@ -1549,7 +1549,7 @@
           "music":"T53",
           "special":"T53",
           "new":false,
-          "score":1,
+          "score":2,
           "author":"NintenYoshi",
           "since_version":"0.1",
           "sha1":"d9e4dccf5c2fe2e909305fe903a9df880ea7115e"
@@ -1566,7 +1566,7 @@
           "music":"T61",
           "special":"T61",
           "new":false,
-          "score":1,
+          "score":2,
           "author":"Likesorange",
           "since_version":"0.1",
           "sha1":"881ae0ecc662f81a99a231b64734c7ee1dde079a"
@@ -1675,7 +1675,7 @@
           "music":"T44",
           "special":"T44",
           "new":false,
-          "score":2,
+          "score":3,
           "author":"Bruh de la Boi",
           "since_version":"0.1",
           "sha1":"a21ae30c32a006f370f6c947468a1f7d4cef46c2"
@@ -1799,7 +1799,7 @@
       "author":"KiwiPowerGreen",
       "special":"T52",
       "music":"T52",
-      "score":2,
+      "score":3,
       "new":true,
       "since_version":"0.7",
       "sha1":"cf4f5ca8ceca4b21ef327f05d32d82fc2dbf8b13"
@@ -1920,7 +1920,7 @@
       "music":"T81",
       "special":"T81",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Toxic Prime",
       "since_version":"0.1",
       "sha1":"a8e0feacae95d03384f83cbd8de8e2fb8737e672"
@@ -2135,7 +2135,7 @@
       "music":"T51",
       "special":"T51",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"6dea567e6b20e8766215613b65885a652c9de88d"
@@ -2195,7 +2195,7 @@
       "music":"T44",
       "special":"T44",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Keiichi1996",
       "since_version":"0.1",
       "sha1":"c13b967d89269959c7243f40f6a36cc38fc5759c"
@@ -2296,7 +2296,7 @@
       "special":"T33",
       "music":"T33",
       "new":true,
-      "score":2,
+      "score":3,
       "since_version":"0.8",
       "sha1":"12c4f935840bbd556a7a8c2c04ee20f9c32444db"
     },
@@ -2427,7 +2427,7 @@
       "music":"T34",
       "special":"T34",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Scye, SpyKid",
       "since_version":"0.1",
       "sha1":"b797a6e527be1517ec7bf3b2bad2b17ab6c49d9c"
@@ -2449,7 +2449,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"eba34c6649cc6ad731d5c1c48fbb3afc97612a9b"
@@ -2561,7 +2561,7 @@
       "special":"T11",
       "music":"T42",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"4848f9247c9c61915d660955c59ac383a671def1"
     },
@@ -2570,7 +2570,7 @@
       "author":"Toxic Prime, ZPL",
       "special":"T32",
       "music":"T32",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"99bf2f2e2d7b7ec07367b49b4ca35ddcb42e4aeb"
@@ -2742,7 +2742,7 @@
       "author":"Retrostyle12",
       "special":"T51",
       "music":"T51",
-      "score":2,
+      "score":3,
       "new":true,
       "since_version":"0.7",
       "sha1":"08829944e96a66720a72e6aabb81adf46a0ddc56"
@@ -2813,7 +2813,7 @@
       "music":"T12",
       "special":"T12",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"636fcab0df6ab953881972e4e8cf1b71abfb979a"
@@ -2844,7 +2844,7 @@
       "author":"Vulcanus2",
       "special":"T43",
       "music":"T43",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"3222b498b1a2d15987476939eeecac0b41f815ed"
@@ -3228,7 +3228,7 @@
       "music":"T22",
       "special":"T22",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Warwick92xD",
       "since_version":"0.1",
       "sha1":"bbe8decc2ec72adf1181cb6dfdbd29c3ea4f1b04"
@@ -3511,7 +3511,7 @@
       "music":"T44",
       "special":"T44",
       "new":true,
-      "score":2,
+      "score":1,
       "author":"tZ",
       "since_version":"0.1",
       "sha1":"d212b2a4e76d369e5abbfb3327ffa425f74bef5f"
@@ -3704,7 +3704,7 @@
       "music":"T82",
       "special":"T82",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"7530d04d7ef75472eea29a6cc7a52b756d8708e9"
@@ -3725,7 +3725,7 @@
       "special":"T31",
       "music":"T31",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"3edacd7e4b0476187990ff3e563d8ae0f565604e"
     },
@@ -3754,7 +3754,7 @@
       "music":"T13",
       "special":"T13",
       "new":true,
-      "score":3,
+      "score":2,
       "warning":1,
       "author":"Jasperr, ZPL",
       "since_version":"0.1",
@@ -3829,7 +3829,7 @@
       "music":"T11",
       "special":"T11",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Potatoman44",
       "since_version":"0.1",
       "sha1":"765faa043286a0b6e3ac15c523e6e3b304bb8305"
@@ -3939,7 +3939,7 @@
       "author":"Supershyguy",
       "special":"T81",
       "music":"T44",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"db9ec5804f53e45b592ff59f9db192395a46713b"
@@ -4040,7 +4040,7 @@
       "music":"T14",
       "special":"T14",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Bri911",
       "since_version":"0.1",
       "sha1":"93e1df1d55b12b6cecaef438046347c516076c71"
@@ -4232,7 +4232,7 @@
       "music":"T13",
       "special":"T13",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Potatoman44",
       "since_version":"0.1",
       "sha1":"3ad26f8d8614dd21307d8b2dd5b7aee0df70076a"
@@ -4363,7 +4363,7 @@
       "special":"T33",
       "music":"T33",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"8063274fd61ed6d17052ad1e6bf8ae69b4a6ee11"
     },
@@ -4534,7 +4534,7 @@
       "author":"ChisSilver64",
       "special":"T63",
       "music":"T63",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"181d4f933b7749e95fb30e4aad8a8b01fb35f131"
@@ -5782,7 +5782,7 @@
       "author":"KevinVG207",
       "special":"T82",
       "music":"T82",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"55d309b91b227c88264c39bcf00901bb6024600d"
@@ -6269,7 +6269,7 @@
       "music":"T84",
       "special":"T84",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Warwick92xD",
       "since_version":"0.1",
       "sha1":"9f2e89d8d65eb5709c7b7750c172916fab70ba69"
@@ -6299,7 +6299,7 @@
       "author":"Potatoman44",
       "special":"T82",
       "music":"T82",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"2cffa88e39e3c6f900f93b195d24f0d252f365c5"
@@ -7527,7 +7527,7 @@
       "music":"T11",
       "special":"T11",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Retrostyle12",
       "since_version":"0.1",
       "sha1":"f0be3207d2eec36849b75725ccfdc343d8994b67"
@@ -8308,7 +8308,7 @@
       "author":"Toxic Prime",
       "special":"T44",
       "music":"T44",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"9c886176ec974758244f48e4c6cf7ea2e522fe16"
@@ -8786,7 +8786,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"fae1b20753ac06b6beff189f556b289e90d4d0b2"
@@ -9201,7 +9201,7 @@
       "special":"T63",
       "music":"T63",
       "new":true,
-      "score":3,
+      "score":2,
       "since_version":"0.8",
       "sha1":"7afcf338d21afa7b0b000edb906471b84bcb6727"
     },
@@ -9524,7 +9524,7 @@
       "music":"T81",
       "special":"T81",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Atlas",
       "since_version":"0.1",
       "sha1":"ef831500c31b3c478fa60330884f5918dc4f11ce"
@@ -10547,7 +10547,7 @@
       "special":"T61",
       "music":"T61",
       "new":true,
-      "score":2,
+      "score":3,
       "since_version":"0.8",
       "sha1":"8b4c75fcba60f398a822a7d469bd2c210e3f227c"
     },
@@ -10982,7 +10982,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Potatoman44",
       "since_version":"0.1",
       "sha1":"1347373df364d1bd1facaabf5cfda67cc83584fe"
@@ -11002,7 +11002,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Putinas",
       "since_version":"0.1",
       "sha1":"cac74214bdccb8cf728ab609d3fbdcaa644cca41"
@@ -11063,7 +11063,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"BillyNoodles",
       "since_version":"0.1",
       "sha1":"114a51706be50dcb413588991dfe2d48c6f39b1a"
@@ -11164,7 +11164,7 @@
       "music":"T44",
       "special":"T44",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"MrMartley64",
       "since_version":"0.1",
       "sha1":"7ccbfc760b4c330fba85647a992b3ca9b03a4977"
@@ -11391,7 +11391,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Ferv",
       "since_version":"0.1",
       "sha1":"0eb529b77084f9fe1bd044283bddafc9189f33ca"
@@ -11604,7 +11604,7 @@
       "music":"T41",
       "special":"T41",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"BigOto2",
       "since_version":"0.1",
       "sha1":"a3121dc43b0b6f3e987b63174309cc44fddfa01c"
@@ -12301,7 +12301,7 @@
       "author":"xBlue98, Florian",
       "special":"T83",
       "music":"T83",
-      "score":3,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"7c1cf7ffec5f4683c13bb623e5599e1cf16dff64"
@@ -12404,7 +12404,7 @@
       "author":"Man-O-Wii",
       "special":"T73",
       "music":"T73",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"f5bee4e9099059bfaa474e15e72443ce5c68cd76"
@@ -12601,7 +12601,7 @@
       "special":"T44",
       "music":"T44",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"8b3367bbeb5237c2c74e5d5d5e00cf307d9cf5ef"
     },
@@ -12660,7 +12660,7 @@
       "music":"T43",
       "special":"T43",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Keiichi1996",
       "since_version":"0.1",
       "sha1":"e215087530f748f0d8119979019e359a7e89dac1"
@@ -12690,7 +12690,7 @@
       "author":"Potatoman44",
       "special":"T34",
       "music":"T34",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"5edc7d76c7b0fa22573f0b06c8698a28bccff4df"
@@ -12950,7 +12950,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Toxic Prime, Rosalina Speedruns",
       "since_version":"0.1",
       "sha1":"6db1dff98594fac8771783c220ded267d386df8e"
@@ -13131,7 +13131,7 @@
       "music":"T21",
       "special":"T21",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"MysterE99",
       "since_version":"0.1",
       "sha1":"a66e7e5d8f342f2ce3733daad4e71201ac72a633"
@@ -13194,7 +13194,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Thondam",
       "since_version":"0.1",
       "sha1":"8bad1c25367a6e9e2b7517ef052977ab301a776f"
@@ -13205,7 +13205,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Thondam",
       "since_version":"0.1",
       "sha1":"c61c83ea4ab002a6dc48de0ddd65931165e202ff"
@@ -13245,7 +13245,7 @@
       "music":"T31",
       "special":"T31",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"LuigiM",
       "since_version":"0.1",
       "sha1":"f3316db784c926a5a88b7dd928c5611532d8b58b"
@@ -13266,7 +13266,7 @@
       "music":"T63",
       "special":"T63",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"NikoPlays",
       "since_version":"0.1",
       "sha1":"0ee746fabe39dcd3646bbf62342c853410b4dc1e"
@@ -13366,7 +13366,7 @@
       "music":"T71",
       "special":"T71",
       "new":true,
-      "score":2,
+      "score":1,
       "author":"Warwick92xD",
       "since_version":"0.1",
       "sha1":"b9c5d7df84c5eb034e4afa6bc462bd719e269b4d"
@@ -13416,7 +13416,7 @@
       "music":"T71",
       "special":"T71",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Keiichi1996",
       "since_version":"0.1",
       "sha1":"6042972935c93df9d67258679df82a04cf9de815"
@@ -13469,7 +13469,7 @@
       "author":"Ouroz",
       "special":"T83",
       "music":"T83",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"264d13ebb6d08008ca90114ce451d6f7370af58a"
@@ -13520,7 +13520,7 @@
       "music":"T63",
       "special":"T63",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"ChaosShadow23",
       "since_version":"0.1",
       "sha1":"029e67be4ddf236db11355f8e3134bcbb5297cc7"
@@ -13610,7 +13610,7 @@
       "music":"T33",
       "special":"T33",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Skipper93653",
       "since_version":"0.1",
       "sha1":"65d6e4920a9fdc81eee6a75464f274e74433b1e5"
@@ -13631,7 +13631,7 @@
       "music":"T11",
       "special":"T11",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Callum",
       "since_version":"0.1",
       "sha1":"60daef9131b84297ef6dc7b54e7afc2e29604fa7"
@@ -13703,7 +13703,7 @@
       "music":"T62",
       "special":"T62",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Sucht93a",
       "since_version":"0.1",
       "sha1":"f294a07f461413bb82f181e0d7ba86196830a589"
@@ -13713,7 +13713,7 @@
       "music":"T52",
       "special":"T52",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"lgmb",
       "since_version":"0.1",
       "sha1":"8cbfdf2d395b8ad958dd81fae2b0bc03ea0f0bd0"
@@ -13733,7 +13733,7 @@
       "music":"T52",
       "special":"T52",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Yoshivert99",
       "since_version":"0.1",
       "sha1":"94d753a0e092bf2e7daaaba4ab84bcf2e7126758"
