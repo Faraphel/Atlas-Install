@@ -399,7 +399,7 @@ class Game:
                               add=1)
             img.encode(file="./file/" + file, format=fc["img"][file])
 
-    def patch_img_desc(self, img_desc_path: str = "./file/img_desc", dest_dir: str = "./file") -> None:
+    def patch_img_desc(self, img_desc_path: str = "./file/img_desc/", dest_dir: str = "./file/") -> None:
         """
         patch descriptive image used when the game boot
         :param img_desc_path: directory where original part of the image are stored
@@ -409,7 +409,7 @@ class Game:
         il_16_9 = il.resize((832, 456))
         il_4_3 = il.resize((608, 456))
 
-        for file_lang in glob.glob(img_desc_path + "??.png"):
+        for file_lang in glob.glob(img_desc_path + "/??.png"):
             img_lang = Image.open(file_lang)
             img_lang_16_9 = img_lang.resize((832, 456))
             img_lang_4_3 = img_lang.resize((608, 456))
