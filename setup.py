@@ -54,7 +54,7 @@ options = {
         "includes": ["tkinter", "requests"],
         "include_msvcr": True,
         "packages": [],
-        "excludes": [],
+        "excludes": ["source"],
     }
 }
 
