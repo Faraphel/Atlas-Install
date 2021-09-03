@@ -100,7 +100,7 @@ region_id_to_name = {
     "E": "USA"
 }
 
-sort_version_func = lambda v: list(map(int, v.split('.')))
+get_version_from_string = lambda v: list(map(int, v.split('.')))
 
 def restart():
     """
