@@ -1,26 +1,10 @@
 {
-  "version":"0.9",
+  "version":"0.10",
   "cup":{
     "0":{
       "name":"Coupe Champignon",
       "locked":true,
-      "courses":{
-        "2":{
-          "name":"Gorge Champignon",
-          "music":null,
-          "special":null,
-          "new":false,
-          "author":"Nintendo",
-          "since_version":"0.1"
-        },
-        "3":{
-          "name":"Usine Toad",
-          "music":null,
-          "special":null,
-          "new":false,
-          "author":"Nintendo",
-          "since_version":"0.1"
-        },
+      "tracks":{
         "0":{
           "name":"Circuit Luigi",
           "music":null,
@@ -36,13 +20,29 @@
           "new":false,
           "author":"Nintendo",
           "since_version":"0.1"
+        },
+        "2":{
+          "name":"Gorge Champignon",
+          "music":null,
+          "special":null,
+          "new":false,
+          "author":"Nintendo",
+          "since_version":"0.1"
+        },
+        "3":{
+          "name":"Usine Toad",
+          "music":null,
+          "special":null,
+          "new":false,
+          "author":"Nintendo",
+          "since_version":"0.1"
         }
       }
     },
     "1":{
       "name":"Coupe Carapace",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GCN",
           "name":"Plage Peach",
@@ -84,7 +84,7 @@
     "2":{
       "name":"Coupe Fleur",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "name":"Circuit Mario",
           "music":null,
@@ -122,7 +122,7 @@
     "3":{
       "name":"Coupe Banane",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"N64",
           "name":"Royaume Sorbet",
@@ -164,7 +164,7 @@
     "4":{
       "name":"Coupe Etoile",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "name":"Circuit Daisy",
           "music":null,
@@ -202,7 +202,7 @@
     "5":{
       "name":"Coupe Feuille",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"DS",
           "name":"Désert du Soleil",
@@ -244,7 +244,7 @@
     "6":{
       "name":"Coupe Couronne",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "name":"Ruines Sec Sec",
           "music":null,
@@ -282,7 +282,7 @@
     "7":{
       "name":"Coupe Eclair",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"SNES",
           "name":"Circuit Mario 3",
@@ -324,7 +324,7 @@
     "8":{
       "name":"Aléatoire",
       "locked":true,
-      "courses":{
+      "tracks":{
         "0":{
           "name":"Aléatoire: Toutes les pistes",
           "music":null,
@@ -362,7 +362,7 @@
     "9":{
       "name":"Switch1",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"Wii U",
           "name":"Excitebike adventure",
@@ -377,54 +377,54 @@
         "1":{
           "prefix":"Wii U",
           "name":"Mario Kart Stadium",
-          "music":"T11",
-          "special":"T11",
+          "author":"TheGamingBram",
+          "special":"T64",
+          "music":"T64",
           "new":false,
-          "score":1,
-          "author":"Yosh",
-          "since_version":"0.1",
-          "sha1":"2a78d5d53b20b79b8c81f703358e1f47fc644123"
+          "score":2,
+          "since_version":"0.10",
+          "sha1":"608aca91319006e95e3b26526125823acf02e580"
         },
         "2":{
           "prefix":"Wii U",
           "name":"Sweet Sweet Canyon",
-          "music":"T12",
-          "special":"T12",
+          "author":"TheGamingBram",
+          "special":"T11",
+          "music":"T11",
           "new":false,
           "score":3,
-          "author":"HackStarz",
-          "since_version":"0.1",
-          "sha1":"ed38125f0a889f0a43e1929d232bc3d1cc80e629"
+          "since_version":"0.10",
+          "sha1":"d0eeb368229f942fb08abd5b31f6d949a3043ff2"
         },
         "3":{
-          "prefix":"Wii U",
           "name":"Thwomp Ruins",
-          "music":"T33",
-          "special":"T33",
+          "prefix":"Wii U",
+          "author":"TheGamingBram",
+          "special":"T13",
+          "music":"T13",
           "new":false,
-          "score":3,
-          "author":"Degeso",
-          "since_version":"0.1",
-          "sha1":"e098c2657db2449e3ad6dc0e83ddc6cd02bfac8f"
+          "score":2,
+          "since_version":"0.10",
+          "sha1":"ec987228866efdbe2ae9e746080597f34022d18c"
         }
       }
     },
     "10":{
       "name":"Switch2",
       "locked":false,
-      "courses":{
-        "0":{
+      "tracks":{
+        "1":{
           "prefix":"Wii U",
           "name":"Water Park",
-          "music":"T32",
+          "author":"TheGamingBram",
           "special":"T32",
+          "music":"T32",
           "new":false,
-          "score":1,
-          "author":"Yosh",
-          "since_version":"0.1",
-          "sha1":"f98c7e6c7dfe77d72c317f1ca228693544b9e6ed"
+          "score":2,
+          "since_version":"0.10",
+          "sha1":"cc288d56e37dae4e16095fd5e8fa88a0ec19273f"
         },
-        "1":{
+        "2":{
           "prefix":"Wii U",
           "name":"Dolphin Shoals",
           "music":"T32",
@@ -435,15 +435,16 @@
           "since_version":"0.1",
           "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1"
         },
-        "2":{
-          "name":"_",
-          "music":"T32",
-          "special":"T32",
+        "0":{
+          "name":"Mario Circuit",
+          "prefix":"Wii U",
+          "author":"TGB",
+          "special":"T21",
+          "music":"T21",
           "new":false,
-          "score":0,
-          "author":"MrFluffy",
-          "since_version":"0.1",
-          "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1"
+          "score":2,
+          "since_version":"0.10",
+          "sha1":"a1bf675e64104b074fa39bb3549ddfce425d581e"
         },
         "3":{
           "name":"_",
@@ -460,7 +461,7 @@
     "11":{
       "name":"DS31",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"3DS",
           "name":"Toad Circuit",
@@ -510,7 +511,7 @@
     "12":{
       "name":"DS32",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"3DS",
           "name":"Wuhu Loop",
@@ -560,7 +561,7 @@
     "13":{
       "name":"DS33",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"3DS",
           "name":"Piranha Plant Slide",
@@ -586,13 +587,13 @@
         "2":{
           "prefix":"3DS",
           "name":"Neo Bowser City",
-          "music":"T21",
+          "author":"ZPL",
           "special":"T21",
-          "new":false,
+          "music":"T21",
+          "new":true,
           "score":3,
-          "author":"Atlas",
-          "since_version":"0.1",
-          "sha1":"0a226160d53c887f5604520cab6ad4c7c20a3f20"
+          "since_version":"0.10",
+          "sha1":"ecdc38493f25083373ca0cea23e67aa4617ebf14"
         },
         "3":{
           "prefix":"3DS",
@@ -610,7 +611,7 @@
     "14":{
       "name":"DS34",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"3DS",
           "name":"DK Jungle",
@@ -660,7 +661,7 @@
     "15":{
       "name":"DS1",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"DS",
           "name":"Figure-8 Circuit",
@@ -710,7 +711,7 @@
     "16":{
       "name":"DS2",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"DS",
           "name":"Shroom Ridge",
@@ -760,7 +761,7 @@
     "17":{
       "name":"DS3",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"DS",
           "name":"Airship Fortress",
@@ -810,7 +811,7 @@
     "18":{
       "name":"GCN1",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GCN",
           "name":"Luigi Circuit",
@@ -860,7 +861,7 @@
     "19":{
       "name":"GCN2",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GCN",
           "name":"Daisy Cruiser",
@@ -895,22 +896,22 @@
           "sha1":"8719c6c193df683f66d94d7c3c2796b638a70edc"
         },
         "3":{
-          "prefix":"GCN",
           "name":"Yoshi Circuit",
-          "music":"T74",
+          "prefix":"GCN",
+          "author":"Tock",
           "special":"T74",
+          "music":"T74",
           "new":false,
           "score":3,
-          "author":"ZPL",
-          "since_version":"0.1",
-          "sha1":"3ae954953510df5329e83f36e6a1bf5fda486051"
+          "since_version":"0.10",
+          "sha1":"564a22ac241838164243b1e1918bc439f028b61b"
         }
       }
     },
     "20":{
       "name":"GCN3",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GCN",
           "name":"Wario Colosseum",
@@ -960,7 +961,7 @@
     "21":{
       "name":"GBA1",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GBA",
           "name":"Peach Circuit",
@@ -1010,7 +1011,7 @@
     "22":{
       "name":"GBA2",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GBA",
           "name":"Boo Lake",
@@ -1060,17 +1061,17 @@
     "23":{
       "name":"GBA3",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GBA",
           "name":"Sky Garden",
           "author":"Squadaloo",
           "special":"T82",
           "music":"T82",
-          "new":true,
+          "new":false,
           "score":3,
-          "since_version":"0.9",
-          "sha1":"4aaa850e7fd59893a2bcfad0b42ef0646000c95c"
+          "since_version":"0.10",
+          "sha1":"d9105f328644965af30dae869b5a157baec41584"
         },
         "1":{
           "prefix":"GBA",
@@ -1110,7 +1111,7 @@
     "24":{
       "name":"GBA4",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GBA",
           "name":"Ribbon Road",
@@ -1160,7 +1161,7 @@
     "25":{
       "name":"GBA5",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GBA",
           "name":"Bowser Castle 4",
@@ -1208,7 +1209,7 @@
     "26":{
       "name":"N641",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"N64",
           "name":"Luigi Raceway",
@@ -1258,7 +1259,7 @@
     "27":{
       "name":"N642",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"N64",
           "name":"Toad's Turnpike",
@@ -1282,15 +1283,15 @@
           "sha1":"a82fd8ff3f286b9ac8f01c5ab6c0e624aa157f95"
         },
         "2":{
-          "prefix":"N64",
           "name":"Choco Mountain",
-          "music":"T83",
+          "prefix":"N64",
+          "author":"TacoJosh",
           "special":"T83",
+          "music":"T83",
           "new":false,
-          "score":2,
-          "author":"Yoshidude4, FunkyDude15",
-          "since_version":"0.1",
-          "sha1":"030fa240fa8f33d53f6147aa2e5ce4d93c8978e9"
+          "score":3,
+          "since_version":"0.10",
+          "sha1":"7a7da2d0f10441fa8b4df0e8a7683ed17b220b79"
         },
         "3":{
           "prefix":"N64",
@@ -1308,28 +1309,28 @@
     "28":{
       "name":"N643",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
-          "prefix":"N64",
           "name":"Royal Raceway",
-          "music":"T74",
-          "special":"T74",
+          "prefix":"N64",
+          "author":"ZPL",
+          "special":"T54",
+          "music":"T54",
           "new":false,
           "score":3,
-          "author":"Baoulettes",
-          "since_version":"0.1",
-          "sha1":"a5b2509b1c3873989fc14b4b88d55077cd061523"
+          "since_version":"0.10",
+          "sha1":"3eb9922bb859df1b2b9c3c19ee55bdde86e74ec2"
         },
         "1":{
-          "prefix":"N64",
           "name":"Yoshi Valley",
-          "music":"T62",
-          "special":"T62",
+          "prefix":"N64",
+          "author":"SquireTurnbolt",
+          "special":"T24",
+          "music":"T24",
           "new":false,
-          "score":2,
-          "author":"MKDasher",
-          "since_version":"0.1",
-          "sha1":"cb5e0096d455cc466b665d62b1f16c85601f4aca"
+          "score":3,
+          "since_version":"0.10",
+          "sha1":"858de1f40c710e7fad69e757a0a147ddd3596597"
         },
         "2":{
           "prefix":"N64",
@@ -1358,7 +1359,7 @@
     "29":{
       "name":"SNES1",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"SNES",
           "name":"Mario Circuit 1",
@@ -1382,15 +1383,15 @@
           "sha1":"d34826c73d49c58c297224f30fb5930bf7c46a92"
         },
         "2":{
-          "prefix":"SNES",
           "name":"Ghost Valley 1",
-          "music":"T53",
+          "prefix":"SNES",
+          "author":"Slimeserver",
           "special":"T53",
+          "music":"T53",
           "new":false,
           "score":2,
-          "author":"Toxic Prime",
-          "since_version":"0.1",
-          "sha1":"37c3bb7864a2c829509eb8a03da5e7772c2955b6"
+          "since_version":"0.10",
+          "sha1":"60170ac752b2b18024ba1495a5d4edc733272aff"
         },
         "3":{
           "prefix":"SNES",
@@ -1408,17 +1409,17 @@
     "30":{
       "name":"SNES2",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
-          "prefix":"SNES",
           "name":"Mario Circuit 2",
-          "music":"T81",
-          "special":"T81",
-          "new":false,
-          "score":2,
+          "prefix":"SNES",
           "author":"ZPL",
-          "since_version":"0.1",
-          "sha1":"a7d28cfe98c26c4b4c80e1703c2f5812d05a903a"
+          "special":"T81",
+          "music":"T81",
+          "new":false,
+          "score":3,
+          "since_version":"0.10",
+          "sha1":"b675802a1470bfe20ade45bf9c1b6e0255af40d8"
         },
         "1":{
           "prefix":"SNES",
@@ -1458,7 +1459,7 @@
     "31":{
       "name":"SNES3",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"SNES",
           "name":"Koopa Beach 1",
@@ -1508,7 +1509,7 @@
     "32":{
       "name":"SNES4",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"SNES",
           "name":"Mario Circuit 4",
@@ -1537,7 +1538,7 @@
           "music":"T51",
           "special":"T51",
           "new":false,
-          "score":2,
+          "score":3,
           "author":"Luca",
           "since_version":"0.1",
           "sha1":"581762fee3bd1946a30b7c92d646ef39d97ac54f"
@@ -1548,7 +1549,7 @@
           "music":"T53",
           "special":"T53",
           "new":false,
-          "score":1,
+          "score":2,
           "author":"NintenYoshi",
           "since_version":"0.1",
           "sha1":"d9e4dccf5c2fe2e909305fe903a9df880ea7115e"
@@ -1558,14 +1559,14 @@
     "33":{
       "name":"SNES5",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"SNES",
           "name":"Vanilla Lake 2",
           "music":"T61",
           "special":"T61",
           "new":false,
-          "score":1,
+          "score":2,
           "author":"Likesorange",
           "since_version":"0.1",
           "sha1":"881ae0ecc662f81a99a231b64734c7ee1dde079a"
@@ -1606,7 +1607,7 @@
     "34":{
       "name":"MKT1",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"MKT",
           "name":"Kalimari Desert 2",
@@ -1656,7 +1657,7 @@
     "35":{
       "name":"MKT2",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"RMX",
           "name":"Rainbow Road 1",
@@ -1674,7 +1675,7 @@
           "music":"T44",
           "special":"T44",
           "new":false,
-          "score":2,
+          "score":3,
           "author":"Bruh de la Boi",
           "since_version":"0.1",
           "sha1":"a21ae30c32a006f370f6c947468a1f7d4cef46c2"
@@ -1704,7 +1705,7 @@
     "36":{
       "name":"DX1",
       "locked":false,
-      "courses":{
+      "tracks":{
         "0":{
           "prefix":"GP",
           "name":"Diamond City",
@@ -1798,7 +1799,7 @@
       "author":"KiwiPowerGreen",
       "special":"T52",
       "music":"T52",
-      "score":2,
+      "score":3,
       "new":true,
       "since_version":"0.7",
       "sha1":"cf4f5ca8ceca4b21ef327f05d32d82fc2dbf8b13"
@@ -1832,6 +1833,17 @@
       "author":"ChaosShadow23, Renegade Ciara",
       "since_version":"0.1",
       "sha1":"8c4eeed505f0862cbb490a0ac0bd334515895710"
+    },
+    {
+      "name":"Abandoned Laboratory",
+      "author":"Luigi Story",
+      "special":"T11",
+      "music":"T21",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "note":"some turn are really hard",
+      "sha1":"23cdc60056966036a34c2ab4561ebc65b10956d6"
     },
     {
       "name":"Abandoned Pier",
@@ -1908,7 +1920,7 @@
       "music":"T81",
       "special":"T81",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Toxic Prime",
       "since_version":"0.1",
       "sha1":"a8e0feacae95d03384f83cbd8de8e2fb8737e672"
@@ -2037,6 +2049,16 @@
       "sha1":"18e875934783fbe85d2b770d41bad99b9ff1c210"
     },
     {
+      "name":"Anatomical Excursion",
+      "author":"Man-O-Wii",
+      "special":"T72",
+      "music":"T72",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"4a9ba88bce7d5ecc53268355caf75076d9e63a2a"
+    },
+    {
       "prefix":"DKR",
       "name":"Ancient Lake",
       "music":"T83",
@@ -2113,7 +2135,7 @@
       "music":"T51",
       "special":"T51",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"6dea567e6b20e8766215613b65885a652c9de88d"
@@ -2173,7 +2195,7 @@
       "music":"T44",
       "special":"T44",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Keiichi1996",
       "since_version":"0.1",
       "sha1":"c13b967d89269959c7243f40f6a36cc38fc5759c"
@@ -2274,7 +2296,7 @@
       "special":"T33",
       "music":"T33",
       "new":true,
-      "score":2,
+      "score":3,
       "since_version":"0.8",
       "sha1":"12c4f935840bbd556a7a8c2c04ee20f9c32444db"
     },
@@ -2307,6 +2329,16 @@
       "author":"Odie5776, Maximiliano",
       "since_version":"0.1",
       "sha1":"394bb6781399c3d6905985bfc56a4ccdf982def3"
+    },
+    {
+      "name":"Azria Temple",
+      "author":"Jasperr, Terron",
+      "special":"T73",
+      "music":"T73",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"b3454bfdc986e9bc5f4779ed4eeb952eaaf4414b"
     },
     {
       "prefix":"GK7",
@@ -2395,7 +2427,7 @@
       "music":"T34",
       "special":"T34",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Scye, SpyKid",
       "since_version":"0.1",
       "sha1":"b797a6e527be1517ec7bf3b2bad2b17ab6c49d9c"
@@ -2417,7 +2449,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"eba34c6649cc6ad731d5c1c48fbb3afc97612a9b"
@@ -2529,7 +2561,7 @@
       "special":"T11",
       "music":"T42",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"4848f9247c9c61915d660955c59ac383a671def1"
     },
@@ -2538,7 +2570,7 @@
       "author":"Toxic Prime, ZPL",
       "special":"T32",
       "music":"T32",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"99bf2f2e2d7b7ec07367b49b4ca35ddcb42e4aeb"
@@ -2710,7 +2742,7 @@
       "author":"Retrostyle12",
       "special":"T51",
       "music":"T51",
-      "score":2,
+      "score":3,
       "new":true,
       "since_version":"0.7",
       "sha1":"08829944e96a66720a72e6aabb81adf46a0ddc56"
@@ -2781,7 +2813,7 @@
       "music":"T12",
       "special":"T12",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"636fcab0df6ab953881972e4e8cf1b71abfb979a"
@@ -2812,7 +2844,7 @@
       "author":"Vulcanus2",
       "special":"T43",
       "music":"T43",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"3222b498b1a2d15987476939eeecac0b41f815ed"
@@ -3082,6 +3114,26 @@
       "sha1":"61bd73b006faa27ab0571b284d10bb22b850ea64"
     },
     {
+      "name":"CT Jam Festival",
+      "author":"Justin",
+      "special":"T63",
+      "music":"T63",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"7c37bf079c5d3bc38e99a3a7ef3c1af4b8800fd9"
+    },
+    {
+      "name":"CTR Nin Clan Road",
+      "author":"HackStarz",
+      "special":"T11",
+      "music":"T11",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"568860d3da72a5435c521d929faa688ad467873d"
+    },
+    {
       "name":"Cacti Desert",
       "music":"T41",
       "special":"T11",
@@ -3102,25 +3154,24 @@
       "sha1":"5c3423ab20666f02cea3955b5f5eb1b6b5da4eaa"
     },
     {
-      "name":"Camp Kartigan",
-      "music":"T42",
-      "special":"T42",
+      "name":"Caliginous Valley",
+      "author":"Man-O-Wii, Trainiax",
+      "special":"T33",
+      "music":"T33",
       "new":true,
-      "score":3,
-      "author":"MrFluffy",
-      "since_version":"0.1",
-      "sha1":"f6dbefdcf16edde5b5367b17ea3d4625a8ffa0b0"
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"86462a7abc4718c0ee88c56faef7ad01d87a0895"
     },
     {
       "name":"Camp Kartigan",
-      "suffix":"Boost",
-      "music":"T42",
+      "author":"MrFluffy",
       "special":"T42",
+      "music":"T21",
       "new":true,
       "score":3,
-      "author":"MrFluffy",
-      "since_version":"0.1",
-      "sha1":"8bd477e25f6bd0116130cec329868f4b3ff1ba01"
+      "since_version":"0.10",
+      "sha1":"f6dbefdcf16edde5b5367b17ea3d4625a8ffa0b0"
     },
     {
       "name":"Canary Bay",
@@ -3177,7 +3228,7 @@
       "music":"T22",
       "special":"T22",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Warwick92xD",
       "since_version":"0.1",
       "sha1":"bbe8decc2ec72adf1181cb6dfdbd29c3ea4f1b04"
@@ -3446,11 +3497,21 @@
       "sha1":"6da331df61c81ee95e69b99fd76357b78e4d862c"
     },
     {
+      "name":"Cheese Land",
+      "author":"HackStarz",
+      "special":"T12",
+      "music":"T12",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"bc97dcc6504ff5b6321c9bab7f121848e1243016"
+    },
+    {
       "name":"Cheesebow Road",
       "music":"T44",
       "special":"T44",
       "new":true,
-      "score":2,
+      "score":1,
       "author":"tZ",
       "since_version":"0.1",
       "sha1":"d212b2a4e76d369e5abbfb3327ffa425f74bef5f"
@@ -3507,14 +3568,24 @@
       "sha1":"8e03f3d97acb10b7865aa9ce4605a2ed3612863d"
     },
     {
-      "name":"Chomp Canyon",
-      "music":"T83",
-      "special":"T83",
+      "name":"Chomp Around",
+      "author":"Slimeserver",
+      "special":"T14",
+      "music":"T14",
       "new":true,
       "score":2,
-      "author":"4TLPati",
-      "since_version":"0.1",
-      "sha1":"1d021952c3d2a85041eea139aab1a2acf31af5ba"
+      "since_version":"0.10",
+      "sha1":"04389c8b09de96e2990ca50ccc3026d687c8fd70"
+    },
+    {
+      "name":"Chomp Canyon",
+      "author":"Man-O-Wii",
+      "special":"T52",
+      "music":"T52",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"ae22c7d7da9f678b3caee6c6e99a56a54c742421"
     },
     {
       "name":"Chomp Valley",
@@ -3609,6 +3680,16 @@
       "sha1":"96c9a17ecd815b9b6c3e981aec094b5e26f6a3d1"
     },
     {
+      "name":"Circuit Boardway",
+      "author":"Aidan190903, Oh ok",
+      "special":"T44",
+      "music":"T44",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"1fec260ea48272809d438e503263fc612061818b"
+    },
+    {
       "name":"Circuit Speedway",
       "music":"T11",
       "special":"T11",
@@ -3623,7 +3704,7 @@
       "music":"T82",
       "special":"T82",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"7530d04d7ef75472eea29a6cc7a52b756d8708e9"
@@ -3644,7 +3725,7 @@
       "special":"T31",
       "music":"T31",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"3edacd7e4b0476187990ff3e563d8ae0f565604e"
     },
@@ -3673,7 +3754,8 @@
       "music":"T13",
       "special":"T13",
       "new":true,
-      "score":3,
+      "score":2,
+      "warning":1,
       "author":"Jasperr, ZPL",
       "since_version":"0.1",
       "sha1":"cfe5b318e83c2a73fde8a9ce4dbe274d645f897d"
@@ -3747,7 +3829,7 @@
       "music":"T11",
       "special":"T11",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Potatoman44",
       "since_version":"0.1",
       "sha1":"765faa043286a0b6e3ac15c523e6e3b304bb8305"
@@ -3857,7 +3939,7 @@
       "author":"Supershyguy",
       "special":"T81",
       "music":"T44",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"db9ec5804f53e45b592ff59f9db192395a46713b"
@@ -3958,7 +4040,7 @@
       "music":"T14",
       "special":"T14",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Bri911",
       "since_version":"0.1",
       "sha1":"93e1df1d55b12b6cecaef438046347c516076c71"
@@ -4006,13 +4088,13 @@
     },
     {
       "name":"Coral Cape",
-      "music":"T32",
+      "author":"Terron",
       "special":"T32",
+      "music":"T32",
       "new":true,
-      "score":2,
-      "author":"SpyKid",
-      "since_version":"0.1",
-      "sha1":"743271868d5b18f9cc7b3bacf09aa48dfc4357c1"
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"e47be757e228810826732618faf843bac58cfd52"
     },
     {
       "prefix":"CTR",
@@ -4096,6 +4178,16 @@
       "sha1":"24c7c43df08e8f3adc11e30ce5b822dcb0787b15"
     },
     {
+      "name":"Crossway Summit",
+      "author":"Man-O-Wii",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"4d50b6c77cc89b5101e0083395531d4218baaafb"
+    },
+    {
       "name":"Crystal Cove",
       "music":"T24",
       "special":"T24",
@@ -4140,10 +4232,20 @@
       "music":"T13",
       "special":"T13",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Potatoman44",
       "since_version":"0.1",
       "sha1":"3ad26f8d8614dd21307d8b2dd5b7aee0df70076a"
+    },
+    {
+      "name":"Curved Raceway",
+      "author":"Warwick92xD",
+      "special":"T54",
+      "music":"T54",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"b9fb1d5c35b50c719973f07860d5c37f46b66950"
     },
     {
       "name":"Custom Track Offices",
@@ -4261,7 +4363,7 @@
       "special":"T33",
       "music":"T33",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"8063274fd61ed6d17052ad1e6bf8ae69b4a6ee11"
     },
@@ -4407,15 +4509,15 @@
       "sha1":"276df89e5e8411ee314bf01816080481e93ac3bc"
     },
     {
-      "prefix":"SMS",
       "name":"Delfino Plaza",
-      "music":"T11",
+      "prefix":"SMS",
+      "author":"ChisSilver64, ANoob",
       "special":"T11",
+      "music":"T21",
       "new":true,
       "score":2,
-      "author":"ChisSilver64, ANoob",
-      "since_version":"0.1",
-      "sha1":"44124ccd380083adfc7de54a0ca17fdf858a02f1"
+      "since_version":"0.10",
+      "sha1":"65e78fe7f5977624536bdc2b1ae5fefdd133bb7e"
     },
     {
       "name":"Delfino Sky",
@@ -4432,7 +4534,7 @@
       "author":"ChisSilver64",
       "special":"T63",
       "music":"T63",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"181d4f933b7749e95fb30e4aad8a8b01fb35f131"
@@ -4661,7 +4763,7 @@
     },
     {
       "name":"Digitally Enhanced",
-      "suffix": "Boost",
+      "suffix":"Boost",
       "music":"T41",
       "special":"T41",
       "new":true,
@@ -4739,6 +4841,26 @@
       "author":"Toxic Prime",
       "since_version":"0.1",
       "sha1":"9bda240f345bbebed35dc0a79f568e4ee957337a"
+    },
+    {
+      "name":"Docking Bay",
+      "author":"TL",
+      "special":"T52",
+      "music":"T52",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"8d9a22f4bceb5760b0a9a1dae518e683e470e451"
+    },
+    {
+      "name":"Dolphin Harbor",
+      "author":"SpyKid, WiiLuigi",
+      "special":"T63",
+      "music":"T63",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"9bbdd6722758b1afcd7345a51cd92fac8bc947cd"
     },
     {
       "name":"Dom Dom Islands",
@@ -4912,6 +5034,16 @@
       "sha1":"64b3e05e70a8dc76a517f8130503733c04301ea0"
     },
     {
+      "name":"Dusty Outpost",
+      "author":"Toxic Amaranth",
+      "special":"T41",
+      "music":"T41",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"13c8664fbc1eb9261c9906c2f2ee6ec61f14b1a7"
+    },
+    {
       "name":"Dwight Loop",
       "author":"Toxic Prime",
       "special":"T72",
@@ -5000,6 +5132,16 @@
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"1da10c4a34b8b8ac714059247da5637630a51c59"
+    },
+    {
+      "name":"End Time",
+      "author":"Lovelifeandtpose024",
+      "special":"T84",
+      "music":"T84",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"3ff7126faeda0bb9c86537df51e2417cefa0182e"
     },
     {
       "name":"Entei Castle 1",
@@ -5484,6 +5626,16 @@
       "sha1":"67042a2cdae43b006da1387078d5ba78d81b0e4f"
     },
     {
+      "name":"Frigid Peaks",
+      "author":"Toxic Amaranth",
+      "special":"T24",
+      "music":"T24",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"6867540b8a791b827ffdd4b820918f4c5cff9268"
+    },
+    {
       "name":"Frigid Waterfalls",
       "author":"Fatality 94, ZPL",
       "special":"T61",
@@ -5502,6 +5654,16 @@
       "new":true,
       "since_version":"0.7",
       "sha1":"524b729211ca8213045e7dcb4dce28afacbde6a7"
+    },
+    {
+      "name":"Frostburn Falls",
+      "author":"NintenYoshi",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"f2b9512eb2e3f05cc6177b75b05cbf0502bb9e9a"
     },
     {
       "name":"Frosty Mountains",
@@ -5620,7 +5782,7 @@
       "author":"KevinVG207",
       "special":"T82",
       "music":"T82",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"55d309b91b227c88264c39bcf00901bb6024600d"
@@ -6011,6 +6173,16 @@
       "sha1":"5e677dbe3729409588bf1c0ca2dee7e0b923e3fa"
     },
     {
+      "name":"Grinch Stronghold",
+      "author":"Baoulettes",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"7e77534dc8cd8cc41edf42cf60a8db621a6c778a"
+    },
+    {
       "name":"Groudon's Mine",
       "author":"Warwick92xD",
       "special":"T24",
@@ -6097,7 +6269,7 @@
       "music":"T84",
       "special":"T84",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Warwick92xD",
       "since_version":"0.1",
       "sha1":"9f2e89d8d65eb5709c7b7750c172916fab70ba69"
@@ -6127,7 +6299,7 @@
       "author":"Potatoman44",
       "special":"T82",
       "music":"T82",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"2cffa88e39e3c6f900f93b195d24f0d252f365c5"
@@ -6265,6 +6437,16 @@
       "author":"TacoJosh",
       "since_version":"0.1",
       "sha1":"17502a75c71a9db1e693f6bc4a79ef9d0eb4a98e"
+    },
+    {
+      "name":"Honeyhive Drive",
+      "author":"Slimeserver",
+      "special":"T12",
+      "music":"T12",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"61a7668bf9fc935d08cf8d2946c8e270ba1b3d22"
     },
     {
       "name":"Horror Mansion",
@@ -6551,6 +6733,16 @@
       "sha1":"55409ee4e6b4add345b9a6b2aadb0b6a2b46d5b3"
     },
     {
+      "name":"Interstellar War",
+      "author":"Lovelifeandtpose024",
+      "special":"T34",
+      "music":"T34",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"d72dfaeed1eb1fda3774d37ffef492d606daeb8f"
+    },
+    {
       "name":"Into the Matrix",
       "author":"ZPL",
       "special":"T44",
@@ -6663,13 +6855,13 @@
     },
     {
       "name":"Jungle Glade",
-      "music":"T73",
+      "author":"Citrus",
       "special":"T73",
+      "music":"T73",
       "new":true,
       "score":3,
-      "author":"Citrus",
-      "since_version":"0.1",
-      "sha1":"a34da0a404f95e4f26593644f50d6e200ca3cce0"
+      "since_version":"0.10",
+      "sha1":"fac164137f79728bb3e0c0c5f81deda8e96cdd8c"
     },
     {
       "name":"Jungle Island",
@@ -6764,13 +6956,15 @@
     {
       "prefix":"Zelda TP",
       "name":"Kakariko Village",
-      "music":"T11",
+      "author":"Jopojelly",
       "special":"T11",
+      "music":"T11",
       "new":true,
       "score":2,
-      "author":"Jopojelly",
-      "since_version":"0.1",
-      "sha1":"6a6ef7799c4d36a608e8a840fb420624a84ef355"
+      "warning":1,
+      "note":"bad kcl",
+      "since_version":"0.10",
+      "sha1":"e135e0e8f5dffb1aa53341fcd9fb321f70f85d3f"
     },
     {
       "name":"Kamek's Crazy Castle",
@@ -6794,16 +6988,6 @@
     },
     {
       "name":"Kartwood Creek",
-      "music":"T12",
-      "special":"T12",
-      "new":true,
-      "score":2,
-      "author":"TokukuMKW, Riidefi",
-      "since_version":"0.1",
-      "sha1":"f668c133516ff347d5abe4f127da1b0100475577"
-    },
-    {
-      "name":"Kartwood Creek",
       "suffix":"Boost",
       "music":"T74",
       "special":"T74",
@@ -6812,6 +6996,16 @@
       "author":"TokukuMKW, Riidefi",
       "since_version":"0.1",
       "sha1":"0b4f37e6c060a9d1c4244c3fa8a0fad4d0df6792"
+    },
+    {
+      "name":"Kartwood Creek",
+      "author":"Toxic Amaranth",
+      "special":"T12",
+      "music":"T12",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"c22cd2c2614f9b6147d156fc2e6e7fef7514fb00"
     },
     {
       "name":"King Boo's Area",
@@ -7035,6 +7229,16 @@
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"13c74ba7a5abb9eac957f2f7a3c9e00c778368e2"
+    },
+    {
+      "name":"Lakeside Park",
+      "author":"Flint, Hman6516",
+      "special":"T73",
+      "music":"T73",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"e068192d272d5151a733ae6b4f85d7a173fecd89"
     },
     {
       "name":"Lakeside Raceway",
@@ -7323,7 +7527,7 @@
       "music":"T11",
       "special":"T11",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Retrostyle12",
       "since_version":"0.1",
       "sha1":"f0be3207d2eec36849b75725ccfdc343d8994b67"
@@ -7526,6 +7730,16 @@
       "sha1":"ee60299af40785e13ba97d546aa0d73ea60b292a"
     },
     {
+      "name":"Lunar Laboratory",
+      "author":"Toxic Amaranth",
+      "special":"T14",
+      "music":"T14",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"89b0394b1c0006e44e0eab65262f18a15fd9f8da"
+    },
+    {
       "name":"Lunar Lights",
       "music":"T44",
       "special":"T44",
@@ -7564,6 +7778,26 @@
       "author":"Luke Chandler",
       "since_version":"0.1",
       "sha1":"fe5a30c3c82011080dafe9a0eda364c00c0d36ad"
+    },
+    {
+      "name":"Lyncho Lair",
+      "author":"Slimeserver",
+      "special":"T43",
+      "music":"T43",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"22e4240740aebb42e3b42c12e5a4b4fee501ec45"
+    },
+    {
+      "name":"Lyncho Lair 2",
+      "author":"Slimeserver",
+      "special":"T43",
+      "music":"T43",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"78c2859c27d012771678eaeb954422621f37268d"
     },
     {
       "name":"Magic Track",
@@ -7657,13 +7891,13 @@
     },
     {
       "name":"Mansion of Madness",
-      "music":"T11",
-      "special":"T11",
-      "new":true,
-      "score":1,
       "author":"Sucht93a",
-      "since_version":"0.1",
-      "sha1":"01fbd9368f461520d371b6f755129020948193b7"
+      "special":"T11",
+      "music":"T53",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"15841473d9d83c93537ad74b750d136fda3b001e"
     },
     {
       "name":"Maple Realm",
@@ -7757,6 +7991,16 @@
       "sha1":"cab74ff0eabc9cc448baf3f58016161c2521e1af"
     },
     {
+      "name":"Mars Paradise",
+      "author":"Toxic Amaranth",
+      "special":"T31",
+      "music":"T31",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"abf82292256b1873ab95503b676816e20bb2a957"
+    },
+    {
       "name":"Meadow Isle",
       "author":"ZPL",
       "special":"T83",
@@ -7788,13 +8032,13 @@
     },
     {
       "name":"Melody Sanctum",
-      "music":"T33",
+      "author":"SpyKid",
       "special":"T33",
+      "music":"T33",
       "new":true,
       "score":3,
-      "author":"SpyKid",
-      "since_version":"0.1",
-      "sha1":"d3e7143de5255f573e0637eb01ab1bccbd907b22"
+      "since_version":"0.10",
+      "sha1":"17473492af301aee43a3d28d961bdeff84e2f716"
     },
     {
       "name":"Melting Magma Melee",
@@ -7805,6 +8049,16 @@
       "author":"Sucht93a",
       "since_version":"0.1",
       "sha1":"063583936ef52b9820c529d5c89aa7d8e8883210"
+    },
+    {
+      "name":"Merry Mountain",
+      "author":"Luca, NintenYoshi",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"3e8538fd1229e578786deec1a0d96851e6370e23"
     },
     {
       "name":"Michigan Int. Speedway",
@@ -8054,7 +8308,7 @@
       "author":"Toxic Prime",
       "special":"T44",
       "music":"T44",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"9c886176ec974758244f48e4c6cf7ea2e522fe16"
@@ -8203,13 +8457,13 @@
     },
     {
       "name":"Musical Cliff",
-      "music":"T13",
-      "special":"T13",
+      "author":"Luca",
+      "special":"T33",
+      "music":"T33",
       "new":true,
       "score":3,
-      "author":"Luca",
-      "since_version":"0.1",
-      "sha1":"6831ea605c774a67e3cbba415e59278b6fca015a"
+      "since_version":"0.10",
+      "sha1":"fa60cda275d39fb23ecd8ee135b77b2bde999c32"
     },
     {
       "prefix":"FZ",
@@ -8319,10 +8573,10 @@
       "author":"SpyKid, WiiLuigi, Florian",
       "special":"T43",
       "music":"T43",
-      "score":3,
       "new":true,
-      "since_version":"0.7",
-      "sha1":"b112b346546446f21fa3b348c55849775d70b6fa"
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"c7ed1e81b53b68b6cbeaf1c59b73e07ff4a28413"
     },
     {
       "name":"Negative Land",
@@ -8532,7 +8786,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"SpyKid",
       "since_version":"0.1",
       "sha1":"fae1b20753ac06b6beff189f556b289e90d4d0b2"
@@ -8760,6 +9014,16 @@
       "sha1":"222d846317564cc69fdd848a6b5c1fb1518f8418"
     },
     {
+      "name":"Paper Car and Bicycles",
+      "author":"BillyNoodles",
+      "special":"T13",
+      "music":"T13",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"161825385d949d7af5b5dfad4e70837885064a48"
+    },
+    {
       "name":"Papyrophobia",
       "music":"T72",
       "special":"T72",
@@ -8808,6 +9072,17 @@
       "author":"EdwardJW",
       "since_version":"0.1",
       "sha1":"f80d616496e6a39f769aba0d6d1767ffaf967afd"
+    },
+    {
+      "name":"Pauline Circuit",
+      "author":"SquireTurnbolt",
+      "special":"T31",
+      "music":"T31",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "note":"invisible car",
+      "sha1":"d418880bf1e666cbb710d371ee0c59d6c9550e30"
     },
     {
       "name":"Peach's Castle Raceway",
@@ -8926,7 +9201,7 @@
       "special":"T63",
       "music":"T63",
       "new":true,
-      "score":3,
+      "score":2,
       "since_version":"0.8",
       "sha1":"7afcf338d21afa7b0b000edb906471b84bcb6727"
     },
@@ -8989,6 +9264,17 @@
       "author":"MEGAKart69",
       "since_version":"0.1",
       "sha1":"7153ce0c82d0261d01261421965ad17e9dd22b1d"
+    },
+    {
+      "name":"Pipe Way",
+      "author":"AlexTG4517, Fynn93",
+      "special":"T32",
+      "music":"T32",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "note":"minimap glitched",
+      "sha1":"0d240dd7b95cd0faa872e8bc636b6db04ff3aaed"
     },
     {
       "name":"Pipeland Sewer",
@@ -9238,7 +9524,7 @@
       "music":"T81",
       "special":"T81",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Atlas",
       "since_version":"0.1",
       "sha1":"ef831500c31b3c478fa60330884f5918dc4f11ce"
@@ -9395,6 +9681,16 @@
       "author":"HackStarz",
       "since_version":"0.1",
       "sha1":"b666fe758b56c4c0cc61705203454220cf2c2e07"
+    },
+    {
+      "name":"Rainbow Road Revolution",
+      "author":"Luigi Hack Fan",
+      "special":"T44",
+      "music":"T44",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"7207cb7f7a63160d187e90c9c6f371fe88fd410e"
     },
     {
       "name":"Rainbow Rollercoaster",
@@ -9559,6 +9855,16 @@
       "sha1":"7de82a0c8077eae4ba30863293e9402be425a48d"
     },
     {
+      "name":"Riparian Paradise",
+      "author":"SPT",
+      "special":"T83",
+      "music":"T83",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"e0df4046422a7a555fd5c845e6564d2bc34d4b56"
+    },
+    {
       "name":"Riru's Course",
       "author":"Riru2025",
       "special":"T11",
@@ -9580,13 +9886,13 @@
     },
     {
       "name":"River Path",
-      "music":"T13",
+      "author":"Warwick92xD",
       "special":"T13",
+      "music":"T13",
       "new":true,
       "score":2,
-      "author":"Warwick92xD",
-      "since_version":"0.1",
-      "sha1":"24d368ecad4b535f370b52a822942a313a2c04aa"
+      "since_version":"0.10",
+      "sha1":"a438418e74126a92b0266495a131334b0ab69225"
     },
     {
       "name":"River of Dreams",
@@ -9707,6 +10013,16 @@
       "new":true,
       "since_version":"0.7",
       "sha1":"c7b9f875ccabcb850d66aa8f42d2ca41ec5f4735"
+    },
+    {
+      "name":"Rocky Loop",
+      "author":"Luigi Story",
+      "special":"T24",
+      "music":"T24",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"672f62b6f74d9e23d31903ccb6ce75d73931d533"
     },
     {
       "name":"Rocky Snake",
@@ -9843,6 +10159,16 @@
       "sha1":"4917bee1edfd574310a674b849201c4aa7dfdbd5"
     },
     {
+      "name":"Rube Goldberg Run",
+      "author":"pokey-424",
+      "special":"T11",
+      "music":"T11",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"087354e47c659847d616005e2393c7351b045c58"
+    },
+    {
       "name":"Rugged Island",
       "author":"HackerCop, SitBar",
       "special":"T83",
@@ -9881,6 +10207,17 @@
       "new":true,
       "since_version":"0.7",
       "sha1":"dcea0c938356fb7908a2ff899ef2bf9e04c032da"
+    },
+    {
+      "name":"Run",
+      "author":"razero",
+      "special":"T14",
+      "music":"T14",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "note":"some turn are hard",
+      "sha1":"c24f68ec0c20c5607da652e8afa717ad43e822ff"
     },
     {
       "name":"Rural Raceway",
@@ -10001,6 +10338,16 @@
       "author":"wiimaster35000vr, SpyKid",
       "since_version":"0.1",
       "sha1":"6a2c9d5858054fa8faaa22b54a44d078a2f61a5b"
+    },
+    {
+      "name":"Sandstone Cliffs",
+      "author":"Citrus",
+      "special":"T13",
+      "music":"T13",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"0b2860435d1149d968b941ed451b9f2ef77a5ec8"
     },
     {
       "name":"Sandy Citadel",
@@ -10175,6 +10522,16 @@
       "sha1":"4502a43c938ff5e0704a4ed8c958c892e72c062d"
     },
     {
+      "name":"Shaped Raceway",
+      "author":"Luigi Story, Toxic Amaranth",
+      "special":"T11",
+      "music":"T11",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"821c4ff15a22997129368281d188304f3101904d"
+    },
+    {
       "name":"Shell Speedway",
       "author":"Hman6516",
       "special":"T32",
@@ -10190,7 +10547,7 @@
       "special":"T61",
       "music":"T61",
       "new":true,
-      "score":2,
+      "score":3,
       "since_version":"0.8",
       "sha1":"8b4c75fcba60f398a822a7d469bd2c210e3f227c"
     },
@@ -10255,6 +10612,26 @@
       "score":2,
       "since_version":"0.9",
       "sha1":"c99e6088952af6a9f11bfc2fc68c7d8f8f73a554"
+    },
+    {
+      "name":"Shiver Mountain",
+      "author":"AlexTG4517",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"e6563d839e79edd8a7817ebb3f2ecaf407ca92f9"
+    },
+    {
+      "name":"Shizukesa Falls",
+      "author":"Madinstance",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"93fb5b96f6b6e384598245cd58081dce8de4b0d0"
     },
     {
       "name":"Shoobity Boop",
@@ -10389,6 +10766,16 @@
       "sha1":"a0117aa17493b5ef28b74757148da00b0618ca54"
     },
     {
+      "name":"Ski Vacation",
+      "author":"Stego",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"a2f829e23d2a2f475e1cdc498c695dc456393689"
+    },
+    {
       "name":"Sky Beach",
       "music":"T32",
       "special":"T32",
@@ -10489,6 +10876,16 @@
       "sha1":"7bca1036ec919e69eec469396dce0ebade7e59d9"
     },
     {
+      "name":"Slammer Park",
+      "author":"Luigi Story",
+      "special":"T11",
+      "music":"T11",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"da5f385a3f9a1e8afc0ceeccb93f982cd88e7747"
+    },
+    {
       "prefix":"CTR",
       "name":"Slide Coliseum",
       "music":"T64",
@@ -10585,17 +10982,27 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Potatoman44",
       "since_version":"0.1",
       "sha1":"1347373df364d1bd1facaabf5cfda67cc83584fe"
+    },
+    {
+      "name":"Snowpeak Summit",
+      "author":"Flint",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"3c45e2278e14690ae4d8c368234f640622445bea"
     },
     {
       "name":"Snowy Circuit",
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Putinas",
       "since_version":"0.1",
       "sha1":"cac74214bdccb8cf728ab609d3fbdcaa644cca41"
@@ -10656,7 +11063,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"BillyNoodles",
       "since_version":"0.1",
       "sha1":"114a51706be50dcb413588991dfe2d48c6f39b1a"
@@ -10757,7 +11164,7 @@
       "music":"T44",
       "special":"T44",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"MrMartley64",
       "since_version":"0.1",
       "sha1":"7ccbfc760b4c330fba85647a992b3ca9b03a4977"
@@ -10832,6 +11239,16 @@
       "new":true,
       "since_version":"0.7",
       "sha1":"467cf491ca92140c5e5f4bf153fd38aa1cbfd672"
+    },
+    {
+      "name":"Speedrun Grove",
+      "author":"Lovelifeandtpose024",
+      "special":"T83",
+      "music":"T83",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"6565dafd896568c2179db7de117e624874dcd6bc"
     },
     {
       "name":"Speedwagon Speedway",
@@ -10974,7 +11391,7 @@
       "music":"T23",
       "special":"T23",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Ferv",
       "since_version":"0.1",
       "sha1":"0eb529b77084f9fe1bd044283bddafc9189f33ca"
@@ -11114,13 +11531,13 @@
     },
     {
       "name":"Sundown Streets",
-      "music":"T42",
+      "author":"SpyKid",
       "special":"T42",
+      "music":"T31",
       "new":true,
       "score":3,
-      "author":"SpyKid",
-      "since_version":"0.1",
-      "sha1":"18746528c84bc5ca9808953bee9f93a1f38af572"
+      "since_version":"0.10",
+      "sha1":"ae52b5406e79810decd609e8d6a1303e6b8c5015"
     },
     {
       "name":"Sunny Island",
@@ -11187,7 +11604,7 @@
       "music":"T41",
       "special":"T41",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"BigOto2",
       "since_version":"0.1",
       "sha1":"a3121dc43b0b6f3e987b63174309cc44fddfa01c"
@@ -11224,13 +11641,13 @@
     },
     {
       "name":"Sunset Ridge",
-      "music":"T13",
+      "author":"ZPL",
       "special":"T13",
+      "music":"T13",
       "new":true,
       "score":2,
-      "author":"Vulcanus2, BigOto2",
-      "since_version":"0.1",
-      "sha1":"8ea7c8d239b2a509a1b68090737d87b62c606677"
+      "since_version":"0.10",
+      "sha1":"9304ca2bbe8758c063b991efdaeee60b0901a116"
     },
     {
       "name":"Sunset Rocks",
@@ -11281,6 +11698,16 @@
       "new":true,
       "since_version":"0.7",
       "sha1":"2de363cbbfb8ddcc3424caef07d4dfd4f553097b"
+    },
+    {
+      "name":"Super Marine World",
+      "author":"MrFluffy",
+      "special":"T61",
+      "music":"T32",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"1e2158409e12ccfcdafaa48fa4b32c4f91b221a1"
     },
     {
       "name":"Super Sky Courtyard",
@@ -11688,6 +12115,16 @@
       "sha1":"be556aaad8f097d006109c511b57b5a8c4976485"
     },
     {
+      "name":"Timber Rapids",
+      "author":"ZPL, Toxic Amaranth",
+      "special":"T73",
+      "music":"T73",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"d2cbe2c16a10713b1cca5fee124e64e56a065991"
+    },
+    {
       "name":"Timeshift Temple",
       "author":"Citrus, Riidefi",
       "special":"T41",
@@ -11864,7 +12301,7 @@
       "author":"xBlue98, Florian",
       "special":"T83",
       "music":"T83",
-      "score":3,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"7c1cf7ffec5f4683c13bb623e5599e1cf16dff64"
@@ -11967,7 +12404,7 @@
       "author":"Man-O-Wii",
       "special":"T73",
       "music":"T73",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.7",
       "sha1":"f5bee4e9099059bfaa474e15e72443ce5c68cd76"
@@ -12164,7 +12601,7 @@
       "special":"T44",
       "music":"T44",
       "new":true,
-      "score":1,
+      "score":2,
       "since_version":"0.8",
       "sha1":"8b3367bbeb5237c2c74e5d5d5e00cf307d9cf5ef"
     },
@@ -12223,7 +12660,7 @@
       "music":"T43",
       "special":"T43",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Keiichi1996",
       "since_version":"0.1",
       "sha1":"e215087530f748f0d8119979019e359a7e89dac1"
@@ -12253,7 +12690,7 @@
       "author":"Potatoman44",
       "special":"T34",
       "music":"T34",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"5edc7d76c7b0fa22573f0b06c8698a28bccff4df"
@@ -12319,16 +12756,6 @@
       "sha1":"c35e3b41b96f247a21a5940c500472e03487b002"
     },
     {
-      "name":"Up We Go",
-      "author":"KevinVG207",
-      "special":"T11",
-      "music":"T11",
-      "score":1,
-      "new":true,
-      "since_version":"0.8",
-      "sha1":"1bfee9bf784269756fe40d788d6a538136350a04"
-    },
-    {
       "name":"Upstream Wasteway",
       "author":"BillyNoodles",
       "special":"T14",
@@ -12363,10 +12790,10 @@
       "author":"ChisSilver64",
       "special":"T11",
       "music":"T11",
-      "score":2,
       "new":true,
-      "since_version":"0.7",
-      "sha1":"3a1d52f363bd33e02603d0d56c3dd3bacbb38757"
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"7d5fdb318491c7ad3cddc06a04fa7814482d1cd9"
     },
     {
       "name":"Vaporwave Voyage",
@@ -12429,6 +12856,16 @@
       "sha1":"e53bae05fe007a899d7d2effbf5545e45b317a16"
     },
     {
+      "name":"Verdant Wilds",
+      "author":"Bear, Lovelifeandtpose024",
+      "special":"T32",
+      "music":"T32",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"1537dacfafa987ab14e66c8d3386db8dcc59bc75"
+    },
+    {
       "name":"Vesuvio's Inferno",
       "author":"Bulzeeb",
       "special":"T34",
@@ -12437,6 +12874,16 @@
       "new":true,
       "since_version":"0.7",
       "sha1":"9a229e0de553fa744437472855b177e65aff0daa"
+    },
+    {
+      "name":"Vile Isle",
+      "author":"Citrus",
+      "special":"T84",
+      "music":"T84",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"d4a563a94bc2104b9fada50d41b2be1503112dbc"
     },
     {
       "name":"Village Passthrough",
@@ -12503,7 +12950,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Toxic Prime, Rosalina Speedruns",
       "since_version":"0.1",
       "sha1":"6db1dff98594fac8771783c220ded267d386df8e"
@@ -12670,11 +13117,21 @@
       "sha1":"9cb1c06f6978c2b16732578e54c95cfa3f989a7f"
     },
     {
+      "name":"Wario Bros. Stadium",
+      "author":"Bruh de la Boi",
+      "special":"T64",
+      "music":"T64",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"98ea48779726c0cfca3e83fe20f9f9cdc2008d1c"
+    },
+    {
       "name":"Wario Circuit",
       "music":"T21",
       "special":"T21",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"MysterE99",
       "since_version":"0.1",
       "sha1":"a66e7e5d8f342f2ce3733daad4e71201ac72a633"
@@ -12737,7 +13194,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Thondam",
       "since_version":"0.1",
       "sha1":"8bad1c25367a6e9e2b7517ef052977ab301a776f"
@@ -12748,7 +13205,7 @@
       "music":"T32",
       "special":"T32",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Thondam",
       "since_version":"0.1",
       "sha1":"c61c83ea4ab002a6dc48de0ddd65931165e202ff"
@@ -12774,11 +13231,21 @@
       "sha1":"954d2249a1ff6c99cd05840a8114880881b993b9"
     },
     {
+      "name":"Water Fall, Water Rise",
+      "author":"Slimeserver",
+      "special":"T32",
+      "music":"T32",
+      "new":true,
+      "score":3,
+      "since_version":"0.10",
+      "sha1":"abbe9e8726f85c8448d1c8658f2c231e793ab1a6"
+    },
+    {
       "name":"Water Island",
       "music":"T31",
       "special":"T31",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"LuigiM",
       "since_version":"0.1",
       "sha1":"f3316db784c926a5a88b7dd928c5611532d8b58b"
@@ -12799,7 +13266,7 @@
       "music":"T63",
       "special":"T63",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"NikoPlays",
       "since_version":"0.1",
       "sha1":"0ee746fabe39dcd3646bbf62342c853410b4dc1e"
@@ -12855,6 +13322,16 @@
       "sha1":"9387ffe44b3206dede4d369e03e8ac1c61bb7e6c"
     },
     {
+      "name":"Waterfall Terrain",
+      "author":"Warwick92xD",
+      "special":"T82",
+      "music":"T82",
+      "new":true,
+      "score":1,
+      "since_version":"0.10",
+      "sha1":"339743f9a0214a34f9f0d013c2290bcc26f1e459"
+    },
+    {
       "name":"Waterlake Raceway",
       "music":"T51",
       "special":"T51",
@@ -12889,7 +13366,7 @@
       "music":"T71",
       "special":"T71",
       "new":true,
-      "score":2,
+      "score":1,
       "author":"Warwick92xD",
       "since_version":"0.1",
       "sha1":"b9c5d7df84c5eb034e4afa6bc462bd719e269b4d"
@@ -12939,7 +13416,7 @@
       "music":"T71",
       "special":"T71",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Keiichi1996",
       "since_version":"0.1",
       "sha1":"6042972935c93df9d67258679df82a04cf9de815"
@@ -12992,7 +13469,7 @@
       "author":"Ouroz",
       "special":"T83",
       "music":"T83",
-      "score":1,
+      "score":2,
       "new":true,
       "since_version":"0.8",
       "sha1":"264d13ebb6d08008ca90114ce451d6f7370af58a"
@@ -13043,7 +13520,7 @@
       "music":"T63",
       "special":"T63",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"ChaosShadow23",
       "since_version":"0.1",
       "sha1":"029e67be4ddf236db11355f8e3134bcbb5297cc7"
@@ -13133,7 +13610,7 @@
       "music":"T33",
       "special":"T33",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"Skipper93653",
       "since_version":"0.1",
       "sha1":"65d6e4920a9fdc81eee6a75464f274e74433b1e5"
@@ -13154,10 +13631,20 @@
       "music":"T11",
       "special":"T11",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Callum",
       "since_version":"0.1",
       "sha1":"60daef9131b84297ef6dc7b54e7afc2e29604fa7"
+    },
+    {
+      "name":"Xmas Mayhem",
+      "author":"Man-O-Wii",
+      "special":"T23",
+      "music":"T23",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"7b90b2ab6db6bc98a001ba97a326af6f95e00c8d"
     },
     {
       "name":"Yankees' Octagon",
@@ -13216,7 +13703,7 @@
       "music":"T62",
       "special":"T62",
       "new":true,
-      "score":2,
+      "score":3,
       "author":"Sucht93a",
       "since_version":"0.1",
       "sha1":"f294a07f461413bb82f181e0d7ba86196830a589"
@@ -13226,7 +13713,7 @@
       "music":"T52",
       "special":"T52",
       "new":true,
-      "score":1,
+      "score":2,
       "author":"lgmb",
       "since_version":"0.1",
       "sha1":"8cbfdf2d395b8ad958dd81fae2b0bc03ea0f0bd0"
@@ -13246,7 +13733,7 @@
       "music":"T52",
       "special":"T52",
       "new":true,
-      "score":3,
+      "score":2,
       "author":"Yoshivert99",
       "since_version":"0.1",
       "sha1":"94d753a0e092bf2e7daaaba4ab84bcf2e7126758"
@@ -13270,6 +13757,16 @@
       "author":"Thed0ra7z",
       "since_version":"0.1",
       "sha1":"15d7b593cadc992d5ae88061e7246a0c74e4aac9"
+    },
+    {
+      "name":"Yoshi's Summer Safari",
+      "author":"Rex",
+      "special":"T52",
+      "music":"T52",
+      "new":true,
+      "score":2,
+      "since_version":"0.10",
+      "sha1":"8ec98350bf807cc0ef2848960c11b61e02346c63"
     },
     {
       "name":"Yoshi's Woolly Raceway",

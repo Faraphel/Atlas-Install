@@ -14,11 +14,12 @@
     "Wii game": "Jeu Wii",
     "Error": "Erreur",
     "The file path in invalid": "Le chemin de fichier est invalide",
+    "This game's format is invalid": "Le format du jeu est invalide",
     "Warning": "Attention",
     "This directory will be overwritten if you install the mod !\nAre you sure you want to use it ?": "Ce dossier sera écrasé si vous installer le mod !\nÊtes-vous sûr de vouloir l'utiliser ?",
     "Extracting the game...": "Extraction du jeu...",
     "This file type is not supported": "Le type de fichier n'est pas reconnu",
-    "This game is already modded, it is not recommended to use it to install the mod": "Cette ROM est déjà moddé, il est déconseillé de l'utiliser pour installer le mod",
+    "This game is already modded": "Cette ROM est déjà moddé",
     "Can't find game region.\nPAL region will be used.": "Impossible de trouver la région de votre jeu.\nla région PAL sera utilisé par défaut.",
     "Extract file": "Extraire le fichier",
     "Experimental functionality": "Fonctionnalité expérimentale",
@@ -67,13 +68,15 @@
     "star": "étoile",
     "stars": "étoiles",
     "Mark all tracks from version": "Marquer toutes les courses de la version",
-    "None": "Aucune"
+    "None": "Aucune",
+    "MB": "Mo",
+    "GB": "Go"
   },
   "ge": {
-    "Random: All tracks": "Zufällig: Alle Spuren",
-    "Random: Original tracks": "Zufällig: Original-Spuren",
+    "Random: All tracks": "Zufällig: Alle Tracks",
+    "Random: Original tracks": "Zufällig: Original-Tracks",
     "Random: Custom Tracks": "Zufällig: Custom Tracks",
-    "Random: New tracks": "Zufällig: Neue Spuren"
+    "Random: New tracks": "Zufällig: Neue Tracks"
   },
   "it": {
     "Random: All tracks": "Casuale: Tutte le tracce",

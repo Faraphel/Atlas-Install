@@ -1,0 +1,6 @@
+discord.py
+pygame
+PyOpenGL
+pywavefront
+selenium
+keyboard
