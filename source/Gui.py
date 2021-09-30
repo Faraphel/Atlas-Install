@@ -1,3 +1,4 @@
+from distutils.version import StrictVersion
 from tkinter import filedialog, ttk, messagebox
 from tkinter import *
 import traceback
@@ -8,7 +9,7 @@ import os
 
 from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat, in_thread, VERSION_FILE_URL
 from source.Option import Option
-from source.definition import get_version_from_string
+
 
 with open("./translation.json", encoding="utf-8") as f:
     translation_dict = json.load(f)
@@ -25,8 +26,6 @@ class Gui:
         self.option.load_from_file("./option.json")
         self.game = Game(gui=self)
         self.game.ctconfig.load_ctconfig_file("./ct_config.json")
-        self.game.ctconfig.all_version.sort(key=get_version_from_string)
-        latest_version: str = self.game.ctconfig.all_version[-1]
 
         self.is_dev_version = False  # Is this installer version a dev ?
         self.stringvar_language = StringVar(value=self.option.language)
@@ -38,7 +37,7 @@ class Gui:
         self.boolvar_use_1star_track = BooleanVar(value=True)
         self.boolvar_use_2star_track = BooleanVar(value=True)
         self.boolvar_use_3star_track = BooleanVar(value=True)
-        self.stringvar_mark_track_from_version = StringVar(value=latest_version)
+        self.stringvar_mark_track_from_version = StringVar(value="None")
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -80,10 +79,11 @@ class Gui:
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
 
         self.menu_advanced.add_separator()
-        self.menu_trackconvprocess = Menu(self.menu_advanced, tearoff=0)
-        self.menu_advanced.add_cascade(label=self.translate("Number of track conversion process"), menu=self.menu_trackconvprocess)
-        for cpu in range(1, 9):
-            self.menu_trackconvprocess.add_radiobutton(label=self.translate(str(cpu), " ", "process"), variable=self.intvar_process_track, value=cpu, command=lambda: self.option.edit("process_track", self.intvar_process_track))
+        self.menu_advanced.add_command(label=self.translate("Number of track conversion process", " :"))
+        self.menu_advanced.add_radiobutton(label=self.translate("1 ", "process"), variable=self.intvar_process_track, value=1, command=lambda: self.option.edit("process_track", 1))
+        self.menu_advanced.add_radiobutton(label=self.translate("2 ", "process"), variable=self.intvar_process_track, value=2, command=lambda: self.option.edit("process_track", 2))
+        self.menu_advanced.add_radiobutton(label=self.translate("4 ", "process"), variable=self.intvar_process_track, value=4, command=lambda: self.option.edit("process_track", 4))
+        self.menu_advanced.add_radiobutton(label=self.translate("8 ", "process"), variable=self.intvar_process_track, value=8, command=lambda: self.option.edit("process_track", 8))
 
         self.frame_language = Frame(self.root)
         self.frame_language.grid(row=1, column=1, sticky="E")
@@ -163,8 +163,8 @@ class Gui:
             github_version_data = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
             with open("./version", "rb") as f: local_version_data = json.load(f)
 
-            local_version = get_version_from_string(f"{local_version_data['version']}.{local_version_data['subversion']}")
-            github_version = get_version_from_string(f"{github_version_data['version']}.{github_version_data['subversion']}")
+            local_version = StrictVersion(f"{local_version_data['version']}.{local_version_data['subversion']}")
+            github_version = StrictVersion(f"{github_version_data['version']}.{github_version_data['subversion']}")
 
             if github_version > local_version: # if github version is newer than local version
                 if messagebox.askyesno(

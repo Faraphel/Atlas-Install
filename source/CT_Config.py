@@ -57,9 +57,10 @@ class CT_Config:
         self.all_version.add(track.since_version)
         self.all_tracks.append(track)
 
-    def create_ctfile(self, directory: str = "./file/", highlight_version: str = None) -> None:
+    def create_ctfile(self, directory: str = "./file/", highlight_version: str = None, sort_track_by: str = None) -> None:
         """
         create a ctfile configuration in a directory
+        :param sort_track_by: by which property will track be sorted
         :param highlight_version: highlight a specific version in light blue
         :param directory: create CTFILE.txt and RCTFILE.txt in this directory
         """
@@ -83,6 +84,8 @@ class CT_Config:
 
             track_list = self.search_tracks(not_value=True, values_list=True,
                                             only_unordered_track=True, score=star_value)
+            if sort_track_by:
+                track_list.sort(key=lambda track: track.get(sort_track_by))
 
             for i, track in enumerate(track_list):
                 if i % 4 == 0:

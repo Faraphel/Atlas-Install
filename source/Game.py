@@ -366,7 +366,10 @@ class Game:
             self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Converting files"),
                               max=max_step, step=0)
             self.gui.progress(statut=self.gui.translate("Configurating LE-CODE"), add=1)
-            self.ctconfig.create_ctfile(highlight_version=self.gui.stringvar_mark_track_from_version.get())
+            self.ctconfig.create_ctfile(
+                highlight_version=self.gui.stringvar_mark_track_from_version.get(),
+                sort_track_by=self.gui.stringvar_sort_track_by.get()
+            )
 
             self.gui.progress(statut=self.gui.translate("Creating ct_icon.png"), add=1)
             ct_icon = self.ctconfig.get_cticon()
