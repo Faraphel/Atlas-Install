@@ -38,6 +38,7 @@ class Gui:
         self.boolvar_use_2star_track = BooleanVar(value=True)
         self.boolvar_use_3star_track = BooleanVar(value=True)
         self.stringvar_mark_track_from_version = StringVar(value="None")
+        self.stringvar_sort_track_by = StringVar(value="name")
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -71,6 +72,10 @@ class Gui:
         self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
         for version in self.game.ctconfig.all_version:
             self.menu_marktrackversion.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
+        self.menu_sort_track_by = Menu(self.menu_trackselection, tearoff=0)
+        self.menu_trackselection.add_cascade(label=self.translate("Sort track by"), menu=self.menu_sort_track_by)
+        for param_name, param in [("Name", "name"), ("Version", "since_version"), ("Author", "author"), ("Score", "score"), ("Warning", "warning")]:
+            self.menu_sort_track_by.add_radiobutton(label=param_name, variable=self.stringvar_sort_track_by, value=param)
 
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)
