@@ -293,3 +293,14 @@ class Gui:
             return translated_text
 
         return "".join(texts)  # if no translation language is found
+
+    def is_using_official_config(self) -> bool:
+        """
+        :return: True if the parameter is the official one, False if it is customized
+        """
+        return (
+            self.boolvar_use_1star_track.get() is True and
+            self.boolvar_use_2star_track.get() is True and
+            self.boolvar_use_3star_track.get() is True and
+            self.stringvar_sort_track_by.get() == "name"
+        )

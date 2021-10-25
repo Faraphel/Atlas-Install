@@ -44,8 +44,10 @@ class NoGui:
     """
     'fake' gui if no gui are used for compatibility.
     """
+
     class NoButton:
         def grid(self, *args, **kwargs): pass
+
         def config(self, *args, **kwargs): pass
 
     class NoVariable:
@@ -59,7 +61,9 @@ class NoGui:
             return self.value
 
     def progress(*args, **kwargs): print(args, kwargs)
+
     def translate(*args, **kwargs): return ""
+
     def log_error(*args, **kwargs): print(args, kwargs)
 
     is_dev_version = False
@@ -148,7 +152,8 @@ class Game:
         self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
 
     @in_thread
-    def install_mod(self): self.nothread_install_mod()
+    def install_mod(self):
+        self.nothread_install_mod()
 
     def nothread_install_mod(self):
         """
@@ -184,7 +189,7 @@ class Game:
             extracted_file = []
             max_step += 4  # PATCH main.dol and PATCH lecode.bin, converting, changing ID
             self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Installing mod"), max=max_step,
-                             step=0)
+                              step=0)
 
             def replace_file(path, file, subpath="/") -> None:
                 """
@@ -273,8 +278,14 @@ class Game:
         Patch bmg file (text file)
         :param gamefile: an .szs file where file will be patched
         """
+
         NINTENDO_CWF_REPLACE = "Wiimmfi"
-        MAINMENU_REPLACE = f"MKWFaraphel {self.ctconfig.version}"
+        _customized = " (custom)"
+        MAINMENU_REPLACE = (
+            f"MKWFaraphel {self.ctconfig.version}" +
+            ("" if self.gui.is_using_official_config() else _customized)
+        )
+
         menu_replacement = {
             "CWF de Nintendo": NINTENDO_CWF_REPLACE,
             "Wi-Fi Nintendo": NINTENDO_CWF_REPLACE,
@@ -353,7 +364,8 @@ class Game:
         finalise(f"./file/Common_R{bmglang}.txt", rbmgcommon)
 
     @in_thread
-    def patch_file(self): self.nothread_patch_file()
+    def patch_file(self):
+        self.nothread_patch_file()
 
     def nothread_patch_file(self):
         """
@@ -452,7 +464,8 @@ class Game:
 
             if not self.gui.boolvar_disable_download.get():
                 if not os.path.exists(track.file_wu8):
-                    try: track.download_wu8(GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
+                    try:
+                        track.download_wu8(GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
                     except CantDownloadTrack:
                         error_count += 1
                         if error_count > error_max:  # Too much track wasn't correctly converted
@@ -466,10 +479,11 @@ class Game:
                                                                       f" ({error_count} / {error_max})"))
 
             if not track.check_szs_sha1():  # if sha1 of track's szs is incorrect or track's szs does not exist
-                if os.path.exists(track.file_wu8): track.convert_wu8_to_szs()
+                if os.path.exists(track.file_wu8):
+                    track.convert_wu8_to_szs()
                 else:
                     messagebox.showerror(self.gui.translate("Error"),
-                        self.gui.translate("Can't convert track.\nEnable track download and retry."))
+                                         self.gui.translate("Can't convert track.\nEnable track download and retry."))
                     raise CantConvertTrack()
             elif self.gui.boolvar_del_track_after_conv.get():
                 os.remove(track.file_wu8)
@@ -487,8 +501,10 @@ class Game:
                     if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
                 if not (any(thread_list.values())): return 1  # if there is no more process
 
-            if len(thread_list): return 1
-            else: return 0
+            if len(thread_list):
+                return 1
+            else:
+                return 0
 
         total_track = len(self.ctconfig.all_tracks)
         self.gui.progress(max=total_track, indeter=False, show=True)
