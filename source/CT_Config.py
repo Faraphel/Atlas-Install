@@ -85,7 +85,7 @@ class CT_Config:
             track_list = self.search_tracks(not_value=True, values_list=True,
                                             only_unordered_track=True, score=star_value)
             if sort_track_by:
-                track_list.sort(key=lambda track: track.get(sort_track_by))
+                track_list.sort(key=lambda track: getattr(track, sort_track_by, None))
 
             for i, track in enumerate(track_list):
                 if i % 4 == 0:
