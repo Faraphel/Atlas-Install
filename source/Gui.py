@@ -39,6 +39,7 @@ class Gui:
         self.boolvar_use_3star_track = BooleanVar(value=True)
         self.stringvar_mark_track_from_version = StringVar(value="None")
         self.stringvar_sort_track_by = StringVar(value="name")
+        self.boolvar_use_debug_mode = BooleanVar(value=False)
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -82,6 +83,7 @@ class Gui:
         self.menu_advanced.add_checkbutton(label=self.translate("Disable downloads"), variable=self.boolvar_disable_download, command=lambda: self.option.edit("disable_download", self.boolvar_disable_download))
         self.menu_advanced.add_checkbutton(label=self.translate("Delete track after wu8 to szs conversion"), variable=self.boolvar_del_track_after_conv, command=lambda: self.option.edit("del_track_after_conv", self.boolvar_del_track_after_conv))
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
+        self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"), variable=self.boolvar_use_debug_mode)
 
         self.menu_advanced.add_separator()
         self.menu_advanced.add_command(label=self.translate("Number of track conversion process", " :"))

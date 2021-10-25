@@ -237,13 +237,15 @@ class Game:
 
             shutil.copytree("./file/Track/", self.path + "/files/Race/Course/", dirs_exist_ok=True)
 
+            lpar_path = "./file/lpar-debug.txt" if self.gui.boolvar_use_debug_mode.get() else "./file/lpar-default.txt"
+
             lec.patch(
                 lecode_file=f"./file/lecode-{self.region}.bin",
                 dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
                 game_track_path=f"{self.path}/files/Race/Course/",
                 move_track_path=f"{self.path}/files/Race/Course/",
                 ctfile_path="./file/CTFILE.txt",
-                lpar_path="./file/lpar-default.txt",
+                lpar_path=lpar_path,
             )
 
             output_format = self.gui.stringvar_game_format.get()
