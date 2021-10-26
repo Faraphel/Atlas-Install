@@ -1,6 +1,10 @@
 import subprocess
+from . import error
+
+WCTCT_PATH = "./tools/szs/wctct"
 
 
+@error.better_wszst_error(wszst_tools=WCTCT_PATH)
 def patch_bmg(bmgs: list, ctfile: str = "./file/CTFILE.txt"):
     """
     Patch a bmg file with a ctfile with OVERWRITE option
@@ -11,5 +15,5 @@ def patch_bmg(bmgs: list, ctfile: str = "./file/CTFILE.txt"):
     bmg_cmd = []
     for bmg in bmgs: bmg_cmd.extend(["--patch-bmg", f"OVERWRITE={bmg}"])
     return subprocess.run(
-        ["tools/szs/wctct", "bmg", "--le-code", "--long", ctfile, *bmg_cmd],
+        [WCTCT_PATH, "bmg", "--le-code", "--long", ctfile, *bmg_cmd],
         creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE).stdout.decode()

@@ -1,6 +1,10 @@
 import subprocess
+from . import error
+
+WLECT_PATH = "./tools/szs/wlect"
 
 
+@error.better_wszst_error(wszst_tools=WLECT_PATH)
 def patch(lecode_file: str = f"./file/lecode-PAL.bin",
           dest_lecode_file: str = f"./files/rel/lecode-PAL.bin",
           game_track_path: str = "./files/Race/Course/",
@@ -17,6 +21,6 @@ def patch(lecode_file: str = f"./file/lecode-PAL.bin",
     :param lpar_path: where is the lpar_path (game modification like speed, speedometer, ...)
     """
     subprocess.run(
-        ["./tools/szs/wlect", "patch", lecode_file, "-od", dest_lecode_file, "--track-dir", game_track_path,
+        [WLECT_PATH, "patch", lecode_file, "-od", dest_lecode_file, "--track-dir", game_track_path,
          "--move-tracks", move_track_path, "--le-define", ctfile_path, "--lpar", lpar_path, "--overwrite"],
         creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
