@@ -148,7 +148,12 @@ class Track:
 
         if self.score:
             if 0 < self.score <= 3:
-                star_text = "★" * self.score + "☆" * (3 - self.score) + "!" * getattr(self, "warning", 0)
+                star_text = "★" * self.score + "☆" * (3 - self.score)
+                if 0 < self.warning <= 3:
+                    star_text += "!" * self.warning
+                if self.warning == 4:
+                    star_text += "d"
+
                 star_text = trackname_color[star_text] + " "
 
         if self.since_version == highlight_version:

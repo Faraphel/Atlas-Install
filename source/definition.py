@@ -91,6 +91,9 @@ trackname_color = {
     "★★★!!": "\\\\c{YOR6}★★★\\\\c{off}",
     "★★☆!!": "\\\\c{YOR6}★★☆\\\\c{off}",
     "★☆☆!!": "\\\\c{YOR6}★☆☆\\\\c{off}",
+    "★★★d": "\\\\c{BLUE}★★★\\\\c{off}",
+    "★★☆d": "\\\\c{BLUE}★★☆\\\\c{off}",
+    "★☆☆d": "\\\\c{BLUE}★☆☆\\\\c{off}",
 }
 
 region_id_to_name = {
