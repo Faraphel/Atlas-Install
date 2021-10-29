@@ -40,6 +40,7 @@ class Gui:
         self.stringvar_mark_track_from_version = StringVar(value="None")
         self.stringvar_sort_track_by = StringVar(value="name")
         self.boolvar_use_debug_mode = BooleanVar(value=False)
+        self.stringvar_mystuff_folder = StringVar(value=None)
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -84,6 +85,16 @@ class Gui:
         self.menu_advanced.add_checkbutton(label=self.translate("Delete track after wu8 to szs conversion"), variable=self.boolvar_del_track_after_conv, command=lambda: self.option.edit("del_track_after_conv", self.boolvar_del_track_after_conv))
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
         self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"), variable=self.boolvar_use_debug_mode)
+
+        def select_mystuff_folder(index, init=False):
+            self.stringvar_mystuff_folder.set(None)
+            if not init:
+                mystuff_dir = filedialog.askdirectory()
+                if mystuff_dir: self.stringvar_mystuff_folder.set(mystuff_dir)
+            self.menu_advanced.entryconfig(index, label=f"Apply MyStuff Folder ({self.stringvar_mystuff_folder.get()!r} selected)")
+
+        self.menu_advanced.add_command(command=lambda index=self.menu_advanced.index("end")+1: select_mystuff_folder(index))
+        select_mystuff_folder(self.menu_advanced.index("end"), init=True)
 
         self.menu_advanced.add_separator()
         self.menu_advanced.add_command(label=self.translate("Number of track conversion process", " :"))

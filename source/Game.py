@@ -187,9 +187,17 @@ class Game:
                                 for ffp in fs[fp][nf]: count_rf(path=f)
             ###
             extracted_file = []
-            max_step += 4  # PATCH main.dol and PATCH lecode.bin, converting, changing ID
-            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Installing mod"), max=max_step,
+            max_step += 5  # PATCH main.dol and PATCH lecode.bin, converting, changing ID, copying MyStuff Folder
+
+            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Copying MyStuff"), max=max_step,
                               step=0)
+            
+            mystuff_folder = self.gui.stringvar_mystuff_folder.get()
+            if mystuff_folder and mystuff_folder != "None":
+                shutil.copytree(mystuff_folder, self.path + "/files/", dirs_exist_ok=True)
+
+            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Installing mod"),
+                              add=1)
 
             def replace_file(path, file, subpath="/") -> None:
                 """
