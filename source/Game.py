@@ -155,115 +155,150 @@ class Game:
     def install_mod(self):
         self.nothread_install_mod()
 
-    def nothread_install_mod(self):
+    def count_patch_subfile_operation(self) -> int:
+        """
+        count all the step patching subfile will take (for the progress bar)
+        :return: number of step estimated
+        """
+        with open("./fs.json") as f:
+            fs = json.load(f)
+
+        # This part is used to estimate the max_step
+        extracted_file = []
+        max_step = 1
+
+        def count_rf(path):
+            nonlocal max_step
+            max_step += 1
+            if get_extension(path) == "szs":
+                if not (os.path.realpath(path) in extracted_file):
+                    extracted_file.append(os.path.realpath(path))
+                    max_step += 1
+
+        for fp in fs:
+            for f in glob.glob(self.path + "/files/" + fp, recursive=True):
+                if type(fs[fp]) == str:
+                    count_rf(path=f)
+                elif type(fs[fp]) == dict:
+                    for nf in fs[fp]:
+                        if type(fs[fp][nf]) == str:
+                            count_rf(path=f)
+                        elif type(fs[fp][nf]) == list:
+                            for ffp in fs[fp][nf]: count_rf(path=f)
+
+        return max_step
+
+    def install_patch_subfile(self) -> None:
+        """
+        patch subfile as indicated in the fs.json file (for file structure)
+        """
+        with open("./fs.json") as f:
+            fs = json.load(f)
+
+        extracted_file = []
+        self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Modifying subfile..."), add=1)
+
+        def replace_file(path, file, subpath="/") -> None:
+            """
+            Replace subfile in the .szs file
+            :param path: path to the .szs file
+            :param file: file to replace
+            :param subpath: directory between .szs file and file inside to replace
+            """
+            self.gui.progress(statut=self.gui.translate("Editing", "\n", get_nodir(path)), add=1)
+            extension = get_extension(path)
+
+            if extension == "szs":
+                if not (os.path.realpath(path) in extracted_file):
+                    szs.extract(file=path)
+                    extracted_file.append(os.path.realpath(path))
+
+                szs_extract_path = path + ".d"
+                if os.path.exists(szs_extract_path + subpath):
+                    if subpath[-1] == "/":
+                        shutil.copyfile(f"./file/{file}", szs_extract_path + subpath + file)
+                    else:
+                        shutil.copyfile(f"./file/{file}", szs_extract_path + subpath)
+
+            elif path[-1] == "/":
+                shutil.copyfile(f"./file/{file}", path + file)
+            else:
+                shutil.copyfile(f"./file/{file}", path)
+
+        for fp in fs:
+            for f in glob.glob(self.path + "/files/" + fp, recursive=True):
+                if type(fs[fp]) == str:
+                    replace_file(path=f, file=fs[fp])
+                elif type(fs[fp]) == dict:
+                    for nf in fs[fp]:
+                        if type(fs[fp][nf]) == str:
+                            replace_file(path=f, subpath=nf, file=fs[fp][nf])
+                        elif type(fs[fp][nf]) == list:
+                            for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
+
+        for file in extracted_file:
+            self.gui.progress(statut=self.gui.translate("Recompilating", "\n", get_nodir(file)), add=1)
+            szs.create(file=file)
+            if os.path.exists(file + ".d"):
+                shutil.rmtree(file + ".d")
+
+    def install_copy_mystuff(self) -> None:
+        """
+        copy MyStuff directory into the game before patching the game
+        """
+        self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Copying MyStuff..."), add=1)
+
+        mystuff_folder = self.gui.stringvar_mystuff_folder.get()
+        if mystuff_folder and mystuff_folder != "None":
+            shutil.copytree(mystuff_folder, self.path + "/files/", dirs_exist_ok=True)
+
+    def install_patch_maindol(self) -> None:
+        """
+        patch the main.dol file to allow the addition of LECODE.bin file
+        """
+        self.gui.progress(statut=self.gui.translate("Patch main.dol"), add=1)
+        wstrt.patch(path=self.path)
+
+    def install_patch_lecode(self) -> None:
+        """
+        configure and add the LECODE.bin file to the mod
+        """
+        self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
+
+        shutil.copytree("./file/Track/", self.path + "/files/Race/Course/", dirs_exist_ok=True)
+        lpar_path = "./file/lpar-debug.txt" if self.gui.boolvar_use_debug_mode.get() else "./file/lpar-default.txt"
+
+        lec.patch(
+            lecode_file=f"./file/lecode-{self.region}.bin",
+            dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
+            game_track_path=f"{self.path}/files/Race/Course/",
+            move_track_path=f"{self.path}/files/Race/Course/",
+            ctfile_path="./file/CTFILE.txt",
+            lpar_path=lpar_path,
+        )
+
+    def install_convert_rom(self) -> None:
+        """
+        convert the rom to the selected game format
+        """
+        output_format = self.gui.stringvar_game_format.get()
+        self.gui.progress(statut=self.gui.translate("Converting to", " ", output_format), add=1)
+        self.convert_to(output_format)
+
+    def nothread_install_mod(self) -> None:
         """
         Patch the game to install the mod
         """
         try:
-            with open("./fs.json") as f:
-                fs = json.load(f)
+            max_step = 5 + self.count_patch_subfile_operation()
+            # PATCH main.dol and PATCH lecode.bin, converting, changing ID, copying MyStuff Folder
 
-            # This part is used to estimate the max_step
-            extracted_file = []
-            max_step, step = 1, 0
-
-            def count_rf(path):
-                nonlocal max_step
-                max_step += 1
-                if get_extension(path) == "szs":
-                    if not (os.path.realpath(path) in extracted_file):
-                        extracted_file.append(os.path.realpath(path))
-                        max_step += 1
-
-            for fp in fs:
-                for f in glob.glob(self.path + "/files/" + fp, recursive=True):
-                    if type(fs[fp]) == str:
-                        count_rf(path=f)
-                    elif type(fs[fp]) == dict:
-                        for nf in fs[fp]:
-                            if type(fs[fp][nf]) == str:
-                                count_rf(path=f)
-                            elif type(fs[fp][nf]) == list:
-                                for ffp in fs[fp][nf]: count_rf(path=f)
-            ###
-            extracted_file = []
-            max_step += 5  # PATCH main.dol and PATCH lecode.bin, converting, changing ID, copying MyStuff Folder
-
-            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Copying MyStuff"), max=max_step,
-                              step=0)
-            
-            mystuff_folder = self.gui.stringvar_mystuff_folder.get()
-            if mystuff_folder and mystuff_folder != "None":
-                shutil.copytree(mystuff_folder, self.path + "/files/", dirs_exist_ok=True)
-
-            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Installing mod"),
-                              add=1)
-
-            def replace_file(path, file, subpath="/") -> None:
-                """
-                Replace subfile in the .szs file
-                :param path: path to the .szs file
-                :param file: file to replace
-                :param subpath: directory between .szs file and file inside to replace
-                """
-                self.gui.progress(statut=self.gui.translate("Editing", "\n", get_nodir(path)), add=1)
-                extension = get_extension(path)
-
-                if extension == "szs":
-                    if not (os.path.realpath(path) in extracted_file):
-                        szs.extract(file=path)
-                        extracted_file.append(os.path.realpath(path))
-
-                    szs_extract_path = path + ".d"
-                    if os.path.exists(szs_extract_path + subpath):
-                        if subpath[-1] == "/":
-                            shutil.copyfile(f"./file/{file}", szs_extract_path + subpath + file)
-                        else:
-                            shutil.copyfile(f"./file/{file}", szs_extract_path + subpath)
-
-                elif path[-1] == "/":
-                    shutil.copyfile(f"./file/{file}", path + file)
-                else:
-                    shutil.copyfile(f"./file/{file}", path)
-
-            for fp in fs:
-                for f in glob.glob(self.path + "/files/" + fp, recursive=True):
-                    if type(fs[fp]) == str:
-                        replace_file(path=f, file=fs[fp])
-                    elif type(fs[fp]) == dict:
-                        for nf in fs[fp]:
-                            if type(fs[fp][nf]) == str:
-                                replace_file(path=f, subpath=nf, file=fs[fp][nf])
-                            elif type(fs[fp][nf]) == list:
-                                for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
-
-            for file in extracted_file:
-                self.gui.progress(statut=self.gui.translate("Recompilating", "\n", get_nodir(file)), add=1)
-                szs.create(file=file)
-                if os.path.exists(file + ".d"):
-                    shutil.rmtree(file + ".d")
-
-            self.gui.progress(statut=self.gui.translate("Patch main.dol"), add=1)
-            wstrt.patch(path=self.path)
-
-            self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
-
-            shutil.copytree("./file/Track/", self.path + "/files/Race/Course/", dirs_exist_ok=True)
-
-            lpar_path = "./file/lpar-debug.txt" if self.gui.boolvar_use_debug_mode.get() else "./file/lpar-default.txt"
-
-            lec.patch(
-                lecode_file=f"./file/lecode-{self.region}.bin",
-                dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
-                game_track_path=f"{self.path}/files/Race/Course/",
-                move_track_path=f"{self.path}/files/Race/Course/",
-                ctfile_path="./file/CTFILE.txt",
-                lpar_path=lpar_path,
-            )
-
-            output_format = self.gui.stringvar_game_format.get()
-            self.gui.progress(statut=self.gui.translate("Converting to", " ", output_format), add=1)
-            self.convert_to(output_format)
+            self.gui.progress(statut=self.gui.translate("Installing mod..."), max=max_step, step=0)
+            self.install_copy_mystuff()
+            self.install_patch_subfile()
+            self.install_patch_maindol()
+            self.install_patch_lecode()
+            self.install_convert_rom()
 
             messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod has been installed !"))
 
