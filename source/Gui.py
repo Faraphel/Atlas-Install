@@ -34,13 +34,20 @@ class Gui:
         self.boolvar_del_track_after_conv = BooleanVar(value=self.option.del_track_after_conv)
         self.boolvar_dont_check_for_update = BooleanVar(value=self.option.dont_check_for_update)
         self.intvar_process_track = IntVar(value=self.option.process_track)
+
         self.boolvar_use_1star_track = BooleanVar(value=True)
         self.boolvar_use_2star_track = BooleanVar(value=True)
         self.boolvar_use_3star_track = BooleanVar(value=True)
+
         self.stringvar_mark_track_from_version = StringVar(value="None")
         self.stringvar_sort_track_by = StringVar(value="name")
         self.boolvar_use_debug_mode = BooleanVar(value=False)
+
         self.stringvar_mystuff_folder = StringVar(value=None)
+        self.stringvar_mystuff_music_folder = StringVar(value=None)
+        self.stringvar_mystuff_vehicle_folder = StringVar(value=None)
+        self.stringvar_mystuff_character_folder = StringVar(value=None)
+        self.stringvar_mystuff_original_track_folder = StringVar(value=None)
 
         self.root.title(self.translate("MKWFaraphel Installer"))
         self.root.resizable(False, False)
@@ -51,11 +58,13 @@ class Gui:
         self.menu_bar = Menu(self.root)
         self.root.config(menu=self.menu_bar)
 
+        #  LANGUAGE MENU
         self.menu_language = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Language"), menu=self.menu_language)
         self.menu_language.add_radiobutton(label="Français", variable=self.stringvar_language, value="fr", command=lambda: self.option.edit("language", "fr", need_restart=True))
         self.menu_language.add_radiobutton(label="English", variable=self.stringvar_language, value="en", command=lambda: self.option.edit("language", "en", need_restart=True))
 
+        #  OUTPUT FORMAT MENU
         self.menu_format = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Format"), menu=self.menu_format)
         self.menu_format.add_radiobutton(label=self.translate("FST (Directory)"), variable=self.stringvar_game_format, value="FST", command=lambda: self.option.edit("format", "FST"))
@@ -63,6 +72,7 @@ class Gui:
         self.menu_format.add_radiobutton(label="CISO", variable=self.stringvar_game_format, value="CISO", command=lambda: self.option.edit("format", "CISO"))
         self.menu_format.add_radiobutton(label="WBFS", variable=self.stringvar_game_format, value="WBFS", command=lambda: self.option.edit("format", "WBFS"))
 
+        # TRACK SELECTION MENU
         self.menu_trackselection = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Track selection"), menu=self.menu_trackselection)
         self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 1 ","star"), variable=self.boolvar_use_1star_track)
@@ -79,30 +89,55 @@ class Gui:
         for param_name, param in [("Name", "name"), ("Version", "since_version"), ("Author", "author"), ("Score", "score"), ("Warning", "warning")]:
             self.menu_sort_track_by.add_radiobutton(label=param_name, variable=self.stringvar_sort_track_by, value=param)
 
+        #  ADVANCED MENU
+        ## INSTALLER PARAMETER
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)
         self.menu_advanced.add_checkbutton(label=self.translate("Disable downloads"), variable=self.boolvar_disable_download, command=lambda: self.option.edit("disable_download", self.boolvar_disable_download))
         self.menu_advanced.add_checkbutton(label=self.translate("Delete track after wu8 to szs conversion"), variable=self.boolvar_del_track_after_conv, command=lambda: self.option.edit("del_track_after_conv", self.boolvar_del_track_after_conv))
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
+
+        self.menu_conv_process = Menu(self.menu_advanced, tearoff=0)
+        self.menu_advanced.add_cascade(label=self.translate("Number of track conversion process"), menu=self.menu_conv_process)
+
+        self.menu_conv_process.add_radiobutton(label=self.translate("1 ", "process"), variable=self.intvar_process_track, value=1, command=lambda: self.option.edit("process_track", 1))
+        self.menu_conv_process.add_radiobutton(label=self.translate("2 ", "process"), variable=self.intvar_process_track, value=2, command=lambda: self.option.edit("process_track", 2))
+        self.menu_conv_process.add_radiobutton(label=self.translate("4 ", "process"), variable=self.intvar_process_track, value=4, command=lambda: self.option.edit("process_track", 4))
+        self.menu_conv_process.add_radiobutton(label=self.translate("8 ", "process"), variable=self.intvar_process_track, value=8, command=lambda: self.option.edit("process_track", 8))
+
+        ## GAME PARAMETER
+        self.menu_advanced.add_separator()
+
         self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"), variable=self.boolvar_use_debug_mode)
 
-        def select_mystuff_folder(index, init=False):
-            self.stringvar_mystuff_folder.set(None)
-            if not init:
-                mystuff_dir = filedialog.askdirectory()
-                if mystuff_dir: self.stringvar_mystuff_folder.set(mystuff_dir)
-            self.menu_advanced.entryconfig(index, label=f"Apply MyStuff Folder ({self.stringvar_mystuff_folder.get()!r} selected)")
+        self.menu_mystuff = Menu(self.menu_advanced, tearoff=0)
+        self.menu_advanced.add_cascade(label=self.translate("MyStuff"), menu=self.menu_mystuff)
 
-        self.menu_advanced.add_command(command=lambda index=self.menu_advanced.index("end")+1: select_mystuff_folder(index))
-        select_mystuff_folder(self.menu_advanced.index("end"), init=True)
+        def add_menu_mystuff_command(stringvar: StringVar, label: str):
+            self.menu_mystuff.add_command()
+            index: int = self.menu_mystuff.index("end")
 
-        self.menu_advanced.add_separator()
-        self.menu_advanced.add_command(label=self.translate("Number of track conversion process", " :"))
-        self.menu_advanced.add_radiobutton(label=self.translate("1 ", "process"), variable=self.intvar_process_track, value=1, command=lambda: self.option.edit("process_track", 1))
-        self.menu_advanced.add_radiobutton(label=self.translate("2 ", "process"), variable=self.intvar_process_track, value=2, command=lambda: self.option.edit("process_track", 2))
-        self.menu_advanced.add_radiobutton(label=self.translate("4 ", "process"), variable=self.intvar_process_track, value=4, command=lambda: self.option.edit("process_track", 4))
-        self.menu_advanced.add_radiobutton(label=self.translate("8 ", "process"), variable=self.intvar_process_track, value=8, command=lambda: self.option.edit("process_track", 8))
+            def _func(init: bool = False):
+                stringvar.set(None)
+                if not init:
+                    mystuff_dir = filedialog.askdirectory()
+                    if mystuff_dir: stringvar.set(mystuff_dir)
 
+                self.menu_mystuff.entryconfig(index, label=f"Apply {label} Folder ({stringvar.get()!r} selected)")
+
+            _func(init=True)
+            self.menu_mystuff.entryconfig(index, command=_func)
+
+            return _func
+
+        add_menu_mystuff_command(self.stringvar_mystuff_folder, "MyStuff")
+        self.menu_mystuff.add_separator()
+        add_menu_mystuff_command(self.stringvar_mystuff_music_folder, "MyStuff Music")
+        add_menu_mystuff_command(self.stringvar_mystuff_character_folder, "MyStuff Character")
+        add_menu_mystuff_command(self.stringvar_mystuff_vehicle_folder, "MyStuff Vehicle")
+        add_menu_mystuff_command(self.stringvar_mystuff_original_track_folder, "MyStuff Original Tracks")
+
+        # GUI
         self.frame_language = Frame(self.root)
         self.frame_language.grid(row=1, column=1, sticky="E")
 
