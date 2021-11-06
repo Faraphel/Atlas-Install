@@ -244,13 +244,31 @@ class Game:
 
     def install_copy_mystuff(self) -> None:
         """
-        copy MyStuff directory into the game before patching the game
+        copy MyStuff directory into the game *before* patching the game
         """
         self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Copying MyStuff..."), add=1)
 
         mystuff_folder = self.gui.stringvar_mystuff_folder.get()
         if mystuff_folder and mystuff_folder != "None":
-            shutil.copytree(mystuff_folder, self.path + "/files/", dirs_exist_ok=True)
+
+            # replace game's file by files with the same name in the MyStuff root
+            mystuff_files = {}
+            for mystuff_file in glob.glob(f"{mystuff_folder}/*"):   # for every file at the root of the mystuff folder
+                basename = os.path.basename(mystuff_file)
+
+                if os.path.isfile(mystuff_file):
+                    #  replace the game files with the file at mystuff's root
+                    mystuff_files[basename] = mystuff_file
+                else:
+                    #  if this is a dict, simply copy it into the game files
+                    shutil.copytree(mystuff_file, f"{self.path}/files/{basename}/", dirs_exist_ok=True)
+
+            for game_file in glob.glob(f"{self.path}/files/**/*", recursive=True):
+                basename = os.path.basename(game_file)
+                if basename in mystuff_files:
+                    mystuff_file = mystuff_files[basename]
+                    shutil.copy(mystuff_file, game_file)
+                    print(f"copied {mystuff_file} to {game_file}")
 
     def install_patch_maindol(self) -> None:
         """
