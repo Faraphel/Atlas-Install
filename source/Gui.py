@@ -1,14 +1,16 @@
 from distutils.version import StrictVersion
 from tkinter import filedialog, ttk, messagebox
 from tkinter import *
+import webbrowser
 import traceback
 import requests
 import zipfile
 import json
-import os
 
-from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat, in_thread, VERSION_FILE_URL
+from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat
 from source.Option import Option
+
+from .definition import *
 
 
 with open("./translation.json", encoding="utf-8") as f:
@@ -131,6 +133,12 @@ class Gui:
             return _func
 
         add_menu_mystuff_command(self.stringvar_mystuff_folder, "MyStuff")
+
+        #  HELP MENU
+        self.menu_help = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Help"), menu=self.menu_help)
+        self.menu_help.add_command(label="Github Wiki", command=lambda: webbrowser.open(GITHUB_HELP_PAGE_URL))
+        self.menu_help.add_command(label="Discord", command=lambda: webbrowser.open(DISCORD_URL))
 
         # GUI
         self.frame_language = Frame(self.root)

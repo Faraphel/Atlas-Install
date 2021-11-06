@@ -9,6 +9,8 @@ GITHUB_DEV_BRANCH = f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/dev/
 ZIPBALL_MASTER_BRANCH = f"https://github.com/{GITHUB_REPOSITORY}/zipball/master/"
 ZIPBALL_DEV_BRANCH = f"https://github.com/{GITHUB_REPOSITORY}/zipball/dev/"
 VERSION_FILE_URL = GITHUB_MASTER_BRANCH + "version"
+GITHUB_HELP_PAGE_URL = f"https://github.com/{GITHUB_REPOSITORY}/wiki/help"
+DISCORD_URL = "https://discord.gg/HEYW5v8ZCd"
 
 CHUNK_SIZE: int = 524288  # chunk size used to download file
 
