@@ -131,11 +131,6 @@ class Gui:
             return _func
 
         add_menu_mystuff_command(self.stringvar_mystuff_folder, "MyStuff")
-        self.menu_mystuff.add_separator()
-        add_menu_mystuff_command(self.stringvar_mystuff_music_folder, "MyStuff Music")
-        add_menu_mystuff_command(self.stringvar_mystuff_character_folder, "MyStuff Character")
-        add_menu_mystuff_command(self.stringvar_mystuff_vehicle_folder, "MyStuff Vehicle")
-        add_menu_mystuff_command(self.stringvar_mystuff_original_track_folder, "MyStuff Original Tracks")
 
         # GUI
         self.frame_language = Frame(self.root)
