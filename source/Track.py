@@ -15,8 +15,11 @@ def check_file_sha1(file: str, excepted_sha1: str) -> int:
     :return: 1 if yes, 0 if no
     """
     if not os.path.exists(file): return 0
-    if szs.sha1(file=file) == excepted_sha1: return 1
-    else: return 0
+    calculated_sha1 = szs.sha1(file=file)
+    if calculated_sha1 == excepted_sha1: return 1
+    else:
+        print(f"incorrect sha1 for {file} {calculated_sha1} : (expected {excepted_sha1})")
+        return 0
 
 
 class Track:

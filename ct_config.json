@@ -394,7 +394,7 @@
           "new":false,
           "score":3,
           "since_version":"0.10",
-          "sha1":"d0eeb368229f942fb08abd5b31f6d949a3043ff2"
+          "sha1":"ed38125f0a889f0a43e1929d232bc3d1cc80e629"
         },
         "3":{
           "name":"Thwomp Ruins",
@@ -405,7 +405,7 @@
           "new":false,
           "score":2,
           "since_version":"0.10",
-          "sha1":"ec987228866efdbe2ae9e746080597f34022d18c"
+          "sha1":"e098c2657db2449e3ad6dc0e83ddc6cd02bfac8f"
         }
       }
     },
@@ -954,7 +954,7 @@
           "score":3,
           "author":"Caron",
           "since_version":"0.1",
-          "sha1":"07d69e9af5b115b9f7f687234429bfd4dbe57456"
+          "sha1":"f6c48cad7dc7a029b55078fae3d084474d83bc18"
         }
       }
     },
@@ -3171,7 +3171,7 @@
       "new":true,
       "score":3,
       "since_version":"0.10",
-      "sha1":"f6dbefdcf16edde5b5367b17ea3d4625a8ffa0b0"
+      "sha1":"bedb7c81a58bf9b79c5a3b170eafb5d9dd62116b"
     },
     {
       "name":"Canary Bay",
@@ -6964,7 +6964,7 @@
       "warning":1,
       "note":"bad kcl",
       "since_version":"0.10",
-      "sha1":"e135e0e8f5dffb1aa53341fcd9fb321f70f85d3f"
+      "sha1":"6a6ef7799c4d36a608e8a840fb420624a84ef355"
     },
     {
       "name":"Kamek's Crazy Castle",
