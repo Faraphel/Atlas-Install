@@ -46,6 +46,8 @@
   "Scene/UI/Race_S.szs": {"/message/Common.bmg": "Common_RS.bmg"},
   "Scene/UI/Race_M.szs": {"/message/Common.bmg": "Common_RM.bmg"},
 
+  "Scene/UI/Font.szs": {"/": "kart_kanji_font.brfnt"},
+
   "Boot/Strap/eu/Dutch.szs": {
     "/Textures(NW4R)/strapA_16_9_832x456": "strapA_16_9_832x456de",
     "/Textures(NW4R)/strapB_16_9_832x456": "strapA_16_9_832x456de",

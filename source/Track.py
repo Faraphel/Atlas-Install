@@ -147,17 +147,17 @@ class Track:
         hl_suffix = ""
         prefix = ""
         suffix = ""
+
+        star_prefix = "\\\\c{YOR2}"  # per default, stars are colored in gold
+        star_suffix = ""
         star_text = ""
 
         if self.score:
-            if 0 < self.score <= 3:
-                star_text = "★" * self.score + "☆" * (3 - self.score)
+            if 0 <= self.score <= 5:
+                star_text = f"\\\\x{0xFF10 + self.score:04X}"
+                star_suffix = "\\\\c{off} "
                 if 0 < self.warning <= 3:
-                    star_text += "!" * self.warning
-                if self.warning == 4:
-                    star_text += "d"
-
-                star_text = trackname_color[star_text] + " "
+                    star_prefix = warning_color[self.warning]
 
         if self.since_version == highlight_version:
             hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"
@@ -167,7 +167,7 @@ class Track:
         if self.suffix in trackname_color:
             suffix = " (" + trackname_color[self.suffix] + ")"
 
-        name = (star_text + prefix + hl_prefix + self.name + hl_suffix + suffix)
+        name = (star_prefix + star_text + star_suffix + prefix + hl_prefix + self.name + hl_suffix + suffix)
         name = name.replace("_", " ")
         return name
 

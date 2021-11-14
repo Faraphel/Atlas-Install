@@ -83,19 +83,6 @@ trackname_color = {
     "GP": "\\\\c{YOR6}GP\\\\c{off}",
 
     "Boost": "\\\\c{YOR3}Boost\\\\c{off}",
-
-    "★★★": "\\\\c{YOR2}★★★\\\\c{off}",
-    "★★☆": "\\\\c{YOR2}★★☆\\\\c{off}",
-    "★☆☆": "\\\\c{YOR2}★☆☆\\\\c{off}",
-    "★★★!": "\\\\c{YOR4}★★★\\\\c{off}",
-    "★★☆!": "\\\\c{YOR4}★★☆\\\\c{off}",
-    "★☆☆!": "\\\\c{YOR4}★☆☆\\\\c{off}",
-    "★★★!!": "\\\\c{YOR6}★★★\\\\c{off}",
-    "★★☆!!": "\\\\c{YOR6}★★☆\\\\c{off}",
-    "★☆☆!!": "\\\\c{YOR6}★☆☆\\\\c{off}",
-    "★★★d": "\\\\c{BLUE}★★★\\\\c{off}",
-    "★★☆d": "\\\\c{BLUE}★★☆\\\\c{off}",
-    "★☆☆d": "\\\\c{BLUE}★☆☆\\\\c{off}",
 }
 
 region_id_to_name = {
@@ -103,6 +90,12 @@ region_id_to_name = {
     "P": "PAL",
     "K": "KO",
     "E": "USA"
+}
+
+warning_color = {
+    1: "\\\\c{YOR4}",
+    2: "\\\\c{YOR6}",
+    3: "\\\\c{BLUE}",
 }
 
 get_version_from_string = lambda v: list(map(int, v.split('.')))
