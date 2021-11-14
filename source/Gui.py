@@ -74,22 +74,43 @@ class Gui:
         self.menu_format.add_radiobutton(label="CISO", variable=self.stringvar_game_format, value="CISO", command=lambda: self.option.edit("format", "CISO"))
         self.menu_format.add_radiobutton(label="WBFS", variable=self.stringvar_game_format, value="WBFS", command=lambda: self.option.edit("format", "WBFS"))
 
-        # TRACK SELECTION MENU
-        self.menu_trackselection = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Track selection"), menu=self.menu_trackselection)
-        self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 1 ","star"), variable=self.boolvar_use_1star_track)
-        self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 2 ","stars"), variable=self.boolvar_use_2star_track)
-        self.menu_trackselection.add_checkbutton(label=self.translate("Select"," 3 ","stars"), variable=self.boolvar_use_3star_track)
-        self.menu_trackselection.add_separator()
-        self.menu_marktrackversion = Menu(self.menu_trackselection, tearoff=0)
-        self.menu_trackselection.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
-        self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
-        for version in self.game.ctconfig.all_version:
-            self.menu_marktrackversion.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
-        self.menu_sort_track_by = Menu(self.menu_trackselection, tearoff=0)
-        self.menu_trackselection.add_cascade(label=self.translate("Sort track by"), menu=self.menu_sort_track_by)
+        # TRACK CONFIGURATION MENU
+        self.menu_trackconfiguration = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Track configuration"), menu=self.menu_trackconfiguration)
+
+        # select track
+        self.menu_trackselection = Menu(self.menu_trackconfiguration, tearoff=0)
+        self.menu_trackconfiguration.add_cascade(label=self.translate("Select track"), menu=self.menu_trackselection)
+
+        self.menu_trackselection_score = Menu(self.menu_trackselection, tearoff=0)
+        self.menu_trackselection.add_cascade(label="Score", menu=self.menu_trackselection_score)
+
+        self.menu_trackselection_score.add_checkbutton(label=self.translate("Select"," 1 ","star"), variable=self.boolvar_use_1star_track)
+        self.menu_trackselection_score.add_checkbutton(label=self.translate("Select"," 2 ","stars"), variable=self.boolvar_use_2star_track)
+        self.menu_trackselection_score.add_checkbutton(label=self.translate("Select"," 3 ","stars"), variable=self.boolvar_use_3star_track)
+
+        # sort track
+        self.menu_sort_track_by = Menu(self.menu_trackconfiguration, tearoff=0)
+        self.menu_trackconfiguration.add_cascade(label=self.translate("Sort track"), menu=self.menu_sort_track_by)
         for param_name, param in [("Name", "name"), ("Version", "since_version"), ("Author", "author"), ("Score", "score"), ("Warning", "warning")]:
             self.menu_sort_track_by.add_radiobutton(label=param_name, variable=self.stringvar_sort_track_by, value=param)
+
+        # highlight track
+        self.menu_marktrackversion = Menu(self.menu_trackconfiguration, tearoff=0)
+        self.menu_trackconfiguration.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
+        self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
+
+        self.menu_marktrackversion_beta = Menu(self.menu_marktrackversion, tearoff=0)
+        self.menu_marktrackversion.add_cascade(label="BETA", menu=self.menu_marktrackversion_beta)
+
+        for version in self.game.ctconfig.all_version:
+            _menu = self.menu_marktrackversion
+
+            version_tuple = tuple(int(v) for v in version.split("."))
+            if version_tuple < (1, 0, 0):
+                _menu = self.menu_marktrackversion_beta
+
+            _menu.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
 
         #  ADVANCED MENU
         ## INSTALLER PARAMETER
