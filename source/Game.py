@@ -324,7 +324,7 @@ class Game:
             self.gui.log_error()
         finally:
             self.gui.progress(show=False)
-            exit()
+            self.gui.quit()
 
     def patch_autoadd(self, auto_add_dir: str = "./file/auto-add") -> None:
         """

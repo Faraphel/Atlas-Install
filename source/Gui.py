@@ -97,7 +97,7 @@ class Gui:
 
         # highlight track
         self.menu_marktrackversion = Menu(self.menu_trackconfiguration, tearoff=0)
-        self.menu_trackconfiguration.add_cascade(label=self.translate("Mark all tracks from version"), menu=self.menu_marktrackversion)
+        self.menu_trackconfiguration.add_cascade(label=self.translate("Highlight track"), menu=self.menu_marktrackversion)
         self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
 
         self.menu_marktrackversion_beta = Menu(self.menu_marktrackversion, tearoff=0)
@@ -374,3 +374,8 @@ class Gui:
             self.boolvar_use_3star_track.get() is True and
             self.stringvar_sort_track_by.get() == "name"
         )
+
+    def quit(self) -> None:
+        self.root.quit()
+        self.root.destroy()
+        sys.exit()
