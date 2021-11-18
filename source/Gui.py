@@ -190,7 +190,12 @@ class Gui:
         def nothread_use_path():
             self.frame_action.grid_forget()
             try:
-                self.game.set_path(entry_game_path.get())
+                game_path = entry_game_path.get()
+                if not os.path.exists(game_path):
+                    messagebox.showerror(self.translate("Error"), self.translate("This file does not exist."))
+                    return
+
+                self.game.set_path(game_path)
                 self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
                 self.game.extract()
                 self.frame_action.grid(row=3, column=1, sticky="NEWS")
