@@ -289,8 +289,8 @@ class Gui:
         with open("./error.log", "a") as f:
             f.write(f"---\n"
                     f"For game version : {self.game.ctconfig.version}\n"
-                    f"./file/ directory : {os.listdir('./file/')}"
-                    f"GAME/files/ information : {self.game.path, self.game.region}"
+                    f"./file/ directory : {os.listdir('./file/')}\n"
+                    f"GAME/files/ information : {self.game.path, self.game.region}\n"
                     f"{error}\n")
         messagebox.showerror(self.translate("Error"), self.translate("An error occured", " :", "\n", error, "\n\n"))
 
