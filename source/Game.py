@@ -449,10 +449,6 @@ class Game:
             self.patch_autoadd()
             self.patch_tracks()
 
-            self.gui.button_install_mod.grid(row=2, column=1, columnspan=2, sticky="NEWS")
-            self.gui.button_install_mod.config(
-                text=self.gui.translate("Install mod", " (v", self.ctconfig.version, ")"))
-
         except:
             self.gui.log_error()
         finally:

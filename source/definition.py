@@ -140,8 +140,8 @@ def get_next_available_dir(parent_dir: str, dir_name: str) -> str:
     final_dir_name = dir_name
     while True:
         path_dir = os.path.realpath(parent_dir + "/" + final_dir_name)
-        if not os.path.exists(path_dir): break
+        if not os.path.exists(path_dir): return path_dir
         final_dir_name = f"{dir_name} ({i})"
         i += 1
 
-    return parent_dir + "/" + final_dir_name
+
