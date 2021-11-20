@@ -150,10 +150,6 @@ class Game:
         self.region_ID = self.game_ID[3]
         self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
 
-    @in_thread
-    def install_mod(self):
-        self.nothread_install_mod()
-
     def count_patch_subfile_operation(self) -> int:
         """
         count all the step patching subfile will take (for the progress bar)
@@ -302,7 +298,7 @@ class Game:
         self.gui.progress(statut=self.gui.translate("Converting to", " ", output_format), add=1)
         self.convert_to(output_format)
 
-    def nothread_install_mod(self) -> None:
+    def install_mod(self) -> None:
         """
         Patch the game to install the mod
         """
@@ -423,11 +419,7 @@ class Game:
         finalise(f"./file/Common_{bmglang}.txt", bmgcommon)
         finalise(f"./file/Common_R{bmglang}.txt", rbmgcommon)
 
-    @in_thread
     def patch_file(self):
-        self.nothread_patch_file()
-
-    def nothread_patch_file(self):
         """
         Prepare all files to install the mod (track, bmg text, descriptive image, ...)
         """

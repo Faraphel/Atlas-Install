@@ -184,10 +184,7 @@ class Gui:
         self.frame_game_path_action.grid(row=2, column=1, columnspan=2, sticky="NEWS")
         self.frame_game_path_action.columnconfigure(1, weight=1)
 
-        @in_thread
-        def use_path(): nothread_use_path()
-
-        def nothread_use_path():
+        def use_path():
             try:
                 game_path = entry_game_path.get()
                 if not os.path.exists(game_path): raise InvalidGamePath
@@ -213,9 +210,9 @@ class Gui:
 
         @in_thread
         def do_everything():
-            nothread_use_path()
-            self.game.nothread_patch_file()
-            self.game.nothread_install_mod()
+            use_path()
+            self.game.patch_file()
+            self.game.install_mod()
 
         self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Install mod"), relief=RIDGE, command=do_everything)
         self.button_do_everything.grid(row=1, column=1, columnspan=2, sticky="NEWS")
