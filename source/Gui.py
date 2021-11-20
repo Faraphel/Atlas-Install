@@ -188,7 +188,6 @@ class Gui:
         def use_path(): nothread_use_path()
 
         def nothread_use_path():
-            self.frame_action.grid_forget()
             try:
                 game_path = entry_game_path.get()
                 if not os.path.exists(game_path):
@@ -198,7 +197,6 @@ class Gui:
                 self.game.set_path(game_path)
                 self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
                 self.game.extract()
-                self.frame_action.grid(row=3, column=1, sticky="NEWS")
             except RomAlreadyPatched:
                 messagebox.showerror(self.translate("Error"), self.translate("This game is already modded"))
                 raise RomAlreadyPatched
@@ -214,25 +212,14 @@ class Gui:
             finally:
                 self.progress(show=False)
 
-        self.button_game_extract = Button(self.frame_game_path_action, text=self.translate("Extract file"),
-                                          relief=RIDGE, command=use_path)
-        self.button_game_extract.grid(row=1, column=1, sticky="NEWS")
-
         @in_thread
         def do_everything():
             nothread_use_path()
             self.game.nothread_patch_file()
             self.game.nothread_install_mod()
 
-        self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Do everything"), relief=RIDGE, command=do_everything)
-        self.button_do_everything.grid(row=1, column=2, sticky="NEWS")
-
-        self.frame_action = LabelFrame(self.root, text=self.translate("Action"))
-
-        self.button_prepare_file = Button(self.frame_action, text=self.translate("Prepare files"), relief=RIDGE, command=lambda: self.game.patch_file(), width=45)
-        self.button_prepare_file.grid(row=1, column=1, columnspan=2, sticky="NEWS")
-        self.button_install_mod = Button(self.frame_action, text=self.translate("Install mod"), relief=RIDGE, command=lambda: self.game.install_mod(), width=45)
-        # Install mod button will only appear after prepare file step
+        self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Install mod"), relief=RIDGE, command=do_everything)
+        self.button_do_everything.grid(row=1, column=1, columnspan=2, sticky="NEWS")
 
         self.progressbar = ttk.Progressbar(self.root)
         self.progresslabel = Label(self.root)
@@ -333,9 +320,6 @@ class Gui:
         :param enable: are the button enabled ?
         """
         button = [
-            self.button_game_extract,
-            self.button_install_mod,
-            self.button_prepare_file,
             self.button_do_everything
         ]
         for widget in button:
