@@ -127,3 +127,21 @@ def in_thread(func):
         return thread
 
     return wrapped_func
+
+
+def get_next_available_dir(parent_dir: str, dir_name: str) -> str:
+    """
+    get the next available directory name
+    :param parent_dir: name of the parent directory
+    :param dir_name: wished name for the directory
+    :return: name of the directory with a potential index at the end
+    """
+    i = 1
+    final_dir_name = dir_name
+    while True:
+        path_dir = os.path.realpath(parent_dir + "/" + final_dir_name)
+        if not os.path.exists(path_dir): break
+        final_dir_name = f"{dir_name} ({i})"
+        i += 1
+
+    return final_dir_name
