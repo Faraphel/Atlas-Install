@@ -144,4 +144,4 @@ def get_next_available_dir(parent_dir: str, dir_name: str) -> str:
         final_dir_name = f"{dir_name} ({i})"
         i += 1
 
-    return final_dir_name
+    return parent_dir + "/" + final_dir_name
