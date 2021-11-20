@@ -190,13 +190,12 @@ class Gui:
         def nothread_use_path():
             try:
                 game_path = entry_game_path.get()
-                if not os.path.exists(game_path):
-                    messagebox.showerror(self.translate("Error"), self.translate("This file does not exist."))
-                    return
+                if not os.path.exists(game_path): raise InvalidGamePath
 
                 self.game.set_path(game_path)
                 self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
                 self.game.extract()
+
             except RomAlreadyPatched:
                 messagebox.showerror(self.translate("Error"), self.translate("This game is already modded"))
                 raise RomAlreadyPatched
@@ -320,7 +319,7 @@ class Gui:
         :param enable: are the button enabled ?
         """
         button = [
-            self.button_do_everything
+            self.button_do_everything,
         ]
         for widget in button:
             if enable:
