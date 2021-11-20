@@ -178,7 +178,8 @@ class Gui:
                 entry_game_path.delete(0, END)
                 entry_game_path.insert(0, path)
 
-        Button(self.frame_game_path, text="...", relief=RIDGE, command=select_path).grid(row=1, column=2, sticky="NEWS")
+        self.button_select_path = Button(self.frame_game_path, text="...", relief=RIDGE, command=select_path)
+        self.button_select_path.grid(row=1, column=2, sticky="NEWS")
 
         self.frame_game_path_action = Frame(self.frame_game_path)  # Extract and do everything button
         self.frame_game_path_action.grid(row=2, column=1, columnspan=2, sticky="NEWS")
@@ -317,6 +318,7 @@ class Gui:
         """
         button = [
             self.button_do_everything,
+            self.button_select_path
         ]
         for widget in button:
             if enable:
