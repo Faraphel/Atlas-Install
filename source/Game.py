@@ -155,7 +155,7 @@ class Game:
         count all the step patching subfile will take (for the progress bar)
         :return: number of step estimated
         """
-        with open("./fs.json") as f:
+        with open("./file_structure.json") as f:
             fs = json.load(f)
 
         # This part is used to estimate the max_step
@@ -185,9 +185,9 @@ class Game:
 
     def install_patch_subfile(self) -> None:
         """
-        patch subfile as indicated in the fs.json file (for file structure)
+        patch subfile as indicated in the file_structure.json file (for file structure)
         """
-        with open("./fs.json") as f:
+        with open("./file_structure.json") as f:
             fs = json.load(f)
 
         extracted_file = []
@@ -425,7 +425,7 @@ class Game:
         """
         try:
             if not (os.path.exists("./file/Track-WU8/")): os.makedirs("./file/Track-WU8/")
-            with open("./convert_file.json") as f:
+            with open("./file_process.json") as f:
                 fc = json.load(f)
             max_step = len(fc["img"]) + len(self.ctconfig.all_tracks) + 3 + len("EGFIS")
 

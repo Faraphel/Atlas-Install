@@ -8,9 +8,9 @@ include_files = [
     "./README.md",
     "./version",
     "./ct_config.json",
-    "./convert_file.json",
+    "./file_process.json",
     "./translation.json",
-    "./fs.json",
+    "./file_structure.json",
 
     "./tools",
     "./source",
