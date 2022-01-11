@@ -2,6 +2,7 @@
   "version":"0.11",
   "name": "Mario Kart Wii Faraphel",
   "nickname": "MKWF",
+  "game_variant": "60",
 
   "cup":{
     "0":{

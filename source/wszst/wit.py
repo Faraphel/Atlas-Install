@@ -16,15 +16,17 @@ def extract(file: str, dst_dir: str) -> None:
 
 
 @error.better_wszst_error(wszst_tools=WIT_PATH)
-def edit(file: str, region_ID: str = "P", name: str = "Mario Kart Wii") -> None:
+def edit(file: str, game_code: str = "RMC", region_ID: str = "P", game_variant: str = "01", name: str = "Mario Kart Wii") -> None:
     """
     Edit game property like region or name
+    :param game_variant: for example, the 60 in RMCP60
+    :param game_code: code for the game. MKWii is RMC.
     :param file: game's file
     :param region_ID: new region_ID
     :param name: new name
     """
     subprocess.run(
-        [WIT_PATH, "EDIT", file, "--id", f"RMC{region_ID}60", "--name", name, "--modify", "ALL"],
+        [WIT_PATH, "EDIT", file, "--id", f"{game_code}{region_ID}{game_variant}", "--name", name, "--modify", "ALL"],
         creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
 
 

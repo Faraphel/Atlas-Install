@@ -108,7 +108,7 @@ class Game:
         :param format: game format (ISO, WBFS, ...)
         """
         if format in ["ISO", "WBFS", "CISO"]:
-            path_game_format: str = os.path.realpath(self.path + f"/../MKWFaraphel v{self.ctconfig.version}." + format.lower())
+            path_game_format: str = os.path.realpath(self.path + f"/../{self.ctconfig.nickname} v{self.ctconfig.version}." + format.lower())
             wit.copy(src_path=self.path, dst_path=path_game_format, format=format)
             shutil.rmtree(self.path)
             self.path = path_game_format
@@ -118,7 +118,7 @@ class Game:
                 file=self.path,
                 region_ID=self.region_ID,
                 game_variant=self.ctconfig.game_variant,
-                name=f"Mario Kart Wii Faraphel {self.ctconfig.version}"
+                name=f"{self.ctconfig.name} {self.ctconfig.version}"
             )
 
     def extract(self) -> None:
@@ -132,7 +132,7 @@ class Game:
             # Fiding a directory name that doesn't already exist
             path_dir = get_next_available_dir(
                 parent_dir=self.path + f"/../",
-                dir_name=f"MKWiiFaraphel v{self.ctconfig.version}"
+                dir_name=f"{self.ctconfig.nickname} v{self.ctconfig.version}"
             )
 
             wit.extract(file=self.path, dst_dir=path_dir)
