@@ -46,10 +46,6 @@
     "The mod has been installed !": "L'installation est terminé !",
     "An error occured": "Une erreur est survenue",
     "Patching text": "Patch des textes",
-    "Random: All tracks": "Aléatoire: Toutes les pistes",
-    "Random: Original tracks": "Aléatoire: Pistes Originales",
-    "Random: Custom Tracks": "Aléatoire: Custom Tracks",
-    "Random: New tracks": "Aléatoire: Pistes Nouvelles",
     "Converting files": "Conversion des fichiers",
     "Configurating LE-CODE": "Configuration de LE-CODE",
     "Creating ct_icon.png": "Création de ct_icon.png",
@@ -71,23 +67,5 @@
     "None": "Aucune",
     "MB": "Mo",
     "GB": "Go"
-  },
-  "ge": {
-    "Random: All tracks": "Zufällig: Alle Tracks",
-    "Random: Original tracks": "Zufällig: Original-Tracks",
-    "Random: Custom Tracks": "Zufällig: Custom Tracks",
-    "Random: New tracks": "Zufällig: Neue Tracks"
-  },
-  "it": {
-    "Random: All tracks": "Casuale: Tutte le tracce",
-    "Random: Original tracks": "Casuale: Tracce originali",
-    "Random: Custom Tracks": "Casuale: Custom Tracks",
-    "Random: New tracks": "Casuale: Nuovi brani"
-  },
-  "sp": {
-    "Random: All tracks": "Aleatorio: Todas las pistas",
-    "Random: Original tracks": "Aleatorio: Pistas originales",
-    "Random: Custom Tracks": "Aleatorio: Custom Tracks",
-    "Random: New tracks": "Aleatorio: Pistas nuevas"
   }
 }

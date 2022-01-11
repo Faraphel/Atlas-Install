@@ -326,18 +326,14 @@ class Gui:
             else:
                 widget.config(state=DISABLED)
 
-    def translate(self, *texts, lang: str = None) -> str:
+    def translate(self, *texts, gamelang: str = None) -> str:
         """
         translate text into an another language in translation.json file
         :param texts: all text to convert
-        :param lang: force a destination language to convert track
+        :param gamelang: force a destination language to convert track
         :return: translated text
         """
-        if lang is None: lang = self.stringvar_language.get()
-        elif lang == "F": lang = "fr"
-        elif lang == "G": lang = "ge"
-        elif lang == "I": lang = "it"
-        elif lang == "S": lang = "sp"
+        lang = gamelang_to_lang.get(gamelang, self.stringvar_language.get())
 
         if lang in translation_dict:
             _lang_trad = translation_dict[lang]

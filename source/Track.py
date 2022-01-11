@@ -26,7 +26,7 @@ class Track:
     def __init__(self, name: str = "_", prefix: str = None, suffix: str = None,
                  author="Nintendo", special="T11", music="T11", new=True, sha1: str = None, since_version: str = None,
                  score: int = 0, warning: int = 0, note: str = "", track_wu8_dir: str = "./file/Track-WU8/",
-                 track_szs_dir: str = "./file/Track/", *args, **kwargs):
+                 track_szs_dir: str = "./file/Track/", track_version: str = None, tags: list = [], *args, **kwargs):
         """
         Track class
         :param name: track name
@@ -45,6 +45,9 @@ class Track:
         :param note: note about the track
         :param track_wu8_dir: where is stored the track wu8
         :param track_szs_dir: where is stored the track szs
+        :param track_version: version of the track
+        :param tags: a list of tags that correspond to the track
+
         :param args: /
         :param kwargs: /
         """
@@ -65,6 +68,8 @@ class Track:
         self.track_szs_dir = track_szs_dir
         self.file_wu8 = f"{track_wu8_dir}/{self.get_track_name()}.wu8"
         self.file_szs = f"{track_szs_dir}/{self.get_track_name()}.szs"
+        self.track_version = track_version
+        self.tags = tags
 
     def __repr__(self) -> str:
         """
@@ -192,3 +197,6 @@ class Track:
 
         self.file_wu8 = f"{self.track_wu8_dir}/{self.get_track_name()}.wu8"
         self.file_szs = f"{self.track_szs_dir}/{self.get_track_name()}.szs"
+
+    def create_from_track_file(self, track_file: str) -> None:
+        pass

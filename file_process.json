@@ -2,33 +2,76 @@
   "bmg": [
     {
       "mode": "overwrite_id",
-      "language": "fr",
+      "language": ["en"],
       "data": {
-        "0x703e": "\\\\c{{white}}{self.gui.translate('Random: All tracks', lang=bmglang)}\n",
-        "0x703f": "\\\\c{{white}}{self.gui.translate('Random: Original tracks', lang=bmglang)}\n",
-        "0x7040": "\\\\c{{white}}{self.gui.translate('Random: Custom Tracks', lang=bmglang)}\n",
-        "0x7041": "\\\\c{{white}}{self.gui.translate('Random: New tracks', lang=bmglang)}\n"
+        "0x703e": "\\c{white}Random: All tracks",
+        "0x703f": "\\c{white}Random: Original tracks",
+        "0x7040": "\\c{white}Random: Custom Tracks",
+        "0x7041": "\\c{white}Random: New tracks"
+      }
+    },
+    {
+      "mode": "overwrite_id",
+      "language": ["fr"],
+      "data": {
+        "0x703e": "\\c{white}Aléatoire: Toutes les pistes",
+        "0x703f": "\\c{white}Aléatoire: Pistes Originales",
+        "0x7040": "\\c{white}Aléatoire: Custom Tracks",
+        "0x7041": "\\c{white}Aléatoire: Nouvelles pistes"
+      }
+    },
+    {
+      "mode": "overwrite_id",
+      "language": ["ge"],
+      "data": {
+        "0x703e": "\\c{white}Zufällig: Alle Tracks",
+        "0x703f": "\\c{white}Zufällig: Original-Tracks",
+        "0x7040": "\\c{white}Zufällig: Custom Tracks",
+        "0x7041": "\\c{white}Zufällig: Neue Tracks"
+      }
+    },
+    {
+      "mode": "overwrite_id",
+      "language": ["it"],
+      "data": {
+        "0x703e": "\\c{white}Casuale: Tutte le tracce",
+        "0x703f": "\\c{white}Casuale: Tracce originali",
+        "0x7040": "\\c{white}Casuale: Custom Tracks",
+        "0x7041": "\\c{white}Casuale: Nuovi brani"
+      }
+    },
+    {
+      "mode": "overwrite_id",
+      "language": ["es"],
+      "data": {
+        "0x703e": "\\c{white}Aleatorio: Todas las pistas",
+        "0x703f": "\\c{white}Aleatorio: Pistas originales",
+        "0x7040": "\\c{white}Aleatorio: Custom Tracks",
+        "0x7041": "\\c{white}Aleatorio: Pistas nuevas"
       }
     },
     {
       "mode": "replace_text",
       "data": {
-        "CWF de Nintendo": "{NINTENDO_CWF_REPLACE}",
-        "Wi-Fi Nintendo": "{NINTENDO_CWF_REPLACE}",
-        "CWF Nintendo": "{NINTENDO_CWF_REPLACE}",
-        "Nintendo WFC": "{NINTENDO_CWF_REPLACE}",
-        "Wi-Fi": "{NINTENDO_CWF_REPLACE}",
-        "インターネット": "{NINTENDO_CWF_REPLACE}",
+        "CWF de Nintendo": "{ONLINE_SERVICE}",
+        "Wi-Fi Nintendo": "{ONLINE_SERVICE}",
+        "CWF Nintendo": "{ONLINE_SERVICE}",
+        "Nintendo WFC": "{ONLINE_SERVICE}",
+        "Wi-Fi": "{ONLINE_SERVICE}",
+        "インターネット": "{ONLINE_SERVICE}",
 
-        "Menu principal": "{MAINMENU_REPLACE}",
-        "Menú principal": "{MAINMENU_REPLACE}",
-        "Main Menu": "{MAINMENU_REPLACE}",
-        "トップメニュー": "{MAINMENU_REPLACE}",
+        "Menu principal": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
+        "Menú principal": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
+        "Main Menu": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
+        "トップメニュー": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
 
-        "Mario Kart Wii": "{MAINMENU_REPLACE}"
+        "Mario Kart Wii": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}"
       }
     }
   ],
+
+
+
   "img": {
     "tt_hatena_64x64.tpl.png": "TPL.RGB5A3",
     "tt_obi_bottom_curve_000.tpl.png": "TPL.RGB5A3",

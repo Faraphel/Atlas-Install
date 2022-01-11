@@ -114,7 +114,12 @@ class Game:
             self.path = path_game_format
 
             self.gui.progress(statut=self.gui.translate("Changing game's ID"), add=1)
-            wit.edit(file=self.path, region_ID=self.region_ID, name=f"Mario Kart Wii Faraphel {self.ctconfig.version}")
+            wit.edit(
+                file=self.path,
+                region_ID=self.region_ID,
+                game_variant=self.ctconfig.game_variant,
+                name=f"Mario Kart Wii Faraphel {self.ctconfig.version}"
+            )
 
     def extract(self) -> None:
         """
@@ -335,27 +340,12 @@ class Game:
         :param gamefile: an .szs file where file will be patched
         """
 
-        NINTENDO_CWF_REPLACE = "Wiimmfi"
-        _customized = " (custom)"
-        MAINMENU_REPLACE = (
-            f"MKWFaraphel {self.ctconfig.version}" +
-            ("" if self.gui.is_using_official_config() else _customized)
-        )
-
-        menu_replacement = {
-            "CWF de Nintendo": NINTENDO_CWF_REPLACE,
-            "Wi-Fi Nintendo": NINTENDO_CWF_REPLACE,
-            "CWF Nintendo": NINTENDO_CWF_REPLACE,
-            "Nintendo WFC": NINTENDO_CWF_REPLACE,
-            "Wi-Fi": NINTENDO_CWF_REPLACE,
-            "インターネット": NINTENDO_CWF_REPLACE,
-
-            "Menu principal": MAINMENU_REPLACE,
-            "Menú principal": MAINMENU_REPLACE,
-            "Main Menu": MAINMENU_REPLACE,
-            "トップメニュー": MAINMENU_REPLACE,
-
-            "Mario Kart Wii": MAINMENU_REPLACE,
+        bmg_replacement = {
+            "MOD_NAME": self.ctconfig.name,
+            "MOD_NICKNAME": self.ctconfig.nickname,
+            "MOD_VERSION": self.ctconfig.version,
+            "MOD_CUSTOMIZED": "" if self.gui.is_using_official_config() else " (custom)",
+            "ONLINE_SERVICE": "Wiimmfi",
         }
 
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
@@ -364,40 +354,44 @@ class Game:
         szs.extract(file=gamefile)
 
         bmgmenu = bmg.cat(path=gamefile, subfile=".d/message/Menu.bmg")  # Menu.bmg
-        bmgtracks = bmg.cat(path=gamefile, subfile=".d/message/Common.bmg")  # Common.bmg
 
         trackheader = "#--- standard track names"
         trackend = "2328"
+        bmgtracks = bmg.cat(path=gamefile, subfile=".d/message/Common.bmg")  # Common.bmg
         bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
 
-        with open("./file/ExtraCommon.txt", "w", encoding="utf8") as f:
-            f.write("#BMG\n\n"
-                    f"  703e\t= \\\\c{{white}}{self.gui.translate('Random: All tracks', lang=bmglang)}\n"
-                    f"  703f\t= \\\\c{{white}}{self.gui.translate('Random: Original tracks', lang=bmglang)}\n"
-                    f"  7040\t= \\\\c{{white}}{self.gui.translate('Random: Custom Tracks', lang=bmglang)}\n"
-                    f"  7041\t= \\\\c{{white}}{self.gui.translate('Random: New tracks', lang=bmglang)}\n")
+        def create_extra_common(extra_common_path: str = "./file/ExtraCommon.txt") -> None:
+            """
+            this function create an "extra common" file : it contain modification about the original tracks name
+            (the color modification) and allow the modification to be applied by overwritting the normal common
+            file by this one.
+            :param extra_common_path: destination path to the extra common file
+            """
+            with open(extra_common_path, "w", encoding="utf8") as f:
+                f.write("#BMG\n")
 
-            for bmgtrack in bmgtracks.split("\n"):
-                if "=" in bmgtrack:
+                for bmgtrack in bmgtracks.split("\n"):
+                    if "=" in bmgtrack:
 
-                    prefix = ""
-                    track_name = bmgtrack[bmgtrack.find("= ") + 2:]
+                        prefix = ""
+                        track_name = bmgtrack[bmgtrack.find("= ") + 2:]
 
-                    if "T" in bmgtrack[:bmgtrack.find("=")]:
-                        start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
-                        track_id = bmgtrack[start_track_id:start_track_id + 3]
-                        if track_id[1] in "1234":  # if the track is a original track from the wii
-                            prefix = trackname_color["Wii"] + " "
-                        elif track_id[1] in "5678":  # if the track is a retro track from the original game
-                            for color_prefix, rep_color_prefix in trackname_color.items():  # color retro track prefix
-                                track_name = track_name.replace(color_prefix, rep_color_prefix)
-                        track_id = hex(bmgID_track_move[track_id])[2:]
-                    else:  # Arena
-                        start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
-                        track_id = bmgtrack[start_track_id:start_track_id + 2]
-                        track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
+                        if "T" in bmgtrack[:bmgtrack.find("=")]:
+                            start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
+                            track_id = bmgtrack[start_track_id:start_track_id + 3]
+                            if track_id[1] in "1234":  # if the track is a original track from the wii
+                                prefix = trackname_color["Wii"] + " "
+                            elif track_id[1] in "5678":  # if the track is a retro track from the original game
+                                for color_prefix, rep_color_prefix in trackname_color.items():  # color retro track prefix
+                                    track_name = track_name.replace(color_prefix, rep_color_prefix)
+                            track_id = hex(bmgID_track_move[track_id])[2:]
+                        else:  # Arena
+                            start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
+                            track_id = bmgtrack[start_track_id:start_track_id + 2]
+                            track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
 
-                    f.write(f"  {track_id}\t= {prefix}{track_name}\n")
+                        f.write(f"  {track_id}\t= {prefix}{track_name}\n")
+        create_extra_common()
 
         bmgcommon = ctc.patch_bmg(ctfile="./file/CTFILE.txt",
                                   bmgs=[gamefile + ".d/message/Common.bmg", "./file/ExtraCommon.txt"])
@@ -407,17 +401,61 @@ class Game:
         shutil.rmtree(gamefile + ".d")
         os.remove("./file/ExtraCommon.txt")
 
-        def finalise(file, bmgtext, replacement_list=None):
-            if replacement_list:
-                for text, colored_text in replacement_list.items(): bmgtext = bmgtext.replace(text, colored_text)
-            with open(file, "w", encoding="utf-8") as f:
-                f.write(bmgtext)
+        def process_bmg_replacement(bmg_content: str, bmg_language: str) -> str:
+            """
+            This function apply the file_process to the bmg file. This allow text modification useful to
+            change menu text (Wiimmfi for example) and the Wiimm's cup.
+            :param bmg_content: content of the bmg to process
+            :param bmg_language: language of the bmg file
+            :return: the replaced bmg file
+            """
+            with open("./file_process.json", encoding="utf8") as fp_file:
+                file_process = json.load(fp_file)
+
+            for bmg_process in file_process["bmg"]:
+                if "only_file" in bmg_process:
+                    if not os.path.basename(file) in bmg_process["only_file"]:
+                        continue
+
+                if bmg_language and "language" in bmg_process:
+                    if gamelang_to_lang[bmg_language] in bmg_process["language"]:
+                        continue
+
+                for data, data_replacement in bmg_process["data"].items():
+                    for key, replacement in bmg_replacement.items():
+                        data_replacement = data_replacement.replace("{"+key+"}", replacement)
+
+                    if bmg_process["mode"] == "overwrite_id":
+                        start_line = f"\n\t{str_to_int(data):x} = "
+                        start_pos = bmg_content.find(start_line)
+                        if start_pos != -1:
+                            end_pos = bmg_content[start_pos:].find("\n")
+                            bmg_content = (
+                                    bmg_content[:start_pos] +
+                                    start_line + data_replacement +
+                                    bmg_content[end_pos:]
+                            )
+                        else:
+                            bmg_content = f"{bmg_content}\n{start_line}{data_replacement}\n"
+
+                    elif bmg_process["mode"] == "replace_text":
+                        bmg_content = bmg_content.replace(data, data_replacement)
+
+            return bmg_content
+
+        def save_bmg(file: str, bmg_content: str) -> None:
+            """
+            Save and encode the bmg
+            :param file: name of the bmg-text to save
+            :param bmg_content: content to save in the bmg-text
+            """
+            with open(file, "w", encoding="utf-8") as f: f.write(bmg_content)
             bmg.encode(file)
             os.remove(file)
 
-        finalise(f"./file/Menu_{bmglang}.txt", bmgmenu, menu_replacement)
-        finalise(f"./file/Common_{bmglang}.txt", bmgcommon)
-        finalise(f"./file/Common_R{bmglang}.txt", rbmgcommon)
+        save_bmg(f"./file/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
+        save_bmg(f"./file/Common_{bmglang}.txt", process_bmg_replacement(bmgcommon, bmglang))
+        save_bmg(f"./file/Common_R{bmglang}.txt", process_bmg_replacement(rbmgcommon, bmglang))
 
     def patch_file(self):
         """
@@ -425,9 +463,9 @@ class Game:
         """
         try:
             if not (os.path.exists("./file/Track-WU8/")): os.makedirs("./file/Track-WU8/")
-            with open("./file_process.json") as f:
-                fc = json.load(f)
-            max_step = len(fc["img"]) + len(self.ctconfig.all_tracks) + 3 + len("EGFIS")
+            with open("./file_process.json", encoding="utf8") as fp_file:
+                file_process = json.load(fp_file)
+            max_step = len(file_process["img"]) + len(self.ctconfig.all_tracks) + 3 + len("EGFIS")
 
             self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Converting files"),
                               max=max_step, step=0)
@@ -443,7 +481,7 @@ class Game:
 
             self.gui.progress(statut=self.gui.translate("Creating descriptive images"), add=1)
             self.patch_img_desc()
-            self.patch_image(fc)
+            self.patch_image(file_process["img"])
             for file in glob.glob(self.path + "/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
             # MenuSingle could be any other file, Common and Menu are all the same in all other files.
             self.patch_autoadd()
@@ -454,15 +492,15 @@ class Game:
         finally:
             self.gui.progress(show=False)
 
-    def patch_image(self, fc: dict) -> None:
+    def patch_image(self, fp_img: dict) -> None:
         """
         Convert .png image into the format wrote in convert_file
-        :param fc: file convert, a dictionnary indicating which format a file need to be converted
+        :param fp_img: file convert, a dictionnary indicating which format a file need to be converted
         """
-        for i, file in enumerate(fc["img"]):
-            self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fc['img'])}) {file}",
+        for i, file in enumerate(fp_img):
+            self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fp_img)}) {file}",
                               add=1)
-            img.encode(file="./file/" + file, format=fc["img"][file])
+            img.encode(file="./file/" + file, format=fp_img[file])
 
     def patch_img_desc(self, img_desc_path: str = "./file/img_desc/", dest_dir: str = "./file/") -> None:
         """

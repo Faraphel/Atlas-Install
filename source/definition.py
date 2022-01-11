@@ -92,6 +92,20 @@ region_id_to_name = {
     "E": "USA"
 }
 
+gamelang_to_lang = {
+    "E": "en",  # english (UK)
+    "U": "en",  # english (America)
+    "F": "fr",  # french (France)
+    "Q": "fr",  # french (Quebec)
+    "G": "ge",  # german
+    "I": "it",  # italian
+    "S": "es",  # spanish (Spain)
+    "M": "es",  # spanish (Mexico)
+
+    "J": "en",  # japan - no translation
+    "K": "en",  # korean - no translation
+}
+
 warning_color = {
     1: "\\\\c{YOR4}",
     2: "\\\\c{YOR6}",
@@ -99,6 +113,7 @@ warning_color = {
 }
 
 get_version_from_string = lambda v: list(map(int, v.split('.')))
+
 
 def restart():
     """
@@ -114,6 +129,7 @@ def in_thread(func):
     :param func: function to thread
     :return: threaded function
     """
+
     def wrapped_func(*args, **kwargs) -> Thread:
         """
         function that will be returned instead of the function, will call it in a thread
@@ -145,3 +161,7 @@ def get_next_available_dir(parent_dir: str, dir_name: str) -> str:
         i += 1
 
 
+def str_to_int(string: str) -> int:
+    base: int = 10
+    if string.startswith("0x"): base = 16
+    return int(string, base=base)
