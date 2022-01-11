@@ -30,8 +30,10 @@ def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf"
 
 
 class CT_Config:
-    def __init__(self, version: str = None, gui=None):
+    def __init__(self, version: str = None, name: str = None, nickname: str = None, gui=None):
         self.version = version
+        self.name = name
+        self.nickname = nickname if nickname else name
         self.ordered_cups = []
         self.unordered_tracks = []
         self.all_tracks = []
@@ -156,6 +158,9 @@ class CT_Config:
         for track in self.all_tracks:
             self.all_version.add(track.since_version)
         self.all_version = sorted(self.all_version)
+
+        self.name = ctconfig_json["name"]
+        self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
 
     def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs) -> list:
         """
