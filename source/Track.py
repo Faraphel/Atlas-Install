@@ -24,7 +24,8 @@ def check_file_sha1(file: str, excepted_sha1: str) -> int:
 
 class Track:
     def __init__(self, name: str = "_", prefix: str = None, suffix: str = None,
-                 author="Nintendo", special="T11", music="T11", new=True, sha1: str = None, since_version: str = None,
+                 author: str = "Nintendo", special: str = "T11", music: str = "T11",
+                 new=True, sha1: str = None, since_version: str = None,
                  score: int = 0, warning: int = 0, note: str = "", track_wu8_dir: str = "./file/Track-WU8/",
                  track_szs_dir: str = "./file/Track/", track_version: str = None, tags: list = [], *args, **kwargs):
         """
@@ -34,7 +35,7 @@ class Track:
         :param file_szs: path to its szs file
         :param prefix: track prefix (often original console or game)
         :param suffix: track suffix (often for variation like Boost or Night)
-        :param author: track creator
+        :param author: track creator(s)
         :param special: track special slot
         :param music: track music slot
         :param new: is the track original or from an older game
@@ -117,6 +118,12 @@ class Track:
                 raise CantDownloadTrack(track=self, http_error=dl.status_code)
         raise CantDownloadTrack(track=self, http_error="Failed to download track")  # if failed more than 3 times
 
+    def get_author_str(self) -> str:
+        """
+        :return: the list of authors with ", " separating them
+        """
+        return ", ".join(self.author) if type(self.author) == str else self.author
+
     def get_ctfile(self, race=False, *args, **kwargs) -> str:
         """
         get ctfile text to create CTFILE.txt and RCTFILE.txt
@@ -136,7 +143,7 @@ class Track:
         else:
             ctfile_text += (
                 f'"-"; '  # track path, not used in Race_*.szs, save a bit of space
-                f'"{self.get_track_formatted_name(*args, **kwargs)}\\n{self.author}"; '  # only in race show author's name
+                f'"{self.get_track_formatted_name(*args, **kwargs)}\\n{self.get_author_str()}"; '  # only in race show author's name
                 f'"-"\n'  # sha1, useless for now.
             )
 

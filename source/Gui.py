@@ -55,7 +55,7 @@ class Gui:
         self.root.resizable(False, False)
         self.root.iconbitmap(bitmap="./icon.ico")
 
-        if not(self.boolvar_dont_check_for_update.get()): self.check_update()
+        if not self.boolvar_dont_check_for_update.get(): self.check_update()
 
         self.menu_bar = Menu(self.root)
         self.root.config(menu=self.menu_bar)
@@ -275,7 +275,8 @@ class Gui:
                     f"For game version : {self.game.ctconfig.version}\n"
                     f"./file/ directory : {os.listdir('./file/')}\n"
                     f"GAME/files/ information : {self.game.path, self.game.region}\n"
-                    f"{error}\n")
+                    f"{error}\n"
+            )
         messagebox.showerror(self.translate("Error"), self.translate("An error occured", " :", "\n", error, "\n\n"))
 
     def progress(self, show: bool = None, indeter: bool = None, step: int = None,
@@ -321,10 +322,8 @@ class Gui:
             self.button_select_path
         ]
         for widget in button:
-            if enable:
-                widget.config(state=NORMAL)
-            else:
-                widget.config(state=DISABLED)
+            if enable: widget.config(state=NORMAL)
+            else: widget.config(state=DISABLED)
 
     def translate(self, *texts, gamelang: str = None) -> str:
         """
@@ -334,18 +333,14 @@ class Gui:
         :return: translated text
         """
         lang = gamelang_to_lang.get(gamelang, self.stringvar_language.get())
+        if lang not in translation_dict: return "".join(texts)  # if no translation language is found
 
-        if lang in translation_dict:
-            _lang_trad = translation_dict[lang]
-            translated_text = ""
-            for text in texts:
-                if text in _lang_trad:
-                    translated_text += _lang_trad[text]
-                else:
-                    translated_text += text
-            return translated_text
-
-        return "".join(texts)  # if no translation language is found
+        _lang_trad = translation_dict[lang]
+        translated_text = ""
+        for text in texts:
+            if text in _lang_trad: translated_text += _lang_trad[text]
+            else: translated_text += text
+        return translated_text
 
     def is_using_official_config(self) -> bool:
         """
