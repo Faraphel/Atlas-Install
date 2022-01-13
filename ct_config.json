@@ -3,6 +3,8 @@
    "name":"Mario Kart Wii Faraphel",
    "nickname":"MKWF",
    "game_variant":"60",
+   "region": 5500,
+   "cheat_region": 20000,
    "cup":{
       "0":{
          "name":"Coupe Champignon",

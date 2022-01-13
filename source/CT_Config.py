@@ -30,11 +30,14 @@ def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf"
 
 
 class CT_Config:
-    def __init__(self, version: str = None, name: str = None, nickname: str = None, game_variant: str = None, gui=None):
+    def __init__(self, version: str = None, name: str = None, nickname: str = None,
+                 game_variant: str = None, gui=None, region: int = None, cheat_region: int = None):
         self.version = version
         self.name = name
         self.nickname = nickname if nickname else name
         self.game_variant = game_variant  # this is the "60" part in RMCP60 for example
+        self.region = region
+        self.cheat_region = cheat_region
 
         self.ordered_cups = []
         self.unordered_tracks = []
@@ -164,6 +167,8 @@ class CT_Config:
         self.name = ctconfig_json["name"]
         self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
         self.game_variant = ctconfig_json["game_variant"] if "game_variant" in ctconfig_json else "01"
+        self.region = ctconfig_json.get("region")
+        self.cheat_region = ctconfig_json.get("cheat_region")
 
     def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs) -> list:
         """

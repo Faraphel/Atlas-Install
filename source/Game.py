@@ -275,7 +275,9 @@ class Game:
         patch the main.dol file to allow the addition of LECODE.bin file
         """
         self.gui.progress(statut=self.gui.translate("Patch main.dol"), add=1)
-        wstrt.patch(path=self.path)
+
+        region_id = self.ctconfig.region if self.gui.is_using_official_config() else self.ctconfig.cheat_region
+        wstrt.patch(path=self.path, region_id=region_id)
 
     def install_patch_lecode(self) -> None:
         """
@@ -413,10 +415,6 @@ class Game:
                 file_process = json.load(fp_file)
 
             for bmg_process in file_process["bmg"]:
-                if "only_file" in bmg_process:
-                    if not os.path.basename(file) in bmg_process["only_file"]:
-                        continue
-
                 if bmg_language and "language" in bmg_process:
                     if gamelang_to_lang[bmg_language] in bmg_process["language"]:
                         continue
