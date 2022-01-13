@@ -122,7 +122,7 @@ class Track:
         """
         :return: the list of authors with ", " separating them
         """
-        return ", ".join(self.author) if type(self.author) == str else self.author
+        return self.author if type(self.author) == str else ", ".join(self.author)
 
     def get_ctfile(self, race=False, *args, **kwargs) -> str:
         """
