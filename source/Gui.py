@@ -44,6 +44,7 @@ class Gui:
         self.stringvar_mark_track_from_version = StringVar(value="None")
         self.stringvar_sort_track_by = StringVar(value="name")
         self.boolvar_use_debug_mode = BooleanVar(value=False)
+        self.boolvar_force_unofficial_mode = BooleanVar(value=False)
 
         self.stringvar_mystuff_folder = StringVar(value=None)
         self.stringvar_mystuff_music_folder = StringVar(value=None)
@@ -119,6 +120,7 @@ class Gui:
         self.menu_advanced.add_checkbutton(label=self.translate("Disable downloads"), variable=self.boolvar_disable_download, command=lambda: self.option.edit("disable_download", self.boolvar_disable_download))
         self.menu_advanced.add_checkbutton(label=self.translate("Delete track after wu8 to szs conversion"), variable=self.boolvar_del_track_after_conv, command=lambda: self.option.edit("del_track_after_conv", self.boolvar_del_track_after_conv))
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
+        self.menu_advanced.add_checkbutton(label=self.translate("Force \"unofficial\" mode"), variable=self.boolvar_force_unofficial_mode)
 
         self.menu_conv_process = Menu(self.menu_advanced, tearoff=0)
         self.menu_advanced.add_cascade(label=self.translate("Number of track conversion process"), menu=self.menu_conv_process)
@@ -350,6 +352,9 @@ class Gui:
             self.boolvar_use_1star_track.get() is True and
             self.boolvar_use_2star_track.get() is True and
             self.boolvar_use_3star_track.get() is True and
+
+            self.boolvar_force_unofficial_mode.get() is False and
+
             self.stringvar_sort_track_by.get() == "name"
         )
 
