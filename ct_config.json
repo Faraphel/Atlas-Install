@@ -5,366 +5,8 @@
    "game_variant":"60",
    "region": 5500,
    "cheat_region": 20000,
-   "cup":{
-      "0":{
-         "name":"Coupe Champignon",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "name":"Circuit Luigi",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "name":"Prairie Meuh Meuh",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "name":"Gorge Champignon",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "name":"Usine Toad",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "1":{
-         "name":"Coupe Carapace",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "prefix":"GCN",
-               "name":"Plage Peach",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "prefix":"DS",
-               "name":"Cascades Yoshi",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "prefix":"SNES",
-               "name":"Vallée Fantôme 2",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "prefix":"N64",
-               "name":"Autodrome Mario",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "2":{
-         "name":"Coupe Fleur",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "name":"Circuit Mario",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "name":"Supermarché Coco",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "name":"Pic DK",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "name":"Mine Wario",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "3":{
-         "name":"Coupe Banane",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "prefix":"N64",
-               "name":"Royaume Sorbet",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "prefix":"GBA",
-               "name":"Plage Maskass",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "prefix":"DS",
-               "name":"Quartier Delfino",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "prefix":"GCN",
-               "name":"Stade Waluigi",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "4":{
-         "name":"Coupe Etoile",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "name":"Circuit Daisy",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "name":"Cap Koopa",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "name":"Bois Vermeil",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "name":"Volcan Grondant",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "5":{
-         "name":"Coupe Feuille",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "prefix":"DS",
-               "name":"Désert du Soleil",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "prefix":"GBA",
-               "name":"Château de Bowser 3",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "prefix":"N64",
-               "name":"Jungle DK",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "prefix":"GCN",
-               "name":"Circuit Mario",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "6":{
-         "name":"Coupe Couronne",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "name":"Ruines Sec Sec",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "name":"Route Clair de Lune",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "name":"Château de Bowser",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "name":"Route Arc-en-Ciel",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "7":{
-         "name":"Coupe Eclair",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "prefix":"SNES",
-               "name":"Circuit Mario 3",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "prefix":"DS",
-               "name":"Jardin Peach",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "prefix":"GCN",
-               "name":"Montagne DK",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "prefix":"N64",
-               "name":"Château de Bowser",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "8":{
-         "name":"Aléatoire",
-         "locked":true,
-         "tracks":{
-            "0":{
-               "name":"Aléatoire: Toutes les pistes",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "1":{
-               "name":"Aléatoire: Pistes Originales",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "2":{
-               "name":"Aléatoire: Custom Tracks",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            },
-            "3":{
-               "name":"Aléatoire: Pistes Nouvelles",
-               "music":null,
-               "special":null,
-               "new":false,
-               "author":"Nintendo",
-               "since_version":"0.1"
-            }
-         }
-      },
-      "9":{
+   "cup":[
+      {
          "name":"Switch1",
          "locked":false,
          "tracks":{
@@ -414,7 +56,7 @@
             }
          }
       },
-      "10":{
+      {
          "name":"Switch2",
          "locked":false,
          "tracks":{
@@ -463,7 +105,7 @@
             }
          }
       },
-      "11":{
+      {
          "name":"DS31",
          "locked":false,
          "tracks":{
@@ -513,7 +155,7 @@
             }
          }
       },
-      "12":{
+      {
          "name":"DS32",
          "locked":false,
          "tracks":{
@@ -570,7 +212,7 @@
             }
          }
       },
-      "13":{
+      {
          "name":"DS33",
          "locked":false,
          "tracks":{
@@ -623,7 +265,7 @@
             }
          }
       },
-      "14":{
+      {
          "name":"DS34",
          "locked":false,
          "tracks":{
@@ -679,7 +321,7 @@
             }
          }
       },
-      "15":{
+      {
          "name":"DS1",
          "locked":false,
          "tracks":{
@@ -736,7 +378,7 @@
             }
          }
       },
-      "16":{
+      {
          "name":"DS2",
          "locked":false,
          "tracks":{
@@ -786,7 +428,7 @@
             }
          }
       },
-      "17":{
+      {
          "name":"DS3",
          "locked":false,
          "tracks":{
@@ -836,7 +478,7 @@
             }
          }
       },
-      "18":{
+      {
          "name":"GCN1",
          "locked":false,
          "tracks":{
@@ -889,7 +531,7 @@
             }
          }
       },
-      "19":{
+      {
          "name":"GCN2",
          "locked":false,
          "tracks":{
@@ -943,7 +585,7 @@
             }
          }
       },
-      "20":{
+      {
          "name":"GCN3",
          "locked":false,
          "tracks":{
@@ -996,7 +638,7 @@
             }
          }
       },
-      "21":{
+      {
          "name":"GBA1",
          "locked":false,
          "tracks":{
@@ -1046,7 +688,7 @@
             }
          }
       },
-      "22":{
+      {
          "name":"GBA2",
          "locked":false,
          "tracks":{
@@ -1096,7 +738,7 @@
             }
          }
       },
-      "23":{
+      {
          "name":"GBA3",
          "locked":false,
          "tracks":{
@@ -1146,7 +788,7 @@
             }
          }
       },
-      "24":{
+      {
          "name":"GBA4",
          "locked":false,
          "tracks":{
@@ -1196,7 +838,7 @@
             }
          }
       },
-      "25":{
+      {
          "name":"GBA5",
          "locked":false,
          "tracks":{
@@ -1244,7 +886,7 @@
             }
          }
       },
-      "26":{
+      {
          "name":"N641",
          "locked":false,
          "tracks":{
@@ -1300,7 +942,7 @@
             }
          }
       },
-      "27":{
+      {
          "name":"N642",
          "locked":false,
          "tracks":{
@@ -1350,7 +992,7 @@
             }
          }
       },
-      "28":{
+      {
          "name":"N643",
          "locked":false,
          "tracks":{
@@ -1400,7 +1042,7 @@
             }
          }
       },
-      "29":{
+      {
          "name":"SNES1",
          "locked":false,
          "tracks":{
@@ -1453,7 +1095,7 @@
             }
          }
       },
-      "30":{
+      {
          "name":"SNES2",
          "locked":false,
          "tracks":{
@@ -1503,7 +1145,7 @@
             }
          }
       },
-      "31":{
+      {
          "name":"SNES3",
          "locked":false,
          "tracks":{
@@ -1553,7 +1195,7 @@
             }
          }
       },
-      "32":{
+      {
          "name":"SNES4",
          "locked":false,
          "tracks":{
@@ -1606,7 +1248,7 @@
             }
          }
       },
-      "33":{
+      {
          "name":"SNES5",
          "locked":false,
          "tracks":{
@@ -1657,7 +1299,7 @@
             }
          }
       },
-      "34":{
+      {
          "name":"MKT1",
          "locked":false,
          "tracks":{
@@ -1707,7 +1349,7 @@
             }
          }
       },
-      "35":{
+      {
          "name":"MKT2",
          "locked":false,
          "tracks":{
@@ -1758,7 +1400,7 @@
             }
          }
       },
-      "36":{
+      {
          "name":"DX1",
          "locked":false,
          "tracks":{
@@ -1808,7 +1450,7 @@
             }
          }
       }
-   },
+   ],
    "tracks_list":[
       {
          "name":"4IT Clown's Road",

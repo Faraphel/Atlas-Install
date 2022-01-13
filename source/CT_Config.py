@@ -144,7 +144,7 @@ class CT_Config:
         self.unordered_tracks = []
         self.all_tracks = []
 
-        for cup_json in ctconfig_json["cup"].values():  # tracks with defined order
+        for cup_json in ctconfig_json["cup"]:  # tracks with defined order
             cup = Cup()
             cup.load_from_json(cup_json)
             if not cup.locked:  # locked cup are not useful (they are original track or random track)
