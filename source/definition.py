@@ -106,6 +106,7 @@ gamelang_to_lang = {
     "K": "en",  # korean - no translation
 }
 
+
 warning_color = {
     1: "\\\\c{YOR4}",
     2: "\\\\c{YOR6}",

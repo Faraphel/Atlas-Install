@@ -6,7 +6,7 @@ from .wszst import *
 
 class CantDownloadTrack(Exception):
     def __init__(self, track, http_error: [str, int]):
-        super().__init__(f"Can't download track {track.get_track_name()} (error {http_error}) !")
+        super().__init__(f"Can't download track {track.name} ({track.sha1}) (error {http_error}) !")
 
 
 def check_file_sha1(file: str, excepted_sha1: str) -> int:
@@ -23,11 +23,10 @@ def check_file_sha1(file: str, excepted_sha1: str) -> int:
 
 
 class Track:
-    def __init__(self, name: str = "_", prefix: str = None, suffix: str = None,
-                 author: str = "Nintendo", special: str = "T11", music: str = "T11",
-                 new=True, sha1: str = None, since_version: str = None,
-                 score: int = 0, warning: int = 0, note: str = "", track_wu8_dir: str = "./file/Track-WU8/",
-                 track_szs_dir: str = "./file/Track/", track_version: str = None, tags: list = [], *args, **kwargs):
+    def __init__(self, name: str = "_", author: str = "Nintendo", special: str = "T11", music: str = "T11",
+                 sha1: str = None, since_version: str = None, score: int = 0, warning: int = 0, note: str = "",
+                 track_wu8_dir: str = "./file/Track-WU8/", track_szs_dir: str = "./file/Track/",
+                 track_version: str = None, tags: list = [], *args, **kwargs):
         """
         Track class
         :param name: track name
@@ -54,21 +53,18 @@ class Track:
         """
 
         self.name = name                    # Track name
-        self.prefix = prefix                # Prefix, often used for game or original console like Wii U, DS, ...
-        self.suffix = suffix                # Suffix, often used for variety like Boost, Night, ...
         self.author = author                # Track author
         self.sha1 = sha1                    # Track sha1 from wszst SHA1
         self.special = special              # Special slot of the track
         self.music = music                  # Music of the track
-        self.new = new                      # Is the track new
         self.since_version = since_version  # Since which version is this track available
         self.score = score                  # Track score between 1 and 3 stars
         self.warning = warning              # Track bug level (1 = minor, 2 = major)
         self.note = note                    # Note about the track
         self.track_wu8_dir = track_wu8_dir
         self.track_szs_dir = track_szs_dir
-        self.file_wu8 = f"{track_wu8_dir}/{self.get_track_name()}.wu8"
-        self.file_szs = f"{track_szs_dir}/{self.get_track_name()}.szs"
+        self.file_wu8 = f"{track_wu8_dir}/{self.sha1}.wu8"
+        self.file_szs = f"{track_szs_dir}/{self.sha1}.szs"
         self.track_version = track_version
         self.tags = tags
 
@@ -77,7 +73,7 @@ class Track:
         track representation when printed
         :return: track information
         """
-        return f"{self.get_track_name()} sha1={self.sha1} score={self.score}"
+        return f"{self.name} sha1={self.sha1} score={self.score}"
 
     def check_wu8_sha1(self) -> int:
         """
@@ -124,41 +120,48 @@ class Track:
         """
         return self.author if type(self.author) == str else ", ".join(self.author)
 
-    def get_ctfile(self, race=False, *args, **kwargs) -> str:
+    def get_ctfile(self, ct_config, race=False, *args, **kwargs) -> str:
         """
         get ctfile text to create CTFILE.txt and RCTFILE.txt
+        :param ct_config: ct_config used to generate the Track
         :param race: is it a text used for Race_*.szs ?
         :return: ctfile definition for the track
         """
         ctfile_text = (
             f'  T {self.music}; '
             f'{self.special}; '
-            f'{"0x01" if self.new else "0x00"}; '
+            f'{"0x00" if ct_config.tag_retro in self.tags else "0x01"}; '
         )
         if not race:
             ctfile_text += (
-                f'"{self.get_track_name()}"; '  # track path
-                f'"{self.get_track_formatted_name(*args, **kwargs)}"; '  # track text shown ig
-                f'"-"\n')  # sha1, useless for now.
+                f'"{self.sha1}"; '  # track path
+                f'"{self.get_track_formatted_name(ct_config, *args, **kwargs)}"; '  # track text shown ig
+                f'"{self.sha1}"\n')  # sha1
         else:
             ctfile_text += (
                 f'"-"; '  # track path, not used in Race_*.szs, save a bit of space
-                f'"{self.get_track_formatted_name(*args, **kwargs)}\\n{self.get_author_str()}"; '  # only in race show author's name
-                f'"-"\n'  # sha1, useless for now.
+                f'"{self.get_track_formatted_name(ct_config, *args, **kwargs)}\\n{self.get_author_str()}"; '  # only in race show author's name
+                f'"-"\n'  # sha1, not used in Race_*.szs, save a bit of space
             )
 
         return ctfile_text
 
-    def get_track_formatted_name(self, highlight_version: str = None) -> str:
+    def select_tag(self, tag_list: list) -> str:
+        for tag in self.tags:
+            if tag in tag_list: return tag
+        return ""
+
+    def get_track_formatted_name(self, ct_config, highlight_version: str = None, *args, **kwargs) -> str:
         """
         get the track name with score, color, ...
+        :param ct_config: ct_config for tags configuration
         :param highlight_version: if a specific version need to be highlighted.
         :return: the name of the track with colored prefix, suffix
         """
         hl_prefix = ""
         hl_suffix = ""
-        prefix = ""
-        suffix = ""
+        prefix = self.select_tag(ct_config.prefix_list)
+        suffix = self.select_tag(ct_config.suffix_list)
 
         star_prefix = "\\\\c{YOR2}"  # per default, stars are colored in gold
         star_suffix = ""
@@ -174,25 +177,19 @@ class Track:
         if self.since_version == highlight_version:
             hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"
 
-        if self.prefix in trackname_color:
-            prefix = trackname_color[self.prefix] + " "
-        if self.suffix in trackname_color:
-            suffix = " (" + trackname_color[self.suffix] + ")"
+        if prefix: prefix = "\\\\c{"+ct_config.tags_color[prefix]+"}"+prefix+"\\\\c{off} "
+        if suffix: suffix = " (\\\\c{"+ct_config.tags_color[suffix]+"}"+suffix+"\\\\c{off})"
 
         name = (star_prefix + star_text + star_suffix + prefix + hl_prefix + self.name + hl_suffix + suffix)
         name = name.replace("_", " ")
         return name
 
-    def get_track_name(self) -> str:
+    def get_track_name(self, ct_config, *args, **kwargs) -> str:
         """
         get the track name without score, color...
         :return: track name
         """
-        prefix = (self.prefix + " ") if self.prefix else ""
-        suffix = (" (" + self.suffix + ")") if self.suffix else ""
-
-        name = (prefix + self.name + suffix)
-        return name
+        return self.select_tag(ct_config.prefix_list) + self.name + self.select_tag(ct_config.suffix_list)
 
     def load_from_json(self, track_json: dict) -> None:
         """
@@ -202,8 +199,8 @@ class Track:
         for key, value in track_json.items():  # load all value in the json as class attribute
             setattr(self, key, value)
 
-        self.file_wu8 = f"{self.track_wu8_dir}/{self.get_track_name()}.wu8"
-        self.file_szs = f"{self.track_szs_dir}/{self.get_track_name()}.szs"
+        self.file_wu8 = f"{self.track_wu8_dir}/{self.sha1}.wu8"
+        self.file_szs = f"{self.track_szs_dir}/{self.sha1}.szs"
 
     def create_from_track_file(self, track_file: str) -> None:
         pass

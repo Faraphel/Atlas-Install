@@ -585,10 +585,7 @@ class Game:
                     if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
                 if not (any(thread_list.values())): return 1  # if there is no more process
 
-            if len(thread_list):
-                return 1
-            else:
-                return 0
+            return bool(thread_list)
 
         total_track = len(self.ctconfig.all_tracks)
         self.gui.progress(max=total_track, indeter=False, show=True)
@@ -596,10 +593,9 @@ class Game:
         for i, track in enumerate(self.ctconfig.all_tracks):
             while error_count <= error_max:
                 if len(thread_list) < max_process:
-                    track_name = track.get_track_name()
-                    thread_list[track_name] = Thread(target=add_process, args=[track])
-                    thread_list[track_name].setDaemon(True)
-                    thread_list[track_name].start()
+                    thread_list[track.sha1] = Thread(target=add_process, args=[track])
+                    thread_list[track.sha1].setDaemon(True)
+                    thread_list[track.sha1].start()
                     self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
                                                                 "\n".join(thread_list.keys())), add=1)
                     break

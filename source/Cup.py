@@ -47,8 +47,8 @@ class Cup:
         :param cup: dictionnary cup
         """
         for key, value in cup.items():  # load all value in the json as class attribute
-            if key != "tracks":
-                setattr(self, key, value)
-            else:  # if the key is tracks
-                for i, track_json in value.items():  # load all tracks from their json
+            if key == "tracks":  # if the key is tracks
+                for i, track_json in enumerate(value):  # load all tracks from their json
                     self.tracks[int(i)].load_from_json(track_json)
+            else:
+                setattr(self, key, value)

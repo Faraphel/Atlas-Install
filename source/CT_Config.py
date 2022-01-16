@@ -31,7 +31,10 @@ def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf"
 
 class CT_Config:
     def __init__(self, version: str = None, name: str = None, nickname: str = None,
-                 game_variant: str = None, gui=None, region: int = None, cheat_region: int = None):
+                 game_variant: str = None, gui=None, region: int = None, cheat_region: int = None,
+                 tags_color: dict = {}, prefix_list: list = [], suffix_list: list = [],
+                 tag_retro: str = "Retro"):
+
         self.version = version
         self.name = name
         self.nickname = nickname if nickname else name
@@ -44,6 +47,10 @@ class CT_Config:
         self.all_tracks = []
         self.all_version = {version}
         self.gui = gui
+        self.tags_color = tags_color
+        self.prefix_list = prefix_list
+        self.suffix_list = suffix_list
+        self.tag_retro = tag_retro
 
     def add_ordered_cup(self, cup: Cup) -> None:
         """
@@ -78,7 +85,8 @@ class CT_Config:
                 "[RACING-TRACK-LIST]\n"
                 "%LE-FLAGS=1\n"
                 "%WIIMM-CUP=1\n"
-                "N N$SWAP | N$F_WII\n\n")
+                "N N$SWAP | N$F_WII\n\n"
+            )
             ctfile.write(header); rctfile.write(header)
 
             # generate cup for undefined track
@@ -102,8 +110,9 @@ class CT_Config:
 
             # all cups
             for cup in self.ordered_cups + unordered_cups:
-                ctfile.write(cup.get_ctfile_cup(race=False, highlight_version=highlight_version))
-                rctfile.write(cup.get_ctfile_cup(race=True, highlight_version=highlight_version))
+                kwargs = {"highlight_version": highlight_version, "ct_config": self}
+                ctfile.write(cup.get_ctfile_cup(race=False, **kwargs))
+                rctfile.write(cup.get_ctfile_cup(race=True, **kwargs))
 
     def get_cticon(self) -> Image:
         """
@@ -169,6 +178,10 @@ class CT_Config:
         self.game_variant = ctconfig_json["game_variant"] if "game_variant" in ctconfig_json else "01"
         self.region = ctconfig_json.get("region")
         self.cheat_region = ctconfig_json.get("cheat_region")
+        self.tags_color = ctconfig_json.get("tags_color")
+        self.prefix_list = ctconfig_json.get("prefix_list")
+        self.suffix_list = ctconfig_json.get("suffix_list")
+        self.tag_retro = ctconfig_json.get("tag_retro")
 
     def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs) -> list:
         """
