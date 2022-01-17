@@ -2,7 +2,7 @@
   "bmg": [
     {
       "mode": "overwrite_id",
-      "language": ["en"],
+      "language": ["E", "U", "J", "K"],
       "data": {
         "0x703e": "\\c{white}Random: All tracks",
         "0x703f": "\\c{white}Random: Original tracks",
@@ -12,7 +12,7 @@
     },
     {
       "mode": "overwrite_id",
-      "language": ["fr"],
+      "language": ["F", "Q"],
       "data": {
         "0x703e": "\\c{white}Aléatoire: Toutes les pistes",
         "0x703f": "\\c{white}Aléatoire: Pistes Originales",
@@ -22,7 +22,7 @@
     },
     {
       "mode": "overwrite_id",
-      "language": ["ge"],
+      "language": ["G"],
       "data": {
         "0x703e": "\\c{white}Zufällig: Alle Tracks",
         "0x703f": "\\c{white}Zufällig: Original-Tracks",
@@ -32,7 +32,7 @@
     },
     {
       "mode": "overwrite_id",
-      "language": ["it"],
+      "language": ["I"],
       "data": {
         "0x703e": "\\c{white}Casuale: Tutte le tracce",
         "0x703f": "\\c{white}Casuale: Tracce originali",
@@ -42,7 +42,7 @@
     },
     {
       "mode": "overwrite_id",
-      "language": ["es"],
+      "language": ["S", "M"],
       "data": {
         "0x703e": "\\c{white}Aleatorio: Todas las pistas",
         "0x703f": "\\c{white}Aleatorio: Pistas originales",

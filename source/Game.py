@@ -425,8 +425,8 @@ class Game:
                 file_process = json.load(fp_file)
 
             for bmg_process in file_process["bmg"]:
-                if bmg_language and "language" in bmg_process:
-                    if gamelang_to_lang[bmg_language] in bmg_process["language"]:
+                if "language" in bmg_process:
+                    if bmg_language not in bmg_process["language"]:
                         continue
 
                 for data, data_replacement in bmg_process["data"].items():
