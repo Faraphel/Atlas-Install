@@ -4,10 +4,9 @@ import shutil
 import glob
 import json
 
-from .Track import CantDownloadTrack
-from .CT_Config import CT_Config
-from .definition import *
-from .wszst import *
+from source.CT_Config import CT_Config
+from source.definition import *
+from source.wszst import *
 
 
 class RomAlreadyPatched(Exception):
@@ -158,7 +157,7 @@ class Game:
         count all the step patching subfile will take (for the progress bar)
         :return: number of step estimated
         """
-        with open("./file_structure.json") as f:
+        with open(f"{self.ctconfig.pack_path}/file_structure.json") as f:
             fs = json.load(f)
 
         # This part is used to estimate the max_step
@@ -190,7 +189,7 @@ class Game:
         """
         patch subfile as indicated in the file_structure.json file (for file structure)
         """
-        with open("./file_structure.json") as f:
+        with open(f"{self.ctconfig.pack_path}/file_structure.json") as f:
             fs = json.load(f)
 
         extracted_file = []

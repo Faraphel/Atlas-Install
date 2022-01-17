@@ -1,7 +1,13 @@
-import requests
+from source.definition import *
+from source.wszst import *
 
-from .definition import *
-from .wszst import *
+
+HiddenTrackAttr = [
+    "file_wu8",
+    "file_szs",
+    "track_wu8_dir",
+    "track_szs_dir"
+]  # These attribute shouldn't be used to reference all the possibilities of values
 
 
 class CantDownloadTrack(Exception):
@@ -26,7 +32,7 @@ class Track:
     def __init__(self, name: str = " ", author: str = "Nintendo", special: str = "T11", music: str = "T11",
                  sha1: str = None, since_version: str = None, score: int = -1, warning: int = 0, note: str = "",
                  track_wu8_dir: str = "./file/Track-WU8/", track_szs_dir: str = "./file/Track/",
-                 track_version: str = None, tags: list = [], *args, **kwargs):
+                 version: str = None, tags: list = [], *args, **kwargs):
         """
         Track class
         :param name: track name
@@ -61,12 +67,13 @@ class Track:
         self.score = score                  # Track score between 1 and 3 stars
         self.warning = warning              # Track bug level (1 = minor, 2 = major)
         self.note = note                    # Note about the track
+        self.version = version
+        self.tags = tags
+
         self.track_wu8_dir = track_wu8_dir
         self.track_szs_dir = track_szs_dir
         self.file_wu8 = f"{track_wu8_dir}/{self.sha1}.wu8"
         self.file_szs = f"{track_szs_dir}/{self.sha1}.szs"
-        self.track_version = track_version
-        self.tags = tags
 
     def __repr__(self) -> str:
         """
@@ -94,25 +101,6 @@ class Track:
         convert track to szs
         """
         szs.normalize(src_file=self.file_wu8)
-
-    def download_wu8(self, github_content_root: str) -> None:
-        """
-        download track wu8 from github
-        :param github_content_root: url to github project root
-        :return: 0 if correctly downloaded
-        """
-        if self.check_wu8_sha1(): return  # if sha1 correct, do not try to download track
-        for _ in range(3):
-            dl = requests.get(github_content_root + self.file_wu8, allow_redirects=True, stream=True)
-            if dl.status_code == 200:  # if page is found
-                with open(self.file_wu8, "wb") as file:
-                    for i, chunk in enumerate(dl.iter_content(chunk_size=CHUNK_SIZE)):
-                        file.write(chunk)
-                        file.flush()
-                if self.check_wu8_sha1(): return  # if sha1 correct, do not try to download track
-            else:
-                raise CantDownloadTrack(track=self, http_error=dl.status_code)
-        raise CantDownloadTrack(track=self, http_error="Failed to download track")  # if failed more than 3 times
 
     def get_author_str(self) -> str:
         """
@@ -179,7 +167,7 @@ class Track:
         if prefix: prefix = "\\\\c{"+ct_config.tags_color[prefix]+"}"+prefix+"\\\\c{off} "
         if suffix: suffix = " (\\\\c{"+ct_config.tags_color[suffix]+"}"+suffix+"\\\\c{off})"
 
-        name = star_prefix + star_text + star_suffix + prefix + hl_prefix + self.name + hl_suffix + suffix
+        name = f"{star_prefix}{star_text}{star_suffix}{prefix}{hl_prefix}{self.name}{hl_suffix}{suffix}"
         return name
 
     def get_track_name(self, ct_config, *args, **kwargs) -> str:
@@ -187,7 +175,7 @@ class Track:
         get the track name without score, color...
         :return: track name
         """
-        return self.select_tag(ct_config.prefix_list) + self.name + self.select_tag(ct_config.suffix_list)
+        return f"{self.select_tag(ct_config.prefix_list)}{self.name}{self.select_tag(ct_config.suffix_list)}"
 
     def load_from_json(self, track_json: dict):
         """

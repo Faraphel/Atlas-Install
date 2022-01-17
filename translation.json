@@ -78,6 +78,7 @@
     "Help": "Aide",
     "Apply": "Appliquer",
     "Folder": "Dossier",
-    "selected": "sélectionné"
+    "selected": "sélectionné",
+    "There is no pack in the ./Pack/ directory.": "Il n'y a pas de pack dans le dossier ./Pack/."
   }
 }

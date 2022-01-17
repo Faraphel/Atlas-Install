@@ -3,8 +3,8 @@ import math
 import json
 import os
 
-from .Cup import Cup
-from .Track import Track
+from source.Cup import Cup
+from source.Track import Track, HiddenTrackAttr
 
 
 def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf",
@@ -33,7 +33,7 @@ class CT_Config:
     def __init__(self, version: str = None, name: str = None, nickname: str = None,
                  game_variant: str = "01", gui=None, region: int = None, cheat_region: int = None,
                  tags_color: dict = {}, prefix_list: list = [], suffix_list: list = [],
-                 tag_retro: str = "Retro", default_track: Track = None):
+                 tag_retro: str = "Retro", default_track: Track = None, pack_path: str = ""):
 
         self.version = version
         self.name = name
@@ -52,6 +52,8 @@ class CT_Config:
         self.suffix_list = suffix_list
         self.tag_retro = tag_retro
         self.default_track = default_track
+
+        self.pack_path = pack_path
 
     def add_ordered_cup(self, cup: Cup) -> None:
         """
@@ -143,13 +145,14 @@ class CT_Config:
         """
         with open(ctconfig_file, encoding="utf-8") as f:
             ctconfig_json = json.load(f)
-        self.load_ctconfig_json(ctconfig_json)
+        self.load_ctconfig_json(ctconfig_json, pack_path=os.path.dirname(ctconfig_file))
 
         return self
 
-    def load_ctconfig_json(self, ctconfig_json: dict):
+    def load_ctconfig_json(self, ctconfig_json: dict, pack_path: str):
         """
         load ctconfig from a dictionnary
+        :param pack_path: path to the pack (parent dir of the ct_config.json)
         :param ctconfig_json: json of the ctconfig to load
         """
         self.ordered_cups = []
@@ -175,15 +178,11 @@ class CT_Config:
 
         self.version = ctconfig_json.get("version")
 
-        self.all_version = set()
-        for track in self.all_tracks: self.all_version.add(track.since_version)
-        self.all_version = sorted(self.all_version)
-
         if "name" in ctconfig_json: self.name = ctconfig_json["name"]
         self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
         if "game_variant" in ctconfig_json: self.game_variant = ctconfig_json["game_variant"]
 
-        for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
+        for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro", "pack_path"]:
             setattr(self, param, ctconfig_json.get(param))
 
         return self
@@ -208,3 +207,19 @@ class CT_Config:
         for keyword, value in kwargs.items():
             track = list(filter(filter_func, track))
         return track
+
+    def get_all_track_possibilities(self) -> dict:
+        possibilities = {}
+        for track in self.all_tracks:
+            for key, value in track.__dict__.items():
+                if key in HiddenTrackAttr: continue
+                if not key in possibilities: possibilities[key] = []
+
+                if type(value) == list:
+                    for value2 in value: possibilities[key].append(value2)
+                else: possibilities[key].append(value)
+
+        for k, v in possibilities.items():
+            possibilities[k] = list(sorted(set(filter(None, v))))  # remove duplicate
+
+        return possibilities

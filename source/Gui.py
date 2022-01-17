@@ -5,12 +5,14 @@ import webbrowser
 import traceback
 import requests
 import zipfile
+import glob
 import json
+import os
 
 from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat
 from source.Option import Option
 
-from .definition import *
+from source.definition import *
 
 
 with open("./translation.json", encoding="utf-8") as f:
@@ -18,7 +20,7 @@ with open("./translation.json", encoding="utf-8") as f:
 
 
 class Gui:
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialize program Gui
         """
@@ -27,9 +29,19 @@ class Gui:
         self.option = Option()
         self.option.load_from_file("./option.json")
         self.game = Game(gui=self)
-        self.game.ctconfig.load_ctconfig_file("./ct_config.json")
+
+        self.menu_bar = None
+
+        self.available_packs = self.get_available_packs()
+        if not self.available_packs:
+            messagebox.showerror(
+                self.translate("Error"),
+                self.translate("There is no pack in the ./Pack/ directory.")
+            )
+            self.quit()
 
         self.is_dev_version = False  # Is this installer version a dev ?
+        self.stringvar_ctconfig = StringVar(value=self.available_packs[0])
         self.stringvar_language = StringVar(value=self.option.language)
         self.stringvar_game_format = StringVar(value=self.option.format)
         self.boolvar_dont_check_for_update = BooleanVar(value=self.option.dont_check_for_update)
@@ -56,115 +68,23 @@ class Gui:
 
         if not self.boolvar_dont_check_for_update.get(): self.check_update()
 
-        self.menu_bar = Menu(self.root)
-        self.root.config(menu=self.menu_bar)
+        self.init_gui()
+        self.init_menu()
 
-        #  LANGUAGE MENU
-        self.menu_language = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Language"), menu=self.menu_language)
-        self.menu_language.add_radiobutton(label="Français", variable=self.stringvar_language, value="fr", command=lambda: self.option.edit("language", "fr", need_restart=True))
-        self.menu_language.add_radiobutton(label="English", variable=self.stringvar_language, value="en", command=lambda: self.option.edit("language", "en", need_restart=True))
+    def init_gui(self) -> None:
+        self.frame_ctconfig = LabelFrame(self.root, text=self.translate("Mod"))
+        self.frame_ctconfig.grid(row=1, column=1, sticky="NWS")
 
-        #  OUTPUT FORMAT MENU
-        self.menu_format = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Format"), menu=self.menu_format)
-        self.menu_format.add_radiobutton(label=self.translate("FST (Directory)"), variable=self.stringvar_game_format, value="FST", command=lambda: self.option.edit("format", "FST"))
-        self.menu_format.add_radiobutton(label="ISO", variable=self.stringvar_game_format, value="ISO", command=lambda: self.option.edit("format", "ISO"))
-        self.menu_format.add_radiobutton(label="CISO", variable=self.stringvar_game_format, value="CISO", command=lambda: self.option.edit("format", "CISO"))
-        self.menu_format.add_radiobutton(label="WBFS", variable=self.stringvar_game_format, value="WBFS", command=lambda: self.option.edit("format", "WBFS"))
+        self.combobox_ctconfig_path = ttk.Combobox(
+            self.frame_ctconfig,
+            values=self.available_packs,
+            textvariable=self.stringvar_ctconfig
+        )
+        self.combobox_ctconfig_path.grid(row=1, column=1, sticky="NEWS", columnspan=2)
+        self.combobox_ctconfig_path.bind("<<ComboboxSelected>>", lambda x=None: self.init_menu())
 
-        # TRACK CONFIGURATION MENU
-        self.menu_trackconfiguration = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Track configuration"), menu=self.menu_trackconfiguration)
 
-        # select track
-        self.menu_trackselection = Menu(self.menu_trackconfiguration, tearoff=0)
-        self.menu_trackconfiguration.add_cascade(label=self.translate("Select track"), menu=self.menu_trackselection)
-
-        self.menu_trackselection_score = Menu(self.menu_trackselection, tearoff=0)
-        self.menu_trackselection.add_cascade(label="Score", menu=self.menu_trackselection_score)
-
-        self.menu_trackselection_score.add_checkbutton(label=self.translate("Select"," 1 ","star"), variable=self.boolvar_use_1star_track)
-        self.menu_trackselection_score.add_checkbutton(label=self.translate("Select"," 2 ","stars"), variable=self.boolvar_use_2star_track)
-        self.menu_trackselection_score.add_checkbutton(label=self.translate("Select"," 3 ","stars"), variable=self.boolvar_use_3star_track)
-
-        # sort track
-        self.menu_sort_track_by = Menu(self.menu_trackconfiguration, tearoff=0)
-        self.menu_trackconfiguration.add_cascade(label=self.translate("Sort track"), menu=self.menu_sort_track_by)
-        for param_name, param in [("Name", "name"), ("Version", "since_version"), ("Author", "author"), ("Score", "score"), ("Warning", "warning")]:
-            self.menu_sort_track_by.add_radiobutton(label=param_name, variable=self.stringvar_sort_track_by, value=param)
-
-        # highlight track
-        self.menu_marktrackversion = Menu(self.menu_trackconfiguration, tearoff=0)
-        self.menu_trackconfiguration.add_cascade(label=self.translate("Highlight track"), menu=self.menu_marktrackversion)
-        self.menu_marktrackversion.add_radiobutton(label=self.translate("None"), variable=self.stringvar_mark_track_from_version, value="None")
-
-        self.menu_marktrackversion_beta = Menu(self.menu_marktrackversion, tearoff=0)
-        self.menu_marktrackversion.add_cascade(label="BETA", menu=self.menu_marktrackversion_beta)
-
-        for version in self.game.ctconfig.all_version:
-            _menu = self.menu_marktrackversion
-
-            version_tuple = tuple(int(v) for v in version.split("."))
-            if version_tuple < (1, 0, 0):
-                _menu = self.menu_marktrackversion_beta
-
-            _menu.add_radiobutton(label=f"v{version}", variable=self.stringvar_mark_track_from_version, value=version)
-
-        #  ADVANCED MENU
-        ## INSTALLER PARAMETER
-        self.menu_advanced = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)
-        self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
-        self.menu_advanced.add_checkbutton(label=self.translate("Force \"unofficial\" mode"), variable=self.boolvar_force_unofficial_mode)
-
-        self.menu_conv_process = Menu(self.menu_advanced, tearoff=0)
-        self.menu_advanced.add_cascade(label=self.translate("Number of track conversion process"), menu=self.menu_conv_process)
-
-        self.menu_conv_process.add_radiobutton(label=self.translate("1 ", "process"), variable=self.intvar_process_track, value=1, command=lambda: self.option.edit("process_track", 1))
-        self.menu_conv_process.add_radiobutton(label=self.translate("2 ", "process"), variable=self.intvar_process_track, value=2, command=lambda: self.option.edit("process_track", 2))
-        self.menu_conv_process.add_radiobutton(label=self.translate("4 ", "process"), variable=self.intvar_process_track, value=4, command=lambda: self.option.edit("process_track", 4))
-        self.menu_conv_process.add_radiobutton(label=self.translate("8 ", "process"), variable=self.intvar_process_track, value=8, command=lambda: self.option.edit("process_track", 8))
-
-        ## GAME PARAMETER
-        self.menu_advanced.add_separator()
-
-        self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"), variable=self.boolvar_use_debug_mode)
-
-        self.menu_mystuff = Menu(self.menu_advanced, tearoff=0)
-        self.menu_advanced.add_cascade(label=self.translate("MyStuff"), menu=self.menu_mystuff)
-
-        def add_menu_mystuff_command(stringvar: StringVar, label: str):
-            self.menu_mystuff.add_command()
-            index: int = self.menu_mystuff.index("end")
-
-            def _func(init: bool = False):
-                stringvar.set(None)
-                if not init:
-                    mystuff_dir = filedialog.askdirectory()
-                    if mystuff_dir: stringvar.set(mystuff_dir)
-
-                self.menu_mystuff.entryconfig(index, label=self.translate(
-                    "Apply", " ", label, f" ({stringvar.get()!r} ", "selected", ")")
-                )
-
-            _func(init=True)
-            self.menu_mystuff.entryconfig(index, command=_func)
-
-            return _func
-
-        add_menu_mystuff_command(self.stringvar_mystuff_folder, "MyStuff")
-
-        #  HELP MENU
-        self.menu_help = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Help"), menu=self.menu_help)
-        self.menu_help.add_command(label="Github Wiki", command=lambda: webbrowser.open(GITHUB_HELP_PAGE_URL))
-        self.menu_help.add_command(label="Discord", command=lambda: webbrowser.open(DISCORD_URL))
-
-        # GUI
-        self.frame_language = Frame(self.root)
-        self.frame_language.grid(row=1, column=1, sticky="E")
-
+        # Jeu
         self.frame_game_path = LabelFrame(self.root, text=self.translate("Original game"))
         self.frame_game_path.grid(row=2, column=1)
 
@@ -172,8 +92,9 @@ class Gui:
         entry_game_path.grid(row=1, column=1, sticky="NEWS")
 
         def select_path():
-            path = filedialog.askopenfilename(filetypes=((self.translate("Wii game"),
-                                                          r"*.iso *.wbfs main.dol *.wia *.ciso"),))
+            path = filedialog.askopenfilename(
+                filetypes=((self.translate("Wii game"), r"*.iso *.wbfs main.dol *.wia *.ciso"),)
+            )
             if os.path.exists(path):
                 entry_game_path.delete(0, END)
                 entry_game_path.insert(0, path)
@@ -215,11 +136,199 @@ class Gui:
             self.game.patch_file()
             self.game.install_mod()
 
-        self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Install mod"), relief=RIDGE, command=do_everything)
+        self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Install mod"),
+                                           relief=RIDGE, command=do_everything)
         self.button_do_everything.grid(row=1, column=1, columnspan=2, sticky="NEWS")
 
         self.progressbar = ttk.Progressbar(self.root)
         self.progresslabel = Label(self.root)
+
+    def init_menu(self) -> None:
+        if self.menu_bar: self.menu_bar.destroy()
+        self.menu_bar = Menu(self.root)
+        self.root.config(menu=self.menu_bar)
+
+        self.game.ctconfig.load_ctconfig_file(ctconfig_file=self.get_ctconfig_path_pack(self.stringvar_ctconfig.get()))
+        track_attr_possibilities = self.game.ctconfig.get_all_track_possibilities()
+
+        #  LANGUAGE MENU
+        self.menu_language = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Language"), menu=self.menu_language)
+        self.menu_language.add_radiobutton(
+            label="Français",
+            variable=self.stringvar_language,
+            value="fr",
+            command=lambda: self.option.edit("language", "fr", need_restart=True)
+        )
+        self.menu_language.add_radiobutton(
+            label="English",
+            variable=self.stringvar_language,
+            value="en",
+            command=lambda: self.option.edit("language", "en", need_restart=True)
+        )
+
+        #  OUTPUT FORMAT MENU
+        self.menu_format = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Format"), menu=self.menu_format)
+        self.menu_format.add_radiobutton(
+            label=self.translate("FST (Directory)"),
+            variable=self.stringvar_game_format,
+            value="FST", command=lambda:
+            self.option.edit("format", "FST")
+        )
+        self.menu_format.add_radiobutton(
+            label="ISO",
+            variable=self.stringvar_game_format,
+            value="ISO",
+            command=lambda: self.option.edit("format", "ISO")
+        )
+        self.menu_format.add_radiobutton(
+            label="CISO",
+            variable=self.stringvar_game_format,
+            value="CISO",
+            command=lambda: self.option.edit("format", "CISO")
+        )
+        self.menu_format.add_radiobutton(
+            label="WBFS",
+            variable=self.stringvar_game_format,
+            value="WBFS",
+            command=lambda: self.option.edit("format", "WBFS")
+        )
+
+        # TRACK CONFIGURATION MENU
+        self.menu_trackconfiguration = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Track configuration"), menu=self.menu_trackconfiguration)
+
+        # sort track
+        self.menu_sort_track_by = Menu(self.menu_trackconfiguration, tearoff=0)
+        self.menu_trackconfiguration.add_cascade(label=self.translate("Sort track"), menu=self.menu_sort_track_by)
+        for param in track_attr_possibilities:
+            self.menu_sort_track_by.add_radiobutton(
+                label=param.title(),
+                variable=self.stringvar_sort_track_by,
+                value=param
+            )
+
+        # select track
+        self.menu_trackselection = Menu(self.menu_trackconfiguration, tearoff=0)
+        self.menu_trackconfiguration.add_cascade(label=self.translate("Select track"), menu=self.menu_trackselection)
+        self.menu_trackselection_param = {}
+
+        self.menu_trackhighlight = Menu(self.menu_trackconfiguration, tearoff=0)
+        self.menu_trackconfiguration.add_cascade(label=self.translate("Highlight track"), menu=self.menu_trackhighlight)
+        self.menu_trackhighlight_param = {}
+
+        for param, values in track_attr_possibilities.items():
+            for menu_param, menu in [
+                (self.menu_trackselection_param, self.menu_trackselection),
+                (self.menu_trackhighlight_param, self.menu_trackhighlight)
+            ]:
+                menu_param[param] = {
+                    "Menu": Menu(menu, tearoff=0),
+                    "Var": []
+                }
+                menu.add_cascade(
+                    label=param.title(),
+                    menu=menu_param[param]["Menu"]
+                )
+
+                for value in values:
+                    menu_param[param]["Var"].append(BooleanVar(value=True))
+                    menu_param[param]["Menu"].add_checkbutton(
+                        label=value,
+                        variable=menu_param[param]["Var"][-1],
+                    )
+
+        #  ADVANCED MENU
+        ## INSTALLER PARAMETER
+        self.menu_advanced = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)
+        self.menu_advanced.add_checkbutton(
+            label=self.translate("Don't check for update"),
+            variable=self.boolvar_dont_check_for_update,
+            command=lambda: self.option.edit(
+                "dont_check_for_update",
+                self.boolvar_dont_check_for_update
+            )
+        )
+        self.menu_advanced.add_checkbutton(
+            label=self.translate("Force \"unofficial\" mode"),
+            variable=self.boolvar_force_unofficial_mode
+        )
+
+        self.menu_conv_process = Menu(self.menu_advanced, tearoff=0)
+        self.menu_advanced.add_cascade(
+            label=self.translate("Number of track conversion process"),
+            menu=self.menu_conv_process
+        )
+
+        self.menu_conv_process.add_radiobutton(
+            label=self.translate("1 ", "process"),
+            variable=self.intvar_process_track, value=1,
+            command=lambda: self.option.edit("process_track", 1)
+        )
+        self.menu_conv_process.add_radiobutton(
+            label=self.translate("2 ", "process"),
+            variable=self.intvar_process_track, value=2,
+            command=lambda: self.option.edit("process_track", 2)
+        )
+        self.menu_conv_process.add_radiobutton(
+            label=self.translate("4 ", "process"),
+            variable=self.intvar_process_track, value=4,
+            command=lambda: self.option.edit("process_track", 4)
+        )
+        self.menu_conv_process.add_radiobutton(
+            label=self.translate("8 ", "process"),
+            variable=self.intvar_process_track, value=8,
+            command=lambda: self.option.edit("process_track", 8)
+        )
+
+        ## GAME PARAMETER
+        self.menu_advanced.add_separator()
+
+        self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"), variable=self.boolvar_use_debug_mode)
+
+        self.menu_mystuff = Menu(self.menu_advanced, tearoff=0)
+        self.menu_advanced.add_cascade(label=self.translate("MyStuff"), menu=self.menu_mystuff)
+
+        def add_menu_mystuff_command(stringvar: StringVar, label: str):
+            self.menu_mystuff.add_command()
+            index: int = self.menu_mystuff.index("end")
+
+            def _func(init: bool = False):
+                stringvar.set(None)
+                if not init:
+                    mystuff_dir = filedialog.askdirectory()
+                    if mystuff_dir: stringvar.set(mystuff_dir)
+
+                self.menu_mystuff.entryconfig(index, label=self.translate(
+                    "Apply", " ", label, f" ({stringvar.get()!r} ", "selected", ")")
+                )
+
+            _func(init=True)
+            self.menu_mystuff.entryconfig(index, command=_func)
+
+            return _func
+
+        add_menu_mystuff_command(self.stringvar_mystuff_folder, "MyStuff")
+
+        #  HELP MENU
+        self.menu_help = Menu(self.menu_bar, tearoff=0)
+        self.menu_bar.add_cascade(label=self.translate("Help"), menu=self.menu_help)
+        self.menu_help.add_command(label="Github Wiki", command=lambda: webbrowser.open(GITHUB_HELP_PAGE_URL))
+        self.menu_help.add_command(label="Discord", command=lambda: webbrowser.open(DISCORD_URL))
+
+    def get_available_packs(self) -> list:
+        available_packs = []
+
+        for pack_ctconfig in glob.glob("./Pack/*/ct_config.json"):
+            dirname = os.path.basename(os.path.dirname(pack_ctconfig))
+            available_packs.append(dirname)
+
+        return available_packs
+
+    def get_ctconfig_path_pack(self, pack_name: str) -> str:
+        return "./Pack/" + pack_name + "/ct_config.json"
 
     def check_update(self) -> None:
         """
@@ -319,7 +428,8 @@ class Gui:
         """
         button = [
             self.button_do_everything,
-            self.button_select_path
+            self.button_select_path,
+            self.combobox_ctconfig_path,
         ]
         for widget in button:
             if enable: widget.config(state=NORMAL)
