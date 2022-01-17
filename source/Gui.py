@@ -203,9 +203,9 @@ class Gui:
             except InvalidFormat:
                 messagebox.showerror(self.translate("Error"), self.translate("This game's format is invalid"))
                 raise InvalidFormat
-            except:
+            except Exception as e:
                 self.log_error()
-                raise Exception
+                raise e
             finally:
                 self.progress(show=False)
 

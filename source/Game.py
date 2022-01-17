@@ -320,8 +320,10 @@ class Game:
 
             messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod have been installed !"))
 
-        except:
+        except Exception as e:
             self.gui.log_error()
+            raise e
+
         finally:
             self.gui.progress(show=False)
             self.gui.quit()
@@ -495,8 +497,10 @@ class Game:
             self.patch_autoadd()
             self.patch_tracks()
 
-        except:
+        except Exception as e:
             self.gui.log_error()
+            raise e
+
         finally:
             self.gui.progress(show=False)
 
