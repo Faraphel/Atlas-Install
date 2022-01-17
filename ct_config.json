@@ -103,6 +103,17 @@
         "Boost":"YOR3"
     },
     "tag_retro": "Retro",
+    "default_track":
+    {
+        "name":"",
+        "music":"T32",
+        "special":"T32",
+        "author":"MrFluffy",
+        "since_version":"0.1",
+        "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
+        "version":"v1.1",
+        "tags":[]
+    },
     "cup":[
         {
             "name":"Switch1",
@@ -210,19 +221,6 @@
                     "tags":[
                         "Retro",
                         "Wii U"
-                    ]
-                },
-                {
-                    "name":"_",
-                    "music":"T32",
-                    "special":"T32",
-                    "score":0,
-                    "author":"MrFluffy",
-                    "since_version":"0.1",
-                    "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-                    "version":"v1.1",
-                    "tags":[
-                        "Retro"
                     ]
                 }
             ]
@@ -1159,32 +1157,6 @@
                         "Retro",
                         "GBA"
                     ]
-                },
-                {
-                    "name":"_",
-                    "music":"T44",
-                    "special":"T44",
-                    "score":0,
-                    "author":"MrFluffy",
-                    "since_version":"0.1",
-                    "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-                    "version":"v1.1",
-                    "tags":[
-                        "Retro"
-                    ]
-                },
-                {
-                    "name":"_",
-                    "music":"T44",
-                    "special":"T44",
-                    "score":0,
-                    "author":"MrFluffy",
-                    "since_version":"0.1",
-                    "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-                    "version":"v1.1",
-                    "tags":[
-                        "Retro"
-                    ]
                 }
             ]
         },
@@ -1668,32 +1640,6 @@
                         "Retro",
                         "SNES"
                     ]
-                },
-                {
-                    "name":"_",
-                    "music":"T44",
-                    "special":"T44",
-                    "score":0,
-                    "author":"MrFluffy",
-                    "since_version":"0.1",
-                    "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-                    "version":"v1.1",
-                    "tags":[
-                        "Retro"
-                    ]
-                },
-                {
-                    "name":"_",
-                    "music":"T44",
-                    "special":"T44",
-                    "score":0,
-                    "author":"MrFluffy",
-                    "since_version":"0.1",
-                    "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-                    "version":"v1.1",
-                    "tags":[
-                        "Retro"
-                    ]
                 }
             ]
         },
@@ -1792,32 +1738,6 @@
                     "tags":[
                         "Retro",
                         "RMX"
-                    ]
-                },
-                {
-                    "name":"_",
-                    "music":"T44",
-                    "special":"T44",
-                    "score":0,
-                    "author":"MrFluffy",
-                    "since_version":"0.1",
-                    "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-                    "version":"v1.1",
-                    "tags":[
-                        "Retro"
-                    ]
-                },
-                {
-                    "name":"_",
-                    "music":"T44",
-                    "special":"T44",
-                    "score":0,
-                    "author":"MrFluffy",
-                    "since_version":"0.1",
-                    "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-                    "version":"v1.1",
-                    "tags":[
-                        "Retro"
                     ]
                 }
             ]

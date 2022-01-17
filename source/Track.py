@@ -23,7 +23,7 @@ def check_file_sha1(file: str, excepted_sha1: str) -> int:
 
 
 class Track:
-    def __init__(self, name: str = "_", author: str = "Nintendo", special: str = "T11", music: str = "T11",
+    def __init__(self, name: str = "", author: str = "Nintendo", special: str = "T11", music: str = "T11",
                  sha1: str = None, since_version: str = None, score: int = 0, warning: int = 0, note: str = "",
                  track_wu8_dir: str = "./file/Track-WU8/", track_szs_dir: str = "./file/Track/",
                  track_version: str = None, tags: list = [], *args, **kwargs):
@@ -180,8 +180,7 @@ class Track:
         if prefix: prefix = "\\\\c{"+ct_config.tags_color[prefix]+"}"+prefix+"\\\\c{off} "
         if suffix: suffix = " (\\\\c{"+ct_config.tags_color[suffix]+"}"+suffix+"\\\\c{off})"
 
-        name = (star_prefix + star_text + star_suffix + prefix + hl_prefix + self.name + hl_suffix + suffix)
-        name = name.replace("_", " ")
+        name = star_prefix + star_text + star_suffix + prefix + hl_prefix + self.name + hl_suffix + suffix
         return name
 
     def get_track_name(self, ct_config, *args, **kwargs) -> str:
@@ -191,7 +190,7 @@ class Track:
         """
         return self.select_tag(ct_config.prefix_list) + self.name + self.select_tag(ct_config.suffix_list)
 
-    def load_from_json(self, track_json: dict) -> None:
+    def load_from_json(self, track_json: dict):
         """
         load the track from a dictionary
         :param track_json: track's dictionary
@@ -202,5 +201,13 @@ class Track:
         self.file_wu8 = f"{self.track_wu8_dir}/{self.sha1}.wu8"
         self.file_szs = f"{self.track_szs_dir}/{self.sha1}.szs"
 
+        return self
+
     def create_from_track_file(self, track_file: str) -> None:
         pass
+
+    def copy(self):
+        new = type(self)()
+        for k, v in self.__dict__.items():
+            setattr(new, k, v)
+        return new

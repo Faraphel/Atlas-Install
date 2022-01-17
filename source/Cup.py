@@ -2,7 +2,9 @@ from .Track import Track
 
 
 class Cup:
-    def __init__(self, name: str = None,
+    def __init__(self,
+                 default_track: Track,
+                 name: str = None,
                  track1: Track = None,
                  track2: Track = None,
                  track3: Track = None,
@@ -24,10 +26,10 @@ class Cup:
         self.name = name
         self.locked = locked
         self.tracks = [
-            track1 if track1 else Track(),
-            track2 if track2 else Track(),
-            track3 if track3 else Track(),
-            track4 if track4 else Track()
+            track1 if track1 else default_track.copy(),
+            track2 if track2 else default_track.copy(),
+            track3 if track3 else default_track.copy(),
+            track4 if track4 else default_track.copy()
         ]
 
     def get_ctfile_cup(self, *args, **kwargs) -> str:

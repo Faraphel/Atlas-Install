@@ -285,14 +285,14 @@ class Game:
         """
         self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
 
-        shutil.copytree("./file/Track/", self.path + "/files/Race/Course/", dirs_exist_ok=True)
         lpar_path = "./file/lpar-debug.txt" if self.gui.boolvar_use_debug_mode.get() else "./file/lpar-default.txt"
 
         lec.patch(
             lecode_file=f"./file/lecode-{self.region}.bin",
             dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
             game_track_path=f"{self.path}/files/Race/Course/",
-            move_track_path=f"{self.path}/files/Race/Course/",
+            copy_track_paths=[f"./file/Track/"],
+            move_track_paths=[f"{self.path}/files/Race/Course/"],
             ctfile_path="./file/CTFILE.txt",
             lpar_path=lpar_path,
         )
@@ -320,7 +320,7 @@ class Game:
             self.install_patch_lecode()
             self.install_convert_rom()
 
-            messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod has been installed !"))
+            messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod have been installed !"))
 
         except:
             self.gui.log_error()
@@ -335,6 +335,49 @@ class Game:
         """
         if os.path.exists(auto_add_dir): shutil.rmtree(auto_add_dir)
         szs.autoadd(path=self.path, dest_dir=auto_add_dir)
+
+    def create_extra_common(self, bmgtracks: str, extra_common_path: str = "./file/ExtraCommon.txt") -> None:
+        """
+        this function create an "extra common" file : it contain modification about the original tracks name
+        (the color modification) and allow the modification to be applied by overwritting the normal common
+        file by this one.
+        :param bmgtracks: bmg containing the track list
+        :param extra_common_path: destination path to the extra common file
+        """
+
+        with open(extra_common_path, "w", encoding="utf8") as f:
+            f.write("#BMG\n")
+
+            for bmgtrack in bmgtracks.split("\n"):
+                if "=" in bmgtrack:
+
+                    prefix = ""
+                    track_name = bmgtrack[bmgtrack.find("= ") + 2:]
+
+                    if "T" in bmgtrack[:bmgtrack.find("=")]:
+                        start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
+                        track_id = bmgtrack[start_track_id:start_track_id + 3]
+                        if track_id[1] in "1234":  # if the track is a original track from the wii
+                            prefix = "Wii"
+                            if prefix in self.ctconfig.tags_color:
+                                prefix = "\\\\c{" + self.ctconfig.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            prefix += " "
+
+                        elif track_id[1] in "5678":  # if the track is a retro track from the original game
+                            prefix, *track_name = track_name.split(" ")
+                            track_name = " ".join(track_name)
+                            if prefix in self.ctconfig.tags_color:
+                                prefix = "\\\\c{" + self.ctconfig.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            prefix += " "
+
+                        track_id = hex(bmgID_track_move[track_id])[2:]
+
+                    else:  # Arena
+                        start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
+                        track_id = bmgtrack[start_track_id:start_track_id + 2]
+                        track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
+
+                    f.write(f"  {track_id}\t= {prefix}{track_name}\n")
 
     def patch_bmg(self, gamefile: str) -> None:
         """
@@ -362,38 +405,7 @@ class Game:
         bmgtracks = bmg.cat(path=gamefile, subfile=".d/message/Common.bmg")  # Common.bmg
         bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
 
-        def create_extra_common(extra_common_path: str = "./file/ExtraCommon.txt") -> None:
-            """
-            this function create an "extra common" file : it contain modification about the original tracks name
-            (the color modification) and allow the modification to be applied by overwritting the normal common
-            file by this one.
-            :param extra_common_path: destination path to the extra common file
-            """
-            with open(extra_common_path, "w", encoding="utf8") as f:
-                f.write("#BMG\n")
-
-                for bmgtrack in bmgtracks.split("\n"):
-                    if "=" in bmgtrack:
-
-                        prefix = ""
-                        track_name = bmgtrack[bmgtrack.find("= ") + 2:]
-
-                        if "T" in bmgtrack[:bmgtrack.find("=")]:
-                            start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
-                            track_id = bmgtrack[start_track_id:start_track_id + 3]
-                            if track_id[1] in "1234":  # if the track is a original track from the wii
-                                prefix = trackname_color["Wii"] + " "
-                            elif track_id[1] in "5678":  # if the track is a retro track from the original game
-                                for color_prefix, rep_color_prefix in trackname_color.items():  # color retro track prefix
-                                    track_name = track_name.replace(color_prefix, rep_color_prefix)
-                            track_id = hex(bmgID_track_move[track_id])[2:]
-                        else:  # Arena
-                            start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
-                            track_id = bmgtrack[start_track_id:start_track_id + 2]
-                            track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
-
-                        f.write(f"  {track_id}\t= {prefix}{track_name}\n")
-        create_extra_common()
+        self.create_extra_common(bmgtracks=bmgtracks, extra_common_path="./file/ExtraCommon.txt")
 
         bmgcommon = ctc.patch_bmg(ctfile="./file/CTFILE.txt",
                                   bmgs=[gamefile + ".d/message/Common.bmg", "./file/ExtraCommon.txt"])

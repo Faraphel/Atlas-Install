@@ -31,9 +31,9 @@ def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf"
 
 class CT_Config:
     def __init__(self, version: str = None, name: str = None, nickname: str = None,
-                 game_variant: str = None, gui=None, region: int = None, cheat_region: int = None,
+                 game_variant: str = "01", gui=None, region: int = None, cheat_region: int = None,
                  tags_color: dict = {}, prefix_list: list = [], suffix_list: list = [],
-                 tag_retro: str = "Retro"):
+                 tag_retro: str = "Retro", default_track: Track = None):
 
         self.version = version
         self.name = name
@@ -51,6 +51,7 @@ class CT_Config:
         self.prefix_list = prefix_list
         self.suffix_list = suffix_list
         self.tag_retro = tag_retro
+        self.default_track = default_track
 
     def add_ordered_cup(self, cup: Cup) -> None:
         """
@@ -104,7 +105,7 @@ class CT_Config:
 
             for i, track in enumerate(track_list):
                 if i % 4 == 0:
-                    _actual_cup = Cup(name=f"TL{i // 4}")
+                    _actual_cup = Cup(name=f"TL{i // 4}", default_track=self.default_track)
                     unordered_cups.append(_actual_cup)
                 _actual_cup.tracks[i % 4] = track
 
@@ -153,35 +154,35 @@ class CT_Config:
         self.unordered_tracks = []
         self.all_tracks = []
 
-        for cup_json in ctconfig_json["cup"]:  # tracks with defined order
-            cup = Cup()
+        # default track
+        self.default_track = Track()
+        if "default_track" in ctconfig_json: self.default_track.load_from_json(ctconfig_json["default_track"])
+
+        for cup_json in ctconfig_json["cup"] if "cup" in ctconfig_json else []:  # tracks with defined order
+            cup = Cup(default_track=self.default_track)
             cup.load_from_json(cup_json)
             if not cup.locked:  # locked cup are not useful (they are original track or random track)
                 self.ordered_cups.append(cup)
                 self.all_tracks.extend(cup.tracks)
 
-        for track_json in ctconfig_json["tracks_list"]:  # unordered tracks
+        for track_json in ctconfig_json["tracks_list"] if "tracks_list" in ctconfig_json else []:  # unordered tracks
             track = Track()
             track.load_from_json(track_json)
             self.unordered_tracks.append(track)
             self.all_tracks.append(track)
 
-        self.version = ctconfig_json["version"]
+        self.version = ctconfig_json.get("version")
 
         self.all_version = set()
-        for track in self.all_tracks:
-            self.all_version.add(track.since_version)
+        for track in self.all_tracks: self.all_version.add(track.since_version)
         self.all_version = sorted(self.all_version)
 
-        self.name = ctconfig_json["name"]
+        if "name" in ctconfig_json: self.name = ctconfig_json["name"]
         self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
-        self.game_variant = ctconfig_json["game_variant"] if "game_variant" in ctconfig_json else "01"
-        self.region = ctconfig_json.get("region")
-        self.cheat_region = ctconfig_json.get("cheat_region")
-        self.tags_color = ctconfig_json.get("tags_color")
-        self.prefix_list = ctconfig_json.get("prefix_list")
-        self.suffix_list = ctconfig_json.get("suffix_list")
-        self.tag_retro = ctconfig_json.get("tag_retro")
+        if "game_variant" in ctconfig_json: self.game_variant = ctconfig_json["game_variant"]
+
+        for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
+            setattr(self, param, ctconfig_json.get(param))
 
     def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs) -> list:
         """
