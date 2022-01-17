@@ -43,7 +43,7 @@ class Cup:
             ctfile_cup += track.get_ctfile(*args, **kwargs)
         return ctfile_cup
 
-    def load_from_json(self, cup: dict) -> None:
+    def load_from_json(self, cup: dict):
         """
         load the cup from a dictionnary
         :param cup: dictionnary cup
@@ -54,3 +54,5 @@ class Cup:
                     self.tracks[int(i)].load_from_json(track_json)
             else:
                 setattr(self, key, value)
+
+        return self

@@ -136,7 +136,7 @@ class CT_Config:
 
         return ct_icon
 
-    def load_ctconfig_file(self, ctconfig_file: str = "./ct_config.json") -> None:
+    def load_ctconfig_file(self, ctconfig_file: str = "./ct_config.json"):
         """
         load a ctconfig from a json file
         :param ctconfig_file: path to the ctconfig file
@@ -145,7 +145,9 @@ class CT_Config:
             ctconfig_json = json.load(f)
         self.load_ctconfig_json(ctconfig_json)
 
-    def load_ctconfig_json(self, ctconfig_json: dict) -> None:
+        return self
+
+    def load_ctconfig_json(self, ctconfig_json: dict):
         """
         load ctconfig from a dictionnary
         :param ctconfig_json: json of the ctconfig to load
@@ -183,6 +185,8 @@ class CT_Config:
 
         for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
             setattr(self, param, ctconfig_json.get(param))
+
+        return self
 
     def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs) -> list:
         """
