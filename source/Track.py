@@ -158,18 +158,18 @@ class Track:
         :param highlight_version: if a specific version need to be highlighted.
         :return: the name of the track with colored prefix, suffix
         """
-        hl_prefix = ""
+        hl_prefix = ""  # highlight
         hl_suffix = ""
-        prefix = self.select_tag(ct_config.prefix_list)
-        suffix = self.select_tag(ct_config.suffix_list)
-
-        star_prefix = "\\\\c{YOR2}"  # per default, stars are colored in gold
+        prefix = self.select_tag(ct_config.prefix_list)  # tag prefix
+        suffix = self.select_tag(ct_config.suffix_list)  # tag suffix
+        star_prefix = ""  # star
         star_suffix = ""
         star_text = ""
 
         if self.score:
             if 0 <= self.score <= 5:
                 star_text = f"\\\\x{0xFF10 + self.score:04X}"
+                star_prefix = "\\\\c{YOR2}"  # per default, stars are colored in gold
                 star_suffix = "\\\\c{off} "
                 if 0 < self.warning <= 3:
                     star_prefix = warning_color[self.warning]
