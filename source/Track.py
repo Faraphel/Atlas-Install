@@ -23,7 +23,7 @@ def check_file_sha1(file: str, excepted_sha1: str) -> int:
 
 
 class Track:
-    def __init__(self, name: str = "", author: str = "Nintendo", special: str = "T11", music: str = "T11",
+    def __init__(self, name: str = " ", author: str = "Nintendo", special: str = "T11", music: str = "T11",
                  sha1: str = None, since_version: str = None, score: int = -1, warning: int = 0, note: str = "",
                  track_wu8_dir: str = "./file/Track-WU8/", track_szs_dir: str = "./file/Track/",
                  track_version: str = None, tags: list = [], *args, **kwargs):
