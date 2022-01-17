@@ -32,8 +32,6 @@ class Gui:
         self.is_dev_version = False  # Is this installer version a dev ?
         self.stringvar_language = StringVar(value=self.option.language)
         self.stringvar_game_format = StringVar(value=self.option.format)
-        self.boolvar_disable_download = BooleanVar(value=self.option.disable_download)
-        self.boolvar_del_track_after_conv = BooleanVar(value=self.option.del_track_after_conv)
         self.boolvar_dont_check_for_update = BooleanVar(value=self.option.dont_check_for_update)
         self.intvar_process_track = IntVar(value=self.option.process_track)
 
@@ -117,8 +115,6 @@ class Gui:
         ## INSTALLER PARAMETER
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)
-        self.menu_advanced.add_checkbutton(label=self.translate("Disable downloads"), variable=self.boolvar_disable_download, command=lambda: self.option.edit("disable_download", self.boolvar_disable_download))
-        self.menu_advanced.add_checkbutton(label=self.translate("Delete track after wu8 to szs conversion"), variable=self.boolvar_del_track_after_conv, command=lambda: self.option.edit("del_track_after_conv", self.boolvar_del_track_after_conv))
         self.menu_advanced.add_checkbutton(label=self.translate("Don't check for update"), variable=self.boolvar_dont_check_for_update, command=lambda: self.option.edit("dont_check_for_update", self.boolvar_dont_check_for_update))
         self.menu_advanced.add_checkbutton(label=self.translate("Force \"unofficial\" mode"), variable=self.boolvar_force_unofficial_mode)
 
@@ -148,7 +144,9 @@ class Gui:
                     mystuff_dir = filedialog.askdirectory()
                     if mystuff_dir: stringvar.set(mystuff_dir)
 
-                self.menu_mystuff.entryconfig(index, label=f"Apply {label} Folder ({stringvar.get()!r} selected)")
+                self.menu_mystuff.entryconfig(index, label=self.translate(
+                    "Apply", " ", label, f" ({stringvar.get()!r} ", "selected", ")")
+                )
 
             _func(init=True)
             self.menu_mystuff.entryconfig(index, command=_func)
@@ -341,7 +339,9 @@ class Gui:
         translated_text = ""
         for text in texts:
             if text in _lang_trad: translated_text += _lang_trad[text]
-            else: translated_text += text
+            else:
+                print(f"No translation found for ({lang}) {text}")
+                translated_text += text
         return translated_text
 
     def is_using_official_config(self) -> bool:

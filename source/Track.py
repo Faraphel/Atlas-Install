@@ -24,7 +24,7 @@ def check_file_sha1(file: str, excepted_sha1: str) -> int:
 
 class Track:
     def __init__(self, name: str = "", author: str = "Nintendo", special: str = "T11", music: str = "T11",
-                 sha1: str = None, since_version: str = None, score: int = 0, warning: int = 0, note: str = "",
+                 sha1: str = None, since_version: str = None, score: int = -1, warning: int = 0, note: str = "",
                  track_wu8_dir: str = "./file/Track-WU8/", track_szs_dir: str = "./file/Track/",
                  track_version: str = None, tags: list = [], *args, **kwargs):
         """
@@ -166,13 +166,12 @@ class Track:
         star_suffix = ""
         star_text = ""
 
-        if self.score:
-            if 0 <= self.score <= 5:
-                star_text = f"\\\\x{0xFF10 + self.score:04X}"
-                star_prefix = "\\\\c{YOR2}"  # per default, stars are colored in gold
-                star_suffix = "\\\\c{off} "
-                if 0 < self.warning <= 3:
-                    star_prefix = warning_color[self.warning]
+        if 0 <= self.score <= 5:
+            star_text = f"\\\\x{0xFF10 + self.score:04X}"
+            star_prefix = "\\\\c{YOR2}"  # per default, stars are colored in gold
+            star_suffix = "\\\\c{off} "
+            if 0 < self.warning <= 3:
+                star_prefix = warning_color[self.warning]
 
         if self.since_version == highlight_version:
             hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"

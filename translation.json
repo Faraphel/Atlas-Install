@@ -66,6 +66,18 @@
     "Mark all tracks from version": "Marquer toutes les courses de la version",
     "None": "Aucune",
     "MB": "Mo",
-    "GB": "Go"
+    "GB": "Go",
+    "Format": "Format",
+    "Track configuration": "Configuration des courses",
+    "Select track": "Sélection des courses",
+    "Sort track": "Trier les courses",
+    "Highlight track": "Surligner les courses",
+    "Force \"unofficial\" mode": "Forcer le mode \"non officiel\"",
+    "Use debug mode": "Utiliser le mode de debuggage",
+    "MyStuff": "MyStuff",
+    "Help": "Aide",
+    "Apply": "Appliquer",
+    "Folder": "Dossier",
+    "selected": "sélectionné"
   }
 }

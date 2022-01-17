@@ -5,16 +5,15 @@ from .definition import restart
 
 
 class Option:
-    def __init__(self):
+    def __init__(self, language: str = "en", format: str = "FST", dont_check_for_update: bool = False,
+                 process_track: int = 8):
         """
         class for Option
         """
-        self.language = "en"
-        self.format = "FST"
-        self.disable_download = False
-        self.del_track_after_conv = False
-        self.dont_check_for_update = False
-        self.process_track = 8
+        self.language = language
+        self.format = format
+        self.dont_check_for_update = dont_check_for_update
+        self.process_track = process_track
 
     def edit(self, option: str, value: any, need_restart: bool = False, gui=None) -> None:
         """

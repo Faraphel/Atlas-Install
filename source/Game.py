@@ -69,10 +69,8 @@ class NoGui:
     is_dev_version = False
     button_install_mod = NoButton()
     stringvar_game_format = NoVariable()
-    boolvar_disable_download = NoVariable()
     intvar_process_track = NoVariable()
     boolvar_dont_check_track_sha1 = NoVariable()
-    boolvar_del_track_after_conv = NoVariable()
 
 
 class Game:
@@ -553,26 +551,8 @@ class Game:
             """
             nonlocal error_count, error_max, thread_list
 
-            for _track in [track.file_szs, track.file_wu8]:
-                if os.path.exists(_track):
-                    if os.path.getsize(_track) < 1000:  # File under this size are corrupted
-                        os.remove(_track)
-
-            if not self.gui.boolvar_disable_download.get():
-                if not os.path.exists(track.file_wu8):
-                    try:
-                        track.download_wu8(GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
-                    except CantDownloadTrack:
-                        error_count += 1
-                        if error_count > error_max:  # Too much track wasn't correctly converted
-                            messagebox.showerror(
-                                self.gui.translate("Error"),
-                                self.gui.translate("Too much tracks had a download issue."))
-                            raise TooMuchDownloadFailed()
-                        else:
-                            messagebox.showwarning(self.gui.translate("Warning"),
-                                                   self.gui.translate("Can't download this track !",
-                                                                      f" ({error_count} / {error_max})"))
+            if os.path.exists(track.file_szs) and os.path.getsize(track.file_szs) < 1000:
+                os.remove(track.file_szs)  # File under this size are corrupted
 
             if not track.check_szs_sha1():  # if sha1 of track's szs is incorrect or track's szs does not exist
                 if os.path.exists(track.file_wu8):
@@ -581,8 +561,6 @@ class Game:
                     messagebox.showerror(self.gui.translate("Error"),
                                          self.gui.translate("Can't convert track.\nEnable track download and retry."))
                     raise CantConvertTrack()
-            elif self.gui.boolvar_del_track_after_conv.get():
-                os.remove(track.file_wu8)
 
         def clean_process() -> int:
             """
@@ -594,7 +572,6 @@ class Game:
             for track_key, thread in thread_list.copy().items():
                 if not thread.is_alive():  # if conversion ended
                     thread_list.pop(track_key)
-                    if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
                 if not (any(thread_list.values())): return 1  # if there is no more process
 
             return bool(thread_list)
