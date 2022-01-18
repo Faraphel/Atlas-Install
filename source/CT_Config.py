@@ -7,28 +7,6 @@ from source.Cup import Cup
 from source.Track import Track, HiddenTrackAttr
 
 
-def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf",
-                 cup_icon_dir: str = "./file/cup_icon") -> Image:
-    """
-    :param cup_id: id of the cup
-    :param cup_icon_dir: directory to cup icon
-    :param font_path: path to the font used to generate icon
-    :return: cup icon
-    """
-    if os.path.exists(f"{cup_icon_dir}/{cup_id}.png"):
-        cup_icon = Image.open(f"{cup_icon_dir}/{cup_id}.png").resize((128, 128))
-
-    else:
-        cup_icon = Image.new("RGBA", (128, 128))
-        draw = ImageDraw.Draw(cup_icon)
-        font = ImageFont.truetype(font_path, 90)
-        draw.text((4, 4), "CT", (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
-        font = ImageFont.truetype(font_path, 60)
-        draw.text((5, 80), "%03i" % cup_id, (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
-
-    return cup_icon
-
-
 class CT_Config:
     def __init__(self, version: str = None, name: str = None, nickname: str = None,
                  game_variant: str = "01", gui=None, region: int = None, cheat_region: int = None,
@@ -117,6 +95,27 @@ class CT_Config:
                 ctfile.write(cup.get_ctfile_cup(race=False, **kwargs))
                 rctfile.write(cup.get_ctfile_cup(race=True, **kwargs))
 
+    def get_cup_icon(self, cup_id: [str, int], font_path: str = "./assets/SuperMario256.ttf",
+                     cup_icon_dir: str = "./file/cup_icon") -> Image:
+        """
+        :param cup_id: id of the cup
+        :param cup_icon_dir: directory to cup icon
+        :param font_path: path to the font used to generate icon
+        :return: cup icon
+        """
+        if os.path.exists(f"{cup_icon_dir}/{cup_id}.png"):
+            cup_icon = Image.open(f"{cup_icon_dir}/{cup_id}.png").resize((128, 128))
+
+        else:
+            cup_icon = Image.new("RGBA", (128, 128))
+            draw = ImageDraw.Draw(cup_icon)
+            font = ImageFont.truetype(font_path, 90)
+            draw.text((4, 4), "CT", (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
+            font = ImageFont.truetype(font_path, 60)
+            draw.text((5, 80), "%03i" % cup_id, (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
+
+        return cup_icon
+
     def get_cticon(self) -> Image:
         """
         get all cup icon into a single image
@@ -133,7 +132,7 @@ class CT_Config:
 
         for index, cup_id in enumerate(icon_files):
             # index is a number, id can be string or number ("left", 0, 12, ...)
-            cup_icon = get_cup_icon(cup_id)
+            cup_icon = self.get_cup_icon(cup_id, cup_icon_dir=self.pack_path+"/file/cup_icon/")
             ct_icon.paste(cup_icon, (0, index * CT_ICON_WIDTH))
 
         return ct_icon
@@ -159,19 +158,20 @@ class CT_Config:
         self.unordered_tracks = []
         self.all_tracks = []
 
+        self.pack_path = pack_path
+
         # default track
-        self.default_track = Track()
+        self.default_track = Track(track_wu8_dir=f"{self.pack_path}/file/Track-WU8/")
         if "default_track" in ctconfig_json: self.default_track.load_from_json(ctconfig_json["default_track"])
 
         for cup_json in ctconfig_json["cup"] if "cup" in ctconfig_json else []:  # tracks with defined order
             cup = Cup(default_track=self.default_track)
             cup.load_from_json(cup_json)
-            if not cup.locked:  # locked cup are not useful (they are original track or random track)
-                self.ordered_cups.append(cup)
-                self.all_tracks.extend(cup.tracks)
+            self.ordered_cups.append(cup)
+            self.all_tracks.extend(cup.tracks)
 
         for track_json in ctconfig_json["tracks_list"] if "tracks_list" in ctconfig_json else []:  # unordered tracks
-            track = Track()
+            track = Track(track_wu8_dir=f"{self.pack_path}/file/Track-WU8/")
             track.load_from_json(track_json)
             self.unordered_tracks.append(track)
             self.all_tracks.append(track)
@@ -182,7 +182,7 @@ class CT_Config:
         self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
         if "game_variant" in ctconfig_json: self.game_variant = ctconfig_json["game_variant"]
 
-        for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro", "pack_path"]:
+        for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
             setattr(self, param, ctconfig_json.get(param))
 
         return self

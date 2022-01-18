@@ -30,7 +30,7 @@ class Option:
         self.save_to_file()
         if need_restart: restart()
 
-    def load_from_file(self, option_file: str = "./option.json") -> None:
+    def load_from_file(self, option_file: str = "./option.json"):
         """
         Load all options from a json file
         :param option_file: the file where to load option
@@ -39,6 +39,8 @@ class Option:
             with open(option_file, encoding="utf-8") as file:
                 file_json = json.load(file)
                 self.load_from_json(file_json)
+
+        return self
 
     def load_from_json(self, option_json: dict) -> None:
         """

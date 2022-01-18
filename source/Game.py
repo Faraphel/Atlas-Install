@@ -213,14 +213,14 @@ class Game:
                 szs_extract_path = path + ".d"
                 if os.path.exists(szs_extract_path + subpath):
                     if subpath[-1] == "/":
-                        shutil.copyfile(f"./file/{file}", szs_extract_path + subpath + file)
+                        shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", szs_extract_path + subpath + file)
                     else:
-                        shutil.copyfile(f"./file/{file}", szs_extract_path + subpath)
+                        shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", szs_extract_path + subpath)
 
             elif path[-1] == "/":
-                shutil.copyfile(f"./file/{file}", path + file)
+                shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", path + file)
             else:
-                shutil.copyfile(f"./file/{file}", path)
+                shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", path)
 
         for fp in fs:
             for f in glob.glob(self.path + "/files/" + fp, recursive=True):
@@ -282,10 +282,11 @@ class Game:
         """
         self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
 
-        lpar_path = "./file/lpar-debug.txt" if self.gui.boolvar_use_debug_mode.get() else "./file/lpar-default.txt"
+        lpar_path = f"{self.ctconfig.pack_path}/file/lpar-debug.txt" \
+            if self.gui.boolvar_use_debug_mode.get() else f"{self.ctconfig.pack_path}/file/lpar-default.txt"
 
         lec.patch(
-            lecode_file=f"./file/lecode-{self.region}.bin",
+            lecode_file=f"{self.ctconfig.pack_path}/file/lecode-{self.region}.bin",
             dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
             game_track_path=f"{self.path}/files/Race/Course/",
             copy_track_paths=[f"./file/Track/"],
@@ -422,13 +423,12 @@ class Game:
             :param bmg_language: language of the bmg file
             :return: the replaced bmg file
             """
-            with open("./file_process.json", encoding="utf8") as fp_file:
+            with open(f"{self.ctconfig.pack_path}/file_process.json", encoding="utf8") as fp_file:
                 file_process = json.load(fp_file)
 
             for bmg_process in file_process["bmg"]:
-                if "language" in bmg_process:
-                    if bmg_language not in bmg_process["language"]:
-                        continue
+                if "language" in bmg_process and bmg_language not in bmg_process["language"]:
+                    continue
 
                 for data, data_replacement in bmg_process["data"].items():
                     for key, replacement in bmg_replacement.items():
@@ -462,17 +462,18 @@ class Game:
             bmg.encode(file)
             os.remove(file)
 
-        save_bmg(f"./file/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
-        save_bmg(f"./file/Common_{bmglang}.txt", process_bmg_replacement(bmgcommon, bmglang))
-        save_bmg(f"./file/Common_R{bmglang}.txt", process_bmg_replacement(rbmgcommon, bmglang))
+        save_bmg(f"{self.ctconfig.pack_path}/file/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
+        save_bmg(f"{self.ctconfig.pack_path}/file/Common_{bmglang}.txt", process_bmg_replacement(bmgcommon, bmglang))
+        save_bmg(f"{self.ctconfig.pack_path}/file/Common_R{bmglang}.txt", process_bmg_replacement(rbmgcommon, bmglang))
 
     def patch_file(self):
         """
         Prepare all files to install the mod (track, bmg text, descriptive image, ...)
         """
         try:
-            if not (os.path.exists("./file/Track-WU8/")): os.makedirs("./file/Track-WU8/")
-            with open("./file_process.json", encoding="utf8") as fp_file:
+            os.makedirs(f"{self.ctconfig.pack_path}/file/Track-WU8/", exist_ok=True)
+
+            with open(f"{self.ctconfig.pack_path}/file_process.json", encoding="utf8") as fp_file:
                 file_process = json.load(fp_file)
             max_step = len(file_process["img"]) + len(self.ctconfig.all_tracks) + 3 + len("EGFIS")
 
@@ -486,10 +487,13 @@ class Game:
 
             self.gui.progress(statut=self.gui.translate("Creating ct_icon.png"), add=1)
             ct_icon = self.ctconfig.get_cticon()
-            ct_icon.save("./file/ct_icons.tpl.png")
+            ct_icon.save(f"{self.ctconfig.pack_path}/file/ct_icons.tpl.png")
 
             self.gui.progress(statut=self.gui.translate("Creating descriptive images"), add=1)
-            self.patch_img_desc()
+            self.patch_img_desc(
+                img_desc_path=self.ctconfig.pack_path+"/file/img_desc/",
+                dest_dir=self.ctconfig.pack_path+"/file/"
+            )
             self.patch_image(file_process["img"])
             for file in glob.glob(self.path + "/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
             # MenuSingle could be any other file, Common and Menu are all the same in all other files.
@@ -511,7 +515,12 @@ class Game:
         for i, file in enumerate(fp_img):
             self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fp_img)}) {file}",
                               add=1)
-            img.encode(file="./file/" + file, format=fp_img[file])
+            # TODO: IMG DESC AND THIS PART REALLY NEED A REWRITE !
+
+            img.encode(
+                file=f"{self.ctconfig.pack_path}/file/{file}",
+                format=fp_img[file]
+            )
 
     def patch_img_desc(self, img_desc_path: str = "./file/img_desc/", dest_dir: str = "./file/") -> None:
         """

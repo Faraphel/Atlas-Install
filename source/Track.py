@@ -5,8 +5,8 @@ from source.wszst import *
 HiddenTrackAttr = [
     "file_wu8",
     "file_szs",
-    "track_wu8_dir",
-    "track_szs_dir"
+    "_track_wu8_dir",
+    "_track_szs_dir"
 ]  # These attribute shouldn't be used to reference all the possibilities of values
 
 
@@ -48,7 +48,6 @@ class Track:
         :param since_version: since when version did the track got added to the mod
         :param score: what it the score of the track
         :param warning: what is the warn level of the track (0 = none, 1 = minor bug, 2 = major bug)
-        :param note: note about the track
         :param track_wu8_dir: where is stored the track wu8
         :param track_szs_dir: where is stored the track szs
         :param track_version: version of the track
@@ -66,12 +65,11 @@ class Track:
         self.since_version = since_version  # Since which version is this track available
         self.score = score                  # Track score between 1 and 3 stars
         self.warning = warning              # Track bug level (1 = minor, 2 = major)
-        self.note = note                    # Note about the track
         self.version = version
         self.tags = tags
 
-        self.track_wu8_dir = track_wu8_dir
-        self.track_szs_dir = track_szs_dir
+        self._track_wu8_dir = track_wu8_dir
+        self._track_szs_dir = track_szs_dir
         self.file_wu8 = f"{track_wu8_dir}/{self.sha1}.wu8"
         self.file_szs = f"{track_szs_dir}/{self.sha1}.szs"
 
@@ -100,7 +98,10 @@ class Track:
         """
         convert track to szs
         """
-        szs.normalize(src_file=self.file_wu8)
+        szs.normalize(
+            src_file=self.file_wu8,
+            dest_dir="./file/Track/"
+        )
 
     def get_author_str(self) -> str:
         """
@@ -128,7 +129,8 @@ class Track:
         else:
             ctfile_text += (
                 f'"-"; '  # track path, not used in Race_*.szs, save a bit of space
-                f'"{self.get_track_formatted_name(ct_config, *args, **kwargs)}\\n{self.get_author_str()}"; '  # only in race show author's name
+                f'"{self.get_track_formatted_name(ct_config, *args, **kwargs)}\\n{self.get_author_str()}"; '  
+                # only in race show author's name
                 f'"-"\n'  # sha1, not used in Race_*.szs, save a bit of space
             )
 
@@ -185,8 +187,8 @@ class Track:
         for key, value in track_json.items():  # load all value in the json as class attribute
             setattr(self, key, value)
 
-        self.file_wu8 = f"{self.track_wu8_dir}/{self.sha1}.wu8"
-        self.file_szs = f"{self.track_szs_dir}/{self.sha1}.szs"
+        self.file_wu8 = f"{self._track_wu8_dir}/{self.sha1}.wu8"
+        self.file_szs = f"{self._track_szs_dir}/{self.sha1}.szs"
 
         return self
 

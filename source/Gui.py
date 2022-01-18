@@ -7,7 +7,6 @@ import requests
 import zipfile
 import glob
 import json
-import os
 
 from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat
 from source.Option import Option
@@ -25,9 +24,10 @@ class Gui:
         Initialize program Gui
         """
         self.root = Tk()
+        self.root.resizable(False, False)
+        self.root.iconbitmap(bitmap="./icon.ico")
 
-        self.option = Option()
-        self.option.load_from_file("./option.json")
+        self.option = Option().load_from_file("./option.json")
         self.game = Game(gui=self)
 
         self.menu_bar = None
@@ -47,42 +47,35 @@ class Gui:
         self.boolvar_dont_check_for_update = BooleanVar(value=self.option.dont_check_for_update)
         self.intvar_process_track = IntVar(value=self.option.process_track)
 
+        self.root.title(self.translate("MKWFaraphel Installer"))
+
         self.boolvar_use_1star_track = BooleanVar(value=True)
         self.boolvar_use_2star_track = BooleanVar(value=True)
         self.boolvar_use_3star_track = BooleanVar(value=True)
-
         self.stringvar_mark_track_from_version = StringVar(value="None")
         self.stringvar_sort_track_by = StringVar(value="name")
+
         self.boolvar_use_debug_mode = BooleanVar(value=False)
         self.boolvar_force_unofficial_mode = BooleanVar(value=False)
 
         self.stringvar_mystuff_folder = StringVar(value=None)
-        self.stringvar_mystuff_music_folder = StringVar(value=None)
-        self.stringvar_mystuff_vehicle_folder = StringVar(value=None)
-        self.stringvar_mystuff_character_folder = StringVar(value=None)
-        self.stringvar_mystuff_original_track_folder = StringVar(value=None)
-
-        self.root.title(self.translate("MKWFaraphel Installer"))
-        self.root.resizable(False, False)
-        self.root.iconbitmap(bitmap="./icon.ico")
 
         if not self.boolvar_dont_check_for_update.get(): self.check_update()
 
-        self.init_gui()
-        self.init_menu()
-
-    def init_gui(self) -> None:
+        # GUI
+        # Mod selector
         self.frame_ctconfig = LabelFrame(self.root, text=self.translate("Mod"))
         self.frame_ctconfig.grid(row=1, column=1, sticky="NWS")
 
         self.combobox_ctconfig_path = ttk.Combobox(
             self.frame_ctconfig,
             values=self.available_packs,
-            textvariable=self.stringvar_ctconfig
+            textvariable=self.stringvar_ctconfig,
+            width=30
         )
         self.combobox_ctconfig_path.grid(row=1, column=1, sticky="NEWS", columnspan=2)
-        self.combobox_ctconfig_path.bind("<<ComboboxSelected>>", lambda x=None: self.init_menu())
-
+        self.combobox_ctconfig_path.bind("<<ComboboxSelected>>", lambda x=None: self.reload_ctconfig())
+        self.reload_ctconfig()
 
         # Jeu
         self.frame_game_path = LabelFrame(self.root, text=self.translate("Original game"))
@@ -136,20 +129,21 @@ class Gui:
             self.game.patch_file()
             self.game.install_mod()
 
-        self.button_do_everything = Button(self.frame_game_path_action, text=self.translate("Install mod"),
-                                           relief=RIDGE, command=do_everything)
+        self.button_do_everything = Button(
+            self.frame_game_path_action,
+            text=self.translate("Install mod"),
+            relief=RIDGE,
+            command=do_everything
+        )
         self.button_do_everything.grid(row=1, column=1, columnspan=2, sticky="NEWS")
 
         self.progressbar = ttk.Progressbar(self.root)
         self.progresslabel = Label(self.root)
 
-    def init_menu(self) -> None:
+
         if self.menu_bar: self.menu_bar.destroy()
         self.menu_bar = Menu(self.root)
         self.root.config(menu=self.menu_bar)
-
-        self.game.ctconfig.load_ctconfig_file(ctconfig_file=self.get_ctconfig_path_pack(self.stringvar_ctconfig.get()))
-        track_attr_possibilities = self.game.ctconfig.get_all_track_possibilities()
 
         #  LANGUAGE MENU
         self.menu_language = Menu(self.menu_bar, tearoff=0)
@@ -194,50 +188,6 @@ class Gui:
             value="WBFS",
             command=lambda: self.option.edit("format", "WBFS")
         )
-
-        # TRACK CONFIGURATION MENU
-        self.menu_trackconfiguration = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Track configuration"), menu=self.menu_trackconfiguration)
-
-        # sort track
-        self.menu_sort_track_by = Menu(self.menu_trackconfiguration, tearoff=0)
-        self.menu_trackconfiguration.add_cascade(label=self.translate("Sort track"), menu=self.menu_sort_track_by)
-        for param in track_attr_possibilities:
-            self.menu_sort_track_by.add_radiobutton(
-                label=param.title(),
-                variable=self.stringvar_sort_track_by,
-                value=param
-            )
-
-        # select track
-        self.menu_trackselection = Menu(self.menu_trackconfiguration, tearoff=0)
-        self.menu_trackconfiguration.add_cascade(label=self.translate("Select track"), menu=self.menu_trackselection)
-        self.menu_trackselection_param = {}
-
-        self.menu_trackhighlight = Menu(self.menu_trackconfiguration, tearoff=0)
-        self.menu_trackconfiguration.add_cascade(label=self.translate("Highlight track"), menu=self.menu_trackhighlight)
-        self.menu_trackhighlight_param = {}
-
-        for param, values in track_attr_possibilities.items():
-            for menu_param, menu in [
-                (self.menu_trackselection_param, self.menu_trackselection),
-                (self.menu_trackhighlight_param, self.menu_trackhighlight)
-            ]:
-                menu_param[param] = {
-                    "Menu": Menu(menu, tearoff=0),
-                    "Var": []
-                }
-                menu.add_cascade(
-                    label=param.title(),
-                    menu=menu_param[param]["Menu"]
-                )
-
-                for value in values:
-                    menu_param[param]["Var"].append(BooleanVar(value=True))
-                    menu_param[param]["Menu"].add_checkbutton(
-                        label=value,
-                        variable=menu_param[param]["Var"][-1],
-                    )
 
         #  ADVANCED MENU
         ## INSTALLER PARAMETER
@@ -286,7 +236,8 @@ class Gui:
         ## GAME PARAMETER
         self.menu_advanced.add_separator()
 
-        self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"), variable=self.boolvar_use_debug_mode)
+        self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"),
+                                           variable=self.boolvar_use_debug_mode)
 
         self.menu_mystuff = Menu(self.menu_advanced, tearoff=0)
         self.menu_advanced.add_cascade(label=self.translate("MyStuff"), menu=self.menu_mystuff)
@@ -303,7 +254,7 @@ class Gui:
 
                 self.menu_mystuff.entryconfig(index, label=self.translate(
                     "Apply", " ", label, f" ({stringvar.get()!r} ", "selected", ")")
-                )
+                                              )
 
             _func(init=True)
             self.menu_mystuff.entryconfig(index, command=_func)
@@ -317,6 +268,11 @@ class Gui:
         self.menu_bar.add_cascade(label=self.translate("Help"), menu=self.menu_help)
         self.menu_help.add_command(label="Github Wiki", command=lambda: webbrowser.open(GITHUB_HELP_PAGE_URL))
         self.menu_help.add_command(label="Discord", command=lambda: webbrowser.open(DISCORD_URL))
+
+    def reload_ctconfig(self) -> None:
+        self.game.ctconfig.load_ctconfig_file(
+            ctconfig_file=self.get_ctconfig_path_pack(self.stringvar_ctconfig.get())
+        )
 
     def get_available_packs(self) -> list:
         available_packs = []
@@ -335,13 +291,13 @@ class Gui:
         Check if an update is available
         """
         try:
-            github_version_data = requests.get(VERSION_FILE_URL, allow_redirects=True).json()
+            github_version_data = requests.get(VERSION_FILE_URL, allow_redirects=True, timeout=3).json()
             with open("./version", "rb") as f: local_version_data = json.load(f)
 
             local_version = StrictVersion(f"{local_version_data['version']}.{local_version_data['subversion']}")
             github_version = StrictVersion(f"{github_version_data['version']}.{github_version_data['subversion']}")
 
-            if github_version > local_version: # if github version is newer than local version
+            if github_version > local_version:  # if github version is newer than local version
                 if messagebox.askyesno(
                         self.translate("Update available !"),
                         self.translate("An update is available, do you want to install it ?",
@@ -360,8 +316,9 @@ class Gui:
                             print(self.translate("finished extracting"))
 
                         os.remove("./download.zip")
-                        print(self.translate("starting application..."))
-                        os.startfile(os.path.realpath("./Updater/Updater.exe"))
+
+                    print(self.translate("starting application..."))
+                    os.startfile(os.path.realpath("./Updater/Updater.exe"))
 
             elif local_version > github_version:
                 self.is_dev_version = True
@@ -380,13 +337,18 @@ class Gui:
         """
         error = traceback.format_exc()
         with open("./error.log", "a") as f:
-            f.write(f"---\n"
-                    f"For game version : {self.game.ctconfig.version}\n"
-                    f"./file/ directory : {os.listdir('./file/')}\n"
-                    f"GAME/files/ information : {self.game.path, self.game.region}\n"
-                    f"{error}\n"
+            f.write(
+                f"---\n"
+                f"For game version : {self.game.ctconfig.version}\n"
+                f"./file/ directory : {os.listdir('./file/')}\n"
+                f"ctconfig directory : {os.listdir(self.game.ctconfig.pack_path)}\n"
+                f"GAME/files/ information : {self.game.path, self.game.region}\n"
+                f"{error}\n"
             )
-        messagebox.showerror(self.translate("Error"), self.translate("An error occured", " :", "\n", error, "\n\n"))
+        messagebox.showerror(
+            self.translate("Error"),
+            self.translate("An error occured", " :", "\n", error, "\n\n")
+        )
 
     def progress(self, show: bool = None, indeter: bool = None, step: int = None,
                  statut: str = None, max: int = None, add: int = None) -> None:

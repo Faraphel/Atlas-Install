@@ -9,7 +9,6 @@ class Cup:
                  track2: Track = None,
                  track3: Track = None,
                  track4: Track = None,
-                 locked: bool = False,
                  *args, **kwargs):
         """
         class of a cup
@@ -18,13 +17,11 @@ class Cup:
         :param track2: second track
         :param track3: third track
         :param track4: fourth track
-        :param locked: is the track locked (used to load ctconfig in CT_Config)
         :param args: other args that I could add in the future
         :param kwargs: other kwargs that I could add in the future
         """
 
         self.name = name
-        self.locked = locked
         self.tracks = [
             track1 if track1 else default_track.copy(),
             track2 if track2 else default_track.copy(),
@@ -51,7 +48,7 @@ class Cup:
         for key, value in cup.items():  # load all value in the json as class attribute
             if key == "tracks":  # if the key is tracks
                 for i, track_json in enumerate(value):  # load all tracks from their json
-                    self.tracks[int(i)].load_from_json(track_json)
+                    self.tracks[i].load_from_json(track_json)
             else:
                 setattr(self, key, value)
 
