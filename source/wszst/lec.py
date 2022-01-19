@@ -11,7 +11,7 @@ def patch(lecode_file: str = f"./file/lecode-PAL.bin",
           copy_track_paths: list = [],
           move_track_paths: list = [],
           ctfile_path: str = "./file/CTFILE.txt",
-          lpar_path: str = "./file/lpar-default.txt") -> None:
+          lpar_path: str = "./file/lpar-normal.txt") -> None:
     """
     Patch the file with a lecode file (this is the adding track part)
     :param lecode_file: path to the lecode file

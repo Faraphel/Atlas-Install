@@ -60,40 +60,101 @@
         "Wi-Fi": "{ONLINE_SERVICE}",
         "インターネット": "{ONLINE_SERVICE}",
 
-        "Menu principal": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
-        "Menú principal": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
-        "Main Menu": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
-        "トップメニュー": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}",
+        "Menu principal": "{MOD_NICKNAME} v{MOD_VERSION} {MOD_CUSTOMIZED}",
+        "Menú principal": "{MOD_NICKNAME} v{MOD_VERSION} {MOD_CUSTOMIZED}",
+        "Main Menu": "{MOD_NICKNAME} v{MOD_VERSION} {MOD_CUSTOMIZED}",
+        "トップメニュー": "{MOD_NICKNAME} v{MOD_VERSION} {MOD_CUSTOMIZED}",
 
-        "Mario Kart Wii": "{MOD_NICKNAME} v{MOD_VERSION}{MOD_CUSTOMIZED}"
+        "Mario Kart Wii": "{MOD_NICKNAME} v{MOD_VERSION} {MOD_CUSTOMIZED}"
       }
     }
   ],
 
 
+  "img_generator": {
+    "/generated/strapA_16_9_832x456de.png": {
+      "width": 832,
+      "height": 456,
+      "format": "RGB",
+      "color": [0, 0, 0],
+      "layers": [
+        {"type": "color", "color": [0, 0, 0], "x_start": 0.2, "y_start": 0.2, "x_end": 0.8, "y_end": 0.8},
+        {"type": "image", "path": "/img_desc/illustration.png", "x_start": 0.2, "y_start": 0.2, "x_end": 0.8, "y_end": 0.8},
+        {"type": "text", "x": 0.2, "y": 0.2, "text": "test", "text_size": 0.1, "color": [255, 255, 255], "font": "/specific/SuperMario256.ttf"}
+      ]
+    },
+    "/generated/strapA_608x456de.png": {
+      "width": 608, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
 
-  "img": {
-    "tt_hatena_64x64.tpl.png": "TPL.RGB5A3",
-    "tt_obi_bottom_curve_000.tpl.png": "TPL.RGB5A3",
-    "tt_obi_bottom_left_000.tpl.png": "TPL.RGB5A3",
-    "tt_obi_bottom_right_000.tpl.png": "TPL.RGB5A3",
-    "tt_obi_check_000.tpl.png": "TPL.RGB5A3",
-    "tt_obi_top_curve_000.tpl.png": "TPL.RGB5A3",
-    "tt_obi_top_left_000.tpl.png": "TPL.RGB5A3",
-    "tt_obi_top_right_000.tpl.png": "TPL.RGB5A3",
-    "strapA_16_9_832x456de.png": "TEX.RGB565",
-    "strapA_16_9_832x456en.png": "TEX.RGB565",
-    "strapA_16_9_832x456es.png": "TEX.RGB565",
-    "strapA_16_9_832x456fr.png": "TEX.RGB565",
-    "strapA_16_9_832x456ge.png": "TEX.RGB565",
-    "strapA_16_9_832x456it.png": "TEX.RGB565",
-    "strapA_608x456de.png": "TEX.RGB565",
-    "strapA_608x456en.png": "TEX.RGB565",
-    "strapA_608x456es.png": "TEX.RGB565",
-    "strapA_608x456fr.png": "TEX.RGB565",
-    "strapA_608x456ge.png": "TEX.RGB565",
-    "strapA_608x456it.png": "TEX.RGB565",
-    "savebanner.tpl.png": "TPL.RGB565",
-    "ct_icons.tpl.png": "TPL.CMPR"
+    "/generated/strapA_16_9_832x456fr.png": {
+      "width": 832, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+    "/generated/strapA_608x456fr.png": {
+      "width": 608, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+
+    "/generated/strapA_16_9_832x456en.png": {
+      "width": 832, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+    "/generated/strapA_608x456en.png": {
+      "width": 608, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+
+    "/generated/strapA_16_9_832x456ge.png": {
+      "width": 832, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+    "/generated/strapA_608x456ge.png": {
+      "width": 608, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+
+    "/generated/strapA_16_9_832x456it.png": {
+      "width": 832, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+    "/generated/strapA_608x456it.png": {
+      "width": 608, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+
+    "/generated/strapA_16_9_832x456es.png": {
+      "width": 832, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    },
+    "/generated/strapA_608x456es.png": {
+      "width": 608, "height": 456, "layers": [{"type": "image", "path": "/generated/strapA_16_9_832x456de.png"}]
+    }
+  },
+
+
+  "img_encode": {
+    "/essentials/tt_hatena_64x64.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/specific/tt_obi_bottom_curve_000.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/specific/tt_obi_bottom_left_000.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/specific/tt_obi_bottom_right_000.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/specific/tt_obi_check_000.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/specific/tt_obi_top_curve_000.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/specific/tt_obi_top_left_000.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/specific/tt_obi_top_right_000.tpl.png": {"format": "TPL.RGB5A3", "dest": "/generated/%N"},
+    "/generated/strapA_16_9_832x456de.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_16_9_832x456en.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_16_9_832x456es.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_16_9_832x456fr.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_16_9_832x456ge.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_16_9_832x456it.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_608x456de.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_608x456en.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_608x456es.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_608x456fr.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_608x456ge.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/generated/strapA_608x456it.png": {"format": "TEX.RGB565", "dest": "/generated/%N"},
+    "/specific/savebanner.tpl.png": {"format": "TPL.RGB565", "dest": "/generated/%N"},
+    "/generated/ct_icons.tpl.png": {"format": "TPL.CMPR", "dest": "/generated/%N"}
+  },
+
+
+  "placement": {
+    "ct_icons": "/generated/ct_icons.tpl.png",
+    "bmg_patch_dir": "/generated/",
+    "cup_icon_dir": "/cup_icon/",
+    "lecode_bin_dir": "/essentials/",
+    "lpar_dir": "/essentials/"
   }
 }

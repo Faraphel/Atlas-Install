@@ -1,5 +1,5 @@
 from tkinter import messagebox
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import shutil
 import glob
 import json
@@ -24,11 +24,6 @@ class InvalidFormat(Exception):
         super().__init__("This game format is not supported !")
 
 
-class TooMuchDownloadFailed(Exception):
-    def __init__(self):
-        super().__init__("Too much download failed !")
-
-
 class TooMuchSha1CheckFailed(Exception):
     def __init__(self):
         super().__init__("Too much sha1 check failed !")
@@ -36,7 +31,7 @@ class TooMuchSha1CheckFailed(Exception):
 
 class CantConvertTrack(Exception):
     def __init__(self):
-        super().__init__("Can't convert track, check if download are enabled.")
+        super().__init__("Can't convert track.")
 
 
 class NoGui:
@@ -144,13 +139,13 @@ class Game:
         if glob.glob(self.path + "/files/rel/lecode-???.bin"):  # if a LECODE file is already here
             raise RomAlreadyPatched()  # warning already patched
 
-        with open(self.path + "/setup.txt") as f:
-            setup = f.read()
-        setup = setup[setup.find("!part-id = ") + len("!part-id = "):]
-        self.game_ID = setup[:setup.find("\n")]
+        if os.path.exists(self.path + "/setup.txt"):
+            with open(self.path + "/setup.txt") as f: setup = f.read()
+            setup = setup[setup.find("!part-id = ") + len("!part-id = "):]
+            self.game_ID = setup[:setup.find("\n")]
 
-        self.region_ID = self.game_ID[3]
-        self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
+            self.region_ID = self.game_ID[3]
+            self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
 
     def count_patch_subfile_operation(self) -> int:
         """
@@ -205,22 +200,22 @@ class Game:
             self.gui.progress(statut=self.gui.translate("Editing", "\n", get_nodir(path)), add=1)
             extension = get_extension(path)
 
+            source_file = f"{self.ctconfig.pack_path}/file/{file}"
+            dest_file = path
+
             if extension == "szs":
-                if not (os.path.realpath(path) in extracted_file):
+                if os.path.realpath(path) not in extracted_file:
                     szs.extract(file=path)
                     extracted_file.append(os.path.realpath(path))
 
                 szs_extract_path = path + ".d"
                 if os.path.exists(szs_extract_path + subpath):
-                    if subpath[-1] == "/":
-                        shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", szs_extract_path + subpath + file)
-                    else:
-                        shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", szs_extract_path + subpath)
+                    dest_file = szs_extract_path + subpath
+                    if subpath[-1] == "/": dest_file += get_nodir(file)
 
-            elif path[-1] == "/":
-                shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", path + file)
-            else:
-                shutil.copyfile(f"{self.ctconfig.pack_path}/file/{file}", path)
+            elif path[-1] == "/": dest_file += get_nodir(file)
+
+            shutil.copyfile(source_file, dest_file)
 
         for fp in fs:
             for f in glob.glob(self.path + "/files/" + fp, recursive=True):
@@ -236,8 +231,7 @@ class Game:
         for file in extracted_file:
             self.gui.progress(statut=self.gui.translate("Recompilating", "\n", get_nodir(file)), add=1)
             szs.create(file=file)
-            if os.path.exists(file + ".d"):
-                shutil.rmtree(file + ".d")
+            shutil.rmtree(file + ".d", ignore_errors=True)
 
     def install_copy_mystuff(self) -> None:
         """
@@ -282,11 +276,19 @@ class Game:
         """
         self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
 
-        lpar_path = f"{self.ctconfig.pack_path}/file/lpar-debug.txt" \
-            if self.gui.boolvar_use_debug_mode.get() else f"{self.ctconfig.pack_path}/file/lpar-default.txt"
+        lpar_path = self.ctconfig.file_process["placement"].get("lpar_dir")
+        if not lpar_path: f""
+        lpar_path = (
+            f"{self.ctconfig.pack_path}/file/{lpar_path}/"
+            f"lpar-{'debug' if self.gui.boolvar_use_debug_mode.get() else 'normal'}"
+        )
+
+        lecode_file = self.ctconfig.file_process["placement"].get("lecode_bin_dir")
+        if not lecode_file: lecode_file = ""
+        lecode_file = f"{self.ctconfig.pack_path}/file/{lecode_file}/lecode-{self.region}.bin"
 
         lec.patch(
-            lecode_file=f"{self.ctconfig.pack_path}/file/lecode-{self.region}.bin",
+            lecode_file=lecode_file,
             dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
             game_track_path=f"{self.path}/files/Race/Course/",
             copy_track_paths=[f"./file/Track/"],
@@ -389,7 +391,7 @@ class Game:
             "MOD_NAME": self.ctconfig.name,
             "MOD_NICKNAME": self.ctconfig.nickname,
             "MOD_VERSION": self.ctconfig.version,
-            "MOD_CUSTOMIZED": "" if self.gui.is_using_official_config() else " (custom)",
+            "MOD_CUSTOMIZED": "" if self.gui.is_using_official_config() else "(custom)",
             "ONLINE_SERVICE": "Wiimmfi",
         }
 
@@ -462,9 +464,17 @@ class Game:
             bmg.encode(file)
             os.remove(file)
 
-        save_bmg(f"{self.ctconfig.pack_path}/file/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
-        save_bmg(f"{self.ctconfig.pack_path}/file/Common_{bmglang}.txt", process_bmg_replacement(bmgcommon, bmglang))
-        save_bmg(f"{self.ctconfig.pack_path}/file/Common_R{bmglang}.txt", process_bmg_replacement(rbmgcommon, bmglang))
+        bmg_dir = self.ctconfig.file_process["placement"].get("bmg_patch_dir")
+        bmg_dir = f"{self.ctconfig.pack_path}/file/{bmg_dir if bmg_dir else ''}"
+        os.makedirs(get_dir(bmg_dir), exist_ok=True)
+
+        save_bmg(f"{bmg_dir}/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
+        save_bmg(f"{bmg_dir}/Common_{bmglang}.txt", process_bmg_replacement(bmgcommon, bmglang))
+        save_bmg(f"{bmg_dir}/Common_R{bmglang}.txt", process_bmg_replacement(rbmgcommon, bmglang))
+
+    def patch_all_bmg(self) -> None:
+        for file in glob.glob(f"{self.path}/files/Scene/UI/MenuSingle_?.szs"):
+            self.patch_bmg(file)
 
     def patch_file(self):
         """
@@ -473,9 +483,10 @@ class Game:
         try:
             os.makedirs(f"{self.ctconfig.pack_path}/file/Track-WU8/", exist_ok=True)
 
-            with open(f"{self.ctconfig.pack_path}/file_process.json", encoding="utf8") as fp_file:
-                file_process = json.load(fp_file)
-            max_step = len(file_process["img"]) + len(self.ctconfig.all_tracks) + 3 + len("EGFIS")
+            max_step = len(self.ctconfig.file_process["img_encode"]) + \
+                       len(self.ctconfig.all_tracks) + \
+                       3 + \
+                       len("EGFIS")
 
             self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Converting files"),
                               max=max_step, step=0)
@@ -485,18 +496,10 @@ class Game:
                 sort_track_by=self.gui.stringvar_sort_track_by.get()
             )
 
-            self.gui.progress(statut=self.gui.translate("Creating ct_icon.png"), add=1)
-            ct_icon = self.ctconfig.get_cticon()
-            ct_icon.save(f"{self.ctconfig.pack_path}/file/ct_icons.tpl.png")
-
-            self.gui.progress(statut=self.gui.translate("Creating descriptive images"), add=1)
-            self.patch_img_desc(
-                img_desc_path=self.ctconfig.pack_path+"/file/img_desc/",
-                dest_dir=self.ctconfig.pack_path+"/file/"
-            )
-            self.patch_image(file_process["img"])
-            for file in glob.glob(self.path + "/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
-            # MenuSingle could be any other file, Common and Menu are all the same in all other files.
+            self.generate_cticons()
+            self.generate_all_image()
+            self.patch_image()
+            self.patch_all_bmg()
             self.patch_autoadd()
             self.patch_tracks()
 
@@ -507,45 +510,93 @@ class Game:
         finally:
             self.gui.progress(show=False)
 
-    def patch_image(self, fp_img: dict) -> None:
+    def generate_cticons(self):
+        file = self.ctconfig.file_process["placement"].get("ct_icons")
+        if not file: file = "ct_icons.tpl.png"
+        file = f"{self.ctconfig.pack_path}/file/{file}"
+
+        os.makedirs(get_dir(file), exist_ok=True)
+        self.ctconfig.get_cticon().save(file)
+
+    def patch_image(self) -> None:
         """
         Convert .png image into the format wrote in convert_file
-        :param fp_img: file convert, a dictionnary indicating which format a file need to be converted
         """
-        for i, file in enumerate(fp_img):
-            self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fp_img)}) {file}",
-                              add=1)
-            # TODO: IMG DESC AND THIS PART REALLY NEED A REWRITE !
+
+        image_amount = len(self.ctconfig.file_process["img_encode"])
+
+        for i, (file, data) in enumerate(self.ctconfig.file_process["img_encode"].items()):
+            self.gui.progress(
+                statut=self.gui.translate("Converting images") + f"\n({i + 1}/{image_amount}) {file}",
+                add=1
+            )
 
             img.encode(
                 file=f"{self.ctconfig.pack_path}/file/{file}",
-                format=fp_img[file]
+                format=data["format"],
+                dest_file=f"{self.ctconfig.pack_path}/file/{data['dest']}" if "dest" in data else None
             )
 
-    def patch_img_desc(self, img_desc_path: str = "./file/img_desc/", dest_dir: str = "./file/") -> None:
-        """
-        patch descriptive image used when the game boot
-        :param img_desc_path: directory where original part of the image are stored
-        :param dest_dir: directory where patched image will be saved
-        """
-        il = Image.open(img_desc_path + "/illustration.png")
-        il_16_9 = il.resize((832, 456))
-        il_4_3 = il.resize((608, 456))
+    def generate_image(self, generator: dict) -> Image.Image:
+        def get_layer_xy(layer: dict) -> tuple:
+            return (
+                int(layer["x"] * generator["width"]) if "x" in layer else 0,
+                int(layer["y"] * generator["height"]) if "y" in layer else 0,
+            )
 
-        for file_lang in glob.glob(img_desc_path + "/??.png"):
-            img_lang = Image.open(file_lang)
-            img_lang_16_9 = img_lang.resize((832, 456))
-            img_lang_4_3 = img_lang.resize((608, 456))
+        def get_layer_bbox(layer: dict) -> tuple:
+            return (
+                int(layer["x_start"] * generator["width"]) if "x_start" in layer else 0,
+                int(layer["y_start"] * generator["height"]) if "y_start" in layer else 0,
+                int(layer["x_end"] * generator["width"]) if "x_end" in layer else generator["width"],
+                int(layer["y_end"] * generator["height"]) if "y_end" in layer else generator["height"]
+            )
 
-            new_16_9 = Image.new("RGBA", (832, 456), (0, 0, 0, 255))
-            new_16_9.paste(il_16_9, (0, 0), il_16_9)
-            new_16_9.paste(img_lang_16_9, (0, 0), img_lang_16_9)
-            new_16_9.save(dest_dir + f"/strapA_16_9_832x456{get_filename(get_nodir(file_lang))}.png")
+        def get_layer_size(layer: dict) -> tuple:
+            x1, y1, x2, y2 = get_layer_bbox(layer)
+            return x2-x1, y2-y1
 
-            new_4_3 = Image.new("RGBA", (608, 456), (0, 0, 0, 255))
-            new_4_3.paste(il_4_3, (0, 0), il_4_3)
-            new_4_3.paste(img_lang_4_3, (0, 0), img_lang_4_3)
-            new_4_3.save(dest_dir + f"/strapA_608x456{get_filename(get_nodir(file_lang))}.png")
+        image = Image.new(
+            generator["format"] if "format" in generator else "RGB",
+            (generator["width"], generator["height"]),
+            tuple(generator["color"]) if "color" in generator else 0
+        )
+        draw = ImageDraw.Draw(image)
+
+        for layer in generator["layers"]:
+            if "type" not in layer: continue
+            if layer["type"] == "color":
+                draw.rectangle(
+                    get_layer_bbox(layer),
+                    tuple(layer["color"]) if "color" in layer else 0
+                )
+            if layer["type"] == "image":
+                layer_image = Image.open(f'{self.ctconfig.pack_path}/file/{layer["path"]}')
+                layer_image = layer_image.resize(get_layer_size(layer)).convert("RGBA")
+                image.paste(
+                    layer_image,
+                    box=get_layer_bbox(layer),
+                    mask=layer_image
+                )
+            if layer["type"] == "text":
+                font = ImageFont.truetype(
+                    font=f'{self.ctconfig.pack_path}/file/{layer["font"]}' if "font" in layer else None,
+                    size=int(layer["text_size"] * generator["height"]) if "text_size" in layer else 10,
+                )
+                draw.text(
+                    get_layer_xy(layer),
+                    text=layer["text"] if "text" in layer else "<Missing text>",
+                    fill=tuple(layer["color"]) if "color" in layer else 255,
+                    font=font
+                )
+
+        return image
+
+    def generate_all_image(self) -> None:
+        for file, generator in self.ctconfig.file_process["img_generator"].items():
+            file = f"{self.ctconfig.pack_path}/file/{file}"
+            os.makedirs(get_dir(file), exist_ok=True)
+            self.generate_image(generator).save(file)
 
     def patch_tracks(self) -> None:
         """

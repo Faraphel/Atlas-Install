@@ -31,7 +31,7 @@ include_files = [
     ("./file/lecode-JAP.bin", "./file/lecode-JAP.bin"),
     ("./file/lecode-KOR.bin", "./file/lecode-KOR.bin"),
     ("./file/itemBoxNiseRtpa.brres", "./file/itemBoxNiseRtpa.brres"),
-    ("./file/lpar-default.txt", "./file/lpar-default.txt"),
+    ("./file/lpar-normal.txt", "./file/lpar-normal.txt"),
     ("./file/RKRace.breff", "./file/RKRace.breff"),
 
     ("./file/tt_hatena_64x64.tpl.png", "./file/tt_hatena_64x64.tpl.png"),

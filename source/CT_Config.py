@@ -11,7 +11,8 @@ class CT_Config:
     def __init__(self, version: str = None, name: str = None, nickname: str = None,
                  game_variant: str = "01", gui=None, region: int = None, cheat_region: int = None,
                  tags_color: dict = {}, prefix_list: list = [], suffix_list: list = [],
-                 tag_retro: str = "Retro", default_track: Track = None, pack_path: str = ""):
+                 tag_retro: str = "Retro", default_track: Track = None, pack_path: str = "",
+                 file_process: dict = None, file_structure: dict = None):
 
         self.version = version
         self.name = name
@@ -32,6 +33,9 @@ class CT_Config:
         self.default_track = default_track
 
         self.pack_path = pack_path
+
+        self.file_process = file_process
+        self.file_structure = file_structure
 
     def add_ordered_cup(self, cup: Cup) -> None:
         """
@@ -95,14 +99,17 @@ class CT_Config:
                 ctfile.write(cup.get_ctfile_cup(race=False, **kwargs))
                 rctfile.write(cup.get_ctfile_cup(race=True, **kwargs))
 
-    def get_cup_icon(self, cup_id: [str, int], font_path: str = "./assets/SuperMario256.ttf",
-                     cup_icon_dir: str = "./file/cup_icon") -> Image:
+    def get_cup_icon(self, cup_id: [str, int], font_path: str = "./assets/SuperMario256.ttf") -> Image:
         """
         :param cup_id: id of the cup
-        :param cup_icon_dir: directory to cup icon
         :param font_path: path to the font used to generate icon
         :return: cup icon
         """
+
+        dir = self.file_process['placement'].get('cup_icon_dir')
+        if not dir: dir = "/ct_icons/"
+        cup_icon_dir = f"{self.pack_path}/file/{dir}/"
+
         if os.path.exists(f"{cup_icon_dir}/{cup_id}.png"):
             cup_icon = Image.open(f"{cup_icon_dir}/{cup_id}.png").resize((128, 128))
 
@@ -132,7 +139,7 @@ class CT_Config:
 
         for index, cup_id in enumerate(icon_files):
             # index is a number, id can be string or number ("left", 0, 12, ...)
-            cup_icon = self.get_cup_icon(cup_id, cup_icon_dir=self.pack_path+"/file/cup_icon/")
+            cup_icon = self.get_cup_icon(cup_id)
             ct_icon.paste(cup_icon, (0, index * CT_ICON_WIDTH))
 
         return ct_icon
@@ -184,6 +191,11 @@ class CT_Config:
 
         for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
             setattr(self, param, ctconfig_json.get(param))
+
+        with open(f"{pack_path}/file_process.json", encoding="utf8") as fp_file:
+            self.file_process = json.load(fp_file)
+        with open(f"{pack_path}/file_structure.json", encoding="utf8") as fs_file:
+            self.file_structure = json.load(fs_file)
 
         return self
 

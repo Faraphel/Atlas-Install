@@ -13,5 +13,5 @@ def encode(file: str, format: str, dest_file: str = None) -> None:
     :param format: new image format
     """
     cmd = [WIMGT_PATH, "ENCODE", file, "-x", format, "--overwrite"]
-    if dest_file: cmd.extend(["--dest", dest_file])
+    if dest_file: cmd.extend(["--DEST", dest_file])
     subprocess.run(cmd, creationflags=subprocess.CREATE_NO_WINDOW, check=True, stdout=subprocess.PIPE)
