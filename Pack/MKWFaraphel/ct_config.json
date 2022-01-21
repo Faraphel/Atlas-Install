@@ -8409,34 +8409,6 @@
             ]
         },
         {
-            "name":"Hideous Hallucinations",
-            "author":"TL",
-            "special":"T11",
-            "music":"T11",
-            "score":1,
-            "since_version":"0.8",
-            "sha1":"39bbb7ad061a5a7e92e9f84bb7aa50abd3738355",
-            "note":"infinite respawn, bad IA",
-            "warning":2,
-            "tags":[
-
-            ]
-        },
-        {
-            "name":"Hideous Hallucinations",
-            "author":"TL",
-            "special":"T11",
-            "music":"T11",
-            "score":1,
-            "since_version":"0.8",
-            "sha1":"39bbb7ad061a5a7e92e9f84bb7aa50abd3738355",
-            "note":"infinite respawn, bad IA",
-            "warning":2,
-            "tags":[
-
-            ]
-        },
-        {
             "name":"Hillside Circuit",
             "music":"T11",
             "special":"T11",
