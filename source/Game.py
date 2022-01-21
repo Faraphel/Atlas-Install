@@ -7,26 +7,7 @@ import json
 from source.CT_Config import CT_Config
 from source.definition import *
 from source.wszst import *
-
-
-class RomAlreadyPatched(Exception):
-    def __init__(self):
-        super().__init__("ROM Already patched !")
-
-
-class InvalidGamePath(Exception):
-    def __init__(self):
-        super().__init__("This path is not valid !")
-
-
-class InvalidFormat(Exception):
-    def __init__(self):
-        super().__init__("This game format is not supported !")
-
-
-class TooMuchSha1CheckFailed(Exception):
-    def __init__(self):
-        super().__init__("Too much sha1 check failed !")
+from source.Error import *
 
 
 class NoGui:

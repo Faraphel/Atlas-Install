@@ -1,7 +1,7 @@
 import json
 import os
 
-from .definition import restart
+from source.definition import restart
 
 
 class Option:

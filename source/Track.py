@@ -1,20 +1,6 @@
 from source.definition import *
 from source.wszst import *
-
-
-class CantDownloadTrack(Exception):
-    def __init__(self, track, http_error: [str, int]):
-        super().__init__(f"Can't download track {track.name} ({track.sha1}) (error {http_error}) !")
-
-
-class CantConvertTrack(Exception):
-    def __init__(self):
-        super().__init__("Can't convert track.")
-
-
-class MissingTrackWU8(Exception):
-    def __init__(self):
-        super().__init__("The original wu8 track file is missing !")
+from source.Error import *
 
 
 def get_trackdata_from_json(track_json, *args, **kwargs):
