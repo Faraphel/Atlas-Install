@@ -155,6 +155,7 @@
     "bmg_patch_dir": "/generated/",
     "cup_icon_dir": "/cup_icon/",
     "lecode_bin_dir": "/essentials/",
-    "lpar_dir": "/essentials/"
+    "lpar_dir": "/essentials/",
+    "track_dir": "/Track-WU8/"
   }
 }

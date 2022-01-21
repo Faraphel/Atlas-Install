@@ -29,11 +29,6 @@ class TooMuchSha1CheckFailed(Exception):
         super().__init__("Too much sha1 check failed !")
 
 
-class CantConvertTrack(Exception):
-    def __init__(self):
-        super().__init__("Can't convert track.")
-
-
 class NoGui:
     """
     'fake' gui if no gui are used for compatibility.
@@ -280,7 +275,7 @@ class Game:
         if not lpar_path: f""
         lpar_path = (
             f"{self.ctconfig.pack_path}/file/{lpar_path}/"
-            f"lpar-{'debug' if self.gui.boolvar_use_debug_mode.get() else 'normal'}"
+            f"lpar-{'debug' if self.gui.boolvar_use_debug_mode.get() else 'normal'}.txt"
         )
 
         lecode_file = self.ctconfig.file_process["placement"].get("lecode_bin_dir")
@@ -493,7 +488,6 @@ class Game:
             self.gui.progress(statut=self.gui.translate("Configurating LE-CODE"), add=1)
             self.ctconfig.create_ctfile(
                 highlight_version=self.gui.stringvar_mark_track_from_version.get(),
-                sort_track_by=self.gui.stringvar_sort_track_by.get()
             )
 
             self.generate_cticons()
@@ -614,16 +608,9 @@ class Game:
             """
             nonlocal error_count, error_max, thread_list
 
-            if os.path.exists(track.file_szs) and os.path.getsize(track.file_szs) < 1000:
-                os.remove(track.file_szs)  # File under this size are corrupted
-
-            if not track.check_szs_sha1():  # if sha1 of track's szs is incorrect or track's szs does not exist
-                if os.path.exists(track.file_wu8):
-                    track.convert_wu8_to_szs()
-                else:
-                    messagebox.showerror(self.gui.translate("Error"),
-                                         self.gui.translate("Can't convert track.\nEnable track download and retry."))
-                    raise CantConvertTrack()
+            try: track.convert_wu8_to_szs()
+            except Exception as e:
+                raise e
 
         def clean_process() -> int:
             """
@@ -639,10 +626,10 @@ class Game:
 
             return bool(thread_list)
 
-        total_track = len(self.ctconfig.all_tracks)
+        total_track = self.ctconfig.get_tracks_count()
         self.gui.progress(max=total_track, indeter=False, show=True)
 
-        for i, track in enumerate(self.ctconfig.all_tracks):
+        for i, track in enumerate(self.ctconfig.get_tracks()):
             while error_count <= error_max:
                 if len(thread_list) < max_process:
                     thread_list[track.sha1] = Thread(target=add_process, args=[track])

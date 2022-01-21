@@ -48,17 +48,16 @@ def sha1(file, autoadd_path: str = "./file/auto-add/") -> str:
 
 
 @error.better_wszst_error(wszst_tools=WSZST_PATH)
-def normalize(src_file: str, dest_dir: str = "./file/Track/", dest_name: str = "%N.szs",
+def normalize(src_file: str, dest_file: str = "./file/Track/%N.szs",
               output_format: str = "szs", autoadd_path: str = "./file/auto-add/") -> None:
     """
     convert a track into an another format
     :param src_file: source file
-    :param dest_dir: destination directory
-    :param dest_name: destination filename (%N mean same name as src_file)
+    :param dest_file: destination filename (%N mean same name as src_file)
     :param output_format: format of the destination track
     :param autoadd_path: path of the auto-add directory
     """
-    subprocess.run([WSZST_PATH, "NORMALIZE", src_file, "--DEST", dest_dir + dest_name, "--" + output_format,
+    subprocess.run([WSZST_PATH, "NORMALIZE", src_file, "--DEST", dest_file, "--" + output_format,
                     "--overwrite", "--autoadd-path", autoadd_path],
                    creationflags=subprocess.CREATE_NO_WINDOW, stderr=subprocess.PIPE)
 

@@ -2,17 +2,23 @@ from source.definition import *
 from source.wszst import *
 
 
-HiddenTrackAttr = [
-    "file_wu8",
-    "file_szs",
-    "_track_wu8_dir",
-    "_track_szs_dir"
-]  # These attribute shouldn't be used to reference all the possibilities of values
-
-
 class CantDownloadTrack(Exception):
     def __init__(self, track, http_error: [str, int]):
         super().__init__(f"Can't download track {track.name} ({track.sha1}) (error {http_error}) !")
+
+
+class CantConvertTrack(Exception):
+    def __init__(self):
+        super().__init__("Can't convert track.")
+
+
+class MissingTrackWU8(Exception):
+    def __init__(self):
+        super().__init__("The original wu8 track file is missing !")
+
+
+def get_trackdata_from_json(track_json, *args, **kwargs):
+    return (TrackGroup if "group" in track_json else Track)(*args, **kwargs).load_from_json(track_json)
 
 
 def check_file_sha1(file: str, excepted_sha1: str) -> int:
@@ -22,17 +28,24 @@ def check_file_sha1(file: str, excepted_sha1: str) -> int:
     """
     if not os.path.exists(file): return 0
     calculated_sha1 = szs.sha1(file=file)
-    if calculated_sha1 == excepted_sha1: return 1
+    if calculated_sha1 == excepted_sha1:
+        return 1
     else:
         print(f"incorrect sha1 for {file} {calculated_sha1} : (expected {excepted_sha1})")
         return 0
 
 
 class Track:
+    _wu8_dir = None
+    _szs_dir = None
+    tag_retro = None
+    prefix_list = None
+    suffix_list = None
+    tags_color = None
+
     def __init__(self, name: str = " ", author: str = "Nintendo", special: str = "T11", music: str = "T11",
-                 sha1: str = None, since_version: str = None, score: int = -1, warning: int = 0, note: str = "",
-                 track_wu8_dir: str = "./file/Track-WU8/", track_szs_dir: str = "./file/Track/",
-                 version: str = None, tags: list = [], *args, **kwargs):
+                 sha1: str = None, since_version: str = None, score: int = -1, warning: int = 0,
+                 version: str = None, tags: list = None, is_in_group: bool = False, *args, **kwargs):
         """
         Track class
         :param name: track name
@@ -57,21 +70,19 @@ class Track:
         :param kwargs: /
         """
 
-        self.name = name                    # Track name
-        self.author = author                # Track author
-        self.sha1 = sha1                    # Track sha1 from wszst SHA1
-        self.special = special              # Special slot of the track
-        self.music = music                  # Music of the track
+        self.name = name  # Track name
+        self.author = author  # Track author
+        self.sha1 = sha1  # Track sha1 from wszst SHA1
+        self.special = special  # Special slot of the track
+        self.music = music  # Music of the track
         self.since_version = since_version  # Since which version is this track available
-        self.score = score                  # Track score between 1 and 3 stars
-        self.warning = warning              # Track bug level (1 = minor, 2 = major)
+        self.score = score  # Track score between 1 and 3 stars
+        self.warning = warning  # Track bug level (1 = minor, 2 = major)
         self.version = version
-        self.tags = tags
+        self.tags = tags if tags else []
+        self.refresh_filename()
 
-        self._track_wu8_dir = track_wu8_dir
-        self._track_szs_dir = track_szs_dir
-        self.file_wu8 = f"{track_wu8_dir}/{self.sha1}.wu8"
-        self.file_szs = f"{track_szs_dir}/{self.sha1}.szs"
+        self._is_in_group = is_in_group
 
     def __repr__(self) -> str:
         """
@@ -85,23 +96,33 @@ class Track:
         check if track wu8 sha1 is correct
         :return: 0 if yes, -1 if no
         """
-        return check_file_sha1(self.file_wu8, self.sha1)
+        return check_file_sha1(self._wu8_file, self.sha1)
 
     def check_szs_sha1(self) -> int:
         """
         check if track szs sha1 is correct
         :return: 0 if yes, -1 if no
         """
-        return check_file_sha1(self.file_szs, self.sha1)
+        return check_file_sha1(self._szs_file, self.sha1)
 
     def convert_wu8_to_szs(self) -> None:
         """
         convert track to szs
         """
-        szs.normalize(
-            src_file=self.file_wu8,
-            dest_dir="./file/Track/"
-        )
+        file_wu8 = f"{self._wu8_dir}/{self.sha1}.wu8"
+        file_szs = f"{self._szs_dir}/{self.sha1}.szs"
+
+        if os.path.exists(file_szs) and os.path.getsize(file_szs) < 1000:
+            os.remove(file_szs)  # File under this size are corrupted
+
+        if not self.check_szs_sha1():  # if sha1 of track's szs is incorrect or track's szs does not exist
+            if os.path.exists(file_wu8):
+                szs.normalize(
+                    src_file=file_wu8,
+                    dest_file=file_szs
+                )
+            else:
+                raise MissingTrackWU8()
 
     def get_author_str(self) -> str:
         """
@@ -109,39 +130,43 @@ class Track:
         """
         return self.author if type(self.author) == str else ", ".join(self.author)
 
-    def get_ctfile(self, ct_config, race=False, *args, **kwargs) -> str:
+    def get_ctfile(self, race=False, *args, **kwargs) -> str:
         """
         get ctfile text to create CTFILE.txt and RCTFILE.txt
-        :param ct_config: ct_config used to generate the Track
         :param race: is it a text used for Race_*.szs ?
         :return: ctfile definition for the track
         """
-        ctfile_text = (
-            f'  T {self.music}; '
-            f'{self.special}; '
-            f'{"0x00" if ct_config.tag_retro in self.tags else "0x01"}; '
-        )
-        if not race:
-            ctfile_text += (
-                f'"{self.sha1}"; '  # track path
-                f'"{self.get_track_formatted_name(ct_config, *args, **kwargs)}"; '  # track text shown ig
-                f'"{self.sha1}"\n')  # sha1
-        else:
-            ctfile_text += (
+        track_type = "T"
+        track_flag = 0x00 if self.tag_retro in self.tags else 0x01
+        if self._is_in_group:
+            track_type = "H"
+            track_flag |= 0x04
+
+        ctfile_track = f'  {track_type} {self.music}; {self.special}; {hex(track_flag)}; '
+
+        if race:
+            ctfile_track += (
                 f'"-"; '  # track path, not used in Race_*.szs, save a bit of space
-                f'"{self.get_track_formatted_name(ct_config, *args, **kwargs)}\\n{self.get_author_str()}"; '  
+                f'"{self.get_track_formatted_name(*args, **kwargs)}\\n{self.get_author_str()}"; '
                 # only in race show author's name
                 f'"-"\n'  # sha1, not used in Race_*.szs, save a bit of space
             )
 
-        return ctfile_text
+        else:
+            ctfile_track += (
+                f'"{self.sha1}"; '  # track path
+                f'"{self.get_track_formatted_name(*args, **kwargs)}"; '  # track text shown ig
+                f'"{self.sha1}"\n' # sha1
+            )
+
+        return ctfile_track
 
     def select_tag(self, tag_list: list) -> str:
         for tag in self.tags:
             if tag in tag_list: return tag
         return ""
 
-    def get_track_formatted_name(self, ct_config, highlight_version: str = None, *args, **kwargs) -> str:
+    def get_track_formatted_name(self, highlight_version: str = None, *args, **kwargs) -> str:
         """
         get the track name with score, color, ...
         :param ct_config: ct_config for tags configuration
@@ -150,8 +175,8 @@ class Track:
         """
         hl_prefix = ""  # highlight
         hl_suffix = ""
-        prefix = self.select_tag(ct_config.prefix_list)  # tag prefix
-        suffix = self.select_tag(ct_config.suffix_list)  # tag suffix
+        prefix = self.select_tag(self.prefix_list)  # tag prefix
+        suffix = self.select_tag(self.suffix_list)  # tag suffix
         star_prefix = ""  # star
         star_suffix = ""
         star_text = ""
@@ -166,8 +191,8 @@ class Track:
         if self.since_version == highlight_version:
             hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"
 
-        if prefix: prefix = "\\\\c{"+ct_config.tags_color[prefix]+"}"+prefix+"\\\\c{off} "
-        if suffix: suffix = " (\\\\c{"+ct_config.tags_color[suffix]+"}"+suffix+"\\\\c{off})"
+        if prefix: prefix = "\\\\c{" + self.tags_color[prefix] + "}" + prefix + "\\\\c{off} "
+        if suffix: suffix = " (\\\\c{" + self.tags_color[suffix] + "}" + suffix + "\\\\c{off})"
 
         name = f"{star_prefix}{star_text}{star_suffix}{prefix}{hl_prefix}{self.name}{hl_suffix}{suffix}"
         return name
@@ -179,6 +204,10 @@ class Track:
         """
         return f"{self.select_tag(ct_config.prefix_list)}{self.name}{self.select_tag(ct_config.suffix_list)}"
 
+    def refresh_filename(self):
+        self._wu8_file = f"{self._wu8_dir}/{self.sha1}.wu8"
+        self._szs_file = f"{self._szs_dir}/{self.sha1}.szs"
+
     def load_from_json(self, track_json: dict):
         """
         load the track from a dictionary
@@ -187,8 +216,7 @@ class Track:
         for key, value in track_json.items():  # load all value in the json as class attribute
             setattr(self, key, value)
 
-        self.file_wu8 = f"{self._track_wu8_dir}/{self.sha1}.wu8"
-        self.file_szs = f"{self._track_szs_dir}/{self.sha1}.szs"
+        self.refresh_filename()
 
         return self
 
@@ -200,3 +228,32 @@ class Track:
         for k, v in self.__dict__.items():
             setattr(new, k, v)
         return new
+
+    def get_tracks(self): yield self
+
+
+class TrackGroup(Track):
+    def __init__(self, tracks: list = None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.tracks = tracks if tracks else []
+
+    def load_from_json(self, group_json: dict, *args, **kwargs):
+        for key, value in group_json.items():  # load all value in the json as class attribute
+            if key == "group":
+                for track_json in value:
+                    self.tracks.append(Track(is_in_group=True, *args, **kwargs).load_from_json(track_json))
+
+            else:
+                setattr(self, key, value)
+
+        return self
+
+    def get_tracks(self):
+        for track in self.tracks: yield track
+
+    def get_ctfile(self, *args, **kwargs):
+        ctfile_group = f'  T T11; T11; 0x02; "-"; "{self.get_track_formatted_name()}"; "-"\n'
+        for track in self.tracks:
+            ctfile_group += track.get_ctfile(*args, **kwargs)
+
+        return ctfile_group
