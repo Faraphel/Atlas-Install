@@ -432,9 +432,7 @@ class Game:
             self.common.gui_main.progress(show=True, indeter=False, statut=self.common.gui_main.translate("Converting files"),
                               max=max_step, step=0)
             self.common.gui_main.progress(statut=self.common.gui_main.translate("Configurating LE-CODE"), add=1)
-            self.common.ct_config.create_ctfile(
-                highlight_version=self.common.gui_main.stringvar_mark_track_from_version.get(),
-            )
+            self.common.ct_config.create_ctfile()
 
             self.generate_cticons()
             self.generate_all_image()

@@ -66,10 +66,9 @@ class CT_Config:
                 cup.tracks[index] = track
             yield cup
 
-    def create_ctfile(self, directory: str = "./file/", highlight_version: str = None) -> None:
+    def create_ctfile(self, directory: str = "./file/") -> None:
         """
         create a ctfile configuration in a directory
-        :param highlight_version: highlight a specific version in light blue
         :param directory: create CTFILE.txt and RCTFILE.txt in this directory
         """
         with open(directory + "CTFILE.txt", "w", encoding="utf-8") as ctfile, \

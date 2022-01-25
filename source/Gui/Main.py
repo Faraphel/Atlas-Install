@@ -203,26 +203,12 @@ class Main:
             menu=self.menu_conv_process
         )
 
-        self.menu_conv_process.add_radiobutton(
-            label=self.translate("1 ", "process"),
-            variable=self.intvar_process_track, value=1,
-            command=lambda: self.common.option.edit("process_track", 1)
-        )
-        self.menu_conv_process.add_radiobutton(
-            label=self.translate("2 ", "process"),
-            variable=self.intvar_process_track, value=2,
-            command=lambda: self.common.option.edit("process_track", 2)
-        )
-        self.menu_conv_process.add_radiobutton(
-            label=self.translate("4 ", "process"),
-            variable=self.intvar_process_track, value=4,
-            command=lambda: self.common.option.edit("process_track", 4)
-        )
-        self.menu_conv_process.add_radiobutton(
-            label=self.translate("8 ", "process"),
-            variable=self.intvar_process_track, value=8,
-            command=lambda: self.common.option.edit("process_track", 8)
-        )
+        for process_number in range(1, 8+1):
+            self.menu_conv_process.add_radiobutton(
+                label=self.translate(f"{process_number} ", "process"),
+                variable=self.intvar_process_track, value=process_number,
+                command=lambda p=process_number: self.common.option.edit("process_track", p)
+            )
 
         ## GAME PARAMETER
         self.menu_advanced.add_separator()

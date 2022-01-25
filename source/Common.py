@@ -4,12 +4,15 @@ from source.Game import Game
 from source.Gui.Main import Main
 from source.Gui.TrackSelection import TrackSelection
 
+
 class Common:
     def __init__(self):
         """
         Common allow to store multiple object that need each other and still make the code readable enough without
         having to access an object with some obscure way
         """
+
+        self.json_frame_filter = None
 
         self.option = Option().load_from_file("./option.json")
         self.ct_config = CT_Config()
