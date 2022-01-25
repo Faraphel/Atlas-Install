@@ -37,6 +37,7 @@ class Main:
             self.quit()
 
         self.is_dev_version = False  # Is this installer version a dev ?
+        self.is_track_configuration_edited = False
         self.stringvar_ctconfig = StringVar(value=self.available_packs[0])
         self.stringvar_language = StringVar(value=self.common.option.language)
         self.stringvar_game_format = StringVar(value=self.common.option.format)
@@ -44,12 +45,6 @@ class Main:
         self.intvar_process_track = IntVar(value=self.common.option.process_track)
 
         self.root.title(self.translate("MKWFaraphel Installer"))
-
-        self.boolvar_use_1star_track = BooleanVar(value=True)
-        self.boolvar_use_2star_track = BooleanVar(value=True)
-        self.boolvar_use_3star_track = BooleanVar(value=True)
-        self.stringvar_mark_track_from_version = StringVar(value="None")
-        self.stringvar_sort_track_by = StringVar(value="name")
 
         self.boolvar_use_debug_mode = BooleanVar(value=False)
         self.boolvar_force_unofficial_mode = BooleanVar(value=False)
@@ -424,13 +419,8 @@ class Main:
         :return: True if the parameter is the official one, False if it is customized
         """
         return (
-            self.boolvar_use_1star_track.get() is True and
-            self.boolvar_use_2star_track.get() is True and
-            self.boolvar_use_3star_track.get() is True and
-
             self.boolvar_force_unofficial_mode.get() is False and
-
-            self.stringvar_sort_track_by.get() == "name"
+            self.is_track_configuration_edited is False
         )
 
     def quit(self) -> None:

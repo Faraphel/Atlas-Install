@@ -218,6 +218,7 @@ class TrackSelection:
         ).grid(row=100, column=1, sticky="E")
 
     def save_configuration(self):
+        self.common.gui_main.is_track_configuration_edited = True
         self.common.ct_config.sort_track_attr = self.combobox_track_sort.get()
         self.common.ct_config.filter_track_selection = self.get_filter(
             self.variable_enable_track_filter,

@@ -552,11 +552,7 @@ class Game:
             :param track: the track that will be patched
             :return: 0 if no error occured
             """
-            nonlocal error_count, error_max, thread_list
-
-            try: track.convert_wu8_to_szs()
-            except Exception as e:
-                raise e
+            track.convert_wu8_to_szs()
 
         def clean_process() -> int:
             """
