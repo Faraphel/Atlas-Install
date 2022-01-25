@@ -1804,6 +1804,7 @@
             ]
         }
     ],
+    "default_sort": "name",
     "tracks_list":[
         {
             "name":"4IT Clown's Road",

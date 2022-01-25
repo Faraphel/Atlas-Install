@@ -35,10 +35,6 @@ class Track:
         """
         Track class
         :param name: track name
-        :param file_wu8: path to its wu8 file
-        :param file_szs: path to its szs file
-        :param prefix: track prefix (often original console or game)
-        :param suffix: track suffix (often for variation like Boost or Night)
         :param author: track creator(s)
         :param special: track special slot
         :param music: track music slot
@@ -47,8 +43,6 @@ class Track:
         :param since_version: since when version did the track got added to the mod
         :param score: what it the score of the track
         :param warning: what is the warn level of the track (0 = none, 1 = minor bug, 2 = major bug)
-        :param track_wu8_dir: where is stored the track wu8
-        :param track_szs_dir: where is stored the track szs
         :param track_version: version of the track
         :param tags: a list of tags that correspond to the track
 
@@ -66,7 +60,6 @@ class Track:
         self.warning = warning  # Track bug level (1 = minor, 2 = major)
         self.version = version
         self.tags = tags if tags else []
-        self.refresh_filename()
 
         self._is_in_group = is_in_group
 
@@ -82,30 +75,34 @@ class Track:
         check if track wu8 sha1 is correct
         :return: 0 if yes, -1 if no
         """
-        return check_file_sha1(self._wu8_file, self.sha1)
+        return check_file_sha1(self.get_wu8_file(), self.sha1)
 
     def check_szs_sha1(self) -> int:
         """
         check if track szs sha1 is correct
         :return: 0 if yes, -1 if no
         """
-        return check_file_sha1(self._szs_file, self.sha1)
+        return check_file_sha1(self.get_szs_file(), self.sha1)
+
+    def get_wu8_file(self): return f"{self._wu8_dir}/{self.sha1}.wu8"
+    def get_szs_file(self): return f"{self._szs_dir}/{self.sha1}.szs"
 
     def convert_wu8_to_szs(self) -> None:
         """
         convert track to szs
         """
-        file_wu8 = f"{self._wu8_dir}/{self.sha1}.wu8"
-        file_szs = f"{self._szs_dir}/{self.sha1}.szs"
 
-        if os.path.exists(file_szs) and os.path.getsize(file_szs) < 1000:
-            os.remove(file_szs)  # File under this size are corrupted
+        szs_file = self.get_szs_file()
+        wu8_file = self.get_wu8_file()
+
+        if os.path.exists(szs_file) and os.path.getsize(szs_file) < 1000:
+            os.remove(szs_file)  # File under this size are corrupted
 
         if not self.check_szs_sha1():  # if sha1 of track's szs is incorrect or track's szs does not exist
-            if os.path.exists(file_wu8):
+            if os.path.exists(wu8_file):
                 szs.normalize(
-                    src_file=file_wu8,
-                    dest_file=file_szs
+                    src_file=wu8_file,
+                    dest_file=szs_file
                 )
             else:
                 raise MissingTrackWU8()
@@ -116,14 +113,17 @@ class Track:
         """
         return self.author if type(self.author) == str else ", ".join(self.author)
 
-    def get_ctfile(self, race=False, *args, **kwargs) -> str:
+    def get_ctfile(self, race=False, filter_random_new=None, *args, **kwargs) -> str:
         """
         get ctfile text to create CTFILE.txt and RCTFILE.txt
+        :param filter_random_new: function to decide if the track should be used by the "random new" option
         :param race: is it a text used for Race_*.szs ?
         :return: ctfile definition for the track
         """
         track_type = "T"
         track_flag = 0x00 if self.tag_retro in self.tags else 0x01
+        if filter_random_new: track_flag = 0x01 if filter_random_new(self) else 0x00
+
         if self._is_in_group:
             track_type = "H"
             track_flag |= 0x04
@@ -152,13 +152,15 @@ class Track:
             if tag in tag_list: return tag
         return ""
 
-    def get_track_formatted_name(self, highlight_version: str = None, *args, **kwargs) -> str:
+    def get_track_formatted_name(self, filter_highlight=None, *args, **kwargs) -> str:
         """
         get the track name with score, color, ...
         :param ct_config: ct_config for tags configuration
-        :param highlight_version: if a specific version need to be highlighted.
+        :param filter_highlight: filter function to decide if the track should be filtered.
         :return: the name of the track with colored prefix, suffix
         """
+        if not filter_highlight: filter_highlight = lambda track: False
+
         hl_prefix = ""  # highlight
         hl_suffix = ""
         prefix = self.select_tag(self.prefix_list)  # tag prefix
@@ -174,8 +176,7 @@ class Track:
             if 0 < self.warning <= 3:
                 star_prefix = warning_color[self.warning]
 
-        if self.since_version == highlight_version:
-            hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"
+        if filter_highlight(self): hl_prefix, hl_suffix = "\\\\c{blue1}", "\\\\c{off}"
 
         if prefix: prefix = "\\\\c{" + self.tags_color[prefix] + "}" + prefix + "\\\\c{off} "
         if suffix: suffix = " (\\\\c{" + self.tags_color[suffix] + "}" + suffix + "\\\\c{off})"
@@ -190,10 +191,6 @@ class Track:
         """
         return f"{self.select_tag(ct_config.prefix_list)}{self.name}{self.select_tag(ct_config.suffix_list)}"
 
-    def refresh_filename(self):
-        self._wu8_file = f"{self._wu8_dir}/{self.sha1}.wu8"
-        self._szs_file = f"{self._szs_dir}/{self.sha1}.szs"
-
     def load_from_json(self, track_json: dict):
         """
         load the track from a dictionary
@@ -201,8 +198,6 @@ class Track:
         """
         for key, value in track_json.items():  # load all value in the json as class attribute
             setattr(self, key, value)
-
-        self.refresh_filename()
 
         return self
 

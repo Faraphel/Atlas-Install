@@ -4,53 +4,19 @@ import shutil
 import glob
 import json
 
-from source.CT_Config import CT_Config
 from source.definition import *
 from source.wszst import *
 from source.Error import *
 
 
-class NoGui:
-    """
-    'fake' gui if no gui are used for compatibility.
-    """
-
-    class NoButton:
-        def grid(self, *args, **kwargs): pass
-
-        def config(self, *args, **kwargs): pass
-
-    class NoVariable:
-        def __init__(self, value=None):
-            self.value = None
-
-        def set(self, value):
-            self.value = value
-
-        def get(self):
-            return self.value
-
-    def progress(*args, **kwargs): print(args, kwargs)
-
-    def translate(*args, **kwargs): return ""
-
-    def log_error(*args, **kwargs): print(args, kwargs)
-
-    is_dev_version = False
-    button_install_mod = NoButton()
-    stringvar_game_format = NoVariable()
-    intvar_process_track = NoVariable()
-    boolvar_dont_check_track_sha1 = NoVariable()
-
-
 class Game:
-    def __init__(self, path: str = "", region_ID: str = "P", game_ID: str = "RMCP01", gui=None):
+    def __init__(self, common, path: str = "", region_ID: str = "P", game_ID: str = "RMCP01"):
         """
         Class about the game code and its treatment.
         :param path: path of the game file / directory
         :param region_ID: game's region id (P for PAL, K for KOR, ...)
         :param game_ID: game's id (RMCP01 for PAL, ...)
-        :param gui: gui class used by the program
+        :param common: common class to access all other element
         """
         if not os.path.exists(path) and path: raise InvalidGamePath()
         self.extension = None
@@ -59,8 +25,7 @@ class Game:
         self.region = region_id_to_name[region_ID]
         self.region_ID = region_ID
         self.game_ID = game_ID
-        self.gui = gui if gui else NoGui
-        self.ctconfig = CT_Config(gui=gui)
+        self.common = common
 
     def set_path(self, path: str) -> None:
         """
@@ -76,17 +41,17 @@ class Game:
         :param format: game format (ISO, WBFS, ...)
         """
         if format in ["ISO", "WBFS", "CISO"]:
-            path_game_format: str = os.path.realpath(self.path + f"/../{self.ctconfig.nickname} v{self.ctconfig.version}." + format.lower())
+            path_game_format: str = os.path.realpath(self.path + f"/../{self.common.ct_config.nickname} v{self.common.ct_config.version}." + format.lower())
             wit.copy(src_path=self.path, dst_path=path_game_format, format=format)
             shutil.rmtree(self.path)
             self.path = path_game_format
 
-            self.gui.progress(statut=self.gui.translate("Changing game's ID"), add=1)
+            self.common.gui_main.progress(statut=self.common.gui_main.translate("Changing game's ID"), add=1)
             wit.edit(
                 file=self.path,
                 region_ID=self.region_ID,
-                game_variant=self.ctconfig.game_variant,
-                name=f"{self.ctconfig.name} {self.ctconfig.version}"
+                game_variant=self.common.ct_config.game_variant,
+                name=f"{self.common.ct_config.name} {self.common.ct_config.version}"
             )
 
     def extract(self) -> None:
@@ -100,7 +65,7 @@ class Game:
             # Fiding a directory name that doesn't already exist
             path_dir = get_next_available_dir(
                 parent_dir=self.path + f"/../",
-                dir_name=f"{self.ctconfig.nickname} v{self.ctconfig.version}"
+                dir_name=f"{self.common.ct_config.nickname} v{self.common.ct_config.version}"
             )
 
             wit.extract(file=self.path, dst_dir=path_dir)
@@ -128,7 +93,7 @@ class Game:
         count all the step patching subfile will take (for the progress bar)
         :return: number of step estimated
         """
-        with open(f"{self.ctconfig.pack_path}/file_structure.json") as f:
+        with open(f"{self.common.ct_config.pack_path}/file_structure.json") as f:
             fs = json.load(f)
 
         # This part is used to estimate the max_step
@@ -160,11 +125,11 @@ class Game:
         """
         patch subfile as indicated in the file_structure.json file (for file structure)
         """
-        with open(f"{self.ctconfig.pack_path}/file_structure.json") as f:
+        with open(f"{self.common.ct_config.pack_path}/file_structure.json") as f:
             fs = json.load(f)
 
         extracted_file = []
-        self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Modifying subfile..."), add=1)
+        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.gui_main.translate("Modifying subfile..."), add=1)
 
         def replace_file(path, file, subpath="/") -> None:
             """
@@ -173,10 +138,10 @@ class Game:
             :param file: file to replace
             :param subpath: directory between .szs file and file inside to replace
             """
-            self.gui.progress(statut=self.gui.translate("Editing", "\n", get_nodir(path)), add=1)
+            self.common.gui_main.progress(statut=self.common.gui_main.translate("Editing", "\n", get_nodir(path)), add=1)
             extension = get_extension(path)
 
-            source_file = f"{self.ctconfig.pack_path}/file/{file}"
+            source_file = f"{self.common.ct_config.pack_path}/file/{file}"
             dest_file = path
 
             if extension == "szs":
@@ -205,7 +170,7 @@ class Game:
                             for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
 
         for file in extracted_file:
-            self.gui.progress(statut=self.gui.translate("Recompilating", "\n", get_nodir(file)), add=1)
+            self.common.gui_main.progress(statut=self.common.gui_main.translate("Recompilating", "\n", get_nodir(file)), add=1)
             szs.create(file=file)
             shutil.rmtree(file + ".d", ignore_errors=True)
 
@@ -213,9 +178,9 @@ class Game:
         """
         copy MyStuff directory into the game *before* patching the game
         """
-        self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Copying MyStuff..."), add=1)
+        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.gui_main.translate("Copying MyStuff..."), add=1)
 
-        mystuff_folder = self.gui.stringvar_mystuff_folder.get()
+        mystuff_folder = self.common.gui_main.stringvar_mystuff_folder.get()
         if mystuff_folder and mystuff_folder != "None":
 
             # replace game's file by files with the same name in the MyStuff root
@@ -241,27 +206,27 @@ class Game:
         """
         patch the main.dol file to allow the addition of LECODE.bin file
         """
-        self.gui.progress(statut=self.gui.translate("Patch main.dol"), add=1)
+        self.common.gui_main.progress(statut=self.common.gui_main.translate("Patch main.dol"), add=1)
 
-        region_id = self.ctconfig.region if self.gui.is_using_official_config() else self.ctconfig.cheat_region
+        region_id = self.common.ct_config.region if self.common.gui_main.is_using_official_config() else self.common.ct_config.cheat_region
         wstrt.patch(path=self.path, region_id=region_id)
 
     def install_patch_lecode(self) -> None:
         """
         configure and add the LECODE.bin file to the mod
         """
-        self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
+        self.common.gui_main.progress(statut=self.common.gui_main.translate("Patch lecode.bin"), add=1)
 
-        lpar_path = self.ctconfig.file_process["placement"].get("lpar_dir")
+        lpar_path = self.common.ct_config.file_process["placement"].get("lpar_dir")
         if not lpar_path: f""
         lpar_path = (
-            f"{self.ctconfig.pack_path}/file/{lpar_path}/"
-            f"lpar-{'debug' if self.gui.boolvar_use_debug_mode.get() else 'normal'}.txt"
+            f"{self.common.ct_config.pack_path}/file/{lpar_path}/"
+            f"lpar-{'debug' if self.common.gui_main.boolvar_use_debug_mode.get() else 'normal'}.txt"
         )
 
-        lecode_file = self.ctconfig.file_process["placement"].get("lecode_bin_dir")
+        lecode_file = self.common.ct_config.file_process["placement"].get("lecode_bin_dir")
         if not lecode_file: lecode_file = ""
-        lecode_file = f"{self.ctconfig.pack_path}/file/{lecode_file}/lecode-{self.region}.bin"
+        lecode_file = f"{self.common.ct_config.pack_path}/file/{lecode_file}/lecode-{self.region}.bin"
 
         lec.patch(
             lecode_file=lecode_file,
@@ -277,8 +242,8 @@ class Game:
         """
         convert the rom to the selected game format
         """
-        output_format = self.gui.stringvar_game_format.get()
-        self.gui.progress(statut=self.gui.translate("Converting to", " ", output_format), add=1)
+        output_format = self.common.gui_main.stringvar_game_format.get()
+        self.common.gui_main.progress(statut=self.common.gui_main.translate("Converting to", " ", output_format), add=1)
         self.convert_to(output_format)
 
     def install_mod(self) -> None:
@@ -289,22 +254,22 @@ class Game:
             max_step = 5 + self.count_patch_subfile_operation()
             # PATCH main.dol and PATCH lecode.bin, converting, changing ID, copying MyStuff Folder
 
-            self.gui.progress(statut=self.gui.translate("Installing mod..."), max=max_step, step=0)
+            self.common.gui_main.progress(statut=self.common.gui_main.translate("Installing mod..."), max=max_step, step=0)
             self.install_copy_mystuff()
             self.install_patch_subfile()
             self.install_patch_maindol()
             self.install_patch_lecode()
             self.install_convert_rom()
 
-            messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod have been installed !"))
+            messagebox.showinfo(self.common.gui_main.translate("End"), self.common.gui_main.translate("The mod have been installed !"))
 
         except Exception as e:
-            self.gui.log_error()
+            self.common.gui_main.log_error()
             raise e
 
         finally:
-            self.gui.progress(show=False)
-            self.gui.quit()
+            self.common.gui_main.progress(show=False)
+            self.common.gui_main.quit()
 
     def patch_autoadd(self, auto_add_dir: str = "./file/auto-add") -> None:
         """
@@ -337,15 +302,15 @@ class Game:
                         track_id = bmgtrack[start_track_id:start_track_id + 3]
                         if track_id[1] in "1234":  # if the track is a original track from the wii
                             prefix = "Wii"
-                            if prefix in self.ctconfig.tags_color:
-                                prefix = "\\\\c{" + self.ctconfig.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            if prefix in self.common.ct_config.tags_color:
+                                prefix = "\\\\c{" + self.common.ct_config.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
                             prefix += " "
 
                         elif track_id[1] in "5678":  # if the track is a retro track from the original game
                             prefix, *track_name = track_name.split(" ")
                             track_name = " ".join(track_name)
-                            if prefix in self.ctconfig.tags_color:
-                                prefix = "\\\\c{" + self.ctconfig.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            if prefix in self.common.ct_config.tags_color:
+                                prefix = "\\\\c{" + self.common.ct_config.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
                             prefix += " "
 
                         track_id = hex(bmgID_track_move[track_id])[2:]
@@ -364,15 +329,15 @@ class Game:
         """
 
         bmg_replacement = {
-            "MOD_NAME": self.ctconfig.name,
-            "MOD_NICKNAME": self.ctconfig.nickname,
-            "MOD_VERSION": self.ctconfig.version,
-            "MOD_CUSTOMIZED": "" if self.gui.is_using_official_config() else "(custom)",
+            "MOD_NAME": self.common.ct_config.name,
+            "MOD_NICKNAME": self.common.ct_config.nickname,
+            "MOD_VERSION": self.common.ct_config.version,
+            "MOD_CUSTOMIZED": "" if self.common.gui_main.is_using_official_config() else "(custom)",
             "ONLINE_SERVICE": "Wiimmfi",
         }
 
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
-        self.gui.progress(statut=self.gui.translate("Patching text", " ", bmglang), add=1)
+        self.common.gui_main.progress(statut=self.common.gui_main.translate("Patching text", " ", bmglang), add=1)
 
         szs.extract(file=gamefile)
 
@@ -401,7 +366,7 @@ class Game:
             :param bmg_language: language of the bmg file
             :return: the replaced bmg file
             """
-            with open(f"{self.ctconfig.pack_path}/file_process.json", encoding="utf8") as fp_file:
+            with open(f"{self.common.ct_config.pack_path}/file_process.json", encoding="utf8") as fp_file:
                 file_process = json.load(fp_file)
 
             for bmg_process in file_process["bmg"]:
@@ -440,8 +405,8 @@ class Game:
             bmg.encode(file)
             os.remove(file)
 
-        bmg_dir = self.ctconfig.file_process["placement"].get("bmg_patch_dir")
-        bmg_dir = f"{self.ctconfig.pack_path}/file/{bmg_dir if bmg_dir else ''}"
+        bmg_dir = self.common.ct_config.file_process["placement"].get("bmg_patch_dir")
+        bmg_dir = f"{self.common.ct_config.pack_path}/file/{bmg_dir if bmg_dir else ''}"
         os.makedirs(get_dir(bmg_dir), exist_ok=True)
 
         save_bmg(f"{bmg_dir}/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
@@ -457,18 +422,18 @@ class Game:
         Prepare all files to install the mod (track, bmg text, descriptive image, ...)
         """
         try:
-            os.makedirs(f"{self.ctconfig.pack_path}/file/Track-WU8/", exist_ok=True)
+            os.makedirs(f"{self.common.ct_config.pack_path}/file/Track-WU8/", exist_ok=True)
 
-            max_step = len(self.ctconfig.file_process["img_encode"]) + \
-                       len(self.ctconfig.all_tracks) + \
+            max_step = len(self.common.ct_config.file_process["img_encode"]) + \
+                       len(self.common.ct_config.all_tracks) + \
                        3 + \
                        len("EGFIS")
 
-            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Converting files"),
+            self.common.gui_main.progress(show=True, indeter=False, statut=self.common.gui_main.translate("Converting files"),
                               max=max_step, step=0)
-            self.gui.progress(statut=self.gui.translate("Configurating LE-CODE"), add=1)
-            self.ctconfig.create_ctfile(
-                highlight_version=self.gui.stringvar_mark_track_from_version.get(),
+            self.common.gui_main.progress(statut=self.common.gui_main.translate("Configurating LE-CODE"), add=1)
+            self.common.ct_config.create_ctfile(
+                highlight_version=self.common.gui_main.stringvar_mark_track_from_version.get(),
             )
 
             self.generate_cticons()
@@ -479,37 +444,37 @@ class Game:
             self.patch_tracks()
 
         except Exception as e:
-            self.gui.log_error()
+            self.common.gui_main.log_error()
             raise e
 
         finally:
-            self.gui.progress(show=False)
+            self.common.gui_main.progress(show=False)
 
     def generate_cticons(self):
-        file = self.ctconfig.file_process["placement"].get("ct_icons")
+        file = self.common.ct_config.file_process["placement"].get("ct_icons")
         if not file: file = "ct_icons.tpl.png"
-        file = f"{self.ctconfig.pack_path}/file/{file}"
+        file = f"{self.common.ct_config.pack_path}/file/{file}"
 
         os.makedirs(get_dir(file), exist_ok=True)
-        self.ctconfig.get_cticon().save(file)
+        self.common.ct_config.get_cticon().save(file)
 
     def patch_image(self) -> None:
         """
         Convert .png image into the format wrote in convert_file
         """
 
-        image_amount = len(self.ctconfig.file_process["img_encode"])
+        image_amount = len(self.common.ct_config.file_process["img_encode"])
 
-        for i, (file, data) in enumerate(self.ctconfig.file_process["img_encode"].items()):
-            self.gui.progress(
-                statut=self.gui.translate("Converting images") + f"\n({i + 1}/{image_amount}) {file}",
+        for i, (file, data) in enumerate(self.common.ct_config.file_process["img_encode"].items()):
+            self.common.gui_main.progress(
+                statut=self.common.gui_main.translate("Converting images") + f"\n({i + 1}/{image_amount}) {file}",
                 add=1
             )
 
             img.encode(
-                file=f"{self.ctconfig.pack_path}/file/{file}",
+                file=f"{self.common.ct_config.pack_path}/file/{file}",
                 format=data["format"],
-                dest_file=f"{self.ctconfig.pack_path}/file/{data['dest']}" if "dest" in data else None
+                dest_file=f"{self.common.ct_config.pack_path}/file/{data['dest']}" if "dest" in data else None
             )
 
     def generate_image(self, generator: dict) -> Image.Image:
@@ -546,7 +511,7 @@ class Game:
                     tuple(layer["color"]) if "color" in layer else 0
                 )
             if layer["type"] == "image":
-                layer_image = Image.open(f'{self.ctconfig.pack_path}/file/{layer["path"]}')
+                layer_image = Image.open(f'{self.common.ct_config.pack_path}/file/{layer["path"]}')
                 layer_image = layer_image.resize(get_layer_size(layer)).convert("RGBA")
                 image.paste(
                     layer_image,
@@ -555,7 +520,7 @@ class Game:
                 )
             if layer["type"] == "text":
                 font = ImageFont.truetype(
-                    font=f'{self.ctconfig.pack_path}/file/{layer["font"]}' if "font" in layer else None,
+                    font=f'{self.common.ct_config.pack_path}/file/{layer["font"]}' if "font" in layer else None,
                     size=int(layer["text_size"] * generator["height"]) if "text_size" in layer else 10,
                 )
                 draw.text(
@@ -568,8 +533,8 @@ class Game:
         return image
 
     def generate_all_image(self) -> None:
-        for file, generator in self.ctconfig.file_process["img_generator"].items():
-            file = f"{self.ctconfig.pack_path}/file/{file}"
+        for file, generator in self.common.ct_config.file_process["img_generator"].items():
+            file = f"{self.common.ct_config.pack_path}/file/{file}"
             os.makedirs(get_dir(file), exist_ok=True)
             self.generate_image(generator).save(file)
 
@@ -577,7 +542,7 @@ class Game:
         """
         Download track's wu8 file and convert them to szs
         """
-        max_process = self.gui.intvar_process_track.get()
+        max_process = self.common.gui_main.intvar_process_track.get()
         thread_list = {}
         error_count, error_max = 0, 3
 
@@ -607,16 +572,16 @@ class Game:
 
             return bool(thread_list)
 
-        total_track = self.ctconfig.get_tracks_count()
-        self.gui.progress(max=total_track, indeter=False, show=True)
+        total_track = self.common.ct_config.get_tracks_count()
+        self.common.gui_main.progress(max=total_track, indeter=False, show=True)
 
-        for i, track in enumerate(self.ctconfig.get_tracks()):
+        for i, track in enumerate(self.common.ct_config.get_tracks()):
             while error_count <= error_max:
                 if len(thread_list) < max_process:
                     thread_list[track.sha1] = Thread(target=add_process, args=[track])
                     thread_list[track.sha1].setDaemon(True)
                     thread_list[track.sha1].start()
-                    self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
+                    self.common.gui_main.progress(statut=self.common.gui_main.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
                                                                 "\n".join(thread_list.keys())), add=1)
                     break
                 clean_process()

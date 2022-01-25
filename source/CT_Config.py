@@ -9,10 +9,10 @@ from source.Track import Track, get_trackdata_from_json
 
 class CT_Config:
     def __init__(self, version: str = None, name: str = None, nickname: str = None,
-                 game_variant: str = "01", gui=None, region: int = None, cheat_region: int = None,
+                 game_variant: str = "01", region: int = None, cheat_region: int = None,
                  tags_color: dict = None, prefix_list: list = None, suffix_list: list = None,
                  tag_retro: str = "Retro", default_track: Track = None, pack_path: str = "",
-                 file_process: dict = None, file_structure: dict = None):
+                 file_process: dict = None, file_structure: dict = None, default_sort: str = "name"):
 
         self.version = version
         self.name = name
@@ -23,7 +23,6 @@ class CT_Config:
 
         self.ordered_cups = []
         self.unordered_tracks = []
-        self.gui = gui
 
         self.tags_color = tags_color if tags_color else {}
         self.prefix_list = prefix_list if tags_color else []
@@ -32,9 +31,14 @@ class CT_Config:
         self.default_track = default_track
 
         self.pack_path = pack_path
+        self.sort_track_attr = default_sort
 
         self.file_process = file_process
         self.file_structure = file_structure
+
+        self.filter_track_selection = lambda track: True
+        self.filter_track_highlight = lambda track: False
+        self.filter_track_random_new = lambda track: getattr(track, "new", False)
 
     def add_ordered_cup(self, cup: Cup) -> None:
         """
@@ -53,9 +57,11 @@ class CT_Config:
     def unordered_tracks_to_cup(self):
         track_in_cup: int = 4
 
-        for cup_id, track_id in enumerate(range(0, len(self.unordered_tracks), track_in_cup), start=1):
+        track_selection = list(filter(self.filter_track_selection, self.unordered_tracks))
+
+        for cup_id, track_id in enumerate(range(0, len(track_selection), track_in_cup), start=1):
             cup = Cup(id=cup_id, name=f"CT{cup_id}")
-            for index, track in enumerate(self.unordered_tracks[track_id:track_id + track_in_cup]):
+            for index, track in enumerate(track_selection[track_id:track_id + track_in_cup]):
                 cup.tracks[index] = track
             yield cup
 
@@ -77,8 +83,13 @@ class CT_Config:
             ctfile.write(header); rctfile.write(header)
 
             # all cups
+            kwargs = {
+                "filter_highlight": self.filter_track_highlight,
+                "filter_random_new": self.filter_track_random_new,
+                "ct_config": self
+            }
+
             for cup in self.get_all_cups():
-                kwargs = {"highlight_version": highlight_version, "ct_config": self}
                 ctfile.write(cup.get_ctfile(race=False, **kwargs))
                 rctfile.write(cup.get_ctfile(race=True, **kwargs))
 
@@ -183,8 +194,9 @@ class CT_Config:
         self.version = ctconfig_json.get("version")
 
         if "name" in ctconfig_json: self.name = ctconfig_json["name"]
-        self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
         if "game_variant" in ctconfig_json: self.game_variant = ctconfig_json["game_variant"]
+        if "default_sort" in ctconfig_json: self.default_sort = ctconfig_json["default_sort"]
+        self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
 
         for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
             setattr(self, param, ctconfig_json.get(param))

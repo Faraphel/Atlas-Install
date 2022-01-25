@@ -8,9 +8,7 @@ import zipfile
 import glob
 import json
 
-from source.Game import Game, RomAlreadyPatched, InvalidGamePath, InvalidFormat
-from source.Option import Option
-
+from source.Error import *
 from source.definition import *
 
 
@@ -18,8 +16,8 @@ with open("./translation.json", encoding="utf-8") as f:
     translation_dict = json.load(f)
 
 
-class Gui:
-    def __init__(self) -> None:
+class Main:
+    def __init__(self, common) -> None:
         """
         Initialize program Gui
         """
@@ -27,9 +25,7 @@ class Gui:
         self.root.resizable(False, False)
         self.root.iconbitmap(bitmap="./icon.ico")
 
-        self.option = Option().load_from_file("./option.json")
-        self.game = Game(gui=self)
-
+        self.common = common
         self.menu_bar = None
 
         self.available_packs = self.get_available_packs()
@@ -42,10 +38,10 @@ class Gui:
 
         self.is_dev_version = False  # Is this installer version a dev ?
         self.stringvar_ctconfig = StringVar(value=self.available_packs[0])
-        self.stringvar_language = StringVar(value=self.option.language)
-        self.stringvar_game_format = StringVar(value=self.option.format)
-        self.boolvar_dont_check_for_update = BooleanVar(value=self.option.dont_check_for_update)
-        self.intvar_process_track = IntVar(value=self.option.process_track)
+        self.stringvar_language = StringVar(value=self.common.option.language)
+        self.stringvar_game_format = StringVar(value=self.common.option.format)
+        self.boolvar_dont_check_for_update = BooleanVar(value=self.common.option.dont_check_for_update)
+        self.intvar_process_track = IntVar(value=self.common.option.process_track)
 
         self.root.title(self.translate("MKWFaraphel Installer"))
 
@@ -104,9 +100,9 @@ class Gui:
                 game_path = entry_game_path.get()
                 if not os.path.exists(game_path): raise InvalidGamePath
 
-                self.game.set_path(game_path)
+                self.common.game.set_path(game_path)
                 self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
-                self.game.extract()
+                self.common.game.extract()
 
             except RomAlreadyPatched:
                 messagebox.showerror(self.translate("Error"), self.translate("This game is already modded"))
@@ -126,8 +122,8 @@ class Gui:
         @in_thread
         def do_everything():
             use_path()
-            self.game.patch_file()
-            self.game.install_mod()
+            self.common.game.patch_file()
+            self.common.game.install_mod()
 
         self.button_do_everything = Button(
             self.frame_game_path_action,
@@ -152,13 +148,13 @@ class Gui:
             label="Français",
             variable=self.stringvar_language,
             value="fr",
-            command=lambda: self.option.edit("language", "fr", need_restart=True)
+            command=lambda: self.common.option.edit("language", "fr", need_restart=True)
         )
         self.menu_language.add_radiobutton(
             label="English",
             variable=self.stringvar_language,
             value="en",
-            command=lambda: self.option.edit("language", "en", need_restart=True)
+            command=lambda: self.common.option.edit("language", "en", need_restart=True)
         )
 
         #  OUTPUT FORMAT MENU
@@ -168,25 +164,25 @@ class Gui:
             label=self.translate("FST (Directory)"),
             variable=self.stringvar_game_format,
             value="FST", command=lambda:
-            self.option.edit("format", "FST")
+            self.common.option.edit("format", "FST")
         )
         self.menu_format.add_radiobutton(
             label="ISO",
             variable=self.stringvar_game_format,
             value="ISO",
-            command=lambda: self.option.edit("format", "ISO")
+            command=lambda: self.common.option.edit("format", "ISO")
         )
         self.menu_format.add_radiobutton(
             label="CISO",
             variable=self.stringvar_game_format,
             value="CISO",
-            command=lambda: self.option.edit("format", "CISO")
+            command=lambda: self.common.option.edit("format", "CISO")
         )
         self.menu_format.add_radiobutton(
             label="WBFS",
             variable=self.stringvar_game_format,
             value="WBFS",
-            command=lambda: self.option.edit("format", "WBFS")
+            command=lambda: self.common.option.edit("format", "WBFS")
         )
 
         #  ADVANCED MENU
@@ -196,7 +192,7 @@ class Gui:
         self.menu_advanced.add_checkbutton(
             label=self.translate("Don't check for update"),
             variable=self.boolvar_dont_check_for_update,
-            command=lambda: self.option.edit(
+            command=lambda: self.common.option.edit(
                 "dont_check_for_update",
                 self.boolvar_dont_check_for_update
             )
@@ -215,29 +211,36 @@ class Gui:
         self.menu_conv_process.add_radiobutton(
             label=self.translate("1 ", "process"),
             variable=self.intvar_process_track, value=1,
-            command=lambda: self.option.edit("process_track", 1)
+            command=lambda: self.common.option.edit("process_track", 1)
         )
         self.menu_conv_process.add_radiobutton(
             label=self.translate("2 ", "process"),
             variable=self.intvar_process_track, value=2,
-            command=lambda: self.option.edit("process_track", 2)
+            command=lambda: self.common.option.edit("process_track", 2)
         )
         self.menu_conv_process.add_radiobutton(
             label=self.translate("4 ", "process"),
             variable=self.intvar_process_track, value=4,
-            command=lambda: self.option.edit("process_track", 4)
+            command=lambda: self.common.option.edit("process_track", 4)
         )
         self.menu_conv_process.add_radiobutton(
             label=self.translate("8 ", "process"),
             variable=self.intvar_process_track, value=8,
-            command=lambda: self.option.edit("process_track", 8)
+            command=lambda: self.common.option.edit("process_track", 8)
         )
 
         ## GAME PARAMETER
         self.menu_advanced.add_separator()
 
-        self.menu_advanced.add_checkbutton(label=self.translate("Use debug mode"),
-                                           variable=self.boolvar_use_debug_mode)
+        self.menu_advanced.add_command(
+            label=self.translate("Change track configuration"),
+            command=self.common.show_gui_track_configuration
+        )
+
+        self.menu_advanced.add_checkbutton(
+            label=self.translate("Use debug mode"),
+            variable=self.boolvar_use_debug_mode
+        )
 
         self.menu_mystuff = Menu(self.menu_advanced, tearoff=0)
         self.menu_advanced.add_cascade(label=self.translate("MyStuff"), menu=self.menu_mystuff)
@@ -270,7 +273,7 @@ class Gui:
         self.menu_help.add_command(label="Discord", command=lambda: webbrowser.open(DISCORD_URL))
 
     def reload_ctconfig(self) -> None:
-        self.game.ctconfig.load_ctconfig_file(
+        self.common.ct_config.load_ctconfig_file(
             ctconfig_file=self.get_ctconfig_path_pack(self.stringvar_ctconfig.get())
         )
 
@@ -326,7 +329,7 @@ class Gui:
         except requests.ConnectionError:
             messagebox.showwarning(self.translate("Warning"),
                                    self.translate("Can't connect to internet. Download will be disabled."))
-            self.option.disable_download = True
+            self.common.option.disable_download = True
 
         except:
             self.log_error()
@@ -339,10 +342,10 @@ class Gui:
         with open("./error.log", "a") as f:
             f.write(
                 f"---\n"
-                f"For game version : {self.game.ctconfig.version}\n"
+                f"For game version : {self.common.ct_config.version}\n"
                 f"./file/ directory : {os.listdir('./file/')}\n"
-                f"ctconfig directory : {os.listdir(self.game.ctconfig.pack_path)}\n"
-                f"GAME/files/ information : {self.game.path, self.game.region}\n"
+                f"ctconfig directory : {os.listdir(self.common.ct_config.pack_path)}\n"
+                f"GAME/files/ information : {self.common.game.path, self.common.game.region}\n"
                 f"{error}\n"
             )
         messagebox.showerror(
@@ -404,7 +407,7 @@ class Gui:
         :param gamelang: force a destination language to convert track
         :return: translated text
         """
-        lang = gamelang_to_lang.get(gamelang, self.stringvar_language.get())
+        lang = gamelang_to_lang.get(gamelang, self.common.option.language)
         if lang not in translation_dict: return "".join(texts)  # if no translation language is found
 
         _lang_trad = translation_dict[lang]
@@ -434,3 +437,6 @@ class Gui:
         self.root.quit()
         self.root.destroy()
         sys.exit()
+
+    def mainloop(self) -> None:
+        self.root.mainloop()
