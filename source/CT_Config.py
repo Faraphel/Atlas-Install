@@ -58,6 +58,7 @@ class CT_Config:
         track_in_cup: int = 4
 
         track_selection = list(filter(self.filter_track_selection, self.unordered_tracks))
+        track_selection.sort(key=lambda track: getattr(track, self.sort_track_attr, 0))
 
         for cup_id, track_id in enumerate(range(0, len(track_selection), track_in_cup), start=1):
             cup = Cup(id=cup_id, name=f"CT{cup_id}")
