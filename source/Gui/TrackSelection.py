@@ -71,7 +71,7 @@ class TrackSelection:
         Label(self.track_sort, text="Sort track by : ").grid(row=1, column=1)
         self.combobox_track_sort = ttk.Combobox(
             self.track_sort,
-            values=list(self.common.ct_config.get_all_track_possibilities().keys())
+            values=list(self.common.ct_config.get_all_track_possibilities())
         )
         self.combobox_track_sort.grid(row=1, column=2, sticky="NEWS")
         self.combobox_track_sort.insert(END, self.common.ct_config.sort_track_attr)
@@ -187,7 +187,7 @@ class TrackSelection:
         frame = Frame(root)
         frame.grid(row=len(frames_filter) + 10, column=1, sticky="NEWS")
         Label(frame, text="If track's").grid(row=1, column=1)
-        track_property = ttk.Combobox(frame, values=list(self.common.ct_config.get_all_track_possibilities().keys()))
+        track_property = ttk.Combobox(frame, values=list(self.common.ct_config.get_all_track_possibilities()))
         track_property.current(0)
         track_property.grid(row=1, column=2)
 
@@ -265,6 +265,7 @@ class TrackSelection:
     def apply_configuration(self):
         self.common.gui_main.is_track_configuration_edited = True
         self.common.ct_config.sort_track_attr = self.combobox_track_sort.get()
+
         self.common.ct_config.filter_track_selection = self.get_filter(
             self.variable_enable_track_filter,
             self.frames_track_filter
@@ -359,7 +360,7 @@ class TrackSelection:
         filename = filedialog.asksaveasfilename(
             title="Save track configuration",
             defaultextension=".mkwf.tc",
-            filetypes=[("track configuration (*.mkwf.tc)", "*.mkwf.tc")]
+            filetypes=[("track configuration", "*.mkwf.tc")]
         )
         if filename: self.save_to_file(filename)
 
@@ -396,6 +397,6 @@ class TrackSelection:
         filename = filedialog.askopenfilename(
             title="Load track configuration",
             defaultextension=".mkwf.tc",
-            filetypes=[("track configuration (*.mkwf.tc)", "*.mkwf.tc")]
+            filetypes=[("track configuration", "*.mkwf.tc")]
         )
         if filename: self.load_from_file(filename)

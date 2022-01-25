@@ -12,7 +12,7 @@ class CT_Config:
                  game_variant: str = "01", region: int = None, cheat_region: int = None,
                  tags_color: dict = None, prefix_list: list = None, suffix_list: list = None,
                  tag_retro: str = "Retro", default_track: Track = None, pack_path: str = "",
-                 file_process: dict = None, file_structure: dict = None, default_sort: str = "name"):
+                 file_process: dict = None, file_structure: dict = None, default_sort: str = ""):
 
         self.version = version
         self.name = name
@@ -195,7 +195,7 @@ class CT_Config:
 
         if "name" in ctconfig_json: self.name = ctconfig_json["name"]
         if "game_variant" in ctconfig_json: self.game_variant = ctconfig_json["game_variant"]
-        if "default_sort" in ctconfig_json: self.default_sort = ctconfig_json["default_sort"]
+        if "default_sort" in ctconfig_json: self.sort_track_attr = ctconfig_json["default_sort"]
         self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
 
         for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
@@ -214,17 +214,11 @@ class CT_Config:
     def get_tracks_count(self) -> int:
         return sum(1 for _ in self.get_tracks())
 
-    def get_all_track_possibilities(self) -> dict:
-        possibilities = {}
+    def get_all_track_possibilities(self) -> list:
+        possibilities = set()
         for track in self.get_tracks():
-            for key, value in track.__dict__.items():
-                if not key in possibilities: possibilities[key] = []
+            for key in track.__dict__.keys():
+                if key.startswith("_"): continue  # if attr start with a _, the attribute is supposed to be hidden
+                possibilities.add(key)
 
-                if type(value) == list:
-                    for value2 in value: possibilities[key].append(value2)
-                else: possibilities[key].append(value)
-
-        for k, v in possibilities.items():
-            possibilities[k] = list(sorted(set(filter(None, v))))  # remove duplicate
-
-        return possibilities
+        return sorted(possibilities)
