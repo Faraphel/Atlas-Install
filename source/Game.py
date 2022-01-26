@@ -1,4 +1,3 @@
-from tkinter import messagebox
 from PIL import Image, ImageDraw, ImageFont
 import shutil
 import glob
@@ -264,7 +263,7 @@ class Game:
             messagebox.showinfo(self.common.translate("End"), self.common.translate("The mod have been installed !"))
 
         except Exception as e:
-            self.common.gui_main.log_error()
+            self.common.log_error()
             raise e
 
         finally:
@@ -442,7 +441,7 @@ class Game:
             self.patch_tracks()
 
         except Exception as e:
-            self.common.gui_main.log_error()
+            self.common.log_error()
             raise e
 
         finally:

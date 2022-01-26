@@ -1,3 +1,8 @@
+from tkinter import messagebox
+import traceback
+import os
+
+
 class RomAlreadyPatched(Exception):
     def __init__(self):
         super().__init__("ROM Already patched !")
@@ -31,3 +36,28 @@ class CantConvertTrack(Exception):
 class MissingTrackWU8(Exception):
     def __init__(self):
         super().__init__("The original wu8 track file is missing !")
+
+
+class ErrorLogger:
+    def __init__(self, common):
+        self.common = common
+
+    def log_error(self) -> None:
+        """
+        When an error occur, will show it in a messagebox and write it in error.log
+        """
+        error = traceback.format_exc()
+        with open("./error.log", "a") as f:
+            f.write(
+                f"---\n"
+                f"For game version : {self.common.ct_config.version}\n"
+                f"./file/ directory : {os.listdir('./file/')}\n"
+                f"ctconfig directory : {os.listdir(self.common.ct_config.pack_path)}\n"
+                f"GAME/files/ information : {self.common.game.path, self.common.game.region}\n"
+                f"{error}\n"
+            )
+
+        messagebox.showerror(
+            self.common.translate("Error"),
+            self.common.translate("An error occured", " :", "\n", error, "\n\n")
+        )

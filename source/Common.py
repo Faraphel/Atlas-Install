@@ -4,6 +4,7 @@ from source.Game import Game
 from source.Gui.Main import Main
 from source.Gui.TrackConfiguration import TrackConfiguration
 from source.Translation import Translator
+from source.Error import ErrorLogger
 
 
 class Common:
@@ -16,6 +17,8 @@ class Common:
         self.json_frame_filter = None
         self.translator = Translator(common=self)
         self.translate = self.translator.translate  # shortcut for the method
+        self.errorlogger = ErrorLogger(common=self)
+        self.log_error = self.errorlogger.log_error  # shortcut for the method
 
         self.option = Option().load_from_file("./option.json")
         self.ct_config = CT_Config()

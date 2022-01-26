@@ -1,8 +1,7 @@
 from distutils.version import StrictVersion
-from tkinter import filedialog, ttk, messagebox
+from tkinter import filedialog, ttk
 from tkinter import *
 import webbrowser
-import traceback
 import requests
 import zipfile
 import glob
@@ -105,7 +104,7 @@ class Main:
                 messagebox.showerror(self.common.translate("Error"), self.common.translate("This game's format is invalid"))
                 raise InvalidFormat
             except Exception as e:
-                self.log_error()
+                self.common.log_error()
                 raise e
             finally:
                 self.progress(show=False)
@@ -309,26 +308,7 @@ class Main:
             self.common.option.disable_download = True
 
         except:
-            self.log_error()
-
-    def log_error(self) -> None:
-        """
-        When an error occur, will show it in a messagebox and write it in error.log
-        """
-        error = traceback.format_exc()
-        with open("./error.log", "a") as f:
-            f.write(
-                f"---\n"
-                f"For game version : {self.common.ct_config.version}\n"
-                f"./file/ directory : {os.listdir('./file/')}\n"
-                f"ctconfig directory : {os.listdir(self.common.ct_config.pack_path)}\n"
-                f"GAME/files/ information : {self.common.game.path, self.common.game.region}\n"
-                f"{error}\n"
-            )
-        messagebox.showerror(
-            self.common.translate("Error"),
-            self.common.translate("An error occured", " :", "\n", error, "\n\n")
-        )
+            self.common.log_error()
 
     def progress(self, show: bool = None, indeter: bool = None, step: int = None,
                  statut: str = None, max: int = None, add: int = None) -> None:
