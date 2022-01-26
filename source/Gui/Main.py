@@ -56,6 +56,7 @@ class Main:
         self.combobox_ctconfig_path = ttk.Combobox(
             self.frame_ctconfig,
             values=self.available_packs,
+            state="readonly",
             textvariable=self.stringvar_ctconfig,
             width=30
         )

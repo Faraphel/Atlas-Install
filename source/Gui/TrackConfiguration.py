@@ -75,6 +75,7 @@ class TrackConfiguration:
         )
         self.combobox_track_sort.grid(row=1, column=2, sticky="NEWS")
         self.combobox_track_sort.insert(END, self.common.ct_config.sort_track_attr)
+        self.combobox_track_sort.config(state="readonly")
 
         self.track_filter = LabelFrame(self.root, text=self.common.translate("Filter Track"))
         self.track_filter.grid(row=2, column=1, sticky="NEWS")
@@ -187,7 +188,7 @@ class TrackConfiguration:
         frame = Frame(root)
         frame.grid(row=len(frames_filter) + 10, column=1, sticky="NEWS")
         Label(frame, text=self.common.translate("If track's")).grid(row=1, column=1)
-        track_property = ttk.Combobox(frame, values=list(self.common.ct_config.get_all_track_possibilities()))
+        track_property = ttk.Combobox(frame, state="readonly", values=list(self.common.ct_config.get_all_track_possibilities()))
         track_property.current(0)
         track_property.grid(row=1, column=2)
 
@@ -227,7 +228,7 @@ class TrackConfiguration:
             for frame in condition_frames.values(): frame.grid_forget()
             condition_frames[condition].grid(row=1, column=10)
 
-        combobox_condition_type = ttk.Combobox(frame, values=list(condition_frames.keys()), width=10)
+        combobox_condition_type = ttk.Combobox(frame, state="readonly", values=list(condition_frames.keys()), width=10)
         combobox_condition_type.current(0)
         combobox_condition_type.bind("<<ComboboxSelected>>", change_condition_type)
         change_condition_type()
@@ -243,7 +244,7 @@ class TrackConfiguration:
                 if frames_filter[-1]["frame"] == frame:  # if this is the last filter available
                     self.add_frame_track_filter(root=root, frames_filter=frames_filter)
 
-        next_condition_link = ttk.Combobox(frame, values=list(self.condition_links.keys()), width=10)
+        next_condition_link = ttk.Combobox(frame, state="readonly", values=list(self.condition_links.keys()), width=10)
         next_condition_link.bind("<<ComboboxSelected>>", change_condition_link)
         next_condition_link.set(self.condition_link_end)
         next_condition_link.grid(row=1, column=100)
