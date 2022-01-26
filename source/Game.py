@@ -46,7 +46,7 @@ class Game:
             shutil.rmtree(self.path)
             self.path = path_game_format
 
-            self.common.gui_main.progress(statut=self.common.gui_main.translate("Changing game's ID"), add=1)
+            self.common.gui_main.progress(statut=self.common.translate("Changing game's ID"), add=1)
             wit.edit(
                 file=self.path,
                 region_ID=self.region_ID,
@@ -129,7 +129,7 @@ class Game:
             fs = json.load(f)
 
         extracted_file = []
-        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.gui_main.translate("Modifying subfile..."), add=1)
+        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.translate("Modifying subfile..."), add=1)
 
         def replace_file(path, file, subpath="/") -> None:
             """
@@ -138,7 +138,7 @@ class Game:
             :param file: file to replace
             :param subpath: directory between .szs file and file inside to replace
             """
-            self.common.gui_main.progress(statut=self.common.gui_main.translate("Editing", "\n", get_nodir(path)), add=1)
+            self.common.gui_main.progress(statut=self.common.translate("Editing", "\n", get_nodir(path)), add=1)
             extension = get_extension(path)
 
             source_file = f"{self.common.ct_config.pack_path}/file/{file}"
@@ -170,7 +170,7 @@ class Game:
                             for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
 
         for file in extracted_file:
-            self.common.gui_main.progress(statut=self.common.gui_main.translate("Recompilating", "\n", get_nodir(file)), add=1)
+            self.common.gui_main.progress(statut=self.common.translate("Recompilating", "\n", get_nodir(file)), add=1)
             szs.create(file=file)
             shutil.rmtree(file + ".d", ignore_errors=True)
 
@@ -178,7 +178,7 @@ class Game:
         """
         copy MyStuff directory into the game *before* patching the game
         """
-        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.gui_main.translate("Copying MyStuff..."), add=1)
+        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.translate("Copying MyStuff..."), add=1)
 
         mystuff_folder = self.common.gui_main.stringvar_mystuff_folder.get()
         if mystuff_folder and mystuff_folder != "None":
@@ -206,7 +206,7 @@ class Game:
         """
         patch the main.dol file to allow the addition of LECODE.bin file
         """
-        self.common.gui_main.progress(statut=self.common.gui_main.translate("Patch main.dol"), add=1)
+        self.common.gui_main.progress(statut=self.common.translate("Patch main.dol"), add=1)
 
         region_id = self.common.ct_config.region if self.common.gui_main.is_using_official_config() else self.common.ct_config.cheat_region
         wstrt.patch(path=self.path, region_id=region_id)
@@ -215,7 +215,7 @@ class Game:
         """
         configure and add the LECODE.bin file to the mod
         """
-        self.common.gui_main.progress(statut=self.common.gui_main.translate("Patch lecode.bin"), add=1)
+        self.common.gui_main.progress(statut=self.common.translate("Patch lecode.bin"), add=1)
 
         lpar_path = self.common.ct_config.file_process["placement"].get("lpar_dir")
         if not lpar_path: f""
@@ -243,7 +243,7 @@ class Game:
         convert the rom to the selected game format
         """
         output_format = self.common.gui_main.stringvar_game_format.get()
-        self.common.gui_main.progress(statut=self.common.gui_main.translate("Converting to", " ", output_format), add=1)
+        self.common.gui_main.progress(statut=self.common.translate("Converting to", " ", output_format), add=1)
         self.convert_to(output_format)
 
     def install_mod(self) -> None:
@@ -254,14 +254,14 @@ class Game:
             max_step = 5 + self.count_patch_subfile_operation()
             # PATCH main.dol and PATCH lecode.bin, converting, changing ID, copying MyStuff Folder
 
-            self.common.gui_main.progress(statut=self.common.gui_main.translate("Installing mod..."), max=max_step, step=0)
+            self.common.gui_main.progress(statut=self.common.translate("Installing mod..."), max=max_step, step=0)
             self.install_copy_mystuff()
             self.install_patch_subfile()
             self.install_patch_maindol()
             self.install_patch_lecode()
             self.install_convert_rom()
 
-            messagebox.showinfo(self.common.gui_main.translate("End"), self.common.gui_main.translate("The mod have been installed !"))
+            messagebox.showinfo(self.common.translate("End"), self.common.translate("The mod have been installed !"))
 
         except Exception as e:
             self.common.gui_main.log_error()
@@ -337,7 +337,7 @@ class Game:
         }
 
         bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
-        self.common.gui_main.progress(statut=self.common.gui_main.translate("Patching text", " ", bmglang), add=1)
+        self.common.gui_main.progress(statut=self.common.translate("Patching text", " ", bmglang), add=1)
 
         szs.extract(file=gamefile)
 
@@ -429,9 +429,9 @@ class Game:
                        3 + \
                        len("EGFIS")
 
-            self.common.gui_main.progress(show=True, indeter=False, statut=self.common.gui_main.translate("Converting files"),
+            self.common.gui_main.progress(show=True, indeter=False, statut=self.common.translate("Converting files"),
                               max=max_step, step=0)
-            self.common.gui_main.progress(statut=self.common.gui_main.translate("Configurating LE-CODE"), add=1)
+            self.common.gui_main.progress(statut=self.common.translate("Configurating LE-CODE"), add=1)
             self.common.ct_config.create_ctfile()
 
             self.generate_cticons()
@@ -465,7 +465,7 @@ class Game:
 
         for i, (file, data) in enumerate(self.common.ct_config.file_process["img_encode"].items()):
             self.common.gui_main.progress(
-                statut=self.common.gui_main.translate("Converting images") + f"\n({i + 1}/{image_amount}) {file}",
+                statut=self.common.translate("Converting images") + f"\n({i + 1}/{image_amount}) {file}",
                 add=1
             )
 
@@ -575,7 +575,7 @@ class Game:
                     thread_list[track.sha1] = Thread(target=add_process, args=[track])
                     thread_list[track.sha1].setDaemon(True)
                     thread_list[track.sha1].start()
-                    self.common.gui_main.progress(statut=self.common.gui_main.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
+                    self.common.gui_main.progress(statut=self.common.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
                                                                 "\n".join(thread_list.keys())), add=1)
                     break
                 clean_process()

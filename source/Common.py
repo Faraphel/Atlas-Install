@@ -2,7 +2,8 @@ from source.CT_Config import CT_Config
 from source.Option import Option
 from source.Game import Game
 from source.Gui.Main import Main
-from source.Gui.TrackSelection import TrackSelection
+from source.Gui.TrackConfiguration import TrackConfiguration
+from source.Translation import Translator
 
 
 class Common:
@@ -13,6 +14,8 @@ class Common:
         """
 
         self.json_frame_filter = None
+        self.translator = Translator(common=self)
+        self.translate = self.translator.translate  # shortcut for the method
 
         self.option = Option().load_from_file("./option.json")
         self.ct_config = CT_Config()
@@ -20,5 +23,5 @@ class Common:
 
         self.gui_main = Main(common=self)
 
-    def show_gui_track_configuration(self): TrackSelection(common=self)
+    def show_gui_track_configuration(self): TrackConfiguration(common=self)
     def mainloop(self): self.gui_main.mainloop()

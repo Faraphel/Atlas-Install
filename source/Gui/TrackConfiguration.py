@@ -25,28 +25,28 @@ class Orderbox(Listbox):
         self.selection_set(index - delta_start + delta_end)
 
 
-class TrackSelection:
+class TrackConfiguration:
     def __init__(self, common):
         self.common = common
 
         self.root = Toplevel(self.common.gui_main.root)
-        self.root.title("Track selection")
+        self.root.title(self.common.translate("Track configuration"))
         self.root.iconbitmap("./icon.ico")
         self.root.resizable(False, False)
         self.root.grab_set()
 
-        self.text_is_equal_to = "is equal to"
-        self.text_is_in = "is in"
-        self.text_is_between = "is between"
-        self.text_contains = "contains"
+        self.text_is_equal_to = self.common.translate("is equal to")
+        self.text_is_in = self.common.translate("is in")
+        self.text_is_between = self.common.translate("is between")
+        self.text_contains = self.common.translate("contains")
 
-        self.text_and = "and"
-        self.text_nand = "nand"
-        self.text_or = "or"
-        self.text_nor = "nor"
-        self.text_xor = "xor"
-        self.text_xnor = "xnor"
-        self.condition_link_end = "end"
+        self.text_and = self.common.translate("and")
+        self.text_nand = self.common.translate("nand")
+        self.text_or = self.common.translate("or")
+        self.text_nor = self.common.translate("nor")
+        self.text_xor = self.common.translate("xor")
+        self.text_xnor = self.common.translate("xnor")
+        self.condition_link_end = self.common.translate("end")
 
         self.condition_links = {
             self.text_and: lambda a, b: lambda track: a(track) and b(track),
@@ -65,10 +65,10 @@ class TrackSelection:
 
             return change_enable_track_filter
 
-        self.track_sort = LabelFrame(self.root, text="Sort Track")
+        self.track_sort = LabelFrame(self.root, text=self.common.translate("Sort Track"))
         self.track_sort.grid(row=1, column=1, sticky="NEWS")
 
-        Label(self.track_sort, text="Sort track by : ").grid(row=1, column=1)
+        Label(self.track_sort, text=self.common.translate("Sort track by"," : ")).grid(row=1, column=1)
         self.combobox_track_sort = ttk.Combobox(
             self.track_sort,
             values=list(self.common.ct_config.get_all_track_possibilities())
@@ -76,14 +76,14 @@ class TrackSelection:
         self.combobox_track_sort.grid(row=1, column=2, sticky="NEWS")
         self.combobox_track_sort.insert(END, self.common.ct_config.sort_track_attr)
 
-        self.track_filter = LabelFrame(self.root, text="Filter Track")
+        self.track_filter = LabelFrame(self.root, text=self.common.translate("Filter Track"))
         self.track_filter.grid(row=2, column=1, sticky="NEWS")
 
         self.variable_enable_track_filter = BooleanVar(value=False)
         self.frames_track_filter = []
         self.checkbutton_track_filter = ttk.Checkbutton(
             self.track_filter,
-            text="Enable track filter",
+            text=self.common.translate("Enable track filter"),
             variable=self.variable_enable_track_filter,
             command=get_change_enable_track_filter_func(
                 self.track_filter,
@@ -94,7 +94,7 @@ class TrackSelection:
         self.checkbutton_track_filter.grid(row=1, column=1)
         Label(
             self.track_filter,
-            text="Warning : only unordered tracks are affected by this option.",
+            text=self.common.translate("Warning : only unordered tracks are affected by this option."),
             fg="gray"
         ).grid(row=2, column=1)
 
@@ -105,7 +105,7 @@ class TrackSelection:
         self.frames_track_highlight = []
         self.checkbutton_track_highlight = ttk.Checkbutton(
             self.track_highlight,
-            text="Enable track highlight",
+            text=self.common.translate("Enable track highlight"),
             variable=self.variable_enable_track_highlight,
             command=get_change_enable_track_filter_func(
                 self.track_highlight,
@@ -115,14 +115,14 @@ class TrackSelection:
         )
         self.checkbutton_track_highlight.grid(row=1, column=1)
 
-        self.track_random_new = LabelFrame(self.root, text="Overwrite random cup new")
+        self.track_random_new = LabelFrame(self.root, text=self.common.translate("Overwrite random cup new"))
         self.track_random_new.grid(row=4, column=1, sticky="NEWS")
 
         self.variable_enable_track_random_new = BooleanVar(value=False)
         self.frames_track_random_new = []
         self.checkbutton_track_random_new = ttk.Checkbutton(
             self.track_random_new,
-            text="Enable overwriting random \"new\" track",
+            text=self.common.translate("Enable overwriting random \"new\" track"),
             variable=self.variable_enable_track_random_new,
             command=get_change_enable_track_filter_func(
                 self.track_random_new,
@@ -157,21 +157,21 @@ class TrackSelection:
 
         Button(
             self.frame_action_button,
-            text="Apply change",
+            text=self.common.translate("Apply change"),
             relief=RIDGE,
             command=self.apply_configuration
         ).grid(row=1, column=1, sticky="W")
 
         Button(
             self.frame_action_button,
-            text="Save to file",
+            text=self.common.translate("Save to file"),
             relief=RIDGE,
             command=self.promp_save_to_file
         ).grid(row=1, column=2, sticky="E")
 
         Button(
             self.frame_action_button,
-            text="Load from file",
+            text=self.common.translate("Load from file"),
             relief=RIDGE,
             command=self.promp_load_from_file
         ).grid(row=1, column=3, sticky="E")
@@ -186,7 +186,7 @@ class TrackSelection:
 
         frame = Frame(root)
         frame.grid(row=len(frames_filter) + 10, column=1, sticky="NEWS")
-        Label(frame, text="If track's").grid(row=1, column=1)
+        Label(frame, text=self.common.translate("If track's")).grid(row=1, column=1)
         track_property = ttk.Combobox(frame, values=list(self.common.ct_config.get_all_track_possibilities()))
         track_property.current(0)
         track_property.grid(row=1, column=2)
@@ -194,26 +194,26 @@ class TrackSelection:
         frame_equal = Frame(frame)
         entry_equal = Entry(frame_equal, width=20)
         entry_equal.grid(row=1, column=1)
-        entry_equal.insert(END, "value")
+        entry_equal.insert(END, self.common.translate("value"))
 
         frame_in = Frame(frame)
         entry_in = Entry(frame_in, width=30)
         entry_in.grid(row=1, column=1)
-        entry_in.insert(END, "value1, value2, ...")
+        entry_in.insert(END, self.common.translate("value1, value2, ..."))
 
         frame_between = Frame(frame)
         entry_start = Entry(frame_between, width=10)
         entry_start.grid(row=1, column=1)
-        entry_start.insert(END, "value1")
-        Label(frame_between, text="and").grid(row=1, column=2)
+        entry_start.insert(END, self.common.translate("value1"))
+        Label(frame_between, text=self.common.translate("and")).grid(row=1, column=2)
         entry_end = Entry(frame_between, width=10)
-        entry_end.insert(END, "value2")
+        entry_end.insert(END, self.common.translate("value2"))
         entry_end.grid(row=1, column=3)
 
         frame_contains = Frame(frame)
         entry_contains = Entry(frame_contains, width=20)
         entry_contains.grid(row=1, column=1)
-        entry_contains.insert(END, "value")
+        entry_contains.insert(END, self.common.translate("value"))
 
         condition_frames = {
             self.text_is_equal_to: frame_equal,
@@ -358,9 +358,9 @@ class TrackSelection:
 
     def promp_save_to_file(self):
         filename = filedialog.asksaveasfilename(
-            title="Save track configuration",
+            title=self.common.translate("Save track configuration"),
             defaultextension=".mkwf.tc",
-            filetypes=[("track configuration", "*.mkwf.tc")]
+            filetypes=[(self.common.translate("track configuration"), "*.mkwf.tc")]
         )
         if filename: self.save_to_file(filename)
 
@@ -395,8 +395,8 @@ class TrackSelection:
 
     def promp_load_from_file(self):
         filename = filedialog.askopenfilename(
-            title="Load track configuration",
+            title=self.common.translate("Load track configuration"),
             defaultextension=".mkwf.tc",
-            filetypes=[("track configuration", "*.mkwf.tc")]
+            filetypes=[(self.common.translate("track configuration"), "*.mkwf.tc")]
         )
         if filename: self.load_from_file(filename)

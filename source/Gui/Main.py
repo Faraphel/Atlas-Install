@@ -12,10 +12,6 @@ from source.Error import *
 from source.definition import *
 
 
-with open("./translation.json", encoding="utf-8") as f:
-    translation_dict = json.load(f)
-
-
 class Main:
     def __init__(self, common) -> None:
         """
@@ -31,8 +27,8 @@ class Main:
         self.available_packs = self.get_available_packs()
         if not self.available_packs:
             messagebox.showerror(
-                self.translate("Error"),
-                self.translate("There is no pack in the ./Pack/ directory.")
+                self.common.translate("Error"),
+                self.common.translate("There is no pack in the ./Pack/ directory.")
             )
             self.quit()
 
@@ -44,7 +40,7 @@ class Main:
         self.boolvar_dont_check_for_update = BooleanVar(value=self.common.option.dont_check_for_update)
         self.intvar_process_track = IntVar(value=self.common.option.process_track)
 
-        self.root.title(self.translate("MKWFaraphel Installer"))
+        self.root.title(self.common.translate("MKWFaraphel Installer"))
 
         self.boolvar_use_debug_mode = BooleanVar(value=False)
         self.boolvar_force_unofficial_mode = BooleanVar(value=False)
@@ -55,7 +51,7 @@ class Main:
 
         # GUI
         # Mod selector
-        self.frame_ctconfig = LabelFrame(self.root, text=self.translate("Mod"))
+        self.frame_ctconfig = LabelFrame(self.root, text=self.common.translate("Mod"))
         self.frame_ctconfig.grid(row=1, column=1, sticky="NWS")
 
         self.combobox_ctconfig_path = ttk.Combobox(
@@ -69,7 +65,7 @@ class Main:
         self.reload_ctconfig()
 
         # Jeu
-        self.frame_game_path = LabelFrame(self.root, text=self.translate("Original game"))
+        self.frame_game_path = LabelFrame(self.root, text=self.common.translate("Original game"))
         self.frame_game_path.grid(row=2, column=1)
 
         entry_game_path = Entry(self.frame_game_path, width=50)
@@ -77,7 +73,7 @@ class Main:
 
         def select_path():
             path = filedialog.askopenfilename(
-                filetypes=((self.translate("Wii game"), r"*.iso *.wbfs main.dol *.wia *.ciso"),)
+                filetypes=((self.common.translate("Wii game"), r"*.iso *.wbfs main.dol *.wia *.ciso"),)
             )
             if os.path.exists(path):
                 entry_game_path.delete(0, END)
@@ -96,17 +92,17 @@ class Main:
                 if not os.path.exists(game_path): raise InvalidGamePath
 
                 self.common.game.set_path(game_path)
-                self.progress(show=True, indeter=True, statut=self.translate("Extracting the game..."))
+                self.progress(show=True, indeter=True, statut=self.common.translate("Extracting the game..."))
                 self.common.game.extract()
 
             except RomAlreadyPatched:
-                messagebox.showerror(self.translate("Error"), self.translate("This game is already modded"))
+                messagebox.showerror(self.common.translate("Error"), self.common.translate("This game is already modded"))
                 raise RomAlreadyPatched
             except InvalidGamePath:
-                messagebox.showerror(self.translate("Error"), self.translate("The file path in invalid"))
+                messagebox.showerror(self.common.translate("Error"), self.common.translate("The file path in invalid"))
                 raise InvalidGamePath
             except InvalidFormat:
-                messagebox.showerror(self.translate("Error"), self.translate("This game's format is invalid"))
+                messagebox.showerror(self.common.translate("Error"), self.common.translate("This game's format is invalid"))
                 raise InvalidFormat
             except Exception as e:
                 self.log_error()
@@ -122,7 +118,7 @@ class Main:
 
         self.button_do_everything = Button(
             self.frame_game_path_action,
-            text=self.translate("Install mod"),
+            text=self.common.translate("Install mod"),
             relief=RIDGE,
             command=do_everything
         )
@@ -138,7 +134,7 @@ class Main:
 
         #  LANGUAGE MENU
         self.menu_language = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Language"), menu=self.menu_language)
+        self.menu_bar.add_cascade(label=self.common.translate("Language"), menu=self.menu_language)
         self.menu_language.add_radiobutton(
             label="Français",
             variable=self.stringvar_language,
@@ -154,9 +150,9 @@ class Main:
 
         #  OUTPUT FORMAT MENU
         self.menu_format = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Format"), menu=self.menu_format)
+        self.menu_bar.add_cascade(label=self.common.translate("Format"), menu=self.menu_format)
         self.menu_format.add_radiobutton(
-            label=self.translate("FST (Directory)"),
+            label=self.common.translate("FST (Directory)"),
             variable=self.stringvar_game_format,
             value="FST", command=lambda:
             self.common.option.edit("format", "FST")
@@ -183,9 +179,9 @@ class Main:
         #  ADVANCED MENU
         ## INSTALLER PARAMETER
         self.menu_advanced = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Advanced"), menu=self.menu_advanced)
+        self.menu_bar.add_cascade(label=self.common.translate("Advanced"), menu=self.menu_advanced)
         self.menu_advanced.add_checkbutton(
-            label=self.translate("Don't check for update"),
+            label=self.common.translate("Don't check for update"),
             variable=self.boolvar_dont_check_for_update,
             command=lambda: self.common.option.edit(
                 "dont_check_for_update",
@@ -193,19 +189,19 @@ class Main:
             )
         )
         self.menu_advanced.add_checkbutton(
-            label=self.translate("Force \"unofficial\" mode"),
+            label=self.common.translate("Force \"unofficial\" mode"),
             variable=self.boolvar_force_unofficial_mode
         )
 
         self.menu_conv_process = Menu(self.menu_advanced, tearoff=0)
         self.menu_advanced.add_cascade(
-            label=self.translate("Number of track conversion process"),
+            label=self.common.translate("Number of track conversion process"),
             menu=self.menu_conv_process
         )
 
         for process_number in range(1, 8+1):
             self.menu_conv_process.add_radiobutton(
-                label=self.translate(f"{process_number} ", "process"),
+                label=self.common.translate(f"{process_number} ", "process"),
                 variable=self.intvar_process_track, value=process_number,
                 command=lambda p=process_number: self.common.option.edit("process_track", p)
             )
@@ -214,17 +210,17 @@ class Main:
         self.menu_advanced.add_separator()
 
         self.menu_advanced.add_command(
-            label=self.translate("Change track configuration"),
+            label=self.common.translate("Change track configuration"),
             command=self.common.show_gui_track_configuration
         )
 
         self.menu_advanced.add_checkbutton(
-            label=self.translate("Use debug mode"),
+            label=self.common.translate("Use debug mode"),
             variable=self.boolvar_use_debug_mode
         )
 
         self.menu_mystuff = Menu(self.menu_advanced, tearoff=0)
-        self.menu_advanced.add_cascade(label=self.translate("MyStuff"), menu=self.menu_mystuff)
+        self.menu_advanced.add_cascade(label=self.common.translate("MyStuff"), menu=self.menu_mystuff)
 
         def add_menu_mystuff_command(stringvar: StringVar, label: str):
             self.menu_mystuff.add_command()
@@ -236,7 +232,7 @@ class Main:
                     mystuff_dir = filedialog.askdirectory()
                     if mystuff_dir: stringvar.set(mystuff_dir)
 
-                self.menu_mystuff.entryconfig(index, label=self.translate(
+                self.menu_mystuff.entryconfig(index, label=self.common.translate(
                     "Apply", " ", label, f" ({stringvar.get()!r} ", "selected", ")")
                                               )
 
@@ -249,7 +245,7 @@ class Main:
 
         #  HELP MENU
         self.menu_help = Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label=self.translate("Help"), menu=self.menu_help)
+        self.menu_bar.add_cascade(label=self.common.translate("Help"), menu=self.menu_help)
         self.menu_help.add_command(label="Github Wiki", command=lambda: webbrowser.open(GITHUB_HELP_PAGE_URL))
         self.menu_help.add_command(label="Discord", command=lambda: webbrowser.open(DISCORD_URL))
 
@@ -283,33 +279,33 @@ class Main:
 
             if github_version > local_version:  # if github version is newer than local version
                 if messagebox.askyesno(
-                        self.translate("Update available !"),
-                        self.translate("An update is available, do you want to install it ?",
+                        self.common.translate("Update available !"),
+                        self.common.translate("An update is available, do you want to install it ?",
                                        f"\n\nVersion : {local_version} -> {github_version}\n"
                                        f"Changelog :\n{github_version_data['changelog']}")):
 
                     if not (os.path.exists("./Updater/Updater.exe")):
                         dl = requests.get(github_version_data["updater_bin"], allow_redirects=True)
                         with open("./download.zip", "wb") as file:
-                            print(self.translate("Downloading the Updater..."))
+                            print(self.common.translate("Downloading the Updater..."))
                             file.write(dl.content)
-                            print(self.translate("end of the download, extracting..."))
+                            print(self.common.translate("end of the download, extracting..."))
 
                         with zipfile.ZipFile("./download.zip") as file:
                             file.extractall("./Updater/")
-                            print(self.translate("finished extracting"))
+                            print(self.common.translate("finished extracting"))
 
                         os.remove("./download.zip")
 
-                    print(self.translate("starting application..."))
+                    print(self.common.translate("starting application..."))
                     os.startfile(os.path.realpath("./Updater/Updater.exe"))
 
             elif local_version > github_version:
                 self.is_dev_version = True
 
         except requests.ConnectionError:
-            messagebox.showwarning(self.translate("Warning"),
-                                   self.translate("Can't connect to internet. Download will be disabled."))
+            messagebox.showwarning(self.common.translate("Warning"),
+                                   self.common.translate("Can't connect to internet. Download will be disabled."))
             self.common.option.disable_download = True
 
         except:
@@ -330,8 +326,8 @@ class Main:
                 f"{error}\n"
             )
         messagebox.showerror(
-            self.translate("Error"),
-            self.translate("An error occured", " :", "\n", error, "\n\n")
+            self.common.translate("Error"),
+            self.common.translate("An error occured", " :", "\n", error, "\n\n")
         )
 
     def progress(self, show: bool = None, indeter: bool = None, step: int = None,
@@ -380,25 +376,6 @@ class Main:
         for widget in button:
             if enable: widget.config(state=NORMAL)
             else: widget.config(state=DISABLED)
-
-    def translate(self, *texts, gamelang: str = None) -> str:
-        """
-        translate text into an another language in translation.json file
-        :param texts: all text to convert
-        :param gamelang: force a destination language to convert track
-        :return: translated text
-        """
-        lang = gamelang_to_lang.get(gamelang, self.common.option.language)
-        if lang not in translation_dict: return "".join(texts)  # if no translation language is found
-
-        _lang_trad = translation_dict[lang]
-        translated_text = ""
-        for text in texts:
-            if text in _lang_trad: translated_text += _lang_trad[text]
-            else:
-                print(f"No translation found for ({lang}) {text}")
-                translated_text += text
-        return translated_text
 
     def is_using_official_config(self) -> bool:
         """
