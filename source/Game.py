@@ -545,9 +545,7 @@ class Game:
         """
         Download track's wu8 file and convert them to szs
         """
-        max_process = self.common.gui_main.intvar_process_track.get()
         thread_list = {}
-        error_count, error_max = 0, 3
 
         def add_process(track) -> None:
             """
@@ -565,7 +563,7 @@ class Game:
             Check if a track conversion ended, and remove them from thread_list
             :return: 0 if thread_list is empty, else 1
             """
-            nonlocal error_count, error_max, thread_list
+            nonlocal thread_list
 
             for track_key, thread in thread_list.copy().items():
                 if not thread.is_alive():  # if conversion ended
@@ -578,13 +576,19 @@ class Game:
         self.common.gui_main.progress(max=total_track, indeter=False, show=True)
 
         for i, track in enumerate(self.common.ct_config.get_tracks()):
-            while error_count <= error_max:
+            while True:
+                max_process = self.common.gui_main.intvar_process_track.get()
                 if len(thread_list) < max_process:
                     thread_list[track.sha1] = Thread(target=add_process, args=[track])
                     thread_list[track.sha1].setDaemon(True)
                     thread_list[track.sha1].start()
-                    self.common.gui_main.progress(statut=self.common.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
-                                                                "\n".join(thread_list.keys())), add=1)
+                    self.common.gui_main.progress(
+                        statut=self.common.translate(
+                            "Converting tracks", f"\n({i + 1}/{total_track})\n",
+                            "\n".join(thread_list.keys())
+                        ),
+                        add=1
+                    )
                     break
                 clean_process()
 
