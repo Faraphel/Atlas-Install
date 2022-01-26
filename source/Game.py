@@ -423,13 +423,19 @@ class Game:
         try:
             os.makedirs(f"{self.common.ct_config.pack_path}/file/Track-WU8/", exist_ok=True)
 
-            max_step = len(self.common.ct_config.file_process["img_encode"]) + \
-                       len(self.common.ct_config.all_tracks) + \
-                       3 + \
-                       len("EGFIS")
+            max_step = (
+                len(self.common.ct_config.file_process["img_encode"]) +
+                len(self.common.ct_config.all_tracks) +
+                3 +
+                len("EGFIS")
+            )
 
-            self.common.gui_main.progress(show=True, indeter=False, statut=self.common.translate("Converting files"),
-                              max=max_step, step=0)
+            self.common.gui_main.progress(
+                show=True,
+                indeter=False,
+                statut=self.common.translate("Converting files"),
+                max=max_step, step=0
+            )
             self.common.gui_main.progress(statut=self.common.translate("Configurating LE-CODE"), add=1)
             self.common.ct_config.create_ctfile()
 
@@ -549,7 +555,10 @@ class Game:
             :param track: the track that will be patched
             :return: 0 if no error occured
             """
-            track.convert_wu8_to_szs()
+            try: track.convert_wu8_to_szs()
+            except Exception as e:
+                self.common.log_error()
+                raise e
 
         def clean_process() -> int:
             """

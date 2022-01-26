@@ -177,7 +177,8 @@ class TrackConfiguration:
             command=self.promp_load_from_file
         ).grid(row=1, column=3, sticky="E")
 
-    def del_frame_track_filter(self, frames_filter: list, index: int = 0):
+    @staticmethod
+    def del_frame_track_filter(frames_filter: list, index: int = 0):
         for elem in frames_filter[index:]:  # remove all track filter after this one
             elem["frame"].destroy()
         del frames_filter[index:]

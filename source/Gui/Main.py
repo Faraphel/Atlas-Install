@@ -127,7 +127,6 @@ class Main:
         self.progressbar = ttk.Progressbar(self.root)
         self.progresslabel = Label(self.root)
 
-
         if self.menu_bar: self.menu_bar.destroy()
         self.menu_bar = Menu(self.root)
         self.root.config(menu=self.menu_bar)
@@ -232,9 +231,10 @@ class Main:
                     mystuff_dir = filedialog.askdirectory()
                     if mystuff_dir: stringvar.set(mystuff_dir)
 
-                self.menu_mystuff.entryconfig(index, label=self.common.translate(
-                    "Apply", " ", label, f" ({stringvar.get()!r} ", "selected", ")")
-                                              )
+                self.menu_mystuff.entryconfig(
+                    index,
+                    label=self.common.translate("Apply", " ", label, f" ({stringvar.get()!r} ", "selected", ")")
+                )
 
             _func(init=True)
             self.menu_mystuff.entryconfig(index, command=_func)
@@ -254,7 +254,8 @@ class Main:
             ctconfig_file=self.get_ctconfig_path_pack(self.stringvar_ctconfig.get())
         )
 
-    def get_available_packs(self) -> list:
+    @staticmethod
+    def get_available_packs() -> list:
         available_packs = []
 
         for pack_ctconfig in glob.glob("./Pack/*/ct_config.json"):
@@ -263,7 +264,8 @@ class Main:
 
         return available_packs
 
-    def get_ctconfig_path_pack(self, pack_name: str) -> str:
+    @staticmethod
+    def get_ctconfig_path_pack(pack_name: str) -> str:
         return "./Pack/" + pack_name + "/ct_config.json"
 
     def check_update(self) -> None:
