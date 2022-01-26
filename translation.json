@@ -102,6 +102,14 @@
     "Apply change": "Appliquer les changements",
     "Save to file": "Exporter",
     "Load from file": "Importer",
-    "Warning : only unordered tracks are affected by this option.": "Attention : seules les courses désordonnées sont affectées par cette option."
+    "Warning : only unordered tracks are affected by this option.": "Attention : seules les courses désordonnées sont affectées par cette option.",
+    "If track's": "Si la propriété de course",
+    "value": "valeur",
+    "value1, value2, ...": "valeur1, valeur2, ...",
+    "value1": "valeur1",
+    "value2": "valeur2",
+    "Save track configuration": "Sauvegarder la configuration de course",
+    "track configuration": "configuration de course",
+    "Load track configuration": "Charger la configuration de course"
   }
 }
