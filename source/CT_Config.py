@@ -11,8 +11,10 @@ class CT_Config:
     def __init__(self, version: str = None, name: str = None, nickname: str = None,
                  game_variant: str = "01", region: int = None, cheat_region: int = None,
                  tags_color: dict = None, prefix_list: list = None, suffix_list: list = None,
-                 tag_retro: str = "Retro", default_track: Track = None, pack_path: str = "",
-                 file_process: dict = None, file_structure: dict = None, default_sort: str = ""):
+                 tag_retro: str = "Retro", default_track: dict = None, pack_path: str = "",
+                 file_process: dict = None, file_structure: dict = None, default_sort: str = "",
+                 cup: list = None, tracks_list: list = None,
+                 *args, **kwargs):
 
         self.version = version
         self.name = name
@@ -24,10 +26,6 @@ class CT_Config:
         self.ordered_cups = []
         self.unordered_tracks = []
 
-        self.tags_color = tags_color if tags_color else {}
-        self.prefix_list = prefix_list if tags_color else []
-        self.suffix_list = suffix_list if tags_color else []
-        self.tag_retro = tag_retro
         self.default_track = default_track
 
         self.pack_path = pack_path
@@ -39,6 +37,41 @@ class CT_Config:
         self.filter_track_selection = lambda track: True
         self.filter_track_highlight = lambda track: False
         self.filter_track_random_new = lambda track: getattr(track, "new", False)
+
+        self.sort_track_attr = default_sort
+
+        self.default_track = Track().load_from_json(default_track if default_track else {})
+        Cup.default_track = self.default_track
+
+        for id, cup_json in enumerate(cup if cup else []):
+            # tracks with defined order
+            cup = Cup(id=id)
+            cup.load_from_json(cup_json)
+            self.ordered_cups.append(cup)
+
+        for track_json in tracks_list if tracks_list else []:
+            # unordered tracks
+            track = get_trackdata_from_json(track_json)
+            self.unordered_tracks.extend([track] * track.weight)
+
+        if pack_path:
+            with open(f"{pack_path}/file_process.json", encoding="utf8") as fp_file:
+                self.file_process = json.load(fp_file)
+            with open(f"{pack_path}/file_structure.json", encoding="utf8") as fs_file:
+                self.file_structure = json.load(fs_file)
+
+            dir = self.file_process['placement'].get('cup_icon_dir') if 'placement' in self.file_process else None
+            if not dir: dir = "/ct_icons/"
+            Cup.icon_dir = f"{self.pack_path}/file/{dir}/"
+
+            wu8_dirname = self.file_process["track_dir"] if "track_dir" in self.file_process else "/Track-WU8/"
+            Track._wu8_dir = f"{self.pack_path}/file/{wu8_dirname}/"
+
+        Track._szs_dir = "./file/Track/"
+        Track.tag_retro = tag_retro if tag_retro else {}
+        Track.prefix_list = prefix_list if prefix_list else []
+        Track.suffix_list = suffix_list if suffix_list else []
+        Track.tags_color = tags_color if tags_color else {}
 
     def add_ordered_cup(self, cup: Cup) -> None:
         """
@@ -160,54 +193,7 @@ class CT_Config:
         :param pack_path: path to the pack (parent dir of the ct_config.json)
         :param ctconfig_json: json of the ctconfig to load
         """
-        self.ordered_cups = []
-        self.unordered_tracks = []
-        self.all_tracks = []
-
-        self.pack_path = pack_path
-
-        with open(f"{pack_path}/file_process.json", encoding="utf8") as fp_file:
-            self.file_process = json.load(fp_file)
-        with open(f"{pack_path}/file_structure.json", encoding="utf8") as fs_file:
-            self.file_structure = json.load(fs_file)
-
-        dir = self.file_process['placement'].get('cup_icon_dir') if 'placement' in self.file_process else None
-        if not dir: dir = "/ct_icons/"
-        Cup.icon_dir = f"{self.pack_path}/file/{dir}/"
-
-        # default track
-        self.default_track = Track()
-        if "default_track" in ctconfig_json: self.default_track.load_from_json(ctconfig_json["default_track"])
-        Cup.default_track = self.default_track
-
-        for id, cup_json in enumerate(ctconfig_json["cup"] if "cup" in ctconfig_json else []):
-            # tracks with defined order
-            cup = Cup(id=id)
-            cup.load_from_json(cup_json)
-            self.ordered_cups.append(cup)
-
-        for track_json in ctconfig_json["tracks_list"] if "tracks_list" in ctconfig_json else []:
-            # unordered tracks
-            track = get_trackdata_from_json(track_json)
-            self.unordered_tracks.append(track)
-
-        self.version = ctconfig_json.get("version")
-
-        if "name" in ctconfig_json: self.name = ctconfig_json["name"]
-        if "game_variant" in ctconfig_json: self.game_variant = ctconfig_json["game_variant"]
-        if "default_sort" in ctconfig_json: self.sort_track_attr = ctconfig_json["default_sort"]
-        self.nickname = ctconfig_json["nickname"] if "nickname" in ctconfig_json else self.name
-
-        for param in ["region", "cheat_region", "tags_color", "prefix_list", "suffix_list", "tag_retro"]:
-            setattr(self, param, ctconfig_json.get(param))
-
-        wu8_dirname = self.file_process["track_dir"] if "track_dir" in self.file_process else "/Track-WU8/"
-        Track._wu8_dir = f"{self.pack_path}/file/{wu8_dirname}/"
-        Track._szs_dir = "./file/Track/"
-        Track.tag_retro = self.tag_retro
-        Track.prefix_list = self.prefix_list
-        Track.suffix_list = self.suffix_list
-        Track.tags_color = self.tags_color
+        self.__init__(pack_path=pack_path, **ctconfig_json)
 
         return self
 

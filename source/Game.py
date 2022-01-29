@@ -6,6 +6,7 @@ import json
 from source.definition import *
 from source.wszst import *
 from source.Error import *
+from source.Track import Track
 
 
 class Game:
@@ -301,15 +302,15 @@ class Game:
                         track_id = bmgtrack[start_track_id:start_track_id + 3]
                         if track_id[1] in "1234":  # if the track is a original track from the wii
                             prefix = "Wii"
-                            if prefix in self.common.ct_config.tags_color:
-                                prefix = "\\\\c{" + self.common.ct_config.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            if prefix in Track.tags_color:
+                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
                             prefix += " "
 
                         elif track_id[1] in "5678":  # if the track is a retro track from the original game
                             prefix, *track_name = track_name.split(" ")
                             track_name = " ".join(track_name)
-                            if prefix in self.common.ct_config.tags_color:
-                                prefix = "\\\\c{" + self.common.ct_config.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            if prefix in Track.tags_color:
+                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
                             prefix += " "
 
                         track_id = hex(bmgID_track_move[track_id])[2:]
@@ -425,7 +426,7 @@ class Game:
 
             max_step = (
                 len(self.common.ct_config.file_process["img_encode"]) +
-                len(self.common.ct_config.all_tracks) +
+                self.common.ct_config.get_tracks_count() +
                 3 +
                 len("EGFIS")
             )
@@ -454,7 +455,8 @@ class Game:
             self.common.gui_main.progress(show=False)
 
     def generate_cticons(self):
-        file = self.common.ct_config.file_process["placement"].get("ct_icons")
+        file = self.common.ct_config.file_process["placement"].get("ct_icons") \
+                if "placement" in self.common.ct_config.file_process else None
         if not file: file = "ct_icons.tpl.png"
         file = f"{self.common.ct_config.pack_path}/file/{file}"
 

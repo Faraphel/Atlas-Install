@@ -31,7 +31,7 @@ class Track:
 
     def __init__(self, name: str = " ", author: str = "Nintendo", special: str = "T11", music: str = "T11",
                  sha1: str = None, since_version: str = None, score: int = -1, warning: int = 0,
-                 version: str = None, tags: list = None, is_in_group: bool = False, *args, **kwargs):
+                 version: str = None, tags: list = None, is_in_group: bool = False, weight: int = 1, *args, **kwargs):
         """
         Track class
         :param name: track name
@@ -60,6 +60,7 @@ class Track:
         self.warning = warning  # Track bug level (1 = minor, 2 = major)
         self.version = version
         self.tags = tags if tags else []
+        self.weight = weight
 
         self._is_in_group = is_in_group
 
@@ -196,8 +197,7 @@ class Track:
         load the track from a dictionary
         :param track_json: track's dictionary
         """
-        for key, value in track_json.items():  # load all value in the json as class attribute
-            setattr(self, key, value)
+        self.__init__(**track_json)
 
         return self
 
@@ -222,7 +222,10 @@ class TrackGroup(Track):
         for key, value in group_json.items():  # load all value in the json as class attribute
             if key == "group":
                 for track_json in value:
-                    self.tracks.append(Track(is_in_group=True, *args, **kwargs).load_from_json(track_json))
+                    track = Track(is_in_group=True, *args, **kwargs).load_from_json(track_json)
+                    self.tracks.extend(
+                        [track] * track.weight
+                    )
 
             else:
                 setattr(self, key, value)
