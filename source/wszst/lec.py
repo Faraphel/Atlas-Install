@@ -33,7 +33,6 @@ def patch(lecode_file: str = f"./file/lecode-PAL.bin",
         cmd.extend(["--copy-tracks", path])
     for path in move_track_paths:
         cmd.extend(["--move-tracks", path])
-    print(cmd)
 
     subprocess.run(
         cmd,

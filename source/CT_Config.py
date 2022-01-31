@@ -13,7 +13,9 @@ class CT_Config:
                  tags_color: dict = None, prefix_list: list = None, suffix_list: list = None,
                  tag_retro: str = "Retro", default_track: dict = None, pack_path: str = "",
                  file_process: dict = None, file_structure: dict = None, default_sort: str = "",
-                 cup: list = None, tracks_list: list = None,
+                 cup: list = None, tracks_list: list = None, add_original_track_prefix: bool = True,
+                 swap_original_order: bool = True, keep_original_track: bool = True,
+                 enable_random_cup: bool = True,
                  *args, **kwargs):
 
         self.version = version
@@ -22,6 +24,11 @@ class CT_Config:
         self.game_variant = game_variant  # this is the "60" part in RMCP60 for example
         self.region = region
         self.cheat_region = cheat_region
+
+        self.add_original_track_prefix = add_original_track_prefix
+        self.swap_original_order = swap_original_order
+        self.keep_original_track = keep_original_track  # display issue, bad bmg.
+        self.enable_random_cup = enable_random_cup
 
         self.ordered_cups = []
         self.unordered_tracks = []
@@ -106,12 +113,21 @@ class CT_Config:
         """
         with open(directory + "CTFILE.txt", "w", encoding="utf-8") as ctfile, \
                 open(directory + "RCTFILE.txt", "w", encoding="utf-8") as rctfile:
+
+            lecode_flags = []
+            if self.add_original_track_prefix: lecode_flags.append("N$F_WII")
+            if self.swap_original_order: lecode_flags.append("N$SWAP")
+
+            if not self.keep_original_track: lecode_flags.append("N$NONE")
+            else: lecode_flags.append("N$SHOW")
+
             header = (
                 "#CT-CODE\n"
                 "[RACING-TRACK-LIST]\n"
                 "%LE-FLAGS=1\n"
-                "%WIIMM-CUP=1\n"
-                "N N$SWAP | N$F_WII\n\n"
+                f"%WIIMM-CUP={int(self.enable_random_cup)}\n"
+                f"N {' | '.join(lecode_flags)}\n"
+                "\n"
             )
             ctfile.write(header); rctfile.write(header)
 
@@ -153,14 +169,20 @@ class CT_Config:
         """
         CT_ICON_WIDTH = 128
 
-        default_cups = [
-            "left", "right",
+        default_cups = ["left", "right"]
 
-            "mushroom", "shell", "flower", "banana",
-            "star", "leaf", "special", "lightning",
-
-            "random"
-        ]
+        if self.keep_original_track:
+            if self.swap_original_order:
+                default_cups.extend(
+                    ["mushroom", "shell", "flower", "banana",
+                     "star", "leaf", "special", "lightning"]
+                )
+            else:
+                default_cups.extend(
+                    ["mushroom", "flower", "star", "special",
+                     "shell", "banana", "leaf", "lightning"]
+                )
+        if self.enable_random_cup: default_cups.append("random")
 
         total_cup_count = self.get_cup_count() + len(default_cups)  # +10 because left, right, start at 0, 8 normal cup
         ct_icon = Image.new("RGBA", (CT_ICON_WIDTH, CT_ICON_WIDTH * (total_cup_count + 2)))

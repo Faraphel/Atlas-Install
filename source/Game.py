@@ -320,6 +320,7 @@ class Game:
                         track_id = bmgtrack[start_track_id:start_track_id + 2]
                         track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
 
+                    if not self.common.ct_config.add_original_track_prefix: prefix = ""
                     f.write(f"  {track_id}\t= {prefix}{track_name}\n")
 
     def patch_bmg(self, gamefile: str) -> None:
