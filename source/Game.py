@@ -291,37 +291,48 @@ class Game:
         with open(extra_common_path, "w", encoding="utf8") as f:
             f.write("#BMG\n")
 
-            for bmgtrack in bmgtracks.split("\n"):
-                if "=" in bmgtrack:
+            if self.common.ct_config.keep_original_track:
+                for bmgtrack in bmgtracks.split("\n"):
+                    if "=" in bmgtrack:
 
-                    prefix = ""
-                    track_name = bmgtrack[bmgtrack.find("= ") + 2:]
+                        prefix = ""
+                        track_name = bmgtrack[bmgtrack.find("= ") + 2:]
 
-                    if "T" in bmgtrack[:bmgtrack.find("=")]:
-                        start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
-                        track_id = bmgtrack[start_track_id:start_track_id + 3]
-                        if track_id[1] in "1234":  # if the track is a original track from the wii
-                            prefix = "Wii"
-                            if prefix in Track.tags_color:
-                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
-                            prefix += " "
+                        if "T" in bmgtrack[:bmgtrack.find("=")]:
+                            start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
+                            track_id = bmgtrack[start_track_id:start_track_id + 3]
+                            if track_id[1] in "1234":  # if the track is a original track from the wii
+                                prefix = "Wii"
+                                if prefix in Track.tags_color:
+                                    prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                                prefix += " "
 
-                        elif track_id[1] in "5678":  # if the track is a retro track from the original game
-                            prefix, *track_name = track_name.split(" ")
-                            track_name = " ".join(track_name)
-                            if prefix in Track.tags_color:
-                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
-                            prefix += " "
+                            elif track_id[1] in "5678":  # if the track is a retro track from the original game
+                                prefix, *track_name = track_name.split(" ")
+                                track_name = " ".join(track_name)
+                                if prefix in Track.tags_color:
+                                    prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                                prefix += " "
 
-                        track_id = hex(bmgID_track_move[track_id])[2:]
+                            track_id = hex(bmgID_track_move[track_id])[2:]
 
-                    else:  # Arena
-                        start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
-                        track_id = bmgtrack[start_track_id:start_track_id + 2]
-                        track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
+                        else:  # Arena
+                            start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
+                            track_id = bmgtrack[start_track_id:start_track_id + 2]
+                            track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
 
-                    if not self.common.ct_config.add_original_track_prefix: prefix = ""
-                    f.write(f"  {track_id}\t= {prefix}{track_name}\n")
+                        if not self.common.ct_config.add_original_track_prefix: prefix = ""
+                        f.write(f"  {track_id}\t= {prefix}{track_name}\n")
+
+            else:
+                for cup_index, cup in enumerate(self.common.ct_config.get_all_cups(), start=1):
+                    if cup_index > 8: break # only keep the 8 first cup
+                    for track_index, track in enumerate(cup.get_tracks(), start=1):
+                        f.write(
+                            f"  T{cup_index}{track_index}\t= "
+                            f"{track.get_track_formatted_name(filter_highlight=self.common.ct_config.filter_track_highlight)}"
+                            f"\n"
+                        )
 
     def patch_bmg(self, gamefile: str) -> None:
         """

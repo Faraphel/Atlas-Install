@@ -115,11 +115,11 @@ class CT_Config:
                 open(directory + "RCTFILE.txt", "w", encoding="utf-8") as rctfile:
 
             lecode_flags = []
-            if self.add_original_track_prefix: lecode_flags.append("N$F_WII")
-            if self.swap_original_order: lecode_flags.append("N$SWAP")
-
             if not self.keep_original_track: lecode_flags.append("N$NONE")
-            else: lecode_flags.append("N$SHOW")
+            else:
+                lecode_flags.append("N$SHOW")
+                if self.add_original_track_prefix: lecode_flags.append("N$F_WII")
+                if self.swap_original_order: lecode_flags.append("N$SWAP")
 
             header = (
                 "#CT-CODE\n"
