@@ -1814,7 +1814,7 @@
             ],
             "special":"T82",
             "music":"T82",
-            "score":2,
+            "score": 2,
             "since_version":"0.8",
             "sha1":"f9dbbaca67b7a26c7986a6e99c2a56cf9fdfa14f",
             "version":"v1.2",
@@ -1823,43 +1823,13 @@
 
             ]
         },
+
         {
             "name":"8'n Infinite Race",
             "author":"Bulzeeb",
             "special":"T11",
             "music":"T21",
-            "score":2,
-            "since_version":"0.7",
-            "sha1":"3566c3453af382ac13b9db813d8b44286d1e281f",
-            "version":"v1.1",
-            "family":3020,
-            "tags":[
-
-            ]
-        },
-        {
-            "name":"4IT Clown's Road",
-            "author":[
-                "4IT★Lecce",
-                "4IT★Clown"
-            ],
-            "special":"T82",
-            "music":"T82",
-            "score":2,
-            "since_version":"0.8",
-            "sha1":"f9dbbaca67b7a26c7986a6e99c2a56cf9fdfa14f",
-            "version":"v1.2",
-            "family":2700,
-            "tags":[
-
-            ]
-        },
-        {
-            "name":"8'n Infinite Race",
-            "author":"Bulzeeb",
-            "special":"T11",
-            "music":"T21",
-            "score":2,
+            "score": 2,
             "since_version":"0.7",
             "sha1":"3566c3453af382ac13b9db813d8b44286d1e281f",
             "version":"v1.1",
@@ -1876,7 +1846,7 @@
             ],
             "special":"T11",
             "music":"T11",
-            "score":2,
+            "score": 2,
             "since_version":"0.8",
             "sha1":"485ffdc676e646f70aa811a365be37617e2be567",
             "version":"v1",
