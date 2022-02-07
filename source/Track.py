@@ -3,6 +3,12 @@ from source.wszst import *
 from source.Error import *
 
 
+WARNING_NONE = 0
+WARNING_MINOR = 1
+WARNING_MAJOR = 2
+WARNING_DOLPHIN = 3
+
+
 def get_trackdata_from_json(track_json, *args, **kwargs):
     return (TrackGroup if "group" in track_json else Track)(*args, **kwargs).load_from_json(track_json)
 
@@ -122,8 +128,9 @@ class Track:
         :return: ctfile definition for the track
         """
         track_type = "T"
-        track_flag = 0x00 if self.tag_retro in self.tags else 0x01
-        if filter_random_new: track_flag = 0x01 if filter_random_new(self) else 0x00
+        if not filter_random_new:
+            filter_random_new = lambda track: not (track.tags_retro in track.tags and track.warning != WARNING_DOLPHIN)
+        track_flag = 0x01 if filter_random_new(self) else 0x00
 
         if self._is_in_group:
             track_type = "H"
