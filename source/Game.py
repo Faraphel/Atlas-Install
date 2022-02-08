@@ -321,10 +321,13 @@ class Game:
                         start_track_id: int = bmgtrack.find("U")  # index where the bmg arena definition start
                         track_id = bmgtrack[start_track_id:start_track_id + 3]
 
-                        if track_id[0] == "2":  # if this is the retro cup of arenas
+                        if track_id[1] == "2":  # if this is the retro cup of arenas
                             prefix, *track_name = track_name.split(" ")
                             track_name = " ".join(track_name)
-                            prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+
+                            if prefix in Track.tags_color:
+                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            prefix += " "
 
                     if not self.common.ct_config.add_original_track_prefix: prefix = ""
                     f.write(f"  {track_id}\t= {prefix}{track_name}\n")
