@@ -37,7 +37,8 @@ class Track:
 
     def __init__(self, name: str = " ", author: str = "Nintendo", special: str = "T11", music: str = "T11",
                  sha1: str = None, since_version: str = None, score: int = -1, warning: int = 0,
-                 version: str = None, tags: list = None, is_in_group: bool = False, weight: int = 1, *args, **kwargs):
+                 version: str = None, tags: list = None, is_in_group: bool = False, weight: int = 1,
+                 is_arena: bool = False, *args, **kwargs):
         """
         Track class
         :param name: track name
@@ -69,6 +70,7 @@ class Track:
         self.weight = weight
 
         self._is_in_group = is_in_group
+        self._is_arena = is_arena
 
     def __repr__(self) -> str:
         """
@@ -127,16 +129,19 @@ class Track:
         :param race: is it a text used for Race_*.szs ?
         :return: ctfile definition for the track
         """
-        track_type = "T"
+        track_type = "  T"
         if not filter_random_new:
             filter_random_new = lambda track: not (track.tags_retro in track.tags) and track.warning != WARNING_DOLPHIN
         track_flag = 0x01 if filter_random_new(self) else 0x00
 
         if self._is_in_group:
-            track_type = "H"
+            track_type = "  H"
             track_flag |= 0x04
 
-        ctfile_track = f'  {track_type} {self.music}; {self.special}; {hex(track_flag)}; '
+        if self._is_arena:
+            track_type = "A"
+
+        ctfile_track = f'{track_type} {self.music}; {self.special}; {hex(track_flag)}; '
 
         if race:
             ctfile_track += (

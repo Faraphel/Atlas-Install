@@ -15,7 +15,7 @@ class CT_Config:
                  file_process: dict = None, file_structure: dict = None, default_sort: str = "",
                  cup: list = None, tracks_list: list = None, add_original_track_prefix: bool = True,
                  swap_original_order: bool = True, keep_original_track: bool = True,
-                 enable_random_cup: bool = True,
+                 enable_random_cup: bool = True, arenas: list = None,
                  *args, **kwargs):
 
         self.version = version
@@ -32,6 +32,7 @@ class CT_Config:
 
         self.ordered_cups = []
         self.unordered_tracks = []
+        self.arenas = []
 
         self.default_track = default_track
 
@@ -60,6 +61,12 @@ class CT_Config:
             # unordered tracks
             track = get_trackdata_from_json(track_json)
             self.unordered_tracks.extend([track] * track.weight)
+
+        for arena_json in arenas if arenas else []:
+            # arena
+            arena_json["is_arena"] = True
+            arena = get_trackdata_from_json(arena_json)
+            self.arenas.append(arena)
 
         if pack_path:
             with open(f"{pack_path}/file_process.json", encoding="utf8") as fp_file:
@@ -141,6 +148,13 @@ class CT_Config:
             for cup in self.get_all_cups():
                 ctfile.write(cup.get_ctfile(race=False, **kwargs))
                 rctfile.write(cup.get_ctfile(race=True, **kwargs))
+
+            if self.arenas:
+                ctfile.write("\n"); rctfile.write("\n")
+
+                for arena in self.arenas:
+                    ctfile.write(arena.get_ctfile(race=False, **kwargs))
+                    rctfile.write(arena.get_ctfile(race=True, **kwargs))
 
     def get_tracks(self):
         for data in self.unordered_tracks + self.ordered_cups:
@@ -230,3 +244,7 @@ class CT_Config:
                 possibilities.add(key)
 
         return sorted(possibilities)
+
+    def get_tracks_and_arenas(self):
+        for track in self.get_tracks(): yield track
+        for arena in self.arenas: yield arena
