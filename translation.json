@@ -110,6 +110,11 @@
     "value2": "valeur2",
     "Save track configuration": "Sauvegarder la configuration de course",
     "track configuration": "configuration de course",
-    "Load track configuration": "Charger la configuration de course"
+    "Load track configuration": "Charger la configuration de course",
+    "Add a pack": "Ajouter un pack",
+    "Extract the modpack": "Extraire le modpack",
+    "MKW Pack": "Pack MKW",
+    "Extraction": "Extraction",
+    "The mod have been extracted !": "Le mod à bien été extrait !"
   }
 }

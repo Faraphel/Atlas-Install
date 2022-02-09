@@ -29,11 +29,11 @@ class Main:
                 self.common.translate("Error"),
                 self.common.translate("There is no pack in the ./Pack/ directory.")
             )
-            self.quit()
+            #self.quit()
 
         self.is_dev_version = False  # Is this installer version a dev ?
         self.is_track_configuration_edited = False
-        self.stringvar_ctconfig = StringVar(value=self.available_packs[0])
+        self.stringvar_ctconfig = StringVar(value=self.available_packs[0] if self.available_packs else None)
         self.stringvar_language = StringVar(value=self.common.option.language)
         self.stringvar_game_format = StringVar(value=self.common.option.format)
         self.boolvar_dont_check_for_update = BooleanVar(value=self.common.option.dont_check_for_update)
@@ -60,9 +60,17 @@ class Main:
             textvariable=self.stringvar_ctconfig,
             width=30
         )
-        self.combobox_ctconfig_path.grid(row=1, column=1, sticky="NEWS", columnspan=2)
+        self.combobox_ctconfig_path.grid(row=1, column=1, sticky="NEWS")
         self.combobox_ctconfig_path.bind("<<ComboboxSelected>>", lambda x=None: self.reload_ctconfig())
-        self.reload_ctconfig()
+
+        self.button_add_mod = Button(
+            self.frame_ctconfig,
+            text="+",
+            relief=RIDGE,
+            command=self.common.show_gui_add_pack,
+            width=2
+        )
+        self.button_add_mod.grid(row=1, column=2)
 
         # Jeu
         self.frame_game_path = LabelFrame(self.root, text=self.common.translate("Original game"))
@@ -249,10 +257,19 @@ class Main:
         self.menu_help.add_command(label="Github Wiki", command=lambda: webbrowser.open(GITHUB_HELP_PAGE_URL))
         self.menu_help.add_command(label="Discord", command=lambda: webbrowser.open(DISCORD_URL))
 
+        self.reload_ctconfig()
+
     def reload_ctconfig(self) -> None:
-        self.common.ct_config.load_ctconfig_file(
-            ctconfig_file=self.get_ctconfig_path_pack(self.stringvar_ctconfig.get())
-        )
+        self.available_packs = self.get_available_packs()
+        if self.available_packs: self.state_button(enable=True)
+        else: self.state_button(enable=False)
+
+        self.combobox_ctconfig_path.configure(values=self.available_packs)
+
+        if self.stringvar_ctconfig.get():
+            self.common.ct_config.load_ctconfig_file(
+                ctconfig_file=self.get_ctconfig_path_pack(self.stringvar_ctconfig.get())
+            )
 
     @staticmethod
     def get_available_packs() -> list:
@@ -352,9 +369,9 @@ class Main:
         :param enable: are the button enabled ?
         """
         button = [
-            self.button_do_everything,
-            self.button_select_path,
             self.combobox_ctconfig_path,
+            self.button_select_path,
+            self.button_do_everything
         ]
         for widget in button:
             if enable: widget.config(state=NORMAL)

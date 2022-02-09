@@ -3,6 +3,7 @@ from source.Option import Option
 from source.Game import Game
 from source.Gui.Main import Main
 from source.Gui.TrackConfiguration import TrackConfiguration
+from source.Gui.SelectPack import SelectPack
 from source.Translation import Translator
 from source.Error import ErrorLogger
 
@@ -27,4 +28,5 @@ class Common:
         self.gui_main = Main(common=self)
 
     def show_gui_track_configuration(self): TrackConfiguration(common=self)
+    def show_gui_add_pack(self): SelectPack(common=self)
     def mainloop(self): self.gui_main.mainloop()
