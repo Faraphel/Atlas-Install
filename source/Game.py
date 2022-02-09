@@ -404,14 +404,14 @@ class Game:
                         data_replacement = data_replacement.replace("{"+key+"}", replacement)
 
                     if bmg_process["mode"] == "overwrite_id":
-                        start_line = f"\n\t{str_to_int(data):x} = "
+                        start_line = f"\n\t{data} = "
                         start_pos = bmg_content.find(start_line)
                         if start_pos != -1:
                             end_pos = bmg_content[start_pos:].find("\n")
                             bmg_content = (
-                                    bmg_content[:start_pos] +
-                                    start_line + data_replacement +
-                                    bmg_content[end_pos:]
+                                bmg_content[:start_pos] +
+                                start_line + data_replacement +
+                                bmg_content[end_pos:]
                             )
                         else:
                             bmg_content = f"{bmg_content}\n{start_line}{data_replacement}\n"
