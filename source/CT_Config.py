@@ -74,11 +74,12 @@ class CT_Config:
             with open(f"{pack_path}/file_structure.json", encoding="utf8") as fs_file:
                 self.file_structure = json.load(fs_file)
 
-            dir = self.file_process['placement'].get('cup_icon_dir') if 'placement' in self.file_process else None
-            if not dir: dir = "/ct_icons/"
+            fileprocess_placement = self.file_process.get('placement', {})
+
+            dir = fileprocess_placement.get('cup_icon_dir', "/ct_icons/")
             Cup.icon_dir = f"{self.pack_path}/file/{dir}/"
 
-            wu8_dirname = self.file_process["track_dir"] if "track_dir" in self.file_process else "/Track-WU8/"
+            wu8_dirname = fileprocess_placement.get("track_dir", "/Track-WU8/")
             Track._wu8_dir = f"{self.pack_path}/file/{wu8_dirname}/"
 
         Track._szs_dir = "./file/Track/"

@@ -1,7 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import shutil
 import glob
-import json
 
 from source.definition import *
 from source.wszst import *
@@ -93,8 +92,6 @@ class Game:
         count all the step patching subfile will take (for the progress bar)
         :return: number of step estimated
         """
-        with open(f"{self.common.ct_config.pack_path}/file_structure.json") as f:
-            fs = json.load(f)
 
         # This part is used to estimate the max_step
         extracted_file = []
@@ -108,6 +105,7 @@ class Game:
                     extracted_file.append(os.path.realpath(path))
                     max_step += 1
 
+        fs = self.common.ct_config.file_structure
         for fp in fs:
             for f in glob.glob(self.path + "/files/" + fp, recursive=True):
                 if type(fs[fp]) == str:
@@ -125,8 +123,6 @@ class Game:
         """
         patch subfile as indicated in the file_structure.json file (for file structure)
         """
-        with open(f"{self.common.ct_config.pack_path}/file_structure.json") as f:
-            fs = json.load(f)
 
         extracted_file = []
         self.common.gui_main.progress(show=True, indeter=False, statut=self.common.translate("Modifying subfile..."), add=1)
@@ -158,6 +154,7 @@ class Game:
 
             shutil.copyfile(source_file, dest_file)
 
+        fs = self.common.ct_config.file_structure
         for fp in fs:
             for f in glob.glob(self.path + "/files/" + fp, recursive=True):
                 if type(fs[fp]) == str:
@@ -217,15 +214,15 @@ class Game:
         """
         self.common.gui_main.progress(statut=self.common.translate("Patch lecode.bin"), add=1)
 
-        lpar_path = self.common.ct_config.file_process["placement"].get("lpar_dir")
-        if not lpar_path: f""
+        fileprocess_placement = self.common.ct_config.file_process.get("placement", {})
+
+        lpar_path = fileprocess_placement.get("lpar_dir", "")
         lpar_path = (
             f"{self.common.ct_config.pack_path}/file/{lpar_path}/"
             f"lpar-{'debug' if self.common.gui_main.boolvar_use_debug_mode.get() else 'normal'}.txt"
         )
 
-        lecode_file = self.common.ct_config.file_process["placement"].get("lecode_bin_dir")
-        if not lecode_file: lecode_file = ""
+        lecode_file = fileprocess_placement.get("lecode_bin_dir", "")
         lecode_file = f"{self.common.ct_config.pack_path}/file/{lecode_file}/lecode-{self.region}.bin"
 
         lec.patch(
@@ -392,10 +389,8 @@ class Game:
             :param bmg_language: language of the bmg file
             :return: the replaced bmg file
             """
-            with open(f"{self.common.ct_config.pack_path}/file_process.json", encoding="utf8") as fp_file:
-                file_process = json.load(fp_file)
 
-            for bmg_process in file_process["bmg"]:
+            for bmg_process in self.common.ct_config.file_process.get("bmg", []):
                 if "language" in bmg_process and bmg_language not in bmg_process["language"]:
                     continue
 
@@ -431,8 +426,9 @@ class Game:
             bmg.encode(file)
             os.remove(file)
 
-        bmg_dir = self.common.ct_config.file_process["placement"].get("bmg_patch_dir")
-        bmg_dir = f"{self.common.ct_config.pack_path}/file/{bmg_dir if bmg_dir else ''}"
+        fileprocess_placement = self.common.ct_config.file_process.get("placement", {})
+        bmg_dir = fileprocess_placement.get("bmg_patch_dir", "")
+        bmg_dir = f"{self.common.ct_config.pack_path}/file/{bmg_dir}"
         os.makedirs(get_dir(bmg_dir), exist_ok=True)
 
         save_bmg(f"{bmg_dir}/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
@@ -451,7 +447,7 @@ class Game:
             os.makedirs(f"{self.common.ct_config.pack_path}/file/Track-WU8/", exist_ok=True)
 
             max_step = (
-                len(self.common.ct_config.file_process["img_encode"]) +
+                len(self.common.ct_config.file_process.get("img_encode", {})) +
                 self.common.ct_config.get_tracks_count() +
                 3 +
                 len("EGFIS")
@@ -481,9 +477,8 @@ class Game:
             self.common.gui_main.progress(show=False)
 
     def generate_cticons(self):
-        file = self.common.ct_config.file_process["placement"].get("ct_icons") \
-                if "placement" in self.common.ct_config.file_process else None
-        if not file: file = "ct_icons.tpl.png"
+        fileprocess_placement = self.common.ct_config.file_process.get("placement", {})
+        file = fileprocess_placement.get("ct_icons", "ct_icons.tpl.png")
         file = f"{self.common.ct_config.pack_path}/file/{file}"
 
         os.makedirs(get_dir(file), exist_ok=True)
@@ -494,9 +489,10 @@ class Game:
         Convert .png image into the format wrote in convert_file
         """
 
-        image_amount = len(self.common.ct_config.file_process["img_encode"])
+        img_encode = self.common.ct_config.file_process.get("img_encode", {})
+        image_amount = len(img_encode)
 
-        for i, (file, data) in enumerate(self.common.ct_config.file_process["img_encode"].items()):
+        for i, (file, data) in enumerate(img_encode.items()):
             self.common.gui_main.progress(
                 statut=self.common.translate("Converting images") + f"\n({i + 1}/{image_amount}) {file}",
                 add=1
@@ -504,23 +500,23 @@ class Game:
 
             img.encode(
                 file=f"{self.common.ct_config.pack_path}/file/{file}",
-                format=data["format"],
-                dest_file=f"{self.common.ct_config.pack_path}/file/{data['dest']}" if "dest" in data else None
+                format=data.get("format", "TEX.RGB565"),
+                dest_file=f"{self.common.ct_config.pack_path}/file/{data.get('dest', None)}"
             )
 
     def generate_image(self, generator: dict) -> Image.Image:
         def get_layer_xy(layer: dict) -> tuple:
             return (
-                int(layer["x"] * generator["width"]) if "x" in layer else 0,
-                int(layer["y"] * generator["height"]) if "y" in layer else 0,
+                int(layer.get("x", 0) * generator["width"]),
+                int(layer.get("y", 0) * generator["height"])
             )
 
         def get_layer_bbox(layer: dict) -> tuple:
             return (
-                int(layer["x_start"] * generator["width"]) if "x_start" in layer else 0,
-                int(layer["y_start"] * generator["height"]) if "y_start" in layer else 0,
-                int(layer["x_end"] * generator["width"]) if "x_end" in layer else generator["width"],
-                int(layer["y_end"] * generator["height"]) if "y_end" in layer else generator["height"]
+                int(layer.get("x_start", 0) * generator["width"]),
+                int(layer.get("y_start", 0) * generator["height"]),
+                int(layer.get("x_end", 1) * generator["width"]),
+                int(layer.get("y_end", 1) * generator["height"])
             )
 
         def get_layer_size(layer: dict) -> tuple:
@@ -528,9 +524,9 @@ class Game:
             return x2-x1, y2-y1
 
         image = Image.new(
-            generator["format"] if "format" in generator else "RGB",
+            generator.get("format", "RGB"),
             (generator["width"], generator["height"]),
-            tuple(generator["color"]) if "color" in generator else 0
+            tuple(generator.get("color", 0))
         )
         draw = ImageDraw.Draw(image)
 
@@ -539,7 +535,7 @@ class Game:
             if layer["type"] == "color":
                 draw.rectangle(
                     get_layer_bbox(layer),
-                    tuple(layer["color"]) if "color" in layer else 0
+                    tuple(layer.get("color", 0))
                 )
             if layer["type"] == "image":
                 layer_image = Image.open(f'{self.common.ct_config.pack_path}/file/{layer["path"]}')
@@ -552,19 +548,19 @@ class Game:
             if layer["type"] == "text":
                 font = ImageFont.truetype(
                     font=f'{self.common.ct_config.pack_path}/file/{layer["font"]}' if "font" in layer else None,
-                    size=int(layer["text_size"] * generator["height"]) if "text_size" in layer else 10,
+                    size=int(layer.get("text_size", 0.1) * generator["height"]),
                 )
                 draw.text(
                     get_layer_xy(layer),
-                    text=layer["text"] if "text" in layer else "<Missing text>",
-                    fill=tuple(layer["color"]) if "color" in layer else 255,
+                    text=layer.get("text", "<Missing text>"),
+                    fill=tuple(layer.get("color", 255)),
                     font=font
                 )
 
         return image
 
     def generate_all_image(self) -> None:
-        for file, generator in self.common.ct_config.file_process["img_generator"].items():
+        for file, generator in self.common.ct_config.file_process.get("img_generator", {}).items():
             file = f"{self.common.ct_config.pack_path}/file/{file}"
             os.makedirs(get_dir(file), exist_ok=True)
             self.generate_image(generator).save(file)
