@@ -275,6 +275,7 @@ class Main:
     def get_available_packs() -> list:
         available_packs = []
 
+        os.makedirs("./Pack/", exist_ok=True)
         for pack_ctconfig in glob.glob("./Pack/*/ct_config.json"):
             dirname = os.path.basename(os.path.dirname(pack_ctconfig))
             available_packs.append(dirname)

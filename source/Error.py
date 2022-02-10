@@ -38,6 +38,11 @@ class MissingTrackWU8(Exception):
         super().__init__("The original wu8 track file is missing !")
 
 
+class CorruptedPack(Exception):
+    def __init__(self):
+        super().__init__("This pack seem corrupted !")
+
+
 class ErrorLogger:
     def __init__(self, common):
         self.common = common
@@ -47,12 +52,15 @@ class ErrorLogger:
         When an error occur, will show it in a messagebox and write it in error.log
         """
         error = traceback.format_exc()
+        file_list = os.listdir('./file/') if os.path.exists("./file/") else None
+        ctconfig_list = os.listdir(self.common.ct_config.pack_path) if os.path.exists(self.common.ct_config.pack_path) else None
+
         with open("./error.log", "a") as f:
             f.write(
                 f"---\n"
                 f"For game version : {self.common.ct_config.version}\n"
-                f"./file/ directory : {os.listdir('./file/')}\n"
-                f"ctconfig directory : {os.listdir(self.common.ct_config.pack_path)}\n"
+                f"./file/ directory : {file_list}\n"
+                f"ctconfig directory : {ctconfig_list}\n"
                 f"GAME/files/ information : {self.common.game.path, self.common.game.region}\n"
                 f"{error}\n"
             )

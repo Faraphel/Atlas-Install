@@ -5,6 +5,8 @@ from tkinter import messagebox
 import zipfile
 import os
 
+from source.Error import CorruptedPack
+
 
 class SelectPack:
     def __init__(self, common):
@@ -43,8 +45,11 @@ class SelectPack:
                 packname = ".".join(packname)
 
                 with zipfile.ZipFile(path) as zip_pack:
+                    if "ct_config.json" not in zip_pack.namelist():
+                        raise CorruptedPack()
                     zip_pack.extractall(f"./Pack/{packname}/")
 
+                self.common.gui_main.stringvar_ctconfig.set(packname)
                 self.common.gui_main.reload_ctconfig()
 
                 messagebox.showinfo(
@@ -55,6 +60,7 @@ class SelectPack:
 
             except Exception as e:
                 self.progressbar_extract.grid_forget()
+                self.common.log_error()
                 raise e
 
         self.button_extract_modpack = Button(
