@@ -46,8 +46,6 @@ class CT_Config:
         self.filter_track_highlight = lambda track: False
         self.filter_track_random_new = lambda track: getattr(track, "new", False)
 
-        self.sort_track_attr = default_sort
-
         self.default_track = Track().load_from_json(default_track if default_track else {})
         Cup.default_track = self.default_track
 
