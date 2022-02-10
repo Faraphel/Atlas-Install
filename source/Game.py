@@ -526,7 +526,7 @@ class Game:
         image = Image.new(
             generator.get("format", "RGB"),
             (generator["width"], generator["height"]),
-            tuple(generator.get("color", 0))
+            tuple(generator.get("color", [0]))
         )
         draw = ImageDraw.Draw(image)
 
@@ -535,7 +535,7 @@ class Game:
             if layer["type"] == "color":
                 draw.rectangle(
                     get_layer_bbox(layer),
-                    tuple(layer.get("color", 0))
+                    tuple(layer.get("color", [0]))
                 )
             if layer["type"] == "image":
                 layer_image = Image.open(f'{self.common.ct_config.pack_path}/file/{layer["path"]}')
