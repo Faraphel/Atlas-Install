@@ -1,20 +1,19 @@
 import json
 import os
 
-from .definition import restart
+from source.definition import restart
 
 
 class Option:
-    def __init__(self):
+    def __init__(self, language: str = "en", format: str = "FST", dont_check_for_update: bool = False,
+                 process_track: int = 8):
         """
         class for Option
         """
-        self.language = "en"
-        self.format = "FST"
-        self.disable_download = False
-        self.del_track_after_conv = False
-        self.dont_check_for_update = False
-        self.process_track = 8
+        self.language = language
+        self.format = format
+        self.dont_check_for_update = dont_check_for_update
+        self.process_track = process_track
 
     def edit(self, option: str, value: any, need_restart: bool = False, gui=None) -> None:
         """
@@ -31,7 +30,7 @@ class Option:
         self.save_to_file()
         if need_restart: restart()
 
-    def load_from_file(self, option_file: str = "./option.json") -> None:
+    def load_from_file(self, option_file: str = "./option.json"):
         """
         Load all options from a json file
         :param option_file: the file where to load option
@@ -40,6 +39,8 @@ class Option:
             with open(option_file, encoding="utf-8") as file:
                 file_json = json.load(file)
                 self.load_from_json(file_json)
+
+        return self
 
     def load_from_json(self, option_json: dict) -> None:
         """

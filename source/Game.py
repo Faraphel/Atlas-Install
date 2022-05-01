@@ -1,84 +1,21 @@
-from tkinter import messagebox
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import shutil
 import glob
-import json
 
-from .Track import CantDownloadTrack
-from .CT_Config import CT_Config
-from .definition import *
-from .wszst import *
-
-
-class RomAlreadyPatched(Exception):
-    def __init__(self):
-        super().__init__("ROM Already patched !")
-
-
-class InvalidGamePath(Exception):
-    def __init__(self):
-        super().__init__("This path is not valid !")
-
-
-class InvalidFormat(Exception):
-    def __init__(self):
-        super().__init__("This game format is not supported !")
-
-
-class TooMuchDownloadFailed(Exception):
-    def __init__(self):
-        super().__init__("Too much download failed !")
-
-
-class TooMuchSha1CheckFailed(Exception):
-    def __init__(self):
-        super().__init__("Too much sha1 check failed !")
-
-
-class CantConvertTrack(Exception):
-    def __init__(self):
-        super().__init__("Can't convert track, check if download are enabled.")
-
-
-class NoGui:
-    """
-    'fake' gui if no gui are used for compatibility.
-    """
-    class NoButton:
-        def grid(self, *args, **kwargs): pass
-        def config(self, *args, **kwargs): pass
-
-    class NoVariable:
-        def __init__(self, value=None):
-            self.value = None
-
-        def set(self, value):
-            self.value = value
-
-        def get(self):
-            return self.value
-
-    def progress(*args, **kwargs): print(args, kwargs)
-    def translate(*args, **kwargs): return ""
-    def log_error(*args, **kwargs): print(args, kwargs)
-
-    is_dev_version = False
-    button_install_mod = NoButton()
-    stringvar_game_format = NoVariable()
-    boolvar_disable_download = NoVariable()
-    intvar_process_track = NoVariable()
-    boolvar_dont_check_track_sha1 = NoVariable()
-    boolvar_del_track_after_conv = NoVariable()
+from source.definition import *
+from source.wszst import *
+from source.Error import *
+from source.Track import Track
 
 
 class Game:
-    def __init__(self, path: str = "", region_ID: str = "P", game_ID: str = "RMCP01", gui=None):
+    def __init__(self, common, path: str = "", region_ID: str = "P", game_ID: str = "RMCP01"):
         """
         Class about the game code and its treatment.
         :param path: path of the game file / directory
         :param region_ID: game's region id (P for PAL, K for KOR, ...)
         :param game_ID: game's id (RMCP01 for PAL, ...)
-        :param gui: gui class used by the program
+        :param common: common class to access all other element
         """
         if not os.path.exists(path) and path: raise InvalidGamePath()
         self.extension = None
@@ -87,8 +24,7 @@ class Game:
         self.region = region_id_to_name[region_ID]
         self.region_ID = region_ID
         self.game_ID = game_ID
-        self.gui = gui if gui else NoGui
-        self.ctconfig = CT_Config(gui=gui)
+        self.common = common
 
     def set_path(self, path: str) -> None:
         """
@@ -104,13 +40,18 @@ class Game:
         :param format: game format (ISO, WBFS, ...)
         """
         if format in ["ISO", "WBFS", "CISO"]:
-            path_game_format: str = os.path.realpath(self.path + "/../MKWFaraphel." + format.lower())
+            path_game_format: str = os.path.realpath(self.path + f"/../{self.common.ct_config.nickname} v{self.common.ct_config.version}." + format.lower())
             wit.copy(src_path=self.path, dst_path=path_game_format, format=format)
             shutil.rmtree(self.path)
             self.path = path_game_format
 
-            self.gui.progress(statut=self.gui.translate("Changing game's ID"), add=1)
-            wit.edit(file=self.path, region_ID=self.region_ID, name=f"Mario Kart Wii Faraphel {self.ctconfig.version}")
+            self.common.gui_main.progress(statut=self.common.translate("Changing game's ID"), add=1)
+            wit.edit(
+                file=self.path,
+                region_ID=self.region_ID,
+                game_variant=self.common.ct_config.game_variant,
+                name=f"{self.common.ct_config.name} {self.common.ct_config.version}"
+            )
 
     def extract(self) -> None:
         """
@@ -121,11 +62,10 @@ class Game:
 
         elif self.extension in ["ISO", "WBFS", "CSIO"]:
             # Fiding a directory name that doesn't already exist
-            directory_name, i = "MKWiiFaraphel", 1
-            while True:
-                path_dir = os.path.realpath(self.path + f"/../{directory_name}")
-                if not (os.path.exists(path_dir)): break
-                directory_name, i = f"MKWiiFaraphel ({i})", i + 1
+            path_dir = get_next_available_dir(
+                parent_dir=self.path + f"/../",
+                dir_name=f"{self.common.ct_config.nickname} v{self.common.ct_config.version}"
+            )
 
             wit.extract(file=self.path, dst_dir=path_dir)
 
@@ -139,124 +79,194 @@ class Game:
         if glob.glob(self.path + "/files/rel/lecode-???.bin"):  # if a LECODE file is already here
             raise RomAlreadyPatched()  # warning already patched
 
-        with open(self.path + "/setup.txt") as f:
-            setup = f.read()
-        setup = setup[setup.find("!part-id = ") + len("!part-id = "):]
-        self.game_ID = setup[:setup.find("\n")]
+        if os.path.exists(self.path + "/setup.txt"):
+            with open(self.path + "/setup.txt") as f: setup = f.read()
+            setup = setup[setup.find("!part-id = ") + len("!part-id = "):]
+            self.game_ID = setup[:setup.find("\n")]
 
-        self.region_ID = self.game_ID[3]
-        self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
+            self.region_ID = self.game_ID[3]
+            self.region = region_id_to_name[self.region_ID] if self.region_ID in region_id_to_name else self.region
 
-    @in_thread
-    def install_mod(self): self.nothread_install_mod()
+    def count_patch_subfile_operation(self) -> int:
+        """
+        count all the step patching subfile will take (for the progress bar)
+        :return: number of step estimated
+        """
 
-    def nothread_install_mod(self):
+        # This part is used to estimate the max_step
+        extracted_file = []
+        max_step = 1
+
+        def count_rf(path):
+            nonlocal max_step
+            max_step += 1
+            if get_extension(path) == "szs":
+                if not (os.path.realpath(path) in extracted_file):
+                    extracted_file.append(os.path.realpath(path))
+                    max_step += 1
+
+        fs = self.common.ct_config.file_structure
+        for fp in fs:
+            for f in glob.glob(self.path + "/files/" + fp, recursive=True):
+                if type(fs[fp]) == str:
+                    count_rf(path=f)
+                elif type(fs[fp]) == dict:
+                    for nf in fs[fp]:
+                        if type(fs[fp][nf]) == str:
+                            count_rf(path=f)
+                        elif type(fs[fp][nf]) == list:
+                            for ffp in fs[fp][nf]: count_rf(path=f)
+
+        return max_step
+
+    def install_patch_subfile(self) -> None:
+        """
+        patch subfile as indicated in the file_structure.json file (for file structure)
+        """
+
+        extracted_file = []
+        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.translate("Modifying subfile..."), add=1)
+
+        def replace_file(path, file, subpath="/") -> None:
+            """
+            Replace subfile in the .szs file
+            :param path: path to the .szs file
+            :param file: file to replace
+            :param subpath: directory between .szs file and file inside to replace
+            """
+            self.common.gui_main.progress(statut=self.common.translate("Editing", "\n", get_nodir(path)), add=1)
+            extension = get_extension(path)
+
+            source_file = f"{self.common.ct_config.pack_path}/file/{file}"
+            dest_file = path
+
+            if extension == "szs":
+                if os.path.realpath(path) not in extracted_file:
+                    szs.extract(file=path)
+                    extracted_file.append(os.path.realpath(path))
+
+                szs_extract_path = path + ".d"
+                if os.path.exists(szs_extract_path + subpath):
+                    dest_file = szs_extract_path + subpath
+                    if subpath[-1] == "/": dest_file += get_nodir(file)
+
+            elif path[-1] == "/": dest_file += get_nodir(file)
+
+            shutil.copyfile(source_file, dest_file)
+
+        fs = self.common.ct_config.file_structure
+        for fp in fs:
+            for f in glob.glob(self.path + "/files/" + fp, recursive=True):
+                if type(fs[fp]) == str:
+                    replace_file(path=f, file=fs[fp])
+                elif type(fs[fp]) == dict:
+                    for nf in fs[fp]:
+                        if type(fs[fp][nf]) == str:
+                            replace_file(path=f, subpath=nf, file=fs[fp][nf])
+                        elif type(fs[fp][nf]) == list:
+                            for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
+
+        for file in extracted_file:
+            self.common.gui_main.progress(statut=self.common.translate("Recompilating", "\n", get_nodir(file)), add=1)
+            szs.create(file=file)
+            shutil.rmtree(file + ".d", ignore_errors=True)
+
+    def install_copy_mystuff(self) -> None:
+        """
+        copy MyStuff directory into the game *before* patching the game
+        """
+        self.common.gui_main.progress(show=True, indeter=False, statut=self.common.translate("Copying MyStuff..."), add=1)
+
+        mystuff_folder = self.common.gui_main.stringvar_mystuff_folder.get()
+        if mystuff_folder and mystuff_folder != "None":
+
+            # replace game's file by files with the same name in the MyStuff root
+            mystuff_files = {}
+            for mystuff_file in glob.glob(f"{mystuff_folder}/*"):   # for every file at the root of the mystuff folder
+                basename = os.path.basename(mystuff_file)
+
+                if os.path.isfile(mystuff_file):
+                    #  replace the game files with the file at mystuff's root
+                    mystuff_files[basename] = mystuff_file
+                else:
+                    #  if this is a dict, simply copy it into the game files
+                    shutil.copytree(mystuff_file, f"{self.path}/files/{basename}/", dirs_exist_ok=True)
+
+            for game_file in glob.glob(f"{self.path}/files/**/*", recursive=True):
+                basename = os.path.basename(game_file)
+                if basename in mystuff_files:
+                    mystuff_file = mystuff_files[basename]
+                    shutil.copy(mystuff_file, game_file)
+                    print(f"copied {mystuff_file} to {game_file}")
+
+    def install_patch_maindol(self) -> None:
+        """
+        patch the main.dol file to allow the addition of LECODE.bin file
+        """
+        self.common.gui_main.progress(statut=self.common.translate("Patch main.dol"), add=1)
+
+        region_id = self.common.ct_config.region if self.common.gui_main.is_using_official_config() else self.common.ct_config.cheat_region
+        wstrt.patch(path=self.path, region_id=region_id)
+
+    def install_patch_lecode(self) -> None:
+        """
+        configure and add the LECODE.bin file to the mod
+        """
+        self.common.gui_main.progress(statut=self.common.translate("Patch lecode.bin"), add=1)
+
+        fileprocess_placement = self.common.ct_config.file_process.get("placement", {})
+
+        lpar_path = fileprocess_placement.get("lpar_dir", "")
+        lpar_path = (
+            f"{self.common.ct_config.pack_path}/file/{lpar_path}/"
+            f"lpar-{'debug' if self.common.gui_main.boolvar_use_debug_mode.get() else 'normal'}.txt"
+        )
+
+        lecode_file = fileprocess_placement.get("lecode_bin_dir", "")
+        lecode_file = f"{self.common.ct_config.pack_path}/file/{lecode_file}/lecode-{self.region}.bin"
+
+        lec.patch(
+            lecode_file=lecode_file,
+            dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
+            game_track_path=f"{self.path}/files/Race/Course/",
+            copy_track_paths=[f"./file/Track/"],
+            move_track_paths=[f"{self.path}/files/Race/Course/"],
+            ctfile_path="./file/CTFILE.txt",
+            lpar_path=lpar_path,
+        )
+
+    def install_convert_rom(self) -> None:
+        """
+        convert the rom to the selected game format
+        """
+        output_format = self.common.gui_main.stringvar_game_format.get()
+        self.common.gui_main.progress(statut=self.common.translate("Converting to", " ", output_format), add=1)
+        self.convert_to(output_format)
+
+    def install_mod(self) -> None:
         """
         Patch the game to install the mod
         """
         try:
-            with open("./fs.json") as f:
-                fs = json.load(f)
+            max_step = 5 + self.count_patch_subfile_operation()
+            # PATCH main.dol and PATCH lecode.bin, converting, changing ID, copying MyStuff Folder
 
-            # This part is used to estimate the max_step
-            extracted_file = []
-            max_step, step = 1, 0
+            self.common.gui_main.progress(statut=self.common.translate("Installing mod..."), max=max_step, step=0)
+            self.install_copy_mystuff()
+            self.install_patch_subfile()
+            self.install_patch_maindol()
+            self.install_patch_lecode()
+            self.install_convert_rom()
 
-            def count_rf(path):
-                nonlocal max_step
-                max_step += 1
-                if get_extension(path) == "szs":
-                    if not (os.path.realpath(path) in extracted_file):
-                        extracted_file.append(os.path.realpath(path))
-                        max_step += 1
+            messagebox.showinfo(self.common.translate("End"), self.common.translate("The mod have been installed !"))
 
-            for fp in fs:
-                for f in glob.glob(self.path + "/files/" + fp, recursive=True):
-                    if type(fs[fp]) == str:
-                        count_rf(path=f)
-                    elif type(fs[fp]) == dict:
-                        for nf in fs[fp]:
-                            if type(fs[fp][nf]) == str:
-                                count_rf(path=f)
-                            elif type(fs[fp][nf]) == list:
-                                for ffp in fs[fp][nf]: count_rf(path=f)
-            ###
-            extracted_file = []
-            max_step += 4  # PATCH main.dol and PATCH lecode.bin, converting, changing ID
-            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Installing mod"), max=max_step,
-                             step=0)
+        except Exception as e:
+            self.common.log_error()
+            raise e
 
-            def replace_file(path, file, subpath="/") -> None:
-                """
-                Replace subfile in the .szs file
-                :param path: path to the .szs file
-                :param file: file to replace
-                :param subpath: directory between .szs file and file inside to replace
-                """
-                self.gui.progress(statut=self.gui.translate("Editing", "\n", get_nodir(path)), add=1)
-                extension = get_extension(path)
-
-                if extension == "szs":
-                    if not (os.path.realpath(path) in extracted_file):
-                        szs.extract(file=path)
-                        extracted_file.append(os.path.realpath(path))
-
-                    szs_extract_path = path + ".d"
-                    if os.path.exists(szs_extract_path + subpath):
-                        if subpath[-1] == "/":
-                            shutil.copyfile(f"./file/{file}", szs_extract_path + subpath + file)
-                        else:
-                            shutil.copyfile(f"./file/{file}", szs_extract_path + subpath)
-
-                elif path[-1] == "/":
-                    shutil.copyfile(f"./file/{file}", path + file)
-                else:
-                    shutil.copyfile(f"./file/{file}", path)
-
-            for fp in fs:
-                for f in glob.glob(self.path + "/files/" + fp, recursive=True):
-                    if type(fs[fp]) == str:
-                        replace_file(path=f, file=fs[fp])
-                    elif type(fs[fp]) == dict:
-                        for nf in fs[fp]:
-                            if type(fs[fp][nf]) == str:
-                                replace_file(path=f, subpath=nf, file=fs[fp][nf])
-                            elif type(fs[fp][nf]) == list:
-                                for ffp in fs[fp][nf]: replace_file(path=f, subpath=nf, file=ffp)
-
-            for file in extracted_file:
-                self.gui.progress(statut=self.gui.translate("Recompilating", "\n", get_nodir(file)), add=1)
-                szs.create(file=file)
-                if os.path.exists(file + ".d"):
-                    shutil.rmtree(file + ".d")
-
-            self.gui.progress(statut=self.gui.translate("Patch main.dol"), add=1)
-            wstrt.patch(path=self.path)
-
-            self.gui.progress(statut=self.gui.translate("Patch lecode.bin"), add=1)
-
-            shutil.copytree("./file/Track/", self.path + "/files/Race/Course/", dirs_exist_ok=True)
-
-            lec.patch(
-                lecode_file=f"./file/lecode-{self.region}.bin",
-                dest_lecode_file=f"{self.path}/files/rel/lecode-{self.region}.bin",
-                game_track_path=f"{self.path}/files/Race/Course/",
-                move_track_path=f"{self.path}/files/Race/Course/",
-                ctfile_path="./file/CTFILE.txt",
-                lpar_path="./file/lpar-default.txt",
-            )
-
-            output_format = self.gui.stringvar_game_format.get()
-            self.gui.progress(statut=self.gui.translate("Converting to", " ", output_format), add=1)
-            self.convert_to(output_format)
-
-            messagebox.showinfo(self.gui.translate("End"), self.gui.translate("The mod has been installed !"))
-
-        except:
-            self.gui.log_error()
         finally:
-            self.gui.progress(show=False)
-            exit()
+            self.common.gui_main.progress(show=False)
+            self.common.gui_main.quit()
 
     def patch_autoadd(self, auto_add_dir: str = "./file/auto-add") -> None:
         """
@@ -266,47 +276,17 @@ class Game:
         if os.path.exists(auto_add_dir): shutil.rmtree(auto_add_dir)
         szs.autoadd(path=self.path, dest_dir=auto_add_dir)
 
-    def patch_bmg(self, gamefile: str) -> None:
+    def create_extra_common(self, bmgtracks: str, extra_common_path: str = "./file/ExtraCommon.txt") -> None:
         """
-        Patch bmg file (text file)
-        :param gamefile: an .szs file where file will be patched
+        this function create an "extra common" file : it contain modification about the original tracks name
+        (the color modification) and allow the modification to be applied by overwritting the normal common
+        file by this one.
+        :param bmgtracks: bmg containing the track list
+        :param extra_common_path: destination path to the extra common file
         """
-        NINTENDO_CWF_REPLACE = "Wiimmfi"
-        MAINMENU_REPLACE = f"MKWFaraphel {self.ctconfig.version}"
-        menu_replacement = {
-            "CWF de Nintendo": NINTENDO_CWF_REPLACE,
-            "Wi-Fi Nintendo": NINTENDO_CWF_REPLACE,
-            "CWF Nintendo": NINTENDO_CWF_REPLACE,
-            "Nintendo WFC": NINTENDO_CWF_REPLACE,
-            "Wi-Fi": NINTENDO_CWF_REPLACE,
-            "インターネット": NINTENDO_CWF_REPLACE,
 
-            "Menu principal": MAINMENU_REPLACE,
-            "Menú principal": MAINMENU_REPLACE,
-            "Main Menu": MAINMENU_REPLACE,
-            "トップメニュー": MAINMENU_REPLACE,
-
-            "Mario Kart Wii": MAINMENU_REPLACE,
-        }
-
-        bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
-        self.gui.progress(statut=self.gui.translate("Patching text", " ", bmglang), add=1)
-
-        szs.extract(file=gamefile)
-
-        bmgmenu = bmg.cat(path=gamefile, subfile=".d/message/Menu.bmg")  # Menu.bmg
-        bmgtracks = bmg.cat(path=gamefile, subfile=".d/message/Common.bmg")  # Common.bmg
-
-        trackheader = "#--- standard track names"
-        trackend = "2328"
-        bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
-
-        with open("./file/ExtraCommon.txt", "w", encoding="utf8") as f:
-            f.write("#BMG\n\n"
-                    f"  703e\t= \\\\c{{white}}{self.gui.translate('Random: All tracks', lang=bmglang)}\n"
-                    f"  703f\t= \\\\c{{white}}{self.gui.translate('Random: Original tracks', lang=bmglang)}\n"
-                    f"  7040\t= \\\\c{{white}}{self.gui.translate('Random: Custom Tracks', lang=bmglang)}\n"
-                    f"  7041\t= \\\\c{{white}}{self.gui.translate('Random: New tracks', lang=bmglang)}\n")
+        with open(extra_common_path, "w", encoding="utf8") as f:
+            f.write("#BMG\n")
 
             for bmgtrack in bmgtracks.split("\n"):
                 if "=" in bmgtrack:
@@ -315,20 +295,84 @@ class Game:
                     track_name = bmgtrack[bmgtrack.find("= ") + 2:]
 
                     if "T" in bmgtrack[:bmgtrack.find("=")]:
+                        if not self.common.ct_config.keep_original_track: continue
+
                         start_track_id: int = bmgtrack.find("T")  # index where the bmg track definition start
                         track_id = bmgtrack[start_track_id:start_track_id + 3]
                         if track_id[1] in "1234":  # if the track is a original track from the wii
-                            prefix = trackname_color["Wii"] + " "
-                        elif track_id[1] in "5678":  # if the track is a retro track from the original game
-                            for color_prefix, rep_color_prefix in trackname_color.items():  # color retro track prefix
-                                track_name = track_name.replace(color_prefix, rep_color_prefix)
-                        track_id = hex(bmgID_track_move[track_id])[2:]
-                    else:  # Arena
-                        start_track_id = bmgtrack.find("U") + 1  # index where the bmg arena definition start
-                        track_id = bmgtrack[start_track_id:start_track_id + 2]
-                        track_id = hex((int(track_id[0]) - 1) * 5 + (int(track_id[1]) - 1) + 0x7020)[2:]
+                            prefix = "Wii"
+                            if prefix in Track.tags_color:
+                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            prefix += " "
 
+                        elif track_id[1] in "5678":  # if the track is a retro track from the original game
+                            prefix, *track_name = track_name.split(" ")
+                            track_name = " ".join(track_name)
+                            if prefix in Track.tags_color:
+                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            prefix += " "
+
+                        track_id = hex(bmgID_track_move[track_id])[2:]
+
+                    else:  # Arena
+                        start_track_id: int = bmgtrack.find("U")  # index where the bmg arena definition start
+                        track_id = bmgtrack[start_track_id:start_track_id + 3]
+
+                        if track_id[1] == "2":  # if this is the retro cup of arenas
+                            prefix, *track_name = track_name.split(" ")
+                            track_name = " ".join(track_name)
+
+                            if prefix in Track.tags_color:
+                                prefix = "\\\\c{" + Track.tags_color[prefix] + "}" + prefix + "\\\\c{off}"
+                            prefix += " "
+
+                    if not self.common.ct_config.add_original_track_prefix: prefix = ""
                     f.write(f"  {track_id}\t= {prefix}{track_name}\n")
+
+            if not self.common.ct_config.keep_original_track:
+                for cup_index, cup in enumerate(self.common.ct_config.get_all_cups(), start=1):
+                    if cup_index > 8: break  # only keep the 8 first cup
+                    for track_index, track in enumerate(cup.get_tracks(), start=1):
+                        f.write(
+                            f"  T{cup_index}{track_index}\t= "
+                            f"{track.get_track_formatted_name(filter_highlight=self.common.ct_config.filter_track_highlight)}"
+                            f"\n"
+                        )
+
+            for arena in self.common.ct_config.arenas:
+                f.write(
+                    f"  U{arena.special[1:]}\t= "
+                    f"{arena.get_track_formatted_name(filter_highlight=self.common.ct_config.filter_track_highlight)}"
+                    f"\n"
+                )
+
+    def patch_bmg(self, gamefile: str) -> None:
+        """
+        Patch bmg file (text file)
+        :param gamefile: an .szs file where file will be patched
+        """
+
+        bmg_replacement = {
+            "MOD_NAME": self.common.ct_config.name,
+            "MOD_NICKNAME": self.common.ct_config.nickname,
+            "MOD_VERSION": self.common.ct_config.version,
+            "MOD_CUSTOMIZED": "" if self.common.gui_main.is_using_official_config() else "(custom)",
+            "ONLINE_SERVICE": "Wiimmfi",
+        }
+
+        bmglang = gamefile[-len("E.txt"):-len(".txt")]  # Langue du fichier
+        self.common.gui_main.progress(statut=self.common.translate("Patching text", " ", bmglang), add=1)
+
+        szs.extract(file=gamefile)
+
+        bmgmenu = bmg.cat(path=gamefile, subfile=".d/message/Menu.bmg")  # Menu.bmg
+
+        trackheader = "#--- standard track names"
+        trackend = "2328"
+        bmgtracks = bmg.cat(path=gamefile, subfile=".d/message/Common.bmg")  # Common.bmg
+        bmgtracks = bmgtracks[bmgtracks.find(trackheader) + len(trackheader):bmgtracks.find(trackend)]
+
+        self.create_extra_common(bmgtracks=bmgtracks, extra_common_path="./file/ExtraCommon.txt")
 
         bmgcommon = ctc.patch_bmg(ctfile="./file/CTFILE.txt",
                                   bmgs=[gamefile + ".d/message/Common.bmg", "./file/ExtraCommon.txt"])
@@ -336,101 +380,196 @@ class Game:
                                    bmgs=[gamefile + ".d/message/Common.bmg", "./file/ExtraCommon.txt"])
 
         shutil.rmtree(gamefile + ".d")
-        os.remove("./file/ExtraCommon.txt")
 
-        def finalise(file, bmgtext, replacement_list=None):
-            if replacement_list:
-                for text, colored_text in replacement_list.items(): bmgtext = bmgtext.replace(text, colored_text)
-            with open(file, "w", encoding="utf-8") as f:
-                f.write(bmgtext)
+        def process_bmg_replacement(bmg_content: str, bmg_language: str) -> str:
+            """
+            This function apply the file_process to the bmg file. This allow text modification useful to
+            change menu text (Wiimmfi for example) and the Wiimm's cup.
+            :param bmg_content: content of the bmg to process
+            :param bmg_language: language of the bmg file
+            :return: the replaced bmg file
+            """
+
+            for bmg_process in self.common.ct_config.file_process.get("bmg", []):
+                if "language" in bmg_process and bmg_language not in bmg_process["language"]:
+                    continue
+
+                for data, data_replacement in bmg_process["data"].items():
+                    for key, replacement in bmg_replacement.items():
+                        data_replacement = data_replacement.replace("{"+key+"}", replacement)
+
+                    if bmg_process["mode"] == "overwrite_id":
+                        start_line = f"\n\t{data} = "
+                        start_pos = bmg_content.find(start_line)
+                        if start_pos != -1:
+                            end_pos = bmg_content[start_pos:].find("\n")
+                            bmg_content = (
+                                bmg_content[:start_pos] +
+                                start_line + data_replacement +
+                                bmg_content[end_pos:]
+                            )
+                        else:
+                            bmg_content = f"{bmg_content}\n{start_line}{data_replacement}\n"
+
+                    elif bmg_process["mode"] == "replace_text":
+                        bmg_content = bmg_content.replace(data, data_replacement)
+
+            return bmg_content
+
+        def save_bmg(file: str, bmg_content: str) -> None:
+            """
+            Save and encode the bmg
+            :param file: name of the bmg-text to save
+            :param bmg_content: content to save in the bmg-text
+            """
+            with open(file, "w", encoding="utf-8") as f: f.write(bmg_content)
             bmg.encode(file)
             os.remove(file)
 
-        finalise(f"./file/Menu_{bmglang}.txt", bmgmenu, menu_replacement)
-        finalise(f"./file/Common_{bmglang}.txt", bmgcommon)
-        finalise(f"./file/Common_R{bmglang}.txt", rbmgcommon)
+        fileprocess_placement = self.common.ct_config.file_process.get("placement", {})
+        bmg_dir = fileprocess_placement.get("bmg_patch_dir", "")
+        bmg_dir = f"{self.common.ct_config.pack_path}/file/{bmg_dir}"
+        os.makedirs(get_dir(bmg_dir), exist_ok=True)
 
-    @in_thread
-    def patch_file(self): self.nothread_patch_file()
+        save_bmg(f"{bmg_dir}/Menu_{bmglang}.txt", process_bmg_replacement(bmgmenu, bmglang))
+        save_bmg(f"{bmg_dir}/Common_{bmglang}.txt", process_bmg_replacement(bmgcommon, bmglang))
+        save_bmg(f"{bmg_dir}/Common_R{bmglang}.txt", process_bmg_replacement(rbmgcommon, bmglang))
 
-    def nothread_patch_file(self):
+    def patch_all_bmg(self) -> None:
+        for file in glob.glob(f"{self.path}/files/Scene/UI/MenuSingle_?.szs"):
+            self.patch_bmg(file)
+
+    def patch_file(self):
         """
         Prepare all files to install the mod (track, bmg text, descriptive image, ...)
         """
         try:
-            if not (os.path.exists("./file/Track-WU8/")): os.makedirs("./file/Track-WU8/")
-            with open("./convert_file.json") as f:
-                fc = json.load(f)
-            max_step = len(fc["img"]) + len(self.ctconfig.all_tracks) + 3 + len("EGFIS")
+            os.makedirs(f"{self.common.ct_config.pack_path}/file/Track-WU8/", exist_ok=True)
 
-            self.gui.progress(show=True, indeter=False, statut=self.gui.translate("Converting files"),
-                              max=max_step, step=0)
-            self.gui.progress(statut=self.gui.translate("Configurating LE-CODE"), add=1)
-            self.ctconfig.create_ctfile(highlight_version=self.gui.stringvar_mark_track_from_version.get())
+            max_step = (
+                len(self.common.ct_config.file_process.get("img_encode", {})) +
+                self.common.ct_config.get_tracks_count() +
+                3 +
+                len("EGFIS")
+            )
 
-            self.gui.progress(statut=self.gui.translate("Creating ct_icon.png"), add=1)
-            ct_icon = self.ctconfig.get_cticon()
-            ct_icon.save("./file/ct_icons.tpl.png")
+            self.common.gui_main.progress(
+                show=True,
+                indeter=False,
+                statut=self.common.translate("Converting files"),
+                max=max_step, step=0
+            )
+            self.common.gui_main.progress(statut=self.common.translate("Configurating LE-CODE"), add=1)
+            self.common.ct_config.create_ctfile()
 
-            self.gui.progress(statut=self.gui.translate("Creating descriptive images"), add=1)
-            self.patch_img_desc()
-            self.patch_image(fc)
-            for file in glob.glob(self.path + "/files/Scene/UI/MenuSingle_?.szs"): self.patch_bmg(file)
-            # MenuSingle could be any other file, Common and Menu are all the same in all other files.
+            self.generate_cticons()
+            self.generate_all_image()
+            self.patch_image()
+            self.patch_all_bmg()
             self.patch_autoadd()
             self.patch_tracks()
 
-            self.gui.button_install_mod.grid(row=2, column=1, columnspan=2, sticky="NEWS")
-            self.gui.button_install_mod.config(
-                text=self.gui.translate("Install mod", " (v", self.ctconfig.version, ")"))
+        except Exception as e:
+            self.common.log_error()
+            raise e
 
-        except:
-            self.gui.log_error()
         finally:
-            self.gui.progress(show=False)
+            self.common.gui_main.progress(show=False)
 
-    def patch_image(self, fc: dict) -> None:
+    def generate_cticons(self):
+        fileprocess_placement = self.common.ct_config.file_process.get("placement", {})
+        file = fileprocess_placement.get("ct_icons", "ct_icons.tpl.png")
+        file = f"{self.common.ct_config.pack_path}/file/{file}"
+
+        os.makedirs(get_dir(file), exist_ok=True)
+        self.common.ct_config.get_cticon().save(file)
+
+    def patch_image(self) -> None:
         """
         Convert .png image into the format wrote in convert_file
-        :param fc: file convert, a dictionnary indicating which format a file need to be converted
         """
-        for i, file in enumerate(fc["img"]):
-            self.gui.progress(statut=self.gui.translate("Converting images") + f"\n({i + 1}/{len(fc['img'])}) {file}",
-                              add=1)
-            img.encode(file="./file/" + file, format=fc["img"][file])
 
-    def patch_img_desc(self, img_desc_path: str = "./file/img_desc/", dest_dir: str = "./file/") -> None:
-        """
-        patch descriptive image used when the game boot
-        :param img_desc_path: directory where original part of the image are stored
-        :param dest_dir: directory where patched image will be saved
-        """
-        il = Image.open(img_desc_path + "/illustration.png")
-        il_16_9 = il.resize((832, 456))
-        il_4_3 = il.resize((608, 456))
+        img_encode = self.common.ct_config.file_process.get("img_encode", {})
+        image_amount = len(img_encode)
 
-        for file_lang in glob.glob(img_desc_path + "/??.png"):
-            img_lang = Image.open(file_lang)
-            img_lang_16_9 = img_lang.resize((832, 456))
-            img_lang_4_3 = img_lang.resize((608, 456))
+        for i, (file, data) in enumerate(img_encode.items()):
+            self.common.gui_main.progress(
+                statut=self.common.translate("Converting images") + f"\n({i + 1}/{image_amount}) {file}",
+                add=1
+            )
 
-            new_16_9 = Image.new("RGBA", (832, 456), (0, 0, 0, 255))
-            new_16_9.paste(il_16_9, (0, 0), il_16_9)
-            new_16_9.paste(img_lang_16_9, (0, 0), img_lang_16_9)
-            new_16_9.save(dest_dir + f"/strapA_16_9_832x456{get_filename(get_nodir(file_lang))}.png")
+            img.encode(
+                file=f"{self.common.ct_config.pack_path}/file/{file}",
+                format=data.get("format", "TEX.RGB565"),
+                dest_file=f"{self.common.ct_config.pack_path}/file/{data.get('dest', None)}"
+            )
 
-            new_4_3 = Image.new("RGBA", (608, 456), (0, 0, 0, 255))
-            new_4_3.paste(il_4_3, (0, 0), il_4_3)
-            new_4_3.paste(img_lang_4_3, (0, 0), img_lang_4_3)
-            new_4_3.save(dest_dir + f"/strapA_608x456{get_filename(get_nodir(file_lang))}.png")
+    def generate_image(self, generator: dict) -> Image.Image:
+        def get_layer_xy(layer: dict) -> tuple:
+            return (
+                int(layer.get("x", 0) * generator["width"]),
+                int(layer.get("y", 0) * generator["height"])
+            )
+
+        def get_layer_bbox(layer: dict) -> tuple:
+            return (
+                int(layer.get("x_start", 0) * generator["width"]),
+                int(layer.get("y_start", 0) * generator["height"]),
+                int(layer.get("x_end", 1) * generator["width"]),
+                int(layer.get("y_end", 1) * generator["height"])
+            )
+
+        def get_layer_size(layer: dict) -> tuple:
+            x1, y1, x2, y2 = get_layer_bbox(layer)
+            return x2-x1, y2-y1
+
+        image = Image.new(
+            generator.get("format", "RGB"),
+            (generator["width"], generator["height"]),
+            tuple(generator.get("color", [0]))
+        )
+        draw = ImageDraw.Draw(image)
+
+        for layer in generator["layers"]:
+            if "type" not in layer: continue
+            if layer["type"] == "color":
+                draw.rectangle(
+                    get_layer_bbox(layer),
+                    tuple(layer.get("color", [0]))
+                )
+            if layer["type"] == "image":
+                layer_image = Image.open(f'{self.common.ct_config.pack_path}/file/{layer["path"]}')
+                layer_image = layer_image.resize(get_layer_size(layer)).convert("RGBA")
+                image.paste(
+                    layer_image,
+                    box=get_layer_bbox(layer),
+                    mask=layer_image
+                )
+            if layer["type"] == "text":
+                font = ImageFont.truetype(
+                    font=f'{self.common.ct_config.pack_path}/file/{layer["font"]}' if "font" in layer else None,
+                    size=int(layer.get("text_size", 0.1) * generator["height"]),
+                )
+                draw.text(
+                    get_layer_xy(layer),
+                    text=layer.get("text", "<Missing text>"),
+                    fill=tuple(layer.get("color", 255)),
+                    font=font
+                )
+
+        return image
+
+    def generate_all_image(self) -> None:
+        for file, generator in self.common.ct_config.file_process.get("img_generator", {}).items():
+            file = f"{self.common.ct_config.pack_path}/file/{file}"
+            os.makedirs(get_dir(file), exist_ok=True)
+            self.generate_image(generator).save(file)
 
     def patch_tracks(self) -> None:
         """
         Download track's wu8 file and convert them to szs
         """
-        max_process = self.gui.intvar_process_track.get()
         thread_list = {}
-        error_count, error_max = 0, 3
 
         def add_process(track) -> None:
             """
@@ -438,65 +577,42 @@ class Game:
             :param track: the track that will be patched
             :return: 0 if no error occured
             """
-            nonlocal error_count, error_max, thread_list
-
-            for _track in [track.file_szs, track.file_wu8]:
-                if os.path.exists(_track):
-                    if os.path.getsize(_track) < 1000:  # File under this size are corrupted
-                        os.remove(_track)
-
-            if not self.gui.boolvar_disable_download.get():
-                if not os.path.exists(track.file_wu8):
-                    try: track.download_wu8(GITHUB_DEV_BRANCH if self.gui.is_dev_version else GITHUB_MASTER_BRANCH)
-                    except CantDownloadTrack:
-                        error_count += 1
-                        if error_count > error_max:  # Too much track wasn't correctly converted
-                            messagebox.showerror(
-                                self.gui.translate("Error"),
-                                self.gui.translate("Too much tracks had a download issue."))
-                            raise TooMuchDownloadFailed()
-                        else:
-                            messagebox.showwarning(self.gui.translate("Warning"),
-                                                   self.gui.translate("Can't download this track !",
-                                                                      f" ({error_count} / {error_max})"))
-
-            if not track.check_szs_sha1():  # if sha1 of track's szs is incorrect or track's szs does not exist
-                if os.path.exists(track.file_wu8): track.convert_wu8_to_szs()
-                else:
-                    messagebox.showerror(self.gui.translate("Error"),
-                        self.gui.translate("Can't convert track.\nEnable track download and retry."))
-                    raise CantConvertTrack()
-            elif self.gui.boolvar_del_track_after_conv.get():
-                os.remove(track.file_wu8)
+            try: track.convert_wu8_to_szs()
+            except Exception as e:
+                self.common.log_error()
+                raise e
 
         def clean_process() -> int:
             """
             Check if a track conversion ended, and remove them from thread_list
             :return: 0 if thread_list is empty, else 1
             """
-            nonlocal error_count, error_max, thread_list
+            nonlocal thread_list
 
             for track_key, thread in thread_list.copy().items():
                 if not thread.is_alive():  # if conversion ended
                     thread_list.pop(track_key)
-                    if self.gui.boolvar_del_track_after_conv.get(): os.remove(track.file_wu8)
                 if not (any(thread_list.values())): return 1  # if there is no more process
 
-            if len(thread_list): return 1
-            else: return 0
+            return bool(thread_list)
 
-        total_track = len(self.ctconfig.all_tracks)
-        self.gui.progress(max=total_track, indeter=False, show=True)
+        total_track = self.common.ct_config.get_tracks_count()
+        self.common.gui_main.progress(max=total_track, indeter=False, show=True)
 
-        for i, track in enumerate(self.ctconfig.all_tracks):
-            while error_count <= error_max:
+        for i, track in enumerate(self.common.ct_config.get_tracks_and_arenas()):
+            while True:
+                max_process = self.common.gui_main.intvar_process_track.get()
                 if len(thread_list) < max_process:
-                    track_name = track.get_track_name()
-                    thread_list[track_name] = Thread(target=add_process, args=[track])
-                    thread_list[track_name].setDaemon(True)
-                    thread_list[track_name].start()
-                    self.gui.progress(statut=self.gui.translate("Converting tracks", f"\n({i + 1}/{total_track})\n",
-                                                                "\n".join(thread_list.keys())), add=1)
+                    thread_list[track.sha1] = Thread(target=add_process, args=[track])
+                    thread_list[track.sha1].setDaemon(True)
+                    thread_list[track.sha1].start()
+                    self.common.gui_main.progress(
+                        statut=self.common.translate(
+                            "Converting tracks", f"\n({i + 1}/{total_track})\n",
+                            "\n".join(thread_list.keys())
+                        ),
+                        add=1
+                    )
                     break
                 clean_process()
 

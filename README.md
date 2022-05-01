@@ -24,7 +24,7 @@ que l'installation est terminée
 Une fois cela fait, vous pouvez lancer votre jeu avec Dolphin ou depuis votre Wii avec un Homebrew.
 L'ID du jeu est RMCP60 si vous n'avez pas choisi comme format de sortie FST.
     
-Si vous rencontrez un problème avec l'installateur, envoyez-moi un mp sur discord à Faraphel#5846 / Faraphel#0001
+Si vous rencontrez un problème avec l'installateur, envoyez-moi un mp sur discord à Faraphel#4526
 </details>
 
 
@@ -52,5 +52,5 @@ and press "Install mod". Once the mod is installed, a notification will appear.
 You can now play the game with Dolphin, or on your Wii with a Homebrew.
 The game ID is RMCP60 if output format isn't FST.
     
-If you find a problem with the program, please contact me on discord at Faraphel#5846 / Faraphel#0001
+If you find a problem with the program, please contact me on discord at Faraphel#4526
 </details>

@@ -1,42 +1,90 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 import math
 import json
 import os
 
-from .Cup import Cup
-from .Track import Track
-
-
-def get_cup_icon(cup_id: [str, int], font_path: str = "./file/SuperMario256.ttf",
-                 cup_icon_dir: str = "./file/cup_icon") -> Image:
-    """
-    :param cup_id: id of the cup
-    :param cup_icon_dir: directory to cup icon
-    :param font_path: path to the font used to generate icon
-    :return: cup icon
-    """
-    if os.path.exists(f"{cup_icon_dir}/{cup_id}.png"):
-        cup_icon = Image.open(f"{cup_icon_dir}/{cup_id}.png").resize((128, 128))
-
-    else:
-        cup_icon = Image.new("RGBA", (128, 128))
-        draw = ImageDraw.Draw(cup_icon)
-        font = ImageFont.truetype(font_path, 90)
-        draw.text((4, 4), "CT", (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
-        font = ImageFont.truetype(font_path, 60)
-        draw.text((5, 80), "%03i" % cup_id, (255, 165, 0), font=font, stroke_width=2, stroke_fill=(0, 0, 0))
-
-    return cup_icon
+from source.Cup import Cup
+from source.Track import Track, get_trackdata_from_json
 
 
 class CT_Config:
-    def __init__(self, version: str = None, gui=None):
+    def __init__(self, version: str = None, name: str = None, nickname: str = None,
+                 game_variant: str = "01", region: int = None, cheat_region: int = None,
+                 tags_color: dict = None, prefix_list: list = None, suffix_list: list = None,
+                 tag_retro: str = "Retro", default_track: dict = None, pack_path: str = "",
+                 file_process: dict = None, file_structure: dict = None, default_sort: str = "",
+                 cup: list = None, tracks_list: list = None, add_original_track_prefix: bool = True,
+                 swap_original_order: bool = True, keep_original_track: bool = True,
+                 enable_random_cup: bool = True, arenas: list = None,
+                 *args, **kwargs):
+
         self.version = version
+        self.name = name
+        self.nickname = nickname if nickname else name
+        self.game_variant = game_variant  # this is the "60" part in RMCP60 for example
+        self.region = region
+        self.cheat_region = cheat_region
+
+        self.add_original_track_prefix = add_original_track_prefix
+        self.swap_original_order = swap_original_order
+        self.keep_original_track = keep_original_track  # display issue, bad bmg.
+        self.enable_random_cup = enable_random_cup
+
         self.ordered_cups = []
         self.unordered_tracks = []
-        self.all_tracks = []
-        self.all_version = {version}
-        self.gui = gui
+        self.arenas = []
+
+        self.default_track = default_track
+
+        self.pack_path = pack_path
+        self.sort_track_attr = default_sort
+
+        self.file_process = file_process
+        self.file_structure = file_structure
+
+        self.filter_track_selection = lambda track: True
+        self.filter_track_highlight = lambda track: False
+        self.filter_track_random_new = lambda track: getattr(track, "new", False)
+
+        self.default_track = Track().load_from_json(default_track if default_track else {})
+        Cup.default_track = self.default_track
+
+        for id, cup_json in enumerate(cup if cup else []):
+            # tracks with defined order
+            cup = Cup(id=id)
+            cup.load_from_json(cup_json)
+            self.ordered_cups.append(cup)
+
+        for track_json in tracks_list if tracks_list else []:
+            # unordered tracks
+            track = get_trackdata_from_json(track_json)
+            self.unordered_tracks.extend([track] * track.weight)
+
+        for arena_json in arenas if arenas else []:
+            # arena
+            arena_json["is_arena"] = True
+            arena = get_trackdata_from_json(arena_json)
+            self.arenas.append(arena)
+
+        if pack_path:
+            with open(f"{pack_path}/file_process.json", encoding="utf8") as fp_file:
+                self.file_process = json.load(fp_file)
+            with open(f"{pack_path}/file_structure.json", encoding="utf8") as fs_file:
+                self.file_structure = json.load(fs_file)
+
+            fileprocess_placement = self.file_process.get('placement', {})
+
+            dir = fileprocess_placement.get('cup_icon_dir', "/ct_icons/")
+            Cup.icon_dir = f"{self.pack_path}/file/{dir}/"
+
+            wu8_dirname = fileprocess_placement.get("track_dir", "/Track-WU8/")
+            Track._wu8_dir = f"{self.pack_path}/file/{wu8_dirname}/"
+
+        Track._szs_dir = "./file/Track/"
+        Track.tag_retro = tag_retro if tag_retro else {}
+        Track.prefix_list = prefix_list if prefix_list else []
+        Track.suffix_list = suffix_list if suffix_list else []
+        Track.tags_color = tags_color if tags_color else {}
 
     def add_ordered_cup(self, cup: Cup) -> None:
         """
@@ -44,9 +92,6 @@ class CT_Config:
         :param cup: a Cup object to add as an ordered cup
         """
         self.ordered_cups.append(cup)
-        for track in cup.tracks:
-            self.all_version.add(track.since_version)
-            self.all_tracks.append(track)
 
     def add_unordered_track(self, track: Track) -> None:
         """
@@ -54,46 +99,81 @@ class CT_Config:
         :param track: a Track object to add as an unordered tracks
         """
         self.unordered_tracks.append(track)
-        self.all_version.add(track.since_version)
-        self.all_tracks.append(track)
 
-    def create_ctfile(self, directory: str = "./file/", highlight_version: str = None) -> None:
+    def unordered_tracks_to_cup(self):
+        track_in_cup: int = 4
+
+        track_selection = list(filter(self.filter_track_selection, self.unordered_tracks))
+        track_selection.sort(key=lambda track: getattr(track, self.sort_track_attr, 0))
+
+        for cup_id, track_id in enumerate(range(0, len(track_selection), track_in_cup), start=1):
+            cup = Cup(id=cup_id, name=f"CT{cup_id}")
+            for index, track in enumerate(track_selection[track_id:track_id + track_in_cup]):
+                cup.tracks[index] = track
+            yield cup
+
+    def create_ctfile(self, directory: str = "./file/") -> None:
         """
         create a ctfile configuration in a directory
-        :param highlight_version: highlight a specific version in light blue
         :param directory: create CTFILE.txt and RCTFILE.txt in this directory
         """
         with open(directory + "CTFILE.txt", "w", encoding="utf-8") as ctfile, \
                 open(directory + "RCTFILE.txt", "w", encoding="utf-8") as rctfile:
+
+            lecode_flags = []
+            if not self.keep_original_track: lecode_flags.append("N$NONE")
+            else:
+                lecode_flags.append("N$SHOW")
+                if self.add_original_track_prefix: lecode_flags.append("N$F_WII")
+                if self.swap_original_order: lecode_flags.append("N$SWAP")
+
             header = (
                 "#CT-CODE\n"
                 "[RACING-TRACK-LIST]\n"
                 "%LE-FLAGS=1\n"
-                "%WIIMM-CUP=1\n"
-                "N N$SWAP | N$F_WII\n\n")
+                f"%WIIMM-CUP={int(self.enable_random_cup)}\n"
+                f"N {' | '.join(lecode_flags)}\n"
+                "\n"
+            )
             ctfile.write(header); rctfile.write(header)
 
-            # generate cup for undefined track
-            unordered_cups = []
-
-            star_value = []
-            if not self.gui.boolvar_use_1star_track.get(): star_value.append(1)
-            if not self.gui.boolvar_use_2star_track.get(): star_value.append(2)
-            if not self.gui.boolvar_use_3star_track.get(): star_value.append(3)
-
-            track_list = self.search_tracks(not_value=True, values_list=True,
-                                            only_unordered_track=True, score=star_value)
-
-            for i, track in enumerate(track_list):
-                if i % 4 == 0:
-                    _actual_cup = Cup(name=f"TL{i // 4}")
-                    unordered_cups.append(_actual_cup)
-                _actual_cup.tracks[i % 4] = track
-
             # all cups
-            for cup in self.ordered_cups + unordered_cups:
-                ctfile.write(cup.get_ctfile_cup(race=False, highlight_version=highlight_version))
-                rctfile.write(cup.get_ctfile_cup(race=True, highlight_version=highlight_version))
+            kwargs = {
+                "filter_highlight": self.filter_track_highlight,
+                "filter_random_new": self.filter_track_random_new,
+                "ct_config": self
+            }
+
+            for cup in self.get_all_cups():
+                ctfile.write(cup.get_ctfile(race=False, **kwargs))
+                rctfile.write(cup.get_ctfile(race=True, **kwargs))
+
+            if self.arenas:
+                ctfile.write("\n"); rctfile.write("\n")
+
+                for arena in self.arenas:
+                    ctfile.write(arena.get_ctfile(race=False, **kwargs))
+                    rctfile.write(arena.get_ctfile(race=True, **kwargs))
+
+    def get_tracks(self):
+        for data in self.unordered_tracks + self.ordered_cups:
+            for track in data.get_tracks(): yield track
+
+    def search_tracks(self, **condition):
+        for track in self.get_tracks():
+            for property, (possibility, filter_func) in condition.items():
+                if not filter_func: filter_func = lambda a, b: a == b
+                if not filter_func(getattr(track, property, None), possibility):
+                    break
+            else:
+                yield track
+
+    def get_cup_count(self) -> int:
+        return math.ceil(len(self.unordered_tracks) / 4) + len(self.ordered_cups)
+
+    def get_all_cups(self):
+        for cup in self.ordered_cups: yield cup
+        for cup in self.unordered_tracks_to_cup(): yield cup
 
     def get_cticon(self) -> Image:
         """
@@ -101,76 +181,69 @@ class CT_Config:
         :return: ct_icon image
         """
         CT_ICON_WIDTH = 128
-        icon_files = ["left", "right"]
 
-        total_cup_count = math.ceil(len(self.all_tracks) // 4) + 10  # +10 because left, right, start at 0, 8 normal cup
+        default_cups = ["left", "right"]
+
+        if self.keep_original_track:
+            if self.swap_original_order:
+                default_cups.extend(
+                    ["mushroom", "shell", "flower", "banana",
+                     "star", "leaf", "special", "lightning"]
+                )
+            else:
+                default_cups.extend(
+                    ["mushroom", "flower", "star", "special",
+                     "shell", "banana", "leaf", "lightning"]
+                )
+        if self.enable_random_cup: default_cups.append("random")
+
+        total_cup_count = self.get_cup_count() + len(default_cups)  # +10 because left, right, start at 0, 8 normal cup
         ct_icon = Image.new("RGBA", (CT_ICON_WIDTH, CT_ICON_WIDTH * (total_cup_count + 2)))
         # +2 because of left and right arrow
 
-        icon_files.extend(range(total_cup_count))
+        def icon_cups_generator():
+            for id, name in enumerate(default_cups): yield Cup(name=name, id=-id)  # default cup have a negative id
+            for cup in self.get_all_cups(): yield cup
 
-        for index, cup_id in enumerate(icon_files):
+        for index, cup in enumerate(icon_cups_generator()):
             # index is a number, id can be string or number ("left", 0, 12, ...)
-            cup_icon = get_cup_icon(cup_id)
-            ct_icon.paste(cup_icon, (0, index * CT_ICON_WIDTH))
+            ct_icon.paste(cup.get_icon(), (0, index * CT_ICON_WIDTH))
 
         return ct_icon
 
-    def load_ctconfig_file(self, ctconfig_file: str = "./ct_config.json") -> None:
+    def load_ctconfig_file(self, ctconfig_file: str = "./ct_config.json"):
         """
         load a ctconfig from a json file
         :param ctconfig_file: path to the ctconfig file
         """
         with open(ctconfig_file, encoding="utf-8") as f:
             ctconfig_json = json.load(f)
-        self.load_ctconfig_json(ctconfig_json)
+        self.load_ctconfig_json(ctconfig_json, pack_path=os.path.dirname(ctconfig_file))
 
-    def load_ctconfig_json(self, ctconfig_json: dict) -> None:
+        return self
+
+    def load_ctconfig_json(self, ctconfig_json: dict, pack_path: str):
         """
         load ctconfig from a dictionnary
+        :param pack_path: path to the pack (parent dir of the ct_config.json)
         :param ctconfig_json: json of the ctconfig to load
         """
-        self.ordered_cups = []
-        self.unordered_tracks = []
-        self.all_tracks = []
+        self.__init__(pack_path=pack_path, **ctconfig_json)
 
-        for cup_json in ctconfig_json["cup"].values():  # tracks with defined order
-            cup = Cup()
-            cup.load_from_json(cup_json)
-            if not cup.locked:  # locked cup are not useful (they are original track or random track)
-                self.ordered_cups.append(cup)
-                self.all_tracks.extend(cup.tracks)
+        return self
 
-        for track_json in ctconfig_json["tracks_list"]:  # unordered tracks
-            track = Track()
-            track.load_from_json(track_json)
-            self.unordered_tracks.append(track)
-            self.all_tracks.append(track)
+    def get_tracks_count(self) -> int:
+        return sum(1 for _ in self.get_tracks())
 
-        self.version = ctconfig_json["version"]
+    def get_all_track_possibilities(self) -> list:
+        possibilities = set()
+        for track in self.get_tracks():
+            for key in track.__dict__.keys():
+                if key.startswith("_"): continue  # if attr start with a _, the attribute is supposed to be hidden
+                possibilities.add(key)
 
-        self.all_version = set()
-        for track in self.all_tracks:
-            self.all_version.add(track.since_version)
-        self.all_version = sorted(self.all_version)
+        return sorted(possibilities)
 
-    def search_tracks(self, values_list=False, not_value=False, only_unordered_track=False, **kwargs) -> list:
-        """
-        :param only_unordered_track: only search in unordered track
-        :param values_list: search track with a value list instead of a single value
-        :param not_value: search track that does not have value
-        :param kwargs: any track property = any value
-        :return: track list respecting condition
-        """
-        track = self.all_tracks.copy() if not only_unordered_track else self.unordered_tracks.copy()
-
-        if values_list:
-            if not_value: filter_func = lambda track: getattr(track, keyword) not in value
-            else: filter_func = lambda track: getattr(track, keyword) in value
-        else:
-            if not_value: filter_func = lambda track: getattr(track, keyword) != value
-            else: filter_func = lambda track: getattr(track, keyword) == value
-
-        for keyword, value in kwargs.items():
-            track = list(filter(filter_func, track))
-        return track
+    def get_tracks_and_arenas(self):
+        for track in self.get_tracks(): yield track
+        for arena in self.arenas: yield arena

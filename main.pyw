@@ -1,4 +1,4 @@
-from source.Gui import Gui
+from source.Common import Common
 
-gui = Gui()
-gui.root.mainloop()
+common = Common()
+common.mainloop()
