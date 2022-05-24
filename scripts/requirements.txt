@@ -1,6 +1,7 @@
-discord.py
 pygame
 PyOpenGL
 pywavefront
+numpy
+
 selenium
 keyboard
