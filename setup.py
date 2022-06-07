@@ -3,11 +3,8 @@ import sys
 import json
 
 include_files = [
-    "./icon.ico",
     "./LICENSE",
     "./README.md",
-    "./version",
-    "./translation.json",
 
     "./assets",
     "./tools",
@@ -19,9 +16,9 @@ include_files = [
 options = {
     "build_exe": {
         "include_files": include_files,
-        "includes": ["tkinter", "requests", "PIL", "distutils"],
+        "includes": ["tkinter", "PIL"],
         "include_msvcr": True,
-        "packages": ["tkinter", "distutils"],
+        "packages": ["tkinter"],
     }
 }
 
@@ -37,7 +34,7 @@ setup(
     executables=[
         Executable(
             "./main.pyw",
-            icon="./icon.ico",
+            icon="./assets/icon.ico",
             base="win32gui",
             target_name="MKWF-Install.exe",
             shortcut_name="MKWF-Install",
