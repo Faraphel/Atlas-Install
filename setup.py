@@ -25,13 +25,10 @@ options = {
     }
 }
 
-with open("./version") as f:
-    version = json.load(f)
-
 setup(
     options=options,
     name='MKWF-Install',
-    version=version["version"],
+    version="0.12",
     url='https://github.com/Faraphel/MKWF-Install',
     license='Apache-2.0',
     author='Faraphel',
