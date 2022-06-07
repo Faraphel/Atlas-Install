@@ -9,8 +9,8 @@ include_files = [
     "./version",
     "./translation.json",
 
+    "./assets",
     "./tools",
-    "./source",
 
     sys.exec_prefix + "\\DLLs\\tcl86t.dll",
     sys.exec_prefix + "\\DLLs\\tk86t.dll",
@@ -22,7 +22,6 @@ options = {
         "includes": ["tkinter", "requests", "PIL", "distutils"],
         "include_msvcr": True,
         "packages": ["tkinter", "distutils"],
-        "excludes": ["source"],
     }
 }
 
@@ -37,7 +36,7 @@ setup(
     license='Apache-2.0',
     author='Faraphel',
     author_email='rc60650@hotmail.com',
-    description='Installateur pour Mario Kart Wii Faraphel.',
+    description='Mario Kart Wii Mod Installer.',
     executables=[
         Executable(
             "./main.pyw",

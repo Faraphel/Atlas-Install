@@ -444,6 +444,7 @@ class Game:
         Prepare all files to install the mod (track, bmg text, descriptive image, ...)
         """
         try:
+            os.makedirs(f"./file/", exist_ok=True)
             os.makedirs(f"{self.common.ct_config.pack_path}/file/Track-WU8/", exist_ok=True)
 
             max_step = (
