@@ -1,6 +1,10 @@
 {
   "name": "English",
   "translation": {
-    "INSTALLER_TITLE": "MKWF-Install"
+    "INSTALLER_TITLE": "MKWF-Install",
+    "LANGUAGE_SELECTION": "Language",
+    "TRACK_CONFIGURATION": "Track Configuration",
+    "ADVANCED_CONFIGURATION": "Advanced",
+    "HELP": "Help"
   }
 }

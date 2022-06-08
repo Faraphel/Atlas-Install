@@ -1,6 +1,10 @@
 {
   "name": "Français",
   "translation": {
-
+    "INSTALLER_TITLE": "MKWF-Install",
+    "LANGUAGE_SELECTION": "Langue",
+    "TRACK_CONFIGURATION": "Configuration des courses",
+    "ADVANCED_CONFIGURATION": "Avancée",
+    "HELP": "Aide"
   }
 }

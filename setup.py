@@ -1,6 +1,6 @@
 from cx_Freeze import setup, Executable
 import sys
-import json
+import source
 
 include_files = [
     "./LICENSE",
@@ -25,7 +25,7 @@ options = {
 setup(
     options=options,
     name='MKWF-Install',
-    version="0.12",
+    version=".".join(source.__version__),
     url='https://github.com/Faraphel/MKWF-Install',
     license='Apache-2.0',
     author='Faraphel',

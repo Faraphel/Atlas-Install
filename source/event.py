@@ -2,11 +2,11 @@ from types import FunctionType
 from pathlib import Path
 import sys
 
+# using this self variable allow us to keep the events in the whole module
 self = sys.modules[__name__]
 self.events = {}
 
 
-# register the function to the event
 def on(event_name: str):
     """
     Register the function to be called when the event is called.
@@ -23,7 +23,6 @@ def on(event_name: str):
     return decorator
 
 
-# register all the events at the end of the function
 def register(func: FunctionType):
     """
     Register the function as an event.
@@ -39,7 +38,6 @@ def register(func: FunctionType):
     return wrapper
 
 
-# call all the events of the event_name
 def call_event(event_name: str, *args, **kwargs) -> None:
     """
     Call all the events associated with the event_name.
@@ -47,9 +45,13 @@ def call_event(event_name: str, *args, **kwargs) -> None:
     :return:
     """
     for func in self.events.get(event_name, []):
-        func(*args, **kwargs)
+        func()
 
 
-# execute all scripts in the ./plugins/ directory that don't start with an underscore
-for file in Path("./plugins/").rglob("[!_]*.py"):
-    exec(file.read_text(encoding="utf8"), globals())
+def initialise_plugins() -> None:
+    """
+    Execute all the scripts in the ./plugins/ directory that don't start with an underscore.
+    :return:
+    """
+    for file in Path("./plugins/").rglob("[!_]*.py"):
+        exec(file.read_text(encoding="utf8"), globals())
