@@ -5,9 +5,12 @@ from tkinter import ttk
 
 
 from source.translation import translate as _
+from source import event
 
 
+# Main window for the installer
 class Window(tkinter.Tk):
+    @event.register
     def __init__(self):
         super().__init__()
 
@@ -15,9 +18,11 @@ class Window(tkinter.Tk):
         self.resizable(False, False)
         self.iconbitmap("./assets/icon.ico")
 
+        # menu bar
         self.menu = Menu(self)
         self.config(menu=self.menu)
 
+        # main frame
         self.select_pack = SelectPack(self)
         self.select_pack.grid(row=1, column=1, sticky="w")
 
@@ -34,6 +39,7 @@ class Window(tkinter.Tk):
         self.progress_bar.grid(row=5, column=1, sticky="nsew")
 
 
+# Menu bar
 class Menu(tkinter.Menu):
     def __init__(self, master):
         super().__init__(master)
@@ -43,6 +49,7 @@ class Menu(tkinter.Menu):
         self.advanced = self.Advanced(self)
         self.help = self.Help(self)
 
+    # Language menu
     class Language(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
@@ -52,6 +59,7 @@ class Menu(tkinter.Menu):
             for file in Path("./assets/language/").iterdir():
                 self.add_command(label=json.loads(file.read_text(encoding="utf8"))["name"])
 
+    # Track configuration menu
     class TrackConfiguration(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
@@ -59,6 +67,7 @@ class Menu(tkinter.Menu):
             master.add_cascade(label="Track Configuration", menu=self)
             self.add_command(label="Change configuration")
 
+    # Advanced menu
     class Advanced(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
@@ -66,6 +75,7 @@ class Menu(tkinter.Menu):
             master.add_cascade(label="Advanced", menu=self)
             self.add_command(label="Debug mode")
 
+    # Help menu
     class Help(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
@@ -75,6 +85,7 @@ class Menu(tkinter.Menu):
             self.add_command(label="Github Wiki")
 
 
+# Select game frame
 class SourceGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Original Game")
@@ -85,6 +96,7 @@ class SourceGame(ttk.LabelFrame):
         ttk.Button(self, text="...", width=2).grid(row=1, column=2, sticky="nsew")
 
 
+# Select game destination frame
 class DestinationGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Game Destination")
@@ -95,6 +107,7 @@ class DestinationGame(ttk.LabelFrame):
         ttk.Button(self, text="...", width=2).grid(row=1, column=2, sticky="nsew")
 
 
+# Install button
 class ButtonInstall(ttk.Button):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Install", command=self.install)
@@ -103,9 +116,10 @@ class ButtonInstall(ttk.Button):
         ...
 
 
+# Progress bar
 class ProgressBar(ttk.Frame):
     def __init__(self, master: tkinter.Tk):
-        super().__init__()
+        super().__init__(master)
 
         self.progress_bar = ttk.Progressbar(self)
         self.progress_bar.grid(row=1, column=1, sticky="nsew")
@@ -114,9 +128,10 @@ class ProgressBar(ttk.Frame):
         self.description.grid(row=2, column=1, sticky="nsew")
 
 
+# Combobox to select the pack
 class SelectPack(ttk.Combobox):
     def __init__(self, master: tkinter.Tk):
-        super().__init__()
+        super().__init__(master)
 
         for pack in Path("./Pack/").iterdir():
             self.insert(tkinter.END, pack.name)
