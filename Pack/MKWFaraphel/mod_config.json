@@ -2,121 +2,68 @@
     "version":"0.11",
     "name":"Mario Kart Wii Faraphel",
     "nickname":"MKWF",
-    "game_variant":"60",
-    "region":5500,
-    "cheat_region":20061,
-    "tags_prefix":[
-        "Wii U",
-        "3DS",
-        "DS",
-        "GCN",
-        "GBA",
-        "SNES",
-        "N64",
-        "MKT",
-        "RMX",
-        "GP",
-        "MSRDS",
-        "CTR",
-        "CTTR",
-        "CNR",
-        "DKR",
-        "LCP",
-        "LEGO-R",
-        "MP9",
-        "MSUSA",
-        "FZMV",
-        "KAR",
-        "KO",
-        "FZ",
-        "RV",
-        "SADX",
-        "SCR",
-        "SH",
-        "SM64",
-        "SMB1",
-        "SMB2",
-        "SSBB",
-        "SMS",
-        "SMO",
-        "VVVVVV",
-        "WF",
-        "WP",
-        "Zelda OoT",
-        "Zelda TP",
-        "Zelda WW",
-        "PMWR",
-        "SHR",
-        "SK64",
-        "SMG",
-        "Spyro 1",
-        "Wii Shop",
-        "UT",
-        "GK2",
-        "GK3",
-        "GK7",
-        "FGKR"
-    ],
-    "tags_suffix":[
-        "Boost"
-    ],
-    "tags_color":{
-        "MSRDS":"green",
-        "CTR":"YOR4",
-        "CTTR":"YOR5",
-        "CNR":"YOR5",
-        "DKR":"YOR6",
-        "LCP":"green",
-        "LEGO-R":"red2",
-        "MP9":"YOR0",
-        "MSUSA":"green",
-        "FZMV":"YOR2",
-        "KAR":"green",
-        "KO":"YOR5",
-        "FZ":"YOR2",
-        "RV":"white",
-        "SADX":"blue2",
-        "SCR":"YOR2",
-        "SH":"red",
-        "SM64":"red1",
-        "SMB1":"red2",
-        "SMB2":"red3",
-        "SSBB":"red4",
-        "SMS":"YOR6",
-        "SMO":"YOR7",
-        "VVVVVV":"blue",
-        "WF":"green",
-        "WP":"yellow",
-        "Zelda OoT":"green",
-        "Zelda TP":"green",
-        "Zelda WW":"green",
-        "PMWR":"yellow",
-        "SHR":"green",
-        "SK64":"green",
-        "SMG":"red2",
-        "Spyro 1":"blue",
-        "Wii U":"red4",
-        "Wii":"blue",
-        "3DS":"YOR3",
-        "DS":"white",
-        "GCN":"blue2",
-        "GBA":"blue1",
-        "N64":"red",
-        "SNES":"green",
-        "RMX":"YOR4",
-        "MKT":"YOR5",
-        "GP":"YOR6",
-        "Boost":"YOR3",
-        "Wii Shop":"blue1",
-        "UT":"red3",
-        "FGKR":"YOR5",
-        "GK2":"green",
-        "GK3":"green",
-        "GK7":"green"
+    "variant":"60",
+    "region":{
+        "default": 5500,
+        "cheat": 20061
     },
-
-    "tag_retro":"Retro",
-
+    "tags_prefix":{
+        "MSRDS": "green",
+        "CTR": "YOR4",
+        "CTTR": "YOR5",
+        "CNR": "YOR5",
+        "DKR": "YOR6",
+        "LCP": "green",
+        "LEGO-R": "red2",
+        "MP9": "YOR0",
+        "MSUSA": "green",
+        "FZMV": "YOR2",
+        "KAR": "green",
+        "KO": "YOR5",
+        "FZ": "YOR2",
+        "RV": "white",
+        "SADX": "blue2",
+        "SCR": "YOR2",
+        "SH": "red",
+        "SM64": "red1",
+        "SMB1": "red2",
+        "SMB2": "red3",
+        "SSBB": "red4",
+        "SMS": "YOR6",
+        "SMO": "YOR7",
+        "VVVVVV": "blue",
+        "WF": "green",
+        "WP": "yellow",
+        "Zelda OoT": "green",
+        "Zelda TP": "green",
+        "Zelda WW": "green",
+        "PMWR": "yellow",
+        "SHR": "green",
+        "SK64": "green",
+        "SMG": "red2",
+        "Spyro 1": "blue",
+        "Wii U": "red4",
+        "Wii": "blue",
+        "3DS": "YOR3",
+        "DS": "white",
+        "GCN": "blue2",
+        "GBA": "blue1",
+        "N64": "red",
+        "SNES": "green",
+        "RMX": "YOR4",
+        "MKT": "YOR5",
+        "GP": "YOR6",
+        "Wii Shop": "blue1",
+        "UT": "red3",
+        "GK2": "green",
+        "GK3": "green",
+        "GK7": "green",
+        "FGKR": "YOR5"
+    },
+    "tags_suffix": {
+        "Boost": "orange"
+    },
+    "tags_cups": ["Switch", "3DS", "DS", "GCN", "GBA", "N64", "SNES", "MKT", "DX"],
     "default_track":{
         "music":"T32",
         "special":"T32",
@@ -219,6 +166,7 @@
                     "since_version":"0.11",
                     "score":4,
                     "tags":[
+                        "Retro",
                         "Wii U"
                     ]
                 },
@@ -232,6 +180,7 @@
                     "since_version":"0.11",
                     "score":3,
                     "tags":[
+                        "Retro",
                         "Wii U"
                     ],
                     "note":"some collision (like the plane) are buggy, and the texture feel a bit too dark"
@@ -265,6 +214,7 @@
                     "since_version":"0.11",
                     "score":5,
                     "tags":[
+                        "Retro",
                         "Wii U"
                     ]
                 },
@@ -278,6 +228,7 @@
                     "since_version":"0.11",
                     "score":5,
                     "tags":[
+                        "Retro",
                         "Wii U"
                     ]
                 },
@@ -291,6 +242,7 @@
                     "since_version":"0.11",
                     "score":5,
                     "tags":[
+                        "Retro",
                         "Wii U"
                     ]
                 },
@@ -839,6 +791,7 @@
                     "since_version":"0.11",
                     "score":2,
                     "tags":[
+                        "Retro",
                         "GCN"
                     ]
                 },
@@ -952,6 +905,7 @@
                     "since_version":"0.11",
                     "score":4,
                     "tags":[
+                        "Retro",
                         "GCN"
                     ]
                 }
@@ -1399,6 +1353,7 @@
                     "since_version":"0.11",
                     "score":5,
                     "tags":[
+                        "Retro",
                         "N64"
                     ]
                 },
@@ -1440,6 +1395,7 @@
                     "since_version":"0.11",
                     "score":5,
                     "tags":[
+                        "Retro",
                         "N64"
                     ]
                 }
@@ -1812,6 +1768,7 @@
                     "since_version":"0.11",
                     "score":4,
                     "tags":[
+                        "Retro",
                         "RMX"
                     ]
                 },
@@ -1825,6 +1782,7 @@
                     "since_version":"0.11",
                     "score":3,
                     "tags":[
+                        "Retro",
                         "RMX"
                     ]
                 },
@@ -1874,6 +1832,7 @@
                     "since_version":"0.11",
                     "score":5,
                     "tags":[
+                        "Retro",
                         "MKT"
                     ]
                 },
@@ -1887,6 +1846,7 @@
                     "since_version":"0.11",
                     "score":5,
                     "tags":[
+                        "Retro",
                         "MKT"
                     ]
                 }
@@ -1955,7 +1915,6 @@
             ]
         }
     ],
-
     "tracks":[
         {
             "name":"4IT Clown's Road",

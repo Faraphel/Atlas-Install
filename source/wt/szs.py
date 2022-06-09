@@ -1,7 +1,7 @@
 from source.wt import *
 from source.wt import _run, _run_dict
 
-tools_path = tools_szs_dir / "wszst.exe"
+tools_path = tools_szs_dir / ("wszst.exe" if system == "win64" else "wszst")
 
 
 class SZSPath:

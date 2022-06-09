@@ -8,15 +8,16 @@ import json
 
 # representation of the configuration of a mod
 class ModConfig:
-    __slots__ = ("name", "nickname", "variant", "region", "tags_prefix", "tags_suffix", "tag_retro",
+    __slots__ = ("name", "nickname", "variant", "region", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
-                 "keep_original_track", "enable_random_cup")
+                 "keep_original_track", "enable_random_cup", "tags_cups")
 
     def __init__(self, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, Color] = None, tags_suffix: dict[Tag, Color] = None,
-                 region: dict[int] | int = None, tag_retro: Tag = None, default_track: "Track | TrackGroup" = None,
-                 tracks: list["Track | TrackGroup"] = None, original_track_prefix: bool = None,
-                 swap_original_order: bool = None, keep_original_track: bool = None, enable_random_cup: bool = None):
+                 tags_cups: list[Tag] = None, region: dict[int] | int = None,
+                 default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
+                 original_track_prefix: bool = None, swap_original_order: bool = None,
+                 keep_original_track: bool = None, enable_random_cup: bool = None):
 
         self.name: str = name
         self.nickname: str = nickname if nickname is not None else name
@@ -24,9 +25,9 @@ class ModConfig:
         self.variant: str = variant if variant is not None else "01"
         self.region: dict[int] | int = region if region is not None else 0
 
-        self.tags_prefix: dict[str] = tags_prefix if tags_prefix is not None else {}
-        self.tags_suffix: dict[str] = tags_suffix if tags_suffix is not None else {}
-        self.tag_retro: str = tag_retro if tag_retro is None else "Retro"
+        self.tags_prefix: dict[Tag] = tags_prefix if tags_prefix is not None else {}
+        self.tags_suffix: dict[Tag] = tags_suffix if tags_suffix is not None else {}
+        self.tags_cups: dict[Tag] = tags_cups if tags_cups is not None else {}
 
         self.default_track: "Track | TrackGroup" = default_track if default_track is not None else None
         self._tracks: list["Track | TrackGroup"] = tracks if tracks is not None else []
@@ -44,18 +45,16 @@ class ModConfig:
         :return: ModConfig
         """
 
+        kwargs = {
+            attr: config_dict.get(attr)
+            for attr in ["nickname", "version", "variant", "tags_prefix", "tags_suffix", "tags_cups",
+                         "original_track_prefix", "swap_original_order", "keep_original_track", "enable_random_cup"]
+        }
+
         return cls(
             name=config_dict["name"],
-            nickname=config_dict.get("nickname"),
-            version=config_dict.get("version"),
-            variant=config_dict.get("variant"),
-            tags_prefix=config_dict.get("tags_prefix"),
-            tags_suffix=config_dict.get("tags_suffix"),
-            tag_retro=config_dict.get("tag_retro"),
-            original_track_prefix=config_dict.get("original_track_prefix"),
-            swap_original_order=config_dict.get("swap_original_order"),
-            keep_original_track=config_dict.get("keep_original_track"),
-            enable_random_cup=config_dict.get("enable_random_cup"),
+
+            **kwargs,
 
             default_track=Track.from_dict(config_dict.get("default_track", {})),
             tracks=[Track.from_dict(track) for track in config_dict.get("tracks", [])],
