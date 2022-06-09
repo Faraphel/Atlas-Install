@@ -5,7 +5,7 @@
     "game_variant":"60",
     "region":5500,
     "cheat_region":20061,
-    "prefix_list":[
+    "tags_prefix":[
         "Wii U",
         "3DS",
         "DS",
@@ -57,7 +57,7 @@
         "GK7",
         "FGKR"
     ],
-    "suffix_list":[
+    "tags_suffix":[
         "Boost"
     ],
     "tags_color":{
@@ -114,7 +114,9 @@
         "GK3":"green",
         "GK7":"green"
     },
+
     "tag_retro":"Retro",
+
     "default_track":{
         "music":"T32",
         "special":"T32",
@@ -1953,8 +1955,8 @@
             ]
         }
     ],
-    "!default_sort":"name",
-    "tracks_list":[
+
+    "tracks":[
         {
             "name":"4IT Clown's Road",
             "author":[
