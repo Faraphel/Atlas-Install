@@ -1,4 +1,5 @@
 from source.wt import *
+from source.wt import _run, _run_dict
 
 tools_path = tools_szs_dir / "wszst.exe"
 
@@ -19,12 +20,16 @@ class SZSPath:
         :param args: command arguments
         :return: the output of the command
         """
-        return subprocess.run(
-            [tools_path, *args],
-            stdout=subprocess.PIPE,
-            check=True,
-            creationflags=subprocess.CREATE_NO_WINDOW
-        ).stdout
+        return _run(tools_path, *args)
+
+    @better_error(tools_path)
+    def _run_dict(self, *args) -> dict:
+        """
+        Return a dictionary of a command that return value associated to a key with a equal sign
+        :param args: others arguments
+        :return: the dictionary
+        """
+        return _run_dict(tools_path, *args)
 
     def cat(self, subfile: str) -> bytes:
         """
@@ -60,12 +65,7 @@ class SZSPath:
         Return the analyze of the szs
         :return: dictionnary of key and value of the analyze
         """
-        analyze = {}
-        for line in filter(lambda f: f.strip(), self._run("ANALYZE", self.path).decode().splitlines()):
-            key, value = line.split("=", 1)
-            analyze[key.strip()] = value.strip()
-
-        return analyze
+        return self._run_dict("ANALYZE", self.path)
 
     def list_raw(self) -> list[str]:
         """
