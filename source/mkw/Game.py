@@ -1,4 +1,6 @@
+import time
 from pathlib import Path
+from typing import Generator
 
 from source.wt.wit import WITPath, Region
 
@@ -27,3 +29,13 @@ class Game:
         :param dest: destination directory
         """
         return self.wit_path.extract_all(dest)
+
+    def install_mod(self) -> Generator[str, None, None]:
+        """
+        Patch the game with the mod
+        """
+        i = 0
+        while True:
+            time.sleep(1)
+            yield {"desc": f"step {i}"}
+            i += 1
