@@ -5,13 +5,17 @@ tools_path = tools_szs_dir / ("wszst.exe" if system == "win64" else "wszst")
 
 
 class SZSPath:
-    __slots__ = ("path",)
+    __slots__ = ("path", "_analyze")
 
     def __init__(self, path: Path | str):
         self.path: Path = path if isinstance(path, Path) else Path(path)
+        self._analyze = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<SZSPath: {self.path}>"
+
+    def __eq__(self, other: "SZSPath") -> bool:
+        return self.path == other.path
 
     @better_error(tools_path)
     def _run(self, *args) -> bytes:
@@ -62,10 +66,11 @@ class SZSPath:
 
     def analyze(self) -> dict:
         """
-        Return the analyze of the szs
+        Return the analyze of the file
         :return: dictionnary of key and value of the analyze
         """
-        return self._run_dict("ANALYZE", self.path)
+        if self._analyze is None: self._analyze = self._run_dict("ANALYZE", self.path)
+        return self._analyze
 
     def list_raw(self) -> list[str]:
         """
@@ -75,7 +80,11 @@ class SZSPath:
 
         # cycle though all of the output line of the command, check if the line are empty, and if not,
         # add it to the list. Finally, remove the first line because this is a description of the command
-        return [subfile.strip() for subfile in self._run("list", self.path).decode().splitlines() if subfile][1:]
+        return [
+            subfile.strip()
+            for subfile in self._run("list", self.path).decode().splitlines()
+            if subfile.startswith("./")
+        ]
 
     def list(self) -> list["SZSSubPath"]:
         """
@@ -105,8 +114,11 @@ class SZSSubPath:
         self.szs_path = szs_path
         self.subfile = subfile
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<SZSSubPath: {self.szs_path.path}/{self.subfile}>"
+
+    def __eq__(self, other: "SZSSubPath") -> bool:
+        return self.subfile == other.subfile and self.szs_path == other.szs_path
 
     def extract(self, dest: Path | str) -> Path:
         """
@@ -124,11 +136,30 @@ class SZSSubPath:
 
         return dest
 
-    def is_dir(self):
+    def exists(self):
+        """
+        Return if the subfile exist in the szs
+        :return: True if the subfile exist, else otherwise
+        """
+        return self in self.szs_path.list()
+
+    def is_dir(self) -> bool:
+        """
+        Return if the subfile is a directory
+        :return: True if the subfile is a directory, else otherwise
+        """
         return self.subfile.endswith("/")
 
-    def is_file(self):
+    def is_file(self) -> bool:
+        """
+        Return if the subfile is a file
+        :return: True if the subfile is a file, else otherwise
+        """
         return not self.is_dir()
 
-    def basename(self):
+    def basename(self) -> str:
+        """
+        Return the basename of the subfile
+        :return: the basename of the subfile
+        """
         return self.subfile.rsplit("/", 1)[-1]
