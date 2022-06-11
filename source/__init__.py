@@ -1,3 +1,5 @@
+import os
+import sys
 from threading import Thread
 from typing import Callable
 
@@ -28,3 +30,10 @@ def threaded(func: Callable) -> Callable:
         Thread(target=func, args=args, kwargs=kwargs, daemon=True).start()
 
     return wrapper
+
+
+def restart_program():
+    """
+    Restart the program
+    """
+    os.execl(sys.executable, sys.executable, *sys.argv)

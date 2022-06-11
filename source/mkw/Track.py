@@ -37,6 +37,8 @@ class Track:
 
         # others not mandatory attributes
         for key, value in kwargs.items():
+            # if the attribute start with __, this is a magic attribute, and it should not be modified
+            if key.startswith("__"): continue
             setattr(self, key, value)
 
     @classmethod

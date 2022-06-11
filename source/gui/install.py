@@ -12,6 +12,7 @@ from typing import Generator
 from source.gui import better_gui_error
 from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
+from source.option import Option
 from source.translation import translate as _
 from source import event
 from source import *
@@ -35,8 +36,10 @@ class InstallerState(enum.Enum):
 
 # Main window for the installer
 class Window(tkinter.Tk):
-    def __init__(self):
+    def __init__(self, options: Option):
         super().__init__()
+
+        self.options: Option = options
 
         self.title(_("INSTALLER_TITLE"))
         self.resizable(False, False)
@@ -141,8 +144,15 @@ class Menu(tkinter.Menu):
 
             master.add_cascade(label=_("LANGUAGE_SELECTION"), menu=self)
 
+            def callback(file: Path):
+                def func(): self.master.master.options["language"] = file.stem
+                return func
+
             for file in Path("./assets/language/").iterdir():
-                self.add_command(label=json.loads(file.read_text(encoding="utf8"))["name"])
+                self.add_command(
+                    label=json.loads(file.read_text(encoding="utf8"))["name"],
+                    command=callback(file)
+                )
 
     # Track configuration menu
     class TrackConfiguration(tkinter.Menu):

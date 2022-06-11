@@ -1,7 +1,6 @@
 import traceback
 from tkinter import messagebox
 from typing import Callable
-
 from source.translation import translate as _
 
 
@@ -12,6 +11,6 @@ def better_gui_error(func: Callable) -> Callable:
 
     def wrapper(*args, **kwargs):
         try: return func(*args, **kwargs)
-        except: messagebox.showerror(_("ERROR"), traceback.format_exc())
+        except: messagebox.showerror(_("Error"), traceback.format_exc())
 
     return wrapper
