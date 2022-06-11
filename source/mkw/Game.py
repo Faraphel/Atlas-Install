@@ -2,6 +2,7 @@ import time
 from pathlib import Path
 from typing import Generator
 
+from source.mkw.ModConfig import ModConfig
 from source.wt.wit import WITPath, Region
 
 
@@ -23,19 +24,29 @@ class Game:
         """
         return not any(self.wit_path[f"./files/rel/lecode-{region.value}.bin"].exists() for region in Region)
 
-    def extract(self, dest: Path | str) -> Path:
+    def extract(self, dest: Path | str) -> Generator[str, None, Path]:
         """
         Extract the game to the destination directory. If the game is a FST, just copy to the destination
         :param dest: destination directory
         """
-        return self.wit_path.extract_all(dest)
+        gen = self.wit_path.progress_extract_all(dest)
+        for gen_data in gen:
+            yield {
+                "description": f'EXTRACTING - {gen_data["percentage"]}% - (estimated time remaining: '
+                               f'{gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"})',
 
-    def install_mod(self) -> Generator[str, None, None]:
+                "maximum": 100,
+                "value": gen_data["percentage"],
+                "determinate": True
+            }
+        try: next(gen)
+        except StopIteration as e:
+            return e.value
+
+    def install_mod(self, dest: Path, mod_config: ModConfig) -> Generator[str, None, None]:
         """
         Patch the game with the mod
+        :dest: destination directory
+        :mod_config: mod configuration
         """
-        i = 0
-        while True:
-            time.sleep(1)
-            yield {"desc": f"step {i}"}
-            i += 1
+        yield from self.extract(dest / f"{mod_config.nickname} {mod_config.version}")

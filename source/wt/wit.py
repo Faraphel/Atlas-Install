@@ -1,8 +1,10 @@
 import enum
+import re
 import shutil
+from typing import Generator
 
 from source.wt import *
-from source.wt import _run, _run_dict
+from source.wt import _run, _run_dict, _run_popen
 
 tools_path = tools_wit_dir / ("wit.exe" if system == "win64" else "wit")
 
@@ -50,7 +52,7 @@ class WITPath:
     def __eq__(self, other: "WITPath") -> bool:
         return self.path == other.path
 
-    @better_error(tools_path)
+    @better_wt_error(tools_path)
     def _run(self, *args) -> bytes:
         """
         Return a command with wit and return the output
@@ -59,7 +61,16 @@ class WITPath:
         """
         return _run(tools_path, *args)
 
-    @better_error(tools_path)
+    @classmethod
+    def _run_popen(cls, *args) -> subprocess.Popen:
+        """
+        Return a command with wit and return the output
+        :param args: command arguments
+        :return: the output of the command
+        """
+        return _run_popen(tools_path, *args)
+
+    @better_wt_error(tools_path)
     def _run_dict(self, *args) -> dict:
         """
         Return a dictionary of a command that return value associated to a key with a equal sign
@@ -128,6 +139,27 @@ class WITPath:
         :return: the extracted file path
         """
         return self["./"].extract(dest, flat=False)
+
+    def progress_extract_all(self, dest: Path | str) -> Generator[dict, None, Path]:
+        """
+        Extract all the subfiles to the destination directory, yelling the percentage and the estimated time remaining
+        :param dest: destination directory
+        :return: the extracted file path
+        """
+        process = self._run_popen("EXTRACT", self.path, "-d", dest, "--progress")
+
+        while process.poll() is None:
+            m = re.match(r'\s*(?P<percentage>\d*)%(?:.*?ETA (?P<estimation>\d*:\d*))?\s*', process.stdout.readline())
+            if m:
+                yield {
+                    "percentage": int(m.group("percentage")),
+                    "estimation": m.group("estimation")
+                }
+
+        if process.returncode != 0:
+            raise WTError(tools_path, process.returncode)
+
+        return dest
 
     @property
     def extension(self) -> Extension:

@@ -17,7 +17,7 @@ class SZSPath:
     def __eq__(self, other: "SZSPath") -> bool:
         return self.path == other.path
 
-    @better_error(tools_path)
+    @better_wt_error(tools_path)
     def _run(self, *args) -> bytes:
         """
         Return a command with wszst and return the output
@@ -26,7 +26,7 @@ class SZSPath:
         """
         return _run(tools_path, *args)
 
-    @better_error(tools_path)
+    @better_wt_error(tools_path)
     def _run_dict(self, *args) -> dict:
         """
         Return a dictionary of a command that return value associated to a key with a equal sign

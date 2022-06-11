@@ -4,10 +4,10 @@ import os
 
 
 class WTError(Exception):
-    def __init__(self, tool_path: Path | str, return_code: int):
+    def __init__(self, tools_path: Path | str, return_code: int):
         try:
             error = subprocess.run(
-                [tool_path, "ERROR", str(return_code)],
+                [tools_path, "ERROR", str(return_code)],
                 stdout=subprocess.PIPE,
                 check=True,
                 creationflags=subprocess.CREATE_NO_WINDOW,
@@ -15,7 +15,7 @@ class WTError(Exception):
         except subprocess.CalledProcessError as e:
             error = "- Can't get the error message -"
 
-        super().__init__(f"{tool_path} raised {return_code} :\n{error}\n")
+        super().__init__(f"{tools_path} raised {return_code} :\n{error}\n")
 
 
 class MissingWTError(Exception):
@@ -34,10 +34,10 @@ try: tools_wit_dir = next(tools_dir.glob("./wit*/")) / system
 except StopIteration as e: raise MissingWTError("wit") from e
 
 
-def better_error(tool_path: Path | str):
+def better_wt_error(tools_path: Path | str):
     """
     Raise a better error when the subprocess return with a non 0 value.
-    :param tool_path: path of the used tools
+    :param tools_path: path of the used tools
     :return: wrapper
     """
 
@@ -46,7 +46,7 @@ def better_error(tool_path: Path | str):
             try:
                 return func(*args, **kwargs)
             except subprocess.CalledProcessError as e:
-                raise WTError(tool_path, e.returncode) from e
+                raise WTError(tools_path, e.returncode) from e
 
         return wrapper
 
@@ -90,3 +90,18 @@ def _run_dict(tools_path: Path | str, *args) -> dict:
         d[key.strip()] = value
 
     return d
+
+
+def _run_popen(tools_path: Path | str, *args) -> subprocess.Popen:
+    """
+    Run a command and return the process
+    :param args: command arguments
+    :return: the output of the command
+    """
+    return subprocess.Popen(
+        [tools_path, *args],
+        stdout=subprocess.PIPE,
+        creationflags=subprocess.CREATE_NO_WINDOW,
+        bufsize=1,
+        universal_newlines=True,
+    )

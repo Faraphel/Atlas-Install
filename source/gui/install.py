@@ -9,7 +9,9 @@ from tkinter import messagebox
 import webbrowser
 from typing import Generator
 
+from source.gui import better_gui_error
 from source.mkw.Game import Game
+from source.mkw.ModConfig import ModConfig
 from source.translation import translate as _
 from source import event
 from source import *
@@ -94,7 +96,32 @@ class Window(tkinter.Tk):
         """
         # get the generator data yield by the generator function
         for step_data in func_gen:
-            if "desc" in step_data: self.progress_bar.set_description(step_data["desc"])
+            if "description" in step_data: self.progress_bar.set_description(step_data["description"])
+            if "maximum" in step_data: self.progress_bar.set_maximum(step_data["maximum"])
+            if "step" in step_data: self.progress_bar.step(step_data["step"])
+            if "value" in step_data: self.progress_bar.set_value(step_data["value"])
+            if "determinate" in step_data: self.progress_bar.set_determinate(step_data["determinate"])
+
+    def get_mod_config(self) -> ModConfig:
+        """
+        Get the mod configuration
+        :return: Get the mod configuration
+        """
+        return self.select_pack.mod_config
+
+    def get_source_path(self) -> Path:
+        """
+        Get the path of the source game
+        :return: path of the source game
+        """
+        return self.source_game.get_path()
+
+    def get_destination_path(self) -> Path:
+        """
+        Get the path of the destination game
+        :return: path of the destination game
+        """
+        return self.destination_game.get_path()
 
 
 # Menu bar
@@ -215,7 +242,6 @@ class SourceGame(ttk.LabelFrame):
         if not path.exists(): raise SourceGameError(path)
         return path
 
-
     def set_state(self, state: InstallerState) -> None:
         """
         Set the progress bar state when the installer change state
@@ -286,15 +312,31 @@ class ButtonInstall(ttk.Button):
         super().__init__(master, text="Install", command=self.install)
 
     @threaded
+    @better_gui_error
     def install(self):
         try:
             self.master.set_state(InstallerState.INSTALLING)
+
+            # check if the user entered a source path
+            source_path = self.master.get_source_path()
+            if str(source_path) == ".":
+                messagebox.showerror(_("ERROR"), _("ERROR_INVALID_SOURCE_GAME"))
+                return
+
+            # check if the user entered a destination path
+            destination_path = self.master.get_destination_path()
+            if str(destination_path) == ".":
+                messagebox.showerror(_("ERROR"), _("ERROR_INVALID_DESTINATION_GAME"))
+                return
+
             # get space remaining on the C: drive
             if shutil.disk_usage(".").free < minimum_space_available:
-                if not messagebox.askokcancel(_("WARNING"), _("WARNING_NOT_ENOUGH_SPACE_CONTINUE")): return
+                if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
+                    return
 
-            game = Game(self.master.source_game.get_path())
-            self.master.progress_function(game.install_mod())
+            game = Game(source_path)
+            mod_config = self.master.get_mod_config()
+            self.master.progress_function(game.install_mod(destination_path, mod_config))
 
         finally:
             self.master.set_state(InstallerState.IDLE)
@@ -321,7 +363,7 @@ class ProgressBar(ttk.LabelFrame):
         self.progress_bar = ttk.Progressbar(self, orient="horizontal")
         self.progress_bar.grid(row=1, column=1, sticky="nsew")
 
-        self.description = ttk.Label(self, text="no process running", anchor="center", font=("TkDefaultFont", 10))
+        self.description = ttk.Label(self, text="", anchor="center", font=("TkDefaultFont", 10))
         self.description.grid(row=2, column=1, sticky="nsew")
 
     def set_state(self, state: InstallerState) -> None:
@@ -342,14 +384,95 @@ class ProgressBar(ttk.LabelFrame):
         """
         self.description.config(text=desc)
 
+    def set_maximum(self, maximum: int) -> None:
+        """
+        Set the progress bar maximum value
+        :param maximum: the maximum value
+        :return:
+        """
+        self.progress_bar.configure(maximum=maximum)
+
+    def set_value(self, value: int) -> None:
+        """
+        Set the progress bar value
+        :param value: the value
+        :return:
+        """
+        self.progress_bar.configure(value=value)
+
+    def step(self, value: int = 1) -> None:
+        """
+        Set the progress bar by the value
+        :param value: the step
+        :return:
+        """
+        self.progress_bar.step(value)
+
+    def set_determinate(self, value: bool) -> None:
+        """
+        Set the progress bar determinate value
+        :param value: the value
+        :return:
+        """
+        self.progress_bar.configure(mode="determinate" if value else "indeterminate")
+
 
 # Combobox to select the pack
 class SelectPack(ttk.Combobox):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master)
 
+        self.mod_config: ModConfig | None = None
+        self.packs: list[Path] = []
+
+        self.refresh_packs()
+        self.select(index=0)
+
+        self.bind("<<ComboboxSelected>>", lambda _: self.select())
+
+    def refresh_packs(self) -> None:
+        """
+        Refresh the list of packs
+        :return:
+        """
+        self.packs = []
+
         for pack in Path("./Pack/").iterdir():
-            self.insert(tkinter.END, pack.name)
+            if self.is_valid_pack(pack):
+                self.packs.append(pack)
+
+        self["values"] = [pack.name for pack in self.packs]
+
+    def select(self, index: int = None) -> None:
+        """
+        When the selection is changed
+        :index: the index of the selection. If none, use the selected index
+        :return:
+        """
+        index = index if index is not None else self.current()
+        pack = self.packs[index]
+        self.set_path(pack)
+        self.set(pack.name)
+
+    @better_gui_error
+    def set_path(self, pack: Path) -> None:
+        """
+        Set the pack to install
+        :param pack: the pack
+        :return:
+        """
+        self.mod_config = ModConfig.from_file(pack / "mod_config.json")
+
+    @classmethod
+    def is_valid_pack(cls, path: Path) -> bool:
+        """
+        Check if the path is a valid pack
+        :param path: the path
+        :return: True if the path is a valid pack
+        """
+        return all([
+            (path / "mod_config.json").exists(),
+        ])
 
     def set_state(self, state: InstallerState) -> None:
         """
