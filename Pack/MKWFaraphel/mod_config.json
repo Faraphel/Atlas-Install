@@ -1,5 +1,5 @@
 {
-    "version": "0.11",
+    "version": "v0.12",
     "name": "Mario Kart Wii Faraphel",
     "nickname": "MKWF",
     "variant": "60",
@@ -67,16 +67,17 @@
     },
     "tags_cups": ["Wii U", "3DS", "DS", "GCN", "GBA", "N64", "SNES", "MKT", "RMX", "DX", "GP"],
 
+    "track_formatting": {
+        "menu_name": "{{ ('\\c{YOR2}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\{off} ') if hasattr(track, 'score') else '' }}{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}",
+        "race_name": "{{ getattr(track, 'name', '/') }}",
+        "file_name": "{{ getattr(track, 'sha1', '/') }}"
+    },
+
     "default_track": {
         "music":"T32",
         "special":"T32",
         "author":"MrFluffy",
-        "since_version":"0.1",
-        "sha1":"54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-        "version":"v1.1",
-        "tags":[
-
-        ]
+        "tags":[]
     },
     "tracks": [
         {

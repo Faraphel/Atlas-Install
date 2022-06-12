@@ -3,7 +3,7 @@
   "translation": {
     "INSTALLER_TITLE": "MKWF-Install",
     "LANGUAGE_SELECTION": "Language",
-    "TRACK_CONFIGURATION": "Track Configuration",
+    "TRACK_FILTER": "Track Filters",
     "ADVANCED_CONFIGURATION": "Advanced",
     "HELP": "Help"
   }

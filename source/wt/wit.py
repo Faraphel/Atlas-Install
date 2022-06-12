@@ -13,9 +13,9 @@ class Extension(enum.Enum):
     """
     Enum for game extension
     """
-    FST = ".dol"
     WBFS = ".wbfs"
     ISO = ".iso"
+    FST = ".dol"
 
     @classmethod
     def _missing_(cls, value: str) -> "Extension | None":

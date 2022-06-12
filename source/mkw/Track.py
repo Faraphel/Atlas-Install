@@ -2,29 +2,10 @@ from typing import Generator
 import re
 
 from source.mkw import Tag, Slot
+from source.safe_eval import safe_eval
 
 TOKEN_START = "{{"
 TOKEN_END = "}}"
-
-common_token_map = {  # these operators and function are considered safe to use in the template
-   operator: operator
-   for operator in
-   ["+", "-", "*", "/", "%", "**", ",", "(", ")", "[", "]", "==", "!=", "in", ">", "<", ">=", "<=", "and", "or", "&",
-    "|", "^", "~", "<<", ">>", "not", "is", "if", "else", "abs", "int", "bin", "hex", "oct", "chr", "ord", "len",
-    "str", "bool", "float", "round", "min", "max", "sum", "zip", "any", "all", "issubclass", "reversed", "enumerate",
-    "list", "sorted", "hasattr", "for", "range", "type", "isinstance", "repr", "None", "True", "False"
-    ]
-
-} | {  # these methods are considered safe, except for the magic methods
-   f".{method}": f".{method}"
-   for method in dir(str) + dir(list) + dir(int) + dir(float)
-   if not method.startswith("__")
-}
-
-
-class TokenParsingError(Exception):
-    def __init__(self, token: str):
-        super().__init__(f"Invalid token while parsing track representation:\n{token}")
 
 
 # representation of a custom track
@@ -40,6 +21,9 @@ class Track:
             # if the attribute start with __, this is a magic attribute, and it should not be modified
             if key.startswith("__"): continue
             setattr(self, key, value)
+
+    def __repr__(self):
+        return f"<Track name={getattr(self, 'name', '/')} tags={getattr(self, 'tags', '/')}>"
 
     @classmethod
     def from_dict(cls, track_dict: dict) -> "Track | TrackGroup":
@@ -68,75 +52,24 @@ class Track:
         :return: formatted representation of the track
         """
 
-        token_map = common_token_map | {  # replace the suffix and the prefix by the corresponding values
-            "prefix": self.get_prefix(mod_config, ""),
-            "suffix": self.get_prefix(mod_config, ""),
-        } | {  # replace the track attribute by the corresponding values
-                        f"track.{attr}": f"track.{attr}" for attr, value in self.__dict__.items()
-                    } | {  # replace the track variable by the corresponding value, if not used with an attribute
-                        "track": "track"
-                    }
+        extra_token_map = {  # replace the suffix and the prefix by the corresponding values
+            "prefix": f'{self.get_prefix(mod_config, "")!r}',
+            "suffix": f'{self.get_suffix(mod_config, "")!r}',
+            "track": "track"
+        }
 
-        def format_token(match: re.Match) -> str:
-            # get the token string without the brackets, then strip it
-            process_token = match.group(1).strip()
-            final_token: str = ""
-
-            def matched(match: re.Match | str | None, value: str = None) -> bool:
-                """
-                check if token is matched, if yes, add it to the final token and remove it from the processing token
-                :param match: match object
-                :param value: if the match is a string, the value to replace the text with
-                :return: True if matched, False otherwise
-                """
-                nonlocal final_token, process_token
-
-                # if there is no match or the string is empty, return False
-                if not match: return False
-
-                if isinstance(match, re.Match):
-                    process_token_raw = process_token[match.end():]
-                    value = match.group()
-
-                else:
-                    if not process_token.startswith(match): return False
-                    process_token_raw = process_token[len(match):]
-
-                process_token = process_token_raw.lstrip()
-
-                final_token += value + (len(process_token_raw) - len(process_token)) * " "
-
-                return True
-
-            while process_token:  # while there is still tokens to process
-                # if the section is a string, add it to the final token
-                # example : "hello", "hello \" world"
-                if matched(re.match(r'^\"(?:[^"\\]|\\.)*\"', process_token)):
-                    continue
-
-                # if the section is a float or an int, add it to the final token
-                # example : 102, 102.59
-                if matched(re.match(r'^[0-9]+(?:\.[0-9]+)?', process_token)):
-                    continue
-
-                # if the section is a variable, operator or function, replace it by its value
-                # example : track.special, +
-                for key, value in token_map.items():
-                    if matched(key, value):
-                        break
-
-                # else, the token is invalid, so raise an error
-                else:
-                    raise TokenParsingError(process_token)
-
-            # if final_token is set, eval final_token and return the result
-            if final_token:
-                return str(eval(final_token, {}, {"track": self}))
-            else:
-                return final_token
+        def format_template(match: re.Match) -> str:
+            """
+            when a token is found, replace it by the corresponding value
+            :param match: match in the format
+            :return: corresponding value
+            """
+            # get the token string without the brackets, then strip it. Also double antislash
+            template = match.group(1).strip().replace("\\", "\\\\")
+            return safe_eval(template, extra_token_map, {"track": self})
 
         # pass everything between TOKEN_START and TOKEN_END in the function
-        return re.sub(rf"{TOKEN_START}(.*?){TOKEN_END}", format_token, format)
+        return re.sub(rf"{TOKEN_START}(.*?){TOKEN_END}", format_template, format)
 
     def get_prefix(self, mod_config: "ModConfig", default: any = None) -> any:
         """
@@ -145,8 +78,7 @@ class Track:
         :param mod_config: mod configuration
         :return: formatted representation of the track prefix
         """
-        for tag in filter(lambda tag: tag in mod_config.tags_prefix, self.tags):
-            return mod_config.tags_prefix[tag]
+        for tag in filter(lambda tag: tag in mod_config.tags_prefix, self.tags): return tag
         return default
 
     def get_suffix(self, mod_config: "ModConfig", default: any = None) -> any:
@@ -156,9 +88,29 @@ class Track:
         :param mod_config: mod configuration
         :return: formatted representation of the track suffix
         """
-        for tag in filter(lambda tag: tag in mod_config.tags_suffix, self.tags):
-            return mod_config.tags_suffix[tag]
+        for tag in filter(lambda tag: tag in mod_config.tags_suffix, self.tags): return tag
         return default
 
-    def get_highlight(self, mod_config: "ModConfig", default: any = None) -> any:
+    def is_highlight(self, mod_config: "ModConfig", default: any = None) -> bool:
         ...
+
+    def is_new(self, mod_config: "ModConfig", default: any = None) -> bool:
+        ...
+
+    def get_ctfile(self, mod_config: "ModConfig", hidden: bool = False) -> str:
+        """
+        return the ctfile of the track
+        :hidden: if the track is in a group
+        :return: ctfile
+        """
+        # TODO: filename, info and - are not implemented
+        menu_name = f'{self.repr_format(mod_config=mod_config, format=mod_config.track_formatting["menu_name"])!r}'
+        file_name = f'{self.repr_format(mod_config=mod_config, format=mod_config.track_formatting["file_name"])!r}'
+
+        return (
+            f'{"H" if hidden else "T"} {self.music}; '  # track type
+            f'{self.special}; {(0x04 if hidden else 0) | (0x01 if self.is_new(mod_config, False) else 0):#04x}; '  # lecode flags
+            f'{file_name}; '  # filename
+            f'{menu_name}; '  # name of the track in the menu
+            f'{file_name}\n'  # unique identifier for each track
+        )

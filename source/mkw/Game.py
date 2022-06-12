@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Generator
 
 from source.mkw.ModConfig import ModConfig
-from source.wt.wit import WITPath, Region
+from source.wt.wit import WITPath, Region, Extension
 
 
 class Game:
@@ -24,7 +24,7 @@ class Game:
         """
         return not any(self.wit_path[f"./files/rel/lecode-{region.value}.bin"].exists() for region in Region)
 
-    def extract(self, dest: Path | str) -> Generator[str, None, Path]:
+    def extract(self, dest: Path | str) -> Generator[dict, None, Path]:
         """
         Extract the game to the destination directory. If the game is a FST, just copy to the destination
         :param dest: destination directory
@@ -43,10 +43,13 @@ class Game:
         except StopIteration as e:
             return e.value
 
-    def install_mod(self, dest: Path, mod_config: ModConfig) -> Generator[str, None, None]:
+    def install_mod(self, dest: Path, mod_config: ModConfig, output_type: Extension) -> Generator[dict, None, None]:
         """
         Patch the game with the mod
         :dest: destination directory
         :mod_config: mod configuration
+        :output_type: type of the destination game
         """
-        yield from self.extract(dest / f"{mod_config.nickname} {mod_config.version}")
+        # yield from self.extract(dest / f"{mod_config.nickname} {mod_config.version}")
+        print(mod_config.get_ctfile())
+        yield {}

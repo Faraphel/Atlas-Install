@@ -18,6 +18,8 @@ from source import event
 from source import *
 import os
 
+from source.wt.wit import Extension
+
 
 class SourceGameError(Exception):
     def __init__(self, path: Path | str):
@@ -126,6 +128,13 @@ class Window(tkinter.Tk):
         """
         return self.destination_game.get_path()
 
+    def get_output_type(self) -> Extension:
+        """
+        Get the output type
+        :return: output type
+        """
+        return self.destination_game.get_output_type()
+
 
 # Menu bar
 class Menu(tkinter.Menu):
@@ -159,8 +168,8 @@ class Menu(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
 
-            master.add_cascade(label=_("TRACK_CONFIGURATION"), menu=self)
-            self.add_command(label="Change configuration")
+            master.add_cascade(label=_("TRACK_FILTER"), menu=self)
+            self.add_command(label="Change filter")
 
     # Advanced menu
     class Advanced(tkinter.Menu):
@@ -209,6 +218,7 @@ class Menu(tkinter.Menu):
 class SourceGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Original Game File")
+        self.columnconfigure(1, weight=1)
 
         self.entry = ttk.Entry(self, width=50)
         self.entry.grid(row=1, column=1, sticky="nsew")
@@ -268,12 +278,17 @@ class SourceGame(ttk.LabelFrame):
 class DestinationGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Game Directory Destination")
+        self.columnconfigure(1, weight=1)
 
-        self.entry = ttk.Entry(self, width=50)
+        self.entry = ttk.Entry(self)
         self.entry.grid(row=1, column=1, sticky="nsew")
 
+        self.output_type = ttk.Combobox(self, width=5, values=[extension.name for extension in Extension])
+        self.output_type.set(Extension.WBFS.name)
+        self.output_type.grid(row=1, column=2, sticky="nsew")
+
         self.button = ttk.Button(self, text="...", width=2, command=self.select)
-        self.button.grid(row=1, column=2, sticky="nsew")
+        self.button.grid(row=1, column=3, sticky="nsew")
 
     def select(self) -> None:
         """
@@ -304,6 +319,13 @@ class DestinationGame(ttk.LabelFrame):
         if not path.exists(): raise DestinationGameError(path)
         return path
 
+    def get_output_type(self) -> Extension:
+        """
+        Get the output type
+        :return: the output type
+        """
+        return Extension[self.output_type.get()]
+
     def set_state(self, state: InstallerState) -> None:
         """
         Set the progress bar state when the installer change state
@@ -312,7 +334,9 @@ class DestinationGame(ttk.LabelFrame):
         """
         for child in self.winfo_children():
             match state:
-                case InstallerState.IDLE: child.config(state="normal")
+                case InstallerState.IDLE:
+                    if child == self.output_type: child.config(state="readonly")
+                    else: child.config(state="normal")
                 case InstallerState.INSTALLING: child.config(state="disabled")
 
 
@@ -339,14 +363,20 @@ class ButtonInstall(ttk.Button):
                 messagebox.showerror(_("ERROR"), _("ERROR_INVALID_DESTINATION_GAME"))
                 return
 
-            # get space remaining on the C: drive
+            # if there is no more space on the installer drive, show a warning
             if shutil.disk_usage(".").free < minimum_space_available:
+                if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
+                    return
+
+            # if there is no more space on the destination drive, show a warning
+            elif shutil.disk_usage(destination_path).free < minimum_space_available:
                 if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
                     return
 
             game = Game(source_path)
             mod_config = self.master.get_mod_config()
-            self.master.progress_function(game.install_mod(destination_path, mod_config))
+            output_type = self.master.get_output_type()
+            self.master.progress_function(game.install_mod(destination_path, mod_config, output_type))
 
         finally:
             self.master.set_state(InstallerState.IDLE)

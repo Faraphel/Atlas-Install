@@ -1,10 +1,13 @@
 from typing import Generator
 
+from source.mkw import Tag
 
-# representation of a group of tracks
+
 class TrackGroup:
-    def __init__(self, tracks: list["Track"] = None):
+    def __init__(self, tracks: list["Track"] = None, tags: list[Tag] = None, name: str = None):
         self.tracks = tracks if tracks is not None else []
+        self.tags = tags if tags is not None else []
+        self.name = name if name is not None else ""
 
     def get_tracks(self) -> Generator["Track", None, None]:
         """
@@ -24,4 +27,19 @@ class TrackGroup:
         from source.mkw.Track import Track
 
         if "group" not in group_dict: return Track.from_dict(group_dict)
-        return cls(tracks=[Track.from_dict(track) for track in group_dict["group"]])
+        return cls(
+            tracks=[Track.from_dict(track) for track in group_dict["group"]],
+            tags=group_dict.get("tags"),
+            name=group_dict.get("name"),
+        )
+
+    def get_ctfile(self, mod_config: "ModConfig") -> str:
+        """
+        return the ctfile of the track group
+        :return: ctfile
+        """
+        ctfile = f'T T11; T11; 0x02; "-"; "info"; "-"\n'
+        for track in self.get_tracks():
+            ctfile += track.get_ctfile(mod_config=mod_config, hidden=True)
+
+        return ctfile
