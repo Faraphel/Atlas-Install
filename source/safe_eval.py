@@ -44,7 +44,7 @@ class SafeFunction:
         :return: the attribute value
         """
         attr = getattr(obj, attr) if default is None else getattr(obj, attr, default)
-        if callable(attr): raise AttributeError(f"getattr can't be used for functions (tried: tr{attr})")
+        if callable(attr): raise AttributeError(f"getattr can't be used for functions (tried: {attr})")
         return attr
 
 

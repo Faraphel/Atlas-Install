@@ -35,7 +35,7 @@ class Region(enum.Enum):
     """
     PAL = "PAL"
     USA = "USA"
-    EUR = "EUR"
+    JAP = "JAP"
     KOR = "KOR"
 
 
@@ -214,7 +214,7 @@ class WITSubPath:
         :param dest: destination directory
         :return: the extracted file path
         """
-        dest: Path = dest if isinstance(dest, Path) else Path(dest)
+        dest: Path = Path(dest)
 
         if self.wit_path.extension == Extension.FST:
             # if flat is used, extract the file / dir into the destination directory, without subdirectory

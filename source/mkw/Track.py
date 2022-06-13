@@ -103,7 +103,6 @@ class Track:
         :hidden: if the track is in a group
         :return: ctfile
         """
-        # TODO: filename, info and - are not implemented
         menu_name = f'{self.repr_format(mod_config=mod_config, format=mod_config.track_formatting["menu_name"])!r}'
         file_name = f'{self.repr_format(mod_config=mod_config, format=mod_config.track_formatting["file_name"])!r}'
 

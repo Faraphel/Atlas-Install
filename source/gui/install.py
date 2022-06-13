@@ -77,8 +77,8 @@ class Window(tkinter.Tk):
         self.after(0, self.run_after)
         self.mainloop()
 
-    @event.register
-    def run_after(self) -> None:
+    @staticmethod
+    def run_after() -> None:
         """
         Run after the installer has been initialised, can be used to add plugins
         :return:
@@ -454,7 +454,13 @@ class ProgressBar(ttk.LabelFrame):
         :param value: the value
         :return:
         """
-        self.progress_bar.configure(mode="determinate" if value else "indeterminate")
+        if value:
+            if self.progress_bar["mode"] == "indeterminate": self.progress_bar.stop()
+            self.progress_bar.configure(mode="determinate")
+
+        else:
+            if self.progress_bar["mode"] == "determinate": self.progress_bar.start(50)
+            self.progress_bar.configure(mode="indeterminate")
 
 
 # Combobox to select the pack

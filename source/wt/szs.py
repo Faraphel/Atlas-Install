@@ -4,11 +4,24 @@ from source.wt import _run, _run_dict
 tools_path = tools_szs_dir / ("wszst.exe" if system == "win64" else "wszst")
 
 
+@better_wt_error(tools_path)
+def autoadd(course_directory: Path | str, destination_path: Path | str) -> Path:
+    """
+    Extract all the autoadd files from course_directory to destination_path
+    :param course_directory: directory with all the default tracks of the game
+    :param destination_path: directory where the autoadd files will be extracted
+    :return: directory where the autoadd files were extracted
+    """
+    destination_path = Path(destination_path)
+    _run(tools_path, "AUTOADD", course_directory, "-D", destination_path)
+    return destination_path
+
+
 class SZSPath:
     __slots__ = ("path", "_analyze")
 
     def __init__(self, path: Path | str):
-        self.path: Path = path if isinstance(path, Path) else Path(path)
+        self.path: Path = Path(path)
         self._analyze = None
 
     def __repr__(self) -> str:
@@ -58,10 +71,10 @@ class SZSPath:
         :param dest: output directory
         :return:
         """
-        dest: Path = dest if isinstance(dest, Path) else Path(dest)
+        dest: Path = Path(dest)
         if dest.is_dir(): dest /= self.path.name
 
-        self._run("EXTRACT", self.path, "-d", dest)
+        self._run("EXTRACT", self.path, "-D", dest)
         return dest
 
     def analyze(self) -> dict:
@@ -128,7 +141,7 @@ class SZSSubPath:
         """
         if self.is_dir(): raise ValueError("Can't extract a directory")
 
-        dest: Path = dest if isinstance(dest, Path) else Path(dest)
+        dest: Path = Path(dest)
         if dest.is_dir(): dest /= self.basename()
 
         with dest.open("wb") as file:

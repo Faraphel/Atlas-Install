@@ -43,7 +43,7 @@ class Option:
         :return: None
         """
         if option_file is None: option_file = self._path
-        if isinstance(option_file, str): option_file = Path(option_file)
+        option_file = Path(option_file)
 
         with option_file.open("w") as file:
             json.dump(self._options, file, indent=4, ensure_ascii=False)
@@ -68,7 +68,7 @@ class Option:
         :param option_file: the option file
         :return: Option
         """
-        if isinstance(option_file, str): option_file = Path(option_file)
+        option_file = Path(option_file)
 
         if not option_file.exists(): obj = cls()
         else: obj = cls.from_dict(json.loads(option_file.read_text(encoding="utf8")))

@@ -34,9 +34,9 @@ class ModConfig:
         self.default_track: "Track | TrackGroup" = default_track if default_track is not None else None
         self._tracks: list["Track | TrackGroup"] = tracks if tracks is not None else []
         self.track_formatting: dict[str, str] = {
-            "menu_name": "{{ getattr(track, 'name', '/') }}",
-            "race_name": "{{ getattr(track, 'name', '/') }}",
-            "file_name": "{{ getattr(track, 'sha1', '/') }}"
+            "menu_name": "{{ getattr(track, 'name', '') }}",
+            "race_name": "{{ getattr(track, 'name', '') }}",
+            "file_name": "{{ getattr(track, 'sha1', '_') }}",
         } | (track_formatting if track_formatting is not None else {})
 
         self.original_track_prefix: bool = original_track_prefix if original_track_prefix is not None else True
