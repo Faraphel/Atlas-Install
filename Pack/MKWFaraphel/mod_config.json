@@ -69,16 +69,17 @@
 
     "track_formatting": {
         "menu_name": "{{ ('\\c{YOR2}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\{off} ') if hasattr(track, 'score') else '' }}{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}",
-        "race_name": "{{ getattr(track, 'name', '/') }}",
-        "file_name": "{{ getattr(track, 'sha1', '/') }}"
+        "race_name": "{{ getattr(track, 'name', '') }}",
+        "file_name": "{{ getattr(track, 'sha1', '_') }}"
     },
 
     "default_track": {
-        "music":"T32",
-        "special":"T32",
-        "author":"MrFluffy",
-        "tags":[]
+        "music": "T32",
+        "special": "T32",
+        "author": "MrFluffy",
+        "tags": []
     },
+
     "tracks": [
         {
             "name":"Mario Kart Stadium",

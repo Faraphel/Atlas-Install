@@ -1,0 +1,3 @@
+{
+  "if": "{{ getattr(mod_config, 'extension', False) == 'USA' }}"
+}
