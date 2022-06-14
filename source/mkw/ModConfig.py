@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Generator
 
+from PIL import Image
+
 from source.mkw import Tag, Color
 from source.mkw.Cup import Cup
 from source.mkw.Track import Track
@@ -9,17 +11,19 @@ import json
 
 # representation of the configuration of a mod
 class ModConfig:
-    __slots__ = ("name", "nickname", "variant", "region", "tags_prefix", "tags_suffix",
+    __slots__ = ("name", "path", "nickname", "variant", "region", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
                  "keep_original_track", "enable_random_cup", "tags_cups", "track_formatting")
 
-    def __init__(self, name: str, nickname: str = None, version: str = None, variant: str = None,
+    def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, Color] = None, tags_suffix: dict[Tag, Color] = None,
                  tags_cups: list[Tag] = None, region: dict[int] | int = None,
                  default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
                  original_track_prefix: bool = None, swap_original_order: bool = None,
                  keep_original_track: bool = None, enable_random_cup: bool = None,
                  track_formatting: dict[str, str] = None):
+
+        self.path = Path(path)
 
         self.name: str = name
         self.nickname: str = nickname if nickname is not None else name
@@ -48,20 +52,22 @@ class ModConfig:
         return f"<ModConfig name={self.name} version={self.version}>"
 
     @classmethod
-    def from_dict(cls, config_dict: dict) -> "ModConfig":
+    def from_dict(cls, path: Path | str, config_dict: dict) -> "ModConfig":
         """
         Create a ModConfig from a dict
+        :param path: path of the mod_config.json
         :param config_dict: dict containing the configuration
         :return: ModConfig
         """
         kwargs = {
             attr: config_dict.get(attr)
             for attr in cls.__slots__
-            if attr not in ["name", "default_track", "_tracks", "tracks"]
+            if attr not in ["name", "default_track", "_tracks", "tracks", "path"]
             # these keys are treated after or are reserved
         }
 
         return cls(
+            path=Path(path),
             name=config_dict["name"],
 
             **kwargs,
@@ -77,8 +83,18 @@ class ModConfig:
         :param config_file: file containing the configuration
         :return: ModConfig
         """
-        if isinstance(config_file, str): config_file = Path(config_file)
-        return cls.from_dict(json.loads(config_file.read_text(encoding="utf8")))
+        config_file = Path(config_file)
+        return cls.from_dict(
+            path=config_file,
+            config_dict=json.loads(config_file.read_text(encoding="utf8"))
+        )
+
+    def get_mod_directory(self) -> Path:
+        """
+        Get the directory of the mod
+        :return: directory of the mod
+        """
+        return self.path.parent
 
     def get_tracks(self) -> Generator["Track", None, None]:
         """
@@ -105,13 +121,13 @@ class ModConfig:
 
                 if len(track_buffer) > 4:
                     current_tag_count += 1
-                    yield Cup(tracks=track_buffer, cup_id=f"{current_tag_name}-{current_tag_count}")
+                    yield Cup(tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count}")
                     track_buffer = []
 
             # if there is still tracks in the buffer, create a cup with them and fill with default>
             if len(track_buffer) > 0:
                 track_buffer.extend([self.default_track] * (4 - len(track_buffer)))
-                yield Cup(tracks=track_buffer, cup_id=f"{current_tag_name}-{current_tag_count+1}")
+                yield Cup(tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count+1}")
 
     def get_unordered_cups(self) -> Generator["Cup", None, None]:
         """
@@ -167,3 +183,61 @@ class ModConfig:
             ctfile += cup.get_ctfile(mod_config=self)
 
         return ctfile
+
+    def get_base_cticons(self) -> Generator[Image.Image, None, None]:
+        """
+        Return the base cticon
+        :return:
+        """
+        icon_names = ["left", "right"]
+
+        if self.keep_original_track:
+            icon_names += [
+                f"_DEFAULT/{name}"
+                for name in (
+                    ["mushroom", "shell", "flower", "banana", "star", "leaf", "special", "lightning"]
+                    if self.swap_original_order else
+                    ["mushroom", "flower", "star", "special", "shell", "banana", "leaf", "lightning"]
+                )
+            ]
+        if self.enable_random_cup: icon_names.append("random")
+
+        for icon_name in icon_names:
+            yield Image.open(self.get_mod_directory() / f"{icon_name}.png").resize((128, 128))
+
+    def get_custom_cticons(self) -> Generator[Image.Image, None, None]:
+        """
+        Return the custom ct_icon generated from the ModConfig
+        :return:
+        """
+        for cup in self.get_cups():
+            yield cup.get_cticon(mod_config=self).resize((128, 128))
+
+    def get_cticons(self) -> Generator[Image.Image, None, None]:
+        """
+        Return all the ct_icon generated from the ModConfig
+        :return:
+        """
+        yield from self.get_base_cticons()
+        yield from self.get_custom_cticons()
+
+    @staticmethod
+    def get_default_font() -> Path:
+        """
+        Return the default font for creating ct_icons
+        :return: the path to the default font file
+        """
+        # TODO: make it customizable
+        return Path("./assets/SuperMario256.ttf")
+
+    def get_full_cticon(self) -> Image.Image:
+        """
+        Return the full ct_icon generated from the ModConfig
+        :return:
+        """
+        cticons = list(self.get_cticons())
+
+        full_cticon = Image.new("RGBA", (128 * len(cticons), 128))
+        for i, cticon in enumerate(cticons): full_cticon.paste(cticon, (i * 128, 0))
+
+        return full_cticon

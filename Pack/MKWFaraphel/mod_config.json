@@ -44,7 +44,7 @@
         "SK64": "green",
         "SMG": "red2",
         "Spyro 1": "blue",
-        "Wii U": "red4",
+        "Switch": "red4",
         "Wii": "blue",
         "3DS": "YOR3",
         "DS": "white",
@@ -65,7 +65,7 @@
     "tags_suffix": {
         "Boost": "orange"
     },
-    "tags_cups": ["Wii U", "3DS", "DS", "GCN", "GBA", "N64", "SNES", "MKT", "RMX", "DX", "GP"],
+    "tags_cups": ["Switch", "3DS", "DS", "GCN", "GBA", "N64", "SNES", "MKT", "RMX", "DX", "GP"],
 
     "track_formatting": {
         "menu_name": "{{ ('\\c{YOR2}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\{off} ') if hasattr(track, 'score') else '' }}{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}",
@@ -92,7 +92,7 @@
             "score":3,
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -106,7 +106,7 @@
             "version":"RC1",
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -120,7 +120,7 @@
             "version":"v1.2b",
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -134,7 +134,7 @@
             "version":"v1",
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -148,7 +148,7 @@
             "version":"RC1",
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -162,7 +162,7 @@
             "score":4,
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -176,7 +176,7 @@
             "score":3,
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ],
             "note":"some collision (like the plane) are buggy, and the texture feel a bit too dark"
         },
@@ -191,7 +191,7 @@
             "version":"v1.1",
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -205,7 +205,7 @@
             "score":5,
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -219,7 +219,7 @@
             "score":5,
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -233,7 +233,7 @@
             "score":5,
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ]
         },
         {
@@ -245,7 +245,7 @@
             "since_version":"0.1",
             "tags":[
                 "Retro",
-                "Wii U"
+                "Switch"
             ],
             "sha1":"e782de12471731e9bb155eea6872cd5b2303357d",
             "version":"v1.3"
