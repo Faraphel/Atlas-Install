@@ -1,3 +1,7 @@
 {
-  "format": "TPL.RGB5A3"
+  "operation": {
+    "tpl-encode": {
+      "encoding": "TPL.RGB5A3"
+    }
+  }
 }

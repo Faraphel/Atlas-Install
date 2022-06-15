@@ -1,3 +1,7 @@
 {
-  "encode": "TPL.RGB565"
+  "operation": {
+    "tpl-encode": {
+      "encoding": "TPL.RGB565"
+    }
+  }
 }

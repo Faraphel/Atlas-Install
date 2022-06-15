@@ -40,9 +40,46 @@ class ExtractedGame:
         :param mod_config: the mod to install
         """
         subfile = Path(subfile)
-        yield {"description": f"Installing {subfile.name}...", "determinate": False}
+        yield {"description": f"Patch {patch_directory.name}\nInstalling {subfile.name}...", "determinate": False}
 
-        configuration = {}
+        '''
+        configuration = {
+            "base": "/files/test.json",  # path a another json file to use as a base
+        
+            "mode": "copy",  # copy, replace, ignore, edit the subfile
+            # if edit is set, use the file in the extracted game as a source
+            
+            "replace_regex": None,  # regex expression to match the file on the game to replace
+            "if": "True",  # safe eval expression to check if the file should be installed
+            
+            "operation": {  # other operation for the file
+                "img-generate": {
+                    # width, height, default color, ... can be determined from the base file
+                    "format": "RGB",  # type of the image
+                    "layers": [
+                        {"type": "image", ...},
+                        {"type": "text", ...}
+                    ]
+                }
+                
+                "tpl-encode": {"encoding": "TPL.RGB565"},  # encode an image to a tpl with the given format
+                
+                "bmg-replace": {
+                    "mode": "regex"  # regex, bmg id
+                    "if": "True" # safe eval expression to check if the bmg operation should be installed
+                    "template": {
+                        "CWF": "{{ ONLINE_SERVICE }}",  # regex type expression
+                        "0x203F": "{{ ONLINE_SERVICE }}"  # bmg id type expression
+                    }
+                }
+            }
+        }
+        '''
+
+        configuration = {  # default configuration
+            "mode": "copy",
+            "if": "True",
+        }
         configuration_path = subfile.with_suffix(subfile.suffix + ".json")
         if configuration_path.exists(): configuration |= json.loads(configuration_path.read_text(encoding="utf8"))
 
@@ -55,8 +92,8 @@ class ExtractedGame:
         patch_directory = Path(patch_directory)
         yield {"description": f"Installing Patch {patch_directory.parent.name}...", "determinate": False}
 
-        for subfile in filter(lambda sf: sf.suffix == ".json", patch_directory.rglob("*")):
-            self.install_file(mod_config, subfile)
+        for subfile in filter(lambda sf: sf.suffix == ".json", patch_directory.glob("*")):
+            self.install_file(mod_config, patch_directory, subfile)
 
     def install_all_patch(self, mod_config: ModConfig) -> Generator[dict, None, None]:
         """

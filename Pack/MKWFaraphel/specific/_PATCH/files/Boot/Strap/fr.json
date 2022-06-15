@@ -1,0 +1,22 @@
+{
+    "operation": {
+        "img-generate": {
+            "format": "RGB",
+            "layers": [
+                {"type": "image", "path": "/specific/bootscreen-base.png"},
+                {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "text_size": 0.04, "color": [100, 100, 100], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.10, "y": 0.06, "text": "Chaque course possède une note allant de 1 à 5 étoiles", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.12, "text": "   jouable", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.35, "y": 0.12, "text": "   parfait", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.18, "text": "   problème mineur", "text_size": 0.045, "color": [255, 130, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.18, "text": "   problème majeur", "text_size": 0.045, "color": [255, 50, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.24, "text": "   seulement dolphin", "text_size": 0.045, "color": [70, 130, 255], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" indique que vous serez constamment\nen accélération sur cette course", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.40, "text": "L'auteur de la course est affiché lors\nde la présentation de la course", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.67, "text": "Le jeu originel de la course est affiché\nen préfix", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.88, "text": "Les notes ne sont pas toujours exactes, vous pouvez contribuer", "text_size": 0.04, "color": [128, 128, 128], "font": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.93, "text": "au mod en donnant votre avi sur le discord : https://discord.gg/C66cfHBb7S", "text_size": 0.04, "color": [128, 128, 128], "font": "/specific/CenturyGothicBold.ttf"}
+            ]
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "mode": "edit",
+
+    "operation": {
+        "bmg-replace": {
+            "mode": "regex",
+            "data": {
+                "CWF de Nintendo": "{{ONLINE_SERVICE}}",
+                "Wi-Fi Nintendo": "{{ONLINE_SERVICE}}",
+                "CWF Nintendo": "{{ONLINE_SERVICE}}",
+                "Nintendo WFC": "{{ONLINE_SERVICE}}",
+                "Wi-Fi": "{{ONLINE_SERVICE}}",
+                "インターネット": "{{ONLINE_SERVICE}}",
+
+                "Menu principal": "{{MOD_NICKNAME}} {{MOD_VERSION}} {{MOD_CUSTOMIZED}}",
+                "Menú principal": "{{MOD_NICKNAME}} {{MOD_VERSION}} {{MOD_CUSTOMIZED}}",
+                "Main Menu": "{{MOD_NICKNAME}} {{MOD_VERSION}} {{MOD_CUSTOMIZED}}",
+                "トップメニュー": "{{MOD_NICKNAME}} {{MOD_VERSION}} {{MOD_CUSTOMIZED}}",
+
+                "Mario Kart Wii": "{{MOD_NICKNAME}} {{MOD_VERSION}} {{MOD_CUSTOMIZED}}"
+            }
+        }
+    }
+}
