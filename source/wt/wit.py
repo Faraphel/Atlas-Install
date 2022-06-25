@@ -146,18 +146,25 @@ class WITPath:
         :param dest: destination directory
         :return: the extracted file path
         """
-        process = self._run_popen("EXTRACT", self.path, "-d", dest, "--progress")
+        if self.extension == Extension.FST:
+            yield {
+                "determinate": False
+            }
+            shutil.copytree(self._get_fst_root(), dest)
 
-        while process.poll() is None:
-            m = re.match(r'\s*(?P<percentage>\d*)%(?:.*?ETA (?P<estimation>\d*:\d*))?\s*', process.stdout.readline())
-            if m:
-                yield {
-                    "percentage": int(m.group("percentage")),
-                    "estimation": m.group("estimation")
-                }
+        else:
+            process = self._run_popen("EXTRACT", self.path, "-d", dest, "--progress")
 
-        if process.returncode != 0:
-            raise WTError(tools_path, process.returncode)
+            while process.poll() is None:
+                m = re.match(r'\s*(?P<percentage>\d*)%(?:.*?ETA (?P<estimation>\d*:\d*))?\s*', process.stdout.readline())
+                if m:
+                    yield {
+                        "percentage": int(m.group("percentage")),
+                        "estimation": m.group("estimation")
+                    }
+
+            if process.returncode != 0:
+                raise WTError(tools_path, process.returncode)
 
         return dest
 

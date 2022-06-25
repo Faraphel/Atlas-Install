@@ -1,3 +1,4 @@
 {
-  "regex": "*_E.szs"
+  "mode": "match",
+  "match_regex": "*_E.szs"
 }

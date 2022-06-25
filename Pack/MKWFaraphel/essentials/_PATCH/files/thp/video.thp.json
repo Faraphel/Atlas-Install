@@ -1,3 +1,4 @@
 {
-  "regex": "*/*.thp"
+  "mode": "match",
+  "match_regex": "*/*.thp"
 }

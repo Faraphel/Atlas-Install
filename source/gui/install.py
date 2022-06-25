@@ -251,6 +251,7 @@ class SourceGame(ttk.LabelFrame):
         self.entry.delete(0, tkinter.END)
         self.entry.insert(0, str(path.absolute()))
 
+        if path.suffix == ".dol": path = path.parent.parent
         self.master.destination_game.set_path(path.parent)
 
     def get_path(self) -> Path:
