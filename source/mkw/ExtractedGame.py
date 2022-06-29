@@ -11,8 +11,9 @@ class ExtractedGame:
     Class that represents an extracted game
     """
 
-    def __init__(self, path: Path | str):
+    def __init__(self, path: Path | str, original_game: "Game" = None):
         self.path = Path(path)
+        self.original_game = original_game
 
     def extract_autoadd(self, destination_path: Path | str) -> Generator[dict, None, None]:
         """

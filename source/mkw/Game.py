@@ -99,7 +99,7 @@ class Game:
         cache_directory.mkdir(parents=True, exist_ok=True)
 
         # get the directory where the game will be extracted
-        extracted_game = ExtractedGame(self.get_output_directory(dest, mod_config))
+        extracted_game = ExtractedGame(self.get_output_directory(dest, mod_config), self)
 
         if not self.is_mkw(): raise NotMKWGameError(self.wit_path.path)
         if not self.is_vanilla(): raise NotVanillaError(self.wit_path.path)

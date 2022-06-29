@@ -6,6 +6,8 @@ from abc import abstractmethod, ABC
 from typing import Generator, IO
 from io import BytesIO
 
+from source.safe_eval import safe_eval
+
 
 class PathOutsidePatch(Exception):
     def __init__(self, forbidden_path: Path, allowed_range: Path):
@@ -37,6 +39,19 @@ class Patch:
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self.path}>"
+
+    def safe_eval(self, template: str, extracted_game: "ExtractedGame") -> str:
+        """
+        Safe eval with a patch environment
+        :param extracted_game: the extracted game to patch
+        :param template: template to evaluate
+        :return: the result of the evaluation
+        """
+        return safe_eval(
+            template,
+            extra_token_map={"extracted_game": "extracted_game"},
+            env={"extracted_game": extracted_game},
+        )
 
     def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:
         """
@@ -336,7 +351,7 @@ class PatchFile(PatchObject):
             print(f"special file : {self} [install to {game_subpath}]")
             return
 
-        if not safe_eval(self.configuration["if"]): return
+        if self.patch.safe_eval(self.configuration["if"], extracted_game) == "False": return
 
         # apply operation on the file
         patch_source: Path = self.get_source_path(game_subpath)
@@ -397,7 +412,7 @@ class PatchDirectory(PatchObject):
         """
         yield {"description": f"Patching {self}"}
 
-        if not safe_eval(self.configuration["if"]): return
+        if self.patch.safe_eval(self.configuration["if"], extracted_game) == "False": return
 
         match self.configuration["mode"]:
             # if the mode is copy, then simply patch the subfile into the game with the same path
@@ -425,7 +440,6 @@ class PatchDirectory(PatchObject):
 # TODO : extract SZS
 # TODO : implement TPL
 # TODO : implement BMG
-# TODO : safe_eval
 
 
 configuration_example = {
