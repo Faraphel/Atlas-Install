@@ -1,12 +1,13 @@
 from pathlib import Path
-import json
 from PIL import Image, ImageDraw
+import json
 
 from abc import abstractmethod, ABC
 from typing import Generator, IO
 from io import BytesIO
 
 from source.safe_eval import safe_eval
+from source.wt.szs import SZSPath
 
 
 class PathOutsidePatch(Exception):
@@ -347,11 +348,22 @@ class PatchFile(PatchObject):
         """
         yield {"description": f"Patching {self}"}
 
+        # check if the file should be patched considering the "if" configuration
+        if self.patch.safe_eval(self.configuration["if"], extracted_game) == "False": return
+
+        # check if the path to the game_subpath is inside a szs, and if yes extract it
+        for szs_subpath in filter(lambda path: path.suffix == ".d",
+                                  game_subpath.parent.relative_to(extracted_game.path).parents):
+            szs_path = extracted_game.path / szs_subpath
+
+            # if the archive is already extracted, ignore
+            if not szs_path.exists():
+                SZSPath(szs_path.with_suffix(".szs")).extract_all(szs_path)
+
+        # if the file is a special file
         if self.full_path.name.startswith("#"):
             print(f"special file : {self} [install to {game_subpath}]")
             return
-
-        if self.patch.safe_eval(self.configuration["if"], extracted_game) == "False": return
 
         # apply operation on the file
         patch_source: Path = self.get_source_path(game_subpath)
@@ -370,6 +382,7 @@ class PatchFile(PatchObject):
             case "copy" | "edit":
                 print(f"[copy] copying {self} to {game_subpath}")
 
+                game_subpath.parent.mkdir(parents=True, exist_ok=True)
                 with open(game_subpath.parent / patch_name, "wb") as file:
                     file.write(patch_content.read())
 
@@ -382,6 +395,7 @@ class PatchFile(PatchObject):
                     # patch the game with the subpatch
                     print(f"[match] copying {self} to {game_subfile}")
 
+                    game_subpath.parent.mkdir(parents=True, exist_ok=True)
                     with open(game_subfile.parent / patch_name, "wb") as file:
                         file.write(patch_content.read())
 
@@ -429,7 +443,10 @@ class PatchDirectory(PatchObject):
                         # disallow patching files outside of the game
                         if not game_subfile.relative_to(extracted_game.path):
                             raise PathOutsidePatch(game_subfile, extracted_game.path)
+
                         # patch the game with the subpatch
+                        # if the subfile is a szs archive, replace it with a .d extension
+                        if game_subfile.suffix == ".szs": game_subfile = game_subfile.with_suffix(".d")
                         yield from subpatch.install(extracted_game, game_subfile / subpatch.full_path.name)
 
             # else raise an error
