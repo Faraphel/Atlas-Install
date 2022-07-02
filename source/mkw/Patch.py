@@ -70,19 +70,6 @@ class PatchOperation:
     """
     Represent an operation that can be applied onto a patch to modify it before installing
     """
-
-    @classmethod
-    def get_operation_by_name(cls, name: str):
-        match name:
-            case "img-generate":
-                return cls.ImageGenerator
-            case "tpl-encode":
-                return cls.TplConverter
-            case "bmg-replace":
-                return cls.BmgEditor
-            case _:
-                raise InvalidPatchOperation(name)
-
     class Operation(ABC):
         @abstractmethod
         def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
@@ -90,10 +77,21 @@ class PatchOperation:
             patch a file and return the new file_path (if changed) and the new content of the file
             """
 
+        def __new__(cls, name) -> "Operation":
+            """
+            Return an operation from its name
+            :return: an Operation from its name
+            """
+            for subclass in filter(lambda subclass: subclass.type == name, cls.__subclasses__()):
+                return subclass
+            raise InvalidPatchOperation(name)
+
     class ImageGenerator(Operation):
         """
         generate a new image based on a file and apply a generator on it
         """
+
+        type = "img-generate"
 
         def __init__(self, layers: list[dict]):
             self.layers: list["Layer"] = [self.Layer(layer) for layer in layers]
@@ -115,18 +113,15 @@ class PatchOperation:
             represent a layer for a image generator
             """
 
-            def __new__(cls, layer: dict):
-                match layer["type"]:
-                    case "color":
-                        obj = ColorLayer
-                    case "image":
-                        obj = ImageLayer
-                    case "text":
-                        obj = TextLayer
-                    case _:
-                        raise InvalidImageLayerType(layer["type"])
-
-                return obj(**layer)
+            def __new__(cls, layer: dict) -> "Layer":
+                """
+                return the correct type of layer corresponding to the layer mode
+                :param layer: the layer to load
+                """
+                for subclass in filter(lambda subclass: subclass.type == layer["type"], cls.__subclasses__()):
+                    layer.pop("type")
+                    return subclass(**layer)
+                raise InvalidImageLayerType(layer["type"])
 
             def get_bbox(self, image: Image.Image) -> tuple:
                 """
@@ -175,6 +170,7 @@ class PatchOperation:
             """
             Represent a layer that fill a rectangle with a certain color on the image
             """
+            type = "color"
 
             def __init__(self, color: tuple[int] = (0,), x1: int | float = 0, y1: int | float = 0, x2: int | float = 1,
                          y2: int | float = 1):
@@ -194,6 +190,7 @@ class PatchOperation:
             """
             Represent a layer that paste an image on the image
             """
+            type = "image"
 
             def __init__(self, image_path: str, x1: int | float = 0, y1: int | float = 0, x2: int | float = 1,
                          y2: int | float = 1):
@@ -218,10 +215,11 @@ class PatchOperation:
 
                 return image
 
-        class TextLayer:
+        class TextLayer(Layer):
             """
             Represent a layer that write a text on the image
             """
+            type = "text"
 
             def __init__(self, text: str, font_path: str | None = None, font_size: int = 10, color: tuple[int] = (255,),
                          x: int | float = 0, y: int | float = 0):
@@ -252,18 +250,26 @@ class PatchOperation:
         convert an image to a tpl file
         """
 
-        def __init__(self): ...
+        type = "tpl-encode"
 
-        def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO): ...
+        def __init__(self, *args, **kwargs):
+            print(args, kwargs)
+
+        def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+            return file_name, file_content
 
     class BmgEditor(Operation):
         """
         edit a bmg
         """
 
-        def __init__(self): ...
+        type = "bmg-replace"
 
-        def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO): ...
+        def __init__(self, *args, **kwargs):
+            print(args, kwargs)
+
+        def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+            return file_name, file_content
 
 
 class PatchObject:
@@ -358,7 +364,9 @@ class PatchFile(PatchObject):
 
             # if the archive is already extracted, ignore
             if not szs_path.exists():
-                SZSPath(szs_path.with_suffix(".szs")).extract_all(szs_path)
+                # if the szs file in the game exists, extract it
+                if szs_path.with_suffix(".szs").exists():
+                    SZSPath(szs_path.with_suffix(".szs")).extract_all(szs_path)
 
         # if the file is a special file
         if self.full_path.name.startswith("#"):
@@ -373,7 +381,7 @@ class PatchFile(PatchObject):
         for operation_name, operation in self.configuration.get("operation", {}).items():
             # process every operation and get the new patch_path (if the name is changed)
             # and the new content of the patch
-            patch_name, patch_content = PatchOperation.get_operation_by_name(operation_name)(*operation).patch(
+            patch_name, patch_content = PatchOperation.Operation(operation_name)(**operation).patch(
                 self.patch, patch_name, patch_content
             )
 
