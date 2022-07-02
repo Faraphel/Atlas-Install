@@ -1,21 +1,20 @@
 {
     "operation": {
         "img-generate": {
-            "format": "RGB",
             "layers": [
                 {"type": "image", "path": "/specific/bootscreen-base.png"},
-                {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "text_size": 0.04, "color": [100, 100, 100], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.10, "y": 0.06, "text": "Cada pista tiene una puntuación entre 1 y 5 estrellas", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.12, "text": "   interpretable", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.35, "y": 0.12, "text": "   perfecto", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.18, "text": "   problema menor", "text_size": 0.045, "color": [255, 130, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.18, "text": "   problema mayor", "text_size": 0.045, "color": [255, 50, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.24, "text": "   solo dolphin", "text_size": 0.045, "color": [70, 130, 255], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" significa que estarás constantemente\nestar acelerando en esta pista", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.40, "text": "El autor de la pista es acreditado\nmientras presentación de la pista", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.67, "text": "El juego de la pista original\nsi se muestra con el prefijo", "text_size": 0.045, "color": [255, 180, 0], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.88, "text": "Todos los puntajes no siempre son correctos, puedes contribuir a", "text_size": 0.04, "color": [128, 128, 128], "font": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.93, "text": "el mod dando tu opinion en el discord : https://discord.gg/C66cfHBb7S", "text_size": 0.04, "color": [128, 128, 128], "font": "/specific/CenturyGothicBold.ttf"}
+                {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "text_size": 0.04, "color": [100, 100, 100], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.10, "y": 0.06, "text": "Cada pista tiene una puntuación entre 1 y 5 estrellas", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.12, "text": "   interpretable", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.35, "y": 0.12, "text": "   perfecto", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.18, "text": "   problema menor", "text_size": 0.045, "color": [255, 130, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.18, "text": "   problema mayor", "text_size": 0.045, "color": [255, 50, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.24, "text": "   solo dolphin", "text_size": 0.045, "color": [70, 130, 255], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" significa que estarás constantemente\nestar acelerando en esta pista", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.40, "text": "El autor de la pista es acreditado\nmientras presentación de la pista", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.67, "text": "El juego de la pista original\nsi se muestra con el prefijo", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.88, "text": "Todos los puntajes no siempre son correctos, puedes contribuir a", "text_size": 0.04, "color": [128, 128, 128], "font_path": "/specific/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.93, "text": "el mod dando tu opinion en el discord : https://discord.gg/C66cfHBb7S", "text_size": 0.04, "color": [128, 128, 128], "font_path": "/specific/CenturyGothicBold.ttf"}
             ]
         }
     }
