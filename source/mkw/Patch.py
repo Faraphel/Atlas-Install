@@ -106,7 +106,7 @@ class PatchOperation:
             image.save(patch_content, format="PNG")
             patch_content.seek(0)
 
-            return file_name, file_content
+            return file_name, patch_content
 
         class Layer(ABC):
             """
