@@ -1,5 +1,5 @@
 from pathlib import Path
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import json
 
 from abc import abstractmethod, ABC
@@ -241,7 +241,7 @@ class PatchOperation:
                     font_image_path = None
 
                 font = ImageFont.truetype(font=font_image_path, size=self.get_font_size(image))
-                draw.text(self.get_layer_position(layer), text=self.text, fill=self.color, font=font)
+                draw.text(self.get_layer_position(image), text=self.text, fill=self.color, font=font)
 
                 return image
 
