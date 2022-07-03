@@ -403,8 +403,8 @@ class PatchFile(PatchObject):
                     # patch the game with the subpatch
                     print(f"[match] copying {self} to {game_subfile}")
 
-                    game_subpath.parent.mkdir(parents=True, exist_ok=True)
-                    with open(game_subfile.parent / patch_name, "wb") as file:
+                    game_subfile.parent.mkdir(parents=True, exist_ok=True)
+                    with open(game_subfile, "wb") as file:
                         file.write(patch_content.read())
 
             # else raise an error
