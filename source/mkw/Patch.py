@@ -392,6 +392,7 @@ class PatchFile(PatchObject):
 
                 game_subpath.parent.mkdir(parents=True, exist_ok=True)
                 with open(game_subpath.parent / patch_name, "wb") as file:
+                    patch_content.seek(0)
                     file.write(patch_content.read())
 
             # if the mode is match, replace all the subfiles that match match_regex by the PatchFile
@@ -405,6 +406,7 @@ class PatchFile(PatchObject):
 
                     game_subfile.parent.mkdir(parents=True, exist_ok=True)
                     with open(game_subfile, "wb") as file:
+                        patch_content.seek(0)
                         file.write(patch_content.read())
 
             # else raise an error
