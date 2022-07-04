@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Generator
 
 from source.mkw.ModConfig import ModConfig
-from source.mkw.Patch import Patch
+from source.mkw.Patch.Patch import Patch
 from source.wt import szs
 
 
