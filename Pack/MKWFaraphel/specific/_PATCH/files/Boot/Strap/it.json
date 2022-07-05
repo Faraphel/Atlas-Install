@@ -2,6 +2,7 @@
     "operation": {
         "img-generate": {
             "layers": [
+                {"type": "color", "color": [0, 0, 0]},
                 {"type": "image", "image_path": "files/Boot/Strap/bootscreen-base.png"},
                 {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "font_size": 0.04, "color": [100, 100, 100], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
                 {"type": "text", "x": 0.10, "y": 0.06, "text": "Ogni traccia ha un punteggio compreso tra 1 e 5 stelle", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},

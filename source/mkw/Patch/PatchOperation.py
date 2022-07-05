@@ -118,12 +118,11 @@ class PatchOperation:
                 type = "color"
 
                 def __init__(self, color: tuple[int] = (0,), x1: int | float = 0, y1: int | float = 0,
-                             x2: int | float = 1,
-                             y2: int | float = 1):
-                    self.x1: int = x1
-                    self.y1: int = y1
-                    self.x2: int = x2
-                    self.y2: int = y2
+                             x2: int | float = 1.0, y2: int | float = 1.0):
+                    self.x1: int | float = x1
+                    self.y1: int | float = y1
+                    self.x2: int | float = x2
+                    self.y2: int | float = y2
                     self.color: tuple[int] = tuple(color)
 
                 def patch_image(self, patch: "Patch", image: Image.Image):
@@ -138,12 +137,12 @@ class PatchOperation:
                 """
                 type = "image"
 
-                def __init__(self, image_path: str, x1: int | float = 0, y1: int | float = 0, x2: int | float = 1,
-                             y2: int | float = 1):
-                    self.x1: int = x1
-                    self.y1: int = y1
-                    self.x2: int = x2
-                    self.y2: int = y2
+                def __init__(self, image_path: str, x1: int | float = 0, y1: int | float = 0,
+                             x2: int | float = 1.0, y2: int | float = 1.0):
+                    self.x1: int | float = x1
+                    self.y1: int | float = y1
+                    self.x2: int | float = x2
+                    self.y2: int | float = y2
                     self.image_path: str = image_path
 
                 def patch_image(self, patch: "Patch", image: Image.Image) -> Image.Image:
@@ -152,7 +151,13 @@ class PatchOperation:
                     if not layer_image_path.is_relative_to(patch.path):
                         raise PathOutsidePatch(layer_image_path, patch.path)
 
-                    layer_image = Image.open(layer_image_path).resize(self.get_bbox_size(image)).convert("RGBA")
+                    layer_image = Image.open(
+                        layer_image_path.resolve()
+                    ).resize(
+                        self.get_bbox_size(image)
+                    ).convert(
+                        "RGBA"
+                    )
 
                     image.paste(
                         layer_image,
