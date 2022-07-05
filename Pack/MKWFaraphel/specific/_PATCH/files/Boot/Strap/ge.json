@@ -2,19 +2,19 @@
     "operation": {
         "img-generate": {
             "layers": [
-                {"type": "image", "path": "/specific/bootscreen-base.png"},
-                {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "text_size": 0.04, "color": [100, 100, 100], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.10, "y": 0.06, "text": "Jeder track hat eine Punktzahl zwischen 1 und 5 sternen", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.12, "text": "   spielbar", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.35, "y": 0.12, "text": "   perfekt", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.18, "text": "   kleines problem", "text_size": 0.045, "color": [255, 130, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.18, "text": "   hauptproblem", "text_size": 0.045, "color": [255, 50, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.24, "text": "   nur dolphin", "text_size": 0.045, "color": [70, 130, 255], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" bedeutet, dass Sie ständig sein\nwerden auf dieser track beschleunigen", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.40, "text": "Der Autor des Titels wird dabei\ngenannt die Track-Präsentation", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.67, "text": "Das Spiel des Originaltracks, falls\nangezeigt mit dem Präfix", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.88, "text": "Alle Punktzahlen sind nicht immer korrekt, Sie können zum Mod beitragen,", "text_size": 0.04, "color": [128, 128, 128], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.93, "text": "indem Sie Ihre Meinung zum Discord äußern : https://discord.gg/C66cfHBb7S", "text_size": 0.04, "color": [128, 128, 128], "font_path": "/specific/CenturyGothicBold.ttf"}
+                {"type": "image", "image_path": "files/Boot/Strap/bootscreen-base.png"},
+                {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "font_size": 0.04, "color": [100, 100, 100], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.10, "y": 0.06, "text": "Jeder track hat eine Punktzahl zwischen 1 und 5 sternen", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.12, "text": "   spielbar", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.35, "y": 0.12, "text": "   perfekt", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.18, "text": "   kleines problem", "font_size": 0.045, "color": [255, 130, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.18, "text": "   hauptproblem", "font_size": 0.045, "color": [255, 50, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.24, "text": "   nur dolphin", "font_size": 0.045, "color": [70, 130, 255], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" bedeutet, dass Sie ständig sein\nwerden auf dieser track beschleunigen", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.40, "text": "Der Autor des Titels wird dabei\ngenannt die Track-Präsentation", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.67, "text": "Das Spiel des Originaltracks, falls\nangezeigt mit dem Präfix", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.88, "text": "Alle Punktzahlen sind nicht immer korrekt, Sie können zum Mod beitragen,", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.93, "text": "indem Sie Ihre Meinung zum Discord äußern : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
             ]
         }
     }

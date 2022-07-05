@@ -56,7 +56,7 @@ class PatchObject(ABC):
         from source.mkw.Patch.PatchDirectory import PatchDirectory
         from source.mkw.Patch.PatchFile import PatchFile
 
-        obj = PatchDirectory.Patch if path.is_dir() else PatchFile
+        obj = PatchDirectory if path.is_dir() else PatchFile
         return obj(self.patch, str(path.relative_to(self.patch.path)))
 
     @abstractmethod

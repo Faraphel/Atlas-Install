@@ -1,6 +1,6 @@
 {
   "operation": {
-    "tpl-encode": {
+    "img-encode": {
       "encoding": "TPL.RGB5A3"
     }
   }

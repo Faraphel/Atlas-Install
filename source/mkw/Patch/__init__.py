@@ -20,26 +20,11 @@ class InvalidImageLayerType(Exception):
     def __init__(self, layer_type: str):
         super().__init__(f"Error : layer type \"{layer_type}\" is not implemented")
 
-
-
-
-
-
-
-
-
-
-
-
-# TODO : extract SZS
-# TODO : implement TPL
 # TODO : implement BMG
-
+# TODO : recreate SZS
 
 configuration_example = {
     "operation": {  # other operation for the file
-        "tpl-encode": {"encoding": "TPL.RGB565"},  # encode an image to a tpl with the given format
-
         "bmg-replace": {
             "mode": "regex",  # regex or id
             "template": {

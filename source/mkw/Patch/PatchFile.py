@@ -56,7 +56,7 @@ class PatchFile(PatchObject):
         for operation_name, operation in self.configuration.get("operation", {}).items():
             # process every operation and get the new patch_path (if the name is changed)
             # and the new content of the patch
-            patch_name, patch_content = PatchOperation.Operation(operation_name)(**operation).patch(
+            patch_name, patch_content = PatchOperation(operation_name)(**operation).patch(
                 self.patch, patch_name, patch_content
             )
 
@@ -83,6 +83,9 @@ class PatchFile(PatchObject):
                     with open(game_subfile, "wb") as file:
                         patch_content.seek(0)
                         file.write(patch_content.read())
+
+            # ignore if mode is "ignore", useful if the file is used as a resource for an operation
+            case "ignore": pass
 
             # else raise an error
             case _:

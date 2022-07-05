@@ -1,7 +1,7 @@
 {
     "mode": "edit",
     "operation": {
-        "bmg-replace": {
+        "bmg-edit": {
             "mode": "id",
             "data": {
                 "0x703e": "\\c{white}Aleatorio: Todas las pistas",

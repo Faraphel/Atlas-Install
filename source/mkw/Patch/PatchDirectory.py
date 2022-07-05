@@ -47,6 +47,9 @@ class PatchDirectory(PatchObject):
                         if game_subfile.suffix == ".szs": game_subfile = game_subfile.with_suffix(".d")
                         yield from subpatch.install(extracted_game, game_subfile / subpatch.full_path.name)
 
+            # ignore if mode is "ignore", useful if the file is used as a resource for an operation
+            case "ignore": pass
+
             # else raise an error
             case _:
                 raise InvalidPatchMode(self.configuration["mode"])

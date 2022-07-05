@@ -2,19 +2,19 @@
     "operation": {
         "img-generate": {
             "layers": [
-                {"type": "image", "path": "/specific/bootscreen-base.png"},
-                {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "text_size": 0.04, "color": [100, 100, 100], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.10, "y": 0.06, "text": "Elke track heeft een score tussen 1 en 5 sterren", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.12, "text": "   speelbaar", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.35, "y": 0.12, "text": "   perfect", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.18, "text": "   klein probleem", "text_size": 0.045, "color": [255, 130, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.18, "text": "   groot probleem", "text_size": 0.045, "color": [255, 50, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.17, "y": 0.24, "text": "   alleen dolphin", "text_size": 0.045, "color": [70, 130, 255], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" betekent dat je constant zult zijn\nversnellen op deze baan", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.40, "text": "De auteur van het nummer wordt gecrediteerd\nterwijl de race presentatie", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.45, "y": 0.67, "text": "Het spel van het originele nummer, indien\ngetoond met het voorvoegsel", "text_size": 0.045, "color": [255, 180, 0], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.88, "text": "Alle scores zijn niet altijd correct, je kunt een bijdrage leveren aan", "text_size": 0.04, "color": [128, 128, 128], "font_path": "/specific/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.93, "text": "de mod door je mening te geven over de discord : https://discord.gg/C66cfHBb7S", "text_size": 0.04, "color": [128, 128, 128], "font_path": "/specific/CenturyGothicBold.ttf"}
+                {"type": "image", "image_path": "files/Boot/Strap/bootscreen-base.png"},
+                {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "font_size": 0.04, "color": [100, 100, 100], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.10, "y": 0.06, "text": "Elke track heeft een score tussen 1 en 5 sterren", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.12, "text": "   speelbaar", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.35, "y": 0.12, "text": "   perfect", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.18, "text": "   klein probleem", "font_size": 0.045, "color": [255, 130, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.18, "text": "   groot probleem", "font_size": 0.045, "color": [255, 50, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.24, "text": "   alleen dolphin", "font_size": 0.045, "color": [70, 130, 255], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" betekent dat je constant zult zijn\nversnellen op deze baan", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.40, "text": "De auteur van het nummer wordt gecrediteerd\nterwijl de race presentatie", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.67, "text": "Het spel van het originele nummer, indien\ngetoond met het voorvoegsel", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.88, "text": "Alle scores zijn niet altijd correct, je kunt een bijdrage leveren aan", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.93, "text": "de mod door je mening te geven over de discord : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
             ]
         }
     }
