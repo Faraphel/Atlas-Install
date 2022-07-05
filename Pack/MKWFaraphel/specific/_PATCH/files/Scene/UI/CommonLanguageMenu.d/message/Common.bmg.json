@@ -2,7 +2,7 @@
     "mode": "edit",
 
     "operation": {
-        "bmg-replace": {
+        "bmg-edit": {
             "mode": "regex",
             "data": {
                 "CWF de Nintendo": "{{ONLINE_SERVICE}}",
