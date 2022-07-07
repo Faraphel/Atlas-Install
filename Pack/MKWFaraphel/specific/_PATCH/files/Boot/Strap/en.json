@@ -2,7 +2,7 @@
     "operation": {
         "img-generate": {
             "layers": [
-                {"type": "color", "color": [0, 0, 0]},
+                {"type": "color", "color": [0, 0, 0, 0]},
                 {"type": "image", "image_path": "files/Boot/Strap/bootscreen-base.png"},
                 {"type": "text", "x": 0.01, "y": 0.00, "text": "Mario Kart Wii - Faraphel", "font_size": 0.04, "color": [100, 100, 100], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
                 {"type": "text", "x": 0.10, "y": 0.06, "text": "Every track has a score between 1 and 5 stars", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
@@ -14,8 +14,8 @@
                 {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" mean that you will be constantly\nbe accelerating on this track", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
                 {"type": "text", "x": 0.45, "y": 0.40, "text": "The track's author is credited while\nthe track presentation", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
                 {"type": "text", "x": 0.45, "y": 0.67, "text": "The original track's game if shown\nwith the prefix", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.88, "text": "All score are not always correct, you can contribute to", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
-                {"type": "text", "x": 0.02, "y": 0.93, "text": "the mod by giving your opinion on the discord : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
+                {"type": "text", "x": 0.02, "y": 0.88, "text": "All score are not always correct, you can contribute to the mod", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.93, "text": "by giving your opinion on the discord : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
             ]
         }
     }

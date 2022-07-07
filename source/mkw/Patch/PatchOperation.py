@@ -40,7 +40,7 @@ class PatchOperation:
             self.layers: list["Layer"] = [self.Layer(layer) for layer in layers]
 
         def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
-            image = Image.open(file_content)
+            image = Image.open(file_content).convert("RGBA")
 
             for layer in self.layers:
                 image = layer.patch_image(patch, image)
@@ -127,7 +127,7 @@ class PatchOperation:
 
                 def patch_image(self, patch: "Patch", image: Image.Image):
                     draw = ImageDraw.Draw(image)
-                    draw.rectangle(self.get_bbox(image), self.color)
+                    draw.rectangle(self.get_bbox(image), fill=self.color)
 
                     return image
 
@@ -151,18 +151,15 @@ class PatchOperation:
                     if not layer_image_path.is_relative_to(patch.path):
                         raise PathOutsidePatch(layer_image_path, patch.path)
 
-                    layer_image = Image.open(
-                        layer_image_path.resolve()
-                    ).resize(
-                        self.get_bbox_size(image)
-                    ).convert(
-                        "RGBA"
-                    )
+                    # load the image that will be pasted
+                    layer_image = Image.open(layer_image_path.resolve()) \
+                                       .resize(self.get_bbox_size(image)) \
+                                       .convert("RGBA")
 
-                    image.paste(
+                    # paste onto the final image the layer with transparency support
+                    image.alpha_composite(
                         layer_image,
-                        box=self.get_bbox(image),
-                        mask=layer_image
+                        dest=self.get_bbox(image)[:2],
                     )
 
                     return image
