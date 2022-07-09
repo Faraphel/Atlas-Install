@@ -7,7 +7,7 @@ tools_path = tools_szs_dir / ("wimgt.exe" if system == "win64" else "wimgt")
 @better_wt_error(tools_path)
 class IMGPath:
     """
-    Represent a path to an image
+    Represent a path to a normal image, that can be converted into game image data
     """
     __slots__ = ("path", )
 
@@ -17,7 +17,7 @@ class IMGPath:
     @better_wt_error(tools_path)
     def _run(self, *args) -> bytes:
         """
-        Return a command with wszst and return the output
+        Return a command with wimgt and return the output
         :param args: command arguments
         :return: the output of the command
         """

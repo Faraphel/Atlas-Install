@@ -1,9 +1,10 @@
 {
     "mode": "edit",
     "operation": {
-        "bmg-edit": {
-            "mode": "id",
-            "data": {
+        "bmg-edit": [
+            {
+                "mode": "id",
+                "data": {
                 "0x703e": "\\c{white}Aleatorio: Todas las pistas",
                 "0x703f": "\\c{white}Aleatorio: Pistas originales",
                 "0x7040": "\\c{white}Aleatorio: Custom Tracks",
@@ -41,6 +42,7 @@
                 "M66": "\\c{YOR4}Partido : 48 pistas",
                 "M67": "\\c{YOR4}Partido : 64 pistas"
             }
-        }
+            }
+        ]
     }
 }

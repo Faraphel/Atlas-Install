@@ -249,8 +249,13 @@ class PatchOperation:
 
         type = "bmg-edit"
 
-        def __init__(self, *args, **kwargs):
-            print(args, kwargs)
+        def __init__(self, layers: list[dict]):
+            """
+            :param layers: all the bmg patch to apply
+            """
+            self.layers = layers
 
         def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+            print(file_content)
+
             return file_name, file_content

@@ -1,46 +1,48 @@
 {
     "mode": "edit",
     "operation": {
-        "bmg-edit": {
-            "mode": "id",
-            "data": {
-                "0x703e": "\\c{white}Aléatoire: Toutes les pistes",
-                "0x703f": "\\c{white}Aléatoire: Pistes Originales",
-                "0x7040": "\\c{white}Aléatoire: Custom Tracks",
-                "0x7041": "\\c{white}Aléatoire: Nouvelles pistes",
+        "bmg-edit": [
+            {
+                "mode": "id",
+                "data": {
+                    "0x703e": "\\c{white}Aléatoire: Toutes les pistes",
+                    "0x703f": "\\c{white}Aléatoire: Pistes Originales",
+                    "0x7040": "\\c{white}Aléatoire: Custom Tracks",
+                    "0x7041": "\\c{white}Aléatoire: Nouvelles pistes",
 
-                "M37": "\\c{YOR4}Réinitialiser les options",
-                "M38": "\\c{YOR4}Vote : par les joueurs",
-                "M39": "\\c{YOR4}Vote : par l'hôte",
-                "M40": "\\c{YOR4}Blocage : réinitialiser",
-                "M41": "\\c{YOR4}Blocage : désactiver",
-                "M42": "\\c{YOR4}Blocage : activer",
-                "M43": "\\c{YOR4}Véhicule : tout",
-                "M44": "\\c{YOR4}Véhicule : tout poids",
-                "M45": "\\c{YOR4}Véhicule : seulement léger",
-                "M46": "\\c{YOR4}Véhicule : tout sauf léger",
-                "M47": "\\c{YOR4}Véhicule : seulement moyen",
-                "M48": "\\c{YOR4}Véhicule : tout sauf moyen",
-                "M49": "\\c{YOR4}Véhicule : seulement lourd",
-                "M50": "\\c{YOR4}Véhicule : tout sauf lourd",
-                "M51": "\\c{YOR4}Véhicule : tout type",
-                "M52": "\\c{YOR4}Véhicule : seulement kart",
-                "M53": "\\c{YOR4}Véhicule : seulement moto",
-                "M54": "\\c{YOR4}Cylindrée : réinitialiser",
-                "M55": "\\c{YOR4}Cylindrée : 100cc",
-                "M56": "\\c{YOR4}Cylindrée : 150cc",
-                "M57": "\\c{YOR4}Cylindrée : 150cc mirroir",
-                "M58": "\\c{YOR4}Partie : 1 course",
-                "M59": "\\c{YOR4}Partie : 2 courses",
-                "M60": "\\c{YOR4}Partie : 4 courses",
-                "M61": "\\c{YOR4}Partie : 8 courses",
-                "M62": "\\c{YOR4}Partie : 12 courses",
-                "M63": "\\c{YOR4}Partie : 16 courses",
-                "M64": "\\c{YOR4}Partie : 24 courses",
-                "M65": "\\c{YOR4}Partie : 32 courses",
-                "M66": "\\c{YOR4}Partie : 48 courses",
-                "M67": "\\c{YOR4}Partie : 64 courses"
+                    "M37": "\\c{YOR4}Réinitialiser les options",
+                    "M38": "\\c{YOR4}Vote : par les joueurs",
+                    "M39": "\\c{YOR4}Vote : par l'hôte",
+                    "M40": "\\c{YOR4}Blocage : réinitialiser",
+                    "M41": "\\c{YOR4}Blocage : désactiver",
+                    "M42": "\\c{YOR4}Blocage : activer",
+                    "M43": "\\c{YOR4}Véhicule : tout",
+                    "M44": "\\c{YOR4}Véhicule : tout poids",
+                    "M45": "\\c{YOR4}Véhicule : seulement léger",
+                    "M46": "\\c{YOR4}Véhicule : tout sauf léger",
+                    "M47": "\\c{YOR4}Véhicule : seulement moyen",
+                    "M48": "\\c{YOR4}Véhicule : tout sauf moyen",
+                    "M49": "\\c{YOR4}Véhicule : seulement lourd",
+                    "M50": "\\c{YOR4}Véhicule : tout sauf lourd",
+                    "M51": "\\c{YOR4}Véhicule : tout type",
+                    "M52": "\\c{YOR4}Véhicule : seulement kart",
+                    "M53": "\\c{YOR4}Véhicule : seulement moto",
+                    "M54": "\\c{YOR4}Cylindrée : réinitialiser",
+                    "M55": "\\c{YOR4}Cylindrée : 100cc",
+                    "M56": "\\c{YOR4}Cylindrée : 150cc",
+                    "M57": "\\c{YOR4}Cylindrée : 150cc mirroir",
+                    "M58": "\\c{YOR4}Partie : 1 course",
+                    "M59": "\\c{YOR4}Partie : 2 courses",
+                    "M60": "\\c{YOR4}Partie : 4 courses",
+                    "M61": "\\c{YOR4}Partie : 8 courses",
+                    "M62": "\\c{YOR4}Partie : 12 courses",
+                    "M63": "\\c{YOR4}Partie : 16 courses",
+                    "M64": "\\c{YOR4}Partie : 24 courses",
+                    "M65": "\\c{YOR4}Partie : 32 courses",
+                    "M66": "\\c{YOR4}Partie : 48 courses",
+                    "M67": "\\c{YOR4}Partie : 64 courses"
+                }
             }
-        }
+        ]
     }
 }

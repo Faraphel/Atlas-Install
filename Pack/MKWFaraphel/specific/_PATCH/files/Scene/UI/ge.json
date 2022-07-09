@@ -1,46 +1,48 @@
 {
     "mode": "edit",
     "operation": {
-        "bmg-edit": {
-            "mode": "id",
-            "data": {
-                "0x703e": "\\c{white}Zufällig: Alle Tracks",
-                "0x703f": "\\c{white}Zufällig: Original-Tracks",
-                "0x7040": "\\c{white}Zufällig: Custom Tracks",
-                "0x7041": "\\c{white}Zufällig: Neue Tracks",
+        "bmg-edit": [
+            {
+                "mode": "id",
+                "data": {
+                    "0x703e": "\\c{white}Zufällig: Alle Tracks",
+                    "0x703f": "\\c{white}Zufällig: Original-Tracks",
+                    "0x7040": "\\c{white}Zufällig: Custom Tracks",
+                    "0x7041": "\\c{white}Zufällig: Neue Tracks",
 
-                "M37": "\\c{YOR4}Optionen zurücksetzen",
-                "M38": "\\c{YOR4}Abstimmung : von Spielern",
-                "M39": "\\c{YOR4}Abstimmung : vom Gastgeber",
-                "M40": "\\c{YOR4}Blockierung : reset",
-                "M41": "\\c{YOR4}Blockierung : disable",
-                "M42": "\\c{YOR4}Blockierung : enable",
-                "M43": "\\c{YOR4}Fahrzeug : alle",
-                "M44": "\\c{YOR4}Fahrzeug : alles Gewicht",
-                "M45": "\\c{YOR4}Fahrzeug : nur leicht",
-                "M46": "\\c{YOR4}Fahrzeug : alles außer leicht",
-                "M47": "\\c{YOR4}Fahrzeug : nur Mittel",
-                "M48": "\\c{YOR4}Fahrzeug : alles außer Mittel",
-                "M49": "\\c{YOR4}Fahrzeug : nur schwer",
-                "M50": "\\c{YOR4}Fahrzeug : alles außer schwer",
-                "M51": "\\c{YOR4}Fahrzeug : alle Arten",
-                "M52": "\\c{YOR4}Fahrzeug : nur Kart",
-                "M53": "\\c{YOR4}Fahrzeug : nur Fahrrad",
-                "M54": "\\c{YOR4}Motor : zurücksetzen",
-                "M55": "\\c{YOR4}Motor : 100cc",
-                "M56": "\\c{YOR4}Motor : 150cc",
-                "M57": "\\c{YOR4}Motor : 150cc Spiegel",
-                "M58": "\\c{YOR4}Spiel : 1 Track",
-                "M59": "\\c{YOR4}Spiel : 2 Tracks",
-                "M60": "\\c{YOR4}Spiel : 4 Tracks",
-                "M61": "\\c{YOR4}Spiel : 8 Tracks",
-                "M62": "\\c{YOR4}Spiel : 12 Tracks",
-                "M63": "\\c{YOR4}Spiel : 16 Tracks",
-                "M64": "\\c{YOR4}Spiel : 24 Tracks",
-                "M65": "\\c{YOR4}Spiel : 32 Tracks",
-                "M66": "\\c{YOR4}Spiel : 48 Tracks",
-                "M67": "\\c{YOR4}Spiel : 64 Tracks"
+                    "M37": "\\c{YOR4}Optionen zurücksetzen",
+                    "M38": "\\c{YOR4}Abstimmung : von Spielern",
+                    "M39": "\\c{YOR4}Abstimmung : vom Gastgeber",
+                    "M40": "\\c{YOR4}Blockierung : reset",
+                    "M41": "\\c{YOR4}Blockierung : disable",
+                    "M42": "\\c{YOR4}Blockierung : enable",
+                    "M43": "\\c{YOR4}Fahrzeug : alle",
+                    "M44": "\\c{YOR4}Fahrzeug : alles Gewicht",
+                    "M45": "\\c{YOR4}Fahrzeug : nur leicht",
+                    "M46": "\\c{YOR4}Fahrzeug : alles außer leicht",
+                    "M47": "\\c{YOR4}Fahrzeug : nur Mittel",
+                    "M48": "\\c{YOR4}Fahrzeug : alles außer Mittel",
+                    "M49": "\\c{YOR4}Fahrzeug : nur schwer",
+                    "M50": "\\c{YOR4}Fahrzeug : alles außer schwer",
+                    "M51": "\\c{YOR4}Fahrzeug : alle Arten",
+                    "M52": "\\c{YOR4}Fahrzeug : nur Kart",
+                    "M53": "\\c{YOR4}Fahrzeug : nur Fahrrad",
+                    "M54": "\\c{YOR4}Motor : zurücksetzen",
+                    "M55": "\\c{YOR4}Motor : 100cc",
+                    "M56": "\\c{YOR4}Motor : 150cc",
+                    "M57": "\\c{YOR4}Motor : 150cc Spiegel",
+                    "M58": "\\c{YOR4}Spiel : 1 Track",
+                    "M59": "\\c{YOR4}Spiel : 2 Tracks",
+                    "M60": "\\c{YOR4}Spiel : 4 Tracks",
+                    "M61": "\\c{YOR4}Spiel : 8 Tracks",
+                    "M62": "\\c{YOR4}Spiel : 12 Tracks",
+                    "M63": "\\c{YOR4}Spiel : 16 Tracks",
+                    "M64": "\\c{YOR4}Spiel : 24 Tracks",
+                    "M65": "\\c{YOR4}Spiel : 32 Tracks",
+                    "M66": "\\c{YOR4}Spiel : 48 Tracks",
+                    "M67": "\\c{YOR4}Spiel : 64 Tracks"
+                }
             }
-        }
+        ]
     }
 }
