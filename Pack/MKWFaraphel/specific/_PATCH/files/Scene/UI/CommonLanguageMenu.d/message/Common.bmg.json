@@ -5,7 +5,7 @@
         "bmg-edit": {
             "layers": [{
                 "mode": "regex",
-                "data": {
+                "template": {
                     "CWF de Nintendo": "{{ONLINE_SERVICE}}",
                     "Wi-Fi Nintendo": "{{ONLINE_SERVICE}}",
                     "CWF Nintendo": "{{ONLINE_SERVICE}}",

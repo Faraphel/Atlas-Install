@@ -4,7 +4,7 @@
         "bmg-edit": {
             "layers": [{
                 "mode": "id",
-                "data": {
+                "template": {
                     "0x703e": "\\c{white}Random: All tracks",
                     "0x703f": "\\c{white}Random: Original tracks",
                     "0x7040": "\\c{white}Random: Custom Tracks",
