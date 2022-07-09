@@ -2,9 +2,9 @@
     "mode": "edit",
     "operation": {
         "bmg-edit": {
-            "template": [{
+            "layers": [{
                 "mode": "id",
-                "data": {
+                "template": {
                     "0x703e": "\\c{white}Aléatoire: Toutes les pistes",
                     "0x703f": "\\c{white}Aléatoire: Pistes Originales",
                     "0x7040": "\\c{white}Aléatoire: Custom Tracks",
