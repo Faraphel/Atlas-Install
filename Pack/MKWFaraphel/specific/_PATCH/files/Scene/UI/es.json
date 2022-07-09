@@ -1,8 +1,8 @@
 {
     "mode": "edit",
     "operation": {
-        "bmg-edit": [
-            {
+        "bmg-edit": {
+            "layers": [{
                 "mode": "id",
                 "data": {
                 "0x703e": "\\c{white}Aleatorio: Todas las pistas",
@@ -42,7 +42,7 @@
                 "M66": "\\c{YOR4}Partido : 48 pistas",
                 "M67": "\\c{YOR4}Partido : 64 pistas"
             }
-            }
-        ]
+            }]
+        }
     }
 }

@@ -2,8 +2,8 @@
     "mode": "edit",
 
     "operation": {
-        "bmg-edit": [
-            {
+        "bmg-edit": {
+            "layers": [{
                 "mode": "regex",
                 "data": {
                     "CWF de Nintendo": "{{ONLINE_SERVICE}}",
@@ -20,7 +20,7 @@
 
                     "Mario Kart Wii": "{{MOD_NICKNAME}} {{MOD_VERSION}} {{MOD_CUSTOMIZED}}"
                 }
-            }
-        ]
+            }]
+        }
     }
 }

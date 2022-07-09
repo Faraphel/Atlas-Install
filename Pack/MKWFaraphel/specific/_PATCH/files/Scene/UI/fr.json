@@ -1,8 +1,8 @@
 {
     "mode": "edit",
     "operation": {
-        "bmg-edit": [
-            {
+        "bmg-edit": {
+            "layers": [{
                 "mode": "id",
                 "data": {
                     "0x703e": "\\c{white}Aléatoire: Toutes les pistes",
@@ -42,7 +42,7 @@
                     "M66": "\\c{YOR4}Partie : 48 courses",
                     "M67": "\\c{YOR4}Partie : 64 courses"
                 }
-            }
-        ]
+            }]
+        }
     }
 }
