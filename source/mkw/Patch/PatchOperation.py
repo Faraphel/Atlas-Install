@@ -251,11 +251,61 @@ class PatchOperation:
 
         def __init__(self, layers: list[dict]):
             """
-            :param layers: all the bmg patch to apply
+            :param layers: layers
             """
             self.layers = layers
 
         def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
-            print(file_content)
+            for layer in self.layers:
+                file_content = self.Layer(layer).patch_bmg(patch, file_content)
 
             return file_name, file_content
+
+        class Layer:
+            """
+            represent a layer for a bmg-edit
+            """
+
+            def __new__(cls, layer: dict) -> "Layer":
+                """
+                return the correct type of layer corresponding to the layer mode
+                :param layer: the layer to load
+                """
+                for subclass in filter(lambda subclass: subclass.mode == layer["mode"],
+                                       cls.AbstractLayer.__subclasses__()):
+                    layer.pop("mode")
+                    return subclass(**layer)
+                raise InvalidBmgLayerMode(layer["mode"])
+
+            class AbstractLayer(ABC):
+                @abstractmethod
+                def patch_bmg(self, patch: "Patch", file_content: IO) -> IO:
+                    """
+                    Patch a bmg with the actual layer. Return the new bmg content.
+                    """
+
+            class IDLayer(AbstractLayer):
+                """
+                Represent a layer that replace bmg entry by their ID
+                """
+
+                mode = "id"
+
+                def __init__(self, template: dict[str, str]):
+                    self.template = template
+
+                def patch_bmg(self, patch: "Patch", file_content: IO) -> IO:
+                    return file_content
+
+            class RegexLayer(AbstractLayer):
+                """
+                Represent a layer that replace bmg entry by matching them with a regex
+                """
+
+                mode = "regex"
+
+                def __init__(self, template: dict[str, str]):
+                    self.template = template
+
+                def patch_bmg(self, patch: "Patch", file_content: IO) -> IO:
+                    return file_content

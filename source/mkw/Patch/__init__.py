@@ -18,14 +18,20 @@ class InvalidPatchOperation(Exception):
 
 class InvalidImageLayerType(Exception):
     def __init__(self, layer_type: str):
-        super().__init__(f"Error : layer type \"{layer_type}\" is not implemented")
+        super().__init__(f"Error : image layer type \"{layer_type}\" is not implemented")
+
+
+class InvalidBmgLayerMode(Exception):
+    def __init__(self, layer_mode: str):
+        super().__init__(f"Error : bmg layer mode \"{layer_mode}\" is not implemented")
+
 
 # TODO : implement BMG
 # TODO : recreate SZS
 
 configuration_example = {
     "operation": {  # other operation for the file
-        "bmg-replace": {
+        "bmg-edit": {
             "mode": "regex",  # regex or id
             "template": {
                 "CWF": "{{ ONLINE_SERVICE }}",  # regex type expression
