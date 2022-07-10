@@ -100,6 +100,7 @@ def _run_popen(tools_path: Path | str, *args) -> subprocess.Popen:
     """
     return subprocess.Popen(
         [tools_path, *args],
+        stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         creationflags=subprocess.CREATE_NO_WINDOW,
         bufsize=1,
