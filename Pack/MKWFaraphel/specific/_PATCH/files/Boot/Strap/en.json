@@ -17,6 +17,7 @@
                 {"type": "text", "x": 0.02, "y": 0.88, "text": "All score are not always correct, you can contribute to the mod", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
                 {"type": "text", "x": 0.02, "y": 0.93, "text": "by giving your opinion on the discord : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
             ]
-        }
+        },
+        "img-encode": {"encoding": "TEX.RGB565"}
     }
 }

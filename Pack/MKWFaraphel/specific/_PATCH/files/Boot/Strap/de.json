@@ -17,6 +17,7 @@
                 {"type": "text", "x": 0.02, "y": 0.88, "text": "Alle scores zijn niet altijd correct, je kunt een bijdrage leveren aan", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
                 {"type": "text", "x": 0.02, "y": 0.93, "text": "de mod door je mening te geven over de discord : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
             ]
-        }
+        },
+        "img-encode": {"encoding": "TEX.RGB565"}
     }
 }

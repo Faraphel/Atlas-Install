@@ -17,6 +17,7 @@
                 {"type": "text", "x": 0.02, "y": 0.88, "text": "Les notes ne sont pas toujours exactes, vous pouvez contribuer", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
                 {"type": "text", "x": 0.02, "y": 0.93, "text": "au mod en donnant votre avi sur le discord : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
             ]
-        }
+        },
+        "img-encode": {"encoding": "TEX.RGB565"}
     }
 }
