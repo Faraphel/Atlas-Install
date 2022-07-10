@@ -9,6 +9,35 @@ from source.wt import _run, _run_dict, _run_popen
 tools_path = tools_wit_dir / ("wit.exe" if system == "win64" else "wit")
 
 
+@better_wt_error(tools_path)
+def _tools_run(*args) -> bytes:
+    """
+    Return a command with wit and return the output
+    :param args: command arguments
+    :return: the output of the command
+    """
+    return _run(tools_path, *args)
+
+
+def _tools_run_popen(*args) -> subprocess.Popen:
+    """
+    Return a command with wit and return the output
+    :param args: command arguments
+    :return: the output of the command
+    """
+    return _run_popen(tools_path, *args)
+
+
+@better_wt_error(tools_path)
+def _tools_run_dict(*args) -> dict:
+    """
+    Return a dictionary of a command that return value associated to a key with a equal sign
+    :param args: others arguments
+    :return: the dictionary
+    """
+    return _run_dict(tools_path, *args)
+
+
 class Extension(enum.Enum):
     """
     Enum for game extension
@@ -52,33 +81,6 @@ class WITPath:
     def __eq__(self, other: "WITPath") -> bool:
         return self.path == other.path
 
-    @better_wt_error(tools_path)
-    def _run(self, *args) -> bytes:
-        """
-        Return a command with wit and return the output
-        :param args: command arguments
-        :return: the output of the command
-        """
-        return _run(tools_path, *args)
-
-    @classmethod
-    def _run_popen(cls, *args) -> subprocess.Popen:
-        """
-        Return a command with wit and return the output
-        :param args: command arguments
-        :return: the output of the command
-        """
-        return _run_popen(tools_path, *args)
-
-    @better_wt_error(tools_path)
-    def _run_dict(self, *args) -> dict:
-        """
-        Return a dictionary of a command that return value associated to a key with a equal sign
-        :param args: others arguments
-        :return: the dictionary
-        """
-        return _run_dict(tools_path, *args)
-
     def _get_fst_root(self) -> Path:
         """
         If the game is a FST, return the root of the FST
@@ -92,7 +94,7 @@ class WITPath:
         Return the analyze of the file
         :return: dictionnary of key and value of the analyze
         """
-        if self._analyze is None: self._analyze = self._run_dict("ANALYZE", self.path)
+        if self._analyze is None: self._analyze = _tools_run_dict("ANALYZE", self.path)
         return self._analyze
     
     def list_raw(self) -> list[str]:
@@ -108,7 +110,7 @@ class WITPath:
 
         return [
             subfile.strip() for subfile
-            in self._run("files", self.path).decode().splitlines()
+            in _tools_run("files", self.path).decode().splitlines()
             if subfile.startswith("./")
         ]
 
@@ -153,7 +155,7 @@ class WITPath:
             shutil.copytree(self._get_fst_root(), dest)
 
         else:
-            process = self._run_popen("EXTRACT", self.path, "-d", dest, "--progress")
+            process = _tools_run_popen("EXTRACT", self.path, "-d", dest, "--progress")
 
             while process.poll() is None:
                 m = re.match(r'\s*(?P<percentage>\d*)%(?:.*?ETA (?P<estimation>\d*:\d*))?\s*', process.stdout.readline())
@@ -244,7 +246,7 @@ class WITSubPath:
         else:
             args = []
             if flat: args.append("--flat")
-            self.wit_path._run("EXTRACT", self.wit_path.path, f"--files=+{self.subfile}", "-d", dest, *args)
+            _tools_run("EXTRACT", self.wit_path.path, f"--files=+{self.subfile}", "-d", dest, *args)
             return dest / self.basename()
 
     def is_dir(self) -> bool:

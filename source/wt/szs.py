@@ -5,6 +5,26 @@ tools_path = tools_szs_dir / ("wszst.exe" if system == "win64" else "wszst")
 
 
 @better_wt_error(tools_path)
+def _tools_run(*args) -> bytes:
+    """
+    Return a command with wszst and return the output
+    :param args: command arguments
+    :return: the output of the command
+    """
+    return _run(tools_path, *args)
+
+
+@better_wt_error(tools_path)
+def _tools_run_dict(*args) -> dict:
+    """
+    Return a dictionary of a command that return value associated to a key with a equal sign
+    :param args: others arguments
+    :return: the dictionary
+    """
+    return _run_dict(tools_path, *args)
+
+
+@better_wt_error(tools_path)
 def autoadd(course_directory: Path | str, destination_path: Path | str) -> Path:
     """
     Extract all the autoadd files from course_directory to destination_path
@@ -30,31 +50,13 @@ class SZSPath:
     def __eq__(self, other: "SZSPath") -> bool:
         return self.path == other.path
 
-    @better_wt_error(tools_path)
-    def _run(self, *args) -> bytes:
-        """
-        Return a command with wszst and return the output
-        :param args: command arguments
-        :return: the output of the command
-        """
-        return _run(tools_path, *args)
-
-    @better_wt_error(tools_path)
-    def _run_dict(self, *args) -> dict:
-        """
-        Return a dictionary of a command that return value associated to a key with a equal sign
-        :param args: others arguments
-        :return: the dictionary
-        """
-        return _run_dict(tools_path, *args)
-
     def cat(self, subfile: str) -> bytes:
         """
         Run the cat command (read a subfile) and return the output
         :param subfile: subfile name
         :return: the content of the subfile
         """
-        return self._run("cat", self.path / subfile)
+        return _tools_run("cat", self.path / subfile)
 
     def extract(self, subfile: str, dest: Path | str) -> Path:
         """
@@ -74,7 +76,7 @@ class SZSPath:
         dest: Path = Path(dest)
         if dest.is_dir(): dest /= self.path.name
 
-        self._run("EXTRACT", self.path, "-D", dest)
+        _tools_run("EXTRACT", self.path, "-D", dest)
         return dest
 
     def analyze(self) -> dict:
@@ -82,7 +84,7 @@ class SZSPath:
         Return the analyze of the file
         :return: dictionnary of key and value of the analyze
         """
-        if self._analyze is None: self._analyze = self._run_dict("ANALYZE", self.path)
+        if self._analyze is None: self._analyze = _tools_run_dict("ANALYZE", self.path)
         return self._analyze
 
     def list_raw(self) -> list[str]:
@@ -95,7 +97,7 @@ class SZSPath:
         # add it to the list. Finally, remove the first line because this is a description of the command
         return [
             subfile.strip()
-            for subfile in self._run("list", self.path).decode().splitlines()
+            for subfile in _tools_run("list", self.path).decode().splitlines()
             if subfile.startswith("./")
         ]
 
