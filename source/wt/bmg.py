@@ -1,26 +1,10 @@
 from source.wt import *
-from source.wt import _run, _run_popen
 
 tools_path = tools_szs_dir / ("wimgt.exe" if system == "win64" else "wimgt")
 
 
-@better_wt_error(tools_path)
-def _tools_run(*args) -> bytes:
-    """
-    Return a command with wbmgt and return the output
-    :param args: command arguments
-    :return: the output of the command
-    """
-    return _run(tools_path, *args)
-
-
-def _tools_run_popen(*args, **kwargs) -> subprocess.Popen:
-    """
-    Return a popen of command with wbmgt
-    :param args: command arguments
-    :return: the process of the command
-    """
-    return _run_popen(tools_path, *args, **kwargs)
+_tools_run = get_tools_run_function(tools_path)
+_tools_run_popen = get_tools_run_popen_function(tools_path)
 
 
 class BMGPath:

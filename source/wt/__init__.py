@@ -1,6 +1,7 @@
 import subprocess
 from pathlib import Path
 import os
+from typing import Callable
 
 
 class WTError(Exception):
@@ -53,7 +54,7 @@ def better_wt_error(tools_path: Path | str):
     return decorator
 
 
-def _run(tools_path: Path | str, *args) -> bytes:
+def _run(tools_path: Path | str, *args, **kwargs) -> bytes:
     """
     Run a command and return the output
     :param args: command arguments
@@ -67,7 +68,16 @@ def _run(tools_path: Path | str, *args) -> bytes:
     ).stdout
 
 
-def _run_dict(tools_path: Path | str, *args) -> dict:
+def get_tools_run_function(tools_path: Path | str) -> Callable:
+    """
+    Return a new function with the tool argument already entered
+    :param tools_path: path to the tool
+    :return: new function
+    """
+    return lambda *args, **kwargs: better_wt_error(tools_path)(_run)(tools_path, *args, **kwargs)
+
+
+def _run_dict(tools_path: Path | str, *args, **kwargs) -> dict:
     """
     Return a dictionary of a command that return value associated to a key with a equal sign
     :param tools_path: tools to use
@@ -92,6 +102,15 @@ def _run_dict(tools_path: Path | str, *args) -> dict:
     return d
 
 
+def get_tools_run_dict_function(tools_path: Path | str) -> Callable:
+    """
+    Return a new function with the tool argument already entered
+    :param tools_path: path to the tool
+    :return: new function
+    """
+    return lambda *args, **kwargs: better_wt_error(tools_path)(_run_dict)(tools_path, *args, **kwargs)
+
+
 def _run_popen(tools_path: Path | str, *args, universal_newlines=False) -> subprocess.Popen:
     """
     Run a command and return the process
@@ -106,3 +125,12 @@ def _run_popen(tools_path: Path | str, *args, universal_newlines=False) -> subpr
         bufsize=1 if universal_newlines else None,
         universal_newlines=universal_newlines,
     )
+
+
+def get_tools_run_popen_function(tools_path: Path | str) -> Callable:
+    """
+    Return a new function with the tool argument already entered
+    :param tools_path: path to the tool
+    :return: new function
+    """
+    return lambda *args, **kwargs: _run_popen(tools_path, *args, **kwargs)
