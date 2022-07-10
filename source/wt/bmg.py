@@ -14,13 +14,13 @@ def _tools_run(*args) -> bytes:
     return _run(tools_path, *args)
 
 
-def _tools_run_popen(*args) -> subprocess.Popen:
+def _tools_run_popen(*args, **kwargs) -> subprocess.Popen:
     """
     Return a popen of command with wbmgt
     :param args: command arguments
     :return: the process of the command
     """
-    return _run_popen(tools_path, *args)
+    return _run_popen(tools_path, *args, **kwargs)
 
 
 class BMGPath:

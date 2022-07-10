@@ -5,7 +5,7 @@ from typing import IO
 from PIL import Image, ImageDraw, ImageFont
 
 from source.mkw.Patch import *
-from source.wt.img import IMGPath
+from source.wt import img
 
 
 class PatchOperation:
@@ -225,19 +225,10 @@ class PatchOperation:
             patched_file_name = file_name.rsplit(".", 1)[0]
             patch_content = BytesIO()
 
-            # write the image to a temporary directory
-            tmp_file = Path(f"./.tmp/{file_name}")
-            tmp_file.parent.mkdir(parents=True, exist_ok=True)
-            file_content.seek(0)
-            tmp_file.write_bytes(file_content.read())
-
             # write the encoded image into the file
             patch_content.write(
-                IMGPath(tmp_file).get_encoded_data(self.encoding)
+                img.encode_data(file_content.read(), self.encoding)
             )
-
-            # delete the temporary directory when finished
-            tmp_file.unlink()
 
             patch_content.seek(0)
             return patched_file_name, patch_content
