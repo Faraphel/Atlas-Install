@@ -19,13 +19,13 @@ def _tools_run(*args) -> bytes:
     return _run(tools_path, *args)
 
 
-def _tools_run_popen(*args) -> subprocess.Popen:
+def _tools_run_popen(*args, **kwargs) -> subprocess.Popen:
     """
     Return a command with wit and return the output
     :param args: command arguments
     :return: the output of the command
     """
-    return _run_popen(tools_path, *args)
+    return _run_popen(tools_path, *args, **kwargs)
 
 
 @better_wt_error(tools_path)
@@ -155,7 +155,8 @@ class WITPath:
             shutil.copytree(self._get_fst_root(), dest)
 
         else:
-            process = _tools_run_popen("EXTRACT", self.path, "-d", dest, "--progress")
+            process = _tools_run_popen("EXTRACT", self.path, "-d", dest, "--progress", universal_newlines=True)
+            # universal_newlines is required to correctly read text line by line
 
             while process.poll() is None:
                 m = re.match(r'\s*(?P<percentage>\d*)%(?:.*?ETA (?P<estimation>\d*:\d*))?\s*', process.stdout.readline())

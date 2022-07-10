@@ -92,7 +92,7 @@ def _run_dict(tools_path: Path | str, *args) -> dict:
     return d
 
 
-def _run_popen(tools_path: Path | str, *args) -> subprocess.Popen:
+def _run_popen(tools_path: Path | str, *args, universal_newlines=False) -> subprocess.Popen:
     """
     Run a command and return the process
     :param args: command arguments
@@ -103,6 +103,6 @@ def _run_popen(tools_path: Path | str, *args) -> subprocess.Popen:
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         creationflags=subprocess.CREATE_NO_WINDOW,
-        bufsize=1,
-        universal_newlines=True,
+        bufsize=1 if universal_newlines else None,
+        universal_newlines=universal_newlines,
     )
