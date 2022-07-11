@@ -5,10 +5,10 @@
             "layers": [{
                 "mode": "id",
                 "template": {
-                    "0x703e": "\\c{white}Aléatoire: Toutes les pistes",
-                    "0x703f": "\\c{white}Aléatoire: Pistes Originales",
-                    "0x7040": "\\c{white}Aléatoire: Custom Tracks",
-                    "0x7041": "\\c{white}Aléatoire: Nouvelles pistes",
+                    "703e": "\\c{white}Aléatoire: Toutes les pistes",
+                    "703f": "\\c{white}Aléatoire: Pistes Originales",
+                    "7040": "\\c{white}Aléatoire: Custom Tracks",
+                    "7041": "\\c{white}Aléatoire: Nouvelles pistes",
 
                     "M37": "\\c{YOR4}Réinitialiser les options",
                     "M38": "\\c{YOR4}Vote : par les joueurs",

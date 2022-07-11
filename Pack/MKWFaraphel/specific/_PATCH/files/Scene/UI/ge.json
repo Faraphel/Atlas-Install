@@ -5,10 +5,10 @@
             "layers": [{
                 "mode": "id",
                 "template": {
-                    "0x703e": "\\c{white}Zufällig: Alle Tracks",
-                    "0x703f": "\\c{white}Zufällig: Original-Tracks",
-                    "0x7040": "\\c{white}Zufällig: Custom Tracks",
-                    "0x7041": "\\c{white}Zufällig: Neue Tracks",
+                    "703e": "\\c{white}Zufällig: Alle Tracks",
+                    "703f": "\\c{white}Zufällig: Original-Tracks",
+                    "7040": "\\c{white}Zufällig: Custom Tracks",
+                    "7041": "\\c{white}Zufällig: Neue Tracks",
 
                     "M37": "\\c{YOR4}Optionen zurücksetzen",
                     "M38": "\\c{YOR4}Abstimmung : von Spielern",
