@@ -1,3 +1,4 @@
+import re
 from abc import ABC, abstractmethod
 from io import BytesIO
 from typing import IO
@@ -5,7 +6,7 @@ from typing import IO
 from PIL import Image, ImageDraw, ImageFont
 
 from source.mkw.Patch import *
-from source.wt import img
+from source.wt import img, bmg
 
 
 class PatchOperation:
@@ -286,7 +287,15 @@ class PatchOperation:
                     self.template = template
 
                 def patch_bmg(self, patch: "Patch", file_content: IO) -> IO:
-                    return file_content
+                    decoded_bmg = bmg.decode_data(file_content.read())
+
+                    decoded_bmg += "\n" + ("\n".join(
+                        [f"  {id}\t= {replacement}" for id, replacement in self.template.items()]
+                    )) + "\n"
+                    # add new bmg definition at the end of the bmg file, overwritting old id.
+
+                    patch_content = BytesIO(bmg.encode_data(decoded_bmg))
+                    return patch_content
 
             class RegexLayer(AbstractLayer):
                 """
