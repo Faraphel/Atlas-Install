@@ -1,7 +1,7 @@
 from typing import Generator
 
 from source.mkw.Patch import *
-from source.safe_eval import safe_eval
+from source.safe_eval import safe_eval, multiple_safe_eval
 
 
 class Patch:
@@ -16,23 +16,18 @@ class Patch:
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self.path}>"
 
-    def safe_eval(self, template: str, **env) -> str:
+    def safe_eval(self, template: str, multiple: bool = False, **env) -> str:
         """
         Safe eval with a patch environment
+        :param multiple: should the expression be a multiple safe eval or a single safe eval
         :param env: other variable that are allowed in the safe_eval
         :param template: template to evaluate
         :return: the result of the evaluation
         """
-        return safe_eval(
+        return (multiple_safe_eval if multiple else safe_eval)(
             template,
-            extra_token_map={
-                "extracted_game": "extracted_game"
-            } | {
-                key: key for key in env
-            },
-            env={
-                "mod_config": self.mod_config
-            } | env,
+            extra_token_map={"mod_config": "mod_config"} | {key: key for key in env},
+            env={"mod_config": self.mod_config} | env,
         )
 
     def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:
