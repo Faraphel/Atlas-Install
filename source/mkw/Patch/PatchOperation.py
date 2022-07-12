@@ -6,6 +6,7 @@ from typing import IO
 from PIL import Image, ImageDraw, ImageFont
 
 from source.mkw.Patch import *
+from source.safe_eval import safe_eval
 from source.wt import img, bmg
 
 
@@ -197,7 +198,12 @@ class PatchOperation:
                         font_image_path,
                         size=self.get_font_size(image)
                     )
-                    draw.text(self.get_layer_position(image), text=self.text, fill=self.color, font=font)
+                    draw.text(
+                        self.get_layer_position(image),
+                        text=patch.safe_eval(self.text, multiple=True),
+                        fill=self.color,
+                        font=font
+                    )
 
                     return image
 
@@ -248,10 +254,13 @@ class PatchOperation:
             self.layers = layers
 
         def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
-            for layer in self.layers:
-                file_content = self.Layer(layer).patch_bmg(patch, file_content)
+            decoded_content = bmg.decode_data(file_content.read())
 
-            return file_name, file_content
+            for layer in self.layers:
+                decoded_content = self.Layer(layer).patch_bmg(patch, decoded_content)
+
+            patch_content = BytesIO(bmg.encode_data(decoded_content))
+            return file_name, patch_content
 
         class Layer:
             """
@@ -271,7 +280,7 @@ class PatchOperation:
 
             class AbstractLayer(ABC):
                 @abstractmethod
-                def patch_bmg(self, patch: "Patch", file_content: IO) -> IO:
+                def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
                     """
                     Patch a bmg with the actual layer. Return the new bmg content.
                     """
@@ -286,16 +295,11 @@ class PatchOperation:
                 def __init__(self, template: dict[str, str]):
                     self.template = template
 
-                def patch_bmg(self, patch: "Patch", file_content: IO) -> IO:
-                    decoded_bmg = bmg.decode_data(file_content.read())
-
-                    decoded_bmg += "\n" + ("\n".join(
-                        [f"  {id}\t= {replacement}" for id, replacement in self.template.items()]
+                def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
+                    return decoded_content + "\n" + ("\n".join(
+                        [f"  {id}\t= {patch.safe_eval(repl, multiple=True)}" for id, repl in self.template.items()]
                     )) + "\n"
                     # add new bmg definition at the end of the bmg file, overwritting old id.
-
-                    patch_content = BytesIO(bmg.encode_data(decoded_bmg))
-                    return patch_content
 
             class RegexLayer(AbstractLayer):
                 """
@@ -307,5 +311,26 @@ class PatchOperation:
                 def __init__(self, template: dict[str, str]):
                     self.template = template
 
-                def patch_bmg(self, patch: "Patch", file_content: IO) -> IO:
-                    return file_content
+                def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
+                    new_bmg_lines: list[str] = []
+                    for line in decoded_content.split("\n"):
+                        if (match := re.match(r"^ {2}(?P<id>.*?)\t= (?P<value>.*)$", line, re.DOTALL)) is None:
+                            # check if the line match a bmg definition, else ignore
+                            # bmg definition is : 2 spaces, a bmg id, a tab, an equal sign, a space and the bmg text
+                            continue
+
+                        new_bmg_id: str = match.group("id")
+                        new_bmg_def: str = match.group("value")
+                        for pattern, repl in self.template.items():
+                            new_bmg_def = re.sub(
+                                pattern,
+                                patch.safe_eval(repl, multiple=True),
+                                new_bmg_def,
+                                flags=re.DOTALL
+                            )
+                            # match a pattern from the template, and replace it with its repl
+
+                        new_bmg_lines.append(f"  {new_bmg_id}\t={new_bmg_def}")
+
+                    return decoded_content + "\n" + ("\n".join(new_bmg_lines)) + "\n"
+                    # add every new line to the end of the decoded_bmg, old bmg_id will be overwritten.
