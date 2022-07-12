@@ -15,6 +15,8 @@ common_token_map = {  # these operators and function are considered safe to use 
    if not method.startswith("__")
 }
 
+TOKEN_START, TOKEN_END = "{{", "}}"
+
 
 class TemplateParsingError(Exception):
     def __init__(self, token: str):
@@ -108,3 +110,18 @@ def safe_eval(template: str, extra_token_map: dict[str, str] = None, env: dict[s
     # if final_token is set, eval final_token and return the result
     if final_token: return str(eval(final_token, SafeFunction.get_all_safe_methods(), env))
     else: return final_token
+
+
+def multiple_safe_eval(template: str, extra_token_map: dict[str, str] = None, env: dict[str, any] = None) -> str:
+    def format_part_template(match: re.Match) -> str:
+        """
+        when a token is found, replace it by the corresponding value
+        :param match: match in the format
+        :return: corresponding value
+        """
+        # get the token string without the brackets, then strip it. Also double antislash
+        part_template = match.group(1).strip().replace("\\", "\\\\")
+        return safe_eval(part_template, extra_token_map, env)
+
+    # pass everything between TOKEN_START and TOKEN_END in the function
+    return re.sub(rf"{TOKEN_START}(.*?){TOKEN_END}", format_part_template, template)

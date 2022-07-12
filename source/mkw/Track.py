@@ -2,10 +2,7 @@ from typing import Generator
 import re
 
 from source.mkw import Tag, Slot
-from source.safe_eval import safe_eval
-
-TOKEN_START = "{{"
-TOKEN_END = "}}"
+from source.safe_eval import safe_eval, multiple_safe_eval
 
 
 # representation of a custom track
@@ -45,9 +42,10 @@ class Track:
         for _ in range(self.weight):
             yield self
 
-    def repr_format(self, mod_config: "ModConfig", format: str) -> str:
+    def repr_format(self, mod_config: "ModConfig", template: str) -> str:
         """
         return the representation of the track from the format
+        :param template: template for the way the text will be represented
         :param mod_config: configuration of the mod
         :return: formatted representation of the track
         """
@@ -58,18 +56,7 @@ class Track:
             "track": "track"
         }
 
-        def format_template(match: re.Match) -> str:
-            """
-            when a token is found, replace it by the corresponding value
-            :param match: match in the format
-            :return: corresponding value
-            """
-            # get the token string without the brackets, then strip it. Also double antislash
-            template = match.group(1).strip().replace("\\", "\\\\")
-            return safe_eval(template, extra_token_map, {"track": self})
-
-        # pass everything between TOKEN_START and TOKEN_END in the function
-        return re.sub(rf"{TOKEN_START}(.*?){TOKEN_END}", format_template, format)
+        return multiple_safe_eval(template, extra_token_map, {"track": self})
 
     def get_prefix(self, mod_config: "ModConfig", default: any = None) -> any:
         """
@@ -103,8 +90,8 @@ class Track:
         :hidden: if the track is in a group
         :return: ctfile
         """
-        menu_name = f'{self.repr_format(mod_config=mod_config, format=mod_config.track_formatting["menu_name"])!r}'
-        file_name = f'{self.repr_format(mod_config=mod_config, format=mod_config.track_formatting["file_name"])!r}'
+        menu_name = f'{self.repr_format(mod_config=mod_config, template=mod_config.track_formatting["menu_name"])!r}'
+        file_name = f'{self.repr_format(mod_config=mod_config, template=mod_config.track_formatting["file_name"])!r}'
 
         return (
             f'{"H" if hidden else "T"} {self.music}; '  # track type
