@@ -44,4 +44,4 @@ class ExtractedGame:
         # for all the subdirectory named "_PATCH", apply the patch
         for part_directory in mod_config.get_mod_directory().glob("[!_]*"):
             for patch_directory in part_directory.glob("_PATCH/"):
-                yield from Patch(patch_directory).install(self)
+                yield from Patch(patch_directory, mod_config).install(self)

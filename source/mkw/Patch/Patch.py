@@ -9,8 +9,9 @@ class Patch:
     Represent a patch object
     """
 
-    def __init__(self, path: Path | str):
+    def __init__(self, path: Path | str, mod_config: "ModConfig"):
         self.path = Path(path)
+        self.mod_config = mod_config
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self.path}>"
@@ -24,8 +25,14 @@ class Patch:
         """
         return safe_eval(
             template,
-            extra_token_map={"extracted_game": "extracted_game"},
-            env={"extracted_game": extracted_game},
+            extra_token_map={
+                "extracted_game": "extracted_game",
+                "mod_config": "mod_config"
+            },
+            env={
+                "extracted_game": extracted_game,
+                "mod_config": self.mod_config
+            },
         )
 
     def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:
