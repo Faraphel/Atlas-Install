@@ -1,0 +1,26 @@
+{
+    "mode": "edit",
+
+    "operation": {
+        "bmg-edit": {
+            "layers": [{
+                "mode": "regex",
+                "template": {
+                    "(.*)CWF de Nintendo(.*)": "\\1Wiimmfi\\2",
+                    "(.*)Wi-Fi Nintendo(.*)": "\\1Wiimmfi\\2",
+                    "(.*)CWF Nintendo(.*)": "\\1Wiimmfi\\2",
+                    "(.*)Nintendo WFC(.*)": "\\1Wiimmfi\\2",
+                    "(.*)Wi-Fi(.*)": "\\1Wiimmfi\\2",
+                    "(.*)インターネット(.*)": "\\1Wiimmfi\\2",
+
+                    "(.*)Menu principal(.*)": "\\1{{getattr(mod_config, 'nickname')}} {{getattr(mod_config, 'version')}}\\2",
+                    "(.*)Menú principal(.*)": "\\1{{getattr(mod_config, 'nickname')}} {{getattr(mod_config, 'version')}}\\2",
+                    "(.*)Main Menu(.*)": "\\1{{getattr(mod_config, 'nickname')}} {{getattr(mod_config, 'version')}}\\2",
+                    "(.*)トップメニュー(.*)": "\\1{{getattr(mod_config, 'nickname')}} {{getattr(mod_config, 'version')}}\\2",
+
+                    "(.*)Mario Kart Wii(.*)": "\\1{{getattr(mod_config, 'nickname')}} {{getattr(mod_config, 'version')}}\\2"
+                }
+            }]
+        }
+    }
+}
