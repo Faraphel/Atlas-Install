@@ -16,23 +16,23 @@ class Patch:
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self.path}>"
 
-    def safe_eval(self, template: str, extracted_game: "ExtractedGame") -> str:
+    def safe_eval(self, template: str, **env) -> str:
         """
         Safe eval with a patch environment
-        :param extracted_game: the extracted game to patch
+        :param env: other variable that are allowed in the safe_eval
         :param template: template to evaluate
         :return: the result of the evaluation
         """
         return safe_eval(
             template,
             extra_token_map={
-                "extracted_game": "extracted_game",
-                "mod_config": "mod_config"
+                "extracted_game": "extracted_game"
+            } | {
+                key: key for key in env
             },
             env={
-                "extracted_game": extracted_game,
                 "mod_config": self.mod_config
-            },
+            } | env,
         )
 
     def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:

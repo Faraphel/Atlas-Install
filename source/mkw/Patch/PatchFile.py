@@ -31,7 +31,7 @@ class PatchFile(PatchObject):
         yield {"description": f"Patching {self}"}
 
         # check if the file should be patched considering the "if" configuration
-        if self.patch.safe_eval(self.configuration["if"], extracted_game) == "False": return
+        if self.patch.safe_eval(self.configuration["if"], extracted_game=extracted_game) == "False": return
 
         # check if the path to the game_subpath is inside a szs, and if yes extract it
         for szs_subpath in filter(lambda path: path.suffix == ".d",
