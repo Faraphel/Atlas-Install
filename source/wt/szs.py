@@ -21,6 +21,25 @@ def autoadd(course_directory: Path | str, destination_path: Path | str) -> Path:
     return destination_path
 
 
+@better_wt_error(tools_path)
+def create(extracted_szs: Path | str, dest: Path | str, overwrite: bool = False) -> "SZSPath":
+    """
+    Convert extracted_szs into a szs archive
+    :param overwrite: should the destination be overwritten
+    :param dest: destination where to create the szs file
+    :param extracted_szs: the extracted szs directory
+    :return: a SZSPath
+    """
+    extracted_szs = Path(extracted_szs)
+    dest = Path(dest)
+
+    args = []
+    if overwrite: args.append("--overwrite")
+
+    _tools_run("CREATE", extracted_szs, "--DEST", dest, *args)
+    return SZSPath(dest)
+
+
 class SZSPath:
     __slots__ = ("path", "_analyze")
 
@@ -40,7 +59,7 @@ class SZSPath:
         :param subfile: subfile name
         :return: the content of the subfile
         """
-        return _tools_run("cat", self.path / subfile)
+        return _tools_run("cat", (self.path / subfile))
 
     def extract(self, subfile: str, dest: Path | str) -> Path:
         """
@@ -60,7 +79,7 @@ class SZSPath:
         dest: Path = Path(dest)
         if dest.is_dir(): dest /= self.path.name
 
-        _tools_run("EXTRACT", self.path, "-D", dest)
+        _tools_run("EXTRACT", self.path, "--DEST", dest)
         return dest
 
     def analyze(self) -> dict:

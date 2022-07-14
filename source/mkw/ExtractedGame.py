@@ -1,3 +1,4 @@
+import shutil
 from io import BytesIO
 from pathlib import Path
 from typing import Generator, IO
@@ -5,6 +6,7 @@ from typing import Generator, IO
 from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
 from source.wt import szs
+from source.wt.wstrt import StrPath
 
 
 class ExtractedGame:
@@ -12,12 +14,12 @@ class ExtractedGame:
     Class that represents an extracted game
     """
 
-    def __init__(self, path: Path | str, original_game: "Game" = None):
+    def __init__(self, path: "Path | str", original_game: "Game" = None):
         self.path = Path(path)
         self.original_game = original_game
         self._special_file: dict[str, IO] = {}
 
-    def extract_autoadd(self, destination_path: Path | str) -> Generator[dict, None, None]:
+    def extract_autoadd(self, destination_path: "Path | str") -> Generator[dict, None, None]:
         """
         Extract all the autoadd files from the game to destination_path
         :param destination_path: directory where the autoadd files will be extracted
@@ -45,12 +47,31 @@ class ExtractedGame:
         ct_icons.seek(0)
         self._special_file["ct_icon"] = ct_icons
 
+    def prepare_dol(self) -> Generator[dict, None, None]:
+        """
+        Prepare main.dol and StaticR.rel files (clean them and add lecode)
+        """
+        yield {"description": "Preparing main.dol...", "determinate": False}
+        StrPath(self.path / "sys/main.dol").patch(clean_dol=True, add_lecode=True)
+
+    def recreate_all_szs(self) -> Generator[dict, None, None]:
+        """
+        Repack all the .d directory into .szs files.
+        :param extracted_game: the extracted game
+        """
+        yield {"description": f"Repacking all szs", "determinate": False}
+
+        for extracted_szs in filter(lambda path: path.is_dir(), self.path.rglob("*.d")):
+            # for every directory that end with a .d in the extracted game, recreate the szs
+            yield {"description": f"Repacking {extracted_szs} to szs", "determinate": False}
+
+            szs.create(extracted_szs, extracted_szs.with_suffix(".szs"), overwrite=True)
+            shutil.rmtree(str(extracted_szs.resolve()))
+
     def install_all_patch(self, mod_config: ModConfig) -> Generator[dict, None, None]:
         """
         Install all patchs of the mod_config into the game
-        :param special_file: special file that can be used to patch the game
         :param mod_config: the mod to install
-        :return:
         """
         yield {"description": "Installing all Patch...", "determinate": False}
 
@@ -62,3 +83,4 @@ class ExtractedGame:
         for part_directory in mod_config.get_mod_directory().glob("[!_]*"):
             for patch_directory in part_directory.glob("_PATCH/"):
                 yield from Patch(patch_directory, mod_config, self._special_file).install(self)
+

@@ -2,6 +2,7 @@ from typing import Generator, IO
 
 from source.mkw.Patch import *
 from source.safe_eval import safe_eval, multiple_safe_eval
+from source.wt import szs
 
 
 class Patch:
@@ -34,8 +35,10 @@ class Patch:
     def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:
         """
         patch a game with this Patch
+        :param extracted_game: the extracted game
         """
         from source.mkw.Patch.PatchDirectory import PatchDirectory
+        yield {"description": f"Installing the patch", "determinate": False}
 
         # take all the files in the root directory, and patch them into the game.
         # Patch is not directly applied to the root to avoid custom configuration

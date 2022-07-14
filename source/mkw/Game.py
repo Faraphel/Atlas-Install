@@ -7,19 +7,19 @@ from source.wt.wit import WITPath, Region, Extension
 
 
 class NotMKWGameError(Exception):
-    def __init__(self, path: Path | str):
+    def __init__(self, path: "Path | str"):
         path = Path(path)
         super().__init__(f'Not a Mario Kart Wii game : "{path.name}"')
 
 
 class NotVanillaError(Exception):
-    def __init__(self, path: Path | str):
+    def __init__(self, path: "Path | str"):
         path = Path(path)
         super().__init__(f'This game is already modded : "{path.name}"')
 
 
 class Game:
-    def __init__(self, path: Path | str):
+    def __init__(self, path: "Path | str"):
         self.wit_path = WITPath(path)
 
     def is_mkw(self) -> bool:
@@ -36,7 +36,7 @@ class Game:
         """
         return not any(self.wit_path[f"./files/rel/lecode-{region.value}.bin"].exists() for region in Region)
 
-    def extract(self, dest: Path | str) -> Generator[dict, None, Path]:
+    def extract(self, dest: "Path | str") -> Generator[dict, None, Path]:
         """
         Extract the game to the destination directory. If the game is a FST, just copy to the destination
         :param dest: destination directory
@@ -67,7 +67,7 @@ class Game:
                 return e.value
 
     @staticmethod
-    def get_output_directory(dest: Path | str, mod_config: ModConfig) -> Path:
+    def get_output_directory(dest: "Path | str", mod_config: ModConfig) -> Path:
         """
         Return the directory where the game will be installed
         :param dest: destination directory
@@ -107,5 +107,7 @@ class Game:
         yield from self.extract(extracted_game.path)
         yield from extracted_game.extract_autoadd(cache_directory / "autoadd/")
         yield from extracted_game.install_mystuff()
+        yield from extracted_game.prepare_dol()
         yield from extracted_game.install_all_patch(mod_config)
+        yield from extracted_game.recreate_all_szs()
 
