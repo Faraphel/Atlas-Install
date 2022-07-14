@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from source.mkw.Patch import *
 from source.wt import img, bmg
-from source.wt import str as wstrt
+from source.wt import wstrt as wstrt
 
 Patch: any
 Layer: any
@@ -405,10 +405,10 @@ class PatchOperation:
             patch_content = BytesIO(
                 wstrt.patch_data(
                     file_content.read(),
-                    self.region,
-                    self.https,
-                    self.domain,
-                    checked_sections
+                    region=self.region,
+                    https=self.https,
+                    domain=self.domain,
+                    sections=checked_sections
                 )
             )
 

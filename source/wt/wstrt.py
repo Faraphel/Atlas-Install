@@ -25,9 +25,38 @@ def patch_data(dol_data: bytes, region: int = None, https: str = None, domain: s
     for section in sections if sections is not None else []:
         args.extend(["--add-section", section])
 
-    process = _tools_run_popen("PATCH", "-", "--DEST", "-", "--clean-dol", "--add-lecode", *args)
+    process = _tools_run_popen("PATCH", "-", "--DEST", "-", *args)
     stdout, _ = process.communicate(input=dol_data)
     if process.returncode != 0:
         raise WTError(tools_path, process.returncode)
 
     return stdout
+
+
+class StrPath:
+    """
+    File representing a main.dol file
+    """
+
+    __slots__ = ("path",)
+
+    def __init__(self, path: "Path | str"):
+        self.path: Path = Path(path)
+
+    def patch(self, clean_dol: bool = False, add_lecode: bool = False,
+              region: int = None, https: str = None, domain: str = None,
+              sections: list[Path] = None) -> None:
+        """
+        See "patch_data". Also patch StaticR.rel.
+        :return:
+        """
+        args = []
+        if clean_dol: args.append("--clean-dol")
+        if add_lecode: args.append("--add-lecode")
+        if region is not None: args.extend(["--region", region])
+        if https is not None: args.extend(["--https", https])
+        if domain is not None: args.extend(["--domain", domain])
+        for section in sections if sections is not None else []:
+            args.extend(["--add-section", section])
+
+        _tools_run("PATCH", self.path, (self.path / "../../files/rel/StaticR.rel").resolve(), "--overwrite", *args)
