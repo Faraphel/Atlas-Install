@@ -57,7 +57,6 @@ class ExtractedGame:
     def recreate_all_szs(self) -> Generator[dict, None, None]:
         """
         Repack all the .d directory into .szs files.
-        :param extracted_game: the extracted game
         """
         yield {"description": f"Repacking all szs", "determinate": False}
 
