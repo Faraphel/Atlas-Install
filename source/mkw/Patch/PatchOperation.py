@@ -46,6 +46,19 @@ class PatchOperation:
             patch_content.seek(0)
             return file_name, patch_content
 
+    class Rename(Operation):
+        """
+        Rename the output file
+        """
+
+        type = "rename"
+
+        def __init__(self, name: str):
+            self.name = name
+
+        def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+            return self.name, file_content
+
     class ImageGenerator(Operation):
         """
         generate a new image based on a file and apply a generator on it
