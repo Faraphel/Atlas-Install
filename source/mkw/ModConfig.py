@@ -9,6 +9,9 @@ from source.mkw.Track import Track
 import json
 
 
+CT_ICON_SIZE: int = 128
+
+
 # representation of the configuration of a mod
 class ModConfig:
     __slots__ = ("name", "path", "nickname", "variant", "region", "tags_prefix", "tags_suffix",
@@ -203,7 +206,7 @@ class ModConfig:
         if self.enable_random_cup: icon_names.append("random")
 
         for icon_name in icon_names:
-            yield Image.open(self.get_mod_directory() / f"{icon_name}.png").resize((128, 128))
+            yield Image.open(self.get_mod_directory() / f"_CUPS/{icon_name}.png").resize((CT_ICON_SIZE, CT_ICON_SIZE))
 
     def get_custom_cticons(self) -> Generator[Image.Image, None, None]:
         """
@@ -211,7 +214,7 @@ class ModConfig:
         :return:
         """
         for cup in self.get_cups():
-            yield cup.get_cticon(mod_config=self).resize((128, 128))
+            yield cup.get_cticon(mod_config=self).resize((CT_ICON_SIZE, CT_ICON_SIZE))
 
     def get_cticons(self) -> Generator[Image.Image, None, None]:
         """
@@ -227,7 +230,6 @@ class ModConfig:
         Return the default font for creating ct_icons
         :return: the path to the default font file
         """
-        # TODO: make it customizable
         return Path("./assets/SuperMario256.ttf")
 
     def get_full_cticon(self) -> Image.Image:
@@ -237,7 +239,7 @@ class ModConfig:
         """
         cticons = list(self.get_cticons())
 
-        full_cticon = Image.new("RGBA", (128 * len(cticons), 128))
-        for i, cticon in enumerate(cticons): full_cticon.paste(cticon, (i * 128, 0))
+        full_cticon = Image.new("RGBA", (CT_ICON_SIZE * len(cticons), CT_ICON_SIZE))
+        for i, cticon in enumerate(cticons): full_cticon.paste(cticon, (i * CT_ICON_SIZE, 0))
 
         return full_cticon

@@ -21,14 +21,17 @@ class Cup:
         Get the default cticon for this cup
         :return: the default cticon
         """
-        ct_icon = Image.new("RGBA", (128, 128))
+        from source.mkw.ModConfig import CT_ICON_SIZE
+
+        ct_icon = Image.new("RGBA", (CT_ICON_SIZE, CT_ICON_SIZE))
+        default_font_path = str(mod_config.get_default_font().resolve())
         draw = ImageDraw.Draw(ct_icon)
 
         draw.text(
             (4, 4),
             "CT",
             (255, 165, 0),
-            font=ImageFont.truetype(mod_config.get_default_font(), 90),
+            font=ImageFont.truetype(default_font_path, 90),
             stroke_width=2,
             stroke_fill=(0, 0, 0)
         )
@@ -36,7 +39,7 @@ class Cup:
             (5, 80),
             f"{self.cup_id:03}",
             (255, 165, 0),
-            font=ImageFont.truetype(mod_config.get_default_font(), 60),
+            font=ImageFont.truetype(default_font_path, 60),
             stroke_width=2,
             stroke_fill=(0, 0, 0)
         )
