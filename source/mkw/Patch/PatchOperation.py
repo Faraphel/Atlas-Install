@@ -261,15 +261,27 @@ class PatchOperation:
             """
             # remove the last extension of the filename
             patched_file_name = file_name.rsplit(".", 1)[0]
-            patch_content = BytesIO()
+            patch_content = BytesIO(img.encode_data(file_content.read(), self.encoding))
 
-            # write the encoded image into the file
-            patch_content.write(
-                img.encode_data(file_content.read(), self.encoding)
-            )
-
-            patch_content.seek(0)
             return patched_file_name, patch_content
+
+    class ImageDecoder(Operation):
+        """
+        decode a game image to a image file
+        """
+
+        type = "img-decode"
+
+        def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+            """
+            Patch a file to encode it in a game image file
+            :param patch: the patch that is applied
+            :param file_name: the file_name of the file
+            :param file_content: the content of the file
+            :return: the new name and new content of the file
+            """
+            patch_content = BytesIO(img.decode_data(file_content.read()))
+            return f"{file_name}.png", patch_content
 
     class BmgEditor(Operation):
         """

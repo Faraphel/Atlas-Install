@@ -24,6 +24,22 @@ def encode_data(image_data: bytes, transform: str = "CMPR") -> bytes:
     return stdout
 
 
+@better_wt_error(tools_path)
+def decode_data(image_data: bytes) -> bytes:
+    """
+    Convert the game image data and return the decoded image data
+    :param image_data: the original game image data
+    :return: the decoded image data
+    """
+    process = _tools_run_popen("DECODE", "-", "--DEST", "-")
+    stdout, _ = process.communicate(input=image_data)
+
+    if process.returncode != 0:
+        raise WTError(tools_path, process.returncode)
+
+    return stdout
+
+
 class IMGPath:
     """
     Represent a path to a normal image, that can be converted into game image data
