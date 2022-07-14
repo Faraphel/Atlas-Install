@@ -25,18 +25,4 @@ class InvalidBmgLayerMode(Exception):
     def __init__(self, layer_mode: str):
         super().__init__(f"Error : bmg layer mode \"{layer_mode}\" is not implemented")
 
-
-# TODO : implement BMG
 # TODO : recreate SZS
-
-configuration_example = {
-    "operation": {  # other operation for the file
-        "bmg-edit": {
-            "mode": "regex",  # regex or id
-            "template": {
-                "CWF": "{{ ONLINE_SERVICE }}",  # regex type expression
-                "0x203F": "{{ ONLINE_SERVICE }}"  # id type expression
-            }
-        }
-    }
-}
