@@ -14,13 +14,13 @@ CT_ICON_SIZE: int = 128
 
 # representation of the configuration of a mod
 class ModConfig:
-    __slots__ = ("name", "path", "nickname", "variant", "region", "tags_prefix", "tags_suffix",
+    __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
                  "keep_original_track", "enable_random_cup", "tags_cups", "track_formatting")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, Color] = None, tags_suffix: dict[Tag, Color] = None,
-                 tags_cups: list[Tag] = None, region: dict[int] | int = None,
+                 tags_cups: list[Tag] = None,
                  default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
                  original_track_prefix: bool = None, swap_original_order: bool = None,
                  keep_original_track: bool = None, enable_random_cup: bool = None,
@@ -32,7 +32,6 @@ class ModConfig:
         self.nickname: str = nickname if nickname is not None else name
         self.version: str = version if version is not None else "v1.0.0"
         self.variant: str = variant if variant is not None else "01"
-        self.region: dict[int] | int = region if region is not None else 0
 
         self.tags_prefix: dict[Tag] = tags_prefix if tags_prefix is not None else {}
         self.tags_suffix: dict[Tag] = tags_suffix if tags_suffix is not None else {}

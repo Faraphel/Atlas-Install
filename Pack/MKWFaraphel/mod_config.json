@@ -4,11 +4,6 @@
     "nickname": "MKWF",
     "variant": "60",
 
-    "region": {
-        "default": 5500,
-        "cheat": 20061
-    },
-
     "tags_prefix": {
         "MSRDS": "green",
         "CTR": "YOR4",

@@ -6,8 +6,11 @@ from typing import IO
 from PIL import Image, ImageDraw, ImageFont
 
 from source.mkw.Patch import *
-from source.safe_eval import safe_eval
 from source.wt import img, bmg
+from source.wt import str as wstrt
+
+Patch: any
+Layer: any
 
 
 class PatchOperation:
@@ -362,3 +365,39 @@ class PatchOperation:
 
                     return decoded_content + "\n" + ("\n".join(new_bmg_lines)) + "\n"
                     # add every new line to the end of the decoded_bmg, old bmg_id will be overwritten.
+
+    class StrEditor(Operation):
+        """
+        patch the main.dol file
+        """
+
+        type = "str-edit"
+
+        def __init__(self, region: int = None, https: str = None, domain: str = None, sections: list[str] = None):
+            self.region = region
+            self.https = https
+            self.domain = domain
+            self.sections = sections
+
+        def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+            checked_sections: list[Path] = []
+
+            for section in self.sections if self.sections is not None else []:
+                section_path = patch.path / section
+                if not section_path.is_relative_to(patch.path):
+                    raise PathOutsidePatch(section_path, patch.path)
+
+                checked_sections += section_path
+            # for every file in the sections, check if they are inside the patch.
+
+            patch_content = BytesIO(
+                wstrt.patch_data(
+                    file_content.read(),
+                    self.region,
+                    self.https,
+                    self.domain,
+                    checked_sections
+                )
+            )
+
+            return file_name, patch_content

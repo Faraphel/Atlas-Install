@@ -7,7 +7,6 @@ _tools_run = get_tools_run_function(tools_path)
 _tools_run_popen = get_tools_run_popen_function(tools_path)
 
 
-@better_wt_error(tools_path)
 def patch_data(dol_data: bytes, region: int = None, https: str = None, domain: str = None,
                sections: list[Path] = None) -> bytes:
     """
@@ -26,7 +25,7 @@ def patch_data(dol_data: bytes, region: int = None, https: str = None, domain: s
     for section in sections if sections is not None else []:
         args.extend(["--add-section", section])
 
-    process = _tools_run_popen("PATCH", "-", "--DEST", "-", "--clean-dol", "add-lecode", *args)
+    process = _tools_run_popen("PATCH", "-", "--DEST", "-", "--clean-dol", "--add-lecode", *args)
     stdout, _ = process.communicate(input=dol_data)
     if process.returncode != 0:
         raise WTError(tools_path, process.returncode)
