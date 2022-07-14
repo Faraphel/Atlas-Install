@@ -355,6 +355,8 @@ class PatchOperation:
                     self.template = template
 
                 def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
+                    # TODO : use regex in a better way to optimise speed
+
                     new_bmg_lines: list[str] = []
                     for line in decoded_content.split("\n"):
                         if (match := re.match(r"^ {2}(?P<id>.*?)\t= (?P<value>.*)$", line, re.DOTALL)) is None:
