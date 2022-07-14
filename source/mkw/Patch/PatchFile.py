@@ -1,5 +1,5 @@
 from io import BytesIO
-from typing import Generator, IO
+from typing import Generator
 
 from source.mkw.Patch import *
 from source.mkw.Patch.PatchOperation import PatchOperation
@@ -43,11 +43,6 @@ class PatchFile(PatchObject):
                 # if the szs file in the game exists, extract it
                 if szs_path.with_suffix(".szs").exists():
                     SZSPath(szs_path.with_suffix(".szs")).extract_all(szs_path)
-
-        # if the file is a special file
-        if self.full_path.name.startswith("#"):
-            # print(f"special file : {self} [install to {game_subpath}]")
-            return
 
         # apply operation on the file
         patch_source: Path = self.get_source_path(game_subpath)

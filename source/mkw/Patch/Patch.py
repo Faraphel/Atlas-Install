@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Generator, IO
 
 from source.mkw.Patch import *
 from source.safe_eval import safe_eval, multiple_safe_eval
@@ -9,9 +9,10 @@ class Patch:
     Represent a patch object
     """
 
-    def __init__(self, path: Path | str, mod_config: "ModConfig"):
+    def __init__(self, path: Path | str, mod_config: "ModConfig", special_file: dict[str, IO] = None):
         self.path = Path(path)
         self.mod_config = mod_config
+        self.special_file = special_file if special_file is not None else {}
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self.path}>"
