@@ -1,5 +1,3 @@
-import enum
-
 Tag = str
 Slot = str
 
