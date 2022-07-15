@@ -238,7 +238,7 @@ class ModConfig:
         """
         cticons = list(self.get_cticons())
 
-        full_cticon = Image.new("RGBA", (CT_ICON_SIZE * len(cticons), CT_ICON_SIZE))
-        for i, cticon in enumerate(cticons): full_cticon.paste(cticon, (i * CT_ICON_SIZE, 0))
+        full_cticon = Image.new("RGBA", (CT_ICON_SIZE, CT_ICON_SIZE * len(cticons)))
+        for i, cticon in enumerate(cticons): full_cticon.paste(cticon, (0, i * CT_ICON_SIZE))
 
         return full_cticon
