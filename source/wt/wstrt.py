@@ -30,7 +30,7 @@ def patch_data(dol_data: bytes, region: int = None, https: str = None, domain: s
     if process.returncode != 0:
         raise WTError(tools_path, process.returncode)
 
-    return stdout
+    return stdout.split(b"\n", 2)[-1]  # remove the 2 first line, because they are from wstrt information
 
 
 class StrPath:
