@@ -1,5 +1,5 @@
 from io import BytesIO
-from typing import Generator
+from typing import Generator, IO
 
 from source.mkw.Patch import *
 from source.mkw.Patch.PatchOperation import PatchOperation
@@ -58,15 +58,26 @@ class PatchFile(PatchObject):
                 self.patch, patch_name, patch_content
             )
 
+        def write_patch(destination: Path, patch_content: IO) -> None:
+            """
+            Write a patch content to the destination. Automatically create the directory and seek to the start.
+            :param destination: file where the content will be written
+            :param patch_content: content of the file to write
+            """
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            with open(destination, "wb") as file:
+                patch_content.seek(0)
+                file.write(patch_content.read())
+
         match self.configuration["mode"]:
             # if the mode is copy, replace the subfile in the game by the PatchFile
             case "copy" | "edit":
-                # print(f"[{self.configuration['mode']}] copying {self} to {game_subpath}")
+                write_patch(game_subpath.parent / patch_name, patch_content)
 
-                game_subpath.parent.mkdir(parents=True, exist_ok=True)
-                with open(game_subpath.parent / patch_name, "wb") as file:
-                    patch_content.seek(0)
-                    file.write(patch_content.read())
+            # if the mode is overwrite, only write if the file existed before
+            case "overwrite":
+                if (game_subpath.parent / patch_name).exists():
+                    write_patch(game_subpath.parent / patch_name, patch_content)
 
             # if the mode is match, replace all the subfiles that match match_regex by the PatchFile
             case "match":
@@ -74,13 +85,9 @@ class PatchFile(PatchObject):
                     # disallow patching files outside of the game
                     if not game_subfile.relative_to(extracted_game.path):
                         raise PathOutsidePatch(game_subfile, extracted_game.path)
-                    # patch the game with the subpatch
-                    # print(f"[match] copying {self} to {game_subfile}")
 
-                    game_subfile.parent.mkdir(parents=True, exist_ok=True)
-                    with open(game_subfile, "wb") as file:
-                        patch_content.seek(0)
-                        file.write(patch_content.read())
+                    # patch the game with the subpatch
+                    write_patch(game_subfile, patch_content)
 
             # ignore if mode is "ignore", useful if the file is used as a resource for an operation
             case "ignore": pass
