@@ -1,7 +1,7 @@
 from source.wt import *
 from source.wt import _run, _run_dict
 
-tools_path = tools_szs_dir / ("wszst.exe" if system == "win64" else "wszst")
+tools_path = tools_szs_dir / "wszst"
 
 
 _tools_run = get_tools_run_function(tools_path)

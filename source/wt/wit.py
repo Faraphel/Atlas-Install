@@ -5,7 +5,7 @@ from typing import Generator
 
 from source.wt import *
 
-tools_path = tools_wit_dir / ("wit.exe" if system == "win64" else "wit")
+tools_path = tools_wit_dir / "wit"
 
 
 _tools_run = get_tools_run_function(tools_path)

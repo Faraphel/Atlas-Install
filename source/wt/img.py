@@ -1,6 +1,6 @@
 from source.wt import *
 
-tools_path = tools_szs_dir / ("wimgt.exe" if system == "win64" else "wimgt")
+tools_path = tools_szs_dir / "wimgt"
 
 
 _tools_run = get_tools_run_function(tools_path)
