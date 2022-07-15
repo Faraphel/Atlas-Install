@@ -121,7 +121,7 @@ def _run_popen(tools_path: Path | str, *args, universal_newlines=False) -> subpr
         [tools_path, *args],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
         creationflags=subprocess.CREATE_NO_WINDOW,
         bufsize=1 if universal_newlines else None,
         universal_newlines=universal_newlines,
