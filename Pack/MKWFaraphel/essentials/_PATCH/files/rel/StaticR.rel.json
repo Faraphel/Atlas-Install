@@ -1,4 +1,8 @@
 {
   "mode": "edit",
-  "base": "sys/main.dol.json"
+  "operation": {
+    "str-edit": {
+      "region": "5500"
+    }
+  }
 }
