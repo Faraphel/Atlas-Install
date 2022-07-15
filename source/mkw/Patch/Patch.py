@@ -2,7 +2,6 @@ from typing import Generator, IO
 
 from source.mkw.Patch import *
 from source.safe_eval import safe_eval, multiple_safe_eval
-from source.wt import szs
 
 
 class Patch:

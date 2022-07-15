@@ -1,0 +1,15 @@
+from abc import ABC, abstractmethod
+
+Patch: any
+
+
+class AbstractLayer(ABC):
+    @abstractmethod
+    def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
+        """
+        Patch a bmg with the actual layer. Return the new bmg content.
+        """
+
+
+from source.mkw.Patch.PatchOperation.Operation.BmgEditor.Layer import IDLayer, RegexLayer
+__all__ = ["AbstractLayer", "IDLayer", "RegexLayer"]

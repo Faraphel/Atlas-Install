@@ -1,6 +1,11 @@
 from pathlib import Path
 
 
+ModConfig: any
+ExtractedGame: any
+Patch: any
+
+
 class PathOutsidePatch(Exception):
     def __init__(self, forbidden_path: Path, allowed_range: Path):
         super().__init__(f"Error : path {forbidden_path} outside of allowed range {allowed_range}")

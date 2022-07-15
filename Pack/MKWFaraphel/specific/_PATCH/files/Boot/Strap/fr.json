@@ -1,6 +1,6 @@
 {
     "operation": {
-        "img-generate": {
+        "img-edit": {
             "layers": [
                 {"type": "color", "color": [0, 0, 0, 255]},
                 {"type": "image", "image_path": "files/Boot/Strap/bootscreen-base.png"},
