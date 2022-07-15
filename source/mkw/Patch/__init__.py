@@ -24,5 +24,3 @@ class InvalidImageLayerType(Exception):
 class InvalidBmgLayerMode(Exception):
     def __init__(self, layer_mode: str):
         super().__init__(f"Error : bmg layer mode \"{layer_mode}\" is not implemented")
-
-# TODO : recreate SZS
