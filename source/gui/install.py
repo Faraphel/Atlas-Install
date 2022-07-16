@@ -14,7 +14,7 @@ from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
 from source.option import Option
 from source.translation import translate as _
-from source import event
+from source import plugins
 from source import *
 import os
 
@@ -73,7 +73,7 @@ class Window(tkinter.Tk):
         """
         Run the installer
         """
-        event.initialise_plugins()
+        plugins.initialise()
         self.after(0, self.run_after)
         self.mainloop()
 

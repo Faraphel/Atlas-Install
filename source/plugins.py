@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-def initialise_plugins() -> None:
+def initialise() -> None:
     """
     Execute all the scripts in the ./plugins/ directory that don't start with an underscore.
     :return:
