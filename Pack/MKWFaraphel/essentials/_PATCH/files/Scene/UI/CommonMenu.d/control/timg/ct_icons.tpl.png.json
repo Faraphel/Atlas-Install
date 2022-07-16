@@ -1,0 +1,6 @@
+{
+  "operation": {
+    "special": {"name": "ct_icon"},
+    "img-encode": {"encoding": "TPL.CMPR"}
+  }
+}
