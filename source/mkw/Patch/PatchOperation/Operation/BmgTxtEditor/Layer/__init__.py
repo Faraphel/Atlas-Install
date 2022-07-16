@@ -11,5 +11,5 @@ class AbstractLayer(ABC):
         """
 
 
-from source.mkw.Patch.PatchOperation.Operation.BmgEditor.Layer import IDLayer, RegexLayer
+from source.mkw.Patch.PatchOperation.Operation.BmgTxtEditor.Layer import IDLayer, RegexLayer
 __all__ = ["AbstractLayer", "IDLayer", "RegexLayer"]

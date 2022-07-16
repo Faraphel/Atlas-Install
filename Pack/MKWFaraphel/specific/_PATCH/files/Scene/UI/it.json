@@ -1,7 +1,8 @@
 {
     "mode": "edit",
     "operation": {
-        "bmg-edit": {
+        "bmg-decode": {},
+        "bmgtxt-edit": {
             "layers": [{
                 "mode": "id",
                 "template": {
@@ -43,6 +44,7 @@
                     "M67": "\\c{YOR4}Gioco : 64 pistas"
                 }
             }]
-        }
+        },
+        "bmg-encode": {}
     }
 }

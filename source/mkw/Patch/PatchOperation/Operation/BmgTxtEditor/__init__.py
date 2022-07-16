@@ -3,16 +3,15 @@ from typing import IO
 
 from source.mkw.Patch import *
 from source.mkw.Patch.PatchOperation.Operation import *
-from source.mkw.Patch.PatchOperation.Operation.BmgEditor.Layer import *
-from source.wt import bmg
+from source.mkw.Patch.PatchOperation.Operation.BmgTxtEditor.Layer import *
 
 
-class BmgEditor(AbstractOperation):
+class BmgTxtEditor(AbstractOperation):
     """
-    edit a bmg
+    edit a decoded bmg
     """
 
-    type = "bmg-edit"
+    type = "bmgtxt-edit"
 
     def __init__(self, layers: list[dict]):
         """
@@ -21,12 +20,12 @@ class BmgEditor(AbstractOperation):
         self.layers = layers
 
     def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
-        decoded_content = bmg.decode_data(file_content.read())
+        decoded_content: str = file_content.read().decode("utf-8")
 
         for layer in self.layers:
             decoded_content = self.Layer(layer).patch_bmg(patch, decoded_content)
 
-        patch_content = BytesIO(bmg.encode_data(decoded_content))
+        patch_content: IO = BytesIO(decoded_content.encode("utf-8"))
         return file_name, patch_content
 
     class Layer:

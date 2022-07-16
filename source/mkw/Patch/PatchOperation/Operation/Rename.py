@@ -3,7 +3,7 @@ from typing import IO
 from source.mkw.Patch.PatchOperation.Operation import *
 
 
-Patch: str
+Patch: any
 
 
 class Rename(AbstractOperation):

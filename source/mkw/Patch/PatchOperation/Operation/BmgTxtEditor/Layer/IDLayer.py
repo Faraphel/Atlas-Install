@@ -1,4 +1,4 @@
-from source.mkw.Patch.PatchOperation.Operation.BmgEditor.Layer import *
+from source.mkw.Patch.PatchOperation.Operation.BmgTxtEditor.Layer import *
 
 
 Patch: any

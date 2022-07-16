@@ -17,6 +17,6 @@ class AbstractOperation(ABC):
 
 
 from source.mkw.Patch.PatchOperation.Operation import ImageDecoder, ImageEncoder, Rename, Special, StrEditor, \
-    BmgEditor, ImageEditor
+    BmgTxtEditor, ImageEditor, BmgEncoder, BmgDecoder
 __all__ = ["AbstractOperation", "ImageDecoder", "ImageEncoder", "Rename",
-           "Special", "StrEditor", "BmgEditor", "ImageEditor"]
+           "Special", "StrEditor", "BmgTxtEditor", "ImageEditor", "BmgEncoder", "BmgDecoder"]
