@@ -1,3 +1,6 @@
 {
-  "format": "TPL.RGB5A3"
+  "mode": "overwrite",
+  "operation": {
+    "img-encode": {"encoding": "TPL.RGB5A3"}
+  }
 }
