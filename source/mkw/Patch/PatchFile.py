@@ -35,7 +35,7 @@ class PatchFile(PatchObject):
 
         # check if the path to the game_subpath is inside a szs, and if yes extract it
         for szs_subpath in filter(lambda path: path.suffix == ".d",
-                                  game_subpath.parent.relative_to(extracted_game.path).parents):
+                                  game_subpath.relative_to(extracted_game.path).parents):
             szs_path = extracted_game.path / szs_subpath
 
             # if the archive is already extracted, ignore
