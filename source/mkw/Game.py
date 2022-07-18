@@ -98,6 +98,10 @@ class Game:
         cache_directory: Path = Path("./.cache")
         cache_directory.mkdir(parents=True, exist_ok=True)
 
+        cache_autoadd_directory = cache_directory / "autoadd/"
+        cache_ogtracks_directory = cache_directory / "original-tracks/"
+        cache_cttracks_directory = cache_directory / f"custom-tracks/"
+
         # get the directory where the game will be extracted
         extracted_game = ExtractedGame(self.get_output_directory(dest, mod_config), self)
 
@@ -108,8 +112,9 @@ class Game:
         yield from self.extract(extracted_game.path)
 
         # prepare the cache
-        yield from extracted_game.extract_autoadd(cache_directory / "autoadd/")
-        yield from extracted_game.extract_original_tracks(cache_directory / "original-tracks/")
+        yield from extracted_game.extract_autoadd(cache_autoadd_directory)
+        yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
+        yield from mod_config.normalize_all_tracks(cache_autoadd_directory, cache_cttracks_directory)
 
         # patch the game
         yield from extracted_game.install_mystuff()

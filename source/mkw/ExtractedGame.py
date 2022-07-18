@@ -36,7 +36,9 @@ class ExtractedGame:
         destination_path.mkdir(parents=True, exist_ok=True)
         yield {"description": "Extracting original tracks...", "determinate": False}
         for track_file in (self.path / "files/Race/Course/").glob("*.szs"):
-            track_file.rename(destination_path / track_file.name)
+            yield {"description": f"Extracting original tracks ({track_file.name})...", "determinate": False}
+            if not (destination_path / track_file.name).exists(): track_file.rename(destination_path / track_file.name)
+            else: track_file.unlink()
 
     def install_mystuff(self) -> Generator[dict, None, None]:
         """

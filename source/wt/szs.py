@@ -53,6 +53,27 @@ class SZSPath:
     def __eq__(self, other: "SZSPath") -> bool:
         return self.path == other.path
 
+    def normalize(self, autoadd_path: "Path | str", destination_path: "Path | str", format: str = "szs") -> "SZSPath":
+        """
+        Convert the file into a another format
+        :param format: format to convert the file
+        :param autoadd_path: Autoadd directory
+        :param destination_path: destination of the converted file
+        :return: new path of the file
+        """
+        if not destination_path.exists() or \
+                (destination_path.exists() and destination_path.stat().st_mtime < self.path.stat().st_mtime):
+            # if the destination_path exists and is less recent than this source file, update it.
+            _tools_run(
+                "NORMALIZE",
+                self.path,
+                "--autoadd-path", autoadd_path,
+                "--DEST", destination_path,
+                f"--{format}",
+                "--overwrite"
+            )
+        return SZSPath(destination_path)
+
     def cat(self, subfile: str) -> bytes:
         """
         Run the cat command (read a subfile) and return the output

@@ -8,6 +8,7 @@ from source.mkw.Cup import Cup
 from source.mkw.Track import Track
 import json
 
+from source.wt.szs import SZSPath
 
 CT_ICON_SIZE: int = 128
 
@@ -242,3 +243,20 @@ class ModConfig:
         for i, cticon in enumerate(cticons): full_cticon.paste(cticon, (0, i * CT_ICON_SIZE))
 
         return full_cticon
+
+    def normalize_all_tracks(self, autoadd_path: "Path | str", destination_path: "Path | str") -> Generator[dict, None, None]:
+        """
+        Convert all tracks of the mod to szs into the destination_path
+        :param autoadd_path: autoadd directory
+        :param destination_path: destination where the files are converted
+        """
+        yield {"description": "Normalizing track..."}
+        destination_path = Path(destination_path)
+        destination_path.mkdir(parents=True, exist_ok=True)
+        for track_file in filter(lambda file: file.is_file(), (self.path.parent / "_TRACKS").rglob("*")):
+            yield {"description": f"Normalizing track \"{track_file.name}\"..."}
+            SZSPath(track_file).normalize(
+                autoadd_path,
+                destination_path / track_file.with_suffix(".szs").name,
+                format="szs"
+            )
