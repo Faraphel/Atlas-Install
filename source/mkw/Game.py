@@ -104,8 +104,14 @@ class Game:
         if not self.is_mkw(): raise NotMKWGameError(self.wit_path.path)
         if not self.is_vanilla(): raise NotVanillaError(self.wit_path.path)
 
+        # extract the game
         yield from self.extract(extracted_game.path)
+
+        # prepare the cache
         yield from extracted_game.extract_autoadd(cache_directory / "autoadd/")
+        yield from extracted_game.extract_original_tracks(cache_directory / "original-tracks/")
+
+        # patch the game
         yield from extracted_game.install_mystuff()
         yield from extracted_game.prepare_dol()
         yield from extracted_game.install_all_patch(mod_config)

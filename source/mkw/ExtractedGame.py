@@ -23,10 +23,20 @@ class ExtractedGame:
         """
         Extract all the autoadd files from the game to destination_path
         :param destination_path: directory where the autoadd files will be extracted
-        :return: directory where the autoadd files were extracted
         """
         yield {"description": "Extracting autoadd files...", "determinate": False}
         szs.autoadd(self.path / "files/Race/Course/", destination_path)
+
+    def extract_original_tracks(self, destination_path: "Path | str") -> Generator[dict, None, None]:
+        """
+        Move all the original tracks to the destination path
+        :param destination_path: destination of the track
+        """
+        destination_path = Path(destination_path)
+        destination_path.mkdir(parents=True, exist_ok=True)
+        yield {"description": "Extracting original tracks...", "determinate": False}
+        for track_file in (self.path / "files/Race/Course/").glob("*.szs"):
+            track_file.rename(destination_path / track_file.name)
 
     def install_mystuff(self) -> Generator[dict, None, None]:
         """
