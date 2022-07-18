@@ -112,6 +112,7 @@ class Game:
         yield from self.extract(extracted_game.path)
 
         # prepare the cache
+        # TODO: normalize all tracks should get the threads amount changeable
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)
         yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
         yield from mod_config.normalize_all_tracks(cache_autoadd_directory, cache_cttracks_directory)

@@ -3,6 +3,7 @@ from typing import Generator
 
 from PIL import Image
 
+from source import threaded
 from source.mkw import Tag, Color
 from source.mkw.Cup import Cup
 from source.mkw.Track import Track
@@ -13,7 +14,12 @@ from source.wt.szs import SZSPath
 CT_ICON_SIZE: int = 128
 
 
+Thread: any
+
+
 # representation of the configuration of a mod
+
+
 class ModConfig:
     __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
@@ -244,19 +250,42 @@ class ModConfig:
 
         return full_cticon
 
-    def normalize_all_tracks(self, autoadd_path: "Path | str", destination_path: "Path | str") -> Generator[dict, None, None]:
+    def normalize_all_tracks(self, autoadd_path: "Path | str", destination_path: "Path | str",
+                             thread_amount: int = 8) -> Generator[dict, None, None]:
         """
         Convert all tracks of the mod to szs into the destination_path
+        :param thread_amount: number of thread to use
         :param autoadd_path: autoadd directory
         :param destination_path: destination where the files are converted
         """
         yield {"description": "Normalizing track..."}
         destination_path = Path(destination_path)
         destination_path.mkdir(parents=True, exist_ok=True)
+
+        normalize_threads: list[dict] = []
+
+        def remove_finished_threads() -> Generator[dict, None, None]:
+            """
+            Remove all the thread that stopped in a thread list
+            :return: the list without the stopped thread
+            """
+            nonlocal normalize_threads
+
+            yield {"description": f"Normalizing tracks :\n" + "\n".join(thread['name'] for thread in normalize_threads)}
+            normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
+
+        # for every track in the tracks mod directory, convert it to szs (in a threaded way)
         for track_file in filter(lambda file: file.is_file(), (self.path.parent / "_TRACKS").rglob("*")):
-            yield {"description": f"Normalizing track \"{track_file.name}\"..."}
-            SZSPath(track_file).normalize(
-                autoadd_path,
-                destination_path / track_file.with_suffix(".szs").name,
-                format="szs"
-            )
+            @threaded
+            def normalize_track():
+                SZSPath(track_file).normalize(
+                    autoadd_path,
+                    destination_path / track_file.with_suffix(".szs").name,
+                    format="szs"
+                )
+
+            normalize_threads.append({"name": track_file.name, "thread": normalize_track()})
+            while len(normalize_threads) > thread_amount: yield from remove_finished_threads()
+            # if there is more than the max amount of thread running, wait for one to finish
+        while len(normalize_threads) > 0: yield from remove_finished_threads()
+        # if there is no longer any track to add, wait for all process to finish
