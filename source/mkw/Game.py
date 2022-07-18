@@ -111,14 +111,18 @@ class Game:
         # extract the game
         yield from self.extract(extracted_game.path)
 
+        # install mystuff
+        yield from extracted_game.install_mystuff()
+
         # prepare the cache
         # TODO: normalize all tracks should get the threads amount changeable
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)
         yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
-        yield from mod_config.normalize_all_tracks(cache_autoadd_directory, cache_cttracks_directory)
+        yield from mod_config.normalize_all_tracks(cache_autoadd_directory, cache_cttracks_directory, 8)
+
+        print(mod_config.get_ctfile())
 
         # patch the game
-        yield from extracted_game.install_mystuff()
         yield from extracted_game.prepare_dol()
         yield from extracted_game.install_all_patch(mod_config)
         yield from extracted_game.recreate_all_szs()
