@@ -27,7 +27,9 @@ def threaded(func: Callable) -> Callable:
 
     def wrapper(*args, **kwargs):
         # run the function in a Daemon, so it will stop when the main thread stops
-        Thread(target=func, args=args, kwargs=kwargs, daemon=True).start()
+        thread = Thread(target=func, args=args, kwargs=kwargs, daemon=True)
+        thread.start()
+        return thread
 
     return wrapper
 
