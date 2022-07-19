@@ -56,13 +56,14 @@ class Cup:
         # if the icon doesn't exist, use the default automatically generated one
         return self.get_default_cticon(mod_config=mod_config)
 
-    def get_ctfile(self, mod_config: "ModConfig") -> str:
+    def get_ctfile(self, mod_config: "ModConfig", template: str) -> str:
         """
         Get the ctfile for this cup
         :return: the ctfile
         """
         ctfile = f'C "{self.cup_name}"\n'
-        for track in self._tracks: ctfile += track.get_ctfile(mod_config=mod_config)
+        for track in self._tracks: ctfile += track.get_ctfile(mod_config, template)
         ctfile += "\n"
 
         return ctfile
+

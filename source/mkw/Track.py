@@ -84,19 +84,20 @@ class Track:
     def is_new(self, mod_config: "ModConfig", default: any = None) -> bool:
         ...
 
-    def get_ctfile(self, mod_config: "ModConfig", hidden: bool = False) -> str:
+    def get_ctfile(self, mod_config: "ModConfig", template: str, hidden: bool = False) -> str:
         """
         return the ctfile of the track
         :hidden: if the track is in a group
+        :template: format of the track's name
         :return: ctfile
         """
-        menu_name = f'{self.repr_format(mod_config=mod_config, template=mod_config.track_formatting["menu_name"])!r}'
-        file_name = f'{self.repr_format(mod_config=mod_config, template=mod_config.track_formatting["file_name"])!r}'
+        name = repr(self.repr_format(mod_config=mod_config, template=template))
+        file_name = repr(self.repr_format(mod_config=mod_config, template=mod_config.track_file_template))
 
         return (
             f'{"H" if hidden else "T"} {self.music}; '  # track type
             f'{self.special}; {(0x04 if hidden else 0) | (0x01 if self.is_new(mod_config, False) else 0):#04x}; '  # lecode flags
             f'{file_name}; '  # filename
-            f'{menu_name}; '  # name of the track in the menu
+            f'{name}; '  # name of the track in the menu
             f'{file_name}\n'  # unique identifier for each track
         )

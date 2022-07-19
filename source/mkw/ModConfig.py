@@ -23,7 +23,7 @@ Thread: any
 class ModConfig:
     __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
-                 "keep_original_track", "enable_random_cup", "tags_cups", "track_formatting")
+                 "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, Color] = None, tags_suffix: dict[Tag, Color] = None,
@@ -31,7 +31,7 @@ class ModConfig:
                  default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
                  original_track_prefix: bool = None, swap_original_order: bool = None,
                  keep_original_track: bool = None, enable_random_cup: bool = None,
-                 track_formatting: dict[str, str] = None):
+                 track_file_template: str = None):
 
         self.path = Path(path)
 
@@ -46,11 +46,8 @@ class ModConfig:
 
         self.default_track: "Track | TrackGroup" = default_track if default_track is not None else None
         self._tracks: list["Track | TrackGroup"] = tracks if tracks is not None else []
-        self.track_formatting: dict[str, str] = {
-            "menu_name": "{{ getattr(track, 'name', '') }}",
-            "race_name": "{{ getattr(track, 'name', '') }}",
-            "file_name": "{{ getattr(track, 'sha1', '_') }}",
-        } | (track_formatting if track_formatting is not None else {})
+        self.track_file_template: str = track_file_template \
+            if track_file_template is not None else "{{ getattr(track, 'sha1', '_') }}"
 
         self.original_track_prefix: bool = original_track_prefix if original_track_prefix is not None else True
         self.swap_original_order: bool = swap_original_order if swap_original_order is not None else True
@@ -189,7 +186,8 @@ class ModConfig:
         )
 
         for cup in self.get_cups():
-            ctfile += cup.get_ctfile(mod_config=self)
+            # get all the cup ctfile, use "-" for the template since the track's name are not used here
+            ctfile += cup.get_ctfile(mod_config=self, template="-")
 
         return ctfile
 
