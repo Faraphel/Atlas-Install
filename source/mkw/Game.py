@@ -120,10 +120,9 @@ class Game:
         yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
         yield from mod_config.normalize_all_tracks(cache_autoadd_directory, cache_cttracks_directory, 8)
 
-        print(mod_config.get_ctfile())
-
         # patch the game
         yield from extracted_game.prepare_dol()
         yield from extracted_game.install_all_patch(mod_config)
         yield from extracted_game.recreate_all_szs()
+        yield from extracted_game.patch_lecode(mod_config, cache_directory)
 

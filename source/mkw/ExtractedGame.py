@@ -5,7 +5,7 @@ from typing import Generator, IO
 
 from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
-from source.wt import szs
+from source.wt import szs, lec
 from source.wt.wstrt import StrPath
 
 
@@ -78,6 +78,29 @@ class ExtractedGame:
 
             szs.create(extracted_szs, extracted_szs.with_suffix(".szs"), overwrite=True)
             shutil.rmtree(str(extracted_szs.resolve()))
+
+    def patch_lecode(self, mod_config: ModConfig, cache_directory: Path | str) -> Generator[dict, None, None]:
+        """
+        install lecode on the mod
+        :param cache_directory: Path to the cache
+        :param mod_config: mod configuration
+        """
+        yield {"description": "Patching LECODE.bin"}
+        cache_directory = Path(cache_directory)
+
+        # write ctfile data to a file in the cache
+        ct_file = (cache_directory / "ctfile.lpar")
+        ct_file.write_text(mod_config.get_ctfile())
+
+        # TODO: the lpar file should be customizable
+        for lecode_file in (self.path / "files/rel/").glob("lecode-*.bin"):
+            lec.patch(
+                lecode_file=lecode_file,
+                ct_file=ct_file,
+                lpar=mod_config.path.parent / "_LPAR/normal.lpar",
+                game_tracks_directory=self.path / "files/Race/Course/",
+                copy_tracks_directories=[cache_directory / "original-tracks/", cache_directory / "custom-tracks/"]
+            )
 
     def install_all_patch(self, mod_config: ModConfig) -> Generator[dict, None, None]:
         """
