@@ -1,8 +1,10 @@
 from typing import Generator
-import re
 
 from source.mkw import Tag, Slot
-from source.safe_eval import safe_eval, multiple_safe_eval
+from source.safe_eval import multiple_safe_eval
+
+
+ModConfig: any
 
 
 # representation of a custom track

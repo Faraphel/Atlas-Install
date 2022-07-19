@@ -3,6 +3,10 @@ from typing import Generator
 from source.mkw import Tag
 
 
+Track: any
+ModConfig: any
+
+
 class TrackGroup:
     def __init__(self, tracks: list["Track"] = None, tags: list[Tag] = None, name: str = None):
         self.tracks = tracks if tracks is not None else []

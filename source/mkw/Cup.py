@@ -2,6 +2,9 @@
 from PIL import Image, ImageDraw, ImageFont
 
 
+ModConfig: any
+
+
 class Cup:
     __slots__ = ["_tracks", "cup_name", "cup_id"]
     _last_cup_id = 0

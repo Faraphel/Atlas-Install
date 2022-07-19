@@ -9,6 +9,9 @@ from source.wt import szs, lec
 from source.wt.wstrt import StrPath
 
 
+Game: any
+
+
 class ExtractedGame:
     """
     Class that represents an extracted game
