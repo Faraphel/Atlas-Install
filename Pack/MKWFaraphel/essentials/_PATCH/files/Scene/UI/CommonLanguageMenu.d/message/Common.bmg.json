@@ -1,0 +1,15 @@
+{
+  "mode": "edit",
+  "operation": {
+    "bmg-decode": {},
+    "bmgtxt-edit": {
+      "layers": [
+        {
+          "mode": "ctfile",
+          "template": "{{ ('\\c{YOR2}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\c{off} ') if hasattr(track, 'score') else '' }}{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}"
+        }
+      ]
+    },
+    "bmg-encode": {}
+  }
+}
