@@ -90,7 +90,7 @@ class ExtractedGame:
 
         # write ctfile data to a file in the cache
         ct_file = (cache_directory / "ctfile.lpar")
-        ct_file.write_text(mod_config.get_ctfile())
+        ct_file.write_text(mod_config.get_ctfile(template="-"))
 
         # TODO: the lpar file should be customizable
         for lecode_file in (self.path / "files/rel/").glob("lecode-*.bin"):

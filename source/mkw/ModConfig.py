@@ -165,9 +165,10 @@ class ModConfig:
         yield from self.get_ordered_cups()
         yield from self.get_unordered_cups()
 
-    def get_ctfile(self) -> str:
+    def get_ctfile(self, template: str) -> str:
         """
         Return the ct_file generated from the ModConfig
+        :template: template for the track name
         :return: ctfile content
         """
         lecode_flags = filter(lambda v: v is not None, [
@@ -187,7 +188,7 @@ class ModConfig:
 
         for cup in self.get_cups():
             # get all the cup ctfile, use "-" for the template since the track's name are not used here
-            ctfile += cup.get_ctfile(mod_config=self, template="-")
+            ctfile += cup.get_ctfile(mod_config=self, template=template)
 
         return ctfile
 
