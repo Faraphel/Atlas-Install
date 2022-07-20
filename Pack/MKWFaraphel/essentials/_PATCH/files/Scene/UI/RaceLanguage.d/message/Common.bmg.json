@@ -7,6 +7,14 @@
         {
           "mode": "ctfile",
           "template": "{{ ('\\c{YOR2}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\c{off} ') if hasattr(track, 'score') else '' }}{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}\n{{ '\\n'.join(getattr(track, 'author')) if isinstance(getattr(track, 'author', ''), list) else getattr(track, 'author', '/') }}"
+        },
+        {
+          "mode": "format-original-track",
+          "template": "{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}\nNintendo"
+        },
+        {
+          "mode": "patch",
+          "patchs": {"LE-FORCE-COPY": null}
         }
       ]
     },

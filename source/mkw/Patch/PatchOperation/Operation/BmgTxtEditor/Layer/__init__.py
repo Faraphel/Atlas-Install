@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 Patch: any
 
 
@@ -11,5 +12,6 @@ class AbstractLayer(ABC):
         """
 
 
-from source.mkw.Patch.PatchOperation.Operation.BmgTxtEditor.Layer import IDLayer, RegexLayer, CTFileLayer
-__all__ = ["AbstractLayer", "IDLayer", "RegexLayer", "CTFileLayer"]
+from source.mkw.Patch.PatchOperation.Operation.BmgTxtEditor.Layer import IDLayer, RegexLayer, CTFileLayer, PatchLayer, \
+    FormatOriginalTrackLayer
+__all__ = ["AbstractLayer", "IDLayer", "RegexLayer", "CTFileLayer", "PatchLayer", "FormatOriginalTrackLayer"]
