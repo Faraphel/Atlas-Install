@@ -126,3 +126,5 @@ def multiple_safe_eval(template: str, extra_token_map: dict[str, str] = None, en
 
     # pass everything between TOKEN_START and TOKEN_END in the function
     return re.sub(rf"{TOKEN_START}(.*?){TOKEN_END}", format_part_template, template)
+
+# TODO: see if extra_token_map can't be shortened
