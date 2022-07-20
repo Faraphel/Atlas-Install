@@ -1,6 +1,7 @@
 from typing import Generator
 
 from source.mkw import Tag, Slot
+from source.mkw.MKWColor import bmg_color_text
 from source.safe_eval import multiple_safe_eval
 
 
@@ -60,6 +61,22 @@ class Track:
 
         return multiple_safe_eval(template, extra_token_map, {"track": self})
 
+    def get_tag_template(self, templates: dict[str, str], default: any = None) -> any:
+        """
+        Return the tag template found in templates. If not found, return default
+        :param templates: template with all the tags and its replacement
+        :param default: default value if no tag template is found
+        :return: formatted representation of the tag
+        """
+        for tag in filter(lambda tag: tag in templates, self.tags):
+            template: str = templates[tag]
+            return multiple_safe_eval(
+                template,
+                extra_token_map={"TAG": "TAG", "bmg_color_text": "bmg_color_text"},
+                env={"TAG": tag, "bmg_color_text": bmg_color_text}
+            )
+        return default
+
     def get_prefix(self, mod_config: "ModConfig", default: any = None) -> any:
         """
         return the prefix of the track
@@ -67,8 +84,7 @@ class Track:
         :param mod_config: mod configuration
         :return: formatted representation of the track prefix
         """
-        for tag in filter(lambda tag: tag in mod_config.tags_prefix, self.tags): return tag
-        return default
+        return self.get_tag_template(mod_config.tags_prefix, default)
 
     def get_suffix(self, mod_config: "ModConfig", default: any = None) -> any:
         """
@@ -77,8 +93,7 @@ class Track:
         :param mod_config: mod configuration
         :return: formatted representation of the track suffix
         """
-        for tag in filter(lambda tag: tag in mod_config.tags_suffix, self.tags): return tag
-        return default
+        return self.get_tag_template(mod_config.tags_suffix, default)
 
     def is_highlight(self, mod_config: "ModConfig", default: any = None) -> bool:
         ...

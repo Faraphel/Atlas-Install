@@ -4,7 +4,7 @@ from typing import Generator
 from PIL import Image
 
 from source import threaded
-from source.mkw import Tag, Color
+from source.mkw import Tag, MKWColor
 from source.mkw.Cup import Cup
 from source.mkw.Track import Track
 import json
@@ -26,7 +26,7 @@ class ModConfig:
                  "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
-                 tags_prefix: dict[Tag, Color] = None, tags_suffix: dict[Tag, Color] = None,
+                 tags_prefix: dict[Tag, str] = None, tags_suffix: dict[Tag, str] = None,
                  tags_cups: list[Tag] = None,
                  default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
                  original_track_prefix: bool = None, swap_original_order: bool = None,
