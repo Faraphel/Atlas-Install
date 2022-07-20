@@ -51,17 +51,15 @@ class SafeFunction:
         return attr
 
 
-def safe_eval(template: str, extra_token_map: dict[str, str] = None, env: dict[str, any] = None) -> str:
+def safe_eval(template: str, env: dict[str, any] = None) -> str:
     """
     Evaluate the template and return the result in a safe way
-    :param extra_token_map: additionnal tokens to use in the template
     :param env: variables to use when using eval
     :param template: template to evaluate
     """
-    if extra_token_map is None: extra_token_map = {}
     if env is None: env = {}
 
-    token_map: dict[str, str] = common_token_map | extra_token_map
+    token_map: dict[str, str] = common_token_map | {var: var for var in env}
     final_token: str = ""
 
     def matched(match: re.Match | str | None, value: str = None) -> bool:
@@ -113,7 +111,7 @@ def safe_eval(template: str, extra_token_map: dict[str, str] = None, env: dict[s
     else: return final_token
 
 
-def multiple_safe_eval(template: str, extra_token_map: dict[str, str] = None, env: dict[str, any] = None) -> str:
+def multiple_safe_eval(template: str, env: dict[str, any] = None) -> str:
     def format_part_template(match: re.Match) -> str:
         """
         when a token is found, replace it by the corresponding value
@@ -122,9 +120,8 @@ def multiple_safe_eval(template: str, extra_token_map: dict[str, str] = None, en
         """
         # get the token string without the brackets, then strip it. Also double antislash
         part_template = match.group(1).strip().replace("\\", "\\\\")
-        return safe_eval(part_template, extra_token_map, env)
+        return safe_eval(part_template, env)
 
     # pass everything between TOKEN_START and TOKEN_END in the function
     return re.sub(rf"{TOKEN_START}(.*?){TOKEN_END}", format_part_template, template)
 
-# TODO: see if extra_token_map can't be shortened

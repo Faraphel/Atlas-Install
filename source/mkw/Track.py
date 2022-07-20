@@ -53,13 +53,14 @@ class Track:
         :return: formatted representation of the track
         """
 
-        extra_token_map = {  # replace the suffix and the prefix by the corresponding values
-            "prefix": f'{self.get_prefix(mod_config, "")!r}',
-            "suffix": f'{self.get_suffix(mod_config, "")!r}',
-            "track": "track"
-        }
-
-        return multiple_safe_eval(template, extra_token_map, {"track": self})
+        return multiple_safe_eval(
+            template,
+            env={
+                "track": self,
+                "prefix": self.get_prefix(mod_config, ""),
+                "suffix": self.get_suffix(mod_config, "")
+            }
+        )
 
     def get_tag_template(self, templates: dict[str, str], default: any = None) -> any:
         """
@@ -70,11 +71,7 @@ class Track:
         """
         for tag in filter(lambda tag: tag in templates, self.tags):
             template: str = templates[tag]
-            return multiple_safe_eval(
-                template,
-                extra_token_map={"TAG": "TAG", "bmg_color_text": "bmg_color_text"},
-                env={"TAG": tag, "bmg_color_text": bmg_color_text}
-            )
+            return multiple_safe_eval(template, env={"TAG": tag, "bmg_color_text": bmg_color_text})
         return default
 
     def get_prefix(self, mod_config: "ModConfig", default: any = None) -> any:

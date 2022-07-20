@@ -11,7 +11,7 @@ class PatchLayer(AbstractLayer):
 
     mode = "patch"
 
-    def __init__(self, patchs: dict[str, str | None]):
+    def __init__(self, patchs: list[str]):
         self.patchs = patchs
 
     def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:

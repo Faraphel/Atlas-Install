@@ -18,7 +18,7 @@ class FormatOriginalTrackLayer(AbstractLayer):
         self.template = template
 
     def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
-        originals_track = bmg.cat_data(decoded_content, filters={"TRACKS+ARENAS": None})
+        originals_track = bmg.cat_data(decoded_content, filters=["TRACKS+ARENAS"])
         new_bmg_lines: list[str] = []
 
         for line in originals_track.split("\n"):

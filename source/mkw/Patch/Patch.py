@@ -17,7 +17,7 @@ class Patch:
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self.path}>"
 
-    def safe_eval(self, template: str, multiple: bool = False, **env) -> str:
+    def safe_eval(self, template: str, multiple: bool = False, env: dict[str, any] = None) -> str:
         """
         Safe eval with a patch environment
         :param multiple: should the expression be a multiple safe eval or a single safe eval
@@ -27,8 +27,7 @@ class Patch:
         """
         return (multiple_safe_eval if multiple else safe_eval)(
             template,
-            extra_token_map={"mod_config": "mod_config"} | {key: key for key in env},
-            env={"mod_config": self.mod_config} | env,
+            env={"mod_config": self.mod_config} | (env if env is not None else {}),
         )
 
     def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:
