@@ -31,22 +31,27 @@ def encode_data(txt_data: str) -> bytes:
     return stdout
 
 
-def patch_data(bmg_data: bytes, patchs: dict[str, str | None]) -> bytes:
+def cat_data(txt_data: str, patchs: dict[str, str | None] = None, filters: dict[str, str | None] = None) -> str:
     """
-    Patch a file with LE-COPY. This copy the original tracks name into the new lecode track name id
+    Patch and filter a bmgtxt file (for example LE-COPY).
     :patchs: dictionary of patchs bmg key and value
     """
     args = []
-    for key, value in patchs.items():
+
+    for key, value in filters.items() if filters is not None else {}:
+        args.append("--filter-bmg")
+        args.append(key if value is None else f"{key}={value}")
+
+    for key, value in patchs.items() if patchs is not None else {}:
         args.append("--patch-bmg")
         args.append(key if value is None else f"{key}={value}")
 
-    process = _tools_run_popen("PATCH", "-", *args, "--DEST", "-")
-    stdout, _ = process.communicate(input=bmg_data)
+    process = _tools_run_popen("CAT", "-", *args)
+    stdout, _ = process.communicate(input=txt_data.encode("utf-8"))
     if process.returncode != 0:
         raise WTError(tools_path, process.returncode)
 
-    return stdout
+    return stdout.decode("utf-8")
 
 
 class BMGPath:
