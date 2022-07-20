@@ -50,7 +50,6 @@
         "RMX": "{{ bmg_color_text('orange', TAG) }}",
         "MKT": "{{ bmg_color_text('dark orange', TAG) }}",
         "GP": "{{ bmg_color_text('dark red', TAG) }}",
-        "Wii Shop": "{{ bmg_color_text('azure', TAG) }}",
         "UT": "{{ bmg_color_text('red', TAG) }}",
         "GK2": "{{ bmg_color_text('green', TAG) }}",
         "GK3": "{{ bmg_color_text('green', TAG) }}",
@@ -3740,7 +3739,7 @@
             ]
         },
         {
-            "name":"CTR Nin Clan Road",
+            "name":"Nin Clan Road",
             "author":"HackStarz",
             "special":"T11",
             "music":"T11",
@@ -3750,7 +3749,7 @@
             "version":"RC1",
             "family":9261,
             "tags":[
-
+                "CTR"
             ]
         },
         {
@@ -9761,7 +9760,7 @@
             "score":1
         },
         {
-            "name":"KAR Top Ride Grass",
+            "name":"Top Ride Grass",
             "music":"T52",
             "special":"T52",
             "score":1,
@@ -9771,7 +9770,7 @@
             "version":"v1",
             "family":8048,
             "tags":[
-
+                "KAR"
             ]
         },
         {
@@ -9785,7 +9784,7 @@
             "score":2
         },
         {
-            "name":"KO Teknik's Incendia Castle",
+            "name":"Teknik's Incendia Castle",
             "music":"T34",
             "special":"T34",
             "score":1,
@@ -9798,7 +9797,7 @@
             "version":"RC1",
             "family":24,
             "tags":[
-
+                "KO"
             ]
         },
         {
@@ -10106,7 +10105,7 @@
             ]
         },
         {
-            "name":"LCP Floor It 1",
+            "name":"Floor It 1",
             "author":"Rex",
             "special":"T81",
             "music":"T81",
@@ -10119,7 +10118,7 @@
             ]
         },
         {
-            "name":"LCP Floor It 3",
+            "name":"Floor It 3",
             "music":"T81",
             "special":"T81",
             "score":3,
@@ -10129,11 +10128,11 @@
             "version":"v1",
             "family":7308,
             "tags":[
-
+                "LCP"
             ]
         },
         {
-            "name":"LEGO-R Imperial Grand Prix",
+            "name":"Imperial Grand Prix",
             "music":"T11",
             "special":"T11",
             "score":3,
@@ -10143,7 +10142,7 @@
             "version":"RC2",
             "family":1219,
             "tags":[
-
+                "LEGO-R"
             ]
         },
         {
@@ -13813,7 +13812,7 @@
             ]
         },
         {
-            "name":"Raceway",
+            "name":"Wii Shop Raceway",
             "author":"Justin",
             "special":"T31",
             "music":"T31",
@@ -13821,9 +13820,7 @@
             "version":"v1",
             "since_version":"0.11",
             "score":2,
-            "tags":[
-                "Wii Shop"
-            ]
+            "tags":[]
         },
         {
             "name":"Raceway District",
