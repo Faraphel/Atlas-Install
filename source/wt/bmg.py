@@ -31,20 +31,18 @@ def encode_data(txt_data: str) -> bytes:
     return stdout
 
 
-def cat_data(txt_data: str, patchs: dict[str, str | None] = None, filters: dict[str, str | None] = None) -> str:
+def cat_data(txt_data: str, patchs: list[str] = None, filters: list[str] = None) -> str:
     """
     Patch and filter a bmgtxt file (for example LE-COPY).
     :patchs: dictionary of patchs bmg key and value
     """
     args = []
 
-    for key, value in filters.items() if filters is not None else {}:
-        args.append("--filter-bmg")
-        args.append(key if value is None else f"{key}={value}")
+    for filter_ in filters if filters is not None else []:
+        args.extend(["--filter-bmg", filter_])
 
-    for key, value in patchs.items() if patchs is not None else {}:
-        args.append("--patch-bmg")
-        args.append(key if value is None else f"{key}={value}")
+    for patch in patchs if patchs is not None else []:
+        args.extend(["--patch-bmg", patch])
 
     process = _tools_run_popen("CAT", "-", *args)
     stdout, _ = process.communicate(input=txt_data.encode("utf-8"))

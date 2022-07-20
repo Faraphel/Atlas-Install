@@ -14,7 +14,7 @@
         },
         {
           "mode": "patch",
-          "patchs": {"LE-FORCE-COPY": null}
+          "patchs": ["LE-FORCE-COPY"]
         }
       ]
     },
