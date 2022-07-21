@@ -1,4 +1,4 @@
 {
   "mode": "match",
-  "match_regex": "[!R]*_*.szs"
+  "match_regex": "[!R]*[!i]_*.szs"
 }

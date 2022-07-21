@@ -1,0 +1,23 @@
+{
+  "mode": "edit",
+  "operation": {
+    "bmg-decode": {},
+    "bmgtxt-edit": {
+      "layers": [
+        {
+          "mode": "ctfile",
+          "template": "{{ '\\c{red3}/\\c{off}' if getattr(track, 'warning', 0) != 0 else '' }}{{ ('\\c{YOR2}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\c{off} ') if hasattr(track, 'score') and getattr(track, 'warning', 0) == 0 else '' }}{{ (prefix+' ') if prefix and getattr(track, 'warning', 0) == 0 else '' }}{{ getattr(track, 'name', '') if getattr(track, 'warning', 0) == 0 else '' }}{{ (' ('+suffix +')') if suffix and getattr(track, 'warning', 0) == 0 else '' }}"
+        },
+        {
+          "mode": "format-original-track",
+          "template": "{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}"
+        },
+        {
+          "mode": "patch",
+          "patchs": ["LE-FORCE-COPY"]
+        }
+      ]
+    },
+    "bmg-encode": {}
+  }
+}
