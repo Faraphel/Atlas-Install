@@ -1,14 +1,16 @@
+import shutil
 from pathlib import Path
 from typing import Generator
 
 from PIL import Image
 
 from source import threaded
-from source.mkw import Tag, MKWColor
+from source.mkw import Tag
 from source.mkw.Cup import Cup
 from source.mkw.Track import Track
 import json
 
+from source.safe_eval import safe_eval
 from source.wt.szs import SZSPath
 
 CT_ICON_SIZE: int = 128
@@ -23,7 +25,8 @@ Thread: any
 class ModConfig:
     __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
-                 "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template")
+                 "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template",
+                 "multiplayer_use_default_track_if")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, str] = None, tags_suffix: dict[Tag, str] = None,
@@ -31,7 +34,7 @@ class ModConfig:
                  default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
                  original_track_prefix: bool = None, swap_original_order: bool = None,
                  keep_original_track: bool = None, enable_random_cup: bool = None,
-                 track_file_template: str = None):
+                 track_file_template: str = None, multiplayer_use_default_track_if: str = None):
 
         self.path = Path(path)
 
@@ -48,6 +51,8 @@ class ModConfig:
         self._tracks: list["Track | TrackGroup"] = tracks if tracks is not None else []
         self.track_file_template: str = track_file_template \
             if track_file_template is not None else "{{ getattr(track, 'sha1', '_') }}"
+        self.multiplayer_use_default_track_if: str = multiplayer_use_default_track_if \
+            if multiplayer_use_default_track_if is not None else "False"
 
         self.original_track_prefix: bool = original_track_prefix if original_track_prefix is not None else True
         self.swap_original_order: bool = swap_original_order if swap_original_order is not None else True
@@ -273,17 +278,44 @@ class ModConfig:
             yield {"description": f"Normalizing tracks :\n" + "\n".join(thread['name'] for thread in normalize_threads)}
             normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
 
-        # for every track in the tracks mod directory, convert it to szs (in a threaded way)
-        for track_file in filter(lambda file: file.is_file(), (self.path.parent / "_TRACKS").rglob("*")):
+        track_directory = self.path.parent / "_TRACKS"
+
+        # prepare the default track
+        default_track_file: Path = next(
+            track_directory.rglob(f"{self.default_track.repr_format(self, self.track_file_template)}*")
+        )
+
+        yield {"description": "normalizing default track"}
+        # normalize the default track before to make it available as a callback
+        SZSPath(default_track_file).normalize(
+            autoadd_path,
+            destination_path / f"{default_track_file.stem}.szs",
+            format="szs"
+        )
+
+        for track in self.get_tracks():
+            track_file: Path = next(
+                track_directory.rglob(f"{track.repr_format(self, self.track_file_template)}*")
+            )
+
             @threaded
-            def normalize_track():
+            def normalize_track(track: Track, track_file: Path):
                 SZSPath(track_file).normalize(
                     autoadd_path,
-                    destination_path / track_file.with_suffix(".szs").name,
+                    destination_path / f"{track_file.stem}.szs",
                     format="szs"
                 )
 
-            normalize_threads.append({"name": track_file.name, "thread": normalize_track()})
+                if safe_eval(self.multiplayer_use_default_track_if, {"track": track}) == "True":
+                    # if the track should use the default track instead in multiplayer,
+                    # copy the default track to the same file but with a _d at the end
+                    shutil.copy(default_track_file, destination_path / f"{track_file.stem}_d.szs")
+
+                else:
+                    # delete the _d file if it exists
+                    (destination_path / f"{track_file.stem}_d.szs").unlink(missing_ok=True)
+
+            normalize_threads.append({"name": track_file.name, "thread": normalize_track(track, track_file)})
             while len(normalize_threads) > thread_amount: yield from remove_finished_threads()
             # if there is more than the max amount of thread running, wait for one to finish
         while len(normalize_threads) > 0: yield from remove_finished_threads()
