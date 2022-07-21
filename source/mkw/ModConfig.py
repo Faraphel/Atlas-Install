@@ -10,6 +10,7 @@ from source.mkw.Cup import Cup
 from source.mkw.Track import Track
 import json
 
+from source.mkw.OriginalTrack import OriginalTrack
 from source.safe_eval import safe_eval
 from source.wt.szs import SZSPath
 
@@ -254,15 +255,17 @@ class ModConfig:
         return full_cticon
 
     def normalize_all_tracks(self, autoadd_path: "Path | str", destination_path: "Path | str",
-                             thread_amount: int = 8) -> Generator[dict, None, None]:
+                             original_tracks_path: "Path | str", thread_amount: int = 8) -> Generator[dict, None, None]:
         """
         Convert all tracks of the mod to szs into the destination_path
+        :param original_tracks_path: path to the originals tracks (if a track is disabled for multiplayer)
         :param thread_amount: number of thread to use
         :param autoadd_path: autoadd directory
         :param destination_path: destination where the files are converted
         """
         yield {"description": "Normalizing track..."}
         destination_path = Path(destination_path)
+        original_tracks_path = Path(original_tracks_path)
         destination_path.mkdir(parents=True, exist_ok=True)
 
         normalize_threads: list[dict] = []
@@ -278,19 +281,6 @@ class ModConfig:
             normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
 
         track_directory = self.path.parent / "_TRACKS"
-
-        # prepare the default track
-        default_track_file: Path = next(
-            track_directory.rglob(f"{self.default_track.repr_format(self, self.track_file_template)}.*")
-        )
-
-        yield {"description": "normalizing default track"}
-        # normalize the default track before to make it available as a callback
-        SZSPath(default_track_file).normalize(
-            autoadd_path,
-            destination_path / f"{default_track_file.stem}.szs",
-            format="szs"
-        )
 
         for track in self.get_tracks():
             track_file: Path = next(
@@ -308,7 +298,10 @@ class ModConfig:
                 if safe_eval(self.multiplayer_disable_if, {"track": track}) == "True":
                     # if the track should use the default track instead in multiplayer,
                     # copy the default track to the same file but with a _d at the end
-                    shutil.copy(default_track_file, destination_path / f"{track_file.stem}_d.szs")
+                    shutil.copy(
+                        original_tracks_path / f"{OriginalTrack(track_data=track.special, track_key='slot').name}_d.szs",
+                        destination_path / f"{track_file.stem}_d.szs"
+                    )
 
                 else:
                     # delete the _d file if it exists
