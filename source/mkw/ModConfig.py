@@ -26,7 +26,7 @@ class ModConfig:
     __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
                  "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template",
-                 "multiplayer_use_default_track_if")
+                 "multiplayer_disable_if")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, str] = None, tags_suffix: dict[Tag, str] = None,
@@ -34,7 +34,7 @@ class ModConfig:
                  default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
                  original_track_prefix: bool = None, swap_original_order: bool = None,
                  keep_original_track: bool = None, enable_random_cup: bool = None,
-                 track_file_template: str = None, multiplayer_use_default_track_if: str = None):
+                 track_file_template: str = None, multiplayer_disable_if: str = None):
 
         self.path = Path(path)
 
@@ -51,8 +51,7 @@ class ModConfig:
         self._tracks: list["Track | TrackGroup"] = tracks if tracks is not None else []
         self.track_file_template: str = track_file_template \
             if track_file_template is not None else "{{ getattr(track, 'sha1', '_') }}"
-        self.multiplayer_use_default_track_if: str = multiplayer_use_default_track_if \
-            if multiplayer_use_default_track_if is not None else "False"
+        self.multiplayer_disable_if: str = multiplayer_disable_if if multiplayer_disable_if is not None else "False"
 
         self.original_track_prefix: bool = original_track_prefix if original_track_prefix is not None else True
         self.swap_original_order: bool = swap_original_order if swap_original_order is not None else True
@@ -306,7 +305,7 @@ class ModConfig:
                     format="szs"
                 )
 
-                if safe_eval(self.multiplayer_use_default_track_if, {"track": track}) == "True":
+                if safe_eval(self.multiplayer_disable_if, {"track": track}) == "True":
                     # if the track should use the default track instead in multiplayer,
                     # copy the default track to the same file but with a _d at the end
                     shutil.copy(default_track_file, destination_path / f"{track_file.stem}_d.szs")

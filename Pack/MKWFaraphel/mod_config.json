@@ -62,7 +62,7 @@
     "tags_cups": ["Switch", "3DS", "DS", "GCN", "GBA", "N64", "SNES", "MKT", "RMX", "DX", "GP"],
 
     "track_file_template": "{{ getattr(track, 'sha1', '_') }}",
-    "multiplayer_use_default_track_if": "getattr(track, 'warning', 0) >= 1",
+    "multiplayer_disable_if": "getattr(track, 'warning', 0) >= 1",
 
     "default_track": {
         "name": " ",
