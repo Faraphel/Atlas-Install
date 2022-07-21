@@ -17,27 +17,23 @@ class RegexLayer(AbstractLayer):
         self.template = template
 
     def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
-        # TODO : use regex in a better way to optimise speed
-
-        new_bmg_lines: list[str] = []
-        for line in decoded_content.split("\n"):
-            if (match := re.match(r"^ {2}(?P<id>.*?)\t= (?P<value>.*)$", line, re.DOTALL)) is None:
-                # check if the line match a bmg definition, else ignore
-                # bmg definition is : 2 spaces, a bmg id, a tab, an equal sign, a space and the bmg text
-                continue
-
-            new_bmg_id: str = match.group("id")
-            new_bmg_def: str = match.group("value")
+        def replacement(match: re.Match) -> str:
+            """
+            Get the replacement for the bmg line
+            :param match: the matched bmg line
+            :return: the patched bmg line
+            """
+            id: str = match.group("id")
+            value: str = match.group("value")
             for pattern, repl in self.template.items():
-                new_bmg_def = re.sub(
+                value = re.sub(
                     pattern,
                     patch.safe_eval(repl, multiple=True),
-                    new_bmg_def,
+                    value,
                     flags=re.DOTALL
                 )
-                # match a pattern from the template, and replace it with its repl
 
-            new_bmg_lines.append(f"  {new_bmg_id}\t={new_bmg_def}")
+            return f"  {id}\t={value}"
 
-        return decoded_content + "\n" + ("\n".join(new_bmg_lines)) + "\n"
-        # add every new line to the end of the decoded_bmg, old bmg_id will be overwritten.
+        return re.sub(r" {2}(?P<id>.*?)\t= (?P<value>.*)", replacement, decoded_content)
+

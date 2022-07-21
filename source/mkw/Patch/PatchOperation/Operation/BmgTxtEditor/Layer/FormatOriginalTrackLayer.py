@@ -18,15 +18,14 @@ class FormatOriginalTrackLayer(AbstractLayer):
         self.template = template
 
     def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
-        originals_track = bmg.cat_data(decoded_content, filters=["TRACKS+ARENAS"])
-        new_bmg_lines: list[str] = []
+        original_tracks = bmg.cat_data(decoded_content, filters=["TRACKS+ARENAS"])
 
-        for line in originals_track.split("\n"):
-            if (match := re.match(r"^ {2}(?P<id>.*?)\t= (?P<value>.*)$", line, re.DOTALL)) is None:
-                # check if the line match a bmg definition, else ignore
-                # bmg definition is : 2 spaces, a bmg id, a tab, an equal sign, a space and the bmg text
-                continue
-
+        def replacement(match: re.Match) -> str:
+            """
+            Get the replacement for the bmg line
+            :param match: the matched bmg line
+            :return: the patched bmg line
+            """
             id = match.group("id")
             name = match.group("value")
 
@@ -43,7 +42,12 @@ class FormatOriginalTrackLayer(AbstractLayer):
                 self.template
             )
 
-            new_bmg_lines.append(f"  {id}\t={patched_name}")
+            return f"  {id}\t= {patched_name}"
 
-        return decoded_content + "\n" + ("\n".join(new_bmg_lines)) + "\n"
-        # add every new line to the end of the decoded_bmg, old bmg_id will be overwritten.
+        patched_original_tracks = re.sub(
+            r" {2}(?P<id>.*?)\t= (?P<value>.*)",
+            replacement,
+            original_tracks
+        )
+
+        return f"{decoded_content}\n{patched_original_tracks}\n"
