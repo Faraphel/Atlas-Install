@@ -6,7 +6,7 @@
       "layers": [
         {
           "mode": "ctfile",
-          "template": "{{ ('\\c{YOR2}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\c{off} ') if hasattr(track, 'score') else '' }}{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}"
+          "template": "{{ ('\\c{' + ['YOR2', 'YOR4', 'YOR6', 'blue1'][getattr(track, 'warning', 0)] +'}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\c{off} ') if hasattr(track, 'score') else '' }}{{ (prefix+' ') if prefix else '' }}{{ getattr(track, 'name', '') }}{{ (' ('+suffix +')') if suffix else '' }}"
         },
         {
           "mode": "format-original-track",
