@@ -282,7 +282,7 @@ class ModConfig:
 
         # prepare the default track
         default_track_file: Path = next(
-            track_directory.rglob(f"{self.default_track.repr_format(self, self.track_file_template)}*")
+            track_directory.rglob(f"{self.default_track.repr_format(self, self.track_file_template)}.*")
         )
 
         yield {"description": "normalizing default track"}
@@ -295,7 +295,7 @@ class ModConfig:
 
         for track in self.get_tracks():
             track_file: Path = next(
-                track_directory.rglob(f"{track.repr_format(self, self.track_file_template)}*")
+                track_directory.rglob(f"{track.repr_format(self, self.track_file_template)}.*")
             )
 
             @threaded
