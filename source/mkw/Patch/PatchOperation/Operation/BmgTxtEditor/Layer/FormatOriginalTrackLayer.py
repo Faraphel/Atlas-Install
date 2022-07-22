@@ -32,6 +32,7 @@ class FormatOriginalTrackLayer(AbstractLayer):
             if (id[0] == "T" and int(id[1]) <= 4) or (id[0] == "U" and int(id[1]) == 1): tag = "Wii"
             # If the cup is in the 4 originals tracks cups, use the wii tags
             # If the cup is in the originals arena cup, use the wii tags
+            # TODO: tag can't be fetch this way in the JAP version
             else: tag, name = name.split(" ", 1)
 
             patched_name = Track(
