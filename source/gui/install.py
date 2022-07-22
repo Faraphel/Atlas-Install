@@ -1,15 +1,15 @@
 import enum
 import shutil
-import tkinter
 from pathlib import Path
 import json
+import tkinter
 from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 import webbrowser
 from typing import Generator
 
-from source.gui import better_gui_error
+from source.gui import better_gui_error, mystuff
 from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
 from source.option import Option
@@ -181,7 +181,8 @@ class Menu(tkinter.Menu):
             super().__init__(master, tearoff=False)
 
             master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
-            self.add_command(label="Debug mode")
+            self.add_command(label=_("DEBUG_MODE"))
+            self.add_command(label=_("OPEN_MYSTUFF_WINDOW"), command= mystuff.Window)
 
             self.threads_used = self.ThreadsUsed(self)
 
@@ -190,7 +191,7 @@ class Menu(tkinter.Menu):
                 super().__init__(master, tearoff=False)
                 master.add_cascade(label=_("THREADS_USED"), menu=self)
 
-                self.variable = tkinter.IntVar(value=self.master.master.master.options["threads"])
+                self.variable = tkinter.IntVar(value=master.master.master.options["threads"])
 
                 def callback(threads_amount: int):
                     def func(): self.master.master.master.options["threads"] = threads_amount
@@ -402,6 +403,8 @@ class ButtonInstall(ttk.Button):
             game = Game(source_path)
             mod_config = self.master.get_mod_config()
             output_type = self.master.get_output_type()
+            import time
+            t1 = time.time()
             self.master.progress_function(
                 game.install_mod(
                     dest=destination_path,
@@ -410,6 +413,7 @@ class ButtonInstall(ttk.Button):
                     options=self.master.options
                 )
             )
+            print(time.time() - t1)
 
         finally:
             self.master.set_state(InstallerState.IDLE)

@@ -115,7 +115,7 @@ class Game:
         yield from self.extract(extracted_game.path)
 
         # install mystuff
-        yield from extracted_game.install_mystuff()
+        # yield from extracted_game.install_mystuff()
 
         # prepare the cache
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)
