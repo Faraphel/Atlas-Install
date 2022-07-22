@@ -43,13 +43,34 @@ class ExtractedGame:
             if not (destination_path / track_file.name).exists(): track_file.rename(destination_path / track_file.name)
             else: track_file.unlink()
 
-    def install_mystuff(self) -> Generator[dict, None, None]:
+    def install_mystuff(self, mystuff_path: "Path | str") -> Generator[dict, None, None]:
         """
-        Install mystuff directory
+        Install mystuff directory. If any files of the game have the same name as a file at the root of the MyStuff
+        Patch, then it is copied.
+        :mystuff_path: path to the MyStuff directory
         :return:
         """
-        yield {"description": "Installing MyStuff directory...", "determinate": False}
-        # TODO: implement mystuff
+        yield {"description": f"Installing MyStuff '{mystuff_path}'...", "determinate": False}
+        mystuff_path = Path(mystuff_path)
+
+        mystuff_rootfiles: dict[str, Path] = {}
+        for mystuff_subpath in mystuff_path.glob("*"):
+            if mystuff_subpath.is_file(): mystuff_rootfiles[mystuff_subpath.name] = mystuff_subpath
+            else: shutil.copytree(mystuff_subpath, self.path / f"/files/{mystuff_subpath.name}", dirs_exist_ok=True)
+
+        for game_file in filter(lambda file: file.is_file(), (self.path / "/files/").rglob("*")):
+            if (mystuff_file := mystuff_rootfiles.get(game_file.name)) is None: continue
+            shutil.copy(mystuff_file, game_file)
+
+    def install_multiple_mystuff(self, mystuff_paths: list["Path | str"]) -> Generator[dict, None, None]:
+        """
+        Install multiple mystuff patch
+        :param mystuff_paths: paths to all the mystuff patch
+        """
+        yield {"description": "Installing all the mystuff patchs"}
+
+        for mystuff_path in mystuff_paths:
+            yield from self.install_mystuff(mystuff_path)
 
     def prepare_special_file(self, mod_config: ModConfig) -> Generator[dict, None, None]:
         """
