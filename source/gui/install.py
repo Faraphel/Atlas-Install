@@ -150,16 +150,20 @@ class Menu(tkinter.Menu):
     class Language(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
-
             master.add_cascade(label=_("LANGUAGE_SELECTION"), menu=self)
+
+            self.variable = tkinter.StringVar(value=self.master.master.options["language"])
 
             def callback(file: Path):
                 def func(): self.master.master.options["language"] = file.stem
                 return func
 
             for file in Path("./assets/language/").iterdir():
-                self.add_command(
-                    label=json.loads(file.read_text(encoding="utf8"))["name"],
+                lang_json = json.loads(file.read_text(encoding="utf8"))
+                self.add_radiobutton(
+                    label=lang_json["name"],
+                    value=file.stem,
+                    variable=self.variable,
                     command=callback(file)
                 )
 
@@ -178,6 +182,27 @@ class Menu(tkinter.Menu):
 
             master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
             self.add_command(label="Debug mode")
+
+            self.threads_used = self.ThreadsUsed(self)
+
+        class ThreadsUsed(tkinter.Menu):
+            def __init__(self, master: tkinter.Menu):
+                super().__init__(master, tearoff=False)
+                master.add_cascade(label=_("THREADS_USED"), menu=self)
+
+                self.variable = tkinter.IntVar(value=self.master.master.master.options["threads"])
+
+                def callback(threads_amount: int):
+                    def func(): self.master.master.master.options["threads"] = threads_amount
+                    return func
+
+                for i in [1, 2, 4, 8, 12, 16]:
+                    self.add_radiobutton(
+                        label=_("USE", f" {i} ", "THREADS"),
+                        value=i,
+                        variable=self.variable,
+                        command=callback(i),
+                    )
 
     # Help menu
     class Help(tkinter.Menu):
@@ -377,7 +402,14 @@ class ButtonInstall(ttk.Button):
             game = Game(source_path)
             mod_config = self.master.get_mod_config()
             output_type = self.master.get_output_type()
-            self.master.progress_function(game.install_mod(destination_path, mod_config, output_type))
+            self.master.progress_function(
+                game.install_mod(
+                    dest=destination_path,
+                    mod_config=mod_config,
+                    output_type=output_type,
+                    options=self.master.options
+                )
+            )
 
         finally:
             self.master.set_state(InstallerState.IDLE)

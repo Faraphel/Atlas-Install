@@ -3,6 +3,7 @@ from typing import Generator
 
 from source.mkw.ExtractedGame import ExtractedGame
 from source.mkw.ModConfig import ModConfig
+from source.option import Option
 from source.wt.wit import WITPath, Region, Extension
 
 
@@ -87,11 +88,13 @@ class Game:
 
         return extracted_game
 
-    def install_mod(self, dest: Path, mod_config: ModConfig, output_type: Extension) -> Generator[dict, None, None]:
+    def install_mod(self, dest: Path, mod_config: ModConfig, options: "Option", output_type: Extension
+                    ) -> Generator[dict, None, None]:
         """
         Patch the game with the mod
         :dest: destination directory
         :mod_config: mod configuration
+        :options: others options for customized installation
         :output_type: type of the destination game
         """
         # create a cache directory for some files
@@ -122,7 +125,7 @@ class Game:
             cache_autoadd_directory,
             cache_cttracks_directory,
             cache_ogtracks_directory,
-            8
+            options["threads"],
         )
 
         # patch the game

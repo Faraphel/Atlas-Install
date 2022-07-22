@@ -7,15 +7,21 @@ from source import restart_program
 class Option:
     __slots__ = ("_path", "_options")
 
-    reboot_on_change: list[any] = ["language"]
+    reboot_on_change: list[str] = [
+        "language",
+    ]
+
     default_options: dict[str, any] = {
-        "language": "en"
+        "language": "en",
+        "threads": 8,
     }
 
-    def __init__(self, language=None):
+    def __init__(self, **options):
         self._path: Path | None = None
         self._options: dict[str, any] = self.default_options.copy()
-        if language is not None: self._options["language"] = language
+
+        for option_name, option_value in options.items():
+            self._options[option_name] = option_value
 
     def __getitem__(self, key: str) -> any:
         """
@@ -55,11 +61,7 @@ class Option:
         :param option_dict: dict containing the configuration
         :return: Option
         """
-        kwargs = {}
-        for key in cls.default_options.keys():
-            if "key" in option_dict: kwargs[key] = option_dict[key]
-
-        return cls(**kwargs)
+        return cls(**option_dict)
 
     @classmethod
     def from_file(cls, option_file: str | Path) -> "Option":
