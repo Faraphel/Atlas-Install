@@ -56,9 +56,9 @@ class ExtractedGame:
         mystuff_rootfiles: dict[str, Path] = {}
         for mystuff_subpath in mystuff_path.glob("*"):
             if mystuff_subpath.is_file(): mystuff_rootfiles[mystuff_subpath.name] = mystuff_subpath
-            else: shutil.copytree(mystuff_subpath, self.path / f"/files/{mystuff_subpath.name}", dirs_exist_ok=True)
+            else: shutil.copytree(mystuff_subpath, self.path / f"files/{mystuff_subpath.name}", dirs_exist_ok=True)
 
-        for game_file in filter(lambda file: file.is_file(), (self.path / "/files/").rglob("*")):
+        for game_file in filter(lambda file: file.is_file(), (self.path / "files/").rglob("*")):
             if (mystuff_file := mystuff_rootfiles.get(game_file.name)) is None: continue
             shutil.copy(mystuff_file, game_file)
 
