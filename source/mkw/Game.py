@@ -115,7 +115,8 @@ class Game:
         yield from self.extract(extracted_game.path)
 
         # install mystuff
-        # yield from extracted_game.install_mystuff()
+        mystuff_data = options["mystuff_packs"].get(options["mystuff_pack_selected"])
+        if mystuff_data is not None: yield from extracted_game.install_multiple_mystuff(mystuff_data["paths"])
 
         # prepare the cache
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)

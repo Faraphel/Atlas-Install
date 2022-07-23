@@ -14,6 +14,8 @@ class Option:
     default_options: dict[str, any] = {
         "language": "en",
         "threads": 8,
+        "mystuff_pack_selected": None,
+        "mystuff_packs": {},
     }
 
     def __init__(self, **options):
