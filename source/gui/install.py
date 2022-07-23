@@ -438,7 +438,7 @@ class ProgressBar(ttk.LabelFrame):
         self.progress_bar = ttk.Progressbar(self, orient="horizontal")
         self.progress_bar.grid(row=1, column=1, sticky="nsew")
 
-        self.description = ttk.Label(self, text="", anchor="center", font=("TkDefaultFont", 10))
+        self.description = ttk.Label(self, text="", anchor="center", font=("TkDefaultFont", 10), wraplength=350)
         self.description.grid(row=2, column=1, sticky="nsew")
 
     def set_state(self, state: InstallerState) -> None:
