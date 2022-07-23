@@ -246,7 +246,7 @@ class SourceGame(ttk.LabelFrame):
         super().__init__(master, text="Original Game File")
         self.columnconfigure(1, weight=1)
 
-        self.entry = ttk.Entry(self, width=50)
+        self.entry = ttk.Entry(self, width=55)
         self.entry.grid(row=1, column=1, sticky="nsew")
 
         self.button = ttk.Button(self, text="...", width=2, command=self.select)
@@ -403,8 +403,7 @@ class ButtonInstall(ttk.Button):
             game = Game(source_path)
             mod_config = self.master.get_mod_config()
             output_type = self.master.get_output_type()
-            import time
-            t1 = time.time()
+
             self.master.progress_function(
                 game.install_mod(
                     dest=destination_path,
@@ -413,7 +412,6 @@ class ButtonInstall(ttk.Button):
                     options=self.master.options
                 )
             )
-            print(time.time() - t1)
 
         finally:
             self.master.set_state(InstallerState.IDLE)
