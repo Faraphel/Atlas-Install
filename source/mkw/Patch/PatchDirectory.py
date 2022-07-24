@@ -24,7 +24,7 @@ class PatchDirectory(PatchObject):
         """
         yield {"description": f"Patching {self}"}
 
-        if self.patch.safe_eval(self.configuration["if"], {"extracted_game": extracted_game}) == "False": return
+        if self.patch.safe_eval(self.configuration["if"], env={"extracted_game": extracted_game}) != "True": return
 
         match self.configuration["mode"]:
             # if the mode is copy, then simply patch the subfile into the game with the same path
