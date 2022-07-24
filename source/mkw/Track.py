@@ -2,7 +2,7 @@ from typing import Generator
 
 from source.mkw import Tag, Slot
 from source.mkw.MKWColor import bmg_color_text
-from source.safe_eval import multiple_safe_eval
+
 
 ModConfig: any
 
