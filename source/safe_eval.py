@@ -78,7 +78,7 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
     Evaluate the template and return the result in a safe way
     :param env: variables to use when using eval
     :param template: template to evaluate
-    :param macros: additionnal macro to replace in the template
+    :param macros: additional macro to replace in the template
     """
     if env is None: env = {}
     if macros is None: macros = {}
