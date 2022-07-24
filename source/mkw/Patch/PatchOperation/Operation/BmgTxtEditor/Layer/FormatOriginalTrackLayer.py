@@ -29,11 +29,21 @@ class FormatOriginalTrackLayer(AbstractLayer):
             id = match.group("id")
             name = match.group("value")
 
-            if (id[0] == "T" and int(id[1]) <= 4) or (id[0] == "U" and int(id[1]) == 1): tag = "Wii"
-            # If the cup is in the 4 originals tracks cups, use the wii tags
-            # If the cup is in the originals arena cup, use the wii tags
-            # TODO: tag can't be fetch this way in the JAP version
-            else: tag, name = name.split(" ", 1)
+            retro_tags = {
+                "GCN": "GCN",
+                "GC": "GCN",  # japanese for GameCube
+                "DS": "DS",
+                "SNES": "SNES",
+                "SFC": "SNES",  # japanese for SNES
+                "N64": "N64",
+                "64": "N64",  # japanese for N64
+                "GBA": "GBA",
+            }
+            for game_tag, tag in retro_tags.items():
+                if name.startswith(game_tag):
+                    name = name.removeprefix(game_tag).strip()
+                    break
+            else: tag = "Wii"
 
             patched_name = Track(
                 name=name,
