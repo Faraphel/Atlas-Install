@@ -62,17 +62,17 @@ class Track:
             multiple=True
         )
 
-    def get_tag_template(self, templates: dict[str, str], default: any = None) -> any:
+    def get_tag_template(self, mod_config: "ModConfig", templates: dict[str, str], default: any = None) -> any:
         """
         Return the tag template found in templates. If not found, return default
+        :param mod_config: mod configuration
         :param templates: template with all the tags and its replacement
         :param default: default value if no tag template is found
         :return: formatted representation of the tag
         """
         for tag in filter(lambda tag: tag in templates, self.tags):
             template: str = templates[tag]
-            # TODO: this should try to use mod_config for save_eval
-            return multiple_safe_eval(template, env={"TAG": tag, "bmg_color_text": bmg_color_text})
+            return mod_config.safe_eval(template, env={"TAG": tag, "bmg_color_text": bmg_color_text}, multiple=True)
         return default
 
     def get_prefix(self, mod_config: "ModConfig", default: any = None) -> any:
@@ -82,7 +82,7 @@ class Track:
         :param mod_config: mod configuration
         :return: formatted representation of the track prefix
         """
-        return self.get_tag_template(mod_config.tags_prefix, default)
+        return self.get_tag_template(mod_config, mod_config.tags_prefix, default)
 
     def get_suffix(self, mod_config: "ModConfig", default: any = None) -> any:
         """
@@ -91,7 +91,7 @@ class Track:
         :param mod_config: mod configuration
         :return: formatted representation of the track suffix
         """
-        return self.get_tag_template(mod_config.tags_suffix, default)
+        return self.get_tag_template(mod_config, mod_config.tags_suffix, default)
 
     def is_highlight(self, mod_config: "ModConfig", default: any = None) -> bool:
         ...
