@@ -3,6 +3,9 @@ from PIL import ImageDraw, Image
 from source.mkw.Patch.PatchOperation.Operation.ImageEditor.Layer import *
 
 
+Patch: any
+
+
 class ColorLayer(AbstractLayer):
     """
     Represent a layer that fill a rectangle with a certain color on the image

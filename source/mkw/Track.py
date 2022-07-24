@@ -4,7 +4,6 @@ from source.mkw import Tag, Slot
 from source.mkw.MKWColor import bmg_color_text
 from source.safe_eval import multiple_safe_eval
 
-
 ModConfig: any
 
 
@@ -53,13 +52,14 @@ class Track:
         :return: formatted representation of the track
         """
 
-        return multiple_safe_eval(
+        return mod_config.safe_eval(
             template,
             env={
                 "track": self,
                 "prefix": self.get_prefix(mod_config, ""),
                 "suffix": self.get_suffix(mod_config, "")
-            }
+            },
+            multiple=True
         )
 
     def get_tag_template(self, templates: dict[str, str], default: any = None) -> any:
@@ -71,6 +71,7 @@ class Track:
         """
         for tag in filter(lambda tag: tag in templates, self.tags):
             template: str = templates[tag]
+            # TODO: this should try to use mod_config for save_eval
             return multiple_safe_eval(template, env={"TAG": tag, "bmg_color_text": bmg_color_text})
         return default
 

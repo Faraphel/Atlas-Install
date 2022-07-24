@@ -11,7 +11,7 @@ from source.mkw.Track import Track
 import json
 
 from source.mkw.OriginalTrack import OriginalTrack
-from source.safe_eval import safe_eval
+from source.safe_eval import safe_eval, multiple_safe_eval
 from source.wt.szs import SZSPath
 
 CT_ICON_SIZE: int = 128
@@ -104,6 +104,20 @@ class ModConfig:
             path=config_file,
             config_dict=json.loads(config_file.read_text(encoding="utf8")),
             macros=json.loads(macros_file.read_text(encoding="utf8")) if macros_file.exists() else None,
+        )
+
+    def safe_eval(self, template: str, multiple: bool = False, env: dict[str, any] = None) -> str:
+        """
+        Safe eval with a patch environment
+        :param multiple: should the expression be a multiple safe eval or a single safe eval
+        :param env: other variable that are allowed in the safe_eval
+        :param template: template to evaluate
+        :return: the result of the evaluation
+        """
+        return (multiple_safe_eval if multiple else safe_eval)(
+            template,
+            env={"mod_config": self} | (env if env is not None else {}),
+            macros=self.macros,
         )
 
     def get_mod_directory(self) -> Path:
