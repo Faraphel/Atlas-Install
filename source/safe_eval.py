@@ -17,11 +17,17 @@ common_token_map = {  # these operators and function are considered safe to use 
 }
 
 TOKEN_START, TOKEN_END = "{{", "}}"
+MACRO_START, MACRO_END = "##", "##"
 
 
 class TemplateParsingError(Exception):
     def __init__(self, token: str):
-        super().__init__(f"Invalid token while parsing track representation:\n{token}")
+        super().__init__(f"Invalid token while parsing safe_eval:\n{token}")
+
+
+class NotImplementedMacro(Exception):
+    def __init__(self, macro: str):
+        super().__init__(f"Invalid macro while parsing macros:\n{macro}")
 
 
 class SafeFunction:
@@ -51,14 +57,33 @@ class SafeFunction:
         return attr
 
 
-def safe_eval(template: str, env: dict[str, any] = None) -> str:
+def replace_macro(template: str, macros: dict[str, str]) -> str:
+    """
+    Replace all the macro defined in macro by their respective value
+    :param template: template where to replace the macro
+    :param macros: dictionary associating macro with their replacement
+    :return: the template with macro replaced
+    """
+
+    def format_macro(match: re.Match) -> str:
+        if (macro := macros.get(match.group(1).strip())) is None: raise NotImplementedMacro(macro)
+        return macro
+
+    # match everything between MACRO_START and MACRO_END.
+    return re.sub(rf"{MACRO_START}(.*?){MACRO_END}", format_macro, template)
+
+
+def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] = None) -> str:
     """
     Evaluate the template and return the result in a safe way
     :param env: variables to use when using eval
     :param template: template to evaluate
+    :param macros: additionnal macro to replace in the template
     """
     if env is None: env = {}
+    if macros is None: macros = {}
 
+    template = replace_macro(template, macros)
     token_map: dict[str, str] = common_token_map | {var: var for var in env}
     final_token: str = ""
 
@@ -111,7 +136,7 @@ def safe_eval(template: str, env: dict[str, any] = None) -> str:
     else: return final_token
 
 
-def multiple_safe_eval(template: str, env: dict[str, any] = None) -> str:
+def multiple_safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] = None) -> str:
     def format_part_template(match: re.Match) -> str:
         """
         when a token is found, replace it by the corresponding value
@@ -120,7 +145,7 @@ def multiple_safe_eval(template: str, env: dict[str, any] = None) -> str:
         """
         # get the token string without the brackets, then strip it. Also double antislash
         part_template = match.group(1).strip().replace("\\", "\\\\")
-        return safe_eval(part_template, env)
+        return safe_eval(part_template, env, macros)
 
     # pass everything between TOKEN_START and TOKEN_END in the function
     return re.sub(rf"{TOKEN_START}(.*?){TOKEN_END}", format_part_template, template)

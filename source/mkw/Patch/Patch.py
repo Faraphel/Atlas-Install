@@ -28,6 +28,7 @@ class Patch:
         return (multiple_safe_eval if multiple else safe_eval)(
             template,
             env={"mod_config": self.mod_config} | (env if env is not None else {}),
+            macros=self.mod_config.macros,
         )
 
     def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:
