@@ -1,0 +1,8 @@
+{
+  "installation_completed": {
+    "text": {
+      "fr": "TODO",
+      "en": "Thanks for downloading Mario Kart Wii Faraphel !\nIf You have an issue starting the game with Dolphin, try in Config > Advanced > Enable Emulated Memory Size Override and set MEM2 to 128Mo\n\nHave fun !"
+    }
+  }
+}

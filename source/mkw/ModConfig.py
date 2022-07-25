@@ -28,7 +28,7 @@ class ModConfig:
     __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
                  "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template",
-                 "multiplayer_disable_if", "macros")
+                 "multiplayer_disable_if", "macros", "messages")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, str] = None, tags_suffix: dict[Tag, str] = None,
@@ -36,10 +36,12 @@ class ModConfig:
                  default_track: "Track | TrackGroup" = None, tracks: list["Track | TrackGroup"] = None,
                  original_track_prefix: bool = None, swap_original_order: bool = None,
                  keep_original_track: bool = None, enable_random_cup: bool = None,
-                 track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict | None = None):
+                 track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
+                 messages: dict[str, dict[str, str]] = None):
 
         self.path = Path(path)
         self.macros: dict = macros if macros is not None else {}
+        self.messages: dict = messages if messages is not None else {}
 
         self.name: str = name
         self.nickname: str = nickname if nickname is not None else name
@@ -65,9 +67,10 @@ class ModConfig:
         return f"<ModConfig name={self.name} version={self.version}>"
 
     @classmethod
-    def from_dict(cls, path: Path | str, config_dict: dict, macros: dict | None) -> "ModConfig":
+    def from_dict(cls, path: Path | str, config_dict: dict, macros: dict, messages: dict) -> "ModConfig":
         """
         Create a ModConfig from a dict
+        :param messages: messages that can be shown to the user at some moment
         :param path: path of the mod_config.json
         :param config_dict: dict containing the configuration
         :param macros: macro that can be used for safe_eval
@@ -76,7 +79,7 @@ class ModConfig:
         kwargs = {
             attr: config_dict.get(attr)
             for attr in cls.__slots__
-            if attr not in ["name", "default_track", "_tracks", "tracks", "path", "macros"]
+            if attr not in ["name", "default_track", "_tracks", "tracks", "path", "macros", "messages"]
             # these keys are treated after or are reserved
         }
 
@@ -89,6 +92,7 @@ class ModConfig:
             default_track=Track.from_dict(config_dict.get("default_track", {})),
             tracks=[Track.from_dict(track) for track in config_dict.get("tracks", [])],
             macros=macros,
+            messages=messages,
         )
 
     @classmethod
@@ -100,11 +104,13 @@ class ModConfig:
         """
         config_file = Path(config_file)
         macros_file = config_file.parent / "macros.json"
+        messages_file = config_file.parent / "messages.json"
 
         return cls.from_dict(
             path=config_file,
             config_dict=json.loads(config_file.read_text(encoding="utf8")),
             macros=json.loads(macros_file.read_text(encoding="utf8")) if macros_file.exists() else None,
+            messages=json.loads(messages_file.read_text(encoding="utf8")) if messages_file.exists() else None,
         )
 
     def safe_eval(self, template: str, multiple: bool = False, env: dict[str, any] = None) -> str:
