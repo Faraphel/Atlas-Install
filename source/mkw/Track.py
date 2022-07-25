@@ -1,7 +1,6 @@
 from typing import Generator
 
 from source.mkw import Tag, Slot
-from source.mkw.MKWColor import bmg_color_text
 
 
 ModConfig: any
@@ -72,7 +71,7 @@ class Track:
         """
         for tag in filter(lambda tag: tag in templates, self.tags):
             template: str = templates[tag]
-            return mod_config.safe_eval(template, env={"TAG": tag, "bmg_color_text": bmg_color_text}, multiple=True)
+            return mod_config.safe_eval(template, env={"TAG": tag}, multiple=True)
         return default
 
     def get_prefix(self, mod_config: "ModConfig", default: any = None) -> any:

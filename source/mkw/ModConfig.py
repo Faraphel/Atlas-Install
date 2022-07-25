@@ -7,6 +7,7 @@ from PIL import Image
 from source import threaded
 from source.mkw import Tag
 from source.mkw.Cup import Cup
+from source.mkw.MKWColor import bmg_color_text
 from source.mkw.Track import Track
 import json
 
@@ -116,7 +117,7 @@ class ModConfig:
         """
         return (multiple_safe_eval if multiple else safe_eval)(
             template,
-            env={"mod_config": self} | (env if env is not None else {}),
+            env={"mod_config": self, "bmg_color_text": bmg_color_text} | (env if env is not None else {}),
             macros=self.macros,
         )
 
