@@ -132,7 +132,7 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
             raise TemplateParsingError(template)
 
     # if final_token is set, eval final_token and return the result
-    if final_token: return str(eval(final_token, SafeFunction.get_all_safe_methods(), env))
+    if final_token: return str(eval(final_token.replace("\\", "\\\\"), SafeFunction.get_all_safe_methods(), env))
     else: return final_token
 
 
@@ -144,7 +144,7 @@ def multiple_safe_eval(template: str, env: dict[str, any] = None, macros: dict[s
         :return: corresponding value
         """
         # get the token string without the brackets, then strip it. Also double antislash
-        part_template = match.group(1).strip().replace("\\", "\\\\")
+        part_template = match.group(1).strip()
         return safe_eval(part_template, env, macros)
 
     # pass everything between TOKEN_START and TOKEN_END in the function
