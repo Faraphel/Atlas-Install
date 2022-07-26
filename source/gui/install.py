@@ -413,14 +413,11 @@ class ButtonInstall(ttk.Button):
                 )
             )
 
-            # TODO: make this code more readable
-            message = mod_config.messages.get('installation_completed', {}).get('text', _('NO_MESSAGE_FROM_AUTHOR'))
-            if isinstance(message, str): message = {"_": message}
-            message = mod_config.safe_eval(
-                message[self.master.options["language"]]
-                if self.master.options["language"] in message else message["_"],
-                multiple=True
-            )
+            message_texts = mod_config.messages.get("installation_completed", {}).get("text", {})
+            message = message_texts.get(self.master.options["language"])
+            if message is None: message = message_texts.get("*")
+            if message is None: message = _('NO_MESSAGE_FROM_AUTHOR')
+            message = mod_config.safe_eval(message, multiple=True)
 
             messagebox.showinfo(
                 _("INSTALLATION_COMPLETED"),
