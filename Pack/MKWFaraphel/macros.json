@@ -1,7 +1,7 @@
 {
   "GAME_REGION": "str(getattr(getattr(getattr(extracted_game, 'original_game'), 'wit_path'), 'region'))",
 
-  "TRACK_TEXT_SCORE": "bmg_color_text(['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)], '\\x'+hex(65296+getattr(track, 'score'))[2:]) if hasattr(track, 'score') else ''",
+  "TRACK_TEXT_SCORE": "bmg_color_text(['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)], '\\x'+hex(65296+getattr(track, 'score'))[2:]+' ') if hasattr(track, 'score') else ''",
   "TRACK_TEXT_PREFIX": "(prefix+' ') if prefix else ''",
   "TRACK_TEXT_SUFFIX": "(' ('+suffix +')') if suffix else ''",
   "TRACK_TEXT_NAME": "getattr(track, 'name', '')",
