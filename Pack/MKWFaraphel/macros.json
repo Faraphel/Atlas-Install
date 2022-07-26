@@ -1,12 +1,12 @@
 {
   "GAME_REGION": "str(getattr(getattr(getattr(extracted_game, 'original_game'), 'wit_path'), 'region'))",
 
-  "TRACK_TEXT_SCORE": "('\\c{' + ['YOR2', 'YOR4', 'YOR6', 'blue1'][getattr(track, 'warning', 0)] +'}\\x'+hex(65296+getattr(track, 'score'))[2:]+'\\c{off} ') if hasattr(track, 'score') else ''",
+  "TRACK_TEXT_SCORE": "bmg_color_text(['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)], '\\x'+hex(65296+getattr(track, 'score'))[2:]) if hasattr(track, 'score') else ''",
   "TRACK_TEXT_PREFIX": "(prefix+' ') if prefix else ''",
   "TRACK_TEXT_SUFFIX": "(' ('+suffix +')') if suffix else ''",
   "TRACK_TEXT_NAME": "getattr(track, 'name', '')",
   "TRACK_TEXT_AUTHORS": "'\\n'.join(getattr(track, 'author')) if isinstance(getattr(track, 'author', ''), list) else getattr(track, 'author', '/')",
-  "TRACK_TEXT_WARNING_IF_DISABLED": "'\\c{red3}/\\c{off}' if getattr(track, 'warning', 0) != 0 else ''",
+  "TRACK_TEXT_WARNING_IF_DISABLED": "bmg_color_text('red', '/') if getattr(track, 'warning', 0) != 0 else ''",
 
   "IF_NO_WARNING": "if getattr(track, 'warning', 0) == 0 else ''"
 }
