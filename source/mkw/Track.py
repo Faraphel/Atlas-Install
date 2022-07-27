@@ -92,11 +92,13 @@ class Track:
         """
         return self.get_tag_template(mod_config, mod_config.tags_suffix, default)
 
-    def is_highlight(self, mod_config: "ModConfig", default: any = None) -> bool:
-        ...
-
-    def is_new(self, mod_config: "ModConfig", default: any = None) -> bool:
-        ...
+    def is_new(self, mod_config: "ModConfig") -> bool:
+        """
+        Return if the track should be considered as new for random selection
+        :param mod_config: mod configuration
+        :return: is the track new
+        """
+        return mod_config.safe_eval(mod_config.track_new_if, multiple=False, env={"track": self}) == "True"
 
     def get_ctfile(self, mod_config: "ModConfig", template: str, hidden: bool = False) -> str:
         """
@@ -110,7 +112,7 @@ class Track:
 
         return (
             f'{"H" if hidden else "T"} {self.music}; '  # track type
-            f'{self.special}; {(0x04 if hidden else 0) | (0x01 if self.is_new(mod_config, False) else 0):#04x}; '  # lecode flags
+            f'{self.special}; {(0x04 if hidden else 0) | (0x01 if self.is_new(mod_config) else 0):#04x}; '  # lecode flags
             f'{file_name}; '  # filename
             f'{name}; '  # name of the track in the menu
             f'{file_name}\n'  # unique identifier for each track
