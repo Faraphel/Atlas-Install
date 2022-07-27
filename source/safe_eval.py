@@ -5,14 +5,14 @@ common_token_map = {  # these operators and function are considered safe to use 
    operator: operator
    for operator in
    [">=", "<=", "<<", ">>", "+", "-", "*", "/", "%", "**", ",", "(", ")", "[", "]", "==", "!=", "in", ">", "<",
-    "and", "or", "&", "|", "^", "~", ":", "isinstance", "issubclass", "not", "is", "if", "else", "abs", "int",
+    "and", "or", "&", "|", "^", "~", ":", "{", "}", "isinstance", "issubclass", "not", "is", "if", "else", "abs", "int",
     "bin", "hex", "oct", "chr", "ord", "len", "str", "bool", "float", "round", "min", "max", "sum", "zip",
     "any", "all", "reversed", "enumerate", "list", "sorted", "hasattr", "for", "range", "type", "repr", "None",
-    "True", "False", "getattr"
+    "True", "False", "getattr", "dict"
     ]
 } | {  # these methods are considered safe, except for the magic methods
    f".{method}": f".{method}"
-   for method in dir(str) + dir(list) + dir(int) + dir(float)
+   for method in dir(str) + dir(list) + dir(int) + dir(float) + dir(dict)
    if not method.startswith("__")
 }
 
