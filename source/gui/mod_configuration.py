@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import ttk
 from source.translation import translate as _
+from source.gui.preview import track_formatting
 
 
 ModConfig: any
@@ -28,6 +29,11 @@ class FrameGlobalSettings(ttk.Frame):
         master.add(self, text=_("GLOBAL_MOD_SETTINGS"))
 
         # TODO: overwrite new tracks entry
+        button = ttk.Button(self, text="test search", command=self.open_test_button)
+        button.grid(row=1, column=1)
+
+    def open_test_button(self):
+        track_formatting.Window(self.master.master.mod_config)
 
 
 class FrameSpecificSettings(ttk.Frame):
