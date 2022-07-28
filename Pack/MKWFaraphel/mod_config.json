@@ -4,6 +4,21 @@
     "nickname": "MKWF",
     "variant": "60",
 
+    "settings": {
+        "mode": {
+            "type": "str",
+            "choices": [
+                "normal",
+                "debug"
+            ]
+        },
+        "highlight_if": {
+            "type": "str",
+            "safe_eval_preview": "track"
+        }
+    },
+    "track_new_if": "'Retro' not in getattr(track, 'tags', []) and getattr(track, 'warning', 0) == 0",
+
     "tags_prefix": {
         "MSRDS": "{{ bmg_color_text('green', TAG) }}",
         "CTR": "{{ bmg_color_text('orange', TAG) }}",

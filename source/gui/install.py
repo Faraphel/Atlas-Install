@@ -9,7 +9,7 @@ from tkinter import messagebox
 import webbrowser
 from typing import Generator
 
-from source.gui import better_gui_error, mystuff
+from source.gui import better_gui_error, mystuff, mod_configuration
 from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
 from source.option import Option
@@ -510,9 +510,15 @@ class ProgressBar(ttk.LabelFrame):
 
 
 # Combobox to select the pack
-class SelectPack(ttk.Combobox):
+class SelectPack(ttk.Frame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master)
+
+        self.combobox = ttk.Combobox(self)
+        self.combobox.grid(row=1, column=1)
+
+        self.button_settings = ttk.Button(self, text="...", width=2, command=self.open_mod_configuration)
+        self.button_settings.grid(row=1, column=2, sticky="NEWS")
 
         self.mod_config: ModConfig | None = None
         self.packs: list[Path] = []
@@ -520,7 +526,10 @@ class SelectPack(ttk.Combobox):
         self.refresh_packs()
         self.select(index=0)
 
-        self.bind("<<ComboboxSelected>>", lambda _: self.select())
+        self.combobox.bind("<<ComboboxSelected>>", lambda _: self.select())
+
+    def open_mod_configuration(self) -> None:
+        mod_configuration.Window(self.mod_config)
 
     def refresh_packs(self) -> None:
         """
@@ -533,7 +542,7 @@ class SelectPack(ttk.Combobox):
             if self.is_valid_pack(pack):
                 self.packs.append(pack)
 
-        self["values"] = [pack.name for pack in self.packs]
+        self.combobox["values"] = [pack.name for pack in self.packs]
 
     def select(self, index: int = None) -> None:
         """
@@ -541,10 +550,10 @@ class SelectPack(ttk.Combobox):
         :index: the index of the selection. If none, use the selected index
         :return:
         """
-        index = index if index is not None else self.current()
+        index = index if index is not None else self.combobox.current()
         pack = self.packs[index]
         self.set_path(pack)
-        self.set(pack.name)
+        self.combobox.set(pack.name)
 
     @better_gui_error
     def set_path(self, pack: Path) -> None:
@@ -573,5 +582,5 @@ class SelectPack(ttk.Combobox):
         :return:
         """
         match state:
-            case InstallerState.IDLE: self.config(state="readonly")
-            case InstallerState.INSTALLING: self.config(state="disabled")
+            case InstallerState.IDLE: self.combobox.config(state="readonly")
+            case InstallerState.INSTALLING: self.combobox.config(state="disabled")
