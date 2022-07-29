@@ -9,7 +9,7 @@ class MKWColor:
     Represent a color that can be used inside MKW files
     """
 
-    all_colors: list[dict] = [
+    _all_colors: list[dict] = [
         {"bmg": "yor7",   "hex": 0xF5090B, "name": "apple red"},
         {"bmg": "yor6",   "hex": 0xE82C09, "name": "dark red"},
         {"bmg": "yor5",   "hex": 0xE65118, "name": "dark orange"},  # flame
@@ -28,17 +28,31 @@ class MKWColor:
         {"bmg": "red1",   "hex": 0xE46C74, "name": "pink"},
         {"bmg": "white",  "hex": 0xFFFFFF, "name": "white"},
         {"bmg": "clear",  "hex": 0x000000, "name": "clear"},
-        {"bmg": "off",    "hex": 0x998C86, "name": "off"},
+        {"bmg": "off",    "hex": 0xDDDDDD, "name": "off"},
     ]
 
     __slots__ = ("bmg", "hex", "name")
 
     def __init__(self, color_data: any, color_key: str = "name"):
-        colors = list(filter(lambda color: color[color_key] == color_data, self.all_colors))
+        colors = list(filter(lambda color: color[color_key].upper() == color_data.upper(), self._all_colors))
         if len(colors) == 0: raise ColorNotFound(color_data)
 
         for key, value in colors[0].items():
             setattr(self, key, value)
+
+    @classmethod
+    def get_all_colors(cls):
+        for color in cls._all_colors:
+            yield cls(color["name"])
+
+    @property
+    def color_code(self) -> str:
+        """
+        Return the color code that can be used in tkinter
+        :return: the color code
+        """
+
+        return f"#{self.hex:06X}"
 
 
 def bmg_color_text(color_name: str, text: str) -> str:
