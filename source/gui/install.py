@@ -9,7 +9,7 @@ from tkinter import messagebox
 import webbrowser
 from typing import Generator
 
-from source.gui import better_gui_error, mystuff, mod_configuration
+from source.gui import better_gui_error, mystuff, mod_settings
 from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
 from source.option import Option
@@ -515,7 +515,7 @@ class SelectPack(ttk.Frame):
         super().__init__(master)
 
         self.combobox = ttk.Combobox(self)
-        self.combobox.grid(row=1, column=1)
+        self.combobox.grid(row=1, column=1, sticky="NEWS")
 
         self.button_settings = ttk.Button(self, text="...", width=2, command=self.open_mod_configuration)
         self.button_settings.grid(row=1, column=2, sticky="NEWS")
@@ -529,7 +529,7 @@ class SelectPack(ttk.Frame):
         self.combobox.bind("<<ComboboxSelected>>", lambda _: self.select())
 
     def open_mod_configuration(self) -> None:
-        mod_configuration.Window(self.mod_config)
+        mod_settings.Window(self.mod_config)
 
     def refresh_packs(self) -> None:
         """

@@ -6,15 +6,15 @@
 
     "settings": {
         "mode": {
-            "type": "str",
+            "type": "choices",
             "choices": [
                 "normal",
                 "debug"
             ]
         },
         "highlight_if": {
-            "type": "str",
-            "safe_eval_preview": "track"
+            "type": "string",
+            "preview": "track_formatting"
         }
     },
     "track_new_if": "'Retro' not in getattr(track, 'tags', []) and getattr(track, 'warning', 0) == 0",

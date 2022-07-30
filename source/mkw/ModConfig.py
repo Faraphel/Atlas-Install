@@ -8,6 +8,7 @@ from source import threaded
 from source.mkw import Tag
 from source.mkw.Cup import Cup
 from source.mkw.MKWColor import bmg_color_text
+from source.mkw.ModSettings import ModSettings
 from source.mkw.Track import Track
 import json
 
@@ -42,7 +43,7 @@ class ModConfig:
         self.path = Path(path)
         self.macros: dict = macros if macros is not None else {}
         self.messages: dict = messages if messages is not None else {}
-        self.settings: dict = settings if settings is not None else {}
+        self.settings: dict = ModSettings(settings if settings is not None else {})
 
         self.name: str = name
         self.nickname: str = nickname if nickname is not None else name

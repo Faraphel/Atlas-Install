@@ -8,16 +8,19 @@ ModConfig: any
 
 
 class Window(tkinter.Toplevel):
-    def __init__(self, mod_config: "ModConfig"):
+    def __init__(self, mod_config: "ModConfig", template: str = ""):
         super().__init__()
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(1, weight=1)
+        self.grab_set()
 
         self.mod_config = mod_config
 
-        self.entry_format_input = ttk.Entry(self, width=100)
-        self.entry_format_input.grid(row=1, column=1, columnspan=2, sticky="NEWS")
-        self.entry_format_input.bind("<Return>", self.preview)
+        self.stringvar_template_input = tkinter.StringVar(self.master)
+        self.entry_template_input = ttk.Entry(self, width=100, textvariable=self.stringvar_template_input)
+        self.entry_template_input.grid(row=1, column=1, columnspan=2, sticky="NEWS")
+        self.entry_template_input.insert(tkinter.END, template)
+        self.entry_template_input.bind("<Return>", self.preview)
 
         self.text_track_preview = tkinter.Text(self, background="black", foreground=MKWColor("off").color_code)
         self.text_track_preview.grid(row=2, column=1, sticky="NEWS")
@@ -31,6 +34,20 @@ class Window(tkinter.Toplevel):
             self.text_track_preview.tag_configure(color.bmg, foreground=color.color_code)
         self.text_track_preview.tag_configure("error", background="red", foreground="white")
 
+    @classmethod
+    def ask_for_template(cls, variable=None, *args, **kwargs) -> str:
+        """
+        prompt the user for a template. Return the final template typed by the user
+        :entry: entry widget wwhere the final template can be inserted
+        :return: final template entered by the user
+        """
+        window = cls(*args, **kwargs)
+        window.wait_window()
+
+        result = window.stringvar_template_input.get()
+        if variable is not None: variable.set(result)
+        return result
+
     def preview(self, event: tkinter.Event = None):
         """
         Preview all the tracks name with the track format
@@ -42,7 +59,7 @@ class Window(tkinter.Toplevel):
         for track in self.mod_config.get_tracks():
             try:
                 track_repr = track.repr_format(
-                    self.mod_config, self.entry_format_input.get()
+                    self.mod_config, self.entry_template_input.get()
                 )
 
                 offset: int = 0  # the color tag is removed at every sub, so keep track of the offset
@@ -77,3 +94,4 @@ class Window(tkinter.Toplevel):
                 formatted_exc = str(exc).replace('\n', ' ')
                 self.text_track_preview.insert(tkinter.END, f"< Error: {formatted_exc} >\n")
                 self.text_track_preview.tag_add("error", "end-1c-1l", "end-1c")
+

@@ -8,7 +8,7 @@ Patch: any
 
 class Special(AbstractOperation):
     """
-    use a file defined as special in the patch to replate the current file content
+    use a file defined as special in the patch to replace the current file content
     """
 
     type = "special"
