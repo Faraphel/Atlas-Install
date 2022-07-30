@@ -22,7 +22,9 @@ class Window(tkinter.Toplevel):
         self.entry_template_input.insert(tkinter.END, template)
         self.entry_template_input.bind("<Return>", self.preview)
 
-        self.text_track_preview = tkinter.Text(self, background="black", foreground=MKWColor("off").color_code)
+        self.text_track_preview = tkinter.Text(
+            self, background="black", foreground=MKWColor("off").color_code, state=tkinter.DISABLED
+        )
         self.text_track_preview.grid(row=2, column=1, sticky="NEWS")
 
         self.scrollbar_track_preview = ttk.Scrollbar(self, command=self.text_track_preview.yview)
@@ -53,6 +55,7 @@ class Window(tkinter.Toplevel):
         Preview all the tracks name with the track format
         :return:
         """
+        self.text_track_preview.configure(state=tkinter.NORMAL)
         self.text_track_preview.delete(1.0, tkinter.END)
 
         # insert all the tracks representation
@@ -94,4 +97,6 @@ class Window(tkinter.Toplevel):
                 formatted_exc = str(exc).replace('\n', ' ')
                 self.text_track_preview.insert(tkinter.END, f"< Error: {formatted_exc} >\n")
                 self.text_track_preview.tag_add("error", "end-1c-1l", "end-1c")
+
+        self.text_track_preview.configure(state=tkinter.DISABLED)
 
