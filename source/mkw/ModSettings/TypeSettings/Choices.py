@@ -11,13 +11,16 @@ class Choices(AbstractTypeSettings):
 
     type = "choices"
 
-    def __init__(self, choices: list[str], value: str = None):
+    def __init__(self, choices: list[str], value: str = None, enabled: bool = False):
         self.value = value if value is not None else choices[0]
+        self.enabled = enabled
         self.choices = choices
 
-    def tkinter_show(self, master) -> None:
-        variable = tkinter.StringVar(master, value=self.value)
-        variable.trace_add("write", lambda *_: setattr(self, "value", variable.get()))
+    def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
+        super().tkinter_show(master, checkbox)
 
-        combobox = ttk.Combobox(master, width=100, values=self.choices, textvariable=variable)
-        combobox.grid(row=1, column=1)
+        value_variable = tkinter.StringVar(master, value=self.value)
+        value_variable.trace_add("write", lambda *_: setattr(self, "value", value_variable.get()))
+
+        combobox = ttk.Combobox(master, values=self.choices, textvariable=value_variable)
+        combobox.grid(row=1, column=1, sticky="NEWS")

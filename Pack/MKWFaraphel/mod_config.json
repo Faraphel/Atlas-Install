@@ -4,7 +4,7 @@
     "nickname": "MKWF",
     "variant": "60",
 
-    "settings": {
+    "specific_settings": {
         "mode": {
             "type": "choices",
             "choices": [

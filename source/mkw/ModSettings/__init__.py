@@ -24,19 +24,3 @@ class ModSettings:
             else: raise InvalidSettingsType(settings_name)
 
         return settings
-
-
-
-example_settings = {
-    "mode": {
-        "type": "choices",
-        "choices": [
-            "normal",
-            "debug"
-        ]
-    },
-    "highlight_if": {
-        "type": "str",
-        "preview": "track_formatting"
-    }
-}

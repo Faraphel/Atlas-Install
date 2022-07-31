@@ -3,23 +3,27 @@ from tkinter import ttk
 import re
 
 from source.mkw.MKWColor import MKWColor
+from source.gui.preview import AbstractPreviewWindow
+
 
 ModConfig: any
 
 
-class Window(tkinter.Toplevel):
-    def __init__(self, mod_config: "ModConfig", template: str = ""):
-        super().__init__()
+class Window(AbstractPreviewWindow):
+
+    name = "track_formatting"
+
+    def __init__(self, mod_config: "ModConfig", template_variable: tkinter.StringVar = None):
+        super().__init__(mod_config, template_variable)
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(1, weight=1)
         self.grab_set()
 
+        if template_variable is None: template_variable = tkinter.StringVar()
         self.mod_config = mod_config
 
-        self.stringvar_template_input = tkinter.StringVar(self.master)
-        self.entry_template_input = ttk.Entry(self, width=100, textvariable=self.stringvar_template_input)
+        self.entry_template_input = ttk.Entry(self, width=100, textvariable=template_variable)
         self.entry_template_input.grid(row=1, column=1, columnspan=2, sticky="NEWS")
-        self.entry_template_input.insert(tkinter.END, template)
         self.entry_template_input.bind("<Return>", self.preview)
 
         self.text_track_preview = tkinter.Text(
@@ -35,20 +39,6 @@ class Window(tkinter.Toplevel):
         for color in MKWColor.get_all_colors():
             self.text_track_preview.tag_configure(color.bmg, foreground=color.color_code)
         self.text_track_preview.tag_configure("error", background="red", foreground="white")
-
-    @classmethod
-    def ask_for_template(cls, variable=None, *args, **kwargs) -> str:
-        """
-        prompt the user for a template. Return the final template typed by the user
-        :entry: entry widget wwhere the final template can be inserted
-        :return: final template entered by the user
-        """
-        window = cls(*args, **kwargs)
-        window.wait_window()
-
-        result = window.stringvar_template_input.get()
-        if variable is not None: variable.set(result)
-        return result
 
     def preview(self, event: tkinter.Event = None):
         """

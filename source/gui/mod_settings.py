@@ -30,22 +30,14 @@ class FrameGlobalSettings(ttk.Frame):
         super().__init__(master)
         master.add(self, text=_("GLOBAL_MOD_SETTINGS"))
 
-        self.checkbutton_override_random_new = ttk.Checkbutton(self, text=_("OVERRIDE_RANDOM_NEW"))
-        self.frame_override_random_new = ttk.LabelFrame(self, labelwidget=self.checkbutton_override_random_new)
-        self.frame_override_random_new.grid(row=1, column=1, sticky="NEWS")
+        self.columnconfigure(1, weight=1)
 
-        variable = tkinter.StringVar(self)
-        variable.trace_add("write", lambda *_: setattr(self, "value", variable.get()))
-        self.entry_override_random_new_cup = ttk.Entry(self.frame_override_random_new, width=70, textvariable=variable)
-        self.entry_override_random_new_cup.grid(row=1, column=1, sticky="NEWS")
+        for index, (settings_name, settings_data) in enumerate(self.master.master.mod_config.global_settings.items()):
+            checkbox = ttk.Checkbutton(self, text=settings_name)
+            frame = ttk.LabelFrame(self, labelwidget=checkbox)
+            frame.grid(row=index, column=1, sticky="NEWS")
 
-        self.button_preview_override_random_new = ttk.Button(self.frame_override_random_new, text="...", width=3)
-        self.button_preview_override_random_new.configure(command=lambda: track_formatting.Window.ask_for_template(
-            mod_config=self.master.master.mod_config,
-            variable=variable,
-            template=self.entry_override_random_new_cup.get(),
-        ))
-        self.button_preview_override_random_new.grid(row=1, column=2, sticky="NEWS")
+            settings_data.tkinter_show(frame, checkbox)
 
 
 class FrameSpecificSettings(ttk.Frame):
@@ -53,8 +45,11 @@ class FrameSpecificSettings(ttk.Frame):
         super().__init__(master)
         master.add(self, text=_("SPECIFIC_MOD_SETTINGS"))
 
-        for index, (settings_name, settings_data) in enumerate(self.master.master.mod_config.settings.items()):
-            frame = ttk.LabelFrame(self, text=settings_name)
+        self.columnconfigure(1, weight=1)
+
+        for index, (settings_name, settings_data) in enumerate(self.master.master.mod_config.specific_settings.items()):
+            checkbox = ttk.Checkbutton(self, text=settings_name)
+            frame = ttk.LabelFrame(self, labelwidget=checkbox)
             frame.grid(row=index, column=1, sticky="NEWS")
 
-            settings_data.tkinter_show(frame)
+            settings_data.tkinter_show(frame, checkbox)

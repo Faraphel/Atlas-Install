@@ -22,14 +22,35 @@ CT_ICON_SIZE: int = 128
 Thread: any
 
 
-# representation of the configuration of a mod
+global_settings = {
+    "override_random_new": {
+        "type": "string",
+        "preview": "track_selecting"
+    },
+    "remove_track_if": {
+        "type": "string",
+        "preview": "track_selecting"
+    },
+    "sort_track_by": {
+        "type": "choices",
+        "choices": [
+            "test1",
+            "test2",
+            "test3"
+        ]
+    }
+}
 
 
 class ModConfig:
+    """
+    Representation of a mod
+    """
+
     __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
                  "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template",
-                 "multiplayer_disable_if", "track_new_if", "macros", "messages", "settings")
+                 "multiplayer_disable_if", "track_new_if", "macros", "messages", "global_settings", "specific_settings")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_prefix: dict[Tag, str] = None, tags_suffix: dict[Tag, str] = None,
@@ -38,12 +59,14 @@ class ModConfig:
                  swap_original_order: bool = None, keep_original_track: bool = None, enable_random_cup: bool = None,
                  track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
                  track_new_if: str = None, messages: dict[str, dict[str, str]] = None,
-                 settings: dict[str, dict[str, str]] = None):
+                 specific_settings: dict[str, dict[str, str]] = None):
 
         self.path = Path(path)
         self.macros: dict = macros if macros is not None else {}
         self.messages: dict = messages if messages is not None else {}
-        self.settings: dict = ModSettings(settings if settings is not None else {})
+
+        self.global_settings: dict = ModSettings(global_settings)
+        self.specific_settings: dict = ModSettings(specific_settings if specific_settings is not None else {})
 
         self.name: str = name
         self.nickname: str = nickname if nickname is not None else name
@@ -82,7 +105,8 @@ class ModConfig:
         kwargs = {
             attr: config_dict.get(attr)
             for attr in cls.__slots__
-            if attr not in ["name", "default_track", "_tracks", "tracks", "path", "macros", "messages"]
+            if attr not in ["name", "default_track", "_tracks", "tracks", "path", "macros", "messages",
+                            "global_settings"]
             # these keys are treated after or are reserved
         }
 
