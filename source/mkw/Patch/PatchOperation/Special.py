@@ -1,12 +1,12 @@
 from typing import IO
 
-from source.mkw.Patch.PatchOperation.Operation import *
+from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
 
 Patch: any
 
 
-class Special(AbstractOperation):
+class Special(AbstractPatchOperation):
     """
     use a file defined as special in the patch to replace the current file content
     """

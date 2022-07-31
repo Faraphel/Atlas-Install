@@ -2,7 +2,7 @@ from io import BytesIO
 from typing import Generator, IO
 
 from source.mkw.Patch import *
-from source.mkw.Patch.PatchOperation import PatchOperation
+from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.mkw.Patch.PatchObject import PatchObject
 from source.wt.szs import SZSPath
 
@@ -55,7 +55,7 @@ class PatchFile(PatchObject):
         for operation_name, operation in self.configuration.get("operation", {}).items():
             # process every operation and get the new patch_path (if the name is changed)
             # and the new content of the patch
-            patch_name, patch_content = PatchOperation(operation_name)(**operation).patch(
+            patch_name, patch_content = AbstractPatchOperation.get(operation_name)(**operation).patch(
                 self.patch, patch_name, patch_content
             )
 

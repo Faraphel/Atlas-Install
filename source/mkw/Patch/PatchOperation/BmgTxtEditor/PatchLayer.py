@@ -1,5 +1,6 @@
-from source.mkw.Patch.PatchOperation.Operation.BmgTxtEditor.Layer import *
+from source.mkw.Patch.PatchOperation.BmgTxtEditor import AbstractLayer
 from source.wt import bmg
+
 
 Patch: any
 

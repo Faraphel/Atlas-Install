@@ -1,18 +1,39 @@
 from source.mkw.Patch import *
-from source.mkw.Patch.PatchOperation.Operation import *
+from abc import ABC, abstractmethod
+from typing import IO, Type
+
+Patch: any
+Layer: any
 
 
-class PatchOperation:
+class AbstractPatchOperation(ABC):
     """
-    Represent an operation that can be applied onto a patch to modify it before installing
+    An AbstractPatchOperation representing any PatchOperation that can be used on one of the game files
     """
 
-    def __new__(cls, name) -> "Operation":
+    mode: str  # name of the operation
+
+    @abstractmethod
+    def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+        """
+        patch a file and return the new file_path (if changed) and the new content of the file
+        """
+
+    @classmethod
+    def get(cls, name: str) -> Type["AbstractPatchOperation"]:
         """
         Return an operation from its name
+        :name: name of the operation
         :return: an Operation from its name
         """
 
-        for subclass in filter(lambda subclass: subclass.type == name, AbstractOperation.__subclasses__()):
+        for subclass in filter(lambda subclass: subclass.type == name, cls.__subclasses__()):
             return subclass
         raise InvalidPatchOperation(name)
+
+
+#  load all the subclass of AbstractPatchOperation to that __subclasses__ can filter them
+from source.mkw.Patch.PatchOperation import (
+    ImageDecoder, ImageEncoder, Rename, Special, StrEditor,
+    BmgTxtEditor, ImageEditor, BmgEncoder, BmgDecoder
+)

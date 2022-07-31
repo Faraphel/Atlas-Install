@@ -1,9 +1,10 @@
 import tkinter
 from tkinter import ttk
-from source.mkw.ModSettings.TypeSettings import AbstractTypeSettings
+
+from source.mkw.ModSettings import AbstractModSettings
 
 
-class Choices(AbstractTypeSettings):
+class Choices(AbstractModSettings):
     """
     This setting type allow you to input a string text.
     You can optionally add a "preview" to allow the user to use a window to select the value.

@@ -1,11 +1,11 @@
 import tkinter
 from tkinter import ttk
 
-from source.mkw.ModSettings.TypeSettings import AbstractTypeSettings
-from source.gui.preview import get_preview_window_class
+from source.mkw.ModSettings import AbstractModSettings
+from source.gui.preview import AbstractPreviewWindow
 
 
-class String(AbstractTypeSettings):
+class String(AbstractModSettings):
     """
     This setting type allow you to input a string text.
     You can optionally add a "preview" to allow the user to use a window to select the value.
@@ -30,7 +30,7 @@ class String(AbstractTypeSettings):
         if self.preview is not None:
             button = ttk.Button(
                 master, text="...", width=3,
-                command=lambda: get_preview_window_class(
+                command=lambda: AbstractPreviewWindow.get(
                     self.preview
                 )(master.master.master.master.mod_config, value_variable)
             )

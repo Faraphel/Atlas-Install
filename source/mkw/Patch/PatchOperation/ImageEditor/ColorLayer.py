@@ -1,6 +1,6 @@
 from PIL import ImageDraw, Image
 
-from source.mkw.Patch.PatchOperation.Operation.ImageEditor.Layer import *
+from source.mkw.Patch.PatchOperation.ImageEditor import AbstractLayer
 
 
 Patch: any

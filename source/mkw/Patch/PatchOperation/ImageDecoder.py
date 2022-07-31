@@ -1,14 +1,14 @@
 from io import BytesIO
 from typing import IO
 
-from source.mkw.Patch.PatchOperation.Operation import *
+from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.wt import img
 
 
 Patch: any
 
 
-class ImageDecoder(AbstractOperation):
+class ImageDecoder(AbstractPatchOperation):
     """
     decode a game image to a image file
     """

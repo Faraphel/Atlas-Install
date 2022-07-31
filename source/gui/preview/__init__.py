@@ -23,16 +23,16 @@ class AbstractPreviewWindow(tkinter.Toplevel, ABC):
         super().__init__()
         ...
 
-
-def get_preview_window_class(name: str) -> Type[AbstractPreviewWindow]:
-    """
-    Return the windows class object from its name
-    :param name: name of the window class
-    :return: the window class object
-    """
-    for window_class in filter(lambda cls: cls.name == name, AbstractPreviewWindow.__subclasses__()):
-        return window_class
-    raise InvalidPreviewWindowName(name)
+    @classmethod
+    def get(cls, name: str) -> Type["AbstractPreviewWindow"]:
+        """
+        Return the windows class object from its name
+        :param name: name of the window class
+        :return: the window class object
+        """
+        for subclass in filter(lambda subclass: subclass.name == name, cls.__subclasses__()):
+            return subclass
+        raise InvalidPreviewWindowName(name)
 
 
 from source.gui.preview import track_formatting, track_selecting

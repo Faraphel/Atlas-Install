@@ -1,12 +1,12 @@
 from io import BytesIO
 from typing import IO
 
-from source.mkw.Patch.PatchOperation.Operation import *
+from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.mkw.Patch import *
 from source.wt import wstrt
 
 
-class StrEditor(AbstractOperation):
+class StrEditor(AbstractPatchOperation):
     """
     patch the main.dol file
     """

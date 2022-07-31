@@ -1,12 +1,12 @@
 from typing import IO
 
-from source.mkw.Patch.PatchOperation.Operation import *
+from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
 
 Patch: any
 
 
-class Rename(AbstractOperation):
+class Rename(AbstractPatchOperation):
     """
     Rename the output file
     """

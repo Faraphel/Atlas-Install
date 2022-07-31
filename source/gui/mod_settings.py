@@ -1,7 +1,6 @@
 import tkinter
 from tkinter import ttk
 from source.translation import translate as _
-from source.gui.preview import track_formatting
 
 
 ModConfig: any

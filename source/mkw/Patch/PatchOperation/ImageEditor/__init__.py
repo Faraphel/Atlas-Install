@@ -1,8 +1,13 @@
+from io import BytesIO
+from typing import IO
 from abc import abstractmethod, ABC
-
 from PIL import Image
 
+from source.mkw.Patch import *
+from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
+
+Layer: any
 Patch: any
 
 
@@ -58,6 +63,42 @@ class AbstractLayer(ABC):
         Patch an image with the actual layer. Return the new image.
         """
 
+    @classmethod
+    def get(cls, layer: dict) -> "Layer":
+        """
+        return the correct type of layer corresponding to the layer mode
+        :param layer: the layer to load
+        """
+        for subclass in filter(lambda subclass: subclass.type == layer["type"], cls.__subclasses__()):
+            layer.pop("type")
+            return subclass(**layer)
+        raise InvalidImageLayerType(layer["type"])
 
-from source.mkw.Patch.PatchOperation.Operation.ImageEditor.Layer import ColorLayer, ImageLayer, TextLayer
-__all__ = ["AbstractLayer", "ColorLayer", "ImageLayer", "TextLayer"]
+
+class ImageGenerator(AbstractPatchOperation):
+    """
+    generate a new image based on a file and apply a generator on it
+    """
+
+    type = "img-edit"
+
+    def __init__(self, layers: list[dict]):
+        self.layers: list["Layer"] = [AbstractLayer.get(layer) for layer in layers]
+
+    def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
+        image = Image.open(file_content).convert("RGBA")
+
+        for layer in self.layers:
+            image = layer.patch_image(patch, image)
+
+        patch_content = BytesIO()
+        image.save(patch_content, format="PNG")
+        patch_content.seek(0)
+
+        return file_name, patch_content
+
+
+# Load the class so that __subclasses__ can find them
+from source.mkw.Patch.PatchOperation.ImageEditor import (
+    ColorLayer, ImageLayer, TextLayer
+)
