@@ -23,4 +23,4 @@ class Choices(AbstractTypeSettings):
         value_variable.trace_add("write", lambda *_: setattr(self, "value", value_variable.get()))
 
         combobox = ttk.Combobox(master, values=self.choices, textvariable=value_variable)
-        combobox.grid(row=1, column=1, sticky="NEWS")
+        combobox.grid(row=1, column=1, sticky="EW")

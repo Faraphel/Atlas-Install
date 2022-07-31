@@ -25,7 +25,7 @@ class String(AbstractTypeSettings):
         value_variable.trace_add("write", lambda *_: setattr(self, "value", value_variable.get()))
 
         entry = ttk.Entry(master, textvariable=value_variable)
-        entry.grid(row=1, column=1, sticky="NEWS")
+        entry.grid(row=1, column=1, sticky="EW")
 
         if self.preview is not None:
             button = ttk.Button(
@@ -34,4 +34,4 @@ class String(AbstractTypeSettings):
                     self.preview
                 )(master.master.master.master.mod_config, value_variable)
             )
-            button.grid(row=1, column=2, sticky="NEWS")
+            button.grid(row=1, column=2, sticky="EW")
