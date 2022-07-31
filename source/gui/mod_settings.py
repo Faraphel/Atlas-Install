@@ -5,6 +5,7 @@ from source.gui.preview import track_formatting
 
 
 ModConfig: any
+AbstractModSettings: any
 
 
 class Window(tkinter.Toplevel):
@@ -21,33 +22,32 @@ class Window(tkinter.Toplevel):
         self.panel_window = ttk.Notebook(self)
         self.panel_window.grid(row=1, column=1, sticky="NEWS")
 
-        self.frame_global_settings = FrameGlobalSettings(self.panel_window)
-        self.frame_specific_settings = FrameSpecificSettings(self.panel_window)
+        self.frame_global_settings = FrameSettings(
+            self.panel_window,
+            _("GLOBAL_MOD_SETTINGS"),
+            self.mod_config.global_settings
+        )
+        self.frame_specific_settings = FrameSettings(
+            self.panel_window,
+            _("SPECIFIC_MOD_SETTINGS"),
+            self.mod_config.specific_settings
+        )
 
 
-class FrameGlobalSettings(ttk.Frame):
-    def __init__(self, master: ttk.Notebook):
+class FrameSettings(ttk.Frame):
+    def __init__(self, master: ttk.Notebook, text: str, settings: dict[str, "AbstractModSettings"]):
+        """
+        Create a frame where settings will be displayed
+        :param master: master window
+        :param text: text of the frame (shown in the notebook)
+        :param settings: dictionary with the settings to show
+        """
         super().__init__(master)
-        master.add(self, text=_("GLOBAL_MOD_SETTINGS"))
+        master.add(self, text=text)
 
         self.columnconfigure(1, weight=1)
 
-        for index, (settings_name, settings_data) in enumerate(self.master.master.mod_config.global_settings.items()):
-            checkbox = ttk.Checkbutton(self, text=settings_name)
-            frame = ttk.LabelFrame(self, labelwidget=checkbox)
-            frame.grid(row=index, column=1, sticky="NEWS")
-
-            settings_data.tkinter_show(frame, checkbox)
-
-
-class FrameSpecificSettings(ttk.Frame):
-    def __init__(self, master: ttk.Notebook):
-        super().__init__(master)
-        master.add(self, text=_("SPECIFIC_MOD_SETTINGS"))
-
-        self.columnconfigure(1, weight=1)
-
-        for index, (settings_name, settings_data) in enumerate(self.master.master.mod_config.specific_settings.items()):
+        for index, (settings_name, settings_data) in enumerate(settings.items()):
             checkbox = ttk.Checkbutton(self, text=settings_name)
             frame = ttk.LabelFrame(self, labelwidget=checkbox)
             frame.grid(row=index, column=1, sticky="NEWS")
