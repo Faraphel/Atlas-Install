@@ -1,1 +1,10 @@
 site_name: MKWF-Install
+
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - python
+
+nav:
+    - Home: "index.md"
