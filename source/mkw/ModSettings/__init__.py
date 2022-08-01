@@ -14,12 +14,20 @@ class AbstractModSettings(ABC):
     """
 
     type: str  # type name of the settings
-    value: str  # value for the settings
     enabled: bool  # is the settings enabled
+    _value: str  # value for the settings
 
     @abstractmethod
     def __init__(self, value: str = None, preview: str = None, enabled: bool = False):
         ...
+
+    @property
+    def value(self) -> "any | None":
+        """
+        If the option is enabled, return the value, else return None
+        :return:
+        """
+        return self._value if self.enabled else None
 
     @abstractmethod
     def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:

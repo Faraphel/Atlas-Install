@@ -13,15 +13,15 @@ class Choices(AbstractModSettings):
     type = "choices"
 
     def __init__(self, choices: list[str], value: str = None, enabled: bool = False):
-        self.value = value if value is not None else choices[0]
+        self._value = value if value is not None else choices[0]
         self.enabled = enabled
         self.choices = choices
 
     def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
         super().tkinter_show(master, checkbox)
 
-        value_variable = tkinter.StringVar(master, value=self.value)
-        value_variable.trace_add("write", lambda *_: setattr(self, "value", value_variable.get()))
+        value_variable = tkinter.StringVar(master, value=self._value)
+        value_variable.trace_add("write", lambda *_: setattr(self, "_value", value_variable.get()))
 
         combobox = ttk.Combobox(master, values=self.choices, textvariable=value_variable)
         combobox.grid(row=1, column=1, sticky="EW")

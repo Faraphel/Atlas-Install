@@ -12,6 +12,11 @@ from source.wt.wstrt import StrPath
 Game: any
 
 
+class PathOutsideMod(Exception):
+    def __init__(self, forbidden_path: Path, allowed_range: Path):
+        super().__init__(f"Error : path {forbidden_path} outside of allowed range {allowed_range}")
+
+
 class ExtractedGame:
     """
     Class that represents an extracted game
@@ -116,12 +121,15 @@ class ExtractedGame:
         ct_file = (cache_directory / "ctfile.lpar")
         ct_file.write_text(mod_config.get_ctfile(template="-"))
 
-        # TODO: the lpar file should be customizable
+        lpar_dir: Path = mod_config.path.parent / "_LPAR/"
+        lpar: Path = lpar_dir / mod_config.safe_eval(mod_config.lpar_template, multiple=True)
+        if not lpar.is_relative_to(lpar_dir): raise PathOutsideMod(lpar, lpar_dir)
+
         for lecode_file in (self.path / "files/rel/").glob("lecode-*.bin"):
             lec.patch(
                 lecode_file=lecode_file,
                 ct_file=ct_file,
-                lpar=mod_config.path.parent / "_LPAR/normal.lpar",
+                lpar=lpar,
                 game_tracks_directory=self.path / "files/Race/Course/",
                 copy_tracks_directories=[cache_directory / "original-tracks/", cache_directory / "custom-tracks/"]
             )

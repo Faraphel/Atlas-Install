@@ -18,6 +18,7 @@
         }
     },
     "track_new_if": "'Retro' not in getattr(track, 'tags', []) and getattr(track, 'warning', 0) == 0",
+    "lpar_template": "{{ ## SETTINGS_MODE ## if ## SETTINGS_MODE ## is not None else 'normal' }}.lpar",
 
     "tags_prefix": {
         "MSRDS": "{{ bmg_color_text('green', TAG) }}",

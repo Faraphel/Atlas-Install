@@ -14,15 +14,15 @@ class String(AbstractModSettings):
     type = "string"
 
     def __init__(self, value: str = None, preview: str = None, enabled: bool = False):
-        self.value: str = value if value is not None else ""
+        self._value: str = value if value is not None else ""
         self.enabled = enabled
         self.preview: str | None = preview
 
     def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
         super().tkinter_show(master, checkbox)
 
-        value_variable = tkinter.StringVar(master, value=self.value)
-        value_variable.trace_add("write", lambda *_: setattr(self, "value", value_variable.get()))
+        value_variable = tkinter.StringVar(master, value=self._value)
+        value_variable.trace_add("write", lambda *_: setattr(self, "_value", value_variable.get()))
 
         entry = ttk.Entry(master, textvariable=value_variable)
         entry.grid(row=1, column=1, sticky="EW")

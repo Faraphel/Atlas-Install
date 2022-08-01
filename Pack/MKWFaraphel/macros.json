@@ -8,5 +8,7 @@
   "TRACK_TEXT_AUTHORS": "'\\n'.join(getattr(track, 'author')) if isinstance(getattr(track, 'author', ''), list) else getattr(track, 'author', '/')",
   "TRACK_TEXT_WARNING_IF_DISABLED": "bmg_color_text('red', '/') if getattr(track, 'warning', 0) != 0 else ''",
 
+  "SETTINGS_MODE": "getattr(getattr(mod_config, 'specific_settings')['mode'], 'value')",
+
   "IF_NO_WARNING": "if getattr(track, 'warning', 0) == 0 else ''"
 }
