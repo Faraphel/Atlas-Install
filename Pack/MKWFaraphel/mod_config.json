@@ -6,6 +6,10 @@
 
     "specific_settings": {
         "mode": {
+            "text": {
+                "en": "Mode",
+                "fr": "Mode"
+            },
             "type": "choices",
             "choices": [
                 "normal",
@@ -13,6 +17,10 @@
             ]
         },
         "highlight_if": {
+            "text": {
+                "en": "Highlight if",
+                "fr": "Surligner si"
+            },
             "type": "string",
             "preview": "track_formatting"
         }

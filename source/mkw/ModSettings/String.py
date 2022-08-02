@@ -13,8 +13,9 @@ class String(AbstractModSettings):
 
     type = "string"
 
-    def __init__(self, value: str = None, preview: str = None, enabled: bool = False):
+    def __init__(self, value: str = None, preview: str = None, enabled: bool = False, text: dict[str] = None):
         self._value: str = value if value is not None else ""
+        self.text = text if text is not None else {}
         self.enabled = enabled
         self.preview: str | None = preview
 

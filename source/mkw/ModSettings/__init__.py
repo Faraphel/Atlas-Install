@@ -14,12 +14,9 @@ class AbstractModSettings(ABC):
     """
 
     type: str  # type name of the settings
+    text: dict[str]  # text to display in the settings window depending on the language
     enabled: bool  # is the settings enabled
     _value: str  # value for the settings
-
-    @abstractmethod
-    def __init__(self, value: str = None, preview: str = None, enabled: bool = False):
-        ...
 
     @property
     def value(self) -> "any | None":

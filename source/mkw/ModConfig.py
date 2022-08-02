@@ -23,15 +23,27 @@ Thread: any
 
 
 global_settings = {
-    "override_random_new": {
+    "force_random_new": {
+        "text": {
+            "en": "Force random new tracks",
+            "fr": "Forcer les courses aléatoires nouvelle"
+        },
         "type": "string",
         "preview": "track_selecting"
     },
     "remove_track_if": {
+        "text": {
+            "en": "Remove track if",
+            "fr": "Retirer la course si"
+        },
         "type": "string",
         "preview": "track_selecting"
     },
-    "sort_track_by": {
+    "sort_tracks_by": {
+        "text": {
+            "en": "Sort tracks by",
+            "fr": "Trier les courses par"
+        },
         "type": "choices",
         "choices": [
             "test1",

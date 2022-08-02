@@ -10,6 +10,7 @@ AbstractModSettings: any
 class Window(tkinter.Toplevel):
     def __init__(self, mod_config: "ModConfig"):
         super().__init__()
+        self.root = self.master.root
         self.resizable(False, False)
         self.grab_set()
 
@@ -18,7 +19,7 @@ class Window(tkinter.Toplevel):
 
         self.mod_config = mod_config
 
-        self.panel_window = ttk.Notebook(self)
+        self.panel_window = NotebookSettings(self)
         self.panel_window.grid(row=1, column=1, sticky="NEWS")
 
         self.frame_global_settings = FrameSettings(
@@ -33,8 +34,14 @@ class Window(tkinter.Toplevel):
         )
 
 
+class NotebookSettings(ttk.Notebook):
+    def __init__(self, master):
+        super().__init__(master)
+        self.root = self.master.root
+
+
 class FrameSettings(ttk.Frame):
-    def __init__(self, master: ttk.Notebook, text: str, settings: dict[str, "AbstractModSettings"]):
+    def __init__(self, master, text: str, settings: dict[str, "AbstractModSettings"]):
         """
         Create a frame where settings will be displayed
         :param master: master window
@@ -43,11 +50,16 @@ class FrameSettings(ttk.Frame):
         """
         super().__init__(master)
         master.add(self, text=text)
+        self.root = self.master.root
 
         self.columnconfigure(1, weight=1)
 
         for index, (settings_name, settings_data) in enumerate(settings.items()):
-            checkbox = ttk.Checkbutton(self, text=settings_name)
+            text = settings_data.text.get(self.root.options["language"])
+            if text is None: text = settings_data.text.get("*")
+            if text is None: text = settings_name
+
+            checkbox = ttk.Checkbutton(self, text=text)
             frame = ttk.LabelFrame(self, labelwidget=checkbox)
             frame.grid(row=index, column=1, sticky="NEWS")
 

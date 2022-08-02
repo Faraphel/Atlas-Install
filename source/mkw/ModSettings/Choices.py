@@ -12,8 +12,9 @@ class Choices(AbstractModSettings):
 
     type = "choices"
 
-    def __init__(self, choices: list[str], value: str = None, enabled: bool = False):
+    def __init__(self, choices: list[str], value: str = None, enabled: bool = False, text: dict[str] = None):
         self._value = value if value is not None else choices[0]
+        self.text = text if text is not None else {}
         self.enabled = enabled
         self.choices = choices
 
