@@ -13,12 +13,14 @@ class Window(tkinter.Toplevel):
 
     def __init__(self):
         super().__init__()
+        self.root = self.master.root
+        
         self.title(_("CONFIGURE_MYSTUFF_PATCH"))
         self.resizable(False, False)
         self.grab_set()  # the others window will be disabled, keeping only this one activated
 
         self.disabled_text: str = _("<", "DISABLED", ">")
-        self.master.options["mystuff_pack_selected"] = self.master.options["mystuff_pack_selected"]
+        self.root.options["mystuff_pack_selected"] = self.root.options["mystuff_pack_selected"]
 
         self.frame_profile = ttk.Frame(self)
         self.frame_profile.grid(row=1, column=1, sticky="NEWS")
@@ -79,11 +81,11 @@ class Window(tkinter.Toplevel):
         Refresh all the profile
         """
 
-        combobox_values = [self.disabled_text, *self.master.options["mystuff_packs"]]
+        combobox_values = [self.disabled_text, *self.root.options["mystuff_packs"]]
         self.combobox_profile.configure(values=combobox_values)
         self.combobox_profile.current(combobox_values.index(
-            self.master.options["mystuff_pack_selected"]
-            if self.master.options["mystuff_pack_selected"] in self.master.options["mystuff_packs"] else
+            self.root.options["mystuff_pack_selected"]
+            if self.root.options["mystuff_pack_selected"] in self.root.options["mystuff_packs"] else
             self.disabled_text
         ))
 
@@ -91,18 +93,20 @@ class Window(tkinter.Toplevel):
         """
         Select another profile
         """
-
+        
         profile_name = self.combobox_profile.get() if profile_name is None else profile_name
+        if not profile_name in self.root.options["mystuff_packs"]: profile_name = self.disabled_text
+        
         self.combobox_profile.set(profile_name)
-        self.master.options["mystuff_pack_selected"] = profile_name
+        self.root.options["mystuff_pack_selected"] = profile_name
         self.listbox_mystuff_paths.delete(0, tkinter.END)
 
-        is_disabled = (profile_name == self.disabled_text)
+        is_disabled: bool = (profile_name == self.disabled_text)
         for children in self.frame_mystuff_paths_action.children.values():
             children.configure(state=tkinter.DISABLED if is_disabled else tkinter.NORMAL)
         if is_disabled: return
 
-        profile_data = self.master.options["mystuff_packs"][profile_name]
+        profile_data = self.root.options["mystuff_packs"][profile_name]
 
         for path in profile_data["paths"]:
             self.listbox_mystuff_paths.insert(tkinter.END, path)
@@ -111,8 +115,9 @@ class Window(tkinter.Toplevel):
         """
         Save the new profile
         """
+        
         profile_name: str = self.combobox_profile.get()
-        if profile_name in self.master.options["mystuff_packs"]:
+        if profile_name in self.root.options["mystuff_packs"]:
             messagebox.showerror(_("ERROR"), _("MYSTUFF_PROFILE_ALREADY_EXIST"))
             return
 
@@ -121,7 +126,7 @@ class Window(tkinter.Toplevel):
                 messagebox.showerror(_("ERROR"), _("MYSTUFF_PROFILE_FORBIDDEN_NAME"))
                 return
 
-        self.master.options["mystuff_packs"][profile_name] = {"paths": []}
+        self.root.options["mystuff_packs"][profile_name] = {"paths": []}
         self.refresh_profiles()
         self.select_profile(profile_name=profile_name)
 
@@ -129,9 +134,9 @@ class Window(tkinter.Toplevel):
         """
         Delete the currently selected profile
         """
-        profile_name: str = self.combobox_profile.get()
-        self.master.options["mystuff_packs"][self.master.options["mystuff_pack_selected"]].pop(profile_name)
-
+        
+        self.root.options["mystuff_packs"].pop(self.root.options["mystuff_pack_selected"])
+        self.refresh_profiles()
         self.select_profile()
 
     def add_mystuff_path(self) -> None:
@@ -142,7 +147,7 @@ class Window(tkinter.Toplevel):
         if (mystuff_path := filedialog.askdirectory(title=_("SELECT_MYSTUFF"), mustexist=True)) is None: return
         mystuff_path = Path(mystuff_path)
 
-        self.master.options["mystuff_packs"][self.master.options["mystuff_pack_selected"]]["paths"].append(
+        self.root.options["mystuff_packs"][self.root.options["mystuff_pack_selected"]]["paths"].append(
             str(mystuff_path.resolve())
         )
 
@@ -151,12 +156,12 @@ class Window(tkinter.Toplevel):
     def remove_mystuff_path(self) -> None:
         """
         Remove the selected MyStuff path from the profile
-        :return:
         """
+        
         selections = self.listbox_mystuff_paths.curselection()
         if not selections: return
 
         for selection in selections:
-            self.master.options["mystuff_packs"][self.master.options["mystuff_pack_selected"]]["paths"].pop(selection)
+            self.root.options["mystuff_packs"][self.root.options["mystuff_pack_selected"]]["paths"].pop(selection)
 
         self.select_profile()

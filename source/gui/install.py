@@ -40,6 +40,7 @@ class InstallerState(enum.Enum):
 class Window(tkinter.Tk):
     def __init__(self, options: Option):
         super().__init__()
+        self.root = self
 
         self.options: Option = options
 
@@ -140,6 +141,7 @@ class Window(tkinter.Tk):
 class Menu(tkinter.Menu):
     def __init__(self, master):
         super().__init__(master)
+        self.root = master.root
 
         self.language = self.Language(self)
         self.advanced = self.Advanced(self)
@@ -149,12 +151,14 @@ class Menu(tkinter.Menu):
     class Language(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
+            self.root = master.root
+        
             master.add_cascade(label=_("LANGUAGE_SELECTION"), menu=self)
 
-            self.variable = tkinter.StringVar(value=self.master.master.options["language"])
+            self.variable = tkinter.StringVar(value=self.root.options["language"])
 
             def callback(file: Path):
-                def func(): self.master.master.options["language"] = file.stem
+                def func(): self.root.options["language"] = file.stem
                 return func
 
             for file in Path("./assets/language/").iterdir():
@@ -170,6 +174,7 @@ class Menu(tkinter.Menu):
     class Advanced(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
+            self.root = master.root
 
             master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
             self.add_command(label=_("OPEN_MYSTUFF_WINDOW"), command= mystuff.Window)
@@ -179,12 +184,14 @@ class Menu(tkinter.Menu):
         class ThreadsUsed(tkinter.Menu):
             def __init__(self, master: tkinter.Menu):
                 super().__init__(master, tearoff=False)
+                self.root = master.root
+                
                 master.add_cascade(label=_("THREADS_USED"), menu=self)
 
-                self.variable = tkinter.IntVar(value=master.master.master.options["threads"])
+                self.variable = tkinter.IntVar(value=self.root.options["threads"])
 
                 def callback(threads_amount: int):
-                    def func(): self.master.master.master.options["threads"] = threads_amount
+                    def func(): self.root.options["threads"] = threads_amount
                     return func
 
                 for i in [1, 2, 4, 8, 12, 16]:
@@ -199,6 +206,7 @@ class Menu(tkinter.Menu):
     class Help(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
+            self.root = master.root
 
             master.add_cascade(label="Help", menu=self)
             self.menu_id = self.master.index(tkinter.END)
@@ -234,6 +242,8 @@ class Menu(tkinter.Menu):
 class SourceGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Original Game File")
+        self.root = master.root
+        
         self.columnconfigure(1, weight=1)
 
         self.entry = ttk.Entry(self, width=55)
@@ -268,7 +278,7 @@ class SourceGame(ttk.LabelFrame):
         self.entry.insert(0, str(path.absolute()))
 
         if path.suffix == ".dol": path = path.parent.parent
-        self.master.destination_game.set_path(path.parent)
+        self.root.destination_game.set_path(path.parent)
 
     def get_path(self) -> Path:
         """
@@ -295,6 +305,8 @@ class SourceGame(ttk.LabelFrame):
 class DestinationGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Game Directory Destination")
+        self.root = master.root
+        
         self.columnconfigure(1, weight=1)
 
         self.entry = ttk.Entry(self)
@@ -361,21 +373,22 @@ class DestinationGame(ttk.LabelFrame):
 class ButtonInstall(ttk.Button):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master, text="Install", command=self.install)
+        self.root = master.root
 
     @threaded
     @better_gui_error
     def install(self):
         try:
-            self.master.set_state(InstallerState.INSTALLING)
+            self.root.set_state(InstallerState.INSTALLING)
 
             # check if the user entered a source path
-            source_path = self.master.get_source_path()
+            source_path = self.root.get_source_path()
             if str(source_path) == ".":
                 messagebox.showerror(_("ERROR"), _("ERROR_INVALID_SOURCE_GAME"))
                 return
 
             # check if the user entered a destination path
-            destination_path = self.master.get_destination_path()
+            destination_path = self.root.get_destination_path()
             if str(destination_path) == ".":
                 messagebox.showerror(_("ERROR"), _("ERROR_INVALID_DESTINATION_GAME"))
                 return
@@ -391,20 +404,20 @@ class ButtonInstall(ttk.Button):
                     return
 
             game = Game(source_path)
-            mod_config = self.master.get_mod_config()
-            output_type = self.master.get_output_type()
+            mod_config = self.root.get_mod_config()
+            output_type = self.root.get_output_type()
 
-            self.master.progress_function(
+            self.root.progress_function(
                 game.install_mod(
                     dest=destination_path,
                     mod_config=mod_config,
                     output_type=output_type,
-                    options=self.master.options
+                    options=self.root.options
                 )
             )
 
             message_texts = mod_config.messages.get("installation_completed", {}).get("text", {})
-            message = message_texts.get(self.master.options["language"])
+            message = message_texts.get(self.root.options["language"])
             if message is None: message = message_texts.get("*")
             if message is None: message = _('NO_MESSAGE_FROM_AUTHOR')
             message = mod_config.safe_eval(message, multiple=True)
@@ -415,7 +428,7 @@ class ButtonInstall(ttk.Button):
             )
 
         finally:
-            self.master.set_state(InstallerState.IDLE)
+            self.root.set_state(InstallerState.IDLE)
 
     def set_state(self, state: InstallerState) -> None:
         """
@@ -432,6 +445,7 @@ class ButtonInstall(ttk.Button):
 class ProgressBar(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master)
+        self.root = master.root
 
         # make the element fill the whole frame
         self.columnconfigure(1, weight=1)
@@ -503,6 +517,7 @@ class ProgressBar(ttk.LabelFrame):
 class SelectPack(ttk.Frame):
     def __init__(self, master: tkinter.Tk):
         super().__init__(master)
+        self.root = master.root
 
         self.combobox = ttk.Combobox(self)
         self.combobox.grid(row=1, column=1, sticky="NEWS")
