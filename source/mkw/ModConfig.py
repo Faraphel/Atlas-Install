@@ -96,6 +96,9 @@ class ModConfig:
     def __repr__(self):
         return f"<ModConfig name={self.name} version={self.version}>"
 
+    def __str__(self):
+        return f"{self.name} {self.version}"
+
     @classmethod
     def from_dict(cls, path: Path | str, config_dict: dict, macros: dict, messages: dict) -> "ModConfig":
         """

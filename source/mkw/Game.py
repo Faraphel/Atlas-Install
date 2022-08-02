@@ -103,7 +103,7 @@ class Game:
 
         cache_autoadd_directory = cache_directory / "autoadd/"
         cache_ogtracks_directory = cache_directory / "original-tracks/"
-        cache_cttracks_directory = cache_directory / f"custom-tracks/"
+        cache_cttracks_directory = cache_directory / f"custom-tracks/{mod_config}/"
 
         # get the directory where the game will be extracted
         extracted_game = ExtractedGame(self.get_output_directory(dest, mod_config), self)
