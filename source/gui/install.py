@@ -142,7 +142,6 @@ class Menu(tkinter.Menu):
         super().__init__(master)
 
         self.language = self.Language(self)
-        self.track_configuration = self.TrackConfiguration(self)
         self.advanced = self.Advanced(self)
         self.help = self.Help(self)
 
@@ -167,21 +166,12 @@ class Menu(tkinter.Menu):
                     command=callback(file)
                 )
 
-    # Track configuration menu
-    class TrackConfiguration(tkinter.Menu):
-        def __init__(self, master: tkinter.Menu):
-            super().__init__(master, tearoff=False)
-
-            master.add_cascade(label=_("TRACK_FILTER"), menu=self)
-            self.add_command(label="Change filter")
-
     # Advanced menu
     class Advanced(tkinter.Menu):
         def __init__(self, master: tkinter.Menu):
             super().__init__(master, tearoff=False)
 
             master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
-            self.add_command(label=_("DEBUG_MODE"))
             self.add_command(label=_("OPEN_MYSTUFF_WINDOW"), command= mystuff.Window)
 
             self.threads_used = self.ThreadsUsed(self)
@@ -391,7 +381,7 @@ class ButtonInstall(ttk.Button):
                 return
 
             # if there is no more space on the installer drive, show a warning
-            if shutil.disk_usage(".").free < minimum_space_available:
+            if shutil.disk_usage("../../../../Downloads").free < minimum_space_available:
                 if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
                     return
 
