@@ -26,27 +26,27 @@ class Window(AbstractPreviewWindow):
         self.entry_template_input.grid(row=1, column=1, columnspan=2, sticky="NEWS")
         self.entry_template_input.bind("<Return>", self.preview)
 
-        self.text_track_preview = tkinter.Text(
+        self.text_track_format = tkinter.Text(
             self, background="black", foreground=MKWColor("off").color_code, state=tkinter.DISABLED
         )
-        self.text_track_preview.grid(row=2, column=1, sticky="NEWS")
+        self.text_track_format.grid(row=2, column=1, sticky="NEWS")
 
-        self.scrollbar_track_preview = ttk.Scrollbar(self, command=self.text_track_preview.yview)
+        self.scrollbar_track_preview = ttk.Scrollbar(self, command=self.text_track_format.yview)
         self.scrollbar_track_preview.grid(row=2, column=2, sticky="NEWS")
 
-        self.text_track_preview.configure(yscrollcommand=self.scrollbar_track_preview.set)
+        self.text_track_format.configure(yscrollcommand=self.scrollbar_track_preview.set)
 
         for color in MKWColor.get_all_colors():
-            self.text_track_preview.tag_configure(color.bmg, foreground=color.color_code)
-        self.text_track_preview.tag_configure("error", background="red", foreground="white")
-
+            self.text_track_format.tag_configure(color.bmg, foreground=color.color_code)
+        self.text_track_format.tag_configure("error", background="red", foreground="white")
+    
     def preview(self, event: tkinter.Event = None):
         """
         Preview all the tracks name with the track format
         :return:
         """
-        self.text_track_preview.configure(state=tkinter.NORMAL)
-        self.text_track_preview.delete(1.0, tkinter.END)
+        self.text_track_format.configure(state=tkinter.NORMAL)
+        self.text_track_format.delete(1.0, tkinter.END)
 
         # insert all the tracks representation
         for track in self.mod_config.get_tracks():
@@ -70,14 +70,14 @@ class Window(AbstractPreviewWindow):
                     return ""  # remove the tag
 
                 # insert into the text the track_repr without the tags
-                self.text_track_preview.insert(
+                self.text_track_format.insert(
                     tkinter.END,
                     re.sub(r"\\c{(?P<color_name>.*?)}", tag_format, track_repr) + "\n"
                 )
 
                 # color every part of the track_repr with the position and color got in the re.sub
                 for (pos_start, tag_start), (pos_end, tag_end) in zip(tags, tags[1:] + [(None, None)]):
-                    self.text_track_preview.tag_add(
+                    self.text_track_format.tag_add(
                         tag_start,
                         f"end-1c-1l+{pos_start}c",
                         "end-1c" + (f"-1l+{pos_end}c" if pos_end is not None else "")
@@ -85,8 +85,8 @@ class Window(AbstractPreviewWindow):
 
             except Exception as exc:
                 formatted_exc = str(exc).replace('\n', ' ')
-                self.text_track_preview.insert(tkinter.END, f"< Error: {formatted_exc} >\n")
-                self.text_track_preview.tag_add("error", "end-1c-1l", "end-1c")
+                self.text_track_format.insert(tkinter.END, f"< Error: {formatted_exc} >\n")
+                self.text_track_format.tag_add("error", "end-1c-1l", "end-1c")
 
-        self.text_track_preview.configure(state=tkinter.DISABLED)
+        self.text_track_format.configure(state=tkinter.DISABLED)
 
