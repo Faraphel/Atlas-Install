@@ -56,6 +56,14 @@ class SafeFunction:
         if callable(attr): raise AttributeError(f"getattr can't be used for functions (tried: {attr})")
         return attr
 
+    @staticmethod
+    def type(obj: any) -> any:
+        """
+        Safe type, can only be used to determinate the type of an object
+        (It can be used to create new class by using all the 3 args)
+        """
+        return type(obj)
+
 
 def replace_macro(template: str, macros: dict[str, str]) -> str:
     """
