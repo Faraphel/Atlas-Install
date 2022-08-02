@@ -1,9 +1,8 @@
 import json
-import sys
 from pathlib import Path
 
 
-self = sys.modules[__name__]
+self = __import__(__name__)
 self._language_data = {}
 
 

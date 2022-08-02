@@ -1,9 +1,5 @@
 import tkinter
-import sys
-
-
-# get the main window from the main module
-window = sys.modules["__main__"].window
+from __main__ import window
 
 # get the install button from the main window
 window.button_install.config(text="installation plugins")
