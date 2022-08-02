@@ -394,7 +394,7 @@ class ButtonInstall(ttk.Button):
                 return
 
             # if there is no more space on the installer drive, show a warning
-            if shutil.disk_usage("../../../../Downloads").free < minimum_space_available:
+            if shutil.disk_usage(".").free < minimum_space_available:
                 if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
                     return
 
