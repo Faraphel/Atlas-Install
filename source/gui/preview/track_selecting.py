@@ -65,7 +65,7 @@ class Window(AbstractPreviewWindow):
         self.text_track_format.delete(1.0, tkinter.END)
 
         # insert all the tracks representation
-        for track in self.mod_config.get_tracks():
+        for track in self.mod_config.get_all_tracks(ignore_filter=True):
             self.text_track_format.insert(tkinter.END, f"{track}\n")
 
         self.text_track_format.configure(state=tkinter.DISABLED)
@@ -78,7 +78,7 @@ class Window(AbstractPreviewWindow):
         self.text_track_select.configure(state=tkinter.NORMAL)
         self.text_track_select.delete(1.0, tkinter.END)
 
-        for track in self.mod_config.get_tracks():
+        for track in self.mod_config.get_all_tracks(ignore_filter=True):
             value = self.mod_config.safe_eval(self.entry_template_input.get(), env={"track": track}) == "True"
             self.text_track_select.insert(tkinter.END, f"{value}\n")
             self.text_track_select.tag_add(str(value), "end-1c-1l", "end-1c")

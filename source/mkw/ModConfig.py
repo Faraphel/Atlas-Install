@@ -31,10 +31,10 @@ global_settings = {
         "type": "string",
         "preview": "track_selecting"
     },
-    "remove_track_if": {
+    "include_track_if": {
         "text": {
-            "en": "Remove track if",
-            "fr": "Retirer la course si"
+            "en": "Include track if",
+            "fr": "Inclure la course si"
         },
         "type": "string",
         "preview": "track_selecting"
@@ -180,27 +180,43 @@ class ModConfig:
         """
         return self.path.parent
 
-    def get_tracks(self) -> Generator["Track", None, None]:
+    def get_all_tracks(self, *args, **kwargs) -> Generator["Track", None, None]:
         """
-        Get all the track elements
-        :return: track elements
+        Same as get_tracks, but track group are divided into subtracks
         """
-        for track in self._tracks:
+
+        for track in self.get_tracks(*args, **kwargs):
             yield from track.get_tracks()
+
+    def get_tracks(self, ignore_filter: bool = False) -> Generator["Track | TrackGroup", None, None]:
+        """
+        Get all the tracks or tracks groups elements
+        :ignore_filter: should the tracks filter be ignored
+        :return: track or tracks groups elements
+        """
+
+        filter_template: str | None = self.global_settings["include_track_if"].value if not ignore_filter else None
+
+        # Go though all the tracks and filter them if enabled
+        for track in filter(
+            lambda track: True if filter_template is None else
+            self.safe_eval(filter_template, env={"track": track}) == "True",
+            self._tracks
+        ):
+            yield track
 
     def get_ordered_cups(self) -> Generator["Cup", None, None]:
         """
         Get all the cups with cup tags
         :return: cups with cup tags
         """
-        # use self._tracks instead of self._get_tracks() because we want the TrackGroup
         # for track that have a tag in self.tags_cups
         for tag_cup in self.tags_cups:
             track_buffer: "Track | TrackGroup" = []
             current_tag_name, current_tag_count = tag_cup, 0
 
             # every four 4 tracks, create a cup
-            for track in filter(lambda track: tag_cup in getattr(track, "tags", []), self._tracks):
+            for track in filter(lambda track: tag_cup in getattr(track, "tags", []), self.get_tracks()):
                 track_buffer.append(track)
 
                 if len(track_buffer) > 4:
@@ -222,7 +238,7 @@ class ModConfig:
         track_buffer: "Track | TrackGroup" = []
         for track in filter(
             lambda track: not any(item in getattr(track, "tags", []) for item in self.tags_cups),
-            self._tracks
+            self.get_tracks()
         ):
             track_buffer.append(track)
 
@@ -355,7 +371,7 @@ class ModConfig:
 
         track_directory = self.path.parent / "_TRACKS"
 
-        for track in self.get_tracks():
+        for track in self.get_all_tracks():
             track_file: Path = next(
                 track_directory.rglob(f"{track.repr_format(self, self.track_file_template)}.*")
             )

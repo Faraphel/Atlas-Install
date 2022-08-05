@@ -2,7 +2,6 @@ from typing import Generator
 
 from source.mkw import Tag, Slot
 
-
 ModConfig: any
 
 
@@ -98,7 +97,11 @@ class Track:
         :param mod_config: mod configuration
         :return: is the track new
         """
-        return mod_config.safe_eval(mod_config.track_new_if, multiple=False, env={"track": self}) == "True"
+
+        # if the random new have been forced in the settings, use it instead of the default one
+        template: str = mod_config.global_settings["force_random_new"].value
+        if template is None: template = mod_config.track_new_if
+        return mod_config.safe_eval(template, multiple=False, env={"track": self}) == "True"
 
     def get_ctfile(self, mod_config: "ModConfig", template: str, hidden: bool = False) -> str:
         """
