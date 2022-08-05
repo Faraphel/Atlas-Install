@@ -5,7 +5,7 @@ common_token_map = {  # these operators and function are considered safe to use 
    operator: operator
    for operator in
    [">=", "<=", "<<", ">>", "+", "-", "*", "/", "%", "**", ",", "(", ")", "[", "]", "==", "!=", "in", ">", "<",
-    "and", "or", "&", "|", "^", "~", ":", "{", "}", "isinstance", "issubclass", "not", "is", "if", "else", "abs", "int",
+    "and", "or", "&", "|", "^", "~", ":", "{", "}", "abs", "int",
     "bin", "hex", "oct", "chr", "ord", "len", "str", "bool", "float", "round", "min", "max", "sum", "zip",
     "any", "all", "reversed", "enumerate", "list", "sorted", "hasattr", "for", "range", "type", "repr", "None",
     "True", "False", "getattr", "dict"
