@@ -108,14 +108,19 @@ class ExtractedGame:
             szs.create(extracted_szs, extracted_szs.with_suffix(".szs"), overwrite=True)
             shutil.rmtree(str(extracted_szs.resolve()))
 
-    def patch_lecode(self, mod_config: ModConfig, cache_directory: Path | str) -> Generator[dict, None, None]:
+    def patch_lecode(self, mod_config: ModConfig, cache_directory: Path | str,
+                     cttracks_directory: Path | str, ogtracks_directory: Path | str) -> Generator[dict, None, None]:
         """
         install lecode on the mod
+        :param cttracks_directory: directory to the customs tracks
+        :param ogtracks_directory: directory to the originals tracks
         :param cache_directory: Path to the cache
         :param mod_config: mod configuration
         """
         yield {"description": "Patching LECODE.bin"}
         cache_directory = Path(cache_directory)
+        cttracks_directory = Path(cttracks_directory)
+        ogtracks_directory = Path(ogtracks_directory)
 
         # write ctfile data to a file in the cache
         ct_file = (cache_directory / "ctfile.lpar")
@@ -131,7 +136,7 @@ class ExtractedGame:
                 ct_file=ct_file,
                 lpar=lpar,
                 game_tracks_directory=self.path / "files/Race/Course/",
-                copy_tracks_directories=[cache_directory / "original-tracks/", cache_directory / "custom-tracks/"]
+                copy_tracks_directories=[ogtracks_directory, cttracks_directory]
             )
 
     def install_all_patch(self, mod_config: ModConfig) -> Generator[dict, None, None]:
