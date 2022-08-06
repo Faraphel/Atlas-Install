@@ -86,7 +86,7 @@ class ExtractedGame:
         ct_icons = BytesIO()
         mod_config.get_full_cticon().save(ct_icons, format="PNG")
         ct_icons.seek(0)
-        self._special_file["ct_icon"] = ct_icons
+        self._special_file["ct_icons"] = ct_icons
 
     def prepare_dol(self) -> Generator[dict, None, None]:
         """
