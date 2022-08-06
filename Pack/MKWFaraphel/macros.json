@@ -1,14 +1,14 @@
 {
-  "GAME_REGION": "str(getattr(getattr(getattr(extracted_game, 'original_game'), 'wit_path'), 'region'))",
+  "GAME_REGION": "str(extracted_game.original_game.wit_path.region)",
 
-  "TRACK_TEXT_SCORE": "bmg_color_text(['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)], '\\x'+hex(65296+getattr(track, 'score'))[2:]+' ') if hasattr(track, 'score') else ''",
-  "TRACK_TEXT_PREFIX": "(prefix+' ') if prefix else ''",
-  "TRACK_TEXT_SUFFIX": "(' ('+suffix +')') if suffix else ''",
+  "TRACK_TEXT_SCORE": "bmg_color_text(['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)], f'\\\\x{65296+track.score:x} ') if hasattr(track, 'score') else ''",
+  "TRACK_TEXT_PREFIX": "f'{prefix} ' if prefix else ''",
+  "TRACK_TEXT_SUFFIX": "f' ({suffix})' if suffix else ''",
   "TRACK_TEXT_NAME": "getattr(track, 'name', '')",
-  "TRACK_TEXT_AUTHORS": "'\\n'.join(getattr(track, 'author')) if isinstance(getattr(track, 'author', ''), list) else getattr(track, 'author', '/')",
+  "TRACK_TEXT_AUTHORS": "'\\\\n'.join(author) if isinstance(author := getattr(track, 'author', '/'), list) else author",
   "TRACK_TEXT_WARNING_IF_DISABLED": "bmg_color_text('red', '/') if getattr(track, 'warning', 0) != 0 else ''",
 
-  "SETTINGS_MODE": "getattr(getattr(mod_config, 'specific_settings')['mode'], 'value')",
+  "SETTINGS_MODE": "mod_config.specific_settings['mode'].value",
 
   "IF_NO_WARNING": "if getattr(track, 'warning', 0) == 0 else ''"
 }

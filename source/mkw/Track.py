@@ -50,14 +50,13 @@ class Track:
         :return: formatted representation of the track
         """
 
-        return mod_config.safe_eval(
+        return mod_config.multiple_safe_eval(
             template,
             env={
                 "track": self,
                 "prefix": self.get_prefix(mod_config, ""),
                 "suffix": self.get_suffix(mod_config, "")
             },
-            multiple=True
         )
 
     def get_tag_template(self, mod_config: "ModConfig", templates: dict[str, str], default: any = None) -> any:
@@ -70,7 +69,7 @@ class Track:
         """
         for tag in filter(lambda tag: tag in templates, self.tags):
             template: str = templates[tag]
-            return mod_config.safe_eval(template, env={"TAG": tag}, multiple=True)
+            return mod_config.multiple_safe_eval(template, env={"tag": tag})
         return default
 
     def get_prefix(self, mod_config: "ModConfig", default: any = None) -> any:
@@ -101,7 +100,8 @@ class Track:
         # if the random new have been forced in the settings, use it instead of the default one
         template: str = mod_config.global_settings["force_random_new"].value
         if template is None: template = mod_config.track_new_if
-        return mod_config.safe_eval(template, multiple=False, env={"track": self}) == "True"
+
+        return mod_config.safe_eval(template, env={"track": self}) is True
 
     def get_ctfile(self, mod_config: "ModConfig", template: str, hidden: bool = False) -> str:
         """

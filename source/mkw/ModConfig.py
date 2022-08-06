@@ -1,6 +1,6 @@
 import shutil
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Callable
 
 from PIL import Image
 
@@ -159,19 +159,32 @@ class ModConfig:
             messages=json.loads(messages_file.read_text(encoding="utf8")) if messages_file.exists() else None,
         )
 
-    def safe_eval(self, template: str, multiple: bool = False, env: dict[str, any] = None) -> str:
+    def get_safe_eval_env(self, base_env: dict[str, any] = None) -> dict[str, any]:
         """
-        Safe eval with a patch environment
-        :param multiple: should the expression be a multiple safe eval or a single safe eval
-        :param env: other variable that are allowed in the safe_eval
-        :param template: template to evaluate
+        Return the env for the modconfig safe_eval function
+        :param base_env: additional environment
+        :return: the modconfig environment
+        """
+        return {
+            "mod_config": self,
+            "bmg_color_text": bmg_color_text
+        } | (
+            base_env if base_env is not None else {}
+        )
+
+    def safe_eval(self, *args, env: dict[str, any] = None, **kwargs) -> any:
+        """
+        Safe eval with useful modconfig environment
         :return: the result of the evaluation
         """
-        return (multiple_safe_eval if multiple else safe_eval)(
-            template,
-            env={"mod_config": self, "bmg_color_text": bmg_color_text} | (env if env is not None else {}),
-            macros=self.macros,
-        )
+        return safe_eval(*args, env=self.get_safe_eval_env(base_env=env), macros=self.macros, **kwargs)
+
+    def multiple_safe_eval(self, *args, env: dict[str, any] = None, **kwargs) -> str:
+        """
+        Multiple safe eval with useful modconfig environment
+        :return: the str result of the evaluation
+        """
+        return multiple_safe_eval(*args, env=self.get_safe_eval_env(base_env=env), macros=self.macros, **kwargs)
 
     def get_mod_directory(self) -> Path:
         """
@@ -197,12 +210,16 @@ class ModConfig:
 
         filter_template: str | None = self.global_settings["include_track_if"].value if not ignore_filter else None
 
+        # filter_template_func is the function checking if the track should be included. If no parameter is set,
+        # then always return True
+        filter_template_func: Callable = self.safe_eval(
+            filter_template, return_lambda=True, lambda_args=["track"]
+        ) if filter_template is not None else (
+            lambda track: True
+        )
+
         # Go though all the tracks and filter them if enabled
-        for track in filter(
-            lambda track: True if filter_template is None else
-            self.safe_eval(filter_template, env={"track": track}) == "True",
-            self._tracks
-        ):
+        for track in filter(lambda track: filter_template_func(track=track) is True, self._tracks):
             yield track
 
     def get_ordered_cups(self) -> Generator["Cup", None, None]:
@@ -370,6 +387,10 @@ class ModConfig:
             normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
 
         track_directory = self.path.parent / "_TRACKS"
+        multiplayer_disable_if_func: Callable = self.safe_eval(
+            self.multiplayer_disable_if,
+            return_lambda=True, lambda_args=["track"]
+        )
 
         for track in self.get_all_tracks():
             track_file: Path = next(
@@ -384,7 +405,7 @@ class ModConfig:
                     format="szs"
                 )
 
-                if safe_eval(self.multiplayer_disable_if, {"track": track}) == "True":
+                if multiplayer_disable_if_func(track=track) is True:
                     # if the track should use the default track instead in multiplayer,
                     # copy the default track to the same file but with a _d at the end
                     shutil.copy(

@@ -420,7 +420,7 @@ class ButtonInstall(ttk.Button):
             message = message_texts.get(self.root.options["language"])
             if message is None: message = message_texts.get("*")
             if message is None: message = _('NO_MESSAGE_FROM_AUTHOR')
-            message = mod_config.safe_eval(message, multiple=True)
+            message = mod_config.multiple_safe_eval(message)
 
             messagebox.showinfo(
                 _("INSTALLATION_COMPLETED"),

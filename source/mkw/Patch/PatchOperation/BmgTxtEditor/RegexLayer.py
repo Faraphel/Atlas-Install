@@ -28,7 +28,7 @@ class RegexLayer(AbstractLayer):
             for pattern, repl in self.template.items():
                 value = re.sub(
                     pattern,
-                    patch.mod_config.safe_eval(repl, multiple=True),
+                    patch.mod_config.multiple_safe_eval(repl),
                     value,
                     flags=re.DOTALL
                 )

@@ -36,6 +36,9 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
     # replace the macro in the template
     template = replace_macro(template=template, macros=macros)
 
+    # escape backslash to avoid unreadable expression
+    template = template.replace("\\", "\\\\")
+
     # prepare the execution environment
     globals_ = all_globals | env
     locals_ = {}

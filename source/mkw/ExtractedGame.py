@@ -127,7 +127,7 @@ class ExtractedGame:
         ct_file.write_text(mod_config.get_ctfile(template="-"))
 
         lpar_dir: Path = mod_config.path.parent / "_LPAR/"
-        lpar: Path = lpar_dir / mod_config.safe_eval(mod_config.lpar_template, multiple=True)
+        lpar: Path = lpar_dir / mod_config.multiple_safe_eval(mod_config.lpar_template)
         if not lpar.is_relative_to(lpar_dir): raise PathOutsideMod(lpar, lpar_dir)
 
         for lecode_file in (self.path / "files/rel/").glob("lecode-*.bin"):
