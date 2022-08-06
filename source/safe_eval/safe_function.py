@@ -1,8 +1,4 @@
-
 from typing import Callable, Generator
-
-
-# TODO: exception class
 
 
 def get_all_safe_functions() -> Generator[list[Callable], None, None]:
@@ -49,5 +45,5 @@ class safe_function:
         """
         Allow a recursive safe_eval, but without the lambda functionality
         """
-        from source.safe_eval import safe_eval
-        return safe_eval(template, env)
+        from source.safe_eval.safe_eval import safe_eval
+        return safe_eval(template=template, env=env)
