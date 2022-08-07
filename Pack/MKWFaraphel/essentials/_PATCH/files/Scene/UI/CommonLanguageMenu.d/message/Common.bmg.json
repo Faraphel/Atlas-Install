@@ -6,7 +6,7 @@
       "layers": [
         {
           "mode": "ctfile",
-          "template": "{{ ## TRACK_TEXT_SCORE ## }}{{ ## TRACK_TEXT_PREFIX ## }}{{ ## TRACK_TEXT_NAME ## }}{{ ## TRACK_TEXT_SUFFIX ## }}"
+          "template": "{{ ## TRACK_TEXT_SCORE ## }}{{ ## TRACK_TEXT_PREFIX ## }}{{ ## TRACK_TEXT_HIGHLIGHT_START ## }}{{ ## TRACK_TEXT_NAME ## }}{{ ## TRACK_TEXT_HIGHLIGHT_END ## }}{{ ## TRACK_TEXT_SUFFIX ## }}"
         },
         {
           "mode": "format-original-track",

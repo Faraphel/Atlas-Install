@@ -7,7 +7,7 @@ from PIL import Image
 from source import threaded
 from source.mkw import Tag
 from source.mkw.Cup import Cup
-from source.mkw.MKWColor import bmg_color_text
+from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
 from source.mkw.ModSettings import AbstractModSettings
 from source.mkw.Track import Track
 import json
@@ -167,6 +167,7 @@ class ModConfig:
         """
         return {
             "mod_config": self,
+            "bmg_color_raw": bmg_color_raw,
             "bmg_color_text": bmg_color_text
         } | (
             base_env if base_env is not None else {}

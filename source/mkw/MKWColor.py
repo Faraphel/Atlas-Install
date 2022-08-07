@@ -55,6 +55,15 @@ class MKWColor:
         return f"#{self.hex:06X}"
 
 
+def bmg_color_raw(color_name: str) -> str:
+    """
+    Useful shortcut to place a color
+    :param color_name: name of the color
+    :return: return the color character
+    """
+    return r"\c{" + MKWColor(color_name).bmg + "}"
+
+
 def bmg_color_text(color_name: str, text: str) -> str:
     """
     Useful shortcut to color a text
@@ -62,4 +71,4 @@ def bmg_color_text(color_name: str, text: str) -> str:
     :param text: text to color
     :return: return the formatted text with the color
     """
-    return r"\c{" + MKWColor(color_name).bmg + "}" + text + r"\c{" + MKWColor('off').bmg + "}"
+    return f'{bmg_color_raw(color_name)}{text}{bmg_color_raw("off")}'
