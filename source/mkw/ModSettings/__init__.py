@@ -16,15 +16,16 @@ class AbstractModSettings(ABC):
     type: str  # type name of the settings
     text: dict[str]  # text to display in the settings window depending on the language
     enabled: bool  # is the settings enabled
+    default: str | None  # default value of the settings (used is disabled)
     _value: str  # value for the settings
 
     @property
     def value(self) -> "any | None":
         """
-        If the option is enabled, return the value, else return None
-        :return:
+        If the option is enabled, return the value, else return the default value
+        :return: value if the setting is enabled, default otherwise
         """
-        return self._value if self.enabled else None
+        return self._value if self.enabled else self.default
 
     @abstractmethod
     def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
@@ -38,7 +39,6 @@ class AbstractModSettings(ABC):
 
         enabled_variable = tkinter.BooleanVar(master, value=self.enabled)
         enabled_variable.trace_add("write", lambda *_: setattr(self, "enabled", enabled_variable.get()))
-        checkbox.configure(variable=enabled_variable)
         ...
 
     @classmethod

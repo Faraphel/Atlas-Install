@@ -13,10 +13,13 @@ class String(AbstractModSettings):
 
     type = "string"
 
-    def __init__(self, value: str = None, preview: str = None, enabled: bool = False, text: dict[str] = None):
-        self._value: str = value if value is not None else ""
-        self.text = text if text is not None else {}
+    def __init__(self, preview: str = None, enabled: bool = False,
+                 default: str | None = None, text: dict[str] = None):
+        self._value: str = default if default is not None else ""
+        self.default = default
         self.enabled = enabled
+
+        self.text = text if text is not None else {}
         self.preview: str | None = preview
 
     def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:

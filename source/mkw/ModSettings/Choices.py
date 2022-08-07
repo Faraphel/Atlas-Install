@@ -12,10 +12,13 @@ class Choices(AbstractModSettings):
 
     type = "choices"
 
-    def __init__(self, choices: list[str], value: str = None, enabled: bool = False, text: dict[str] = None):
-        self._value = value if value is not None else choices[0]
-        self.text = text if text is not None else {}
+    def __init__(self, choices: list[str], enabled: bool = False,
+                 default: str | None = None, text: dict[str] = None):
+        self._value = default if default is not None else choices[0]
+        self.default = default
         self.enabled = enabled
+
+        self.text = text if text is not None else {}
         self.choices = choices
 
     def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
