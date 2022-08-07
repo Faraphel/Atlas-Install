@@ -587,5 +587,9 @@ class SelectPack(ttk.Frame):
         :return:
         """
         match state:
-            case InstallerState.IDLE: self.combobox.config(state="readonly")
-            case InstallerState.INSTALLING: self.combobox.config(state="disabled")
+            case InstallerState.IDLE:
+                self.combobox.config(state="readonly")
+                self.button_settings.config(state="normal")
+            case InstallerState.INSTALLING:
+                self.combobox.config(state="disabled")
+                self.button_settings.config(state="disabled")
