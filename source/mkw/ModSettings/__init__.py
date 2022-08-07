@@ -27,6 +27,13 @@ class AbstractModSettings(ABC):
         """
         return self._value if self.enabled else self.default
 
+    @property
+    def is_modified(self) -> bool:
+        """
+        Return if the settings have been modified compared the the default value
+        """
+        return self.value == self.default
+
     @abstractmethod
     def tkinter_show(self, master: ttk.LabelFrame, enabled_variable: tkinter.BooleanVar) -> None:
         """
