@@ -28,7 +28,7 @@ class AbstractModSettings(ABC):
         return self._value if self.enabled else self.default
 
     @abstractmethod
-    def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
+    def tkinter_show(self, master: ttk.LabelFrame, enabled_variable: tkinter.BooleanVar) -> None:
         """
         Show the option inside a tkinter widget
         :master: master widget
@@ -37,7 +37,7 @@ class AbstractModSettings(ABC):
         master.grid_rowconfigure(1, weight=1)
         master.grid_columnconfigure(1, weight=1)
 
-        enabled_variable = tkinter.BooleanVar(master, value=self.enabled)
+        enabled_variable.set(self.enabled)
         enabled_variable.trace_add("write", lambda *_: setattr(self, "enabled", enabled_variable.get()))
         ...
 

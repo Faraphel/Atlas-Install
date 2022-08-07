@@ -54,13 +54,24 @@ class FrameSettings(ttk.Frame):
 
         self.columnconfigure(1, weight=1)
 
+        def get_event_checkbox(enabled_variable: tkinter.BooleanVar):
+            """
+            Return the event for any child of a frmae when clicked
+            """
+            return lambda event: enabled_variable.set(True)
+
         for index, (settings_name, settings_data) in enumerate(settings.items()):
             text = settings_data.text.get(self.root.options["language"])
             if text is None: text = settings_data.text.get("*")
             if text is None: text = settings_name
 
-            checkbox = ttk.Checkbutton(self, text=text)
+            enabled_variable = tkinter.BooleanVar(value=False)
+            checkbox = ttk.Checkbutton(self, text=text, variable=enabled_variable)
             frame = ttk.LabelFrame(self, labelwidget=checkbox)
             frame.grid(row=index, column=1, sticky="NEWS")
 
-            settings_data.tkinter_show(frame, checkbox)
+            settings_data.tkinter_show(frame, enabled_variable)
+
+            # if any of the label child are clicked, automatically enable the option
+            for child in frame.winfo_children():
+                child.bind("<Button-1>", get_event_checkbox(enabled_variable))
