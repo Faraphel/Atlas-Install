@@ -1,6 +1,6 @@
 import shutil
 from pathlib import Path
-from typing import Generator, Callable, Iterator
+from typing import Generator, Callable, Iterator, Iterable
 
 from PIL import Image
 
@@ -20,11 +20,11 @@ CT_ICON_SIZE: int = 128
 
 Thread: any
 
-global_settings = {
-    "force_random_new": {
+default_global_settings: dict[str, dict[str, str]] = {
+    "replace_random_new": {
         "text": {
-            "en": "Force random new tracks",
-            "fr": "Forcer les courses aléatoires nouvelle"
+            "en": "Replace random new tracks by",
+            "fr": "Remplacer les courses aléatoires nouvelle par"
         },
         "type": "string",
         "preview": "track_selecting"
@@ -37,7 +37,7 @@ global_settings = {
         "type": "string",
         "preview": "track_selecting"
     },
-    "sort_tracks_by": {
+    "sort_tracks": {
         "text": {
             "en": "Sort tracks by",
             "fr": "Trier les courses par"
@@ -48,6 +48,21 @@ global_settings = {
 }
 
 
+def merge_dict(dict1: dict[str, dict] | None, dict2: dict[str, dict] | None,
+               dict_keys: Iterable[str] = None) -> dict[str, dict]:
+    """
+    Merge 2 dict subdict together
+    :return: the merged dict
+    { "option": {"speed": 1} }, { "option": {"mode": "hard"} } -> { "option": {"speed": 1, "mode": "hard"} }
+
+    """
+    if dict1 is None: dict1 = {}
+    if dict2 is None: dict2 = {}
+    if dict_keys is None: dict_keys = dict1.keys() | dict2.keys()
+
+    return {key: dict1.get(key, {}) | dict2.get(key, {}) for key in dict_keys}
+
+
 class ModConfig:
     """
     Representation of a mod
@@ -56,7 +71,7 @@ class ModConfig:
     __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
                  "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
                  "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template",
-                 "multiplayer_disable_if", "track_new_if", "macros", "messages", "global_settings",
+                 "multiplayer_disable_if", "macros", "messages", "global_settings",
                  "specific_settings", "lpar_template")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
@@ -65,14 +80,17 @@ class ModConfig:
                  tracks: list["Track | TrackGroup"] = None, original_track_prefix: bool = None,
                  swap_original_order: bool = None, keep_original_track: bool = None, enable_random_cup: bool = None,
                  track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
-                 track_new_if: str = None, messages: dict[str, dict[str, str]] = None,
+                 messages: dict[str, dict[str, str]] = None, global_settings: dict[str, dict[str, str]] = None,
                  specific_settings: dict[str, dict[str, str]] = None, lpar_template: str = None):
 
         self.path = Path(path)
         self.macros: dict = macros if macros is not None else {}
         self.messages: dict = messages if messages is not None else {}
 
-        self.global_settings: dict = AbstractModSettings.get(global_settings)
+        self.global_settings: dict = AbstractModSettings.get(merge_dict(
+            default_global_settings, global_settings,
+            dict_keys=default_global_settings.keys()  # Avoid modder to add their own settings to globals one
+        ))
         self.specific_settings: dict = AbstractModSettings.get(
             specific_settings if specific_settings is not None else {}
         )
@@ -91,7 +109,6 @@ class ModConfig:
         self.track_file_template: str = track_file_template \
             if track_file_template is not None else "{{ getattr(track, 'sha1', '_') }}"
         self.multiplayer_disable_if: str = multiplayer_disable_if if multiplayer_disable_if is not None else "False"
-        self.track_new_if: str = track_new_if if track_new_if is not None else "True"
         self.lpar_template: str = lpar_template if lpar_template is not None else "normal.lpar"
 
         self.original_track_prefix: bool = original_track_prefix if original_track_prefix is not None else True
@@ -118,8 +135,7 @@ class ModConfig:
         kwargs = {
             attr: config_dict.get(attr)
             for attr in cls.__slots__
-            if attr not in ["name", "default_track", "_tracks", "tracks", "path", "macros", "messages",
-                            "global_settings"]
+            if attr not in ["name", "default_track", "_tracks", "tracks", "path", "macros", "messages"]
             # these keys are treated after or are reserved
         }
 
@@ -206,7 +222,7 @@ class ModConfig:
         """
 
         filter_template: str | None = self.global_settings["include_track_if"].value if not ignore_filter else None
-        settings_sort: str | None = self.global_settings["sort_tracks_by"].value
+        settings_sort: str | None = self.global_settings["sort_tracks"].value
 
         # filter_template_func is the function checking if the track should be included. If no parameter is set,
         # then always return True

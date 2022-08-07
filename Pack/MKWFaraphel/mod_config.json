@@ -4,6 +4,11 @@
     "nickname": "MKWF",
     "variant": "60",
 
+    "global_settings": {
+        "replace_random_new": {
+            "default": "'Retro' not in getattr(track, 'tags', []) and getattr(track, 'warning', 0) == 0"
+        }
+    },
     "specific_settings": {
         "mode": {
             "text": {
@@ -22,10 +27,10 @@
                 "fr": "Surligner si"
             },
             "type": "string",
+            "default": "'v' + getattr(track, 'since_version', '') == mod_config.version",
             "preview": "track_selecting"
         }
     },
-    "track_new_if": "'Retro' not in getattr(track, 'tags', []) and getattr(track, 'warning', 0) == 0",
     "lpar_template": "{{ mode if (mode := ## SETTINGS_MODE ##) is not None else 'normal' }}.lpar",
 
     "tags_prefix": {

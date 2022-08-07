@@ -7,7 +7,7 @@
   "TRACK_TEXT_NAME": "getattr(track, 'name', '')",
   "TRACK_TEXT_AUTHORS": "'\\\\n'.join(author) if isinstance(author := getattr(track, 'author', '/'), list) else author",
   "TRACK_TEXT_WARNING_IF_DISABLED": "bmg_color_text('red', '/') if getattr(track, 'warning', 0) != 0 else ''",
-  "TRACK_TEXT_HIGHLIGHT_START": "bmg_color_raw('azure') if eval(highlight_if if (highlight_if := mod_config.specific_settings['highlight_if'].value) is not None else 'False', env={'track': track}) is True else ''",
+  "TRACK_TEXT_HIGHLIGHT_START": "bmg_color_raw('azure') if eval(highlight_if if (highlight_if := mod_config.specific_settings['highlight_if'].value) is not None else 'False', env={'track': track, 'mod_config': mod_config}) is True else ''",
   "TRACK_TEXT_HIGHLIGHT_END": "bmg_color_raw('off')",
 
   "SETTINGS_MODE": "mod_config.specific_settings['mode'].value",
