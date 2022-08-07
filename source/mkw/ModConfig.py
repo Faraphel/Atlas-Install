@@ -1,6 +1,6 @@
 import shutil
 from pathlib import Path
-from typing import Generator, Callable
+from typing import Generator, Callable, Iterator
 
 from PIL import Image
 
@@ -18,9 +18,7 @@ from source.wt.szs import SZSPath
 
 CT_ICON_SIZE: int = 128
 
-
 Thread: any
-
 
 global_settings = {
     "force_random_new": {
@@ -44,12 +42,8 @@ global_settings = {
             "en": "Sort tracks by",
             "fr": "Trier les courses par"
         },
-        "type": "choices",
-        "choices": [
-            "test1",
-            "test2",
-            "test3"
-        ]
+        "type": "string",
+        "preview": "track_sorting"
     }
 }
 
@@ -166,12 +160,12 @@ class ModConfig:
         :return: the modconfig environment
         """
         return {
-            "mod_config": self,
-            "bmg_color_raw": bmg_color_raw,
-            "bmg_color_text": bmg_color_text
-        } | (
-            base_env if base_env is not None else {}
-        )
+                   "mod_config": self,
+                   "bmg_color_raw": bmg_color_raw,
+                   "bmg_color_text": bmg_color_text
+               } | (
+                   base_env if base_env is not None else {}
+               )
 
     def safe_eval(self, *args, env: dict[str, any] = None, **kwargs) -> any:
         """
@@ -202,7 +196,9 @@ class ModConfig:
         for track in self.get_tracks(*args, **kwargs):
             yield from track.get_tracks()
 
-    def get_tracks(self, ignore_filter: bool = False) -> Generator["Track | TrackGroup", None, None]:
+    def get_tracks(self, ignore_filter: bool = False,
+                   sorting_template: str = None,
+                   ignore_sorting: bool = False) -> Generator["Track | TrackGroup", None, None]:
         """
         Get all the tracks or tracks groups elements
         :ignore_filter: should the tracks filter be ignored
@@ -210,17 +206,31 @@ class ModConfig:
         """
 
         filter_template: str | None = self.global_settings["include_track_if"].value if not ignore_filter else None
+        settings_sort: str | None = self.global_settings["sort_tracks_by"].value
 
         # filter_template_func is the function checking if the track should be included. If no parameter is set,
         # then always return True
         filter_template_func: Callable = self.safe_eval(
-            filter_template, return_lambda=True, lambda_args=["track"]
-        ) if filter_template is not None else (
-            lambda track: True
+            filter_template if filter_template is not None else "True",
+            return_lambda=True,
+            lambda_args=["track"]
         )
 
+        # if a sorting function is set, use it. If no function is set, but sorting is not disabled, use settings.
+        iterator: Iterator = filter(lambda track: filter_template_func(track=track) is True, self._tracks)
+        if not ignore_sorting and (sorting_template is not None or settings_sort is not None):
+            # get the sorting_template_func. If not defined, use the settings one.
+            sorting_template_func: Callable = self.safe_eval(
+                template=sorting_template if sorting_template is not None else settings_sort,
+                return_lambda=True,
+                lambda_args=["track"]
+            )
+
+            # wrap the iterator inside a sort function
+            iterator = sorted(iterator, key=sorting_template_func)
+
         # Go though all the tracks and filter them if enabled
-        for track in filter(lambda track: filter_template_func(track=track) is True, self._tracks):
+        for track in iterator:
             yield track
 
     def get_ordered_cups(self) -> Generator["Cup", None, None]:
@@ -245,7 +255,7 @@ class ModConfig:
             # if there is still tracks in the buffer, create a cup with them and fill with default>
             if len(track_buffer) > 0:
                 track_buffer.extend([self.default_track] * (4 - len(track_buffer)))
-                yield Cup(tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count+1}")
+                yield Cup(tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count + 1}")
 
     def get_unordered_cups(self) -> Generator["Cup", None, None]:
         """
@@ -255,8 +265,8 @@ class ModConfig:
         # for track that have don't have a tag in self.tags_cups
         track_buffer: "Track | TrackGroup" = []
         for track in filter(
-            lambda track: not any(item in getattr(track, "tags", []) for item in self.tags_cups),
-            self.get_tracks()
+                lambda track: not any(item in getattr(track, "tags", []) for item in self.tags_cups),
+                self.get_tracks()
         ):
             track_buffer.append(track)
 
