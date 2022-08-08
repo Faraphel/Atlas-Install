@@ -116,4 +116,4 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
     ast.fix_missing_locations(expression)
 
     # return the evaluated formula
-    return eval(compile(expression, "<string>", "eval"), globals_, locals_)
+    return eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
