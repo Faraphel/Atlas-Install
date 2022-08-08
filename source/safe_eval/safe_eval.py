@@ -5,7 +5,9 @@ from source.safe_eval.macros import replace_macro
 from source.safe_eval.safe_function import get_all_safe_functions
 
 
-# TODO: exception class
+class SafeEvalException(Exception):
+    def __init__(self, message: str):
+        super().__init__(message)
 
 
 # dict of every value used by every safe_eval call
@@ -46,7 +48,7 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
     # convert the template to an ast expression
     stmt: ast.stmt = ast.parse(template).body[0]
     if not isinstance(stmt, ast.Expr):
-        raise Exception(f'Invalid ast type for safe_eval : "{type(stmt).__name__}"')
+        raise SafeEvalException(f'Invalid ast type : "{type(stmt).__name__}"')
 
     # check every node for disabled expression
     for node in ast.walk(stmt):
@@ -56,17 +58,17 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
             case ast.Attribute:
                 # ban all magical function, disabling the __class__.__bases__[0] ... tricks
                 if "__" in node.attr:
-                    raise Exception(f'Magic attribute are forbidden : "{node.attr}"')
+                    raise SafeEvalException(f'Magic attribute are forbidden : "{node.attr}"')
 
                 # ban modification to environment
                 if isinstance(node.ctx, ast.Store):
-                    raise Exception(f'Can\'t set value of attribute : "{node.attr}"')
+                    raise SafeEvalException(f'Can\'t set value of attribute : "{node.attr}"')
 
             # when accessing any variable
             case ast.Name:
                 # ban modification to environment, but allow custom variable to be changed
                 if isinstance(node.ctx, ast.Store) and node.id in globals_ | locals_:
-                    raise Exception(f'Can\'t set value of environment : "{node.id}"')
+                    raise SafeEvalException(f'Can\'t set value of environment : "{node.id}"')
 
             # when calling any function
             case ast.Call:
@@ -75,7 +77,7 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
                     if isinstance(callnode, ast.Attribute):
                         for attrnode in ast.walk(callnode.value):
                             if isinstance(attrnode, ast.Name) and attrnode.id in globals_ | locals_:
-                                raise Exception(f'Calling this function is not allowed : "{callnode.attr}"')
+                                raise SafeEvalException(f'Calling this function is not allowed : "{callnode.attr}"')
 
             # when assigning a value with ":="
             case ast.NamedExpr:
@@ -96,7 +98,7 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
                 ast.ClassDef |                  # Declaring class could maybe allow for dangerous calls
                 ast.AsyncFor | ast.AsyncWith | ast.AsyncFunctionDef | ast.Await  # Just in case
             ):
-                raise Exception(f'Forbidden syntax : "{type(node).__name__}"')
+                raise SafeEvalException(f'Forbidden syntax : "{type(node).__name__}"')
 
     if return_lambda:
         # if return_lambda is enabled, embed the whole expression into a lambda expression
