@@ -68,11 +68,6 @@ def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] 
                 if isinstance(node.ctx, ast.Store) and node.id in globals_ | locals_:
                     raise Exception(f'Can\'t set value of environment : "{node.id}"')
 
-            case ast.Lambda:
-                # lambda expression are disabled because they can allow forbidden action
-                # example: (lambda x: x.append(1))(track.tags)
-                raise Exception(f'Lambda expression are not allowed.')
-
             # when calling any function
             case ast.Call:
                 # ban the function and method from the environment
