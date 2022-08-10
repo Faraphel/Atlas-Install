@@ -9,7 +9,7 @@ from source.mkw import Tag
 from source.mkw.Cup import Cup
 from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
 from source.mkw.ModSettings import AbstractModSettings
-from source.mkw.Track import Track
+from source.mkw.Track.CustomTrack import CustomTrack
 import json
 
 from source.mkw.OriginalTrack import OriginalTrack
@@ -68,20 +68,20 @@ class ModConfig:
     Representation of a mod
     """
 
-    __slots__ = ("name", "path", "nickname", "variant", "tags_prefix", "tags_suffix",
-                 "default_track", "_tracks", "version", "original_track_prefix", "swap_original_order",
-                 "keep_original_track", "enable_random_cup", "tags_cups", "track_file_template",
+    __slots__ = ("name", "path", "nickname", "variant", "default_track", "_tracks", "version",
+                 "original_track_prefix", "swap_original_order", "keep_original_track",
+                 "enable_random_cup", "tags_cups", "track_file_template",
                  "multiplayer_disable_if", "macros", "messages", "global_settings",
-                 "specific_settings", "lpar_template")
+                 "specific_settings", "lpar_template", "tags_template")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
-                 tags_prefix: dict[Tag, str] = None, tags_suffix: dict[Tag, str] = None,
                  tags_cups: list[Tag] = None, default_track: "Track | TrackGroup" = None,
                  tracks: list["Track | TrackGroup"] = None, original_track_prefix: bool = None,
                  swap_original_order: bool = None, keep_original_track: bool = None, enable_random_cup: bool = None,
                  track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
                  messages: dict[str, dict[str, str]] = None, global_settings: dict[str, dict[str, str]] = None,
-                 specific_settings: dict[str, dict[str, str]] = None, lpar_template: str = None):
+                 specific_settings: dict[str, dict[str, str]] = None, lpar_template: str = None,
+                 tags_template: dict[str, str] = None):
 
         self.path = Path(path)
         self.macros: dict = macros if macros is not None else {}
@@ -100,8 +100,7 @@ class ModConfig:
         self.version: str = version if version is not None else "v1.0.0"
         self.variant: str = variant if variant is not None else "01"
 
-        self.tags_prefix: dict[Tag] = tags_prefix if tags_prefix is not None else {}
-        self.tags_suffix: dict[Tag] = tags_suffix if tags_suffix is not None else {}
+        self.tags_template: dict[str, str] = tags_template if tags_template is not None else {}
         self.tags_cups: list[Tag] = tags_cups if tags_cups is not None else []
 
         self.default_track: "Track | TrackGroup" = default_track if default_track is not None else None
@@ -145,8 +144,8 @@ class ModConfig:
 
             **kwargs,
 
-            default_track=Track.from_dict(config_dict.get("default_track", {})),
-            tracks=[Track.from_dict(track) for track in config_dict.get("tracks", [])],
+            default_track=CustomTrack.from_dict(config_dict.get("default_track", {})),
+            tracks=[CustomTrack.from_dict(track) for track in config_dict.get("tracks", [])],
             macros=macros,
             messages=messages,
         )
@@ -204,7 +203,7 @@ class ModConfig:
         """
         return self.path.parent
 
-    def get_all_tracks(self, *args, **kwargs) -> Generator["Track", None, None]:
+    def get_all_tracks(self, *args, **kwargs) -> Generator["CustomTrack", None, None]:
         """
         Same as get_tracks, but track group are divided into subtracks
         """
@@ -425,7 +424,7 @@ class ModConfig:
             )
 
             @threaded
-            def normalize_track(track: Track, track_file: Path):
+            def normalize_track(track: CustomTrack, track_file: Path):
                 SZSPath(track_file).normalize(
                     autoadd_path,
                     destination_path / f"{track_file.stem}.szs",

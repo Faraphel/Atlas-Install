@@ -28,11 +28,11 @@ class TrackGroup:
         :param group_dict: dict containing the track information
         :return: TrackGroup or Track
         """
-        from source.mkw.Track import Track
+        from source.mkw.Track.CustomTrack import CustomTrack
 
-        if "group" not in group_dict: return Track.from_dict(group_dict)
+        if "group" not in group_dict: return CustomTrack.from_dict(group_dict)
         return cls(
-            tracks=[Track.from_dict(track) for track in group_dict["group"]],
+            tracks=[CustomTrack.from_dict(track) for track in group_dict["group"]],
             tags=group_dict.get("tags"),
             name=group_dict.get("name"),
         )

@@ -1,7 +1,7 @@
 import re
 
 from source.mkw.Patch.PatchOperation.BmgTxtEditor import AbstractLayer
-from source.mkw.Track import Track
+from source.mkw.Track.CustomTrack import CustomTrack
 from source.wt import bmg
 
 
@@ -46,7 +46,7 @@ class FormatOriginalTrackLayer(AbstractLayer):
                     break
             else: tag = "Wii"
 
-            patched_name = Track(
+            patched_name = CustomTrack(
                 name=name,
                 tags=[tag]
             ).repr_format(
