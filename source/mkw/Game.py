@@ -139,3 +139,5 @@ class Game:
             cache_ogtracks_directory,
         )
 
+        # convert the extracted game into a file
+        yield from extracted_game.convert_to(output_type)

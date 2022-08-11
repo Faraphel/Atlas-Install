@@ -5,7 +5,7 @@ from typing import Generator, IO
 
 from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
-from source.wt import szs, lec
+from source.wt import szs, lec, wit
 from source.wt.wstrt import StrPath
 
 
@@ -155,3 +155,27 @@ class ExtractedGame:
             for patch_directory in part_directory.glob("_PATCH/"):
                 yield from Patch(patch_directory, mod_config, self._special_file).install(self)
 
+    def convert_to(self, output_type: wit.Extension) -> Generator[dict, None, None]:
+        """
+        Convert the extracted game to another format
+        :param output_type: path to the destination of the game
+        :output_type: format of the destination game
+        """
+        yield {"description": f"Converting game to {output_type}", "determinate": False}
+        if output_type == wit.Extension.FST: return
+
+        destination_file = self.path.with_suffix(self.path.suffix + output_type.value)
+        dest_name: str = destination_file.name
+
+        i: int = 0
+        while destination_file.exists():
+            i += 1
+            destination_file = destination_file.with_name(dest_name + f" ({i})")
+
+        wit.copy(
+            source_directory=self.path,
+            destination_file=destination_file,
+        )
+
+        yield {"description": "Deleting the extracted game...", "determinate": False}
+        shutil.rmtree(self.path)

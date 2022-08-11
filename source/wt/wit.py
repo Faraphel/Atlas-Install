@@ -13,13 +13,25 @@ _tools_run_dict = get_tools_run_dict_function(tools_path)
 _tools_run_popen = get_tools_run_popen_function(tools_path)
 
 
+def copy(source_directory: Path | str, destination_file: Path | str):
+    """
+    Copy a game directory to a game file with a specific format.
+    :param source_directory: path to the extracted game
+    :param destination_file: path to the destination game
+    :return: the destination game path
+    """
+    _tools_run("COPY", source_directory, "--DEST", destination_file)
+    return Path(destination_file)
+
+
 class Extension(enum.Enum):
     """
     Enum for game extension
     """
     WBFS = ".wbfs"
-    ISO = ".iso"
     FST = ".dol"
+    CISO = ".ciso"
+    ISO = ".iso"
 
     @classmethod
     def _missing_(cls, value: str) -> "Extension | None":

@@ -259,7 +259,7 @@ class SourceGame(ttk.LabelFrame):
         """
         path = Path(tkinter.filedialog.askopenfilename(
             title=_("SELECT_SOURCE_GAME"),
-            filetypes=[(_("WII GAMES"), "*.iso *.wbfs *.dol")],
+            filetypes=[(_("WII GAMES"), "*.iso *.ciso *.wbfs *.dol")],
         ))
         # if the user didn't select any file, return None
         if not path.exists():
