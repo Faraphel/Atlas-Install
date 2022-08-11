@@ -72,7 +72,7 @@ class ModConfig:
                  "original_track_prefix", "swap_original_order", "keep_original_track",
                  "enable_random_cup", "tags_cups", "track_file_template",
                  "multiplayer_disable_if", "macros", "messages", "global_settings",
-                 "specific_settings", "lpar_template", "tags_template")
+                 "specific_settings", "lpar_template", "tags_templates")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
                  tags_cups: list[Tag] = None,
@@ -81,7 +81,7 @@ class ModConfig:
                  track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
                  messages: dict[str, dict[str, str]] = None, global_settings: dict[str, dict[str, str]] = None,
                  specific_settings: dict[str, dict[str, str]] = None, lpar_template: str = None,
-                 tags_template: dict[str, str] = None):
+                 tags_templates: dict[str, str] = None):
 
         self.path = Path(path)
         self.macros: dict = macros if macros is not None else {}
@@ -100,10 +100,9 @@ class ModConfig:
         self.version: str = version if version is not None else "v1.0.0"
         self.variant: str = variant if variant is not None else "01"
 
-        self.tags_template: dict[str, str] = tags_template if tags_template is not None else {}
+        self.tags_templates: dict[str, str] = tags_templates if tags_templates is not None else {}
         self.tags_cups: list[Tag] = tags_cups if tags_cups is not None else []
 
-        self.default_track: "Track | TrackGroup" = default_track if default_track is not None else None
         self._tracks: list["Track | TrackGroup"] = tracks if tracks is not None else []
         self.track_file_template: str = track_file_template \
             if track_file_template is not None else "{{ getattr(track, 'sha1', '_') }}"
@@ -134,7 +133,7 @@ class ModConfig:
         kwargs = {
             attr: config_dict.get(attr)
             for attr in cls.__slots__
-            if attr not in ["name", "default_track", "_tracks", "tracks", "path", "macros", "messages"]
+            if attr not in ["name", "_tracks", "tracks", "path", "macros", "messages"]
             # these keys are treated after or are reserved
         }
 
@@ -144,7 +143,6 @@ class ModConfig:
 
             **kwargs,
 
-            default_track=CustomTrack.from_dict(config_dict.get("default_track", {})),
             tracks=[CustomTrack.from_dict(track) for track in config_dict.get("tracks", [])],
             macros=macros,
             messages=messages,

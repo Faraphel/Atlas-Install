@@ -2,8 +2,8 @@
   "GAME_REGION": "str(extracted_game.original_game.wit_path.region)",
 
   "TRACK_TEXT_SCORE": "bmg_color_text(['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)], f'\\\\x{65296+track.score:x} ') if hasattr(track, 'score') else ''",
-  "TRACK_TEXT_PREFIX": "f'{prefix} ' if prefix else ''",
-  "TRACK_TEXT_SUFFIX": "f' ({suffix})' if suffix else ''",
+  "TRACK_TEXT_PREFIX": "f'{prefix} ' if (prefix := get_tag_template('prefix', '')) else ''",
+  "TRACK_TEXT_SUFFIX": "f' ({suffix})' if (suffix := get_tag_template('suffix', '')) else ''",
   "TRACK_TEXT_NAME": "getattr(track, 'name', '')",
   "TRACK_TEXT_AUTHORS": "'\\\\n'.join(author) if isinstance(author := getattr(track, 'author', '/'), list) else author",
   "TRACK_TEXT_WARNING_IF_DISABLED": "bmg_color_text('red', '/') if getattr(track, 'warning', 0) != 0 else ''",
