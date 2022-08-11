@@ -28,7 +28,7 @@ class AbstractTrack(ABC):
             setattr(self, key, value)
 
     def __repr__(self):
-        return f"<{self.__class__.__name__} {id(self)}>"
+        return f"<{self.__class__.__name__} {hex(id(self))}>"
 
     def get_tracks(self) -> Generator["AbstractTrack", None, None]:
         """
@@ -46,10 +46,11 @@ class AbstractTrack(ABC):
         :param default: default value if no tag template is found
         :return: formatted representation of the tag
         """
-        for tag in filter(lambda tag: tag in mod_config.tags_template[template_name], self.tags):
-            return mod_config.multiple_safe_eval(mod_config.tags_template[template_name][tag], env={"tag": tag})
+        for tag in filter(lambda tag: tag in mod_config.tags_templates[template_name], self.tags):
+            return mod_config.multiple_safe_eval(mod_config.tags_templates[template_name][tag], env={"tag": tag})
         return default
 
+    @abstractmethod
     def repr_format(self, mod_config: "ModConfig", template: str) -> str:
         """
         return the representation of the track from the format
@@ -57,7 +58,7 @@ class AbstractTrack(ABC):
         :param mod_config: configuration of the mod
         :return: formatted representation of the track
         """
-        return mod_config.multiple_safe_eval(template, env={"track": self, "get_tag_template": self.get_tag_template})
+        ...
 
     @abstractmethod
     def get_filename(self, mod_config: "ModConfig") -> str:

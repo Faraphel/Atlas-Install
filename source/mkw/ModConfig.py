@@ -9,7 +9,7 @@ from source.mkw import Tag
 from source.mkw.Cup import Cup
 from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
 from source.mkw.ModSettings import AbstractModSettings
-from source.mkw.Track.CustomTrack import CustomTrack
+from source.mkw.Track import CustomTrack, DefaultTrack
 import json
 
 from source.mkw.OriginalTrack import OriginalTrack
@@ -68,14 +68,14 @@ class ModConfig:
     Representation of a mod
     """
 
-    __slots__ = ("name", "path", "nickname", "variant", "default_track", "_tracks", "version",
+    __slots__ = ("name", "path", "nickname", "variant", "_tracks", "version",
                  "original_track_prefix", "swap_original_order", "keep_original_track",
                  "enable_random_cup", "tags_cups", "track_file_template",
                  "multiplayer_disable_if", "macros", "messages", "global_settings",
                  "specific_settings", "lpar_template", "tags_template")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
-                 tags_cups: list[Tag] = None, default_track: "Track | TrackGroup" = None,
+                 tags_cups: list[Tag] = None,
                  tracks: list["Track | TrackGroup"] = None, original_track_prefix: bool = None,
                  swap_original_order: bool = None, keep_original_track: bool = None, enable_random_cup: bool = None,
                  track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
@@ -269,7 +269,7 @@ class ModConfig:
 
             # if there is still tracks in the buffer, create a cup with them and fill with default>
             if len(track_buffer) > 0:
-                track_buffer.extend([self.default_track] * (4 - len(track_buffer)))
+                track_buffer.extend([DefaultTrack()] * (4 - len(track_buffer)))
                 yield Cup(tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count + 1}")
 
     def get_unordered_cups(self) -> Generator["Cup", None, None]:
@@ -291,7 +291,7 @@ class ModConfig:
 
         # if there is still tracks in the buffer, create a cup with them and fill with default
         if len(track_buffer) > 0:
-            track_buffer.extend([self.default_track] * (4 - len(track_buffer)))
+            track_buffer.extend([DefaultTrack()] * (4 - len(track_buffer)))
             yield Cup(tracks=track_buffer)
 
     def get_cups(self) -> Generator["Cup", None, None]:
