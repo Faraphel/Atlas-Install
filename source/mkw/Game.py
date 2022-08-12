@@ -67,6 +67,13 @@ class Game:
             except StopIteration as e:
                 return e.value
 
+    def edit(self, mod_config: ModConfig) -> Generator[dict, None, None]:
+        yield {"description": "Changing game metadata...", "determinate": False}
+        self.wit_path.edit(
+            name=mod_config.name,
+            game_id=self.wit_path.id[:4] + mod_config.variant
+        )
+
     @staticmethod
     def get_output_directory(dest: "Path | str", mod_config: ModConfig) -> Path:
         """
@@ -140,4 +147,5 @@ class Game:
         )
 
         # convert the extracted game into a file
-        yield from extracted_game.convert_to(output_type)
+        converted_game: WITPath = yield from extracted_game.convert_to(output_type)
+        if converted_game is not None: yield from Game(converted_game.path).edit(mod_config)

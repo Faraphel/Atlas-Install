@@ -9,9 +9,6 @@ from source.wt import szs, lec, wit
 from source.wt.wstrt import StrPath
 
 
-Game: any
-
-
 class PathOutsideMod(Exception):
     def __init__(self, forbidden_path: Path, allowed_range: Path):
         super().__init__(f"Error : path {forbidden_path} outside of allowed range {allowed_range}")
@@ -155,7 +152,7 @@ class ExtractedGame:
             for patch_directory in part_directory.glob("_PATCH/"):
                 yield from Patch(patch_directory, mod_config, self._special_file).install(self)
 
-    def convert_to(self, output_type: wit.Extension) -> Generator[dict, None, None]:
+    def convert_to(self, output_type: wit.Extension) -> Generator[dict, None, wit.WITPath | None]:
         """
         Convert the extracted game to another format
         :param output_type: path to the destination of the game
@@ -172,10 +169,12 @@ class ExtractedGame:
             i += 1
             destination_file = destination_file.with_name(dest_name + f" ({i})")
 
-        wit.copy(
+        converted_game: wit.WITPath = wit.copy(
             source_directory=self.path,
             destination_file=destination_file,
         )
 
         yield {"description": "Deleting the extracted game...", "determinate": False}
         shutil.rmtree(self.path)
+
+        return converted_game

@@ -13,7 +13,7 @@ _tools_run_dict = get_tools_run_dict_function(tools_path)
 _tools_run_popen = get_tools_run_popen_function(tools_path)
 
 
-def copy(source_directory: Path | str, destination_file: Path | str):
+def copy(source_directory: Path | str, destination_file: Path | str) -> "WITPath":
     """
     Copy a game directory to a game file with a specific format.
     :param source_directory: path to the extracted game
@@ -21,7 +21,7 @@ def copy(source_directory: Path | str, destination_file: Path | str):
     :return: the destination game path
     """
     _tools_run("COPY", source_directory, "--DEST", destination_file)
-    return Path(destination_file)
+    return WITPath(destination_file)
 
 
 class Extension(enum.Enum):
@@ -75,6 +75,18 @@ class WITPath:
         """
         # main.dol is located in ./sys/main.dol, so return parent of parent
         if self.extension == Extension.FST: return self.path.parent.parent
+
+    def edit(self, name: str = None, game_id: str = None) -> None:
+        """
+        Edit the game's information. If the game is a directory, this is ignored.
+        """
+        if self.extension == Extension.FST: return
+
+        args = []
+        if name is not None: args.extend(["--name", name])
+        if game_id is not None: args.extend(["--id", game_id])
+
+        _tools_run("EDIT", self.path, *args)
 
     def analyze(self) -> dict:
         """
