@@ -23,7 +23,7 @@ class OriginalTrack:
 
         {"name": "desert_course", "slot": "T41", "nickname": "DDR"},
         {"name": "ridgehighway_course", "slot": "T42", "nickname": "MH"},
-        {"name": "koppa_course", "slot": "T43", "nickname": "BC"},
+        {"name": "koopa_course", "slot": "T43", "nickname": "BC"},
         {"name": "rainbow_course", "slot": "T44", "nickname": "RR"},
 
         # retro tracks
