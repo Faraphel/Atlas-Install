@@ -162,12 +162,12 @@ class ExtractedGame:
         if output_type == wit.Extension.FST: return
 
         destination_file = self.path.with_suffix(self.path.suffix + output_type.value)
-        dest_name: str = destination_file.name
+        dest_stem: str = destination_file.stem
 
         i: int = 0
         while destination_file.exists():
             i += 1
-            destination_file = destination_file.with_name(dest_name + f" ({i})")
+            destination_file = destination_file.with_stem(dest_stem + f" ({i})")
 
         converted_game: wit.WITPath = wit.copy(
             source_directory=self.path,
