@@ -49,7 +49,7 @@ class Window(AbstractPreviewWindow):
         self.text_track_format.delete(1.0, tkinter.END)
 
         # insert all the tracks representation
-        for track in self.mod_config.get_all_tracks(ignore_filter=True):
+        for track in self.mod_config.get_all_arenas_tracks(ignore_filter=True):
             try:
                 track_repr = track.repr_format(
                     self.mod_config, self.entry_template_input.get()

@@ -9,7 +9,7 @@ from source.mkw import Tag
 from source.mkw.Cup import Cup
 from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
 from source.mkw.ModSettings import AbstractModSettings
-from source.mkw.Track import CustomTrack, DefaultTrack
+from source.mkw.Track import CustomTrack, DefaultTrack, Arena
 import json
 
 from source.mkw.OriginalTrack import OriginalTrack
@@ -68,7 +68,7 @@ class ModConfig:
     Representation of a mod
     """
 
-    __slots__ = ("name", "path", "nickname", "variant", "_tracks", "version",
+    __slots__ = ("name", "path", "nickname", "variant", "_tracks", "arenas", "version",
                  "original_track_prefix", "swap_original_order", "keep_original_track",
                  "enable_random_cup", "tags_cups", "track_file_template",
                  "multiplayer_disable_if", "macros", "messages", "global_settings",
@@ -81,7 +81,7 @@ class ModConfig:
                  track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
                  messages: dict[str, dict[str, str]] = None, global_settings: dict[str, dict[str, str]] = None,
                  specific_settings: dict[str, dict[str, str]] = None, lpar_template: str = None,
-                 tags_templates: dict[str, str] = None):
+                 tags_templates: dict[str, str] = None, arenas: list["Arena"] = None):
 
         self.path = Path(path)
         self.macros: dict = macros if macros is not None else {}
@@ -109,6 +109,8 @@ class ModConfig:
         self.multiplayer_disable_if: str = multiplayer_disable_if if multiplayer_disable_if is not None else "False"
         self.lpar_template: str = lpar_template if lpar_template is not None else "normal.lpar"
 
+        self.arenas: list["Arena"] = arenas if arenas is not None else []
+
         self.original_track_prefix: bool = original_track_prefix if original_track_prefix is not None else True
         self.swap_original_order: bool = swap_original_order if swap_original_order is not None else True
         self.keep_original_track: bool = keep_original_track if keep_original_track is not None else True
@@ -133,7 +135,7 @@ class ModConfig:
         kwargs = {
             attr: config_dict.get(attr)
             for attr in cls.__slots__
-            if attr not in ["name", "_tracks", "tracks", "path", "macros", "messages"]
+            if attr not in ["name", "_tracks", "tracks", "arenas", "path", "macros", "messages"]
             # these keys are treated after or are reserved
         }
 
@@ -144,6 +146,7 @@ class ModConfig:
             **kwargs,
 
             tracks=[CustomTrack.from_dict(track) for track in config_dict.get("tracks", [])],
+            arenas=[Arena.from_dict(arena) for arena in config_dict.get("arenas", [])],
             macros=macros,
             messages=messages,
         )
@@ -173,12 +176,12 @@ class ModConfig:
         :return: the modconfig environment
         """
         return {
-                   "mod_config": self,
-                   "bmg_color_raw": bmg_color_raw,
-                   "bmg_color_text": bmg_color_text
-               } | (
-                   base_env if base_env is not None else {}
-               )
+           "mod_config": self,
+           "bmg_color_raw": bmg_color_raw,
+           "bmg_color_text": bmg_color_text
+        } | (
+            base_env if base_env is not None else {}
+        )
 
     def safe_eval(self, *args, env: dict[str, any] = None, **kwargs) -> any:
         """
@@ -200,6 +203,13 @@ class ModConfig:
         :return: directory of the mod
         """
         return self.path.parent
+
+    def get_all_arenas_tracks(self, *args, **kwargs) -> Generator["CustomTrack", None, None]:
+        """
+        Same as get_all_tracks, but arenas are included
+        """
+        yield from self.get_all_tracks(*args, **kwargs)
+        yield from self.arenas
 
     def get_all_tracks(self, *args, **kwargs) -> Generator["CustomTrack", None, None]:
         """
@@ -325,6 +335,14 @@ class ModConfig:
             # get all the cup ctfile, use "-" for the template since the track's name are not used here
             ctfile += cup.get_ctfile(mod_config=self, template=template)
 
+        ctfile_override_property = "[SETUP-ARENA]\n"
+        for arena in self.arenas:
+            arena_definition, arena_override_property = arena.get_ctfile(mod_config=self, template=template)
+            ctfile += arena_definition
+            ctfile_override_property += arena_override_property
+
+        ctfile += ctfile_override_property
+
         return ctfile
 
     def get_base_cticons(self) -> Generator[Image.Image, None, None]:
@@ -416,7 +434,7 @@ class ModConfig:
             return_lambda=True, lambda_args=["track"]
         )
 
-        for track in self.get_all_tracks():
+        for track in self.get_all_arenas_tracks():
             track_file: Path = next(
                 track_directory.rglob(f"{track.repr_format(self, self.track_file_template)}.*")
             )

@@ -49,7 +49,7 @@ class Window(AbstractPreviewWindow):
         template = self.entry_template_input.get()
 
         # insert all the tracks representation
-        for track in self.mod_config.get_all_tracks(
+        for track in self.mod_config.get_all_arenas_tracks(
                 ignore_filter=True,
                 sorting_template=template if template else None
         ):
