@@ -9,6 +9,10 @@ if TYPE_CHECKING:
     from source import TemplateSafeEval, Env
 
 
+self = __import__(__name__)
+self.safe_eval_cache = {}
+
+
 class SafeEvalException(Exception):
     def __init__(self, message: str):
         super().__init__(message)
@@ -38,6 +42,11 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     if len(template) == 0: return ""
     if env is None: env = {}
     if macros is None: macros = {}
+    if lambda_args is None: lambda_args = []
+
+    # if the safe_eval return a callable and have already been called, return the cached callable
+    if return_lambda is True and template in self.safe_eval_cache:
+        return self.safe_eval_cache[template]
 
     # replace the macro in the template
     template = replace_macro(template=template, macros=macros)
@@ -122,4 +131,6 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     ast.fix_missing_locations(expression)
 
     # return the evaluated formula
-    return eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
+    result = eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
+    if return_lambda: self.safe_eval_cache[template] = result  # cache the callable for potential latter call
+    return result
