@@ -5,7 +5,6 @@ from abc import ABC, abstractmethod
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
 if TYPE_CHECKING:
-    from source.mkw.Patch.PatchOperation import Layer
     from source.mkw.Patch import Patch
 
 
@@ -26,7 +25,7 @@ class AbstractLayer(ABC):
         """
 
     @classmethod
-    def get(cls, layer: dict) -> "Layer":
+    def get(cls, layer: dict) -> "AbstractLayer":
         """
         return the correct type of layer corresponding to the layer mode
         :param layer: the layer to load

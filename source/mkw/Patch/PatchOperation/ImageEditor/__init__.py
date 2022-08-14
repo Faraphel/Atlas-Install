@@ -6,7 +6,6 @@ from PIL import Image
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
 if TYPE_CHECKING:
-    from source.mkw.Patch.PatchOperation import Layer
     from source.mkw.Patch import Patch
 
 
@@ -68,7 +67,7 @@ class AbstractLayer(ABC):
         """
 
     @classmethod
-    def get(cls, layer: dict) -> "Layer":
+    def get(cls, layer: dict) -> "AbstractLayer":
         """
         return the correct type of layer corresponding to the layer mode
         :param layer: the layer to load
@@ -87,7 +86,7 @@ class ImageGenerator(AbstractPatchOperation):
     type = "img-edit"
 
     def __init__(self, layers: list[dict]):
-        self.layers: list["Layer"] = [AbstractLayer.get(layer) for layer in layers]
+        self.layers: list["AbstractLayer"] = [AbstractLayer.get(layer) for layer in layers]
 
     def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
         image = Image.open(file_content).convert("RGBA")
