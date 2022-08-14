@@ -8,10 +8,9 @@ ModConfig: any
 
 
 class TrackGroup:
-    def __init__(self, tracks: list["Track"] = None, tags: list[Tag] = None, name: str = None):
+    def __init__(self, tracks: list["Track"] = None, tags: list[Tag] = None):
         self.tracks = tracks if tracks is not None else []
         self.tags = tags if tags is not None else []
-        self.name = name if name is not None else ""
 
     def get_tracks(self) -> Generator["Track", None, None]:
         """
@@ -34,7 +33,6 @@ class TrackGroup:
         return cls(
             tracks=[CustomTrack.from_dict(track) for track in group_dict["group"]],
             tags=group_dict.get("tags"),
-            name=group_dict.get("name"),
         )
 
     def get_ctfile(self, mod_config: "ModConfig") -> str:

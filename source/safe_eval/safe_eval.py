@@ -1,8 +1,12 @@
 import ast
 import copy
+from typing import TYPE_CHECKING
 
 from source.safe_eval.macros import replace_macro
 from source.safe_eval.safe_function import get_all_safe_functions
+
+if TYPE_CHECKING:
+    from source import TemplateSafeEval, Env
 
 
 class SafeEvalException(Exception):
@@ -19,7 +23,7 @@ all_globals = {
 }
 
 
-def safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] = None,
+def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str, "TemplateSafeEval"] = None,
               return_lambda: bool = False, lambda_args: list[str] = None) -> any:
     """
     Run a python code in an eval function, but avoid all potential dangerous function.

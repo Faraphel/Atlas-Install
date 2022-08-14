@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import Generator
+from typing import Generator, TYPE_CHECKING
 
 from source.mkw import Slot, Tag, ModConfig
+
+if TYPE_CHECKING:
+    from source import TemplateMultipleSafeEval
 
 
 class TrackForbiddenCustomAttribute(Exception):
@@ -39,7 +42,7 @@ class AbstractTrack(ABC):
             yield self
 
     @abstractmethod
-    def repr_format(self, mod_config: "ModConfig", template: str) -> str:
+    def repr_format(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> str:
         """
         return the representation of the track from the format
         :param template: template for the way the text will be represented
@@ -66,7 +69,7 @@ class AbstractTrack(ABC):
         """
         ...
 
-    def get_ctfile(self, mod_config: "ModConfig", template: str, hidden: bool = False) -> str:
+    def get_ctfile(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval", hidden: bool = False) -> str:
         """
         return the ctfile of the track
         :hidden: if the track is in a group

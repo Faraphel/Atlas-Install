@@ -5,6 +5,7 @@ from source.wt import ctc
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
+    from source import TemplateMultipleSafeEval
 
 
 class CTFileLayer(AbstractLayer):
@@ -14,7 +15,7 @@ class CTFileLayer(AbstractLayer):
 
     mode = "ctfile"
 
-    def __init__(self, template: dict[str, str]):
+    def __init__(self, template: "TemplateMultipleSafeEval"):
         self.template = template
 
     def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:

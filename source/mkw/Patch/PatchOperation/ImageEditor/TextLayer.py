@@ -8,6 +8,7 @@ from source.mkw.Patch.PatchOperation.ImageEditor import AbstractLayer
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
+    from source import TemplateMultipleSafeEval
 
 
 class TextLayer(AbstractLayer):
@@ -24,7 +25,7 @@ class TextLayer(AbstractLayer):
         self.font_path: str | None = font_path
         self.font_size: int = font_size
         self.color: tuple[int] = tuple(color)
-        self.text: str = text
+        self.text: "TemplateMultipleSafeEval" = text
 
     def patch_image(self, patch: "Patch", image: Image.Image) -> Image.Image:
         draw = ImageDraw.Draw(image)

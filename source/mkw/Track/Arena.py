@@ -1,5 +1,10 @@
+from typing import TYPE_CHECKING
+
 from source.mkw import Slot, Tag
 from source.mkw.Track.RealArenaTrack import RealArenaTrack
+
+if TYPE_CHECKING:
+    from source import TemplateMultipleSafeEval
 
 
 class ArenaForbiddenCustomAttribute(Exception):
@@ -32,7 +37,7 @@ class Arena(RealArenaTrack):
     def from_dict(cls, arena_dict: dict[str, any]) -> "Arena":
         return cls(**arena_dict)
 
-    def get_ctfile(self, mod_config: "ModConfig", template: str) -> (str, str):
+    def get_ctfile(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> (str, str):
         """
         Return the ctfile for the arena and the redefinition of the slot property
         :param mod_config: the mod_config object

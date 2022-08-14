@@ -1,3 +1,10 @@
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from source import TemplateMultipleSafeEval
+    from source.mkw.ModConfig import ModConfig
+
+
 class RealArenaTrack:
     """
     class shared between all arena and track class that represent a "real" track or arena
@@ -18,7 +25,7 @@ class RealArenaTrack:
             return mod_config.multiple_safe_eval(mod_config.tags_templates[template_name][tag], env={"tag": tag})
         return default
 
-    def repr_format(self, mod_config: "ModConfig", template: str) -> str:
+    def repr_format(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> str:
         return mod_config.multiple_safe_eval(
             template,
             env={

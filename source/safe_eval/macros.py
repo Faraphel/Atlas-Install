@@ -1,5 +1,8 @@
 import re
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from source import TemplateSafeEval
 
 MACRO_START, MACRO_END = "##", "##"
 
@@ -9,7 +12,7 @@ class NotImplementedMacro(Exception):
         super().__init__(f"Invalid macro while parsing macros:\n{macro}")
 
 
-def replace_macro(template: str, macros: dict[str, str]) -> str:
+def replace_macro(template: str, macros: dict[str, "TemplateSafeEval"]) -> str:
     """
     Replace all the macro defined in macro by their respective value
     :param template: template where to replace the macro

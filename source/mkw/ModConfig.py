@@ -1,6 +1,6 @@
 import shutil
 from pathlib import Path
-from typing import Generator, Callable, Iterator, Iterable
+from typing import Generator, Callable, Iterator, Iterable, TYPE_CHECKING
 
 from PIL import Image
 
@@ -15,6 +15,10 @@ import json
 from source.mkw.OriginalTrack import OriginalTrack
 from source.safe_eval import safe_eval, multiple_safe_eval
 from source.wt.szs import SZSPath
+
+if TYPE_CHECKING:
+    from source import TemplateMultipleSafeEval, TemplateSafeEval, Env
+
 
 CT_ICON_SIZE: int = 128
 
@@ -74,46 +78,47 @@ class ModConfig:
                  "specific_settings", "lpar_template", "tags_templates")
 
     def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
-                 tags_cups: list[Tag] = None,
-                 tracks: list["Track | TrackGroup"] = None, original_track_prefix: bool = None,
-                 swap_original_order: bool = None, keep_original_track: bool = None, enable_random_cup: bool = None,
-                 track_file_template: str = None, multiplayer_disable_if: str = None, macros: dict[str, str] = None,
-                 messages: dict[str, dict[str, str]] = None, global_settings: dict[str, dict[str, str]] = None,
-                 specific_settings: dict[str, dict[str, str]] = None, lpar_template: str = None,
-                 tags_templates: dict[str, str] = None, arenas: list["Arena"] = None):
+                 tags_cups: list[Tag] = None, tracks: list["Track | TrackGroup"] = None,
+                 original_track_prefix: bool = None, swap_original_order: bool = None, keep_original_track: bool = None,
+                 enable_random_cup: bool = None, track_file_template: "TemplateMultipleSafeEval" = None,
+                 multiplayer_disable_if: "TemplateSafeEval" = None, macros: dict[str, "TemplateSafeEval"] = None,
+                 messages: dict[str, dict[str, "TemplateMultipleSafeEval"]] = None,
+                 global_settings: dict[str, dict[str, str]] = None, specific_settings: dict[str, dict[str, str]] = None,
+                 lpar_template: "TemplateMultipleSafeEval" = None,
+                 tags_templates: dict[str, "TemplateMultipleSafeEval"] = None, arenas: list["Arena"] = None):
 
         self.path = Path(path)
-        self.macros: dict = macros if macros is not None else {}
-        self.messages: dict = messages if messages is not None else {}
+        self.macros = macros if macros is not None else {}
+        self.messages = messages if messages is not None else {}
 
-        self.global_settings: dict = AbstractModSettings.get(merge_dict(
+        self.global_settings = AbstractModSettings.get(merge_dict(
             default_global_settings, global_settings,
             dict_keys=default_global_settings.keys()  # Avoid modder to add their own settings to globals one
         ))
-        self.specific_settings: dict = AbstractModSettings.get(
+        self.specific_settings = AbstractModSettings.get(
             specific_settings if specific_settings is not None else {}
         )
 
-        self.name: str = name
-        self.nickname: str = nickname if nickname is not None else name
-        self.version: str = version if version is not None else "v1.0.0"
-        self.variant: str = variant if variant is not None else "01"
+        self.name = name
+        self.nickname = nickname if nickname is not None else name
+        self.version = version if version is not None else "v1.0.0"
+        self.variant = variant if variant is not None else "01"
 
-        self.tags_templates: dict[str, str] = tags_templates if tags_templates is not None else {}
-        self.tags_cups: list[Tag] = tags_cups if tags_cups is not None else []
+        self.tags_templates = tags_templates if tags_templates is not None else {}
+        self.tags_cups = tags_cups if tags_cups is not None else []
 
-        self._tracks: list["Track | TrackGroup"] = tracks if tracks is not None else []
-        self.track_file_template: str = track_file_template \
+        self._tracks = tracks if tracks is not None else []
+        self.track_file_template = track_file_template \
             if track_file_template is not None else "{{ getattr(track, 'sha1', '_') }}"
-        self.multiplayer_disable_if: str = multiplayer_disable_if if multiplayer_disable_if is not None else "False"
-        self.lpar_template: str = lpar_template if lpar_template is not None else "normal.lpar"
+        self.multiplayer_disable_if = multiplayer_disable_if if multiplayer_disable_if is not None else "False"
+        self.lpar_template = lpar_template if lpar_template is not None else "normal.lpar"
 
-        self.arenas: list["Arena"] = arenas if arenas is not None else []
+        self.arenas = arenas if arenas is not None else []
 
-        self.original_track_prefix: bool = original_track_prefix if original_track_prefix is not None else True
-        self.swap_original_order: bool = swap_original_order if swap_original_order is not None else True
-        self.keep_original_track: bool = keep_original_track if keep_original_track is not None else True
-        self.enable_random_cup: bool = enable_random_cup if enable_random_cup is not None else True
+        self.original_track_prefix = original_track_prefix if original_track_prefix is not None else True
+        self.swap_original_order = swap_original_order if swap_original_order is not None else True
+        self.keep_original_track = keep_original_track if keep_original_track is not None else True
+        self.enable_random_cup = enable_random_cup if enable_random_cup is not None else True
 
     def __repr__(self):
         return f"<ModConfig name={self.name} version={self.version}>"
@@ -168,7 +173,7 @@ class ModConfig:
             messages=json.loads(messages_file.read_text(encoding="utf8")) if messages_file.exists() else None,
         )
 
-    def get_safe_eval_env(self, base_env: dict[str, any] = None) -> dict[str, any]:
+    def get_safe_eval_env(self, base_env: "Env" = None) -> dict[str, any]:
         """
         Return the env for the modconfig safe_eval function
         :param base_env: additional environment
@@ -182,14 +187,14 @@ class ModConfig:
             base_env if base_env is not None else {}
         )
 
-    def safe_eval(self, *args, env: dict[str, any] = None, **kwargs) -> any:
+    def safe_eval(self, *args, env: "Env" = None, **kwargs) -> any:
         """
         Safe eval with useful modconfig environment
         :return: the result of the evaluation
         """
         return safe_eval(*args, env=self.get_safe_eval_env(base_env=env), macros=self.macros, **kwargs)
 
-    def multiple_safe_eval(self, *args, env: dict[str, any] = None, **kwargs) -> str:
+    def multiple_safe_eval(self, *args, env: "Env" = None, **kwargs) -> str:
         """
         Multiple safe eval with useful modconfig environment
         :return: the str result of the evaluation
@@ -227,8 +232,9 @@ class ModConfig:
         :return: track or tracks groups elements
         """
 
-        filter_template: str | None = self.global_settings["include_track_if"].value if not ignore_filter else None
-        settings_sort: str | None = self.global_settings["sort_tracks"].value
+        filter_template: "TemplateSafeEval | None" = self.global_settings["include_track_if"].value \
+            if not ignore_filter else None
+        settings_sort: "TemplateSafeEval | None" = self.global_settings["sort_tracks"].value
 
         # filter_template_func is the function checking if the track should be included. If no parameter is set,
         # then always return True
@@ -309,7 +315,7 @@ class ModConfig:
         yield from self.get_ordered_cups()
         yield from self.get_unordered_cups()
 
-    def get_ctfile(self, template: str) -> str:
+    def get_ctfile(self, template: "TemplateMultipleSafeEval") -> str:
         """
         Return the ct_file generated from the ModConfig
         :template: template for the track name

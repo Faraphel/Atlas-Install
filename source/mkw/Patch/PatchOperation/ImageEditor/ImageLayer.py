@@ -2,8 +2,8 @@ from typing import TYPE_CHECKING
 
 from PIL import Image
 
-from source.mkw.Patch import *
 from source.mkw.Patch.PatchOperation.ImageEditor import AbstractLayer
+from source.mkw.Patch import PathOutsidePatch
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch

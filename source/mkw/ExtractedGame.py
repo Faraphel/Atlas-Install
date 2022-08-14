@@ -1,12 +1,15 @@
 import shutil
 from io import BytesIO
 from pathlib import Path
-from typing import Generator, IO
+from typing import Generator, IO, TYPE_CHECKING
 
 from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
 from source.wt import szs, lec, wit
 from source.wt.wstrt import StrPath
+
+if TYPE_CHECKING:
+    from source.mkw.Game import Game
 
 
 class PathOutsideMod(Exception):

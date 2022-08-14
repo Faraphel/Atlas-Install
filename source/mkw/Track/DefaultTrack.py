@@ -1,4 +1,9 @@
+from typing import TYPE_CHECKING
+
 from source.mkw.Track.AbstractTrack import AbstractTrack
+
+if TYPE_CHECKING:
+    from source.mkw.ModConfig import ModConfig
 
 
 class DefaultTrack(AbstractTrack):

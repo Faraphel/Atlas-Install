@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 if TYPE_CHECKING:
     from source.mkw import ModConfig
+    from source import TemplateMultipleSafeEval
 
 
 class Cup:
@@ -64,7 +65,7 @@ class Cup:
         # if the icon doesn't exist, use the default automatically generated one
         return self.get_default_cticon(mod_config=mod_config)
 
-    def get_ctfile(self, mod_config: "ModConfig", template: str) -> str:
+    def get_ctfile(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> str:
         """
         Get the ctfile for this cup
         :return: the ctfile

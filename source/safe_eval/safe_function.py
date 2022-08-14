@@ -1,4 +1,7 @@
-from typing import Callable, Generator
+from typing import Callable, Generator, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from source import TemplateSafeEval, Env
 
 
 def get_all_safe_functions() -> Generator[list[Callable], None, None]:
@@ -41,7 +44,7 @@ class safe_function:
         return type(obj)
 
     @staticmethod
-    def eval(template: str, env: dict | None = None):
+    def eval(template: "TemplateSafeEval", env: "Env | None" = None):
         """
         Allow a recursive safe_eval, but without the lambda functionality
         """

@@ -7,6 +7,7 @@ from source.wt import bmg
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
+    from source import TemplateMultipleSafeEval
 
 
 class FormatOriginalTrackLayer(AbstractLayer):
@@ -16,7 +17,7 @@ class FormatOriginalTrackLayer(AbstractLayer):
 
     mode = "format-original-track"
 
-    def __init__(self, template: str):
+    def __init__(self, template: "TemplateMultipleSafeEval"):
         self.template = template
 
     def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:

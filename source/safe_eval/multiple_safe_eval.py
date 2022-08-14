@@ -1,12 +1,17 @@
 import re
+from typing import TYPE_CHECKING
 
 from source.safe_eval import safe_eval
+
+if TYPE_CHECKING:
+    from source import TemplateMultipleSafeEval, TemplateSafeEval, Env
 
 
 TOKEN_START, TOKEN_END = "{{", "}}"
 
 
-def multiple_safe_eval(template: str, env: dict[str, any] = None, macros: dict[str, str] = None) -> str:
+def multiple_safe_eval(template: "TemplateMultipleSafeEval", env: "Env" = None,
+                       macros: dict[str, "TemplateSafeEval"] = None) -> str:
     """
     Similar to safe_eval, but expression need to be enclosed between "{{" and "}}".
     Example : "{{ track.author }} is the track creator !"

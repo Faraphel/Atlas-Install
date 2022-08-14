@@ -1,9 +1,11 @@
 from typing import TYPE_CHECKING
 
+
 from source.mkw.Patch.PatchOperation.BmgTxtEditor import AbstractLayer
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
+    from source import TemplateMultipleSafeEval
 
 
 class IDLayer(AbstractLayer):
@@ -13,7 +15,7 @@ class IDLayer(AbstractLayer):
 
     mode = "id"
 
-    def __init__(self, template: dict[str, str]):
+    def __init__(self, template: dict[str, "TemplateMultipleSafeEval"]):
         self.template = template
 
     def patch_bmg(self, patch: "Patch", decoded_content: str) -> str:
