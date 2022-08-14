@@ -4,8 +4,10 @@ from typing import IO, Type, TYPE_CHECKING
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
 
-Patch: any
-Layer: any
+
+class InvalidPatchOperation(Exception):
+    def __init__(self, operation: str):
+        super().__init__(f"Error : operation \"{operation}\" is not implemented")
 
 
 class AbstractPatchOperation(ABC):

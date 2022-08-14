@@ -8,8 +8,10 @@ if TYPE_CHECKING:
     from source.mkw.Patch.PatchOperation import Layer
     from source.mkw.Patch import Patch
 
-Layer: any
-Patch: any
+
+class InvalidBmgLayerMode(Exception):
+    def __init__(self, layer_mode: str):
+        super().__init__(f"Error : bmg layer mode \"{layer_mode}\" is not implemented")
 
 
 class AbstractLayer(ABC):

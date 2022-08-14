@@ -9,8 +9,10 @@ if TYPE_CHECKING:
     from source.mkw.Patch.PatchOperation import Layer
     from source.mkw.Patch import Patch
 
-Layer: any
-Patch: any
+
+class InvalidImageLayerType(Exception):
+    def __init__(self, layer_type: str):
+        super().__init__(f"Error : image layer type \"{layer_type}\" is not implemented")
 
 
 class AbstractLayer(ABC):
