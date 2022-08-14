@@ -83,7 +83,7 @@ class Window(AbstractPreviewWindow):
             return_lambda=True, lambda_args=["track"]
         )
 
-        for track in self.mod_config.get_all_arenas_tracks(ignore_filter=True):
+        for track in self.mod_config.get_all_tracks(ignore_filter=True):
             value: bool = template_func(track) is True
 
             self.text_track_select.insert(tkinter.END, f"{value}\n")
