@@ -1,5 +1,5 @@
 {
-    "mode": "overwrite",
+    "mode": "replace",
     "operation": {
         "img-edit": {
             "layers": [

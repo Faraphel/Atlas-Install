@@ -26,12 +26,10 @@ class PatchDirectory(PatchObject):
         """
         patch a subdirectory of the game with the PatchDirectory
         """
-        yield {"description": f"Patching {self}"}
+        yield {"description": f"Patching {game_subpath}"}
 
-        if self.patch.mod_config.safe_eval(
-            self.configuration["if"],
-            env={"extracted_game": extracted_game}
-        ) is not True: return
+        # check if the directory should be patched
+        if not self.is_enabled(extracted_game): return
 
         match self.configuration["mode"]:
             # if the mode is copy, then simply patch the subfile into the game with the same path
@@ -59,4 +57,4 @@ class PatchDirectory(PatchObject):
 
             # else raise an error
             case _:
-                raise InvalidPatchMode(self.configuration["mode"])
+                raise InvalidPatchMode(self, self.configuration["mode"])

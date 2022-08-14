@@ -34,8 +34,9 @@ class PatchObject(ABC):
 
         # default configuration
         self._configuration = {
-            "mode": "copy",
-            "if": "True",
+            "mode": "copy",  # mode on how should the file be patched
+            "source": "patch",  # source of the file data that will be modified
+            "if": "True",  # condition for the patch to be applied
         }
 
         configuration_path = self.full_path.with_suffix(self.full_path.suffix + ".json")
@@ -68,3 +69,12 @@ class PatchObject(ABC):
         install the PatchObject into the game
         yield the step of the process
         """
+        ...
+
+    def is_enabled(self, extracted_game: "ExtractedGame") -> bool:
+        """
+        Return if the patch object is actually enabled
+        :param extracted_game: the extracted game object
+        :return: should the patch be applied ?
+        """
+        return self.patch.mod_config.safe_eval(self.configuration["if"], env={"extracted_game": extracted_game}) is True

@@ -1,4 +1,4 @@
 {
-  "mode": "match-copy",
+  "mode": "match",
   "match_regex": "*/*.thp"
 }
