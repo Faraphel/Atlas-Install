@@ -23,6 +23,7 @@ class AbstractLayer(ABC):
         """
         Patch a bmg with the actual layer. Return the new bmg content.
         """
+        ...
 
     @classmethod
     def get(cls, layer: dict) -> "AbstractLayer":

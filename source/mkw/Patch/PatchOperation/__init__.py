@@ -39,5 +39,5 @@ class AbstractPatchOperation(ABC):
 #  load all the subclass of AbstractPatchOperation to that __subclasses__ can filter them
 from source.mkw.Patch.PatchOperation import (
     ImageDecoder, ImageEncoder, Rename, Special, StrEditor,
-    BmgTxtEditor, ImageEditor, BmgEncoder, BmgDecoder
+    BmgTxtEditor, ImageEditor, BmgEncoder, BmgDecoder, SzsEditor
 )

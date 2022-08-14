@@ -6,6 +6,7 @@ tools_path = tools_szs_dir / "wszst"
 
 _tools_run = get_tools_run_function(tools_path)
 _tools_run_dict = get_tools_run_dict_function(tools_path)
+_tools_run_popen = get_tools_run_popen_function(tools_path)
 
 
 @better_wt_error(tools_path)
@@ -38,6 +39,31 @@ def create(extracted_szs: Path | str, dest: Path | str, overwrite: bool = False)
 
     _tools_run("CREATE", extracted_szs, "--DEST", dest, *args)
     return SZSPath(dest)
+
+
+def patch(szs_data: bytes, scale: dict[str, int] = None, shift: dict[str, int] = None, rotation: dict[str, int] = None,
+          translate: dict[str, int] = None, speed: float = None, laps: int = None):
+    """
+    Patch a szs file (especially track file)
+    :return: the patched szs file
+    """
+
+    args = []
+    if scale is not None: args.append(f"--scale={scale.get('x', 1)},{scale.get('y', 1)},{scale.get('z', 1)}")
+    if shift is not None: args.append(f"--shift={shift.get('x', 0)},{scale.get('y', 0)},{scale.get('z', 0)}")
+    if rotation is not None: args.append(f"--rot={rotation.get('x', 0)},{rotation.get('y', 0)},{rotation.get('z', 0)}")
+    if translate is not None: args.append(
+        f"--translate={translate.get('x', 0)},{translate.get('y', 0)},{translate.get('z', 0)}"
+    )
+    if speed is not None: args.append(f"--speed-mod={speed}")
+    if laps is not None: args.append(f"--kmp={laps}LAPS")
+
+    process = _tools_run_popen("PATCH", "-", *args, "--DEST", "-")
+    stdout, _ = process.communicate(input=szs_data)
+    if process.returncode != 0:
+        raise WTError(tools_path, process.returncode)
+
+    return stdout
 
 
 class SZSPath:

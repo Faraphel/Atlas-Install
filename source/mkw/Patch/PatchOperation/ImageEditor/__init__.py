@@ -65,6 +65,7 @@ class AbstractLayer(ABC):
         """
         Patch an image with the actual layer. Return the new image.
         """
+        ...
 
     @classmethod
     def get(cls, layer: dict) -> "AbstractLayer":
