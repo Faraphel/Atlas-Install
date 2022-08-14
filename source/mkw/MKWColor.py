@@ -1,4 +1,3 @@
-
 class ColorNotFound(Exception):
     def __init__(self, color_data: any):
         super().__init__(f'Can\'t find color "{color_data}"')

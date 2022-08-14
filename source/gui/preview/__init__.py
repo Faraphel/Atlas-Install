@@ -1,9 +1,9 @@
 import tkinter
 from abc import abstractmethod, ABC
-from typing import Type
+from typing import Type, TYPE_CHECKING
 
-
-ModConfig: any
+if TYPE_CHECKING:
+    from source.mkw.ModConfig import ModConfig
 
 
 class InvalidPreviewWindowName(Exception):

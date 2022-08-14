@@ -1,6 +1,8 @@
-from source.mkw.Patch import *
 from abc import ABC, abstractmethod
-from typing import IO, Type
+from typing import IO, Type, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 Patch: any
 Layer: any

@@ -1,6 +1,9 @@
-from typing import Generator, IO
+from pathlib import Path
+from typing import Generator, IO, TYPE_CHECKING
 
-from source.mkw.Patch import *
+if TYPE_CHECKING:
+    from source.mkw.ModConfig import ModConfig
+    from source.mkw.ExtractedGame import ExtractedGame
 
 
 class Patch:

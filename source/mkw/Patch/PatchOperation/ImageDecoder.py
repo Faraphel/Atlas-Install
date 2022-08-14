@@ -1,11 +1,11 @@
 from io import BytesIO
-from typing import IO
+from typing import IO, TYPE_CHECKING
 
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.wt import img
 
-
-Patch: any
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class ImageDecoder(AbstractPatchOperation):

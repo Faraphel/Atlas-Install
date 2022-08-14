@@ -1,8 +1,10 @@
+from typing import TYPE_CHECKING
+
 from source.mkw.Patch.PatchOperation.BmgTxtEditor import AbstractLayer
 from source.wt import ctc
 
-
-Patch: any
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class CTFileLayer(AbstractLayer):

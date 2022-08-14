@@ -1,8 +1,11 @@
 import json
 from abc import abstractmethod, ABC
-from typing import Generator
+from pathlib import Path
+from typing import Generator, TYPE_CHECKING
 
-from source.mkw.Patch import *
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
+    from source.mkw.ExtractedGame import ExtractedGame
 
 
 class PatchObject(ABC):

@@ -11,11 +11,11 @@ __author__ = 'Faraphel'
 discord_url = "https://discord.gg/HEYW5v8ZCd"
 github_wiki_url = "https://github.com/Faraphel/MKWF-Install/wiki/help"
 
-Ko = 1_000
-Mo = 1_000 * Ko
-Go = 1_000 * Mo
+Ko: int = 1_000
+Mo: int = 1_000 * Ko
+Go: int = 1_000 * Mo
 
-minimum_space_available = 15*Go
+minimum_space_available: int = 15*Go
 
 
 def threaded(func: Callable) -> Callable:

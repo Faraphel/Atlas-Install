@@ -1,10 +1,12 @@
 import tkinter
 from tkinter import ttk
+from typing import TYPE_CHECKING
+
 from source.translation import translate as _
 
-
-ModConfig: any
-AbstractModSettings: any
+if TYPE_CHECKING:
+    from source.mkw.ModConfig import ModConfig
+    from source.mkw.ModSettings import AbstractModSettings
 
 
 class Window(tkinter.Toplevel):

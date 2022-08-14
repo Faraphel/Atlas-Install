@@ -1,9 +1,9 @@
-from typing import IO
+from typing import IO, TYPE_CHECKING
 
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
-
-Patch: any
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class Rename(AbstractPatchOperation):

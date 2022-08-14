@@ -1,11 +1,13 @@
 from io import BytesIO
-from typing import IO
+from typing import IO, TYPE_CHECKING
 from abc import abstractmethod, ABC
 from PIL import Image
 
-from source.mkw.Patch import *
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
+if TYPE_CHECKING:
+    from source.mkw.Patch.PatchOperation import Layer
+    from source.mkw.Patch import Patch
 
 Layer: any
 Patch: any

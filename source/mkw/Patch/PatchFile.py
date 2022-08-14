@@ -1,10 +1,14 @@
 from io import BytesIO
-from typing import Generator, IO
+from pathlib import Path
+from typing import Generator, IO, TYPE_CHECKING
 
-from source.mkw.Patch import *
+from source.mkw.Patch import PathOutsidePatch, InvalidPatchMode
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.mkw.Patch.PatchObject import PatchObject
 from source.wt.szs import SZSPath
+
+if TYPE_CHECKING:
+    from source.mkw.ExtractedGame import ExtractedGame
 
 
 class PatchFile(PatchObject):

@@ -1,11 +1,16 @@
-# class that represent a mario kart wii cup
+from typing import TYPE_CHECKING
+
 from PIL import Image, ImageDraw, ImageFont
 
-
-ModConfig: any
+if TYPE_CHECKING:
+    from source.mkw import ModConfig
 
 
 class Cup:
+    """
+    class that represent a mario kart wii track cup
+    """
+
     __slots__ = ["_tracks", "cup_name", "cup_id"]
     _last_cup_id = 0
 

@@ -1,9 +1,13 @@
 from io import BytesIO
-from typing import IO
+from pathlib import Path
+from typing import IO, TYPE_CHECKING
 
+from source.mkw.Patch import PathOutsidePatch
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
-from source.mkw.Patch import *
 from source.wt import wstrt
+
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class StrEditor(AbstractPatchOperation):

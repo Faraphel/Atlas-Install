@@ -1,9 +1,8 @@
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-
-ModConfig: any
-ExtractedGame: any
-Patch: any
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class PathOutsidePatch(Exception):

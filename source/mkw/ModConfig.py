@@ -18,7 +18,6 @@ from source.wt.szs import SZSPath
 
 CT_ICON_SIZE: int = 128
 
-Thread: any
 
 default_global_settings: dict[str, dict[str, str]] = {
     "replace_random_new": {

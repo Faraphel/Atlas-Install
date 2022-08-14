@@ -1,11 +1,12 @@
 import re
+from typing import TYPE_CHECKING
 
 from source.mkw.Patch.PatchOperation.BmgTxtEditor import AbstractLayer
 from source.mkw.Track.CustomTrack import CustomTrack
 from source.wt import bmg
 
-
-Patch: any
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class FormatOriginalTrackLayer(AbstractLayer):

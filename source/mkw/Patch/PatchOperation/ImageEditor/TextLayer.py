@@ -1,7 +1,13 @@
+from pathlib import Path
+from typing import TYPE_CHECKING
+
 from PIL import ImageFont, ImageDraw, Image
 
-from source.mkw.Patch import *
+from source.mkw.Patch import PathOutsidePatch
 from source.mkw.Patch.PatchOperation.ImageEditor import AbstractLayer
+
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class TextLayer(AbstractLayer):

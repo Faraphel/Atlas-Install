@@ -1,7 +1,12 @@
+from typing import TYPE_CHECKING
+
 from PIL import Image
 
 from source.mkw.Patch import *
 from source.mkw.Patch.PatchOperation.ImageEditor import AbstractLayer
+
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class ImageLayer(AbstractLayer):

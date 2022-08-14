@@ -1,7 +1,9 @@
+from typing import TYPE_CHECKING
+
 from source.mkw.Patch.PatchOperation.BmgTxtEditor import AbstractLayer
 
-
-Patch: any
+if TYPE_CHECKING:
+    from source.mkw.Patch import Patch
 
 
 class IDLayer(AbstractLayer):

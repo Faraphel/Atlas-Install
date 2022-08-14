@@ -1,13 +1,13 @@
 import tkinter
 from tkinter import ttk
-import re
+from typing import TYPE_CHECKING
 
 from source.mkw.MKWColor import MKWColor
 from source.gui.preview import AbstractPreviewWindow
 from source.gui import better_gui_error
 
-
-ModConfig: any
+if TYPE_CHECKING:
+    from source.mkw.ModConfig import ModConfig
 
 
 class Window(AbstractPreviewWindow):
