@@ -139,21 +139,34 @@ class ExtractedGame:
                 copy_tracks_directories=[ogtracks_directory, cttracks_directory]
             )
 
+    def _install_all_patch(self, mod_config: ModConfig, patch_directory_name: str) -> Generator[dict, None, None]:
+        """
+        for all directory that are in the root of the mod, and don't start with an underscore,
+        for all the subdirectory named by the patch_directory_name, apply the patch
+        :param mod_config: the mod to install
+        """
+        yield {}  # yield an empty dict so that if nothing is yielded by the Patch, still is considered a generator
+        for part_directory in mod_config.get_mod_directory().glob("[!_]*"):
+            for patch_directory in part_directory.glob(patch_directory_name):
+                yield from Patch(patch_directory, mod_config, self._special_file).install(self)
+
+    def install_all_prepatch(self, mod_config: ModConfig) -> Generator[dict, None, None]:
+        """
+        Install all patchs of the mod_config into the game.
+        Used before the lecode patch is applied
+        :param mod_config: the mod to install
+        """
+        yield {"description": "Installing all Pre-Patch...", "determinate": False}
+        yield from self._install_all_patch(mod_config, "_PREPATCH/")
+
     def install_all_patch(self, mod_config: ModConfig) -> Generator[dict, None, None]:
         """
-        Install all patchs of the mod_config into the game
+        Install all patchs of the mod_config into the game.
+        Used after the lecode patch is applied
         :param mod_config: the mod to install
         """
         yield {"description": "Installing all Patch...", "determinate": False}
-
-        # prepare special files data
-        yield from self.prepare_special_file(mod_config)
-
-        # for all directory that are in the root of the mod, and don't start with an underscore,
-        # for all the subdirectory named "_PATCH", apply the patch
-        for part_directory in mod_config.get_mod_directory().glob("[!_]*"):
-            for patch_directory in part_directory.glob("_PATCH/"):
-                yield from Patch(patch_directory, mod_config, self._special_file).install(self)
+        yield from self._install_all_patch(mod_config, "_PATCH/")
 
     def convert_to(self, output_type: wit.Extension) -> Generator[dict, None, wit.WITPath | None]:
         """

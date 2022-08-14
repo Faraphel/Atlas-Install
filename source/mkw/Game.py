@@ -137,14 +137,16 @@ class Game:
 
         # patch the game
         yield from extracted_game.prepare_dol()
-        yield from extracted_game.install_all_patch(mod_config)
-        yield from extracted_game.recreate_all_szs()
+        yield from extracted_game.prepare_special_file(mod_config)
+        yield from extracted_game.install_all_prepatch(mod_config)
         yield from extracted_game.patch_lecode(
             mod_config,
             cache_directory,
             cache_cttracks_directory,
             cache_ogtracks_directory,
         )
+        yield from extracted_game.install_all_patch(mod_config)
+        yield from extracted_game.recreate_all_szs()
 
         # convert the extracted game into a file
         converted_game: WITPath = yield from extracted_game.convert_to(output_type)
