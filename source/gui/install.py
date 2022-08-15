@@ -219,6 +219,7 @@ class Menu(tkinter.Menu):
 
             self.add_command(label="Discord", command=lambda: webbrowser.open(discord_url))
             self.add_command(label="Github Wiki", command=lambda: webbrowser.open(github_wiki_url))
+            self.add_command(label=_("ReadTheDocs"), command=lambda: webbrowser.open(readthedocs_url))
 
     def set_installation_state(self, state: InstallerState) -> bool:
         """
