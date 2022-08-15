@@ -1,18 +1,19 @@
-from typing import Generator
+from typing import Generator, TYPE_CHECKING
 
 from source.mkw import Tag
 
-
-Track: any
-ModConfig: any
+if TYPE_CHECKING:
+    from source import TemplateMultipleSafeEval
+    from source.mkw.Track.CustomTrack import CustomTrack
+    from source.mkw.ModConfig import ModConfig
 
 
 class TrackGroup:
-    def __init__(self, tracks: list["Track"] = None, tags: list[Tag] = None):
+    def __init__(self, tracks: list["CustomTrack"] = None, tags: list[Tag] = None):
         self.tracks = tracks if tracks is not None else []
         self.tags = tags if tags is not None else []
 
-    def get_tracks(self) -> Generator["Track", None, None]:
+    def get_tracks(self) -> Generator["CustomTrack", None, None]:
         """
         Get all the track elements
         :return: track elements
@@ -35,13 +36,13 @@ class TrackGroup:
             tags=group_dict.get("tags"),
         )
 
-    def get_ctfile(self, mod_config: "ModConfig") -> str:
+    def get_ctfile(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> str:
         """
         return the ctfile of the track group
         :return: ctfile
         """
         ctfile = f'T T11; T11; 0x02; "-"; "info"; "-"\n'
         for track in self.get_tracks():
-            ctfile += track.get_ctfile(mod_config=mod_config, hidden=True)
+            ctfile += track.get_ctfile(template=template, mod_config=mod_config, hidden=True)
 
         return ctfile
