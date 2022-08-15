@@ -3,6 +3,7 @@ from typing import Generator, TYPE_CHECKING
 
 from source.mkw.Patch import PathOutsidePatch, InvalidPatchMode
 from source.mkw.Patch.PatchObject import PatchObject
+from source.progress import Progress
 
 if TYPE_CHECKING:
     from source.mkw.ExtractedGame import ExtractedGame
@@ -22,11 +23,11 @@ class PatchDirectory(PatchObject):
             if subpath.suffix == ".json": continue
             yield self.subfile_from_path(subpath)
 
-    def install(self, extracted_game: "ExtractedGame", game_subpath: Path) -> Generator[dict, None, None]:
+    def install(self, extracted_game: "ExtractedGame", game_subpath: Path) -> Generator[Progress, None, None]:
         """
         patch a subdirectory of the game with the PatchDirectory
         """
-        yield {"description": f"Patching {game_subpath}"}
+        yield Progress(description=f"Patching {game_subpath}")
 
         # check if the directory should be patched
         if not self.is_enabled(extracted_game): return

@@ -13,6 +13,7 @@ from source.mkw.Track import CustomTrack, DefaultTrack, Arena
 import json
 
 from source.mkw.OriginalTrack import OriginalTrack
+from source.progress import Progress
 from source.safe_eval import safe_eval, multiple_safe_eval
 from source.wt.szs import SZSPath
 
@@ -404,7 +405,8 @@ class ModConfig:
         return full_cticon
 
     def normalize_all_tracks(self, autoadd_path: "Path | str", destination_path: "Path | str",
-                             original_tracks_path: "Path | str", thread_amount: int = 8) -> Generator[dict, None, None]:
+                             original_tracks_path: "Path | str",
+                             thread_amount: int = 8) -> Generator[Progress, None, None]:
         """
         Convert all tracks of the mod to szs into the destination_path
         :param original_tracks_path: path to the originals tracks (if a track is disabled for multiplayer)
@@ -412,21 +414,23 @@ class ModConfig:
         :param autoadd_path: autoadd directory
         :param destination_path: destination where the files are converted
         """
-        yield {"description": "Normalizing track..."}
+        yield Progress(description="Normalizing track...")
         destination_path = Path(destination_path)
         original_tracks_path = Path(original_tracks_path)
         destination_path.mkdir(parents=True, exist_ok=True)
 
         normalize_threads: list[dict] = []
 
-        def remove_finished_threads() -> Generator[dict, None, None]:
+        def remove_finished_threads() -> Generator[Progress, None, None]:
             """
             Remove all the thread that stopped in a thread list
             :return: the list without the stopped thread
             """
             nonlocal normalize_threads
 
-            yield {"description": f"Normalizing tracks :\n" + "\n".join(thread['name'] for thread in normalize_threads)}
+            yield Progress(
+                description=f"Normalizing tracks :\n" + "\n".join(thread['name'] for thread in normalize_threads)
+            )
             normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
 
         track_directory = self.path.parent / "_TRACKS"

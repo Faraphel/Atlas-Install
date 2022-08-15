@@ -5,6 +5,7 @@ from typing import Generator, IO, TYPE_CHECKING
 from source.mkw.Patch import PathOutsidePatch, InvalidPatchMode, InvalidSourceMode
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.mkw.Patch.PatchObject import PatchObject
+from source.progress import Progress
 from source.wt.szs import SZSPath
 
 if TYPE_CHECKING:
@@ -76,11 +77,11 @@ class PatchFile(PatchObject):
             if not szs_path.exists() and szs_path.with_suffix(".szs").exists():
                 SZSPath(szs_path.with_suffix(".szs")).extract_all(szs_path)
 
-    def install(self, extracted_game: "ExtractedGame", game_subpath: Path) -> Generator[dict, None, None]:
+    def install(self, extracted_game: "ExtractedGame", game_subpath: Path) -> Generator[Progress, None, None]:
         """
         patch a subfile of the game with the PatchFile
         """
-        yield {"description": f"Patching {game_subpath}"}
+        yield Progress(description=f"Patching {game_subpath}")
 
         # check if the file should be patched
         if not self.is_enabled(extracted_game): return
@@ -118,7 +119,7 @@ class PatchFile(PatchObject):
                     if not game_subfile.relative_to(extracted_game.path):
                         raise PathOutsidePatch(game_subfile, extracted_game.path)
 
-                    yield {"description": f"Patching {game_subfile}"}
+                    yield Progress(description=f"Patching {game_subfile}")
 
                     # if the source is the game, then recalculate the content for every game subfile
                     if self.configuration["source"] == "game":

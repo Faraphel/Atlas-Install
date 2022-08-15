@@ -4,6 +4,7 @@ from typing import Generator
 from source.mkw.ExtractedGame import ExtractedGame
 from source.mkw.ModConfig import ModConfig
 from source.option import Option
+from source.progress import Progress
 from source.wt.wit import WITPath, Region, Extension
 
 
@@ -37,7 +38,7 @@ class Game:
         """
         return not any(self.wit_path[f"./files/rel/lecode-{region.value}.bin"].exists() for region in Region)
 
-    def extract(self, dest: "Path | str") -> Generator[dict, None, Path]:
+    def extract(self, dest: "Path | str") -> Generator[Progress, None, Path]:
         """
         Extract the game to the destination directory. If the game is a FST, just copy to the destination
         :param dest: destination directory
@@ -45,30 +46,25 @@ class Game:
         gen = self.wit_path.progress_extract_all(dest)
 
         if self.wit_path.extension == Extension.FST:
-            for gen_data in gen:
-                yield {
-                    "description": "Copying Game...",
-                    "determinate": False
-                }
+            for _ in gen: yield Progress(description="Copying Game...", determinate=False)
             try: next(gen)
-            except StopIteration as e:
-                return e.value
+            except StopIteration as e: return e.value
 
         else:
             for gen_data in gen:
-                yield {
-                    "description": f'Extracting - {gen_data["percentage"]}% - (estimated time remaining: '
-                                   f'{gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"})',
-                    "maximum": 100,
-                    "value": gen_data["percentage"],
-                    "determinate": True
-                }
+                yield Progress(
+                    description=f'Extracting - {gen_data["percentage"]}% - (estimated time remaining: '
+                                f'{gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"})',
+                    max_step=100,
+                    set_step=gen_data["percentage"],
+                    determinate=True
+                )
             try: next(gen)
             except StopIteration as e:
                 return e.value
 
-    def edit(self, mod_config: ModConfig) -> Generator[dict, None, None]:
-        yield {"description": "Changing game metadata...", "determinate": False}
+    def edit(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
+        yield Progress(description="Changing game metadata...", determinate=False)
         self.wit_path.edit(
             name=mod_config.name,
             game_id=self.wit_path.id[:4] + mod_config.variant
@@ -96,7 +92,7 @@ class Game:
         return extracted_game
 
     def install_mod(self, dest: Path, mod_config: ModConfig, options: "Option", output_type: Extension
-                    ) -> Generator[dict, None, None]:
+                    ) -> Generator[Progress, None, None]:
         """
         Patch the game with the mod
         :dest: destination directory

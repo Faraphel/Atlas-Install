@@ -3,6 +3,8 @@ from abc import abstractmethod, ABC
 from pathlib import Path
 from typing import Generator, TYPE_CHECKING
 
+from source.progress import Progress
+
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
     from source.mkw.ExtractedGame import ExtractedGame
@@ -64,7 +66,7 @@ class PatchObject(ABC):
         return obj(self.patch, str(path.relative_to(self.patch.path)))
 
     @abstractmethod
-    def install(self, extracted_game: "ExtractedGame", game_subpath: Path) -> Generator[dict, None, None]:
+    def install(self, extracted_game: "ExtractedGame", game_subpath: Path) -> Generator[Progress, None, None]:
         """
         install the PatchObject into the game
         yield the step of the process

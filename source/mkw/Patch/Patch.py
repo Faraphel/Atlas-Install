@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Generator, IO, TYPE_CHECKING
 
+from source.progress import Progress
+
 if TYPE_CHECKING:
     from source.mkw.ModConfig import ModConfig
     from source.mkw.ExtractedGame import ExtractedGame
@@ -19,13 +21,13 @@ class Patch:
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self.path}>"
 
-    def install(self, extracted_game: "ExtractedGame") -> Generator[dict, None, None]:
+    def install(self, extracted_game: "ExtractedGame") -> Generator[Progress, None, None]:
         """
         patch a game with this Patch
         :param extracted_game: the extracted game
         """
         from source.mkw.Patch.PatchDirectory import PatchDirectory
-        yield {"description": f"Installing the patch", "determinate": False}
+        yield Progress(description=f"Installing the patch", determinate=False)
 
         # take all the files in the root directory, and patch them into the game.
         # Patch is not directly applied to the root to avoid custom configuration

@@ -13,6 +13,7 @@ from source.gui import better_gui_error, mystuff, mod_settings
 from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
 from source.option import Option
+from source.progress import Progress
 from source.translation import translate as _
 from source import plugins
 from source import *
@@ -95,18 +96,23 @@ class Window(tkinter.Tk):
         for child in self.winfo_children():
             getattr(child, "set_state", lambda *_: "pass")(state)
 
-    def progress_function(self, func_gen: Generator) -> None:
+    def progress_function(self, func_gen: Generator[Progress, None, None]) -> None:
         """
         Run a generator function that yield status for the progress bar
         :return:
         """
         # get the generator data yield by the generator function
-        for step_data in func_gen:
-            if "description" in step_data: self.progress_bar.set_description(step_data["description"])
-            if "maximum" in step_data: self.progress_bar.set_maximum(step_data["maximum"])
-            if "step" in step_data: self.progress_bar.step(step_data["step"])
-            if "value" in step_data: self.progress_bar.set_value(step_data["value"])
-            if "determinate" in step_data: self.progress_bar.set_determinate(step_data["determinate"])
+        for progress in func_gen:
+            if progress.title is not None: self.progress_bar.set_title(progress.title)
+            if progress.part is not None: self.progress_bar.part(progress.part)
+            if progress.set_part is not None: self.progress_bar.set_part(progress.set_part)
+            if progress.max_part is not None: self.progress_bar.set_max_part(progress.max_part)
+
+            if progress.description is not None: self.progress_bar.set_description(progress.description)
+            if progress.step is not None: self.progress_bar.step(progress.step)
+            if progress.set_step is not None: self.progress_bar.set_step(progress.set_step)
+            if progress.max_step is not None: self.progress_bar.set_max_step(progress.max_step)
+            if progress.determinate is not None: self.progress_bar.set_determinate(progress.determinate)
 
     def get_mod_config(self) -> ModConfig:
         """
@@ -450,11 +456,17 @@ class ProgressBar(ttk.LabelFrame):
         # make the element fill the whole frame
         self.columnconfigure(1, weight=1)
 
-        self.progress_bar = ttk.Progressbar(self, orient="horizontal")
-        self.progress_bar.grid(row=1, column=1, sticky="nsew")
+        self.progress_bar_part = ttk.Progressbar(self, orient="horizontal")
+        self.progress_bar_part.grid(row=1, column=1, sticky="nsew")
+
+        self.title = ttk.Label(self, text="", anchor="center", font=("TkDefaultFont", 10), wraplength=350)
+        self.title.grid(row=2, column=1, sticky="nsew")
+
+        self.progress_bar_step = ttk.Progressbar(self, orient="horizontal")
+        self.progress_bar_step.grid(row=3, column=1, sticky="nsew")
 
         self.description = ttk.Label(self, text="", anchor="center", font=("TkDefaultFont", 10), wraplength=350)
-        self.description.grid(row=2, column=1, sticky="nsew")
+        self.description.grid(row=4, column=1, sticky="nsew")
 
     def set_state(self, state: InstallerState) -> None:
         """
@@ -466,37 +478,15 @@ class ProgressBar(ttk.LabelFrame):
             case InstallerState.IDLE: self.grid_remove()
             case InstallerState.INSTALLING: self.grid()
 
-    def set_description(self, desc: str) -> None:
-        """
-        Set the progress bar description
-        :param desc: description
-        :return:
-        """
-        self.description.config(text=desc)
+    def set_title(self, title: str): self.title.config(text=title)
+    def set_max_part(self, maximum: int): self.progress_bar_part.configure(maximum=maximum)
+    def set_part(self, value: int): self.progress_bar_part.configure(value=value)
+    def part(self, value: int = 1): self.progress_bar_part.step(value)
 
-    def set_maximum(self, maximum: int) -> None:
-        """
-        Set the progress bar maximum value
-        :param maximum: the maximum value
-        :return:
-        """
-        self.progress_bar.configure(maximum=maximum)
-
-    def set_value(self, value: int) -> None:
-        """
-        Set the progress bar value
-        :param value: the value
-        :return:
-        """
-        self.progress_bar.configure(value=value)
-
-    def step(self, value: int = 1) -> None:
-        """
-        Set the progress bar by the value
-        :param value: the step
-        :return:
-        """
-        self.progress_bar.step(value)
+    def set_description(self, desc: str) -> None: self.description.config(text=desc)
+    def set_max_step(self, maximum: int) -> None: self.progress_bar_step.configure(maximum=maximum)
+    def set_step(self, value: int) -> None: self.progress_bar_step.configure(value=value)
+    def step(self, value: int = 1) -> None: self.progress_bar_step.step(value)
 
     def set_determinate(self, value: bool) -> None:
         """

@@ -148,9 +148,7 @@ class WITPath:
         :return: the extracted file path
         """
         if self.extension == Extension.FST:
-            yield {
-                "determinate": False
-            }
+            yield {}
             shutil.copytree(self._get_fst_root(), dest)
 
         else:
