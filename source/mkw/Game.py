@@ -100,6 +100,8 @@ class Game:
         :options: others options for customized installation
         :output_type: type of the destination game
         """
+        yield Progress(max_part=7)
+
         # create a cache directory for some files
         cache_directory: Path = Path("./.cache")
         cache_directory.mkdir(parents=True, exist_ok=True)
@@ -115,13 +117,16 @@ class Game:
         if not self.is_vanilla(): raise NotVanillaError(self.wit_path.path)
 
         # extract the game
+        yield Progress(title="Extraction", set_part=1)
         yield from self.extract(extracted_game.path)
 
         # install mystuff
+        yield Progress(title="MyStuff", set_part=2)
         mystuff_data = options["mystuff_packs"].get(options["mystuff_pack_selected"])
         if mystuff_data is not None: yield from extracted_game.install_multiple_mystuff(mystuff_data["paths"])
 
         # prepare the cache
+        yield Progress(title="Preparing files", set_part=3)
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)
         yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
         yield from mod_config.normalize_all_tracks(
@@ -130,20 +135,26 @@ class Game:
             cache_ogtracks_directory,
             options["threads"],
         )
-
-        # patch the game
         yield from extracted_game.prepare_dol()
         yield from extracted_game.prepare_special_file(mod_config)
+
+        # prepatch the game
+        yield Progress(title="Pre-Patching", set_part=4)
         yield from extracted_game.install_all_prepatch(mod_config)
+
+        yield Progress(title="LE-CODE", set_part=5)
         yield from extracted_game.patch_lecode(
             mod_config,
             cache_directory,
             cache_cttracks_directory,
             cache_ogtracks_directory,
         )
+
+        yield Progress(title="Patching", set_part=6)
         yield from extracted_game.install_all_patch(mod_config)
         yield from extracted_game.recreate_all_szs()
 
         # convert the extracted game into a file
+        yield Progress(title="Converting to game file", set_part=7)
         converted_game: WITPath = yield from extracted_game.convert_to(output_type)
         if converted_game is not None: yield from Game(converted_game.path).edit(mod_config)
