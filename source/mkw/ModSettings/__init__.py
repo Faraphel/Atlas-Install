@@ -2,10 +2,12 @@ import tkinter
 from tkinter import ttk
 from abc import ABC, abstractmethod
 
+from source.translation import translate as _
+
 
 class InvalidSettingsType(Exception):
     def __init__(self, settings_type: str):
-        super().__init__(f"Error : Type of mod settings '{settings_type}' not found.")
+        super().__init__(_("TYPE_MOD_SETTINGS", " '", settings_type, "' ", "NOT_FOUND"))
 
 
 class AbstractModSettings(ABC):

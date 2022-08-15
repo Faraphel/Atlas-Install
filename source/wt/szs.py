@@ -1,5 +1,6 @@
 from source.wt import *
-from source.wt import _run, _run_dict
+from source.translation import translate as _
+
 
 tools_path = tools_szs_dir / "wszst"
 
@@ -18,7 +19,7 @@ def autoadd(course_directory: Path | str, destination_path: Path | str) -> Path:
     :return: directory where the autoadd files were extracted
     """
     destination_path = Path(destination_path)
-    _run(tools_path, "AUTOADD", course_directory, "-D", destination_path)
+    _tools_run("AUTOADD", course_directory, "-D", destination_path)
     return destination_path
 
 
@@ -191,7 +192,7 @@ class SZSSubPath:
         :param dest: destination path
         :return: the extracted file path
         """
-        if self.is_dir(): raise ValueError("Can't extract a directory")
+        if self.is_dir(): raise ValueError(_("CANNOT_EXTRACT_A_DIRECTORY"))
 
         dest: Path = Path(dest)
         if dest.is_dir(): dest /= self.basename()

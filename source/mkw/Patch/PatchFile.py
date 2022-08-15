@@ -7,6 +7,7 @@ from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.mkw.Patch.PatchObject import PatchObject
 from source.progress import Progress
 from source.wt.szs import SZSPath
+from source.translation import translate
 
 if TYPE_CHECKING:
     from source.mkw.ExtractedGame import ExtractedGame
@@ -81,7 +82,8 @@ class PatchFile(PatchObject):
         """
         patch a subfile of the game with the PatchFile
         """
-        yield Progress(description=f"Patching {game_subpath}")
+        yield Progress(description=translate("PATCHING", " ", game_subpath))
+        # translate is not renamed "_" here because it is used to drop useless value in unpacking
 
         # check if the file should be patched
         if not self.is_enabled(extracted_game): return
@@ -119,7 +121,7 @@ class PatchFile(PatchObject):
                     if not game_subfile.relative_to(extracted_game.path):
                         raise PathOutsidePatch(game_subfile, extracted_game.path)
 
-                    yield Progress(description=f"Patching {game_subfile}")
+                    yield Progress(description=translate("PATCHING", " ", game_subfile))
 
                     # if the source is the game, then recalculate the content for every game subfile
                     if self.configuration["source"] == "game":

@@ -4,6 +4,7 @@ from typing import Generator, TYPE_CHECKING
 from source.mkw.Patch import PathOutsidePatch, InvalidPatchMode
 from source.mkw.Patch.PatchObject import PatchObject
 from source.progress import Progress
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source.mkw.ExtractedGame import ExtractedGame
@@ -27,7 +28,7 @@ class PatchDirectory(PatchObject):
         """
         patch a subdirectory of the game with the PatchDirectory
         """
-        yield Progress(description=f"Patching {game_subpath}")
+        yield Progress(description=_("PATCHING", " ", game_subpath))
 
         # check if the directory should be patched
         if not self.is_enabled(extracted_game): return

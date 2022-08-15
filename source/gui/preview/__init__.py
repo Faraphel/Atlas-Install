@@ -1,6 +1,7 @@
 import tkinter
 from abc import abstractmethod, ABC
 from typing import Type, TYPE_CHECKING
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source.mkw.ModConfig import ModConfig
@@ -8,7 +9,7 @@ if TYPE_CHECKING:
 
 class InvalidPreviewWindowName(Exception):
     def __init__(self, name: str):
-        super().__init__(f"Error : Type of preview window '{name}' not found.")
+        super().__init__(_("TYPE_PREVIEW_WINDOW", " '", name, "' ", "NOT_FOUND"))
 
 
 class AbstractPreviewWindow(tkinter.Toplevel, ABC):

@@ -6,18 +6,19 @@ from source.mkw.ModConfig import ModConfig
 from source.option import Option
 from source.progress import Progress
 from source.wt.wit import WITPath, Region, Extension
+from source.translation import translate as _
 
 
 class NotMKWGameError(Exception):
     def __init__(self, path: "Path | str"):
         path = Path(path)
-        super().__init__(f'Not a Mario Kart Wii game : "{path.name}"')
+        super().__init__(_("NOT_MKW_GAME", ' : "', path.name, '"'))
 
 
 class NotVanillaError(Exception):
     def __init__(self, path: "Path | str"):
         path = Path(path)
-        super().__init__(f'This game is already modded : "{path.name}"')
+        super().__init__(_("GAME_ALREADY_MODDED", ' : "', path.name, '"'))
 
 
 class Game:
@@ -46,15 +47,15 @@ class Game:
         gen = self.wit_path.progress_extract_all(dest)
 
         if self.wit_path.extension == Extension.FST:
-            for _ in gen: yield Progress(description="Copying Game...", determinate=False)
+            for __ in gen: yield Progress(description=_("COPYING_GAME"), determinate=False)
             try: next(gen)
             except StopIteration as e: return e.value
 
         else:
             for gen_data in gen:
                 yield Progress(
-                    description=f'Extracting - {gen_data["percentage"]}% - (estimated time remaining: '
-                                f'{gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"})',
+                    description=_("EXTRACTING", " - ", gen_data["percentage"], "% - (", "ESTIMATED_TIME_REMAINING", ": "
+                                  f'{gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"})'),
                     max_step=100,
                     set_step=gen_data["percentage"],
                     determinate=True
@@ -64,7 +65,7 @@ class Game:
                 return e.value
 
     def edit(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
-        yield Progress(description="Changing game metadata...", determinate=False)
+        yield Progress(description=_("CHANGING_GAME_METADATA"), determinate=False)
         self.wit_path.edit(
             name=mod_config.name,
             game_id=self.wit_path.id[:4] + mod_config.variant
@@ -117,16 +118,16 @@ class Game:
         if not self.is_vanilla(): raise NotVanillaError(self.wit_path.path)
 
         # extract the game
-        yield Progress(title="Extraction", set_part=1)
+        yield Progress(title=_("EXTRACTION"), set_part=1)
         yield from self.extract(extracted_game.path)
 
         # install mystuff
-        yield Progress(title="MyStuff", set_part=2)
+        yield Progress(title=_("MYSTUFF"), set_part=2)
         mystuff_data = options["mystuff_packs"].get(options["mystuff_pack_selected"])
         if mystuff_data is not None: yield from extracted_game.install_multiple_mystuff(mystuff_data["paths"])
 
         # prepare the cache
-        yield Progress(title="Preparing files", set_part=3)
+        yield Progress(title=_("PREPARING_FILES"), set_part=3)
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)
         yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
         yield from mod_config.normalize_all_tracks(
@@ -139,7 +140,7 @@ class Game:
         yield from extracted_game.prepare_special_file(mod_config)
 
         # prepatch the game
-        yield Progress(title="Pre-Patching", set_part=4)
+        yield Progress(title=_("PRE-PATCHING"), set_part=4)
         yield from extracted_game.install_all_prepatch(mod_config)
 
         yield Progress(title="LE-CODE", set_part=5)
@@ -150,11 +151,11 @@ class Game:
             cache_ogtracks_directory,
         )
 
-        yield Progress(title="Patching", set_part=6)
+        yield Progress(title=_("PATCHING"), set_part=6)
         yield from extracted_game.install_all_patch(mod_config)
         yield from extracted_game.recreate_all_szs()
 
         # convert the extracted game into a file
-        yield Progress(title="Converting to game file", set_part=7)
+        yield Progress(title=_("CONVERTING_TO_GAME_FILE"), set_part=7)
         converted_game: WITPath = yield from extracted_game.convert_to(output_type)
         if converted_game is not None: yield from Game(converted_game.path).edit(mod_config)

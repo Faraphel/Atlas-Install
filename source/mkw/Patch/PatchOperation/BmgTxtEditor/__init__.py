@@ -3,6 +3,7 @@ from typing import IO, TYPE_CHECKING
 from abc import ABC, abstractmethod
 
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
@@ -10,7 +11,7 @@ if TYPE_CHECKING:
 
 class InvalidBmgLayerMode(Exception):
     def __init__(self, layer_mode: str):
-        super().__init__(f"Error : bmg layer mode \"{layer_mode}\" is not implemented")
+        super().__init__(_("BMG_LAYER_MODE", ' "', layer_mode, '" ', "IS_NOT_IMPLEMENTED"))
 
 
 class AbstractLayer(ABC):

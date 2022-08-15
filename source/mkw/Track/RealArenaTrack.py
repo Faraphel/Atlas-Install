@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from source import TemplateMultipleSafeEval
+    from source.mkw import Tag
     from source.mkw.ModConfig import ModConfig
 
 
@@ -11,7 +12,7 @@ class RealArenaTrack:
     (For example, DefaultTrack is not considered a real track class)
     """
 
-    tags: list
+    tags: list["Tag"]
 
     def get_tag_template(self, mod_config: "ModConfig", template_name: str, default: any = None) -> any:
         """

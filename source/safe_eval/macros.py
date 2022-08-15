@@ -1,6 +1,9 @@
 import re
 from typing import TYPE_CHECKING
 
+from source.translation import translate as _
+
+
 if TYPE_CHECKING:
     from source import TemplateSafeEval
 
@@ -9,7 +12,7 @@ MACRO_START, MACRO_END = "##", "##"
 
 class NotImplementedMacro(Exception):
     def __init__(self, macro: str):
-        super().__init__(f"Invalid macro while parsing macros:\n{macro}")
+        super().__init__(_("INVALID_MACRO", ' : "', macro, '"'))
 
 
 def replace_macro(template: str, macros: dict[str, "TemplateSafeEval"]) -> str:

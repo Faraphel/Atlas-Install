@@ -1,7 +1,7 @@
 import shutil
 from pathlib import Path
 from typing import Generator, Callable, Iterator, Iterable, TYPE_CHECKING
-
+import json
 from PIL import Image
 
 from source import threaded
@@ -10,12 +10,11 @@ from source.mkw.Cup import Cup
 from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
 from source.mkw.ModSettings import AbstractModSettings
 from source.mkw.Track import CustomTrack, DefaultTrack, Arena
-import json
-
 from source.mkw.OriginalTrack import OriginalTrack
 from source.progress import Progress
 from source.safe_eval import safe_eval, multiple_safe_eval
 from source.wt.szs import SZSPath
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source import TemplateMultipleSafeEval, TemplateSafeEval, Env
@@ -414,7 +413,7 @@ class ModConfig:
         :param autoadd_path: autoadd directory
         :param destination_path: destination where the files are converted
         """
-        yield Progress(description="Normalizing track...")
+        yield Progress(description=_("NORMALIZING_TRACKS"))
         destination_path = Path(destination_path)
         original_tracks_path = Path(original_tracks_path)
         destination_path.mkdir(parents=True, exist_ok=True)
@@ -429,7 +428,7 @@ class ModConfig:
             nonlocal normalize_threads
 
             yield Progress(
-                description=f"Normalizing tracks :\n" + "\n".join(thread['name'] for thread in normalize_threads)
+                description=_("NORMALIZING_TRACKS", " :\n" + "\n".join(thread['name'] for thread in normalize_threads))
             )
             normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
 

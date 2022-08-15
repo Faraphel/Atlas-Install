@@ -13,7 +13,7 @@ def better_gui_error(func: Callable) -> Callable:
 
     def wrapper(*args, **kwargs):
         try: return func(*args, **kwargs)
-        except:
+        except Exception:
             exc = traceback.format_exc()
             with Path("error.log").open("a", encoding="utf8") as log_file:
                 log_file.write(f"{'#' * 20}\n{time.strftime('%Y/%M/%d %H:%m:%S')}\n\n{exc}\n\n")

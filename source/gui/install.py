@@ -24,12 +24,12 @@ from source.wt.wit import Extension
 
 class SourceGameError(Exception):
     def __init__(self, path: Path | str):
-        super().__init__(f"Invalid path for source game : {path}")
+        super().__init__(_(f"ERROR_INVALID_SOURCE_GAME", " : ", path))
 
 
 class DestinationGameError(Exception):
     def __init__(self, path: Path | str):
-        super().__init__(f"Invalid path for destination game : {path}")
+        super().__init__(_("ERROR_INVALID_DESTINATION_GAME", " : ", path))
 
 
 class InstallerState(enum.Enum):
@@ -183,7 +183,7 @@ class Menu(tkinter.Menu):
             self.root = master.root
 
             master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
-            self.add_command(label=_("OPEN_MYSTUFF_WINDOW"), command= mystuff.Window)
+            self.add_command(label=_("OPEN_MYSTUFF_SETTINGS"), command= mystuff.Window)
 
             self.threads_used = self.ThreadsUsed(self)
 
@@ -192,7 +192,7 @@ class Menu(tkinter.Menu):
                 super().__init__(master, tearoff=False)
                 self.root = master.root
                 
-                master.add_cascade(label=_("THREADS_USED"), menu=self)
+                master.add_cascade(label=_("THREADS_USAGE"), menu=self)
 
                 self.variable = tkinter.IntVar(value=self.root.options["threads"])
 
@@ -214,12 +214,12 @@ class Menu(tkinter.Menu):
             super().__init__(master, tearoff=False)
             self.root = master.root
 
-            master.add_cascade(label="Help", menu=self)
+            master.add_cascade(label=_("HELP"), menu=self)
             self.menu_id = self.master.index(tkinter.END)
 
-            self.add_command(label="Discord", command=lambda: webbrowser.open(discord_url))
-            self.add_command(label="Github Wiki", command=lambda: webbrowser.open(github_wiki_url))
-            self.add_command(label=_("ReadTheDocs"), command=lambda: webbrowser.open(readthedocs_url))
+            self.add_command(label=_("DISCORD"), command=lambda: webbrowser.open(discord_url))
+            self.add_command(label=_("GITHUB WIKI"), command=lambda: webbrowser.open(github_wiki_url))
+            self.add_command(label=_("READTHEDOCS"), command=lambda: webbrowser.open(readthedocs_url))
 
     def set_installation_state(self, state: InstallerState) -> bool:
         """
@@ -248,7 +248,7 @@ class Menu(tkinter.Menu):
 # Select game frame
 class SourceGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
-        super().__init__(master, text="Original Game File")
+        super().__init__(master, text=_("ORIGINAL_GAME_FILE"))
         self.root = master.root
         
         self.columnconfigure(1, weight=1)
@@ -311,7 +311,7 @@ class SourceGame(ttk.LabelFrame):
 # Select game destination frame
 class DestinationGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
-        super().__init__(master, text="Game Directory Destination")
+        super().__init__(master, text=_("GAME_DIRECTORY_DESTINATION"))
         self.root = master.root
         
         self.columnconfigure(1, weight=1)
@@ -379,7 +379,7 @@ class DestinationGame(ttk.LabelFrame):
 # Install button
 class ButtonInstall(ttk.Button):
     def __init__(self, master: tkinter.Tk):
-        super().__init__(master, text="Install", command=self.install)
+        super().__init__(master, text=_("INSTALL"), command=self.install)
         self.root = master.root
 
     @threaded
@@ -431,7 +431,7 @@ class ButtonInstall(ttk.Button):
 
             messagebox.showinfo(
                 _("INSTALLATION_COMPLETED"),
-                f"{_('INSTALLATION_FINISHED_WITH_SUCCESS')}\n{_('MESSAGE_FROM_MOD_AUTHOR')}:\n\n{message}"
+                f"{_('INSTALLATION_FINISHED_WITH_SUCCESS')}\n{_('MESSAGE_FROM_MOD_AUTHOR')} :\n\n{message}"
             )
 
         finally:

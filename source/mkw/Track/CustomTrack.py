@@ -1,7 +1,10 @@
+from typing import TYPE_CHECKING
+
 from source.mkw.Track.AbstractTrack import AbstractTrack
 from source.mkw.Track.RealArenaTrack import RealArenaTrack
 
-ModConfig: any
+if TYPE_CHECKING:
+    from source.mkw.ModConfig import ModConfig
 
 
 class CustomTrack(RealArenaTrack, AbstractTrack):

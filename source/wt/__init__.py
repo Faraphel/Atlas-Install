@@ -3,6 +3,8 @@ from pathlib import Path
 import os
 from typing import Callable
 
+from source.translation import translate as _
+
 
 class WTError(Exception):
     def __init__(self, tools_path: Path | str, return_code: int):
@@ -14,14 +16,14 @@ class WTError(Exception):
                 creationflags=subprocess.CREATE_NO_WINDOW,
             ).stdout.decode()
         except subprocess.CalledProcessError as e:
-            error = "- Can't get the error message -"
+            error = _("- ", "CANNOT_GET_ERROR_MESSAGE", " -")
 
-        super().__init__(f"{tools_path} raised {return_code} :\n{error}\n")
+        super().__init__(_(tools_path, " ", "RAISED", " ", return_code, ":\n", error, "\n"))
 
 
 class MissingWTError(Exception):
     def __init__(self, tool_name: str):
-        super().__init__(f"Can't find tools \"{tool_name}\" in the tools directory.")
+        super().__init__(_("CANNOT_FIND_TOOL", ' "', tool_name, '" ', "IN_TOOLS_DIRECTORY"))
 
 
 tools_dir = Path("./tools/")

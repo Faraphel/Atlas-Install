@@ -4,6 +4,7 @@ from abc import abstractmethod, ABC
 from PIL import Image
 
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
@@ -11,7 +12,7 @@ if TYPE_CHECKING:
 
 class InvalidImageLayerType(Exception):
     def __init__(self, layer_type: str):
-        super().__init__(f"Error : image layer type \"{layer_type}\" is not implemented")
+        super().__init__(_("IMAGE_LAYER_TYPE", ' "', layer_type, '" ', "IS_NOT_IMPLEMENTED"))
 
 
 class AbstractLayer(ABC):

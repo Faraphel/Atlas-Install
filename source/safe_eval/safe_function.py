@@ -1,7 +1,9 @@
 from typing import Callable, Generator, TYPE_CHECKING
 
+from source.translation import translate as _
+
 if TYPE_CHECKING:
-    from source import TemplateSafeEval, Env
+    from source import TemplateSafeEval
 
 
 def get_all_safe_functions() -> Generator[list[Callable], None, None]:
@@ -33,7 +35,7 @@ class safe_function:
         """
         Same as normal getattr, but magic attribute are banned
         """
-        if "__" in name: raise Exception(f'Magic method are not allowed : "{name}"')
+        if "__" in name: raise Exception(_("MAGIC_METHOD_FORBIDDEN", ' : "', name, '"'))
         return getattr(obj, name, default)
 
     @staticmethod

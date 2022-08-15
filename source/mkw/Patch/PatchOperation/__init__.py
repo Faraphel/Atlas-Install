@@ -1,13 +1,15 @@
 from abc import ABC, abstractmethod
 from typing import IO, Type, TYPE_CHECKING
 
+from source.translation import translate as _
+
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
 
 
 class InvalidPatchOperation(Exception):
     def __init__(self, operation: str):
-        super().__init__(f"Error : operation \"{operation}\" is not implemented")
+        super().__init__(_("OPERATION", ' "', operation, '" ', "IS_NOT_IMPLEMENTED"))
 
 
 class AbstractPatchOperation(ABC):

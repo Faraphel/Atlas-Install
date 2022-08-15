@@ -2,14 +2,16 @@ from typing import TYPE_CHECKING
 
 from source.mkw import Slot, Tag
 from source.mkw.Track.RealArenaTrack import RealArenaTrack
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source import TemplateMultipleSafeEval
+    from source.mkw.ModConfig import ModConfig
 
 
 class ArenaForbiddenCustomAttribute(Exception):
     def __init__(self, attribute_name: str):
-        super().__init__(f"Forbidden arena attribute : {attribute_name!r}")
+        super().__init__(_("FORBIDDEN_ARENA_ATTRIBUTE", " : ", repr(attribute_name)))
 
 
 class Arena(RealArenaTrack):

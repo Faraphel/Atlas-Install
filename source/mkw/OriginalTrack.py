@@ -1,6 +1,9 @@
+from source.translation import translate as _
+
+
 class OriginalTrackNotFound(Exception):
     def __init__(self, track_data: any):
-        super().__init__(f'Can\'t find original track "{track_data}"')
+        super().__init__(_("CANNOT_FIND_ORIGINAL_TRACK", ' "', track_data, '" '))
 
 
 class OriginalTrack:

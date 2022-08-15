@@ -8,6 +8,7 @@ from source.mkw.Patch.Patch import Patch
 from source.progress import Progress
 from source.wt import szs, lec, wit
 from source.wt.wstrt import StrPath
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source.mkw.Game import Game
@@ -15,7 +16,7 @@ if TYPE_CHECKING:
 
 class PathOutsideMod(Exception):
     def __init__(self, forbidden_path: Path, allowed_range: Path):
-        super().__init__(f"Error : path {forbidden_path} outside of allowed range {allowed_range}")
+        super().__init__(_("PATH", ' "', forbidden_path, '" ', "OUTSIDE_ALLOWED_RANGE", ' "', allowed_range, '" '))
 
 
 class ExtractedGame:
@@ -33,7 +34,7 @@ class ExtractedGame:
         Extract all the autoadd files from the game to destination_path
         :param destination_path: directory where the autoadd files will be extracted
         """
-        yield Progress(description="Extracting autoadd files...", determinate=False)
+        yield Progress(description=_("EXTRACTING_AUTOADD_FILES"), determinate=False)
         szs.autoadd(self.path / "files/Race/Course/", destination_path)
 
     def extract_original_tracks(self, destination_path: "Path | str") -> Generator[Progress, None, None]:
@@ -43,9 +44,12 @@ class ExtractedGame:
         """
         destination_path = Path(destination_path)
         destination_path.mkdir(parents=True, exist_ok=True)
-        yield Progress(description="Extracting original tracks...", determinate=False)
+        yield Progress(description=_("EXTRACTING_ORIGINAL_TRACKS"), determinate=False)
         for track_file in (self.path / "files/Race/Course/").glob("*.szs"):
-            yield Progress(description=f"Extracting original tracks ({track_file.name})...", determinate=False)
+
+            yield Progress(description=_("EXTRACTING_ORIGINAL_TRACKS", " (", track_file.name, ") ..."),
+                           determinate=False)
+
             if not (destination_path / track_file.name).exists(): track_file.rename(destination_path / track_file.name)
             else: track_file.unlink()
 
@@ -56,7 +60,7 @@ class ExtractedGame:
         :mystuff_path: path to the MyStuff directory
         :return:
         """
-        yield Progress(description=f"Installing MyStuff '{mystuff_path}'...", determinate=False)
+        yield Progress(description=_("INSTALLING_MYSTUFF", ' "', mystuff_path, '" ...'), determinate=False)
         mystuff_path = Path(mystuff_path)
 
         mystuff_rootfiles: dict[str, Path] = {}
@@ -73,7 +77,7 @@ class ExtractedGame:
         Install multiple mystuff patch
         :param mystuff_paths: paths to all the mystuff patch
         """
-        yield Progress(description="Installing all the mystuff patchs")
+        yield Progress(description=_("INSTALLING_ALL_MYSTUFF_PATCHS"))
 
         for mystuff_path in mystuff_paths:
             yield from self.install_mystuff(mystuff_path)
@@ -83,7 +87,7 @@ class ExtractedGame:
         Prepare special files for the patch
         :return: the special files dict
         """
-        yield Progress(description="Preparing ct_icon special file...", determinate=False)
+        yield Progress(description=_("PREPARING", " ct_icon ", "SPECIAL_FILE", "..."), determinate=False)
         ct_icons = BytesIO()
         mod_config.get_full_cticon().save(ct_icons, format="PNG")
         ct_icons.seek(0)
@@ -100,11 +104,11 @@ class ExtractedGame:
         """
         Repack all the .d directory into .szs files.
         """
-        yield Progress(description=f"Repacking all szs", determinate=False)
+        yield Progress(description=_("REPACKING", " ", "ALL_ARCHIVES"), determinate=False)
 
         for extracted_szs in filter(lambda path: path.is_dir(), self.path.rglob("*.d")):
             # for every directory that end with a .d in the extracted game, recreate the szs
-            yield Progress(description=f"Repacking {extracted_szs} to szs", determinate=False)
+            yield Progress(description=_("REPACKING", ' "', extracted_szs, '"'), determinate=False)
 
             szs.create(extracted_szs, extracted_szs.with_suffix(".szs"), overwrite=True)
             shutil.rmtree(str(extracted_szs.resolve()))
@@ -118,7 +122,7 @@ class ExtractedGame:
         :param cache_directory: Path to the cache
         :param mod_config: mod configuration
         """
-        yield Progress(description="Patching LECODE.bin")
+        yield Progress(description=_("PATCHING", " LECODE.bin"))
         cache_directory = Path(cache_directory)
         cttracks_directory = Path(cttracks_directory)
         ogtracks_directory = Path(ogtracks_directory)
@@ -159,7 +163,7 @@ class ExtractedGame:
         Used before the lecode patch is applied
         :param mod_config: the mod to install
         """
-        yield Progress(description="Installing all Pre-Patch...", determinate=False)
+        yield Progress(description=_("INSTALLING_ALL", " Pre-Patchs..."), determinate=False)
         yield from self._install_all_patch(mod_config, "_PREPATCH/")
 
     def install_all_patch(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
@@ -168,7 +172,7 @@ class ExtractedGame:
         Used after the lecode patch is applied
         :param mod_config: the mod to install
         """
-        yield Progress(description="Installing all Patch...", determinate=False)
+        yield Progress(description=_("INSTALLING_ALL", " Patchs..."), determinate=False)
         yield from self._install_all_patch(mod_config, "_PATCH/")
 
     def convert_to(self, output_type: wit.Extension) -> Generator[Progress, None, wit.WITPath | None]:
@@ -177,7 +181,7 @@ class ExtractedGame:
         :param output_type: path to the destination of the game
         :output_type: format of the destination game
         """
-        yield Progress(description=f"Converting game to {output_type}", determinate=False)
+        yield Progress(description=_("CONVERTING_GAME_TO", " ", output_type.name), determinate=False)
         if output_type == wit.Extension.FST: return
 
         destination_file = self.path.with_suffix(self.path.suffix + output_type.value)
@@ -193,7 +197,7 @@ class ExtractedGame:
             destination_file=destination_file,
         )
 
-        yield Progress(description="Deleting the extracted game...", determinate=False)
+        yield Progress(description=_("DELETING_EXTRACTED_GAME"), determinate=False)
         shutil.rmtree(self.path)
 
         return converted_game

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Generator, TYPE_CHECKING
 
 from source.mkw import Slot, Tag, ModConfig
+from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source import TemplateMultipleSafeEval
@@ -9,7 +10,7 @@ if TYPE_CHECKING:
 
 class TrackForbiddenCustomAttribute(Exception):
     def __init__(self, attribute_name: str):
-        super().__init__(f"Forbidden track attribute : {attribute_name!r}")
+        super().__init__(_("FORBIDDEN_TRACK_ATTRIBUTE", " : ", repr(attribute_name)))
 
 
 class AbstractTrack(ABC):
