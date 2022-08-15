@@ -45,7 +45,7 @@ class TextLayer(AbstractLayer):
         )
         draw.text(
             self.get_layer_position(image),
-            text=patch.mod_config.multiple_safe_eval(self.text),
+            text=patch.mod_config.multiple_safe_eval(self.text)(),
             fill=self.color,
             font=font
         )

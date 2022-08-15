@@ -77,4 +77,7 @@ class PatchObject(ABC):
         :param extracted_game: the extracted game object
         :return: should the patch be applied ?
         """
-        return self.patch.mod_config.safe_eval(self.configuration["if"], env={"extracted_game": extracted_game}) is True
+        return self.patch.mod_config.safe_eval(
+            self.configuration["if"],
+            env={"extracted_game": extracted_game}
+        )() is True

@@ -187,14 +187,14 @@ class ModConfig:
             base_env if base_env is not None else {}
         )
 
-    def safe_eval(self, *args, env: "Env" = None, **kwargs) -> any:
+    def safe_eval(self, *args, env: "Env" = None, **kwargs) -> Callable:
         """
         Safe eval with useful modconfig environment
         :return: the result of the evaluation
         """
         return safe_eval(*args, env=self.get_safe_eval_env(base_env=env), macros=self.macros, **kwargs)
 
-    def multiple_safe_eval(self, *args, env: "Env" = None, **kwargs) -> str:
+    def multiple_safe_eval(self, *args, env: "Env" = None, **kwargs) -> Callable:
         """
         Multiple safe eval with useful modconfig environment
         :return: the str result of the evaluation
@@ -239,9 +239,7 @@ class ModConfig:
         # filter_template_func is the function checking if the track should be included. If no parameter is set,
         # then always return True
         filter_template_func: Callable = self.safe_eval(
-            filter_template if filter_template is not None else "True",
-            return_lambda=True,
-            lambda_args=["track"]
+            filter_template if filter_template is not None else "True", args=["track"]
         )
 
         # if a sorting function is set, use it. If no function is set, but sorting is not disabled, use settings.
@@ -249,9 +247,7 @@ class ModConfig:
         if not ignore_sorting and (sorting_template is not None or settings_sort is not None):
             # get the sorting_template_func. If not defined, use the settings one.
             sorting_template_func: Callable = self.safe_eval(
-                template=sorting_template if sorting_template is not None else settings_sort,
-                return_lambda=True,
-                lambda_args=["track"]
+                template=sorting_template if sorting_template is not None else settings_sort, args=["track"]
             )
 
             # wrap the iterator inside a sort function
@@ -435,8 +431,7 @@ class ModConfig:
 
         track_directory = self.path.parent / "_TRACKS"
         multiplayer_disable_if_func: Callable = self.safe_eval(
-            self.multiplayer_disable_if,
-            return_lambda=True, lambda_args=["track"]
+            self.multiplayer_disable_if, args=["track"]
         )
 
         for track in self.get_all_arenas_tracks():

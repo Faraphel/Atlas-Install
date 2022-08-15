@@ -78,10 +78,7 @@ class Window(AbstractPreviewWindow):
         self.text_track_select.configure(state=tkinter.NORMAL)
         self.text_track_select.delete(1.0, tkinter.END)
 
-        template_func = self.mod_config.safe_eval(
-            self.entry_template_input.get(),
-            return_lambda=True, lambda_args=["track"]
-        )
+        template_func = self.mod_config.safe_eval(self.entry_template_input.get(), args=["track"])
 
         for track in self.mod_config.get_all_tracks(ignore_filter=True):
             value: bool = template_func(track) is True

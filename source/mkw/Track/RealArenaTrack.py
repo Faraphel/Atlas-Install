@@ -22,16 +22,20 @@ class RealArenaTrack:
         :return: formatted representation of the tag
         """
         for tag in filter(lambda tag: tag in mod_config.tags_templates[template_name], self.tags):
-            return mod_config.multiple_safe_eval(mod_config.tags_templates[template_name][tag], env={"tag": tag})
+            return mod_config.multiple_safe_eval(
+                mod_config.tags_templates[template_name][tag],
+                args=["tag"],
+            )(tag=tag)
         return default
 
     def repr_format(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> str:
         return mod_config.multiple_safe_eval(
             template,
-            env={
-                "track": self,
-                "get_tag_template": lambda *args, **kwargs: self.get_tag_template(mod_config, *args, **kwargs)
-            }
+            args=["track", "get_tag_template"]
+        )(
+            track=self,
+            get_tag_template=lambda *args, **kwargs: self.get_tag_template(mod_config, *args, **kwargs)
+            # get_tag_template can't be in env because it is dependent of the track self
         )
 
     def get_filename(self, mod_config: "ModConfig") -> str:

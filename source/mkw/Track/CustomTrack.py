@@ -24,4 +24,7 @@ class CustomTrack(RealArenaTrack, AbstractTrack):
         return cls(**track_dict)
 
     def is_new(self, mod_config: "ModConfig") -> bool:
-        return mod_config.safe_eval(mod_config.global_settings["replace_random_new"].value, env={"track": self}) is True
+        return mod_config.safe_eval(
+            mod_config.global_settings["replace_random_new"].value,
+            args=["track"]
+        )(track=self) is True

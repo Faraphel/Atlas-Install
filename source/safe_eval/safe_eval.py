@@ -1,6 +1,6 @@
 import ast
 import copy
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterable, Callable
 
 from source.safe_eval.macros import replace_macro
 from source.safe_eval.safe_function import get_all_safe_functions
@@ -28,29 +28,27 @@ all_globals = {
 
 
 def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str, "TemplateSafeEval"] = None,
-              return_lambda: bool = False, lambda_args: list[str] = None) -> any:
+              args: Iterable[str] = None) -> Callable:
     """
     Run a python code in an eval function, but avoid all potential dangerous function.
     :env: additional variables that will be used when evaluating the template
-    :return_lambda: if enabled, return a lambda function instead of the result of the expression
     :lambda_args: arguments that the final lambda function can receive
     :macros: dictionary associating a macro name to a macro value
 
-    :return: the evaluated expression or the lambda expression
+    :return: the lambda expression
     """
 
-    if len(template) == 0: return ""
+    if len(template) == 0: return lambda *_, **__: ""
     if env is None: env = {}
     if macros is None: macros = {}
-    if lambda_args is None: lambda_args = []
+    args = tuple(args) if args is not None else ()  # allow the argument to be any iterable
 
+    template_key: tuple = (template, args)  # unique identifiant for every template (need to be hashable)
     # if the safe_eval return a callable and have already been called, return the cached callable
-    if return_lambda is True and template in self.safe_eval_cache:
-        return self.safe_eval_cache[template]
+    if template_key in self.safe_eval_cache: return self.safe_eval_cache[template_key]
 
     # replace the macro in the template
     template = replace_macro(template=template, macros=macros)
-
     # escape backslash to avoid unreadable expression
     template = template.replace("\\", "\\\\")
 
@@ -113,16 +111,15 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
             ):
                 raise SafeEvalException(f'Forbidden syntax : "{type(node).__name__}"')
 
-    if return_lambda:
-        # if return_lambda is enabled, embed the whole expression into a lambda expression
-        stmt.value = ast.Lambda(
-            body=stmt.value,
-            args=ast.arguments(
-                args=[ast.arg(arg=lambda_arg) for lambda_arg in lambda_args],
-                posonlyargs=[], kwonlyargs=[],
-                kw_defaults=[], defaults=[],
-            )
+    # embed the whole expression into a lambda expression
+    stmt.value = ast.Lambda(
+        body=stmt.value,
+        args=ast.arguments(
+            args=[ast.arg(arg=arg) for arg in args],
+            posonlyargs=[], kwonlyargs=[],
+            kw_defaults=[], defaults=[],
         )
+    )
 
     # convert into a ast.Expression, object needed for the compilation
     expression: ast.Expression = ast.Expression(stmt.value)
@@ -131,6 +128,6 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     ast.fix_missing_locations(expression)
 
     # return the evaluated formula
-    result = eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
-    if return_lambda: self.safe_eval_cache[template] = result  # cache the callable for potential latter call
-    return result
+    lambda_template = eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
+    self.safe_eval_cache[template_key] = lambda_template  # cache the callable for potential latter call
+    return lambda_template

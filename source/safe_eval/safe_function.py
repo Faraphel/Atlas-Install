@@ -49,4 +49,4 @@ class safe_function:
         Allow a recursive safe_eval, but without the lambda functionality
         """
         from source.safe_eval.safe_eval import safe_eval
-        return safe_eval(template=template, env=env)
+        return safe_eval(template=template, env=env)()
