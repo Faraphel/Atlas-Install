@@ -43,7 +43,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     if macros is None: macros = {}
     args = tuple(args) if args is not None else ()  # allow the argument to be any iterable
 
-    template_key: tuple = (template, args)  # unique identifiant for every template (need to be hashable)
+    template_key: hash = hash((template, args, tuple(env.items())))  # unique identifiant for every template
     # if the safe_eval return a callable and have already been called, return the cached callable
     if template_key in self.safe_eval_cache: return self.safe_eval_cache[template_key]
 
@@ -78,8 +78,11 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
             # when accessing any variable
             case ast.Name:
                 # ban modification to environment, but allow custom variable to be changed
-                if isinstance(node.ctx, ast.Store) and node.id in globals_ | locals_:
-                    raise SafeEvalException(f'Can\'t set value of environment : "{node.id}"')
+                if isinstance(node.ctx, ast.Store):
+                    if node.id in globals_ | locals_:
+                        raise SafeEvalException(f'Can\'t set value of environment : "{node.id}"')
+                    elif node.id in args:
+                        raise SafeEvalException(f'Can\'t set value of argument : "{node.id}"')
 
             # when calling any function
             case ast.Call:
@@ -87,8 +90,11 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
                 for callnode in ast.walk(node.func):
                     if isinstance(callnode, ast.Attribute):
                         for attrnode in ast.walk(callnode.value):
-                            if isinstance(attrnode, ast.Name) and attrnode.id in globals_ | locals_:
-                                raise SafeEvalException(f'Calling this function is not allowed : "{callnode.attr}"')
+                            if isinstance(attrnode, ast.Name):
+                                if attrnode.id in globals_ | locals_:
+                                    raise SafeEvalException(f'Calling this function is not allowed : "{callnode.attr}"')
+                                if attrnode.id in args:
+                                    raise SafeEvalException(f'Calling this function is not allowed : "{callnode.attr}"')
 
             # when assigning a value with ":="
             case ast.NamedExpr:
