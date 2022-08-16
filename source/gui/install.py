@@ -264,11 +264,16 @@ class SourceGame(ttk.LabelFrame):
         Select the source game
         :return:
         """
-        path = Path(tkinter.filedialog.askopenfilename(
+        raw_path = tkinter.filedialog.askopenfilename(
             title=_("SELECT_SOURCE_GAME"),
             filetypes=[(_("WII GAMES"), "*.iso *.ciso *.wbfs *.dol")],
-        ))
+        )
+
         # if the user didn't select any file, return None
+        if raw_path == "": return
+        path = Path(raw_path)
+
+        # if the user didn't select a correct file, return None
         if not path.exists():
             messagebox.showerror(_("ERROR"), _("ERROR_INVALID_SOURCE_GAME"))
             return
@@ -331,9 +336,13 @@ class DestinationGame(ttk.LabelFrame):
         Select the source game
         :return:
         """
-        path = Path(tkinter.filedialog.askdirectory(
+        raw_path = tkinter.filedialog.askdirectory(
             title=_("SELECT_DESTINATION_GAME"),
-        ))
+        )
+
+        # if the user didn't select any directory, return None
+        if raw_path == "": return
+        path = Path(raw_path)
 
         path.mkdir(mode=0o777, parents=True, exist_ok=True)
 
