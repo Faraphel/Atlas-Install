@@ -8,6 +8,7 @@ from source.wt import wstrt
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
+    from source import TemplateMultipleSafeEval
 
 
 class StrEditor(AbstractPatchOperation):
@@ -17,7 +18,8 @@ class StrEditor(AbstractPatchOperation):
 
     type = "str-edit"
 
-    def __init__(self, region: int = None, https: str = None, domain: str = None, sections: list[str] = None):
+    def __init__(self, region: "TemplateMultipleSafeEval" = None, https: "TemplateMultipleSafeEval" = None,
+                 domain: "TemplateMultipleSafeEval" = None, sections: list[str] = None):
         self.region = region
         self.https = https
         self.domain = domain
@@ -37,9 +39,9 @@ class StrEditor(AbstractPatchOperation):
         patch_content = BytesIO(
             wstrt.patch_data(
                 file_content.read(),
-                region=self.region,
-                https=self.https,
-                domain=self.domain,
+                region=patch.mod_config.multiple_safe_eval(self.region)(),
+                https=patch.mod_config.multiple_safe_eval(self.https)(),
+                domain=patch.mod_config.multiple_safe_eval(self.domain)(),
                 sections=checked_sections
             )
         )

@@ -4,6 +4,7 @@ from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
+    from source import TemplateMultipleSafeEval
 
 
 class Rename(AbstractPatchOperation):
@@ -13,8 +14,8 @@ class Rename(AbstractPatchOperation):
 
     type = "rename"
 
-    def __init__(self, name: str):
+    def __init__(self, name: "TemplateMultipleSafeEval"):
         self.name = name
 
     def patch(self, patch: "Patch", file_name: str, file_content: IO) -> (str, IO):
-        return self.name, file_content
+        return patch.mod_config.multiple_safe_eval(self.name)(), file_content
