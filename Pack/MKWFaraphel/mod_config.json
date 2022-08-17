@@ -41,6 +41,18 @@
             "type": "string",
             "default": "'v' + getattr(track, 'since_version', '') == mod_config.version",
             "preview": "track_selecting"
+        },
+        "balancing": {
+            "text": {
+                "en": "Balancing *",
+                "fr": "Équilibrage *"
+            },
+            "type": "choices",
+            "choices": [
+                "Enabled",
+                "Disabled"
+            ],
+            "default": "Enabled"
         }
     },
     "lpar_template": "{{ mode if (mode := ## SETTINGS_MODE ##) is not None else 'normal' }}.lpar",

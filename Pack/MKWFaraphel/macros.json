@@ -11,6 +11,7 @@
   "TRACK_TEXT_HIGHLIGHT_END": "bmg_color_raw('off')",
 
   "SETTINGS_MODE": "mod_config.specific_settings['mode'].value",
+  "SETTINGS_BALANCING": "mod_config.specific_settings['balancing'].value",
 
   "IF_NO_WARNING": "if getattr(track, 'warning', 0) == 0 else ''"
 }
