@@ -62,6 +62,7 @@ class FrameSettings(ttk.Frame):
             """
             return lambda event: enabled_variable.set(True)
 
+        index: int = 0
         for index, (settings_name, settings_data) in enumerate(settings.items()):
             text = translate_external(
                 self.master.master.mod_config,
@@ -79,3 +80,12 @@ class FrameSettings(ttk.Frame):
             # if any of the label child are clicked, automatically enable the option
             for child in frame.winfo_children():
                 child.bind("<Button-1>", get_event_checkbox(enabled_variable))
+
+        # add at the end a message from the mod creator where he can put some additional note about the settings.
+        if text := translate_external(
+            self.master.master.mod_config,
+            self.root.options["language"],
+            self.master.master.mod_config.messages.get("settings_description", {}).get("text", {})
+        ):
+            self.label_description = ttk.Label(self, text="\n"+text, foreground="gray")
+            self.label_description.grid(row=index+1, column=1)
