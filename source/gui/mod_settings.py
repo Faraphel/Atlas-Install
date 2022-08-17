@@ -2,7 +2,7 @@ import tkinter
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from source.translation import translate as _
+from source.translation import translate as _, translate_external
 
 if TYPE_CHECKING:
     from source.mkw.ModConfig import ModConfig
@@ -63,9 +63,11 @@ class FrameSettings(ttk.Frame):
             return lambda event: enabled_variable.set(True)
 
         for index, (settings_name, settings_data) in enumerate(settings.items()):
-            text = settings_data.text.get(self.root.options["language"])
-            if text is None: text = settings_data.text.get("*")
-            if text is None: text = settings_name
+            text = translate_external(
+                self.master.master.mod_config,
+                self.root.options["language"],
+                settings_data.text,
+            )
 
             enabled_variable = tkinter.BooleanVar(value=False)
             checkbox = ttk.Checkbutton(self, text=text, variable=enabled_variable)

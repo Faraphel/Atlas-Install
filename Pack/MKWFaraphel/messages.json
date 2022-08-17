@@ -1,4 +1,10 @@
 {
+  "specific_settings_description": {
+    "text": {
+      "fr": "* Ceci activera le mode \"triche\"",
+      "en": "* This will enable the \"cheat\" mode"
+    }
+  },
   "installation_completed": {
     "text": {
       "fr": "Merci d'avoir téléchargé {{ mod_config.name }} !\nSi vous avez un problème en démarrant le jeu avec Dolphin, essayer dans Configurer > Avancé > Modifier la taille de la mémoire émulée et mettre MEM2 à 128MB\n\nAmusez-vous !",

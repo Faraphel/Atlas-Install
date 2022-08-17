@@ -29,7 +29,6 @@
     "USE": "Use",
     "THREADS": "threads",
     "MESSAGE_FROM_MOD_AUTHOR": "Message from the author",
-    "NO_MESSAGE_FROM_AUTHOR": "< The author didn't left any message >",
     "GLOBAL_MOD_SETTINGS": "Global mod settings",
     "SPECIFIC_MOD_SETTINGS": "Specific mod settings",
     "CONFIGURE_MYSTUFF_PATCH": "Configure the MyStuff patchs",

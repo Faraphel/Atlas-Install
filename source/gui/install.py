@@ -14,7 +14,7 @@ from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
 from source.option import Option
 from source.progress import Progress
-from source.translation import translate as _
+from source.translation import translate as _, translate_external
 from source import plugins
 from source import *
 import os
@@ -432,15 +432,17 @@ class ButtonInstall(ttk.Button):
                 )
             )
 
-            message_texts = mod_config.messages.get("installation_completed", {}).get("text", {})
-            message = message_texts.get(self.root.options["language"])
-            if message is None: message = message_texts.get("*")
-            if message is None: message = _('NO_MESSAGE_FROM_AUTHOR')
-            message = mod_config.multiple_safe_eval(message)()
+            message: str = translate_external(
+                mod_config,
+                self.root.options["language"],
+                mod_config.messages.get("installation_completed", {}).get("text", {})
+            )
 
             messagebox.showinfo(
                 _("INSTALLATION_COMPLETED"),
-                f"{_('INSTALLATION_FINISHED_WITH_SUCCESS')}\n{_('MESSAGE_FROM_MOD_AUTHOR')} :\n\n{message}"
+                f"{_('INSTALLATION_FINISHED_WITH_SUCCESS')}" + (
+                    f"\n{_('MESSAGE_FROM_MOD_AUTHOR')} :\n\n{message}" if message != "" else ""
+                )
             )
 
         finally:
