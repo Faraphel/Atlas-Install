@@ -44,6 +44,6 @@ def translate_external(mod_config: "ModConfig", language: str, message_texts: di
     message = message_texts.get(language)
     if message is None: message = message_texts.get("*")
     if message is None: message = default
-    return mod_config.multiple_safe_eval(message)()
+    return mod_config.multiple_safe_eval(message, args=["language"])(language=language)
 
 

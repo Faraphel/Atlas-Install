@@ -5,6 +5,18 @@
     "variant": "60",
 
     "global_settings": {
+        "include_track_if": {
+            "text": {
+                "en": "Include track if *",
+                "fr": "Inclure la course si *"
+            }
+        },
+        "sort_tracks": {
+            "text": {
+                "en": "Sort tracks by *",
+                "fr": "Trier les courses par *"
+            }
+        },
         "replace_random_new": {
             "default": "'Retro' not in getattr(track, 'tags', []) and getattr(track, 'warning', 0) == 0"
         }
