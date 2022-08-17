@@ -3,6 +3,7 @@ from pathlib import Path
 from tkinter import messagebox
 from typing import Callable
 from source.translation import translate as _
+from source import __version__
 import time
 
 
@@ -16,7 +17,14 @@ def better_gui_error(func: Callable) -> Callable:
         except Exception:
             exc = traceback.format_exc()
             with Path("error.log").open("a", encoding="utf8") as log_file:
-                log_file.write(f"{'#' * 20}\n{time.strftime('%Y/%M/%d %H:%m:%S')}\n\n{exc}\n\n")
+                log_file.write(
+                    f"{'#' * 20}\n"
+                    f"{time.strftime('%Y/%M/%d %H:%m:%S')}\n"
+                    f"Version: {__version__}\n"
+                    f"\n"
+                    f"{exc}\n"
+                    f"\n"
+                )
             messagebox.showerror(_("Error"), exc)
 
     return wrapper
