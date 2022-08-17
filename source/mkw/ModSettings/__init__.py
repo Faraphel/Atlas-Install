@@ -19,7 +19,7 @@ class AbstractModSettings(ABC):
     text: dict[str]  # text to display in the settings window depending on the language
     enabled: bool  # is the settings enabled
     default: str | None  # default value of the settings (used is disabled)
-    _value: str  # value for the settings
+    _value: any  # value for the settings
 
     @property
     def value(self) -> "any | None":
@@ -69,4 +69,4 @@ class AbstractModSettings(ABC):
 
 
 # these import load the different ModSettings, and so get_mod_settings will be able to fetch them with __subclasses__
-from source.mkw.ModSettings import Choices, String
+from source.mkw.ModSettings import Choices, String, Check

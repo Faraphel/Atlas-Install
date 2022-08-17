@@ -33,6 +33,7 @@
     "SPECIFIC_MOD_SETTINGS": "Specific mod settings",
     "CONFIGURE_MYSTUFF_PATCH": "Configure the MyStuff patchs",
     "DISABLED": "Disabled",
+    "ENABLED": "Enabled",
     "NEW_PROFILE": "New Profile",
     "DELETE_PROFILE": "Delete Profile",
     "ADD_MYSTUFF": "Add MyStuff patch",

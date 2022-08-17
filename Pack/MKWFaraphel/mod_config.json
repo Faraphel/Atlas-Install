@@ -47,12 +47,8 @@
                 "en": "Balancing *",
                 "fr": "Équilibrage *"
             },
-            "type": "choices",
-            "choices": [
-                "Enabled",
-                "Disabled"
-            ],
-            "default": "Enabled"
+            "type": "check",
+            "default": true
         }
     },
     "lpar_template": "{{ mode if (mode := ## SETTINGS_MODE ##) is not None else 'normal' }}.lpar",
