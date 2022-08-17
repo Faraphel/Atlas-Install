@@ -39,9 +39,9 @@ class StrEditor(AbstractPatchOperation):
         patch_content = BytesIO(
             wstrt.patch_data(
                 file_content.read(),
-                region=patch.mod_config.multiple_safe_eval(self.region)(),
-                https=patch.mod_config.multiple_safe_eval(self.https)(),
-                domain=patch.mod_config.multiple_safe_eval(self.domain)(),
+                region=patch.mod_config.multiple_safe_eval(self.region)() if self.region is not None else None,
+                https=patch.mod_config.multiple_safe_eval(self.https)() if self.https is not None else None,
+                domain=patch.mod_config.multiple_safe_eval(self.domain)() if self.domain is not None else None,
                 sections=checked_sections
             )
         )
