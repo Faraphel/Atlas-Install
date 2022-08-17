@@ -24,6 +24,8 @@ class String(AbstractModSettings):
 
     def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
         super().tkinter_show(master, checkbox)
+        master.grid_rowconfigure(1, weight=1)
+        master.grid_columnconfigure(1, weight=1)
 
         value_variable = tkinter.StringVar(master, value=self._value)
         value_variable.trace_add("write", lambda *_: setattr(self, "_value", value_variable.get()))

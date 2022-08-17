@@ -38,7 +38,7 @@ class Window(tkinter.Toplevel):
 
 class NotebookSettings(ttk.Notebook):
     def __init__(self, master):
-        super().__init__(master)
+        super().__init__(master, width=500)
         self.root = self.master.root
 
 

@@ -28,6 +28,6 @@ class Choices(AbstractModSettings):
         value_variable.trace_add("write", lambda *_: setattr(self, "_value", value_variable.get()))
 
         radiobutton_on = ttk.Radiobutton(master, text=_("DISABLED"), variable=value_variable, value=False)
-        radiobutton_on.grid(row=1, column=1, sticky="NEWS")
+        radiobutton_on.grid(row=1, column=1, sticky="E")
         radiobutton_off = ttk.Radiobutton(master, text=_("ENABLED"), variable=value_variable, value=True)
-        radiobutton_off.grid(row=1, column=2, sticky="NEWS")
+        radiobutton_off.grid(row=1, column=2, sticky="E")

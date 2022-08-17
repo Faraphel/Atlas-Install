@@ -43,9 +43,6 @@ class AbstractModSettings(ABC):
         :master: master widget
         :checkbox: checkbox inside the labelframe allowing to enable or disable the setting
         """
-        master.grid_rowconfigure(1, weight=1)
-        master.grid_columnconfigure(1, weight=1)
-
         enabled_variable.set(self.enabled)
         enabled_variable.trace_add("write", lambda *_: setattr(self, "enabled", enabled_variable.get()))
         ...
