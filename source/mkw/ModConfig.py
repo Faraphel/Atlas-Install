@@ -11,7 +11,7 @@ from source.mkw.Cup import Cup
 from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
 from source.mkw.ModSettings import AbstractModSettings
 from source.mkw.Track import CustomTrack, DefaultTrack, Arena
-from source.mkw.OriginalTrack import OriginalTrack
+from source.mkw import OriginalTrack
 from source.progress import Progress
 from source.safe_eval import safe_eval, multiple_safe_eval
 from source.wt.szs import SZSPath
@@ -450,7 +450,7 @@ class ModConfig:
                     # if the track should use the default track instead in multiplayer,
                     # copy the default track to the same file but with a _d at the end
                     shutil.copy(
-                        original_tracks_path / f"{OriginalTrack(track_data=track.special, track_key='slot').name}_d.szs",
+                        original_tracks_path / f"{OriginalTrack.get(slot=track.special).name}_d.szs",
                         destination_path / f"{track_file.stem}_d.szs"
                     )
 
