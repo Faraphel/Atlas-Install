@@ -1,2 +1,1 @@
 Tag = str
-Slot = str

@@ -96,6 +96,7 @@
     "RAISED": "à levé",
     "CANNOT_FIND_TOOL": "Impossible de trouver l'outil",
     "IN_TOOLS_DIRECTORY": "dans le dossier des outils.",
-    "CANNOT_EXTRACT_A_DIRECTORY": "Impossible d'extraire un dossier"
+    "CANNOT_EXTRACT_A_DIRECTORY": "Impossible d'extraire un dossier",
+    "CANNOT_FIND_SLOT": "Impossible de trouver le slot"
   }
 }

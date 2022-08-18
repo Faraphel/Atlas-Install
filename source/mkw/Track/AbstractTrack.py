@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Generator, TYPE_CHECKING
 
-from source.mkw import Slot, Tag, ModConfig
+from source.mkw import Tag, ModConfig, Slot
 from source.translation import translate as _
 
 if TYPE_CHECKING:
@@ -14,14 +14,15 @@ class TrackForbiddenCustomAttribute(Exception):
 
 
 class AbstractTrack(ABC):
-    music: Slot
-    special: Slot
+    music: Slot.Slot
+    special: Slot.Slot
     tags: list[Tag]
     weight: int
 
-    def __init__(self, music: Slot = "T11", special: Slot = "T11", tags: list[Tag] = None, weight: int = 1, **kwargs):
-        self.music = music
-        self.special = special
+    def __init__(self, music: Slot.Slot = "T11", special: Slot.Slot = "T11",
+                 tags: list[Tag] = None, weight: int = 1, **kwargs):
+        self.music = Slot.find(music)
+        self.special = Slot.find(special)
         self.tags = tags if tags is not None else []
         self.weight = weight
 
@@ -87,8 +88,8 @@ class AbstractTrack(ABC):
 
         return (
             f'{category} '  # category (is the track hidden, visible, an arena, ...)
-            f'{self.music}; '  # music 
-            f'{self.special}; '  # property of the tracks
+            f'{self.music.normal}; '  # music 
+            f'{self.special.normal}; '  # property of the tracks
             f'{flags:#04x}; '  # lecode flags
             f'{filename!r}; '  # filename
             f'{name!r}; '  # name of the track in the menu

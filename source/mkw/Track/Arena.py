@@ -15,15 +15,16 @@ class ArenaForbiddenCustomAttribute(Exception):
 
 
 class Arena(RealArenaTrack):
-    slot: Slot
-    music: Slot
-    special: Slot
+    slot: Slot.Slot
+    music: Slot.Slot
+    special: Slot.Slot
     tags: list[Tag]
 
-    def __init__(self, slot: Slot, music: Slot = None, special: Slot = None, tags: list[Tag] = None, **kwargs):
-        self.slot = slot
-        self.music = music if music is not None else slot
-        self.special = special if special is not None else slot
+    def __init__(self, slot: Slot.Slot, music: Slot.Slot = None, special: Slot.Slot = None,
+                 tags: list[Tag] = None, **kwargs):
+        self.slot = Slot.find(slot)
+        self.music = Slot.find(music if music is not None else slot)
+        self.special = Slot.find(special if special is not None else slot)
         self.tags = tags if tags is not None else []
 
         # others not mandatory attributes
@@ -48,20 +49,20 @@ class Arena(RealArenaTrack):
         """
 
         name: str = self.repr_format(mod_config=mod_config, template=template)
-        filename = self.get_filename(mod_config=mod_config)
+        filename: str = self.get_filename(mod_config=mod_config)
 
         return (
             (
                 f'A '  # category (A for arena)
-                f'{self.music}; '  # music 
-                f'{self.slot}; '  # slot of the arena
+                f'{self.music.normal}; '  # music 
+                f'{self.slot.normal}; '  # slot of the arena
                 f'0x00; '  # lecode flag
                 f'{filename!r}; '  # filename
                 f'{name!r}; '  # name of the track in the menu
                 f'{filename!r}\n'  # unique identifier for each track
             ),
             (
-                f"{self.slot} "
-                f"{self.special}\n"
+                f"{self.slot.normal} "
+                f"{self.special.normal}\n"
             )
         )
