@@ -1,4 +1,5 @@
 import shutil
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Generator, Callable, Iterator, Iterable, TYPE_CHECKING
 import json
@@ -66,65 +67,50 @@ def merge_dict(dict1: dict[str, dict] | None, dict2: dict[str, dict] | None,
     return {key: dict1.get(key, {}) | dict2.get(key, {}) for key in dict_keys}
 
 
+@dataclass(init=True, slots=True)
 class ModConfig:
     """
     Representation of a mod
     """
 
-    __slots__ = ("name", "path", "nickname", "variant", "_tracks", "arenas", "version",
-                 "original_track_prefix", "swap_original_order", "keep_original_track",
-                 "enable_random_cup", "tags_cups", "track_file_template",
-                 "multiplayer_disable_if", "macros", "messages", "global_settings",
-                 "specific_settings", "lpar_template", "tags_templates")
+    path: Path | str
+    name: str
+    nickname: str = None
+    version: str = "v1.0.0"
+    variant: str = "01"
 
-    def __init__(self, path: Path | str, name: str, nickname: str = None, version: str = None, variant: str = None,
-                 tags_cups: list[Tag] = None, tracks: list["Track | TrackGroup"] = None,
-                 original_track_prefix: bool = None, swap_original_order: bool = None, keep_original_track: bool = None,
-                 enable_random_cup: bool = None, track_file_template: "TemplateMultipleSafeEval" = None,
-                 multiplayer_disable_if: "TemplateSafeEval" = None, macros: dict[str, "TemplateSafeEval"] = None,
-                 messages: dict[str, dict[str, "TemplateMultipleSafeEval"]] = None,
-                 global_settings: dict[str, dict[str, str]] = None, specific_settings: dict[str, dict[str, str]] = None,
-                 lpar_template: "TemplateMultipleSafeEval" = None,
-                 tags_templates: dict[str, "TemplateMultipleSafeEval"] = None, arenas: list["Arena"] = None):
+    _tracks: list["Track | TrackGroup"] = field(default_factory=list)
+    _arenas: list["Arena"] = field(default_factory=list)
+    track_file_template: "TemplateMultipleSafeEval" = "{{ getattr(track, 'sha1', '_') }}"
+    multiplayer_disable_if: "TemplateSafeEval" = "False"
 
-        self.path = Path(path)
-        self.macros = macros if macros is not None else {}
-        self.messages = messages if messages is not None else {}
+    tags_cups: list[Tag] = field(default_factory=list)
+    tags_templates: dict[str, "TemplateMultipleSafeEval"] = field(default_factory=dict)
 
-        self.global_settings = {name: AbstractModSettings.get(data) for name, data in merge_dict(
-            # Avoid modder to add their own settings to globals one
-            default_global_settings, global_settings, dict_keys=default_global_settings.keys()
-        ).items()}
+    original_track_prefix: bool = True
+    swap_original_order: bool = True
+    keep_original_track: bool = True
+    enable_random_cup: bool = True
 
-        self.specific_settings = {name: AbstractModSettings.get(data) for name, data in (
-            specific_settings if specific_settings is not None else {}
-        ).items()}
+    macros: dict[str, "TemplateSafeEval"] = field(default_factory=dict)
+    messages: dict[str, dict[str, "TemplateMultipleSafeEval"]] = field(default_factory=dict)
 
-        self.name = name
-        self.nickname = nickname if nickname is not None else name
-        self.version = version if version is not None else "v1.0.0"
-        self.variant = variant if variant is not None else "01"
+    global_settings: dict[str, "AbstractModSettings"] = field(default_factory=dict)
+    specific_settings: dict[str, "AbstractModSettings"] = field(default_factory=dict)
 
-        self.tags_templates = tags_templates if tags_templates is not None else {}
-        self.tags_cups = tags_cups if tags_cups is not None else []
+    lpar_template: "TemplateMultipleSafeEval" = "normal.lpar"
 
-        self._tracks = tracks if tracks is not None else []
-        self.track_file_template = track_file_template \
-            if track_file_template is not None else "{{ getattr(track, 'sha1', '_') }}"
-        self.multiplayer_disable_if = multiplayer_disable_if if multiplayer_disable_if is not None else "False"
-        self.lpar_template = lpar_template if lpar_template is not None else "normal.lpar"
+    def __post_init__(self):
+        self.path = Path(self.path)
+        if self.nickname is None: self.nickname = self.name
 
-        self.arenas = arenas if arenas is not None else []
+    def __hash__(self) -> int:
+        return hash(self.name)
 
-        self.original_track_prefix = original_track_prefix if original_track_prefix is not None else True
-        self.swap_original_order = swap_original_order if swap_original_order is not None else True
-        self.keep_original_track = keep_original_track if keep_original_track is not None else True
-        self.enable_random_cup = enable_random_cup if enable_random_cup is not None else True
-
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<ModConfig name={self.name} version={self.version}>"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} {self.version}"
 
     @classmethod
@@ -137,24 +123,27 @@ class ModConfig:
         :param macros: macro that can be used for safe_eval
         :return: ModConfig
         """
-        kwargs = {
-            attr: config_dict.get(attr)
-            for attr in cls.__slots__
-            if attr not in ["name", "_tracks", "tracks", "arenas", "path", "macros", "messages"]
-            # these keys are treated after or are reserved
+        kwargs = config_dict | {
+            "path": path,
+
+            "_tracks": [CustomTrack.from_dict(track) for track in config_dict.pop("tracks", [])],
+            "_arenas": [Arena.from_dict(arena) for arena in config_dict.pop("arenas", [])],
+
+            "macros": macros,
+            "messages": messages,
+
+            "global_settings": {name: AbstractModSettings.get(data) for name, data in merge_dict(
+                default_global_settings,
+                config_dict.get("global_settings", {}),
+                dict_keys=default_global_settings.keys()  # Avoid modder to add their own settings to globals one
+            ).items()},
+
+            "specific_settings": {name: AbstractModSettings.get(data) for name, data in config_dict.get(
+                "specific_settings", {}
+            ).items()},
         }
 
-        return cls(
-            path=Path(path),
-            name=config_dict["name"],
-
-            **kwargs,
-
-            tracks=[CustomTrack.from_dict(track) for track in config_dict.get("tracks", [])],
-            arenas=[Arena.from_dict(arena) for arena in config_dict.get("arenas", [])],
-            macros=macros,
-            messages=messages,
-        )
+        return cls(**kwargs)
 
     @classmethod
     def from_file(cls, config_file: str | Path) -> "ModConfig":
@@ -214,7 +203,13 @@ class ModConfig:
         Same as get_all_tracks, but arenas are included
         """
         yield from self.get_all_tracks(*args, **kwargs)
-        yield from self.arenas
+        yield from self.get_arenas()
+
+    def get_arenas(self) -> Generator["Arena", None, None]:
+        """
+        Yield all arenas of the mod
+        """
+        yield from self._arenas
 
     def get_all_tracks(self, *args, **kwargs) -> Generator["CustomTrack", None, None]:
         """
@@ -338,7 +333,7 @@ class ModConfig:
             ctfile += cup.get_ctfile(mod_config=self, template=template)
 
         ctfile_override_property = "[SETUP-ARENA]\n"
-        for arena in self.arenas:
+        for arena in self.get_arenas():
             arena_definition, arena_override_property = arena.get_ctfile(mod_config=self, template=template)
             ctfile += arena_definition
             ctfile_override_property += arena_override_property
