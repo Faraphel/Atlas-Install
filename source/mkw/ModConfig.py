@@ -91,13 +91,14 @@ class ModConfig:
         self.macros = macros if macros is not None else {}
         self.messages = messages if messages is not None else {}
 
-        self.global_settings = AbstractModSettings.get(merge_dict(
-            default_global_settings, global_settings,
-            dict_keys=default_global_settings.keys()  # Avoid modder to add their own settings to globals one
-        ))
-        self.specific_settings = AbstractModSettings.get(
+        self.global_settings = {name: AbstractModSettings.get(data) for name, data in merge_dict(
+            # Avoid modder to add their own settings to globals one
+            default_global_settings, global_settings, dict_keys=default_global_settings.keys()
+        ).items()}
+
+        self.specific_settings = {name: AbstractModSettings.get(data) for name, data in (
             specific_settings if specific_settings is not None else {}
-        )
+        ).items()}
 
         self.name = name
         self.nickname = nickname if nickname is not None else name
