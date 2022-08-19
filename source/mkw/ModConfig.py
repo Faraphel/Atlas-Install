@@ -8,10 +8,9 @@ from PIL import Image
 from source import threaded
 from source.mkw import Tag, Slot
 from source.mkw.Cup import Cup
-from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
+from source.mkw import MKWColor
 from source.mkw.ModSettings import AbstractModSettings
 from source.mkw.Track import CustomTrack, DefaultTrack, Arena
-from source.mkw import OriginalTrack
 from source.progress import Progress
 from source.safe_eval import safe_eval, multiple_safe_eval
 from source.wt.szs import SZSPath
@@ -170,9 +169,8 @@ class ModConfig:
         :return: the modconfig environment
         """
         return {
-           "mod_config": self,
-           "bmg_color_raw": bmg_color_raw,
-           "bmg_color_text": bmg_color_text
+            "mod_config": self,
+            "get_color": MKWColor.get
         } | (
             base_env if base_env is not None else {}
         )

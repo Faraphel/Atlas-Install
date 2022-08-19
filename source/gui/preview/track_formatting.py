@@ -3,7 +3,7 @@ from tkinter import ttk
 from typing import TYPE_CHECKING
 import re
 
-from source.mkw.MKWColor import MKWColor
+from source.mkw import MKWColor
 from source.gui.preview import AbstractPreviewWindow
 
 if TYPE_CHECKING:
@@ -28,7 +28,7 @@ class Window(AbstractPreviewWindow):
         self.entry_template_input.bind("<Return>", self.preview)
 
         self.text_track_format = tkinter.Text(
-            self, background="black", foreground=MKWColor("off").color_code, state=tkinter.DISABLED
+            self, background="black", foreground=MKWColor.get(bmg="off").color_code, state=tkinter.DISABLED
         )
         self.text_track_format.grid(row=2, column=1, sticky="NEWS")
 
@@ -37,7 +37,7 @@ class Window(AbstractPreviewWindow):
 
         self.text_track_format.configure(yscrollcommand=self.scrollbar_track_preview.set)
 
-        for color in MKWColor.get_all_colors():
+        for color in MKWColor.all_colors:
             self.text_track_format.tag_configure(color.bmg, foreground=color.color_code)
         self.text_track_format.tag_configure("error", background="red", foreground="white")
     

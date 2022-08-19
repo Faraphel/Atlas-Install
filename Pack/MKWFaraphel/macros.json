@@ -1,14 +1,14 @@
 {
   "GAME_REGION": "str(extracted_game.original_game.wit_path.region)",
 
-  "TRACK_TEXT_SCORE": "bmg_color_text(['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)], f'\\\\x{65296+track.score:x} ') if hasattr(track, 'score') else ''",
+  "TRACK_TEXT_SCORE": "get_color(name=['yellow', 'orange', 'dark red', 'azure'][getattr(track, 'warning', 0)]).color_text(f'\\\\x{65296+track.score:x} ') if hasattr(track, 'score') else ''",
   "TRACK_TEXT_PREFIX": "f'{prefix} ' if (prefix := get_tag_template('prefix', '')) else ''",
   "TRACK_TEXT_SUFFIX": "f' ({suffix})' if (suffix := get_tag_template('suffix', '')) else ''",
   "TRACK_TEXT_NAME": "getattr(track, 'name', '')",
   "TRACK_TEXT_AUTHORS": "'\\\\n'.join(author) if isinstance(author := getattr(track, 'author', '/'), list) else author",
-  "TRACK_TEXT_WARNING_IF_DISABLED": "bmg_color_text('red', '/') if getattr(track, 'warning', 0) != 0 else ''",
-  "TRACK_TEXT_HIGHLIGHT_START": "bmg_color_raw('azure') if eval(highlight_if if (highlight_if := mod_config.specific_settings['highlight_if'].value) is not None else 'False', env={'track': track, 'mod_config': mod_config}) is True else ''",
-  "TRACK_TEXT_HIGHLIGHT_END": "bmg_color_raw('off')",
+  "TRACK_TEXT_WARNING_IF_DISABLED": "get_color(name='red').color_text('/') if getattr(track, 'warning', 0) != 0 else ''",
+  "TRACK_TEXT_HIGHLIGHT_START": "get_color(name='azure').raw if eval(highlight_if if (highlight_if := mod_config.specific_settings['highlight_if'].value) is not None else 'False', env={'track': track, 'mod_config': mod_config}) is True else ''",
+  "TRACK_TEXT_HIGHLIGHT_END": "get_color(name='off').raw",
 
   "SETTINGS_MODE": "mod_config.specific_settings['mode'].value",
   "SETTINGS_BALANCING": "mod_config.specific_settings['balancing'].value",

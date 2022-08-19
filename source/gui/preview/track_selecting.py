@@ -2,7 +2,7 @@ import tkinter
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from source.mkw.MKWColor import MKWColor
+from source.mkw import MKWColor
 from source.gui.preview import AbstractPreviewWindow
 from source.gui import better_gui_error
 
@@ -27,7 +27,9 @@ class Window(AbstractPreviewWindow):
         self.entry_template_input.grid(row=1, column=1, columnspan=2, sticky="NEWS")
         self.entry_template_input.bind("<Return>", self.preview)
 
-        self.text_track_format = tkinter.Text(self, width=40, bg="black", fg=MKWColor("off").color_code, state=tkinter.DISABLED)
+        self.text_track_format = tkinter.Text(
+            self, width=40, bg="black", fg=MKWColor.get(bmg="off").color_code, state=tkinter.DISABLED
+        )
         self.text_track_format.grid(row=2, column=1, sticky="NEWS")
         
         self.text_track_select = tkinter.Text(self, width=20, bg="black", state=tkinter.DISABLED)
