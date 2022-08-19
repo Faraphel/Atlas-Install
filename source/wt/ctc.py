@@ -1,4 +1,4 @@
-from source.mkw import Slot
+from source.mkw.collection import Slot
 from source.wt import *
 import re
 

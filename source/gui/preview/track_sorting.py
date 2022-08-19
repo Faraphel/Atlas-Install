@@ -2,7 +2,7 @@ import tkinter
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from source.mkw import MKWColor
+from source.mkw.collection import MKWColor
 from source.gui.preview import AbstractPreviewWindow
 from source.gui import better_gui_error
 

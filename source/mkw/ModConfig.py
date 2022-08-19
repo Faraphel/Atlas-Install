@@ -6,9 +6,9 @@ import json
 from PIL import Image
 
 from source import threaded
-from source.mkw import Tag, Slot
+from source.mkw import Tag
 from source.mkw.Cup import Cup
-from source.mkw import MKWColor
+from source.mkw.collection import MKWColor, Slot
 from source.mkw.ModSettings import AbstractModSettings
 from source.mkw.Track import CustomTrack, DefaultTrack, Arena
 from source.progress import Progress

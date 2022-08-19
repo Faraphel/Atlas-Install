@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Generator, TYPE_CHECKING
 
-from source.mkw import Tag, ModConfig, Slot
+from source.mkw import Tag, ModConfig
+from source.mkw.collection import Slot
 from source.translation import translate as _
 
 if TYPE_CHECKING:

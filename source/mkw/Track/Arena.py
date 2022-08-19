@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING
 
-from source.mkw import Slot, Tag
+from source.mkw import Tag
+from source.mkw.collection import Slot
 from source.mkw.Track.RealArenaTrack import RealArenaTrack
 from source.translation import translate as _
 

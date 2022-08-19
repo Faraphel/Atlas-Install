@@ -3,7 +3,7 @@ from tkinter import ttk
 from typing import TYPE_CHECKING
 import re
 
-from source.mkw import MKWColor
+from source.mkw.collection import MKWColor
 from source.gui.preview import AbstractPreviewWindow
 
 if TYPE_CHECKING:
