@@ -95,6 +95,10 @@
     "CANNOT_FIND_TOOL": "Can't find tool",
     "IN_TOOLS_DIRECTORY": "in the tools directory.",
     "CANNOT_EXTRACT_A_DIRECTORY": "Can't extract a directory",
-    "CANNOT_FIND_SLOT": "Can't find slot"
+    "CANNOT_FIND_SLOT": "Can't find slot",
+    "FORBIDDEN_TRACKGROUP_ATTRIBUTE": "Forbidden TrackGroup attribute",
+    "SAFE_EVAL_ERROR": "Safe eval error",
+    "TEMPLATE_USED": "Template used",
+    "MORE_IN_ERROR_LOG": "More information in the error.log file"
   }
 }

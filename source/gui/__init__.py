@@ -25,6 +25,12 @@ def better_gui_error(func: Callable) -> Callable:
                     f"{exc}\n"
                     f"\n"
                 )
-            messagebox.showerror(_("Error"), exc)
+
+            exc_split = exc.splitlines()
+            if len(exc_split) > 10:
+                # if the traceback is too long, only keep the 5 first and 5 last lines of the traceback
+                exc_split = exc_split[:5] + ["..."] + exc_split[-5:] + ["", "", _("MORE_IN_ERROR_LOG")]
+
+            messagebox.showerror(_("Error"), "\n".join(exc_split))
 
     return wrapper

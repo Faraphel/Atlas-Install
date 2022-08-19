@@ -96,6 +96,10 @@
     "CANNOT_FIND_TOOL": "Impossible de trouver l'outil",
     "IN_TOOLS_DIRECTORY": "dans le dossier des outils.",
     "CANNOT_EXTRACT_A_DIRECTORY": "Impossible d'extraire un dossier",
-    "CANNOT_FIND_SLOT": "Impossible de trouver le slot"
+    "CANNOT_FIND_SLOT": "Impossible de trouver le slot",
+    "FORBIDDEN_TRACKGROUP_ATTRIBUTE": "Attribut de groupe de course interdit",
+    "SAFE_EVAL_ERROR": "Erreur lors d'un safe eval",
+    "TEMPLATE_USED": "Modèle utilisé",
+    "MORE_IN_ERROR_LOG": "Plus d'information dans le fichier error.log"
   }
 }
