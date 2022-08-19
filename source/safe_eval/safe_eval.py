@@ -86,6 +86,18 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
                     elif node.id in args:
                         raise SafeEvalException(_("CANNOT_SET_ARGUMENT", ' : "', node.id, '"'))
 
+            # when calling any function
+            case ast.Call:
+                # ban the function and method from the environment
+                for callnode in ast.walk(node.func):
+                    if isinstance(callnode, ast.Attribute):
+                        for attrnode in ast.walk(callnode.value):
+                            if isinstance(attrnode, ast.Name):
+                                if attrnode.id in globals_ | locals_ or attrnode.id in args:
+                                    raise SafeEvalException(
+                                        _("CALLING_FUNCTION_NOT_ALLOWED", ' : "', callnode.attr, '"')
+                                    )
+
             # when assigning a value with ":="
             case ast.NamedExpr:
                 # embed the value into a deepcopy, to avoid interaction with class attribute
