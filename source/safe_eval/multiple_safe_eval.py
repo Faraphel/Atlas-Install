@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, Iterable, Callable
 
-from source.safe_eval import safe_eval
+from source.safe_eval.safe_eval import safe_eval
+from source.safe_eval import better_safe_eval_error
 
 if TYPE_CHECKING:
     from source import TemplateMultipleSafeEval, TemplateSafeEval, Env
@@ -40,9 +41,9 @@ def multiple_safe_eval(template: "TemplateMultipleSafeEval", env: "Env" = None,
             ))
             template = template[token_end:]
 
-    return lambda *args, **kwargs: "".join([
+    return better_safe_eval_error(lambda *args, **kwargs: "".join([
         str(part(*args, **kwargs)) if callable(part) else part
         for part in lambda_templates
-    ])
+    ]), template=template)
 
 

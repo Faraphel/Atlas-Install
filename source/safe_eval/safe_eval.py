@@ -2,6 +2,7 @@ import ast
 import copy
 from typing import TYPE_CHECKING, Iterable, Callable
 
+from source.safe_eval import better_safe_eval_error
 from source.safe_eval.macros import replace_macro
 from source.safe_eval.safe_function import get_all_safe_functions
 from source.translation import translate as _
@@ -126,7 +127,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     # return the evaluated formula
     lambda_template = eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
     self.safe_eval_cache[template_key] = lambda_template  # cache the callable for potential latter call
-    return lambda_template
+    return better_safe_eval_error(lambda_template, template=template)
 
 
 # TODO: disable some method and function call. for example, mod_config.path.unlink() is dangerous !
