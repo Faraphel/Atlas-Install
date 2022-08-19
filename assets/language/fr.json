@@ -82,7 +82,6 @@
     "CONVERTING_TO_GAME_FILE": "Conversion en fichier de jeu",
     "CANNOT_FIND_COLOR": "Impossible de trouver la couleur",
     "NORMALIZING_TRACKS": "Normalisation des courses",
-    "CANNOT_FIND_ORIGINAL_TRACK": "Impossible de trouver la course originale",
     "INVALID_MACRO": "Macro invalide",
     "INVALID_AST_TYPE": "Type d'Ast invalide",
     "MAGIC_ATTRIBUTE_ARE_FORBIDDEN": "Les attributs magique sont interdit",

@@ -81,7 +81,6 @@
     "CONVERTING_TO_GAME_FILE": "Converting to game file",
     "CANNOT_FIND_COLOR": "Can't find color",
     "NORMALIZING_TRACKS": "Normalizing tracks",
-    "CANNOT_FIND_ORIGINAL_TRACK": "Can't find original track",
     "INVALID_MACRO": "Invalid macro",
     "INVALID_AST_TYPE": "Invalid ast type",
     "MAGIC_ATTRIBUTE_ARE_FORBIDDEN": "Magic attribute are forbidden",

@@ -6,7 +6,7 @@ import json
 from PIL import Image
 
 from source import threaded
-from source.mkw import Tag
+from source.mkw import Tag, Slot
 from source.mkw.Cup import Cup
 from source.mkw.MKWColor import bmg_color_text, bmg_color_raw
 from source.mkw.ModSettings import AbstractModSettings
@@ -450,7 +450,7 @@ class ModConfig:
                     # if the track should use the default track instead in multiplayer,
                     # copy the default track to the same file but with a _d at the end
                     shutil.copy(
-                        original_tracks_path / f"{OriginalTrack.get(slot=track.special).name}_d.szs",
+                        original_tracks_path / f"{Slot.get(normal=track.special).track_name}_d.szs",
                         destination_path / f"{track_file.stem}_d.szs"
                     )
 

@@ -1,4 +1,4 @@
-from source.mkw import OriginalTrack
+from source.mkw import Slot
 from source.wt import *
 import re
 
@@ -24,7 +24,7 @@ def bmg_ctfile(ctfile: "Path | str") -> str:
     # this command will generate unwanted definition for the originals tracks / arena. Delete them if
     # they are not custom
 
-    original_tracks_texts: list[str] = list(map(lambda og_track: og_track.name, OriginalTrack.all_original_tracks))
+    original_tracks_texts: list[str] = list(map(lambda slot: slot.track_name, Slot.all_slots))
 
     def remove_unwanted_definition(match: re.Match) -> str:
         def_id = int(match.group("id"), 16)
