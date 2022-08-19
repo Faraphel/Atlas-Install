@@ -16,13 +16,20 @@ class ArenaForbiddenCustomAttribute(Exception):
 
 
 class Arena(RealArenaTrack):
+    """
+    Represent an arena object
+    """
+
+    mod_config: "ModConfig"
     slot: Slot.Slot
     music: Slot.Slot
     special: Slot.Slot
     tags: list[Tag]
 
-    def __init__(self, slot: Slot.Slot, music: Slot.Slot = None, special: Slot.Slot = None,
+    def __init__(self, mod_config: "ModConfig", slot: Slot.Slot, music: Slot.Slot = None, special: Slot.Slot = None,
                  tags: list[Tag] = None, **kwargs):
+
+        self.mod_config = mod_config
         self.slot = Slot.find(slot)
         self.music = Slot.find(music if music is not None else slot)
         self.special = Slot.find(special if special is not None else slot)
@@ -31,26 +38,25 @@ class Arena(RealArenaTrack):
         # others not mandatory attributes
         for key, value in kwargs.items():
             # if the attribute start with __, this is a magic attribute, and it should not be modified
-            if "__" in key or hasattr(self, key): raise ArenaForbiddenCustomAttribute(key)
+            if "__" in key: raise ArenaForbiddenCustomAttribute(key)
             setattr(self, key, value)
 
     def __repr__(self):
         return f"<{self.__class__.__name__} name={getattr(self, 'name', '/')} tags={getattr(self, 'tags', '/')}>"
 
     @classmethod
-    def from_dict(cls, arena_dict: dict[str, any]) -> "Arena":
-        return cls(**arena_dict)
+    def from_dict(cls, mod_config: "ModConfig", arena_dict: dict[str, any]) -> "Arena":
+        return cls(mod_config, **arena_dict)
 
-    def get_ctfile(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> (str, str):
+    def get_ctfile(self, template: "TemplateMultipleSafeEval") -> (str, str):
         """
         Return the ctfile for the arena and the redefinition of the slot property
-        :param mod_config: the mod_config object
         :param template: the template of the track name
         :return: the ctfile for the arena and the redefinition of the slot property
         """
 
-        name: str = self.repr_format(mod_config=mod_config, template=template)
-        filename: str = self.get_filename(mod_config=mod_config)
+        name: str = self.repr_format(template=template)
+        filename: str = self.filename
 
         return (
             (

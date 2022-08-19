@@ -18,7 +18,7 @@
             }
         },
         "replace_random_new": {
-            "default": "'Retro' not in getattr(track, 'tags', []) and getattr(track, 'warning', 0) == 0"
+            "default": "'Retro' not in track.tags and track.warning == 0"
         }
     },
     "specific_settings": {
@@ -39,7 +39,7 @@
                 "fr": "Surligner si"
             },
             "type": "string",
-            "default": "'v' + getattr(track, 'since_version', '') == mod_config.version",
+            "default": "'v' + track.since_version == mod_config.version",
             "preview": "track_selecting"
         },
         "balancing": {
@@ -124,9 +124,18 @@
         "GP"
     ],
 
-    "track_file_template": "{{ getattr(track, 'sha1', '_') }}",
-    "multiplayer_disable_if": "getattr(track, 'warning', 0) >= 1",
+    "track_file_template": "{{ track.sha1 }}",
+    "multiplayer_disable_if": "track.warning >= 1",
 
+    "default_track_attributes": {
+        "since_version": "",
+        "sha1": "_",
+        "name": "",
+        "author": "/",
+        "warning": 0,
+        "score": 0,
+        "tags": []
+    },
     "tracks": [
         {
             "name":"Mario Kart Stadium",

@@ -15,13 +15,17 @@ class TrackForbiddenCustomAttribute(Exception):
 
 
 class AbstractTrack(ABC):
+
+    mod_config: "ModConfig"
     music: Slot.Slot
     special: Slot.Slot
     tags: list[Tag]
     weight: int
 
-    def __init__(self, music: Slot.Slot = "T11", special: Slot.Slot = "T11",
+    def __init__(self, mod_config: "ModConfig", music: Slot.Slot = "T11", special: Slot.Slot = "T11",
                  tags: list[Tag] = None, weight: int = 1, **kwargs):
+
+        self.mod_config = mod_config
         self.music = Slot.find(music)
         self.special = Slot.find(special)
         self.tags = tags if tags is not None else []
@@ -30,7 +34,8 @@ class AbstractTrack(ABC):
         # others not mandatory attributes
         for key, value in kwargs.items():
             # if the attribute start with __, this is a magic attribute, and it should not be modified
-            if "__" in key or hasattr(self, key): raise TrackForbiddenCustomAttribute(key)
+            if "__" in key: raise TrackForbiddenCustomAttribute(key)
+            # TODO: check potential security issue with setattr and already implemented method and attribute
             setattr(self, key, value)
 
     def __repr__(self):
@@ -45,34 +50,33 @@ class AbstractTrack(ABC):
             yield self
 
     @abstractmethod
-    def repr_format(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval") -> str:
+    def repr_format(self, template: "TemplateMultipleSafeEval") -> str:
         """
         return the representation of the track from the format
         :param template: template for the way the text will be represented
-        :param mod_config: configuration of the mod
         :return: formatted representation of the track
         """
         ...
 
+    @property
     @abstractmethod
-    def get_filename(self, mod_config: "ModConfig") -> str:
+    def filename(self) -> str:
         """
         Return the filename of the track
-        :param mod_config: the mod_config object
         :return: the filename of the track
         """
         ...
 
+    @property
     @abstractmethod
-    def is_new(self, mod_config: "ModConfig") -> bool:
+    def is_new(self) -> bool:
         """
         Return if the track should be considered as new for random selection
-        :param mod_config: mod configuration
         :return: is the track new
         """
         ...
 
-    def get_ctfile(self, mod_config: "ModConfig", template: "TemplateMultipleSafeEval", hidden: bool = False) -> str:
+    def get_ctfile(self, template: "TemplateMultipleSafeEval", hidden: bool = False) -> str:
         """
         return the ctfile of the track
         :hidden: if the track is in a group
@@ -80,11 +84,11 @@ class AbstractTrack(ABC):
         :return: ctfile
         """
         category: str = "H" if hidden else "T"
-        name: str = self.repr_format(mod_config=mod_config, template=template)
-        filename: str = self.get_filename(mod_config=mod_config)
+        name: str = self.repr_format(template=template)
+        filename: str = self.filename
         flags: int = (
             (0x04 if hidden else 0) |
-            (0x01 if self.is_new(mod_config) else 0)
+            (0x01 if self.is_new else 0)
         )
 
         return (

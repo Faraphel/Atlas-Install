@@ -52,9 +52,7 @@ class Window(AbstractPreviewWindow):
         # insert all the tracks representation
         for track in self.mod_config.get_all_arenas_tracks(ignore_filter=True):
             try:
-                track_repr = track.repr_format(
-                    self.mod_config, self.entry_template_input.get()
-                )
+                track_repr = track.repr_format(template=self.entry_template_input.get())
 
                 offset: int = 0  # the color tag is removed at every sub, so keep track of the offset
                 tags: list[tuple[int | None, str | None]] = []  # list of all the position of the tags, with the offset

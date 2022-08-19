@@ -7,12 +7,13 @@ from PIL import Image
 
 from source import threaded
 from source.mkw import Tag
-from source.mkw.Cup import Cup
+from source.mkw.Track.Cup import Cup
 from source.mkw.collection import MKWColor, Slot
 from source.mkw.ModSettings import AbstractModSettings
 from source.mkw.Track import CustomTrack, DefaultTrack, Arena
 from source.progress import Progress
-from source.safe_eval import safe_eval, multiple_safe_eval
+from source.safe_eval.safe_eval import safe_eval
+from source.safe_eval.multiple_safe_eval import multiple_safe_eval
 from source.wt.szs import SZSPath
 from source.translation import translate as _
 
@@ -78,8 +79,9 @@ class ModConfig:
     version: str = "v1.0.0"
     variant: str = "01"
 
-    _tracks: list["Track | TrackGroup"] = field(default_factory=list)
-    _arenas: list["Arena"] = field(default_factory=list)
+    _tracks: list["Track | TrackGroup | dict"] = field(default_factory=list)
+    default_track_attributes: dict[str, any] = field(default_factory=dict)
+    _arenas: list["Arena | dict"] = field(default_factory=list)
     track_file_template: "TemplateMultipleSafeEval" = "{{ getattr(track, 'sha1', '_') }}"
     multiplayer_disable_if: "TemplateSafeEval" = "False"
 
@@ -94,14 +96,23 @@ class ModConfig:
     macros: dict[str, "TemplateSafeEval"] = field(default_factory=dict)
     messages: dict[str, dict[str, "TemplateMultipleSafeEval"]] = field(default_factory=dict)
 
-    global_settings: dict[str, "AbstractModSettings"] = field(default_factory=dict)
-    specific_settings: dict[str, "AbstractModSettings"] = field(default_factory=dict)
+    global_settings: dict[str, "AbstractModSettings | dict"] = field(default_factory=dict)
+    specific_settings: dict[str, "AbstractModSettings | dict"] = field(default_factory=dict)
 
     lpar_template: "TemplateMultipleSafeEval" = "normal.lpar"
 
     def __post_init__(self):
         self.path = Path(self.path)
         if self.nickname is None: self.nickname = self.name
+
+        self._tracks = [CustomTrack.from_dict(self, track) for track in self._tracks if isinstance(track, dict)]
+        self._arenas = [Arena.from_dict(self, arena) for arena in self._arenas if isinstance(arena, dict)]
+
+        self.global_settings = {name: AbstractModSettings.get(data) for name, data in merge_dict(
+            default_global_settings, self.global_settings, dict_keys=default_global_settings.keys()
+            # Avoid modder to add their own settings to globals one
+        ).items()}
+        self.specific_settings = {name: AbstractModSettings.get(data) for name, data in self.specific_settings.items()}
 
     def __hash__(self) -> int:
         return hash(self.name)
@@ -125,21 +136,11 @@ class ModConfig:
         kwargs = config_dict | {
             "path": path,
 
-            "_tracks": [CustomTrack.from_dict(track) for track in config_dict.pop("tracks", [])],
-            "_arenas": [Arena.from_dict(arena) for arena in config_dict.pop("arenas", [])],
+            "_tracks": config_dict.pop("tracks", []),
+            "_arenas": config_dict.pop("arenas", []),
 
             "macros": macros,
             "messages": messages,
-
-            "global_settings": {name: AbstractModSettings.get(data) for name, data in merge_dict(
-                default_global_settings,
-                config_dict.get("global_settings", {}),
-                dict_keys=default_global_settings.keys()  # Avoid modder to add their own settings to globals one
-            ).items()},
-
-            "specific_settings": {name: AbstractModSettings.get(data) for name, data in config_dict.get(
-                "specific_settings", {}
-            ).items()},
         }
 
         return cls(**kwargs)
@@ -233,7 +234,7 @@ class ModConfig:
         # filter_template_func is the function checking if the track should be included. If no parameter is set,
         # then always return True
         filter_template_func: Callable = self.safe_eval(
-            filter_template if filter_template is not None else "True", args=["track"]
+            template=filter_template if filter_template is not None else "True", args=["track"]
         )
 
         # if a sorting function is set, use it. If no function is set, but sorting is not disabled, use settings.
@@ -247,7 +248,7 @@ class ModConfig:
             # wrap the iterator inside a sort function
             iterator = sorted(iterator, key=sorting_template_func)
 
-        # Go though all the tracks and filter them if enabled
+        # Go through all the tracks and filter them if enabled
         for track in iterator:
             yield track
 
@@ -267,13 +268,13 @@ class ModConfig:
 
                 if len(track_buffer) > 4:
                     current_tag_count += 1
-                    yield Cup(tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count}")
+                    yield Cup(mod_config=self, tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count}")
                     track_buffer = []
 
             # if there is still tracks in the buffer, create a cup with them and fill with default>
             if len(track_buffer) > 0:
-                track_buffer.extend([DefaultTrack()] * (4 - len(track_buffer)))
-                yield Cup(tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count + 1}")
+                track_buffer.extend([DefaultTrack(mod_config=self)] * (4 - len(track_buffer)))
+                yield Cup(mod_config=self, tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count + 1}")
 
     def get_unordered_cups(self) -> Generator["Cup", None, None]:
         """
@@ -289,13 +290,13 @@ class ModConfig:
             track_buffer.append(track)
 
             if len(track_buffer) > 4:
-                yield Cup(tracks=track_buffer)
+                yield Cup(mod_config=self, tracks=track_buffer)
                 track_buffer = []
 
         # if there is still tracks in the buffer, create a cup with them and fill with default
         if len(track_buffer) > 0:
-            track_buffer.extend([DefaultTrack()] * (4 - len(track_buffer)))
-            yield Cup(tracks=track_buffer)
+            track_buffer.extend([DefaultTrack(mod_config=self)] * (4 - len(track_buffer)))
+            yield Cup(mod_config=self, tracks=track_buffer)
 
     def get_cups(self) -> Generator["Cup", None, None]:
         """
@@ -328,11 +329,11 @@ class ModConfig:
 
         for cup in self.get_cups():
             # get all the cup ctfile, use "-" for the template since the track's name are not used here
-            ctfile += cup.get_ctfile(mod_config=self, template=template)
+            ctfile += cup.get_ctfile(template=template)
 
         ctfile_override_property = "[SETUP-ARENA]\n"
         for arena in self.get_arenas():
-            arena_definition, arena_override_property = arena.get_ctfile(mod_config=self, template=template)
+            arena_definition, arena_override_property = arena.get_ctfile(template=template)
             ctfile += arena_definition
             ctfile_override_property += arena_override_property
 
@@ -433,7 +434,7 @@ class ModConfig:
 
         for track in self.get_all_arenas_tracks():
             track_file: Path = next(
-                track_directory.rglob(f"{track.repr_format(self, self.track_file_template)}.*")
+                track_directory.rglob(f"{track.repr_format(template=self.track_file_template)}.*")
             )
 
             @threaded

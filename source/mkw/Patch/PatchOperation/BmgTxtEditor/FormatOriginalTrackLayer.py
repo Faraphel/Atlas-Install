@@ -49,11 +49,11 @@ class FormatOriginalTrackLayer(AbstractLayer):
             else: tag = "Wii"
 
             patched_name = CustomTrack(
+                mod_config=patch.mod_config,
                 name=name,
                 tags=[tag]
             ).repr_format(
-                patch.mod_config,
-                self.template
+                template=self.template
             )
 
             return f"  {id}\t= {patched_name}"
