@@ -99,6 +99,7 @@
     "FORBIDDEN_TRACKGROUP_ATTRIBUTE": "Forbidden TrackGroup attribute",
     "SAFE_EVAL_ERROR": "Safe eval error",
     "TEMPLATE_USED": "Template used",
-    "MORE_IN_ERROR_LOG": "More information in the error.log file"
+    "MORE_IN_ERROR_LOG": "More information in the error.log file",
+    "COPY_FUNCTION_FORBIDDEN": "Copying functions is forbidden"
   }
 }

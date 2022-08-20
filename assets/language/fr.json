@@ -100,6 +100,7 @@
     "FORBIDDEN_TRACKGROUP_ATTRIBUTE": "Attribut de groupe de course interdit",
     "SAFE_EVAL_ERROR": "Erreur lors d'un safe eval",
     "TEMPLATE_USED": "Modèle utilisé",
-    "MORE_IN_ERROR_LOG": "Plus d'information dans le fichier error.log"
+    "MORE_IN_ERROR_LOG": "Plus d'information dans le fichier error.log",
+    "COPY_FUNCTION_FORBIDDEN": "Impossible de copier une fonction"
   }
 }

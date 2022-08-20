@@ -1,5 +1,4 @@
 import ast
-import copy
 from typing import TYPE_CHECKING, Iterable, Callable
 
 from source.safe_eval import better_safe_eval_error
@@ -24,7 +23,6 @@ class SafeEvalException(Exception):
 # dict of every value used by every safe_eval call
 all_globals = {
     "__builtins__": {},
-    "deepcopy": copy.deepcopy
 } | {
     func.__name__: func for func in get_all_safe_functions()
 }
@@ -91,7 +89,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
             case ast.NamedExpr:
                 # embed the value into a deepcopy, to avoid interaction with class attribute
                 node.value = ast.Call(
-                    func=ast.Name(id="deepcopy", ctx=ast.Load()),
+                    func=ast.Name(id="copy", ctx=ast.Load()),
                     args=[node.value], keywords=[],
                 )
 

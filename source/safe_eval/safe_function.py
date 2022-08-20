@@ -1,3 +1,4 @@
+import copy
 from typing import Callable, Generator, TYPE_CHECKING
 
 from source.translation import translate as _
@@ -52,3 +53,13 @@ class safe_function:
         """
         from source.safe_eval.safe_eval import safe_eval
         return safe_eval(template=template, env=env)()
+
+    @staticmethod
+    def copy(obj: any) -> any:
+        """
+        Deepcopy an object, and raise an exception if it is a function / method.
+        :param obj: the object to copy
+        :return: the copied object
+        """
+        if callable(obj): raise Exception(_("COPY_FUNCTION_FORBIDDEN", ' : "', obj.__name__, '"'))
+        return copy.deepcopy(obj)
