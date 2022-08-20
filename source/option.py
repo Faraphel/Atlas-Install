@@ -16,6 +16,7 @@ class Option:
         "threads": 8,
         "mystuff_pack_selected": None,
         "mystuff_packs": {},
+        "extension": "WBFS",
     }
 
     def __init__(self, **options):

@@ -325,8 +325,11 @@ class DestinationGame(ttk.LabelFrame):
         self.entry.grid(row=1, column=1, sticky="nsew")
 
         self.output_type = ttk.Combobox(self, width=5, values=[extension.name for extension in Extension])
-        self.output_type.set(Extension.WBFS.name)
+        self.output_type.set(self.root.options["extension"])
         self.output_type.grid(row=1, column=2, sticky="nsew")
+
+        def output_type_callback(_: tkinter.Event): self.root.options["extension"] = self.output_type.get()
+        self.output_type.bind("<<ComboboxSelected>>", output_type_callback)
 
         self.button = ttk.Button(self, text="...", width=2, command=self.select)
         self.button.grid(row=1, column=3, sticky="nsew")
