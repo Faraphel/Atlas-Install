@@ -30,7 +30,13 @@ class RealArenaTrack:
         return default
 
     def repr_format(self, template: "TemplateMultipleSafeEval") -> str:
-        return self.mod_config.multiple_safe_eval(template=template, args=["track"])(track=self)
+        return self.mod_config.multiple_safe_eval(
+            template=template,
+            env={
+                "get_tag_template": lambda track, *args, **kwargs: track.get_tag_template(*args, **kwargs),
+            },
+            args=["track"],
+        )(track=self)
 
     @property
     def filename(self) -> str:
