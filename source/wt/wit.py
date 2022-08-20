@@ -1,8 +1,9 @@
-import enum
 import re
 import shutil
 from typing import Generator
 
+from source.mkw.collection.Extension import Extension
+from source.mkw.collection.Region import Region
 from source.wt import *
 
 tools_path = tools_wit_dir / "wit"
@@ -22,37 +23,6 @@ def copy(source_directory: Path | str, destination_file: Path | str) -> "WITPath
     """
     _tools_run("COPY", source_directory, "--DEST", destination_file)
     return WITPath(destination_file)
-
-
-class Extension(enum.Enum):
-    """
-    Enum for game extension
-    """
-    WBFS = ".wbfs"
-    FST = ".dol"
-    CISO = ".ciso"
-    ISO = ".iso"
-
-    @classmethod
-    def _missing_(cls, value: str) -> "Extension | None":
-        """
-        if not found, search for the same value with lower case
-        :param value: value to search for
-        :return: None if nothing found, otherwise the found value
-        """
-        value = value.lower()
-        for member in filter(lambda m: m.value == value, cls): return member
-        return None
-
-
-class Region(enum.Enum):
-    """
-    Enum for game region
-    """
-    PAL = "PAL"
-    USA = "USA"
-    JAP = "JAP"
-    KOR = "KOR"
 
 
 class WITPath:

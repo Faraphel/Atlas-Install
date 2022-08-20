@@ -3,9 +3,11 @@ from typing import Generator
 
 from source.mkw.ExtractedGame import ExtractedGame
 from source.mkw.ModConfig import ModConfig
+from source.mkw.collection.Extension import Extension
+from source.mkw.collection.Region import Region
 from source.option import Option
 from source.progress import Progress
-from source.wt.wit import WITPath, Region, Extension
+from source.wt.wit import WITPath
 from source.translation import translate as _
 
 

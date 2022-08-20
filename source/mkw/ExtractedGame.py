@@ -5,6 +5,7 @@ from typing import Generator, IO, TYPE_CHECKING
 
 from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
+from source.mkw.collection.Extension import Extension
 from source.progress import Progress
 from source.wt import szs, lec, wit
 from source.wt.wstrt import StrPath
@@ -175,14 +176,14 @@ class ExtractedGame:
         yield Progress(description=_("INSTALLING_ALL", " Patchs..."), determinate=False)
         yield from self._install_all_patch(mod_config, "_PATCH/")
 
-    def convert_to(self, output_type: wit.Extension) -> Generator[Progress, None, wit.WITPath | None]:
+    def convert_to(self, output_type: Extension) -> Generator[Progress, None, wit.WITPath | None]:
         """
         Convert the extracted game to another format
         :param output_type: path to the destination of the game
         :output_type: format of the destination game
         """
         yield Progress(description=_("CONVERTING_GAME_TO", " ", output_type.name), determinate=False)
-        if output_type == wit.Extension.FST: return
+        if output_type == Extension.FST: return
 
         destination_file = self.path.with_suffix(self.path.suffix + output_type.value)
         dest_stem: str = destination_file.stem

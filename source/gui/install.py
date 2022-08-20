@@ -12,14 +12,14 @@ from typing import Generator
 from source.gui import better_gui_error, mystuff, mod_settings
 from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
-from source.option import Option
+from source.option import Options
 from source.progress import Progress
 from source.translation import translate as _, translate_external
 from source import plugins
 from source import *
 import os
 
-from source.wt.wit import Extension
+from source.mkw.collection.Extension import Extension
 
 
 class SourceGameError(Exception):
@@ -39,11 +39,11 @@ class InstallerState(enum.Enum):
 
 # Main window for the installer
 class Window(tkinter.Tk):
-    def __init__(self, options: Option):
+    def __init__(self, options: Options):
         super().__init__()
         self.root = self
 
-        self.options: Option = options
+        self.options: Options = options
 
         self.title(_("INSTALLER_TITLE"))
         self.resizable(False, False)
@@ -161,19 +161,12 @@ class Menu(tkinter.Menu):
         
             master.add_cascade(label=_("LANGUAGE_SELECTION"), menu=self)
 
-            self.variable = tkinter.StringVar(value=self.root.options["language"])
-
-            def callback(file: Path):
-                def func(): self.root.options["language"] = file.stem
-                return func
-
             for file in Path("./assets/language/").iterdir():
                 lang_json = json.loads(file.read_text(encoding="utf8"))
                 self.add_radiobutton(
                     label=lang_json["name"],
                     value=file.stem,
-                    variable=self.variable,
-                    command=callback(file)
+                    variable=self.root.options.language
                 )
 
     # Advanced menu
@@ -194,18 +187,11 @@ class Menu(tkinter.Menu):
                 
                 master.add_cascade(label=_("THREADS_USAGE"), menu=self)
 
-                self.variable = tkinter.IntVar(value=self.root.options["threads"])
-
-                def callback(threads_amount: int):
-                    def func(): self.root.options["threads"] = threads_amount
-                    return func
-
                 for i in [1, 2, 4, 8, 12, 16]:
                     self.add_radiobutton(
                         label=_("USE", f" {i} ", "THREADS"),
                         value=i,
-                        variable=self.variable,
-                        command=callback(i),
+                        variable=self.root.options.threads,
                     )
 
     # Help menu
@@ -324,12 +310,9 @@ class DestinationGame(ttk.LabelFrame):
         self.entry = ttk.Entry(self)
         self.entry.grid(row=1, column=1, sticky="nsew")
 
-        self.output_type = ttk.Combobox(self, width=5, values=[extension.name for extension in Extension])
-        self.output_type.set(self.root.options["extension"])
+        self.output_type = ttk.Combobox(self, width=5, values=[extension.name for extension in Extension],
+                                        textvariable=self.root.options.extension)
         self.output_type.grid(row=1, column=2, sticky="nsew")
-
-        def output_type_callback(_: tkinter.Event): self.root.options["extension"] = self.output_type.get()
-        self.output_type.bind("<<ComboboxSelected>>", output_type_callback)
 
         self.button = ttk.Button(self, text="...", width=2, command=self.select)
         self.button.grid(row=1, column=3, sticky="nsew")
@@ -437,7 +420,7 @@ class ButtonInstall(ttk.Button):
 
             message: str = translate_external(
                 mod_config,
-                self.root.options["language"],
+                self.root.options.language.value,
                 mod_config.messages.get("installation_completed", {}).get("text", {})
             )
 
