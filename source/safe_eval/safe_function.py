@@ -37,7 +37,9 @@ class safe_function:
         Same as normal getattr, but magic attribute are banned
         """
         if "__" in name: raise Exception(_("MAGIC_METHOD_FORBIDDEN", ' : "', name, '"'))
-        return getattr(obj, name, default)
+        attr = getattr(obj, name, default)
+        if callable(attr): raise Exception(_("GET_METHOD_FORBIDDEN", ' : "', name, '"'))
+        return attr
 
     @staticmethod
     def type(obj: any):
