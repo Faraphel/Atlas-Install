@@ -93,6 +93,17 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
                     args=[node.value], keywords=[],
                 )
 
+            case ast.Call:
+                if isinstance(node.func, ast.Attribute):  # if this is a method
+                    if not isinstance(node.func.value, ast.Constant):  # if the method is not on a constant
+                        raise SafeEvalException(_("CAN_ONLY_CALL_METHOD_OF_CONSTANT"))
+
+                elif isinstance(node.func, ast.Name):  # if this is a direct function call
+                    if node.func.id not in globals_ | locals_:  # if the function is not in env
+                        raise SafeEvalException(_("CAN_ONLY_CALL_FUNCTION_IN_ENV"))
+
+                else: raise SafeEvalException(_("CAN_ONLY_CALL_FUNCTION_IN_ENV"))  # else don't allow the function call
+
             # Forbidden type. Some of them can't be accessed with the eval mode, but just in case, still ban them
             case (
                 ast.Assign | ast.AugAssign |    # Assign should only be done by ":=" with check in eval
@@ -102,7 +113,9 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
                 ast.Lambda | ast.FunctionDef |  # Defining functions can allow skipping some check
                 ast.Global | ast.Nonlocal |     # Changing variables range could cause some issue
                 ast.ClassDef |                  # Declaring class could maybe allow for dangerous calls
-                ast.AsyncFor | ast.AsyncWith | ast.AsyncFunctionDef | ast.Await  # Just in case
+                ast.AsyncFor | ast.AsyncWith | ast.AsyncFunctionDef | ast.Await |  # Just in case
+                # comprehension are extremely dangerous since their can associate value
+                ast.ListComp | ast.SetComp | ast.DictComp | ast.GeneratorExp
             ):
                 raise SafeEvalException(_("FORBIDDEN_SYNTAX", ' : "', type(node).__name__, '"'))
 
@@ -126,6 +139,3 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     lambda_template = eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
     self.safe_eval_cache[template_key] = lambda_template  # cache the callable for potential latter call
     return better_safe_eval_error(lambda_template, template=template)
-
-
-# TODO: disable some method and function call. for example, mod_config.path.unlink() is dangerous !

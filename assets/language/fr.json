@@ -102,6 +102,8 @@
     "TEMPLATE_USED": "Modèle utilisé",
     "MORE_IN_ERROR_LOG": "Plus d'information dans le fichier error.log",
     "COPY_FUNCTION_FORBIDDEN": "Impossible de copier une fonction",
-    "GET_METHOD_FORBIDDEN": "Impossible d'utiliser getattr sur une méthode"
+    "GET_METHOD_FORBIDDEN": "Impossible d'utiliser getattr sur une méthode",
+    "CAN_ONLY_CALL_METHOD_OF_CONSTANT": "Vous ne pouvez appeler que des méthodes sur des constantes",
+    "CAN_ONLY_CALL_FUNCTION_IN_ENV": "Vous ne pouvez appeler que des fonctions dans l'environnement"
   }
 }

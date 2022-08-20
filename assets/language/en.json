@@ -101,6 +101,8 @@
     "TEMPLATE_USED": "Template used",
     "MORE_IN_ERROR_LOG": "More information in the error.log file",
     "COPY_FUNCTION_FORBIDDEN": "Copying functions is forbidden",
-    "GET_METHOD_FORBIDDEN": "Using getattr on a method is forbidden"
+    "GET_METHOD_FORBIDDEN": "Using getattr on a method is forbidden",
+    "CAN_ONLY_CALL_METHOD_OF_CONSTANT": "You can only call methods on constant",
+    "CAN_ONLY_CALL_FUNCTION_IN_ENV": "You can only call function from the environment"
   }
 }
