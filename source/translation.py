@@ -26,7 +26,7 @@ def translate(*text) -> str:
     :return: translated text
     """
     return "".join([
-        self._language_data["translation"].get(word, word) if isinstance(word, str)
+        self._language_data.get("translation", {}).get(word, word) if isinstance(word, str)
         else str(word)
         for word in text
     ])
