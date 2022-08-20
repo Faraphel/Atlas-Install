@@ -42,6 +42,9 @@ class MKWColor:
         """
         return f'{self.raw}{text}{get(bmg="off").raw}'
 
+    def __matmul__(self, other: str) -> str:  # the operator @. Example : MKWColor.get(bmg="white") @ "text_to_color"
+        return self.color_text(other)
+
 
 all_colors: list[MKWColor] = [
     MKWColor(bmg="white",  hexadecimal=0xFFFFFF, name="white"),
