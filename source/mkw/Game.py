@@ -5,7 +5,7 @@ from source.mkw.ExtractedGame import ExtractedGame
 from source.mkw.ModConfig import ModConfig
 from source.mkw.collection.Extension import Extension
 from source.mkw.collection.Region import Region
-from source.option import Option
+from source.option import Options
 from source.progress import Progress
 from source.wt.wit import WITPath
 from source.translation import translate as _
@@ -94,7 +94,7 @@ class Game:
 
         return extracted_game
 
-    def install_mod(self, dest: Path, mod_config: ModConfig, options: "Option", output_type: Extension
+    def install_mod(self, dest: Path, mod_config: ModConfig, options: "Options", output_type: Extension
                     ) -> Generator[Progress, None, None]:
         """
         Patch the game with the mod
@@ -125,7 +125,8 @@ class Game:
 
         # install mystuff
         yield Progress(title=_("MYSTUFF"), set_part=2)
-        mystuff_data = options["mystuff_packs"].get(options["mystuff_pack_selected"])
+        mystuff_packs = options.mystuff_packs.get()
+        mystuff_data = mystuff_packs.get(options.mystuff_pack_selected.get())
         if mystuff_data is not None: yield from extracted_game.install_multiple_mystuff(mystuff_data["paths"])
 
         # prepare the cache
@@ -136,7 +137,7 @@ class Game:
             cache_autoadd_directory,
             cache_cttracks_directory,
             cache_ogtracks_directory,
-            options["threads"],
+            options.threads.get(),
         )
         yield from extracted_game.prepare_dol()
         yield from extracted_game.prepare_special_file(mod_config)

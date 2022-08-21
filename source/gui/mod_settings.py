@@ -66,7 +66,7 @@ class FrameSettings(ttk.Frame):
         for index, (settings_name, settings_data) in enumerate(settings.items()):
             text = translate_external(
                 self.master.master.mod_config,
-                self.root.options["language"],
+                self.root.options.language.get(),
                 settings_data.text,
             )
 
@@ -84,7 +84,7 @@ class FrameSettings(ttk.Frame):
         # add at the end a message from the mod creator where he can put some additional note about the settings.
         if text := translate_external(
             self.master.master.mod_config,
-            self.root.options["language"],
+            self.root.options.language.get(),
             self.master.master.mod_config.messages.get("settings_description", {}).get("text", {})
         ):
             self.label_description = ttk.Label(self, text="\n"+text, foreground="gray")

@@ -161,12 +161,15 @@ class Menu(tkinter.Menu):
         
             master.add_cascade(label=_("LANGUAGE_SELECTION"), menu=self)
 
+            self.lang_variable = tkinter.StringVar(value=self.root.options.language.get())
+
             for file in Path("./assets/language/").iterdir():
                 lang_json = json.loads(file.read_text(encoding="utf8"))
                 self.add_radiobutton(
                     label=lang_json["name"],
                     value=file.stem,
-                    variable=self.root.options.language
+                    variable=self.lang_variable,
+                    command=(lambda value: (lambda: self.root.options.language.set(value)))(file.stem),
                 )
 
     # Advanced menu
@@ -187,11 +190,14 @@ class Menu(tkinter.Menu):
                 
                 master.add_cascade(label=_("THREADS_USAGE"), menu=self)
 
+                self.variable = tkinter.IntVar(value=self.root.options.threads.get())
+
                 for i in [1, 2, 4, 8, 12, 16]:
                     self.add_radiobutton(
                         label=_("USE", f" {i} ", "THREADS"),
                         value=i,
-                        variable=self.root.options.threads,
+                        variable=self.variable,
+                        command=(lambda amount: (lambda: self.root.options.threads.set(amount)))(i),
                     )
 
     # Help menu
@@ -310,8 +316,9 @@ class DestinationGame(ttk.LabelFrame):
         self.entry = ttk.Entry(self)
         self.entry.grid(row=1, column=1, sticky="nsew")
 
-        self.output_type = ttk.Combobox(self, width=5, values=[extension.name for extension in Extension],
-                                        textvariable=self.root.options.extension)
+        self.output_type = ttk.Combobox(self, width=5, values=[extension.name for extension in Extension])
+        self.output_type.set(self.root.options.extension.get())
+        self.output_type.bind("<<ComboboxSelected>>", lambda _: self.root.options.extension.set(self.output_type.get()))
         self.output_type.grid(row=1, column=2, sticky="nsew")
 
         self.button = ttk.Button(self, text="...", width=2, command=self.select)
@@ -420,7 +427,7 @@ class ButtonInstall(ttk.Button):
 
             message: str = translate_external(
                 mod_config,
-                self.root.options.language.value,
+                self.root.options.language.get(),
                 mod_config.messages.get("installation_completed", {}).get("text", {})
             )
 
