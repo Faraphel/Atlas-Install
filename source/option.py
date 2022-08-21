@@ -54,6 +54,7 @@ class Options:
             "mystuff_pack_selected": Option(self, value=None),
             "mystuff_packs": Option(self, value={}),
             "extension": Option(self, value="WBFS"),
+            "developer_mode": Option(self, value=False),
         }
 
         for option_name, option_value in options.items():

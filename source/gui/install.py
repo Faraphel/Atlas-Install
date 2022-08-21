@@ -173,10 +173,20 @@ class Menu(tkinter.Menu):
             self.root = master.root
 
             master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
-            self.add_command(label=_("OPEN_MYSTUFF_SETTINGS"),
-                             command=lambda: mystuff.Window(self.root.mod_config, self.root.options))
-
+            self.add_command(
+                label=_("OPEN_MYSTUFF_SETTINGS"),
+                command=lambda: mystuff.Window(self.root.mod_config, self.root.options)
+            )
             self.threads_used = self.ThreadsUsed(self)
+
+            self.add_separator()
+
+            self.variable_developer_mode = tkinter.BooleanVar(value=self.root.options.developer_mode.get())
+            self.add_checkbutton(
+                label=_("ENABLE_DEVELOPER_MODE"),
+                variable=self.variable_developer_mode,
+                command=lambda: self.root.options.developer_mode.set(self.variable_developer_mode.get())
+            )
 
         class ThreadsUsed(tkinter.Menu):
             def __init__(self, master: tkinter.Menu):

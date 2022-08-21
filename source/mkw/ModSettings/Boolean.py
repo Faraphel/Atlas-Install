@@ -2,7 +2,7 @@ from source.mkw.ModSettings import AbstractModSettings
 from source.translation import translate as _
 
 
-class Choices(AbstractModSettings):
+class Boolean(AbstractModSettings):
     """
     This setting type allow you to input a string text.
     You can optionally add a "preview" to allow the user to use a window to select the value.
@@ -10,7 +10,7 @@ class Choices(AbstractModSettings):
 
     type = "boolean"
 
-    def tkinter_show(self, master, checkbox) -> None:
+    def tkinter_show(self, master, checkbox=None) -> None:
         import tkinter
         from tkinter import ttk
 

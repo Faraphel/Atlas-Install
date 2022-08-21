@@ -14,7 +14,7 @@ class Choices(AbstractModSettings):
         self.choices = choices
         if self.default is None: self.default = self.choices[0]
 
-    def tkinter_show(self, master, checkbox) -> None:
+    def tkinter_show(self, master, checkbox=None) -> None:
         import tkinter
         from tkinter import ttk
 

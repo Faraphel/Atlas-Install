@@ -3,6 +3,7 @@ from tkinter import ttk
 from typing import TYPE_CHECKING
 
 from source.translation import translate as _, translate_external
+from source.mkw import ModSettings
 
 if TYPE_CHECKING:
     from source.mkw.ModConfig import ModConfig
@@ -37,6 +38,12 @@ class Window(tkinter.Toplevel):
             self.mod_config.specific_settings
         )
 
+        if self.options.developer_mode.get():
+            self.frame_testing_settings = FrameTesting(
+                self.panel_window,
+                _("TESTING_MOD_SETTINGS")
+            )
+
         # add at the end a message from the mod creator where he can put some additional note about the settings.
         if text := translate_external(
                 self.mod_config,
@@ -68,7 +75,6 @@ class FrameSettings(ttk.Frame):
         self.columnconfigure(1, weight=1)
         language = self.root.options.language.get()
 
-        index: int = 0
         for index, (settings_name, settings_data) in enumerate(settings.items()):
             text = translate_external(self.root.mod_config, language, settings_data.text)
             description = translate_external(self.root.mod_config, language, settings_data.description)
@@ -90,3 +96,25 @@ class FrameSettings(ttk.Frame):
                                               foreground="gray", justify=tkinter.CENTER)
                 description_label.grid(row=2, column=1)
 
+
+class FrameTesting(ttk.Frame):
+    def __init__(self, master, text: str):
+        super().__init__(master)
+        master.add(self, text=text)
+        self.root = self.master.root
+
+        self.columnconfigure(1, weight=1)
+
+        for index, (settings_name, settings_data) in enumerate({
+            "TEST_PREVIEW_FORMATTING": ModSettings.String.String(preview="track_formatting"),
+            "TEST_PREVIEW_SELECTING": ModSettings.String.String(preview="track_selecting"),
+            "TEST_PREVIEW_SORTING": ModSettings.String.String(preview="track_sorting"),
+
+            "TEST_STRING": ModSettings.String.String(),
+            "TEST_CHOICES": ModSettings.Choices.Choices(["test1", "test2", "test3"]),
+            "TEST_BOOLEAN": ModSettings.Boolean.Boolean(),
+        }.items()):
+            frame = ttk.LabelFrame(self, text=settings_name)
+            frame.root = self.root
+            frame.grid(row=index, column=1, sticky="NEWS")
+            settings_data.tkinter_show(frame)

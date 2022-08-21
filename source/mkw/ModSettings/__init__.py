@@ -45,12 +45,15 @@ class AbstractModSettings(ABC):
         return self.value == self.default
 
     @abstractmethod
-    def tkinter_show(self, master, enabled_variable: "tkinter.BooleanVar") -> None:
+    def tkinter_show(self, master, enabled_variable: "tkinter.BooleanVar" = None) -> None:
         """
         Show the option inside a tkinter widget
         :master: master widget
         :checkbox: checkbox inside the labelframe allowing to enable or disable the setting
         """
+        import tkinter
+        if enabled_variable is None: enabled_variable = tkinter.BooleanVar()
+
         enabled_variable.set(self.enabled)
         enabled_variable.trace_add("write", lambda *_: setattr(self, "enabled", enabled_variable.get()))
         ...
@@ -66,13 +69,15 @@ class AbstractModSettings(ABC):
         return variable
 
     @staticmethod
-    def tkinter_bind(master, enabled_variable: "tkinter.BooleanVar") -> None:
+    def tkinter_bind(master, enabled_variable: "tkinter.BooleanVar" = None) -> None:
         """
         Bind all widget of the master so that clicking on the frame enable automatically the option
         :param master: the frame containing the elements
         :param enabled_variable: the variable associated with the enable state
         :return:
         """
+        if enabled_variable is None: return
+
         for child in master.winfo_children():
             child.bind("<Button-1>", lambda e: enabled_variable.set(True))
 

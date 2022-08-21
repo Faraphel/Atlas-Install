@@ -14,7 +14,7 @@ class String(AbstractModSettings):
         super().__init__(**kwargs)
         self.preview = preview
 
-    def tkinter_show(self, master, checkbox) -> None:
+    def tkinter_show(self, master, checkbox=None) -> None:
         import tkinter
         from tkinter import ttk
 
