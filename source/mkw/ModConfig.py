@@ -30,6 +30,11 @@ default_global_settings: dict[str, dict[str, str]] = {
             "en": "Replace random new tracks by",
             "fr": "Remplacer les courses aléatoires nouvelle par"
         },
+        "description": {
+            "en": "The \"Random: New track\" option in the game will select any track respecting this condition.",
+            "fr": "L'option \"Aléatoire: Nouvelle course\" dans le jeu va sélectionner n'importe quel course qui "
+                  "respecte cette condition."
+        },
         "type": "string",
         "preview": "track_selecting"
     },
@@ -38,6 +43,10 @@ default_global_settings: dict[str, dict[str, str]] = {
             "en": "Include track if",
             "fr": "Inclure la course si"
         },
+        "description": {
+            "en": "Only the tracks respecting the condition will be in the patched game.",
+            "fr": "Seulement les courses respectant la condition seront présente dans le jeu patché."
+        },
         "type": "string",
         "preview": "track_selecting"
     },
@@ -45,6 +54,10 @@ default_global_settings: dict[str, dict[str, str]] = {
         "text": {
             "en": "Sort tracks by",
             "fr": "Trier les courses par"
+        },
+        "description": {
+            "en": "Define how the tracks should be sorted in the mod.",
+            "fr": "Défini comment les courses devrait être trié dans le mod."
         },
         "type": "string",
         "preview": "track_sorting"

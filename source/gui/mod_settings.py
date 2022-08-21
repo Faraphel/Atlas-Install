@@ -35,6 +35,15 @@ class Window(tkinter.Toplevel):
             self.mod_config.specific_settings
         )
 
+        # add at the end a message from the mod creator where he can put some additional note about the settings.
+        if text := translate_external(
+                self.mod_config,
+                self.root.options.language.get(),
+                self.mod_config.messages.get("settings_description", {}).get("text", {})
+        ):
+            self.label_description = ttk.Label(self, text="\n" + text, foreground="gray")
+            self.label_description.grid(row=2, column=1)
+
 
 class NotebookSettings(ttk.Notebook):
     def __init__(self, master):
@@ -55,37 +64,29 @@ class FrameSettings(ttk.Frame):
         self.root = self.master.root
 
         self.columnconfigure(1, weight=1)
-
-        def get_event_checkbox(enabled_variable: tkinter.BooleanVar):
-            """
-            Return the event for any child of a frmae when clicked
-            """
-            return lambda event: enabled_variable.set(True)
+        language = self.root.options.language.get()
 
         index: int = 0
         for index, (settings_name, settings_data) in enumerate(settings.items()):
-            text = translate_external(
-                self.master.master.mod_config,
-                self.root.options.language.get(),
-                settings_data.text,
-            )
+            text = translate_external(self.master.master.mod_config, language, settings_data.text)
+            description = translate_external(self.master.master.mod_config, language, settings_data.description)
 
             enabled_variable = tkinter.BooleanVar(value=False)
             checkbox = ttk.Checkbutton(self, text=text, variable=enabled_variable)
+
             frame = ttk.LabelFrame(self, labelwidget=checkbox)
             frame.grid(row=index, column=1, sticky="NEWS")
+            frame.columnconfigure(1, weight=1)
 
-            settings_data.tkinter_show(frame, enabled_variable)
+            action_frame = ttk.Frame(frame)
+            action_frame.grid(row=1, column=1, sticky="NEWS")
+            settings_data.tkinter_show(action_frame, enabled_variable)
+
+            if description:
+                description_label = ttk.Label(frame, text=description, wraplength=450,
+                                              foreground="gray", justify=tkinter.CENTER)
+                description_label.grid(row=2, column=1)
 
             # if any of the label child are clicked, automatically enable the option
             for child in frame.winfo_children():
-                child.bind("<Button-1>", get_event_checkbox(enabled_variable))
-
-        # add at the end a message from the mod creator where he can put some additional note about the settings.
-        if text := translate_external(
-            self.master.master.mod_config,
-            self.root.options.language.get(),
-            self.master.master.mod_config.messages.get("settings_description", {}).get("text", {})
-        ):
-            self.label_description = ttk.Label(self, text="\n"+text, foreground="gray")
-            self.label_description.grid(row=index+1, column=1)
+                child.bind("<Button-1>", (lambda variable: (lambda event: variable.set(True)))(enabled_variable))

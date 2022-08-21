@@ -27,6 +27,10 @@
                 "en": "Mode",
                 "fr": "Mode"
             },
+            "description": {
+                "en": "Special mod's configuration.",
+                "fr": "Configuration spécial du mod."
+            },
             "type": "choices",
             "choices": [
                 "normal",
@@ -38,6 +42,10 @@
                 "en": "Highlight if",
                 "fr": "Surligner si"
             },
+            "description": {
+                "en": "all the tracks selected by this condition will be colored in blue.",
+                "fr": "toutes les courses sélectionné par cette condition seront coloré en bleu."
+            },
             "type": "string",
             "default": "'v' + track.since_version == mod_config.version",
             "preview": "track_selecting"
@@ -46,6 +54,10 @@
             "text": {
                 "en": "Balancing *",
                 "fr": "Équilibrage *"
+            },
+            "description": {
+                "en": "Should the mod balancing (fake item box, blooper) be enabled ?",
+                "fr": "Est-ce que l'équilibrage du mod (fausse boite d'objet, bloops) devrait être activé ?"
             },
             "type": "check",
             "default": true

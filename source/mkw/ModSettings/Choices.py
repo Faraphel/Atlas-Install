@@ -13,16 +13,18 @@ class Choices(AbstractModSettings):
     type = "choices"
 
     def __init__(self, choices: list[str], enabled: bool = False,
-                 default: str | None = None, text: dict[str] = None):
+                 default: str | None = None, text: dict[str, str] = None, description: dict[str, str] = None):
         self._value = default if default is not None else choices[0]
         self.default = default
         self.enabled = enabled
 
         self.text = text if text is not None else {}
+        self.description = description if description is not None else {}
         self.choices = choices
 
-    def tkinter_show(self, master: ttk.LabelFrame, checkbox) -> None:
+    def tkinter_show(self, master, checkbox) -> None:
         super().tkinter_show(master, checkbox)
+
         master.grid_rowconfigure(1, weight=1)
         master.grid_columnconfigure(1, weight=1)
 
@@ -31,3 +33,4 @@ class Choices(AbstractModSettings):
 
         combobox = ttk.Combobox(master, values=self.choices, textvariable=value_variable)
         combobox.grid(row=1, column=1, sticky="EW")
+
