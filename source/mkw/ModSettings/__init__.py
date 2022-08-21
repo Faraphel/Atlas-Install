@@ -1,9 +1,10 @@
-import tkinter
-from tkinter import ttk
 from abc import ABC, abstractmethod
-from typing import Type
+from typing import Type, TYPE_CHECKING
 
 from source.translation import translate as _
+
+if TYPE_CHECKING:
+    import tkinter
 
 
 class InvalidSettingsType(Exception):
@@ -44,7 +45,7 @@ class AbstractModSettings(ABC):
         return self.value == self.default
 
     @abstractmethod
-    def tkinter_show(self, master: ttk.LabelFrame, enabled_variable: tkinter.BooleanVar) -> None:
+    def tkinter_show(self, master, enabled_variable: "tkinter.BooleanVar") -> None:
         """
         Show the option inside a tkinter widget
         :master: master widget
@@ -52,13 +53,28 @@ class AbstractModSettings(ABC):
         """
         enabled_variable.set(self.enabled)
         enabled_variable.trace_add("write", lambda *_: setattr(self, "enabled", enabled_variable.get()))
-        # si le paramètre est modifié, coche automatiquement la case
         ...
 
-    def tkinter_variable(self, vartype: Type[tkinter.Variable]) -> tkinter.Variable:
+    def tkinter_variable(self, vartype: Type["tkinter.Variable"]) -> "tkinter.Variable":
+        """
+        Create a tkinter variable that is linked to the ModSettings value
+        :param vartype: the type of variable (boolean, int string)
+        :return: the tkinter variable
+        """
         variable = vartype(value=self._value)
         variable.trace_add("write", lambda *_: setattr(self, "_value", variable.get()))
         return variable
+
+    @staticmethod
+    def tkinter_bind(master, enabled_variable: "tkinter.BooleanVar") -> None:
+        """
+        Bind all widget of the master so that clicking on the frame enable automatically the option
+        :param master: the frame containing the elements
+        :param enabled_variable: the variable associated with the enable state
+        :return:
+        """
+        for child in master.winfo_children():
+            child.bind("<Button-1>", lambda e: enabled_variable.set(True))
 
 
 def get(settings_data: dict) -> "AbstractModSettings":

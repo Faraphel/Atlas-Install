@@ -20,7 +20,7 @@ class AbstractPreviewWindow(tkinter.Toplevel, ABC):
     name: str
 
     @abstractmethod
-    def __init__(self, mod_config: "ModConfig", template_variable: tkinter.StringVar = None):
+    def __init__(self, mod_config: "ModConfig", template_variable: tkinter.Variable = None):
         super().__init__()
         ...
 

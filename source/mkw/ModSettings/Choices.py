@@ -1,11 +1,6 @@
-import tkinter
-from dataclasses import field, dataclass
-from tkinter import ttk
-
 from source.mkw.ModSettings import AbstractModSettings
 
 
-@dataclass(init=False)
 class Choices(AbstractModSettings):
     """
     This setting type allow you to input a string text.
@@ -14,14 +9,21 @@ class Choices(AbstractModSettings):
 
     type = "choices"
 
-    def __init__(self, choices: list[str] = None, **kwargs):
+    def __init__(self, choices: list[str], **kwargs):
         super().__init__(**kwargs)
-        self.choices = choices if choices is not None else []
+        self.choices = choices
+        if self.default is None: self.default = self.choices[0]
 
     def tkinter_show(self, master, checkbox) -> None:
+        import tkinter
+        from tkinter import ttk
+
         super().tkinter_show(master, checkbox)
         variable = self.tkinter_variable(tkinter.StringVar)
         master.grid_columnconfigure(1, weight=1)
 
         combobox = ttk.Combobox(master, values=self.choices, textvariable=variable)
+        combobox.set(self.default)
         combobox.grid(row=1, column=1, sticky="EW")
+
+        self.tkinter_bind(master, checkbox)

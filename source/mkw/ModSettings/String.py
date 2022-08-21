@@ -1,6 +1,3 @@
-import tkinter
-from tkinter import ttk
-
 from source.mkw.ModSettings import AbstractModSettings
 from source.gui.preview import AbstractPreviewWindow
 
@@ -18,6 +15,9 @@ class String(AbstractModSettings):
         self.preview = preview
 
     def tkinter_show(self, master, checkbox) -> None:
+        import tkinter
+        from tkinter import ttk
+
         super().tkinter_show(master, checkbox)
         variable = self.tkinter_variable(tkinter.StringVar)
         master.grid_columnconfigure(1, weight=1)
@@ -28,8 +28,8 @@ class String(AbstractModSettings):
         if self.preview is not None:
             button = ttk.Button(
                 master, text="...", width=3,
-                command=lambda: AbstractPreviewWindow.get(self.preview)(
-                    master.master.master.master.mod_config, variable
-                )
+                command=lambda: AbstractPreviewWindow.get(self.preview)(master.root.mod_config, variable)
             )
             button.grid(row=1, column=2, sticky="EW")
+
+        self.tkinter_bind(master, checkbox)

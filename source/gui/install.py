@@ -43,6 +43,7 @@ class Window(tkinter.Tk):
         super().__init__()
         self.root = self
 
+        self.mod_config: ModConfig | None = None
         self.options: Options = options
 
         self.title(_("INSTALLER_TITLE"))
@@ -114,13 +115,6 @@ class Window(tkinter.Tk):
             if progress.max_step is not None: self.progress_bar.set_max_step(progress.max_step)
             if progress.determinate is not None: self.progress_bar.set_determinate(progress.determinate)
 
-    def get_mod_config(self) -> ModConfig:
-        """
-        Get the mod configuration
-        :return: Get the mod configuration
-        """
-        return self.select_pack.mod_config
-
     def get_source_path(self) -> Path:
         """
         Get the path of the source game
@@ -179,7 +173,8 @@ class Menu(tkinter.Menu):
             self.root = master.root
 
             master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
-            self.add_command(label=_("OPEN_MYSTUFF_SETTINGS"), command= mystuff.Window)
+            self.add_command(label=_("OPEN_MYSTUFF_SETTINGS"),
+                             command=lambda: mystuff.Window(self.root.mod_config, self.root.options))
 
             self.threads_used = self.ThreadsUsed(self)
 
@@ -413,22 +408,21 @@ class ButtonInstall(ttk.Button):
                     return
 
             game = Game(source_path)
-            mod_config = self.root.get_mod_config()
             output_type = self.root.get_output_type()
 
             self.root.progress_function(
                 game.install_mod(
                     dest=destination_path,
-                    mod_config=mod_config,
+                    mod_config=self.root.mod_config,
                     output_type=output_type,
                     options=self.root.options
                 )
             )
 
             message: str = translate_external(
-                mod_config,
+                self.root.mod_config,
                 self.root.options.language.get(),
-                mod_config.messages.get("installation_completed", {}).get("text", {})
+                self.root.mod_config.messages.get("installation_completed", {}).get("text", {})
             )
 
             messagebox.showinfo(
@@ -522,7 +516,6 @@ class SelectPack(ttk.Frame):
         self.button_settings = ttk.Button(self, text="...", width=2, command=self.open_mod_configuration)
         self.button_settings.grid(row=1, column=2, sticky="NEWS")
 
-        self.mod_config: ModConfig | None = None
         self.packs: list[Path] = []
 
         self.refresh_packs()
@@ -531,7 +524,7 @@ class SelectPack(ttk.Frame):
         self.combobox.bind("<<ComboboxSelected>>", lambda _: self.select())
 
     def open_mod_configuration(self) -> None:
-        mod_settings.Window(self.mod_config)
+        mod_settings.Window(self.root.mod_config, self.root.options)
 
     def refresh_packs(self) -> None:
         """
@@ -564,7 +557,7 @@ class SelectPack(ttk.Frame):
         :param pack: the pack
         :return:
         """
-        self.mod_config = ModConfig.from_file(pack / "mod_config.json")
+        self.root.mod_config = ModConfig.from_file(pack / "mod_config.json")
 
     @classmethod
     def is_valid_pack(cls, path: Path) -> bool:

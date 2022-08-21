@@ -1,12 +1,7 @@
-import tkinter
-from tkinter import ttk
-
-from dataclasses import dataclass, field
 from source.mkw.ModSettings import AbstractModSettings
 from source.translation import translate as _
 
 
-@dataclass(init=False)
 class Choices(AbstractModSettings):
     """
     This setting type allow you to input a string text.
@@ -16,6 +11,9 @@ class Choices(AbstractModSettings):
     type = "boolean"
 
     def tkinter_show(self, master, checkbox) -> None:
+        import tkinter
+        from tkinter import ttk
+
         super().tkinter_show(master, checkbox)
         variable = self.tkinter_variable(tkinter.BooleanVar)
 
@@ -23,3 +21,5 @@ class Choices(AbstractModSettings):
         radiobutton_on.grid(row=1, column=1, sticky="E")
         radiobutton_off = ttk.Radiobutton(master, text=_("ENABLED"), variable=variable, value=True)
         radiobutton_off.grid(row=1, column=2, sticky="E")
+
+        self.tkinter_bind(master, checkbox)

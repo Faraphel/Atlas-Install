@@ -3,7 +3,13 @@ from pathlib import Path
 from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
+from typing import TYPE_CHECKING
+
 from source.translation import translate as _
+
+if TYPE_CHECKING:
+    from source.mkw.ModConfig import ModConfig
+    from source.option import Options
 
 
 class Window(tkinter.Toplevel):
@@ -11,10 +17,13 @@ class Window(tkinter.Toplevel):
     A window that let the user select MyStuff pack for a MKWF patch
     """
 
-    def __init__(self):
+    def __init__(self, mod_config: "ModConfig", options: "Options"):
         super().__init__()
-        self.root = self.master.root
-        
+
+        self.root = self
+        self.mod_config = mod_config
+        self.options = options
+
         self.title(_("CONFIGURE_MYSTUFF_PATCH"))
         self.resizable(False, False)
         self.grab_set()  # the others window will be disabled, keeping only this one activated
@@ -105,8 +114,7 @@ class Window(tkinter.Toplevel):
         state = tkinter.DISABLED if is_disabled else tkinter.NORMAL
 
         self.button_delete_profile.configure(state=state)
-        for children in self.frame_mystuff_paths_action.children.values():
-            children.configure(state=state)
+        for children in self.frame_mystuff_paths_action.children.values(): children.configure(state=state)
 
         if is_disabled: return
 
