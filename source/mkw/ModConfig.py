@@ -6,10 +6,9 @@ import json
 from PIL import Image
 
 from source import threaded
-from source.mkw import Tag
+from source.mkw import Tag, ModSettings
 from source.mkw.Track.Cup import Cup
 from source.mkw.collection import MKWColor, Slot
-from source.mkw.ModSettings import AbstractModSettings
 from source.mkw.Track import CustomTrack, DefaultTrack, Arena
 from source.progress import Progress
 from source.safe_eval.safe_eval import safe_eval
@@ -121,11 +120,11 @@ class ModConfig:
         self._tracks = [CustomTrack.from_dict(self, track) for track in self._tracks if isinstance(track, dict)]
         self._arenas = [Arena.from_dict(self, arena) for arena in self._arenas if isinstance(arena, dict)]
 
-        self.global_settings = {name: AbstractModSettings.get(data) for name, data in merge_dict(
+        self.global_settings = {name: ModSettings.get(data) for name, data in merge_dict(
             default_global_settings, self.global_settings, dict_keys=default_global_settings.keys()
             # Avoid modder to add their own settings to globals one
         ).items()}
-        self.specific_settings = {name: AbstractModSettings.get(data) for name, data in self.specific_settings.items()}
+        self.specific_settings = {name: ModSettings.get(data) for name, data in self.specific_settings.items()}
 
     def __hash__(self) -> int:
         return hash(self.name)

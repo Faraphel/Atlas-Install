@@ -59,7 +59,7 @@
                 "en": "Should the mod balancing (fake item box, blooper) be enabled ?",
                 "fr": "Est-ce que l'équilibrage du mod (fausse boite d'objet, bloops) devrait être activé ?"
             },
-            "type": "check",
+            "type": "boolean",
             "default": true
         }
     },
