@@ -46,6 +46,9 @@ class Window(tkinter.Tk):
         self.mod_config: ModConfig | None = None
         self.options: Options = options
 
+        self.source_path = tkinter.StringVar()
+        self.destination_path = tkinter.StringVar()
+
         self.title(_("INSTALLER_TITLE"))
         self.resizable(False, False)
         self.iconbitmap("./assets/icon.ico")
@@ -84,7 +87,6 @@ class Window(tkinter.Tk):
     def run_after() -> None:
         """
         Run after the installer has been initialised, can be used to add plugins
-        :return:
         """
         return None
 
@@ -100,7 +102,6 @@ class Window(tkinter.Tk):
     def progress_function(self, func_gen: Generator[Progress, None, None]) -> None:
         """
         Run a generator function that yield status for the progress bar
-        :return:
         """
         # get the generator data yield by the generator function
         for progress in func_gen:
@@ -114,27 +115,6 @@ class Window(tkinter.Tk):
             if progress.set_step is not None: self.progress_bar.set_step(progress.set_step)
             if progress.max_step is not None: self.progress_bar.set_max_step(progress.max_step)
             if progress.determinate is not None: self.progress_bar.set_determinate(progress.determinate)
-
-    def get_source_path(self) -> Path:
-        """
-        Get the path of the source game
-        :return: path of the source game
-        """
-        return self.source_game.get_path()
-
-    def get_destination_path(self) -> Path:
-        """
-        Get the path of the destination game
-        :return: path of the destination game
-        """
-        return self.destination_game.get_path()
-
-    def get_output_type(self) -> Extension:
-        """
-        Get the output type
-        :return: output type
-        """
-        return self.destination_game.get_output_type()
 
 
 # Menu bar
@@ -250,7 +230,7 @@ class SourceGame(ttk.LabelFrame):
         
         self.columnconfigure(1, weight=1)
 
-        self.entry = ttk.Entry(self, width=55)
+        self.entry = ttk.Entry(self, width=55, textvariable=self.root.source_path)
         self.entry.grid(row=1, column=1, sticky="nsew")
 
         self.button = ttk.Button(self, text="...", width=2, command=self.select)
@@ -286,17 +266,10 @@ class SourceGame(ttk.LabelFrame):
         self.entry.delete(0, tkinter.END)
         self.entry.insert(0, str(path.absolute()))
 
+        # if the selected path is an extracted game, use 2 directory upper
         if path.suffix == ".dol": path = path.parent.parent
-        self.root.destination_game.set_path(path.parent)
 
-    def get_path(self) -> Path:
-        """
-        Get the source game path
-        :return: the game path
-        """
-        path = Path(self.entry.get())
-        if not path.exists(): raise SourceGameError(path)
-        return path
+        self.root.destination_game.set_path(path.parent)
 
     def set_state(self, state: InstallerState) -> None:
         """
@@ -318,12 +291,12 @@ class DestinationGame(ttk.LabelFrame):
         
         self.columnconfigure(1, weight=1)
 
-        self.entry = ttk.Entry(self)
+        self.entry = ttk.Entry(self, textvariable=self.root.destination_path)
         self.entry.grid(row=1, column=1, sticky="nsew")
 
         self.output_type = ttk.Combobox(self, width=5, values=[extension.name for extension in Extension])
-        self.output_type.set(self.root.options.extension.get())
         self.output_type.bind("<<ComboboxSelected>>", lambda _: self.root.options.extension.set(self.output_type.get()))
+        self.output_type.set(self.root.options.extension.get())
         self.output_type.grid(row=1, column=2, sticky="nsew")
 
         self.button = ttk.Button(self, text="...", width=2, command=self.select)
@@ -353,22 +326,6 @@ class DestinationGame(ttk.LabelFrame):
         self.entry.delete(0, tkinter.END)
         self.entry.insert(0, str(path.absolute()))
 
-    def get_path(self) -> Path:
-        """
-        Get the destination game path
-        :return: the game path
-        """
-        path = Path(self.entry.get())
-        if not path.exists(): raise DestinationGameError(path)
-        return path
-
-    def get_output_type(self) -> Extension:
-        """
-        Get the output type
-        :return: the output type
-        """
-        return Extension[self.output_type.get()]
-
     def set_state(self, state: InstallerState) -> None:
         """
         Set the progress bar state when the installer change state
@@ -396,13 +353,15 @@ class ButtonInstall(ttk.Button):
             self.root.set_state(InstallerState.INSTALLING)
 
             # check if the user entered a source path
-            source_path = self.root.get_source_path()
+            source_path = Path(self.root.source_path.get())
+            if not source_path.exists(): raise SourceGameError(source_path)
             if str(source_path) == ".":
                 messagebox.showerror(_("ERROR"), _("ERROR_INVALID_SOURCE_GAME"))
                 return
 
             # check if the user entered a destination path
-            destination_path = self.root.get_destination_path()
+            destination_path = Path(self.root.destination_path.get())
+            if not destination_path.exists(): raise DestinationGameError(destination_path)
             if str(destination_path) == ".":
                 messagebox.showerror(_("ERROR"), _("ERROR_INVALID_DESTINATION_GAME"))
                 return
@@ -418,7 +377,7 @@ class ButtonInstall(ttk.Button):
                     return
 
             game = Game(source_path)
-            output_type = self.root.get_output_type()
+            output_type = Extension[self.root.options.extension.get()]
 
             self.root.progress_function(
                 game.install_mod(
