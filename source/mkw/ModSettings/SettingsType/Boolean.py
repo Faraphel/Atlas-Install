@@ -1,4 +1,4 @@
-from source.mkw.ModSettings import AbstractModSettings
+from source.mkw.ModSettings.AbstractModSettings import AbstractModSettings
 from source.translation import translate as _
 
 

@@ -105,6 +105,9 @@
     "CAN_ONLY_CALL_METHOD_OF_CONSTANT": "You can only call methods on constant",
     "CAN_ONLY_CALL_FUNCTION_IN_ENV": "You can only call function from the environment",
     "ENABLE_DEVELOPER_MODE": "Enable the developer mode",
-    "TESTING_MOD_SETTINGS": "Test mod settings"
+    "TESTING_MOD_SETTINGS": "Test mod settings",
+    "SETTINGS_FILE": "Settings file",
+    "EXPORT_SETTINGS": "Export settings",
+    "IMPORT_SETTINGS": "Import settings"
   }
 }

@@ -1,4 +1,4 @@
-from source.mkw.ModSettings import AbstractModSettings
+from source.mkw.ModSettings.AbstractModSettings import AbstractModSettings
 
 
 class Choices(AbstractModSettings):
@@ -23,7 +23,7 @@ class Choices(AbstractModSettings):
         master.grid_columnconfigure(1, weight=1)
 
         combobox = ttk.Combobox(master, values=self.choices, textvariable=variable)
-        combobox.set(self.default)
+        combobox.set(self.default if self._value is None else self._value)
         combobox.grid(row=1, column=1, sticky="EW")
 
         self.tkinter_bind(master, checkbox)

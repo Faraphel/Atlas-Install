@@ -1,4 +1,4 @@
-from source.mkw.ModSettings import AbstractModSettings
+from source.mkw.ModSettings.AbstractModSettings import AbstractModSettings
 from source.gui.preview import AbstractPreviewWindow
 
 
@@ -20,6 +20,11 @@ class String(AbstractModSettings):
 
         super().tkinter_show(master, checkbox)
         variable = self.tkinter_variable(tkinter.StringVar)
+
+        text = self.default if self.default is not None else ""
+        text = text if self._value is None else self._value
+        variable.set(text)
+
         master.grid_columnconfigure(1, weight=1)
 
         entry = ttk.Entry(master, textvariable=variable)

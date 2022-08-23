@@ -6,16 +6,10 @@
 
     "global_settings": {
         "include_track_if": {
-            "text": {
-                "en": "Include track if *",
-                "fr": "Inclure la course si *"
-            }
+            "suffix": "*"
         },
         "sort_tracks": {
-            "text": {
-                "en": "Sort tracks by *",
-                "fr": "Trier les courses par *"
-            }
+            "suffix": "*"
         },
         "replace_random_new": {
             "default": "'Retro' not in track.tags and track.warning == 0"
@@ -52,9 +46,10 @@
         },
         "balancing": {
             "text": {
-                "en": "Balancing *",
-                "fr": "Équilibrage *"
+                "en": "Balancing",
+                "fr": "Équilibrage"
             },
+            "suffix": "*",
             "description": {
                 "en": "Should the mod balancing (fake item box, blooper) be enabled ?",
                 "fr": "Est-ce que l'équilibrage du mod (fausse boite d'objet, bloops) devrait être activé ?"

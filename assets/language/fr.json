@@ -106,6 +106,9 @@
     "CAN_ONLY_CALL_METHOD_OF_CONSTANT": "Vous ne pouvez appeler que des méthodes sur des constantes",
     "CAN_ONLY_CALL_FUNCTION_IN_ENV": "Vous ne pouvez appeler que des fonctions dans l'environnement",
     "ENABLE_DEVELOPER_MODE": "Activer le mode développeur",
-    "TESTING_MOD_SETTINGS": "Paramètre de test"
+    "TESTING_MOD_SETTINGS": "Paramètre de test",
+    "SETTINGS_FILE": "Fichier de paramètres",
+    "EXPORT_SETTINGS": "Exporter les paramètres",
+    "IMPORT_SETTINGS": "Importer les paramètres"
   }
 }

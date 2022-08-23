@@ -6,7 +6,8 @@ import json
 from PIL import Image
 
 from source import threaded
-from source.mkw import Tag, ModSettings
+from source.mkw import Tag
+from source.mkw.ModSettings.ModSettingsGroup import ModSettingsGroup
 from source.mkw.Track.Cup import Cup
 from source.mkw.collection import MKWColor, Slot
 from source.mkw.Track import CustomTrack, DefaultTrack, Arena
@@ -64,21 +65,6 @@ default_global_settings: dict[str, dict[str, str]] = {
 }
 
 
-def merge_dict(dict1: dict[str, dict] | None, dict2: dict[str, dict] | None,
-               dict_keys: Iterable[str] = None) -> dict[str, dict]:
-    """
-    Merge 2 dict subdict together
-    :return: the merged dict
-    { "option": {"speed": 1} }, { "option": {"mode": "hard"} } -> { "option": {"speed": 1, "mode": "hard"} }
-
-    """
-    if dict1 is None: dict1 = {}
-    if dict2 is None: dict2 = {}
-    if dict_keys is None: dict_keys = dict1.keys() | dict2.keys()
-
-    return {key: dict1.get(key, {}) | dict2.get(key, {}) for key in dict_keys}
-
-
 @dataclass(init=True, slots=True)
 class ModConfig:
     """
@@ -108,8 +94,8 @@ class ModConfig:
     macros: dict[str, "TemplateSafeEval"] = field(default_factory=dict)
     messages: dict[str, dict[str, "TemplateMultipleSafeEval"]] = field(default_factory=dict)
 
-    global_settings: dict[str, "AbstractModSettings | dict"] = field(default_factory=dict)
-    specific_settings: dict[str, "AbstractModSettings | dict"] = field(default_factory=dict)
+    global_settings: ModSettingsGroup = field(default_factory=ModSettingsGroup)
+    specific_settings: ModSettingsGroup = field(default_factory=ModSettingsGroup)
 
     lpar_template: "TemplateMultipleSafeEval" = "normal.lpar"
 
@@ -120,11 +106,12 @@ class ModConfig:
         self._tracks = [CustomTrack.from_dict(self, track) for track in self._tracks if isinstance(track, dict)]
         self._arenas = [Arena.from_dict(self, arena) for arena in self._arenas if isinstance(arena, dict)]
 
-        self.global_settings = {name: ModSettings.get(data) for name, data in merge_dict(
-            default_global_settings, self.global_settings, dict_keys=default_global_settings.keys()
-            # Avoid modder to add their own settings to globals one
-        ).items()}
-        self.specific_settings = {name: ModSettings.get(data) for name, data in self.specific_settings.items()}
+        # Settings
+        user_global_settings = self.global_settings
+        self.global_settings = ModSettingsGroup(default_global_settings)
+        self.global_settings.import_values(user_global_settings)
+
+        self.specific_settings = ModSettingsGroup(self.specific_settings)
 
     def __hash__(self) -> int:
         return hash(self.name)
