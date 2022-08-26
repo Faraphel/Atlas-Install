@@ -1,8 +1,10 @@
+import hashlib
 import shutil
 from io import BytesIO
 from pathlib import Path
 from typing import Generator, IO, TYPE_CHECKING
 
+from source import file_block_size
 from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
 from source.mkw.collection.Extension import Extension
@@ -202,3 +204,20 @@ class ExtractedGame:
         shutil.rmtree(self.path)
 
         return converted_game
+
+    def get_hash_map(self) -> dict[str, str]:
+        """
+        Return a dictionary associating all the game subfiles to a hash
+        :return: a dictionary associating all the game subfiles to a hash
+        """
+        md5_map: dict[str, str] = {}
+
+        for fp in filter(lambda fp: fp.is_file(), self.path.rglob("*")):
+            hasher = hashlib.md5()
+
+            with open(fp, "rb") as file:
+                while block := file.read(file_block_size):
+                    hasher.update(block)
+            md5_map[str(fp.relative_to(self.path))] = hasher.hexdigest()
+
+        return md5_map

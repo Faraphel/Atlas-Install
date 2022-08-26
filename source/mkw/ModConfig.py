@@ -1,11 +1,11 @@
 import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Generator, Callable, Iterator, Iterable, TYPE_CHECKING
+from typing import Generator, Callable, Iterator, TYPE_CHECKING
 import json
 from PIL import Image
 
-from source import threaded
+from source.utils import threaded
 from source.mkw import Tag
 from source.mkw.ModSettings.ModSettingsGroup import ModSettingsGroup
 from source.mkw.Track.Cup import Cup

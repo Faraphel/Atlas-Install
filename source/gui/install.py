@@ -17,6 +17,7 @@ from source.progress import Progress
 from source.translation import translate as _, translate_external
 from source import plugins
 from source import *
+from source.utils import threaded
 import os
 
 from source.mkw.collection.Extension import Extension

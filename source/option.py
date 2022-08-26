@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from source import restart_program
+from source.utils import restart_program
 
 
 class OptionLoadingError(Exception):

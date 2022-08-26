@@ -7,6 +7,7 @@ from source.mkw.collection.Extension import Extension
 from source.mkw.collection.Region import Region
 from source.option import Options
 from source.progress import Progress
+from source.utils import comp_dict_changes
 from source.wt.wit import WITPath
 from source.translation import translate as _
 
@@ -123,6 +124,9 @@ class Game:
         yield Progress(title=_("EXTRACTION"), set_part=1)
         yield from self.extract(extracted_game.path)
 
+        # Riivolution hash map for the final comparaison
+        riivolution_original_hash_map = extracted_game.get_hash_map()
+
         # install mystuff
         yield Progress(title=_("MYSTUFF"), set_part=2)
         mystuff_packs = options.mystuff_packs.get()
@@ -158,7 +162,15 @@ class Game:
         yield from extracted_game.install_all_patch(mod_config)
         yield from extracted_game.recreate_all_szs()
 
+        # Riivolution comparaison
+        riivolution_patched_hash_map = extracted_game.get_hash_map()
+        riivolution_diff: dict[str, Path] = comp_dict_changes(
+            riivolution_original_hash_map,
+            riivolution_patched_hash_map
+        )
+
         # convert the extracted game into a file
         yield Progress(title=_("CONVERTING_TO_GAME_FILE"), set_part=7)
         converted_game: WITPath = yield from extracted_game.convert_to(output_type)
         if converted_game is not None: yield from Game(converted_game.path).edit(mod_config)
+
