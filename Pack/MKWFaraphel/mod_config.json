@@ -126,8 +126,6 @@
         "N64",
         "SNES",
         "MKT",
-        "RMX",
-        "DX",
         "GP"
     ],
 
@@ -1639,7 +1637,8 @@
             "version":"v1.4",
             "tags":[
                 "Retro",
-                "RMX"
+                "RMX",
+                "MKT"
             ]
         },
         {
@@ -1653,7 +1652,8 @@
             "version":"v1",
             "tags":[
                 "Retro",
-                "RMX"
+                "RMX",
+                "MKT"
             ]
         },
         {
@@ -1667,7 +1667,8 @@
             "score":4,
             "tags":[
                 "Retro",
-                "RMX"
+                "RMX",
+                "MKT"
             ]
         },
         {
@@ -1681,7 +1682,8 @@
             "score":3,
             "tags":[
                 "Retro",
-                "RMX"
+                "RMX",
+                "MKT"
             ]
         },
         {
@@ -1698,7 +1700,8 @@
             "version":"v1",
             "tags":[
                 "Retro",
-                "RMX"
+                "RMX",
+                "MKT"
             ]
         },
         {
@@ -1712,7 +1715,8 @@
             "version":"v1.01",
             "tags":[
                 "Retro",
-                "RMX"
+                "RMX",
+                "MKT"
             ]
         },
         {
