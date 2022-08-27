@@ -9,12 +9,16 @@ from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
 from source.mkw.collection.Extension import Extension
 from source.progress import Progress
+from source.utils import comp_dict_changes
 from source.wt import szs, lec, wit
 from source.wt.wstrt import StrPath
 from source.translation import translate as _
 
 if TYPE_CHECKING:
     from source.mkw.Game import Game
+
+
+RIIVOLUTION_FOLDER_NAME: str = "riivolution"
 
 
 class PathOutsideMod(Exception):
@@ -166,7 +170,7 @@ class ExtractedGame:
         Used before the lecode patch is applied
         :param mod_config: the mod to install
         """
-        yield Progress(description=_("INSTALLING_ALL", " Pre-Patchs..."), determinate=False)
+        yield Progress(description=_("INSTALLING_ALL", " ", "PRE-PATCHS", "..."), determinate=False)
         yield from self._install_all_patch(mod_config, "_PREPATCH/")
 
     def install_all_patch(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
@@ -175,7 +179,7 @@ class ExtractedGame:
         Used after the lecode patch is applied
         :param mod_config: the mod to install
         """
-        yield Progress(description=_("INSTALLING_ALL", " Patchs..."), determinate=False)
+        yield Progress(description=_("INSTALLING_ALL", " ", "PATCHS", "..."), determinate=False)
         yield from self._install_all_patch(mod_config, "_PATCH/")
 
     def convert_to(self, output_type: Extension) -> Generator[Progress, None, wit.WITPath | None]:
@@ -205,7 +209,67 @@ class ExtractedGame:
 
         return converted_game
 
-    def get_hash_map(self) -> dict[str, str]:
+    def convert_to_riivolution(self, mod_config: ModConfig, old_hash_map: dict[str, str]
+                               ) -> Generator[Progress, None, None]:
+        """
+        Convert the extracted game into a riivolution patch
+        :param mod_config: the mod configuration
+        :param old_hash_map: hash map of all the games files created before all the modifications
+        """
+        new_hash_map = yield from self.get_hash_map()
+
+        yield Progress(description=_("CONVERTING_TO_RIIVOLUTION"), determinate=False)
+
+        # get the files difference between the original game and the patched game
+        diff_hash_map: dict[str, Path] = comp_dict_changes(old_hash_map, new_hash_map)
+
+        for file in filter(lambda file: file.is_file(), self.path.rglob("*")):
+            # if the file have not being patched, delete it
+            if str(file.relative_to(self.path)) not in diff_hash_map:
+                file.unlink()
+
+        # get riivolution configuration content
+        riivolution_config_content = "\n".join((
+            '<wiidisc version="1">',
+            '    <id game="RMC" disc="0" version="0"> </id>',
+            '',
+            '    <options>',
+            f'        <section name="{str(mod_config)}">',
+            '            <option id="CT" name="Custom Tracks" default="1">',
+            '                <choice name="Enabled"> <patch id="mod"/> </choice>',
+            '            </option>',
+            '            <option id="save_SD" name="Save on SD" default="1">',
+            '                <choice name="Enabled"> <patch id="save_SD"/> </choice>',
+            '            </option>',
+            '            <option id="my_stuff" name="My Stuff" default="1">',
+            '                <choice name="Enabled"> <patch id="my_stuff"/> </choice>',
+            '            </option>',
+            '        </section>',
+            '    </options>',
+            '',
+            '    <patch id="mod">',
+            f'        <folder disc="/" external="/{self.path.name}/files/" recursive="true" create="true"/>',
+            f'        <folder disc="" external="/{self.path.name}/sys/" recursive="true" create="true"/>',
+            '    </patch>',
+            '',
+            '    <patch id="my_stuff">',
+            f'        <folder external="/{RIIVOLUTION_FOLDER_NAME}/MyStuff/" recursive="false"/>',
+            f'        <folder external="/{RIIVOLUTION_FOLDER_NAME}/MyStuff/" disc="/"/>',
+            '    </patch>',
+            '',
+            '    <patch id="save_SD">',
+            '        <savegame clone="false"',
+            f'            external="/{RIIVOLUTION_FOLDER_NAME}/save/{"{$__gameid}{$__region}"}{mod_config.variant}"/>',
+            '    </patch>',
+            '</wiidisc>',
+        ))
+
+        # get riivolution configuration path
+        riivolution_config_path: Path = self.path.parent / f"{RIIVOLUTION_FOLDER_NAME}/{str(mod_config)}.xml"
+        riivolution_config_path.parent.mkdir(parents=True, exist_ok=True)
+        riivolution_config_path.write_text(riivolution_config_content, encoding="utf-8")
+
+    def get_hash_map(self) -> Generator[Progress, None, dict[str, str]]:
         """
         Return a dictionary associating all the game subfiles to a hash
         :return: a dictionary associating all the game subfiles to a hash
@@ -214,10 +278,13 @@ class ExtractedGame:
 
         for fp in filter(lambda fp: fp.is_file(), self.path.rglob("*")):
             hasher = hashlib.md5()
+            rel_path: str = str(fp.relative_to(self.path))
+
+            yield Progress(description=_(f"CALCULATING_HASH_FOR", ' "', rel_path, '"'))
 
             with open(fp, "rb") as file:
                 while block := file.read(file_block_size):
                     hasher.update(block)
-            md5_map[str(fp.relative_to(self.path))] = hasher.hexdigest()
+            md5_map[rel_path] = hasher.hexdigest()
 
         return md5_map

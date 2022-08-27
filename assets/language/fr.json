@@ -109,6 +109,11 @@
     "TESTING_MOD_SETTINGS": "Paramètre de test",
     "SETTINGS_FILE": "Fichier de paramètres",
     "EXPORT_SETTINGS": "Exporter les paramètres",
-    "IMPORT_SETTINGS": "Importer les paramètres"
+    "IMPORT_SETTINGS": "Importer les paramètres",
+    "PREPARING_RIIVOLUTION": "Préparation pour Riivolution",
+    "CONVERTING_TO_RIIVOLUTION": "Conversion en patch Riivolution",
+    "PATCHS": "patchs",
+    "PRE-PATCHS": "pre-patchs",
+    "CALCULATING_HASH_FOR": "Calcule du hash pour"
   }
 }
