@@ -82,7 +82,7 @@ class PatchFile(PatchObject):
         """
         patch a subfile of the game with the PatchFile
         """
-        yield Progress(description=translate("PATCHING", " ", game_subpath))
+        yield Progress(description=translate("PATCHING", ' "', game_subpath.relative_to(extracted_game.path), '"'))
         # translate is not renamed "_" here because it is used to drop useless value in unpacking
 
         # check if the file should be patched

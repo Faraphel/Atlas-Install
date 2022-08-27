@@ -115,7 +115,8 @@ class ExtractedGame:
 
         for extracted_szs in filter(lambda path: path.is_dir(), self.path.rglob("*.d")):
             # for every directory that end with a .d in the extracted game, recreate the szs
-            yield Progress(description=_("REPACKING", ' "', extracted_szs, '"'), determinate=False)
+            yield Progress(description=_("REPACKING", ' "', extracted_szs.relative_to(self.path), '"'),
+                           determinate=False)
 
             szs.create(extracted_szs, extracted_szs.with_suffix(".szs"), overwrite=True)
             shutil.rmtree(str(extracted_szs.resolve()))

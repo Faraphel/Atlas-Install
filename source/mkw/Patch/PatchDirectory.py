@@ -28,7 +28,7 @@ class PatchDirectory(PatchObject):
         """
         patch a subdirectory of the game with the PatchDirectory
         """
-        yield Progress(description=_("PATCHING", " ", game_subpath))
+        yield Progress(description=_("PATCHING", ' "', game_subpath.relative_to(extracted_game.path), '"'))
 
         # check if the directory should be patched
         if not self.is_enabled(extracted_game): return

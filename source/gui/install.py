@@ -428,13 +428,15 @@ class ProgressBar(ttk.LabelFrame):
         self.progress_bar_part = ttk.Progressbar(self, orient="horizontal")
         self.progress_bar_part.grid(row=1, column=1, sticky="nsew")
 
-        self.title = ttk.Label(self, text="", anchor="center", font=("TkDefaultFont", 10), wraplength=350)
+        self.title = ttk.Label(self, text="", anchor=tkinter.CENTER, justify=tkinter.CENTER,
+                               font=("TkDefaultFont", 10), wraplength=350)
         self.title.grid(row=2, column=1, sticky="nsew")
 
         self.progress_bar_step = ttk.Progressbar(self, orient="horizontal")
         self.progress_bar_step.grid(row=3, column=1, sticky="nsew")
 
-        self.description = ttk.Label(self, text="", anchor="center", font=("TkDefaultFont", 10), wraplength=350)
+        self.description = ttk.Label(self, text="", anchor=tkinter.CENTER, justify=tkinter.CENTER,
+                                     font=("TkDefaultFont", 10), wraplength=350)
         self.description.grid(row=4, column=1, sticky="nsew")
 
     def set_state(self, state: InstallerState) -> None:
