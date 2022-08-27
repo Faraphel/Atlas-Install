@@ -9,6 +9,29 @@ class Extension(enum.Enum):
     FST = ".dol"
     CISO = ".ciso"
     ISO = ".iso"
+    RIIVO = ".xml"
+
+    def is_riivolution(self) -> bool:
+        """
+        :return: True is a riivolution patch, otherwise False
+        """
+        return self == self.__class__.RIIVO
+
+    def is_directory(self) -> bool:
+        """
+        :return: True if the extension a directory extension, otherwise False
+        """
+        return self == self.__class__.FST
+
+    def is_extractable(self) -> bool:
+        """
+        :return: True if the extension is extractable, otherwise False
+        """
+        return self in [
+            self.__class__.CISO,
+            self.__class__.ISO,
+            self.__class__.WBFS,
+        ]
 
     @classmethod
     def _missing_(cls, value: str) -> "Extension | None":

@@ -104,7 +104,7 @@ class Game:
         :options: others options for customized installation
         :output_type: type of the destination game
         """
-        yield Progress(max_part=7)
+        yield Progress(max_part=8)
 
         # create a cache directory for some files
         cache_directory: Path = Path("./.cache")
@@ -125,16 +125,18 @@ class Game:
         yield from self.extract(extracted_game.path)
 
         # Riivolution hash map for the final comparaison
-        riivolution_original_hash_map = extracted_game.get_hash_map()
+        yield Progress(title=_("PREPARING_RIIVOLUTION"), set_part=2,
+                       description=_("PREPARING_RIIVOLUTION"), determinate=False)
+        if output_type.is_riivolution(): riivolution_original_hash_map = extracted_game.get_hash_map()
 
         # install mystuff
-        yield Progress(title=_("MYSTUFF"), set_part=2)
+        yield Progress(title=_("MYSTUFF"), set_part=3)
         mystuff_packs = options.mystuff_packs.get()
         mystuff_data = mystuff_packs.get(options.mystuff_pack_selected.get())
         if mystuff_data is not None: yield from extracted_game.install_multiple_mystuff(mystuff_data["paths"])
 
         # prepare the cache
-        yield Progress(title=_("PREPARING_FILES"), set_part=3)
+        yield Progress(title=_("PREPARING_FILES"), set_part=4)
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)
         yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
         yield from mod_config.normalize_all_tracks(
@@ -147,10 +149,10 @@ class Game:
         yield from extracted_game.prepare_special_file(mod_config)
 
         # prepatch the game
-        yield Progress(title=_("PRE-PATCHING"), set_part=4)
+        yield Progress(title=_("PRE-PATCHING"), set_part=5)
         yield from extracted_game.install_all_prepatch(mod_config)
 
-        yield Progress(title="LE-CODE", set_part=5)
+        yield Progress(title="LE-CODE", set_part=6)
         yield from extracted_game.patch_lecode(
             mod_config,
             cache_directory,
@@ -158,19 +160,71 @@ class Game:
             cache_ogtracks_directory,
         )
 
-        yield Progress(title=_("PATCHING"), set_part=6)
+        yield Progress(title=_("PATCHING"), set_part=7)
         yield from extracted_game.install_all_patch(mod_config)
         yield from extracted_game.recreate_all_szs()
 
-        # Riivolution comparaison
-        riivolution_patched_hash_map = extracted_game.get_hash_map()
-        riivolution_diff: dict[str, Path] = comp_dict_changes(
-            riivolution_original_hash_map,
-            riivolution_patched_hash_map
-        )
+        if output_type.is_riivolution():
+            # Riivolution comparaison
+            riivolution_patched_hash_map = extracted_game.get_hash_map()
+            riivolution_diff: dict[str, Path] = comp_dict_changes(
+                riivolution_original_hash_map,
+                riivolution_patched_hash_map
+            )
 
-        # convert the extracted game into a file
-        yield Progress(title=_("CONVERTING_TO_GAME_FILE"), set_part=7)
-        converted_game: WITPath = yield from extracted_game.convert_to(output_type)
-        if converted_game is not None: yield from Game(converted_game.path).edit(mod_config)
+            for file in filter(lambda file: file.is_file(), extracted_game.path.rglob("*")):
+                # if the file have not being patched, delete it
+                if str(file.relative_to(extracted_game.path)) not in riivolution_diff:
+                    file.unlink()
+
+            # get riivolution configuration content
+            riivolution_config_content = f"""
+<wiidisc version="1">
+    <id game="RMC" disc="0" version="0">
+        <region type="P"/>
+        <region type="J"/>
+        <region type="E"/>
+        <region type="K"/>
+    </id>
+    
+    <options>
+        <section name="{str(mod_config)}">
+            <option id="CT" name="Custom Tracks" default="1">
+                <choice name="Enabled"> <patch id="mod"/> </choice>
+            </option>
+            <option id="save_SD" name="Save on SD" default="1">
+                <choice name="Enabled"> <patch id="save_SD"/> </choice>
+            </option>
+            <option id="my_stuff" name="My Stuff" default="1">
+                <choice name="Enabled"> <patch id="my_stuff"/> </choice>
+            </option>
+        </section>
+    </options>
+    
+    <patch id="mod">
+        <folder disc="/" external="/{extracted_game.path.name}/files/" recursive="true" create="true"/>
+        <folder disc="" external="/{extracted_game.path.name}/sys/" recursive="true" create="true"/>
+    </patch>
+    
+    <patch id="my_stuff">
+        <folder external="/riivolution/MyStuff/" recursive="false"/>
+        <folder external="/riivolution/MyStuff/" disc="/"/>
+    </patch>
+    
+    <patch id="save_SD">
+        <savegame clone="false" external="/riivolution/save/{'{$__gameid}{$__region}'}{mod_config.variant}"/>
+    </patch>
+</wiidisc>
+            """
+
+            # get riivolution configuration path
+            riivolution_config_path = extracted_game.path.parent / f"riivolution/{str(mod_config)}.xml"
+            riivolution_config_path.parent.mkdir(parents=True, exist_ok=True)
+            riivolution_config_path.write_text(riivolution_config_content, encoding="utf8")
+
+        else:
+            # convert the extracted game into a file
+            yield Progress(title=_("CONVERTING_TO_GAME_FILE"), set_part=8)
+            converted_game: WITPath = yield from extracted_game.convert_to(output_type)
+            if converted_game is not None: yield from Game(converted_game.path).edit(mod_config)
 
