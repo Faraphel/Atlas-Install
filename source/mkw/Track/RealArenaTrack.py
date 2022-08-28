@@ -22,7 +22,12 @@ class RealArenaTrack:
         :param default: default value if no tag template is found
         :return: formatted representation of the tag
         """
-        for tag in filter(lambda tag: tag in self.mod_config.tags_templates[template_name], self.tags):
+        for tag in self.tags:
+            # if the tag start with an underscore (for example _3DS), it will be found in a get_tag_template,
+            # but ignored in the tags_cups list
+            tag = tag.removeprefix("_")
+            if tag not in self.mod_config.tags_templates[template_name]: continue
+
             return self.mod_config.multiple_safe_eval(
                 template=self.mod_config.tags_templates[template_name][tag],
                 args=["tag"],
