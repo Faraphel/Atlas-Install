@@ -122,7 +122,13 @@ class WITPath:
             shutil.copytree(self._get_fst_root(), dest)
 
         else:
-            process = _tools_run_popen("EXTRACT", self.path, "-d", dest, "--progress", universal_newlines=True)
+            process = _tools_run_popen(
+                "EXTRACT", self.path,
+                "--DEST", dest,
+                "--progress",
+                "--psel=DATA",  # only extract the game data, ignore update data, ...
+                universal_newlines=True
+            )
             # universal_newlines is required to correctly read text line by line
 
             while process.poll() is None:
