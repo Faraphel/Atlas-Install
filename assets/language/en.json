@@ -54,6 +54,8 @@
     "OUTSIDE_ALLOWED_RANGE": "outside of allowed range",
     "IN_PATCH": "in patch",
     "INSTALLING_PATCH": "Installing the patch",
+    "PATCH_TITLE": "Patch",
+    "PRE-PATCH_TITLE": "Pre-patch",
     "PATCHING": "Patching",
     "FORBIDDEN_TRACK_ATTRIBUTE": "Forbidden track attribute",
     "FORBIDDEN_ARENA_ATTRIBUTE": "Forbidden arena attribute",

@@ -55,6 +55,8 @@
     "OUTSIDE_ALLOWED_RANGE": "En dehors de la portée autorisée",
     "IN_PATCH": "dans le patch",
     "INSTALLING_PATCH": "Installation du patch",
+    "PATCH_TITLE": "Patch",
+    "PRE-PATCH_TITLE": "Pre-patch",
     "PATCHING": "Patch de",
     "FORBIDDEN_TRACK_ATTRIBUTE": "Attribut de course interdit",
     "FORBIDDEN_ARENA_ATTRIBUTE": "Attribut d'arène interdit",
