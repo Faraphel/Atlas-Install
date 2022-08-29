@@ -465,9 +465,10 @@ class ProgressBar(ttk.LabelFrame):
         :param value: the value
         :return:
         """
+
         if value:
-            if self.progress_bar_step["mode"] == "indeterminate": self.progress_bar_step.stop()
             self.progress_bar_step.configure(mode="determinate")
+            self.progress_bar_step.stop()
 
         else:
             self.progress_bar_step.configure(mode="indeterminate", maximum=100)
