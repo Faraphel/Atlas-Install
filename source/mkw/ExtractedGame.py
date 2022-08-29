@@ -51,11 +51,17 @@ class ExtractedGame:
         """
         destination_path = Path(destination_path)
         destination_path.mkdir(parents=True, exist_ok=True)
-        yield Progress(description=_("EXTRACTING_ORIGINAL_TRACKS"), determinate=False)
-        for track_file in (self.path / "files/Race/Course/").glob("*.szs"):
 
-            yield Progress(description=_("EXTRACTING_ORIGINAL_TRACKS", " (", track_file.name, ") ..."),
-                           determinate=False)
+        original_tracks: list[Path] = list((self.path / "files/Race/Course/").glob("*.szs"))
+        yield Progress(
+            description=_("EXTRACTING_ORIGINAL_TRACKS"),
+            determinate=True,
+            max_step=len(original_tracks),
+            set_step=0,
+        )
+
+        for track_file in original_tracks:
+            yield Progress(description=_("EXTRACTING_ORIGINAL_TRACKS", " (", track_file.name, ") ..."), step=1)
 
             if not (destination_path / track_file.name).exists(): track_file.rename(destination_path / track_file.name)
             else: track_file.unlink()
@@ -67,7 +73,7 @@ class ExtractedGame:
         :mystuff_path: path to the MyStuff directory
         :return:
         """
-        yield Progress(description=_("INSTALLING_MYSTUFF", ' "', mystuff_path, '" ...'), determinate=False)
+        yield Progress(description=_("INSTALLING_MYSTUFF", ' "', mystuff_path, '" ...'))
         mystuff_path = Path(mystuff_path)
 
         mystuff_rootfiles: dict[str, Path] = {}
@@ -84,9 +90,15 @@ class ExtractedGame:
         Install multiple mystuff patch
         :param mystuff_paths: paths to all the mystuff patch
         """
-        yield Progress(description=_("INSTALLING_ALL_MYSTUFF_PATCHS"))
+        yield Progress(
+            description=_("INSTALLING_ALL_MYSTUFF_PATCHS"),
+            determinate=True,
+            max_step=len(mystuff_paths),
+            set_step=0
+        )
 
         for mystuff_path in mystuff_paths:
+            yield Progress(step=1)
             yield from self.install_mystuff(mystuff_path)
 
     def prepare_special_file(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
@@ -94,7 +106,7 @@ class ExtractedGame:
         Prepare special files for the patch
         :return: the special files dict
         """
-        yield Progress(description=_("PREPARING", " ct_icon ", "SPECIAL_FILE", "..."), determinate=False)
+        yield Progress(description=_("PREPARING", " ct_icons ", "SPECIAL_FILE", "..."), determinate=False)
         ct_icons = BytesIO()
         mod_config.get_full_cticon().save(ct_icons, format="PNG")
         ct_icons.seek(0)
@@ -111,12 +123,20 @@ class ExtractedGame:
         """
         Repack all the .d directory into .szs files.
         """
-        yield Progress(description=_("REPACKING", " ", "ALL_ARCHIVES"), determinate=False)
+        all_extracted_szs: list[Path] = list(filter(lambda path: path.is_dir(), self.path.rglob("*.d")))
+        yield Progress(
+            description=_("REPACKING", " ", "ALL_ARCHIVES"),
+            determinate=True,
+            max_step=len(all_extracted_szs),
+            set_step=0,
+        )
 
-        for extracted_szs in filter(lambda path: path.is_dir(), self.path.rglob("*.d")):
+        for extracted_szs in all_extracted_szs:
             # for every directory that end with a .d in the extracted game, recreate the szs
-            yield Progress(description=_("REPACKING", ' "', extracted_szs.relative_to(self.path), '"'),
-                           determinate=False)
+            yield Progress(
+                description=_("REPACKING", ' "', extracted_szs.relative_to(self.path), '"'),
+                step=1
+            )
 
             szs.create(extracted_szs, extracted_szs.with_suffix(".szs"), overwrite=True)
             shutil.rmtree(str(extracted_szs.resolve()))
@@ -219,12 +239,19 @@ class ExtractedGame:
         """
         new_hash_map = yield from self.get_hash_map()
 
-        yield Progress(description=_("CONVERTING_TO_RIIVOLUTION"), determinate=False)
+        game_files: list[Path] = list(filter(lambda file: file.is_file(), self.path.rglob("*")))
+        yield Progress(
+            description=_("CONVERTING_TO_RIIVOLUTION"),
+            determinate=True,
+            max_step=len(game_files),
+            set_step=0,
+        )
 
         # get the files difference between the original game and the patched game
         diff_hash_map: dict[str, Path] = comp_dict_changes(old_hash_map, new_hash_map)
 
-        for file in filter(lambda file: file.is_file(), self.path.rglob("*")):
+        for file in game_files:
+            yield Progress(step=1)
             # if the file have not being patched, delete it
             if str(file.relative_to(self.path)) not in diff_hash_map:
                 file.unlink()
@@ -277,11 +304,21 @@ class ExtractedGame:
         """
         md5_map: dict[str, str] = {}
 
-        for fp in filter(lambda fp: fp.is_file(), self.path.rglob("*")):
+        game_files: list[Path] = list(filter(lambda fp: fp.is_file(), self.path.rglob("*")))
+        yield Progress(
+            determinate=True,
+            max_step=len(game_files),
+            set_step=0
+        )
+
+        for fp in game_files:
             hasher = hashlib.md5()
             rel_path: str = str(fp.relative_to(self.path))
 
-            yield Progress(description=_(f"CALCULATING_HASH_FOR", ' "', rel_path, '"'))
+            yield Progress(
+                description=_(f"CALCULATING_HASH_FOR", ' "', rel_path, '"'),
+                step=1
+            )
 
             with open(fp, "rb") as file:
                 while block := file.read(file_block_size):

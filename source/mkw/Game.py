@@ -149,19 +149,19 @@ class Game:
         yield from extracted_game.prepare_special_file(mod_config)
 
         # prepatch the game
-        yield Progress(title=_("PRE-PATCHING"), set_part=5)
-        yield from extracted_game.install_all_prepatch(mod_config)
+        yield Progress(title=_("PRE-PATCH_TITLE"), set_part=5)
+        yield from extracted_game.install_all_prepatch(mod_config)  # PROGRESS
 
         yield Progress(title="LE-CODE", set_part=6)
-        yield from extracted_game.patch_lecode(
+        yield from extracted_game.patch_lecode(  # PROGRESS
             mod_config,
             cache_directory,
             cache_cttracks_directory,
             cache_ogtracks_directory,
         )
 
-        yield Progress(title=_("PATCHING"), set_part=7)
-        yield from extracted_game.install_all_patch(mod_config)
+        yield Progress(title=_("PATCH_TITLE"), set_part=7)
+        yield from extracted_game.install_all_patch(mod_config)  # PROGRESS
         yield from extracted_game.recreate_all_szs()
 
         if output_type.is_riivolution():

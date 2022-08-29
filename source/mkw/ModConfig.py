@@ -407,12 +407,12 @@ class ModConfig:
         :param autoadd_path: autoadd directory
         :param destination_path: destination where the files are converted
         """
-        yield Progress(description=_("NORMALIZING_TRACKS"))
         destination_path = Path(destination_path)
         original_tracks_path = Path(original_tracks_path)
         destination_path.mkdir(parents=True, exist_ok=True)
 
         normalize_threads: list[dict] = []
+        all_arenas_tracks = list(self.get_all_arenas_tracks())
 
         def remove_finished_threads() -> Generator[Progress, None, None]:
             """
@@ -424,6 +424,7 @@ class ModConfig:
             yield Progress(
                 description=_("NORMALIZING_TRACKS", " :\n" + "\n".join(thread['name'] for thread in normalize_threads))
             )
+
             normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
 
         track_directory = self.path.parent / "_TRACKS"
@@ -431,7 +432,16 @@ class ModConfig:
             self.multiplayer_disable_if, args=["track"]
         )
 
-        for track in self.get_all_arenas_tracks():
+        yield Progress(
+            description=_("NORMALIZING_TRACKS"),
+            determinate=True,
+            max_step=len(all_arenas_tracks)+1,
+            set_step=0,
+        )
+
+        for track in all_arenas_tracks:
+            yield Progress(step=1)
+
             track_file: Path = next(
                 track_directory.rglob(f"{track.repr_format(template=self.track_file_template)}.*")
             )
