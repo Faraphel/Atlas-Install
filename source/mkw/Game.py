@@ -54,13 +54,13 @@ class Game:
             except StopIteration as e: return e.value
 
         else:
+            yield Progress(determinate=True, max_step=100)
+
             for gen_data in gen:
                 yield Progress(
                     description=_("EXTRACTING", " - ", gen_data["percentage"], "% - (", "ESTIMATED_TIME_REMAINING", ": "
                                   f'{gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"})'),
-                    max_step=100,
                     set_step=gen_data["percentage"],
-                    determinate=True
                 )
             try: next(gen)
             except StopIteration as e:
