@@ -6,6 +6,13 @@ from typing import Callable
 from source.translation import translate as _
 
 
+tools_dir: Path = Path("./tools/")
+system = "win64" if os.name == "nt" else "lin64"
+
+subprocess_kwargs = {"creationflags": subprocess.CREATE_NO_WINDOW} if system == "win64" else {}
+# creationflags are Windows specific. Linux don't show any subprocess window per default.
+
+
 class WTError(Exception):
     def __init__(self, tools_path: Path | str, return_code: int):
         try:
@@ -13,7 +20,7 @@ class WTError(Exception):
                 [tools_path, "ERROR", str(return_code)],
                 stdout=subprocess.PIPE,
                 check=True,
-                creationflags=subprocess.CREATE_NO_WINDOW,
+                **subprocess_kwargs
             ).stdout.decode()
         except subprocess.CalledProcessError as e:
             error = _("- ", "CANNOT_GET_ERROR_MESSAGE", " -")
@@ -24,10 +31,6 @@ class WTError(Exception):
 class MissingWTError(Exception):
     def __init__(self, tool_name: str):
         super().__init__(_("CANNOT_FIND_TOOL", ' "', tool_name, '" ', "IN_TOOLS_DIRECTORY"))
-
-
-tools_dir = Path("./tools/")
-system = "win64" if os.name == "nt" else "lin64"
 
 
 try: tools_szs_dir = next(tools_dir.glob("./szs*/")) / system
@@ -66,7 +69,7 @@ def _run(tools_path: Path | str, *args, **kwargs) -> bytes:
         [tools_path, *args],
         stdout=subprocess.PIPE,
         check=True,
-        creationflags=subprocess.CREATE_NO_WINDOW
+        **subprocess_kwargs
     ).stdout
 
 
@@ -124,9 +127,9 @@ def _run_popen(tools_path: Path | str, *args, universal_newlines=False) -> subpr
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
-        creationflags=subprocess.CREATE_NO_WINDOW,
         bufsize=1 if universal_newlines else None,
         universal_newlines=universal_newlines,
+        **subprocess_kwargs
     )
 
 
