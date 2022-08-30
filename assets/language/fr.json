@@ -116,6 +116,8 @@
     "CONVERTING_TO_RIIVOLUTION": "Conversion en patch Riivolution",
     "PATCHS": "patchs",
     "PRE-PATCHS": "pre-patchs",
-    "CALCULATING_HASH_FOR": "Calcule du hash pour"
+    "CALCULATING_HASH_FOR": "Calcule du hash pour",
+    "WARNING_NOT_ROOT": "Cette application nécessite les permissions root. Vous devriez lancer l'application avec 'sudo'. Continuer quand même ?",
+    "WARNING_INSTALLER_PERMISSION": "Cette application nécessite les permissions d'écriture et d'exécution sur ses propres fichiers. Vous pouvez utiliser 'sudo chmod 777 -R <installer-path>' pour corriger cela. Continuer quand même ?"
   }
 }

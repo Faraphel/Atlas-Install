@@ -379,6 +379,16 @@ class ButtonInstall(ttk.Button):
                 if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
                     return
 
+            if system == "lin64":  # if linux
+                if os.getuid() != 0:  # if the user is not root
+                    if not messagebox.askokcancel(_("WARNING"), _("WARNING_NOT_ROOT")):
+                        return
+
+                if not os.access("./", os.W_OK | os.X_OK):
+                    # check if writing (for the /.cache/) and execution (for /tools/) are allowed
+                    if not messagebox.askokcancel(_("WARNING"), _("WARNING_INSTALLER_PERMISSION")):
+                        return
+
             game = Game(source_path)
             output_type = Extension[self.root.options.extension.get()]
 

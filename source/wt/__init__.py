@@ -1,13 +1,12 @@
 import subprocess
 from pathlib import Path
-import os
 from typing import Callable
 
+from source import system
 from source.translation import translate as _
 
 
 tools_dir: Path = Path("./tools/")
-system = "win64" if os.name == "nt" else "lin64"
 
 subprocess_kwargs = {"creationflags": subprocess.CREATE_NO_WINDOW} if system == "win64" else {}
 # creationflags are Windows specific. Linux don't show any subprocess window per default.
