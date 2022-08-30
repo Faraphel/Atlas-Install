@@ -52,7 +52,9 @@ class Window(tkinter.Tk):
 
         self.title(_("INSTALLER_TITLE"))
         self.resizable(False, False)
-        self.iconbitmap("./assets/icon.ico")
+
+        self.icon = tkinter.PhotoImage(file="./assets/icon.png")
+        self.iconphoto(True, self.icon)
 
         # menu bar
         self.menu = Menu(self)
