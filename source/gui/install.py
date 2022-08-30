@@ -161,6 +161,7 @@ class Menu(tkinter.Menu):
                 command=lambda: mystuff.Window(self.root.mod_config, self.root.options)
             )
             self.threads_used = self.ThreadsUsed(self)
+            self.add_command(label=_("EMPTY_CACHE"), command=self.empty_cache)
 
             self.add_separator()
 
@@ -170,6 +171,14 @@ class Menu(tkinter.Menu):
                 variable=self.variable_developer_mode,
                 command=lambda: self.root.options.developer_mode.set(self.variable_developer_mode.get())
             )
+
+        @staticmethod
+        def empty_cache():
+            cache_path: Path = Path("./.cache/")
+            cache_size: int = sum(file.stat().st_size / Go for file in cache_path.rglob("*"))
+
+            if messagebox.askokcancel(_("WARNING"), _("WARNING_EMPTY_CACHE") % cache_size):
+                shutil.rmtree("./.cache/", ignore_errors=True)
 
         class ThreadsUsed(tkinter.Menu):
             def __init__(self, master: tkinter.Menu):

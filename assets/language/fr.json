@@ -118,6 +118,8 @@
     "PRE-PATCHS": "pre-patchs",
     "CALCULATING_HASH_FOR": "Calcule du hash pour",
     "WARNING_NOT_ROOT": "Cette application nécessite les permissions root. Vous devriez lancer l'application avec 'sudo'. Continuer quand même ?",
-    "WARNING_INSTALLER_PERMISSION": "Cette application nécessite les permissions d'écriture et d'exécution sur ses propres fichiers. Vous pouvez utiliser 'sudo chmod 777 -R <installer-path>' pour corriger cela. Continuer quand même ?"
+    "WARNING_INSTALLER_PERMISSION": "Cette application nécessite les permissions d'écriture et d'exécution sur ses propres fichiers. Vous pouvez utiliser 'sudo chmod 777 -R <installer-path>' pour corriger cela. Continuer quand même ?",
+    "WARNING_EMPTY_CACHE": "En vidant le cache, vous allez gagner %.2fGo, mais réinstaller un mod sera beaucoup plus long. Continuer ?",
+    "EMPTY_CACHE": "Vider le cache"
   }
 }
