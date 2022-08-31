@@ -32,6 +32,7 @@ class Window(tkinter.Toplevel):
 
         self.frame_profile = ttk.Frame(self)
         self.frame_profile.grid(row=1, column=1, sticky="NEWS")
+        self.frame_profile.grid_columnconfigure(1, weight=1)
 
         self.combobox_profile = ttk.Combobox(self.frame_profile, justify=tkinter.CENTER)
         self.combobox_profile.grid(row=1, column=1, sticky="NEWS")
@@ -55,14 +56,20 @@ class Window(tkinter.Toplevel):
         self.frame_mystuff_paths.grid(row=2, column=1, sticky="NEWS")
         self.frame_mystuff_paths.grid_columnconfigure(1, weight=1)
 
-        self.listbox_mystuff_paths = tkinter.Listbox(self.frame_mystuff_paths)
+        self.listbox_mystuff_paths = tkinter.Listbox(self.frame_mystuff_paths, width=60)
         self.listbox_mystuff_paths.grid(row=1, column=1, sticky="NEWS")
-        self.scrollbar_mystuff_paths = ttk.Scrollbar(
-            self.frame_mystuff_paths,
-            command=self.listbox_mystuff_paths.yview
+        self.scrollbar_x_mystuff_paths = ttk.Scrollbar(
+            self.frame_mystuff_paths, command=self.listbox_mystuff_paths.xview, orient=tkinter.HORIZONTAL
         )
-        self.scrollbar_mystuff_paths.grid(row=1, column=2, sticky="NS")
-        self.listbox_mystuff_paths.configure(yscrollcommand=self.scrollbar_mystuff_paths.set)
+        self.scrollbar_y_mystuff_paths = ttk.Scrollbar(
+            self.frame_mystuff_paths, command=self.listbox_mystuff_paths.yview, orient=tkinter.VERTICAL
+        )
+        self.scrollbar_x_mystuff_paths.grid(row=2, column=1, sticky="WE")
+        self.scrollbar_y_mystuff_paths.grid(row=1, column=2, sticky="NS")
+        self.listbox_mystuff_paths.configure(
+            xscrollcommand=self.scrollbar_x_mystuff_paths.set,
+            yscrollcommand=self.scrollbar_y_mystuff_paths.set,
+        )
 
         self.frame_mystuff_paths_action = ttk.Frame(self)
         self.frame_mystuff_paths_action.grid(row=3, column=1, sticky="NEWS")
