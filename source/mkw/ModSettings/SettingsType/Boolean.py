@@ -17,9 +17,9 @@ class Boolean(AbstractModSettings):
         super().tkinter_show(master, checkbox)
         variable = self.tkinter_variable(tkinter.BooleanVar)
 
-        radiobutton_on = ttk.Radiobutton(master, text=_("DISABLED"), variable=variable, value=False)
+        radiobutton_on = ttk.Radiobutton(master, text=_("TEXT_DISABLED"), variable=variable, value=False)
         radiobutton_on.grid(row=1, column=1, sticky="E")
-        radiobutton_off = ttk.Radiobutton(master, text=_("ENABLED"), variable=variable, value=True)
+        radiobutton_off = ttk.Radiobutton(master, text=_("TEXT_ENABLED"), variable=variable, value=True)
         radiobutton_off.grid(row=1, column=2, sticky="E")
 
         self.tkinter_bind(master, checkbox)

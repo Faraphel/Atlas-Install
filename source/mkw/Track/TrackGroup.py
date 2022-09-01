@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 class TrackGroupForbiddenCustomAttribute(Exception):
     def __init__(self, attribute_name: str):
-        super().__init__(_("FORBIDDEN_TRACKGROUP_ATTRIBUTE", " : ", repr(attribute_name)))
+        super().__init__(_("ERROR_FORBIDDEN_TRACKGROUP_ATTRIBUTE") % attribute_name)
 
 
 class TrackGroup:
@@ -61,7 +61,7 @@ class TrackGroup:
         return the ctfile of the track group
         :return: ctfile
         """
-        ctfile = f'T T11; T11; 0x02; "-"; "info"; "-"\n'
+        ctfile = f'T T11; T11; 0x02; "-"; "-"; "-"\n'
         for track in self.get_tracks():
             ctfile += track.get_ctfile(template=template, hidden=True)
 

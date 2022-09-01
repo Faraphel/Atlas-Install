@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 class ArenaForbiddenCustomAttribute(Exception):
     def __init__(self, attribute_name: str):
-        super().__init__(_("FORBIDDEN_ARENA_ATTRIBUTE", " : ", repr(attribute_name)))
+        super().__init__(_("ERROR_FORBIDDEN_ARENA_ATTRIBUTE") % attribute_name)
 
 
 class Arena(RealArenaTrack):

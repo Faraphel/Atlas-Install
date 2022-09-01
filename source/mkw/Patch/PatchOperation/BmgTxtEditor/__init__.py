@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 class InvalidBmgLayerMode(Exception):
     def __init__(self, layer_mode: str):
-        super().__init__(_("BMG_LAYER_MODE", ' "', layer_mode, '" ', "IS_NOT_IMPLEMENTED"))
+        super().__init__(_("ERROR_BMG_LAYER_MODE_NOT_IMPLEMENTED") % layer_mode)
 
 
 class AbstractLayer(ABC):

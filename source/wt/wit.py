@@ -202,7 +202,7 @@ class WITSubPath:
         if self.wit_path.extension == Extension.FST:
             # if flat is used, extract the file / dir into the destination directory, without subdirectory
             if flat:
-                os.makedirs(dest, exist_ok=True)
+                dest.mkdir(parents=True, exist_ok=True)
                 # if we are extracting a directory, we need to extract every file recursively
                 if self.is_dir():
                     for file in (self._get_fst_path()).rglob("*"):

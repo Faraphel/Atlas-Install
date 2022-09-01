@@ -192,7 +192,7 @@ class SZSSubPath:
         :param dest: destination path
         :return: the extracted file path
         """
-        if self.is_dir(): raise ValueError(_("CANNOT_EXTRACT_A_DIRECTORY"))
+        if self.is_dir(): raise ValueError(_("ERROR_CANNOT_EXTRACT_DIRECTORY"))
 
         dest: Path = Path(dest)
         if dest.is_dir(): dest /= self.basename()

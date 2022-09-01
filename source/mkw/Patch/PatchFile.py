@@ -2,7 +2,8 @@ from io import BytesIO
 from pathlib import Path
 from typing import Generator, IO, TYPE_CHECKING
 
-from source.mkw.Patch import PathOutsidePatch, InvalidPatchMode, InvalidSourceMode
+from source.mkw import PathOutsideAllowedRange
+from source.mkw.Patch import InvalidPatchMode, InvalidSourceMode
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.mkw.Patch.PatchObject import PatchObject
 from source.progress import Progress
@@ -82,7 +83,7 @@ class PatchFile(PatchObject):
         """
         patch a subfile of the game with the PatchFile
         """
-        yield Progress(description=translate("PATCHING", ' "', game_subpath.relative_to(extracted_game.path), '"'))
+        yield Progress(description=translate("TEXT_PATCHING") % game_subpath.relative_to(extracted_game.path))
         # translate is not renamed "_" here because it is used to drop useless value in unpacking
 
         # check if the file should be patched
@@ -119,9 +120,9 @@ class PatchFile(PatchObject):
                 for game_subfile in game_subpath.parent.glob(self.configuration["match_regex"]):
                     # disallow patching files outside of the game
                     if not game_subfile.relative_to(extracted_game.path):
-                        raise PathOutsidePatch(game_subfile, extracted_game.path)
+                        raise PathOutsideAllowedRange(game_subfile, extracted_game.path)
 
-                    yield Progress(description=translate("PATCHING", " ", game_subfile))
+                    yield Progress(description=translate("TEXT_PATCHING") % game_subfile)
 
                     # if the source is the game, then recalculate the content for every game subfile
                     if self.configuration["source"] == "game":

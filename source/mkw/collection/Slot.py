@@ -4,7 +4,7 @@ from source.translation import translate as _
 
 class SlotNotFound(Exception):
     def __init__(self, slot_data: any):
-        super().__init__(_("CANNOT_FIND_SLOT", ' "', slot_data, '" '))
+        super().__init__(_("ERROR_CANNOT_FIND_SLOT") % slot_data)
 
 
 @dataclass(init=True, slots=True, frozen=True, repr=True)

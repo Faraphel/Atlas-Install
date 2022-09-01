@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 class TrackForbiddenCustomAttribute(Exception):
     def __init__(self, attribute_name: str):
-        super().__init__(_("FORBIDDEN_TRACK_ATTRIBUTE", " : ", repr(attribute_name)))
+        super().__init__(_("ERROR_FORBIDDEN_TRACK_ATTRIBUTE") % attribute_name)
 
 
 class AbstractTrack(ABC):
@@ -35,7 +35,6 @@ class AbstractTrack(ABC):
         for key, value in kwargs.items():
             # if the attribute start with __, this is a magic attribute, and it should not be modified
             if "__" in key: raise TrackForbiddenCustomAttribute(key)
-            # TODO: check potential security issue with setattr and already implemented method and attribute
             setattr(self, key, value)
 
     def __repr__(self):

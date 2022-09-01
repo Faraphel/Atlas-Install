@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 class InvalidImageLayerType(Exception):
     def __init__(self, layer_type: str):
-        super().__init__(_("IMAGE_LAYER_TYPE", ' "', layer_type, '" ', "IS_NOT_IMPLEMENTED"))
+        super().__init__(_("ERROR_IMAGE_LAYER_TYPE_NOT_IMPLEMENTED") % layer_type)
 
 
 class AbstractLayer(ABC):

@@ -6,7 +6,7 @@ from source.utils import restart_program
 
 class OptionLoadingError(Exception):
     def __init__(self):
-        super().__init__(f"An error occured while loading options. Try deleting the option.json file.")
+        super().__init__(f"An error occurred while loading options. Try deleting the option.json file.")
 
 
 class Option:

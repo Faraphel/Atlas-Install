@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 
 from PIL import ImageFont, ImageDraw, Image
 
-from source.mkw.Patch import PathOutsidePatch
+from source.mkw import PathOutsideAllowedRange
 from source.mkw.Patch.PatchOperation.ImageEditor import AbstractLayer
 
 if TYPE_CHECKING:
@@ -33,7 +33,7 @@ class TextLayer(AbstractLayer):
         if self.font_path is not None:
             font_image_path = patch.path / self.font_path
             if not font_image_path.is_relative_to(patch.path):
-                raise PathOutsidePatch(font_image_path, patch.path)
+                raise PathOutsideAllowedRange(font_image_path, patch.path)
         else:
             font_image_path = None
 

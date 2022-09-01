@@ -60,7 +60,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     # convert the template to an ast expression
     stmt: ast.stmt = ast.parse(template).body[0]
     if not isinstance(stmt, ast.Expr):
-        raise SafeEvalException(_("INVALID_AST_TYPE", ' : "', type(stmt).__name__, '"'))
+        raise SafeEvalException(_("ERROR_INVALID_AST_TYPE") % type(stmt).__name__)
 
     # check every node for disabled expression
     for node in ast.walk(stmt):
@@ -70,20 +70,20 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
             case ast.Attribute:
                 # ban all magical function, disabling the __class__.__bases__[0] ... tricks
                 if "__" in node.attr:
-                    raise SafeEvalException(_("MAGIC_ATTRIBUTE_ARE_FORBIDDEN", ' : "', node.attr, '"'))
+                    raise SafeEvalException(_("ERROR_FORBIDDEN_MAGIC_ATTRIBUTE") % node.attr)
 
                 # ban modification to environment
                 if isinstance(node.ctx, ast.Store):
-                    raise SafeEvalException(_("CANNOT_SET_ATTRIBUTE", ' : "', node.attr, '"'))
+                    raise SafeEvalException(_("ERROR_CANNOT_SET_ATTRIBUTE") % node.attr)
 
             # when accessing any variable
             case ast.Name:
                 # ban modification to environment, but allow custom variable to be changed
                 if isinstance(node.ctx, ast.Store):
                     if node.id in globals_ | locals_:
-                        raise SafeEvalException(_("CANNOT_SET_ENVIRONMENT", ' : "', node.id, '"'))
+                        raise SafeEvalException(_("ERROR_CANNOT_SET_ENVIRONMENT") % node.id)
                     elif node.id in args:
-                        raise SafeEvalException(_("CANNOT_SET_ARGUMENT", ' : "', node.id, '"'))
+                        raise SafeEvalException(_("ERROR_CANNOT_SET_ARGUMENT") % node.id)
 
             # when assigning a value with ":="
             case ast.NamedExpr:
@@ -96,13 +96,14 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
             case ast.Call:
                 if isinstance(node.func, ast.Attribute):  # if this is a method
                     if not isinstance(node.func.value, ast.Constant):  # if the method is not on a constant
-                        raise SafeEvalException(_("CAN_ONLY_CALL_METHOD_OF_CONSTANT"))
+                        raise SafeEvalException(_("ERROR_CAN_ONLY_CALL_CONSTANT_METHOD"))
 
                 elif isinstance(node.func, ast.Name):  # if this is a direct function call
                     if node.func.id not in globals_ | locals_:  # if the function is not in env
-                        raise SafeEvalException(_("CAN_ONLY_CALL_FUNCTION_IN_ENV"))
+                        raise SafeEvalException(_("ERROR_CAN_ONLY_CALL_ENV_FUNCTION"))
 
-                else: raise SafeEvalException(_("CAN_ONLY_CALL_FUNCTION_IN_ENV"))  # else don't allow the function call
+                else:  # else don't allow the function call
+                    raise SafeEvalException(_("ERROR_CAN_ONLY_CALL_ENV_FUNCTION"))
 
             # Forbidden type. Some of them can't be accessed with the eval mode, but just in case, still ban them
             case (
@@ -117,7 +118,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
                 # comprehension are extremely dangerous since their can associate value
                 ast.ListComp | ast.SetComp | ast.DictComp | ast.GeneratorExp
             ):
-                raise SafeEvalException(_("FORBIDDEN_SYNTAX", ' : "', type(node).__name__, '"'))
+                raise SafeEvalException(_("ERROR_FORBIDDEN_SYNTAX") % type(node).__name__)
 
     # embed the whole expression into a lambda expression
     stmt.value = ast.Lambda(

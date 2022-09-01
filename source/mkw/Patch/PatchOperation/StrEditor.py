@@ -2,7 +2,7 @@ from io import BytesIO
 from pathlib import Path
 from typing import IO, TYPE_CHECKING
 
-from source.mkw.Patch import PathOutsidePatch
+from source.mkw import PathOutsideAllowedRange
 from source.mkw.Patch.PatchOperation import AbstractPatchOperation
 from source.wt import wstrt
 
@@ -31,7 +31,7 @@ class StrEditor(AbstractPatchOperation):
         for section in self.sections if self.sections is not None else []:
             section_path = patch.path / section
             if not section_path.is_relative_to(patch.path):
-                raise PathOutsidePatch(section_path, patch.path)
+                raise PathOutsideAllowedRange(section_path, patch.path)
 
             checked_sections += section_path
         # for every file in the sections, check if they are inside the patch.

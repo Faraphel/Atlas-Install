@@ -422,7 +422,7 @@ class ModConfig:
             nonlocal normalize_threads
 
             yield Progress(
-                description=_("NORMALIZING_TRACKS", " :\n" + "\n".join(thread['name'] for thread in normalize_threads))
+                description=_("TEXT_NORMALIZING_TRACKS") % "\n".join(thread['name'] for thread in normalize_threads)
             )
 
             normalize_threads = list(filter(lambda thread: thread["thread"].is_alive(), normalize_threads))
@@ -433,7 +433,6 @@ class ModConfig:
         )
 
         yield Progress(
-            description=_("NORMALIZING_TRACKS"),
             determinate=True,
             max_step=len(all_arenas_tracks)+1,
             set_step=0,

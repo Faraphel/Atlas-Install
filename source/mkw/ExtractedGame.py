@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Generator, IO, TYPE_CHECKING
 
 from source import file_block_size
+from source.mkw import PathOutsideAllowedRange
 from source.mkw.ModConfig import ModConfig
 from source.mkw.Patch.Patch import Patch
 from source.mkw.collection.Extension import Extension
@@ -19,11 +20,6 @@ if TYPE_CHECKING:
 
 
 RIIVOLUTION_FOLDER_NAME: str = "riivolution"
-
-
-class PathOutsideMod(Exception):
-    def __init__(self, forbidden_path: Path, allowed_range: Path):
-        super().__init__(_("PATH", ' "', forbidden_path, '" ', "OUTSIDE_ALLOWED_RANGE", ' "', allowed_range, '" '))
 
 
 class ExtractedGame:
@@ -41,7 +37,7 @@ class ExtractedGame:
         Extract all the autoadd files from the game to destination_path
         :param destination_path: directory where the autoadd files will be extracted
         """
-        yield Progress(description=_("EXTRACTING_AUTOADD_FILES"), determinate=False)
+        yield Progress(description=_("TEXT_EXTRACTING_AUTOADD"), determinate=False)
         szs.autoadd(self.path / "files/Race/Course/", destination_path)
 
     def extract_original_tracks(self, destination_path: "Path | str") -> Generator[Progress, None, None]:
@@ -54,14 +50,13 @@ class ExtractedGame:
 
         original_tracks: list[Path] = list((self.path / "files/Race/Course/").glob("*.szs"))
         yield Progress(
-            description=_("EXTRACTING_ORIGINAL_TRACKS"),
             determinate=True,
             max_step=len(original_tracks),
             set_step=0,
         )
 
         for track_file in original_tracks:
-            yield Progress(description=_("EXTRACTING_ORIGINAL_TRACKS", " (", track_file.name, ") ..."), step=1)
+            yield Progress(description=_("TEXT_EXTRACTING_ORIGINAL_TRACKS") % track_file.name, step=1)
 
             if not (destination_path / track_file.name).exists(): track_file.rename(destination_path / track_file.name)
             else: track_file.unlink()
@@ -73,7 +68,7 @@ class ExtractedGame:
         :mystuff_path: path to the MyStuff directory
         :return:
         """
-        yield Progress(description=_("INSTALLING_MYSTUFF", ' "', mystuff_path, '" ...'))
+        yield Progress(description=_("TEXT_INSTALLING_MYSTUFF") % mystuff_path)
         mystuff_path = Path(mystuff_path)
 
         mystuff_rootfiles: dict[str, Path] = {}
@@ -90,12 +85,7 @@ class ExtractedGame:
         Install multiple mystuff patch
         :param mystuff_paths: paths to all the mystuff patch
         """
-        yield Progress(
-            description=_("INSTALLING_ALL_MYSTUFF_PATCHS"),
-            determinate=True,
-            max_step=len(mystuff_paths),
-            set_step=0
-        )
+        yield Progress(determinate=True, max_step=len(mystuff_paths), set_step=0)
 
         for mystuff_path in mystuff_paths:
             yield Progress(step=1)
@@ -106,7 +96,7 @@ class ExtractedGame:
         Prepare special files for the patch
         :return: the special files dict
         """
-        yield Progress(description=_("PREPARING", " ct_icons ", "SPECIAL_FILE", "..."), determinate=False)
+        yield Progress(description=_("TEXT_PREPARING_SPECIAL_FILE") % "ct_icons", determinate=False)
         ct_icons = BytesIO()
         mod_config.get_full_cticon().save(ct_icons, format="PNG")
         ct_icons.seek(0)
@@ -116,7 +106,7 @@ class ExtractedGame:
         """
         Prepare main.dol and StaticR.rel files (clean them and add lecode)
         """
-        yield Progress(description="Preparing main.dol...", determinate=False)
+        yield Progress(description=_("TEXT_PREPARING_MAIN_DOL"), determinate=False)
         StrPath(self.path / "sys/main.dol").patch(clean_dol=True, add_lecode=True)
 
     def recreate_all_szs(self) -> Generator[Progress, None, None]:
@@ -125,7 +115,6 @@ class ExtractedGame:
         """
         all_extracted_szs: list[Path] = list(filter(lambda path: path.is_dir(), self.path.rglob("*.d")))
         yield Progress(
-            description=_("REPACKING", " ", "ALL_ARCHIVES"),
             determinate=True,
             max_step=len(all_extracted_szs),
             set_step=0,
@@ -134,7 +123,7 @@ class ExtractedGame:
         for extracted_szs in all_extracted_szs:
             # for every directory that end with a .d in the extracted game, recreate the szs
             yield Progress(
-                description=_("REPACKING", ' "', extracted_szs.relative_to(self.path), '"'),
+                description=_("TEXT_REPACKING_ARCHIVE") % extracted_szs.relative_to(self.path),
                 step=1
             )
 
@@ -150,7 +139,7 @@ class ExtractedGame:
         :param cache_directory: Path to the cache
         :param mod_config: mod configuration
         """
-        yield Progress(description=_("PATCHING", " LECODE.bin"))
+        yield Progress(description=_("TEXT_PATCHING_LECODE"))
         cache_directory = Path(cache_directory)
         cttracks_directory = Path(cttracks_directory)
         ogtracks_directory = Path(ogtracks_directory)
@@ -161,7 +150,7 @@ class ExtractedGame:
 
         lpar_dir: Path = mod_config.path.parent / "_LPAR/"
         lpar: Path = lpar_dir / mod_config.multiple_safe_eval(mod_config.lpar_template)()
-        if not lpar.is_relative_to(lpar_dir): raise PathOutsideMod(lpar, lpar_dir)
+        if not lpar.is_relative_to(lpar_dir): raise PathOutsideAllowedRange(lpar, lpar_dir)
 
         for lecode_file in (self.path / "files/rel/").glob("lecode-*.bin"):
             lec.patch(
@@ -178,12 +167,16 @@ class ExtractedGame:
         for all the subdirectory named by the patch_directory_name, apply the patch
         :param mod_config: the mod to install
         """
-        # yield an empty dict so that if nothing is yielded by the Patch, still is considered a generator
-        yield Progress()
-
+        patch_directories: list[Path] = []
         for part_directory in mod_config.get_mod_directory().glob("[!_]*"):
             for patch_directory in part_directory.glob(patch_directory_name):
-                yield from Patch(patch_directory, mod_config, self._special_file).install(self)
+                patch_directories.append(patch_directory)
+
+        yield Progress(determinate=True, max_step=len(patch_directories)+1, set_step=0)
+
+        for patch_directory in patch_directories:
+            yield Progress(step=1)
+            yield from Patch(patch_directory, mod_config, self._special_file).install(self)
 
     def install_all_prepatch(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
         """
@@ -191,7 +184,6 @@ class ExtractedGame:
         Used before the lecode patch is applied
         :param mod_config: the mod to install
         """
-        yield Progress(description=_("INSTALLING_ALL", " ", "PRE-PATCHS", "..."), determinate=False)
         yield from self._install_all_patch(mod_config, "_PREPATCH/")
 
     def install_all_patch(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
@@ -200,7 +192,6 @@ class ExtractedGame:
         Used after the lecode patch is applied
         :param mod_config: the mod to install
         """
-        yield Progress(description=_("INSTALLING_ALL", " ", "PATCHS", "..."), determinate=False)
         yield from self._install_all_patch(mod_config, "_PATCH/")
 
     def convert_to(self, output_type: Extension) -> Generator[Progress, None, wit.WITPath | None]:
@@ -209,7 +200,7 @@ class ExtractedGame:
         :param output_type: path to the destination of the game
         :output_type: format of the destination game
         """
-        yield Progress(description=_("CONVERTING_GAME_TO", " ", output_type.name), determinate=False)
+        yield Progress(description=_("TEXT_CONVERT_GAME_TO") % output_type.name, determinate=False)
         if output_type == Extension.FST: return
 
         destination_file = self.path.with_suffix(self.path.suffix + output_type.value)
@@ -225,7 +216,7 @@ class ExtractedGame:
             destination_file=destination_file,
         )
 
-        yield Progress(description=_("DELETING_EXTRACTED_GAME"), determinate=False)
+        yield Progress(description=_("TEXT_DELETING_EXTRACTED_GAME"), determinate=False)
         shutil.rmtree(self.path)
 
         return converted_game
@@ -241,7 +232,7 @@ class ExtractedGame:
 
         game_files: list[Path] = list(filter(lambda file: file.is_file(), self.path.rglob("*")))
         yield Progress(
-            description=_("CONVERTING_TO_RIIVOLUTION"),
+            description=_("TEXT_CONVERTING_TO_RIIVOLUTION"),
             determinate=True,
             max_step=len(game_files),
             set_step=0,
@@ -316,7 +307,7 @@ class ExtractedGame:
             rel_path: str = str(fp.relative_to(self.path))
 
             yield Progress(
-                description=_(f"CALCULATING_HASH_FOR", ' "', rel_path, '"'),
+                description=_("TEXT_CALCULATING_HASH") % rel_path,
                 step=1
             )
 

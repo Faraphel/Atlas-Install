@@ -24,11 +24,11 @@ class Window(tkinter.Toplevel):
         self.mod_config = mod_config
         self.options = options
 
-        self.title(_("CONFIGURE_MYSTUFF_PATCH"))
+        self.title(_("TITLE_MYSTUFF_SETTINGS"))
         self.resizable(False, False)
         self.grab_set()  # the others window will be disabled, keeping only this one activated
 
-        self.disabled_text: str = _("<", "DISABLED", ">")
+        self.disabled_text: str = f"<{_('TEXT_DISABLED')}>"
 
         self.frame_profile = ttk.Frame(self)
         self.frame_profile.grid(row=1, column=1, sticky="NEWS")
@@ -40,14 +40,14 @@ class Window(tkinter.Toplevel):
 
         self.button_new_profile = ttk.Button(
             self.frame_profile,
-            text=_("NEW_PROFILE"),
+            text=_("TEXT_NEW_PROFILE"),
             command=self.new_profile
         )
         self.button_new_profile.grid(row=1, column=2, sticky="NEWS")
 
         self.button_delete_profile = ttk.Button(
             self.frame_profile,
-            text=_("DELETE_PROFILE"),
+            text=_("TEXT_DELETE_PROFILE"),
             command=self.delete_profile
         )
         self.button_delete_profile.grid(row=1, column=3, sticky="NEWS")
@@ -76,14 +76,14 @@ class Window(tkinter.Toplevel):
 
         self.button_add_mystuff_path = ttk.Button(
             self.frame_mystuff_paths_action,
-            text=_("ADD_MYSTUFF"),
+            text=_("TEXT_ADD_MYSTUFF"),
             command=self.add_mystuff_path
         )
         self.button_add_mystuff_path.grid(row=1, column=1)
 
         self.button_remove_mystuff_path = ttk.Button(
             self.frame_mystuff_paths_action,
-            text=_("REMOVE_MYSTUFF"),
+            text=_("TEXT_REMOVE_MYSTUFF"),
             command=self.remove_mystuff_path
         )
         self.button_remove_mystuff_path.grid(row=1, column=2)
@@ -138,12 +138,12 @@ class Window(tkinter.Toplevel):
 
         profile_name: str = self.combobox_profile.get()
         if profile_name in mystuff_packs:
-            messagebox.showerror(_("ERROR"), _("MYSTUFF_PROFILE_ALREADY_EXIST"))
+            messagebox.showerror(_("ERROR"), _("ERROR_MYSTUFF_PROFILE_ALREADY_EXIST") % profile_name)
             return
 
         for banned_char in "<>":
             if banned_char in profile_name:
-                messagebox.showerror(_("ERROR"), _("MYSTUFF_PROFILE_FORBIDDEN_NAME"))
+                messagebox.showerror(_("ERROR"), _("ERROR_MYSTUFF_PROFILE_FORBIDDEN_NAME") % profile_name)
                 return
 
         mystuff_packs[profile_name] = {"paths": []}
@@ -167,7 +167,7 @@ class Window(tkinter.Toplevel):
         Add a new path to the currently selected MyStuff profile
         """
 
-        if (mystuff_path := filedialog.askdirectory(title=_("SELECT_MYSTUFF"), mustexist=True)) is None: return
+        if (mystuff_path := filedialog.askdirectory(title=_("TEXT_SELECT_MYSTUFF"), mustexist=True)) == "": return
         mystuff_path = Path(mystuff_path)
 
         mystuff_packs = self.root.options.mystuff_packs.get()

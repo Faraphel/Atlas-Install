@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 class InvalidPatchOperation(Exception):
     def __init__(self, operation: str):
-        super().__init__(_("OPERATION", ' "', operation, '" ', "IS_NOT_IMPLEMENTED"))
+        super().__init__(_("ERROR_OPERATION_NOT_IMPLEMENTED") % operation)
 
 
 class AbstractPatchOperation(ABC):

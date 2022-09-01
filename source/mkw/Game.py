@@ -13,14 +13,12 @@ from source.translation import translate as _
 
 class NotMKWGameError(Exception):
     def __init__(self, path: "Path | str"):
-        path = Path(path)
-        super().__init__(_("NOT_MKW_GAME", ' : "', path.name, '"'))
+        super().__init__(_("ERROR_NOT_MKW_GAME") % Path(path).name)
 
 
 class NotVanillaError(Exception):
     def __init__(self, path: "Path | str"):
-        path = Path(path)
-        super().__init__(_("GAME_ALREADY_MODDED", ' : "', path.name, '"'))
+        super().__init__(_("ERROR_GAME_ALREADY_MODDED") % Path(path).name)
 
 
 class Game:
@@ -49,7 +47,7 @@ class Game:
         gen = self.wit_path.progress_extract_all(dest)
 
         if self.wit_path.extension == Extension.FST:
-            for __ in gen: yield Progress(description=_("COPYING_GAME"), determinate=False)
+            for __ in gen: yield Progress(description=_("TEXT_COPYING_GAME"), determinate=False)
             try: next(gen)
             except StopIteration as e: return e.value
 
@@ -57,17 +55,20 @@ class Game:
             yield Progress(determinate=True, max_step=100)
 
             for gen_data in gen:
+                percentage: int = gen_data["percentage"]
+                estimation: str = gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"
+
                 yield Progress(
-                    description=_("EXTRACTING", " - ", gen_data["percentage"], "% - (", "ESTIMATED_TIME_REMAINING", ": "
-                                  f'{gen_data["estimation"] if gen_data["estimation"] is not None else "-:--"})'),
-                    set_step=gen_data["percentage"],
+                    description=_("TEXT_EXTRACTING_GAME") % (percentage, estimation),
+                    set_step=percentage,
                 )
+
             try: next(gen)
             except StopIteration as e:
                 return e.value
 
     def edit(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
-        yield Progress(description=_("CHANGING_GAME_METADATA"), determinate=False)
+        yield Progress(description=_("TEXT_CHANGING_GAME_METADATA"), determinate=False)
         self.wit_path.edit(
             name=mod_config.name,
             game_id=self.wit_path.id[:4] + mod_config.variant
@@ -120,23 +121,23 @@ class Game:
         if not self.is_vanilla(): raise NotVanillaError(self.wit_path.path)
 
         # extract the game
-        yield Progress(title=_("EXTRACTION"), set_part=1)
+        yield Progress(title=_("PART_EXTRACTION"), set_part=1)
         yield from self.extract(extracted_game.path)
 
         # Get the original file hash map for comparaison with the post-patched game
-        yield Progress(title=_("PREPARING_RIIVOLUTION"), set_part=2)
+        yield Progress(title=_("PART_PRE_RIIVOLUTION"), set_part=2)
         riivolution_original_hash_map: dict[str, str] | None = None
         if output_type.is_riivolution():
             riivolution_original_hash_map = yield from extracted_game.get_hash_map()
 
         # install mystuff
-        yield Progress(title=_("MYSTUFF"), set_part=3)
+        yield Progress(title=_("PART_MYSTUFF"), set_part=3)
         mystuff_packs = options.mystuff_packs.get()
         mystuff_data = mystuff_packs.get(options.mystuff_pack_selected.get())
         if mystuff_data is not None: yield from extracted_game.install_multiple_mystuff(mystuff_data["paths"])
 
         # prepare the cache
-        yield Progress(title=_("PREPARING_FILES"), set_part=4)
+        yield Progress(title=_("PART_PREPARING_FILES"), set_part=4)
         yield from extracted_game.extract_autoadd(cache_autoadd_directory)
         yield from extracted_game.extract_original_tracks(cache_ogtracks_directory)
         yield from mod_config.normalize_all_tracks(
@@ -149,10 +150,10 @@ class Game:
         yield from extracted_game.prepare_special_file(mod_config)
 
         # prepatch the game
-        yield Progress(title=_("PRE-PATCH_TITLE"), set_part=5)
-        yield from extracted_game.install_all_prepatch(mod_config)  # PROGRESS
+        yield Progress(title=_("PART_PREPATCH"), set_part=5)
+        yield from extracted_game.install_all_prepatch(mod_config)
 
-        yield Progress(title="LE-CODE", set_part=6)
+        yield Progress(title=_("PART_LECODE"), set_part=6)
         yield from extracted_game.patch_lecode(  # PROGRESS
             mod_config,
             cache_directory,
@@ -160,17 +161,17 @@ class Game:
             cache_ogtracks_directory,
         )
 
-        yield Progress(title=_("PATCH_TITLE"), set_part=7)
-        yield from extracted_game.install_all_patch(mod_config)  # PROGRESS
+        yield Progress(title=_("PART_PATCH"), set_part=7)
+        yield from extracted_game.install_all_patch(mod_config)
         yield from extracted_game.recreate_all_szs()
 
         if output_type.is_riivolution():
-            yield Progress(title=_("CONVERTING_TO_RIIVOLUTION"), set_part=8)
+            yield Progress(title=_("PART_RIIVOLUTION"), set_part=8)
             yield from extracted_game.convert_to_riivolution(mod_config, riivolution_original_hash_map)
 
         else:
             # convert the extracted game into a file
-            yield Progress(title=_("CONVERTING_TO_GAME_FILE"), set_part=8)
+            yield Progress(title=_("PART_CONVERSION"), set_part=8)
             converted_game: WITPath = yield from extracted_game.convert_to(output_type)
             if converted_game is not None: yield from Game(converted_game.path).edit(mod_config)
 

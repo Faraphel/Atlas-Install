@@ -21,6 +21,7 @@ class Window(tkinter.Toplevel):
         self.resizable(False, False)
         self.grab_set()
 
+        self.title(_("TITLE_MOD_SETTINGS"))
         self.rowconfigure(1, weight=1)
         self.columnconfigure(1, weight=1)
 
@@ -32,19 +33,19 @@ class Window(tkinter.Toplevel):
 
         self.frame_global_settings = FrameSettings(
             self.panel_window,
-            _("GLOBAL_MOD_SETTINGS"),
+            _("TEXT_MOD_GLOBAL_SETTINGS"),
             self.mod_config.global_settings
         )
         self.frame_specific_settings = FrameSettings(
             self.panel_window,
-            _("SPECIFIC_MOD_SETTINGS"),
+            _("TEXT_MOD_SPECIFIC_SETTINGS"),
             self.mod_config.specific_settings
         )
 
         if self.options.developer_mode.get():
             self.frame_testing_settings = FrameTesting(
                 self.panel_window,
-                _("TESTING_MOD_SETTINGS")
+                _("TEXT_MOD_TEST_SETTINGS")
             )
 
         self.frame_action = FrameAction(self)
@@ -143,10 +144,10 @@ class FrameAction(ttk.Frame):
         super().__init__(master)
         self.root = master.root
 
-        self.button_import_settings = ttk.Button(self, text=_("IMPORT_SETTINGS"), width=20,
+        self.button_import_settings = ttk.Button(self, text=_("TEXT_IMPORT_SETTINGS"), width=20,
                                                  command=self.import_settings)
         self.button_import_settings.grid(row=1, column=1)
-        self.button_export_settings = ttk.Button(self, text=_("EXPORT_SETTINGS"), width=20,
+        self.button_export_settings = ttk.Button(self, text=_("TEXT_EXPORT_SETTINGS"), width=20,
                                                  command=self.export_settings)
         self.button_export_settings.grid(row=1, column=2)
 
@@ -156,8 +157,8 @@ class FrameAction(ttk.Frame):
         """
 
         path = filedialog.askopenfilename(
-            title=_("IMPORT_SETTINGS"),
-            filetypes=[(_("SETTINGS_FILE"), f"*{SETTINGS_FILE_EXTENSION}")]
+            title=_("TEXT_IMPORT_SETTINGS"),
+            filetypes=[(_("TEXT_SETTINGS_FILE"), f"*{SETTINGS_FILE_EXTENSION}")]
         )
 
         # si le fichier n'a pas été choisi, ignore
@@ -178,8 +179,8 @@ class FrameAction(ttk.Frame):
         """
 
         path = filedialog.asksaveasfilename(
-            title=_("EXPORT_SETTINGS"),
-            filetypes=[(_("SETTINGS_FILE"), f"*{SETTINGS_FILE_EXTENSION}")]
+            title=_("TEXT_EXPORT_SETTINGS"),
+            filetypes=[(_("TEXT_SETTINGS_FILE"), f"*{SETTINGS_FILE_EXTENSION}")]
         )
 
         # si le fichier n'a pas été choisi, ignore

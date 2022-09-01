@@ -29,7 +29,7 @@ class Patch:
         :param extracted_game: the extracted game
         """
         from source.mkw.Patch.PatchDirectory import PatchDirectory
-        yield Progress(description=_("INSTALLING_PATCH"), determinate=False)
+        yield Progress()
 
         # take all the files in the root directory, and patch them into the game.
         # Patch is not directly applied to the root to avoid custom configuration

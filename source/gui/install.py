@@ -23,16 +23,6 @@ import os
 from source.mkw.collection.Extension import Extension
 
 
-class SourceGameError(Exception):
-    def __init__(self, path: Path | str):
-        super().__init__(_(f"ERROR_INVALID_SOURCE_GAME", " : ", path))
-
-
-class DestinationGameError(Exception):
-    def __init__(self, path: Path | str):
-        super().__init__(_("ERROR_INVALID_DESTINATION_GAME", " : ", path))
-
-
 class InstallerState(enum.Enum):
     IDLE = 0
     INSTALLING = 1
@@ -50,7 +40,7 @@ class Window(tkinter.Tk):
         self.source_path = tkinter.StringVar()
         self.destination_path = tkinter.StringVar()
 
-        self.title(_("INSTALLER_TITLE"))
+        self.title(_("TITLE_INSTALL"))
         self.resizable(False, False)
 
         self.icon = tkinter.PhotoImage(file="./assets/icon.png")
@@ -136,7 +126,7 @@ class Menu(tkinter.Menu):
             super().__init__(master, tearoff=False)
             self.root = master.root
         
-            master.add_cascade(label=_("LANGUAGE_SELECTION"), menu=self)
+            master.add_cascade(label=_("MENU_LANGUAGE_SELECTION"), menu=self)
 
             self.lang_variable = tkinter.StringVar(value=self.root.options.language.get())
 
@@ -155,19 +145,19 @@ class Menu(tkinter.Menu):
             super().__init__(master, tearoff=False)
             self.root = master.root
 
-            master.add_cascade(label=_("ADVANCED_CONFIGURATION"), menu=self)
+            master.add_cascade(label=_("MENU_ADVANCED"), menu=self)
             self.add_command(
-                label=_("OPEN_MYSTUFF_SETTINGS"),
+                label=_("MENU_ADVANCED_MYSTUFF"),
                 command=lambda: mystuff.Window(self.root.mod_config, self.root.options)
             )
             self.threads_used = self.ThreadsUsed(self)
-            self.add_command(label=_("EMPTY_CACHE"), command=self.empty_cache)
+            self.add_command(label=_("MENU_ADVANCED_EMPTY_CACHE"), command=self.empty_cache)
 
             self.add_separator()
 
             self.variable_developer_mode = tkinter.BooleanVar(value=self.root.options.developer_mode.get())
             self.add_checkbutton(
-                label=_("ENABLE_DEVELOPER_MODE"),
+                label=_("MENU_ADVANCED_DEVELOPER_MODE"),
                 variable=self.variable_developer_mode,
                 command=lambda: self.root.options.developer_mode.set(self.variable_developer_mode.get())
             )
@@ -184,14 +174,14 @@ class Menu(tkinter.Menu):
             def __init__(self, master: tkinter.Menu):
                 super().__init__(master, tearoff=False)
                 self.root = master.root
-                
-                master.add_cascade(label=_("THREADS_USAGE"), menu=self)
+
+                master.add_cascade(label=_("MENU_ADVANCED_THREADS"), menu=self)
 
                 self.variable = tkinter.IntVar(value=self.root.options.threads.get())
 
                 for i in [1, 2, 4, 8, 12, 16]:
                     self.add_radiobutton(
-                        label=_("USE", f" {i} ", "THREADS"),
+                        label=_("MENU_ADVANCED_THREADS_SELECTION") % i,
                         value=i,
                         variable=self.variable,
                         command=(lambda amount: (lambda: self.root.options.threads.set(amount)))(i),
@@ -203,12 +193,12 @@ class Menu(tkinter.Menu):
             super().__init__(master, tearoff=False)
             self.root = master.root
 
-            master.add_cascade(label=_("HELP"), menu=self)
+            master.add_cascade(label=_("MENU_HELP"), menu=self)
             self.menu_id = self.master.index(tkinter.END)
 
-            self.add_command(label=_("DISCORD"), command=lambda: webbrowser.open(discord_url))
-            self.add_command(label=_("GITHUB WIKI"), command=lambda: webbrowser.open(github_wiki_url))
-            self.add_command(label=_("READTHEDOCS"), command=lambda: webbrowser.open(readthedocs_url))
+            self.add_command(label="Discord", command=lambda: webbrowser.open(discord_url))
+            self.add_command(label="GitHub", command=lambda: webbrowser.open(github_wiki_url))
+            self.add_command(label="ReadTheDocs", command=lambda: webbrowser.open(readthedocs_url))
 
     def set_installation_state(self, state: InstallerState) -> bool:
         """
@@ -237,7 +227,7 @@ class Menu(tkinter.Menu):
 # Select game frame
 class SourceGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
-        super().__init__(master, text=_("ORIGINAL_GAME_FILE"))
+        super().__init__(master, text=_("TEXT_SOURCE_GAME"))
         self.root = master.root
         
         self.columnconfigure(1, weight=1)
@@ -254,8 +244,8 @@ class SourceGame(ttk.LabelFrame):
         :return:
         """
         raw_path = tkinter.filedialog.askopenfilename(
-            title=_("SELECT_SOURCE_GAME"),
-            filetypes=[(_("WII GAMES"), "*.iso *.ciso *.wbfs *.dol")],
+            title=_("TEXT_SELECT_SOURCE_GAME"),
+            filetypes=[(_("TEXT_WII_GAMES"), "*.iso *.ciso *.wbfs *.dol")],
         )
 
         # if the user didn't select any file, return None
@@ -298,7 +288,7 @@ class SourceGame(ttk.LabelFrame):
 # Select game destination frame
 class DestinationGame(ttk.LabelFrame):
     def __init__(self, master: tkinter.Tk):
-        super().__init__(master, text=_("GAME_DIRECTORY_DESTINATION"))
+        super().__init__(master, text=_("TEXT_GAME_DESTINATION"))
         self.root = master.root
         
         self.columnconfigure(1, weight=1)
@@ -320,7 +310,7 @@ class DestinationGame(ttk.LabelFrame):
         :return:
         """
         raw_path = tkinter.filedialog.askdirectory(
-            title=_("SELECT_DESTINATION_GAME"),
+            title=_("TEXT_SELECT_GAME_DESTINATION"),
         )
 
         # if the user didn't select any directory, return None
@@ -333,7 +323,7 @@ class DestinationGame(ttk.LabelFrame):
 
     def set_path(self, path: Path):
         if not os.access(path, os.W_OK):
-            messagebox.showwarning(_("WARNING"), _("WARNING_DESTINATION_GAME_NOT_WRITABLE"))
+            messagebox.showwarning(_("WARNING"), _("WARNING_DESTINATION_NOT_WRITABLE"))
 
         self.entry.delete(0, tkinter.END)
         self.entry.insert(0, str(path.absolute()))
@@ -355,7 +345,7 @@ class DestinationGame(ttk.LabelFrame):
 # Install button
 class ButtonInstall(ttk.Button):
     def __init__(self, master: tkinter.Tk):
-        super().__init__(master, text=_("INSTALL"), command=self.install)
+        super().__init__(master, text=_("TEXT_INSTALL"), command=self.install)
         self.root = master.root
 
     @threaded
@@ -364,29 +354,35 @@ class ButtonInstall(ttk.Button):
         try:
             self.root.set_state(InstallerState.INSTALLING)
 
-            # check if the user entered a source path
+            # check if the user entered a source path. If the string is ".", then the user didn't input any path
             source_path = Path(self.root.source_path.get())
-            if not source_path.exists(): raise SourceGameError(source_path)
-            if str(source_path) == ".":
-                messagebox.showerror(_("ERROR"), _("ERROR_INVALID_SOURCE_GAME"))
+            if not source_path.exists() or str(source_path) == ".":
+                messagebox.showerror(_("ERROR"), _("ERROR_INVALID_SOURCE_GAME") % source_path)
                 return
 
-            # check if the user entered a destination path
+            # check if the user entered a destination path. If the string is ".", then the user didn't input any path
             destination_path = Path(self.root.destination_path.get())
-            if not destination_path.exists(): raise DestinationGameError(destination_path)
-            if str(destination_path) == ".":
-                messagebox.showerror(_("ERROR"), _("ERROR_INVALID_DESTINATION_GAME"))
+            if not destination_path.exists() or str(destination_path) == ".":
+                messagebox.showerror(_("ERROR"), _("ERROR_INVALID_GAME_DESTINATION") % source_path)
                 return
+
+            available_space_local = shutil.disk_usage(".").free
+            available_space_destination = shutil.disk_usage(destination_path).free
 
             # if there is no more space on the installer drive, show a warning
-            if shutil.disk_usage(".").free < minimum_space_available:
-                if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
+            if available_space_local < minimum_space_available:
+                if not messagebox.askokcancel(
+                    _("WARNING"),
+                    _("WARNING_LOW_SPACE_CONTINUE") % (Path(".").resolve().drive, available_space_local/Go)
+                ):
                     return
 
             # if there is no more space on the destination drive, show a warning
-            elif shutil.disk_usage(destination_path).free < minimum_space_available:
-                if not messagebox.askokcancel(_("WARNING"), _("WARNING_LOW_SPACE_CONTINUE")):
-                    return
+            elif available_space_destination < minimum_space_available:
+                if not messagebox.askokcancel(
+                    _("WARNING"),
+                    _("WARNING_LOW_SPACE_CONTINUE") % (destination_path.resolve().drive, available_space_destination/Go)
+                ): return
 
             if system == "lin64":  # if linux
                 if os.getuid() != 0:  # if the user is not root
@@ -417,9 +413,9 @@ class ButtonInstall(ttk.Button):
             )
 
             messagebox.showinfo(
-                _("INSTALLATION_COMPLETED"),
-                f"{_('INSTALLATION_FINISHED_WITH_SUCCESS')}" + (
-                    f"\n{_('MESSAGE_FROM_MOD_AUTHOR')} :\n\n{message}" if message != "" else ""
+                _("TEXT_INSTALLATION_COMPLETED"),
+                f"{_('TEXT_INSTALLATION_FINISHED_SUCCESSFULLY')}" + (
+                    f"\n{_('TEXT_MESSAGE_FROM_AUTHOR')} :\n\n{message}" if message != "" else ""
                 )
             )
 

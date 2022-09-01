@@ -36,9 +36,9 @@ class safe_function:
         """
         Same as normal getattr, but magic attribute are banned
         """
-        if "__" in name: raise Exception(_("MAGIC_METHOD_FORBIDDEN", ' : "', name, '"'))
+        if "__" in name: raise Exception(_("ERROR_FORBIDDEN_MAGIC_METHOD") % name)
         attr = getattr(obj, name, default)
-        if callable(attr): raise Exception(_("GET_METHOD_FORBIDDEN", ' : "', name, '"'))
+        if callable(attr): raise Exception(_("ERROR_GETTING_METHOD_FORBIDDEN") % name)
         return attr
 
     @staticmethod
@@ -63,5 +63,5 @@ class safe_function:
         :param obj: the object to copy
         :return: the copied object
         """
-        if callable(obj): raise Exception(_("COPY_FUNCTION_FORBIDDEN", ' : "', obj.__name__, '"'))
+        if callable(obj): raise Exception(_("ERROR_FUNCTION_COPY_FORBIDDEN") % obj.__name__)
         return copy.deepcopy(obj)

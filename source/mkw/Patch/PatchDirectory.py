@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import Generator, TYPE_CHECKING
 
-from source.mkw.Patch import PathOutsidePatch, InvalidPatchMode
+from source.mkw import PathOutsideAllowedRange
+from source.mkw.Patch import InvalidPatchMode
 from source.mkw.Patch.PatchObject import PatchObject
 from source.progress import Progress
 from source.translation import translate as _
@@ -28,7 +29,7 @@ class PatchDirectory(PatchObject):
         """
         patch a subdirectory of the game with the PatchDirectory
         """
-        yield Progress(description=_("PATCHING", ' "', game_subpath.relative_to(extracted_game.path), '"'))
+        yield Progress(description=_("TEXT_PATCHING") % game_subpath.relative_to(extracted_game.path))
 
         # check if the directory should be patched
         if not self.is_enabled(extracted_game): return
@@ -47,7 +48,7 @@ class PatchDirectory(PatchObject):
                     for game_subfile in game_subpath.parent.glob(self.configuration["match_regex"]):
                         # disallow patching files outside of the game
                         if not game_subfile.relative_to(extracted_game.path):
-                            raise PathOutsidePatch(game_subfile, extracted_game.path)
+                            raise PathOutsideAllowedRange(game_subfile, extracted_game.path)
 
                         # patch the game with the subpatch
                         # if the subfile is a szs archive, replace it with a .d extension

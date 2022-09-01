@@ -2,8 +2,8 @@ from typing import TYPE_CHECKING
 
 from PIL import Image
 
+from source.mkw import PathOutsideAllowedRange
 from source.mkw.Patch.PatchOperation.ImageEditor import AbstractLayer
-from source.mkw.Patch import PathOutsidePatch
 
 if TYPE_CHECKING:
     from source.mkw.Patch import Patch
@@ -27,7 +27,7 @@ class ImageLayer(AbstractLayer):
         # check if the path is outside of the allowed directory
         layer_image_path = patch.path / self.image_path
         if not layer_image_path.is_relative_to(patch.path):
-            raise PathOutsidePatch(layer_image_path, patch.path)
+            raise PathOutsideAllowedRange(layer_image_path, patch.path)
 
         # load the image that will be pasted
         layer_image = Image.open(layer_image_path.resolve()) \

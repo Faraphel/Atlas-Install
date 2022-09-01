@@ -5,7 +5,7 @@ from source.translation import translate as _
 
 class ColorNotFound(Exception):
     def __init__(self, color_data: any):
-        super().__init__(_("CANNOT_FIND_COLOR", ' "', color_data, '"'))
+        super().__init__(_("ERROR_CANNOT_FIND_COLOR") % color_data)
 
 
 @dataclass(init=True, slots=True)

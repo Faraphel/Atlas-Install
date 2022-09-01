@@ -4,7 +4,7 @@ from source.translation import translate as _
 
 class BetterSafeEvalError(Exception):
     def __init__(self, template: str):
-        super().__init__(_("SAFE_EVAL_ERROR", " (", "TEMPLATE_USED", " : ", repr(template), ")"))
+        super().__init__(_("ERROR_SAFEEVAL") % template)
 
 
 def better_safe_eval_error(func: Callable, template: str):

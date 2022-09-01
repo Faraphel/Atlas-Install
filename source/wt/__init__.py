@@ -21,15 +21,15 @@ class WTError(Exception):
                 check=True,
                 **subprocess_kwargs
             ).stdout.decode()
-        except subprocess.CalledProcessError as e:
-            error = _("- ", "CANNOT_GET_ERROR_MESSAGE", " -")
+        except subprocess.CalledProcessError:
+            error = _("ERROR_CANNOT_GET_ERROR_MESSAGE")
 
-        super().__init__(_(tools_path, " ", "RAISED", " ", return_code, ":\n", error, "\n"))
+        super().__init__(_("ERROR_WT") % (tools_path, return_code, error))
 
 
 class MissingWTError(Exception):
     def __init__(self, tool_name: str):
-        super().__init__(_("CANNOT_FIND_TOOL", ' "', tool_name, '" ', "IN_TOOLS_DIRECTORY"))
+        super().__init__(_("ERROR_CANNOT_FIND_TOOL") % tool_name)
 
 
 try: tools_szs_dir = next(tools_dir.glob("./szs*/")) / system

@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 class InvalidPreviewWindowName(Exception):
     def __init__(self, name: str):
-        super().__init__(_("TYPE_PREVIEW_WINDOW", " '", name, "' ", "NOT_FOUND"))
+        super().__init__(_("ERROR_PREVIEW_WINDOW_NOT_FOUND") % name)
 
 
 class AbstractPreviewWindow(tkinter.Toplevel, ABC):

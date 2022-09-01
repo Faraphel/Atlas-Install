@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 class InvalidSettingsType(Exception):
     def __init__(self, settings_type: str):
-        super().__init__(_("TYPE_MOD_SETTINGS", " '", settings_type, "' ", "NOT_FOUND"))
+        super().__init__(_("ERROR_MOD_SETTINGS_NOT_FOUND") % settings_type)
 
 
 class AbstractModSettings(ABC):
