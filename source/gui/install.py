@@ -523,9 +523,8 @@ class SelectPack(ttk.Frame):
         """
         self.packs = []
 
-        for pack in Path("./Pack/").iterdir():
-            if self.is_valid_pack(pack):
-                self.packs.append(pack)
+        for pack in filter(lambda pack: self.is_valid_pack(pack), Path("./Pack/").iterdir()):
+            self.packs.append(pack)
 
         self.combobox["values"] = [pack.name for pack in self.packs]
 

@@ -22,7 +22,7 @@
                 "fr": "Mode"
             },
             "description": {
-                "en": "Special mod's configuration.",
+                "en": "Special mod configuration.",
                 "fr": "Configuration spécial du mod."
             },
             "type": "choices",
