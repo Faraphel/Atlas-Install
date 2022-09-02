@@ -5,6 +5,7 @@ from typing import Generator, Callable, Iterator, TYPE_CHECKING
 import json
 from PIL import Image
 
+from source.mkw.collection.Region import Region
 from source.utils import threaded
 from source.mkw import Tag
 from source.mkw.ModSettings.ModSettingsGroup import ModSettingsGroup
@@ -75,7 +76,7 @@ class ModConfig:
     name: str
     nickname: str = None
     version: str = "v1.0.0"
-    variant: str = "01"
+    gameid_template: "TemplateMultipleSafeEval" = "RMC{{region}}01"
 
     _tracks: list["Track | TrackGroup | dict"] = field(default_factory=list)
     default_track_attributes: dict[str, any] = field(default_factory=dict)
@@ -470,3 +471,6 @@ class ModConfig:
             # if there is more than the max amount of thread running, wait for one to finish
         while len(normalize_threads) > 0: yield from remove_finished_threads()
         # if there is no longer any track to add, wait for all process to finish
+
+    def get_gameid(self, region: Region):
+        pass

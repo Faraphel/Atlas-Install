@@ -67,11 +67,24 @@ class Game:
             except StopIteration as e:
                 return e.value
 
+    def get_patched_gameid(self, mod_config: ModConfig) -> str:
+        """
+        :return: the patched game id
+        """
+        region: str = self.wit_path.id[3]
+        return mod_config.multiple_safe_eval(template=mod_config.gameid_template, args=["region"])(region=region)
+
     def edit(self, mod_config: ModConfig) -> Generator[Progress, None, None]:
+        """
+        Edit some metadata about the game
+        :param mod_config: the mod configuration
+        """
+
         yield Progress(description=_("TEXT_CHANGING_GAME_METADATA"), determinate=False)
+
         self.wit_path.edit(
             name=mod_config.name,
-            game_id=self.wit_path.id[:4] + mod_config.variant
+            game_id=self.get_patched_gameid(mod_config)
         )
 
     @staticmethod

@@ -2,7 +2,7 @@
     "version": "v0.12",
     "name": "Mario Kart Wii Faraphel",
     "nickname": "MKWF",
-    "variant": "60",
+    "gameid_template": "RMC{{region}}60",
 
     "global_settings": {
         "include_track_if": {

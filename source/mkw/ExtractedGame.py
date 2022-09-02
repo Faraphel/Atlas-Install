@@ -278,7 +278,7 @@ class ExtractedGame:
             '',
             '    <patch id="save_SD">',
             '        <savegame clone="false"',
-            f'            external="/{RIIVOLUTION_FOLDER_NAME}/save/{"{$__gameid}{$__region}"}{mod_config.variant}"/>',
+            f'            external="/{RIIVOLUTION_FOLDER_NAME}/save/{self.original_game.get_patched_gameid(mod_config)}"/>',
             '    </patch>',
             '</wiidisc>',
         ))
