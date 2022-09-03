@@ -1,3 +1,4 @@
+import argparse
 from pathlib import Path
 
 from source.mkw.Game import Game
@@ -6,26 +7,36 @@ from source.translation import translate as _
 from source.mkw.collection.Extension import Extension
 
 
-def cli(options):
-    print(_("TITLE_INSTALL"))
+def cli(options, argparser: argparse.ArgumentParser):
+    argparser.add_argument("-m", "--mod", help="name of the mod to install")
+    argparser.add_argument("-s", "--source", help="path to the original game")
+    argparser.add_argument("-d", "--dest", help="destination directory of the patched game")
+    argparser.add_argument("-ot", "--output_type", help="format of the patched game")
+    args = argparser.parse_args()
 
     packs = []
     for pack in Path("./Pack/").iterdir():
         packs.append(pack)
 
-    mod_name = input(_("TEXT_INPUT_MOD_NAME") % [pack.name for pack in packs])
+    mod_name = args.mod
+    choices = [pack.name for pack in packs]
+    while mod_name is None or mod_name not in choices: mod_name = input(_("TEXT_INPUT_MOD_NAME") % choices)
     mod_config = ModConfig.from_file(Path(f"./Pack/{mod_name}/mod_config.json"))
 
-    source_path = input(_("TEXT_INPUT_SOURCE_PATH"))
+    source_path = args.source
+    if source_path is None: source_path = input(_("TEXT_INPUT_SOURCE_PATH"))
     game = Game(source_path)
 
-    destination_directory = input(_("TEXT_INPUT_DESTINATION_DIRECTORY"))
+    destination_directory = args.dest
+    if destination_directory is None: destination_directory = input(_("TEXT_INPUT_DESTINATION_DIRECTORY"))
     destination_path = Path(destination_directory)
 
-    output_name = input(_("TEXT_INPUT_OUPUT_TYPE") % [extension.name for extension in Extension])
+    output_name = args.output_type
+    choices = [extension.name for extension in Extension]
+    if output_name is None or mod_name not in choices: output_name = input(_("TEXT_INPUT_OUPUT_TYPE") % choices)
     output_type = Extension[output_name]
 
-    progressbar_max: int = 30
+    progressbar_max: int = 40
 
     title: str = ""
     description: str = ""

@@ -3,8 +3,8 @@ from tkinter import ttk
 from typing import TYPE_CHECKING
 
 from source.mkw.collection import MKWColor
-from source.gui.preview import AbstractPreviewWindow
-from source.gui import better_gui_error
+from source.interface.gui.preview import AbstractPreviewWindow
+from source.interface.gui import better_gui_error
 
 if TYPE_CHECKING:
     from source.mkw.ModConfig import ModConfig

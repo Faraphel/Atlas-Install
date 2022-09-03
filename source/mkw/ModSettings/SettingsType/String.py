@@ -1,5 +1,5 @@
 from source.mkw.ModSettings.AbstractModSettings import AbstractModSettings
-from source.gui.preview import AbstractPreviewWindow
+from source.interface.gui.preview import AbstractPreviewWindow
 
 
 class String(AbstractModSettings):

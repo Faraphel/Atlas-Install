@@ -12,20 +12,25 @@ translater = load_language(options.language.get())
 
 
 def main_gui():
-    from source.gui import install
+    from source.interface.gui import install
     self.window = install.Window(options)
     self.window.run()
 
 
-def main_cli():
-    from source.cli import install
-    install.cli(options)
+def main_cli(argparser: argparse.ArgumentParser):
+    from source.interface.cli import install
+    install.cli(options, argparser)
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--interface", choices=["gui", "cli"], default="gui")
-args = parser.parse_args()
+argparser = argparse.ArgumentParser()
+argparser.add_argument(
+    "-i", "--interface",
+    choices=["gui", "cli"],
+    default="gui",
+    help="should the installer be started with a graphical interface or with the command line interface"
+)
+args, _ = argparser.parse_known_args()
 
 match args.interface:
     case "gui": main_gui()
-    case "cli": main_cli()
+    case "cli": main_cli(argparser)

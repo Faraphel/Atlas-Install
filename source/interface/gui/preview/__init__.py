@@ -36,4 +36,4 @@ class AbstractPreviewWindow(tkinter.Toplevel, ABC):
         raise InvalidPreviewWindowName(name)
 
 
-from source.gui.preview import track_formatting, track_selecting, track_sorting
+from source.interface.gui.preview import track_formatting, track_selecting, track_sorting

@@ -9,7 +9,8 @@ from tkinter import messagebox
 import webbrowser
 from typing import Generator
 
-from source.gui import better_gui_error, mystuff, mod_settings
+from source.interface.gui import better_gui_error
+from source.interface.gui import mod_settings, mystuff
 from source.mkw.Game import Game
 from source.mkw.ModConfig import ModConfig
 from source.option import Options
@@ -373,7 +374,7 @@ class ButtonInstall(ttk.Button):
             if available_space_local < minimum_space_available:
                 if not messagebox.askokcancel(
                     _("WARNING"),
-                    _("WARNING_LOW_SPACE_CONTINUE") % (Path(".").resolve().drive, available_space_local/Go)
+                    _("WARNING_LOW_SPACE_CONTINUE") % (Path(".").resolve().drive, available_space_local / Go)
                 ):
                     return
 

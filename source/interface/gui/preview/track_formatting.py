@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 import re
 
 from source.mkw.collection import MKWColor
-from source.gui.preview import AbstractPreviewWindow
+from source.interface.gui.preview import AbstractPreviewWindow
 
 if TYPE_CHECKING:
     from source.mkw.ModConfig import ModConfig
