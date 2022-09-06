@@ -9,6 +9,8 @@ from tkinter import messagebox
 import webbrowser
 from typing import Generator
 
+from source.interface import is_valid_source_path, is_valid_destination_path, is_user_root, are_permissions_enabled, \
+    get_finished_installation_message
 from source.interface.gui import better_gui_error
 from source.interface.gui import mod_settings, mystuff
 from source.mkw.Game import Game
@@ -357,13 +359,13 @@ class ButtonInstall(ttk.Button):
 
             # check if the user entered a source path. If the string is ".", then the user didn't input any path
             source_path = Path(self.root.source_path.get())
-            if not source_path.exists() or str(source_path) == ".":
+            if not is_valid_source_path(source_path):
                 messagebox.showerror(_("ERROR"), _("ERROR_INVALID_SOURCE_GAME") % source_path)
                 return
 
             # check if the user entered a destination path. If the string is ".", then the user didn't input any path
             destination_path = Path(self.root.destination_path.get())
-            if not destination_path.exists() or str(destination_path) == ".":
+            if not is_valid_destination_path(destination_path):
                 messagebox.showerror(_("ERROR"), _("ERROR_INVALID_GAME_DESTINATION") % source_path)
                 return
 
@@ -385,15 +387,14 @@ class ButtonInstall(ttk.Button):
                     _("WARNING_LOW_SPACE_CONTINUE") % (destination_path.resolve().drive, available_space_destination/Go)
                 ): return
 
-            if system == "lin64":  # if linux
-                if os.getuid() != 0:  # if the user is not root
-                    if not messagebox.askokcancel(_("WARNING"), _("WARNING_NOT_ROOT")):
-                        return
+            if is_user_root():
+                if not messagebox.askokcancel(_("WARNING"), _("WARNING_NOT_ROOT")):
+                    return
 
-                if not os.access("./", os.W_OK | os.X_OK):
-                    # check if writing (for the /.cache/) and execution (for /tools/) are allowed
-                    if not messagebox.askokcancel(_("WARNING"), _("WARNING_INSTALLER_PERMISSION")):
-                        return
+            if are_permissions_enabled():
+                # check if writing (for the /.cache/) and execution (for /tools/) are allowed
+                if not messagebox.askokcancel(_("WARNING"), _("WARNING_INSTALLER_PERMISSION")):
+                    return
 
             game = Game(source_path)
             output_type = Extension[self.root.options.extension.get()]
@@ -407,17 +408,9 @@ class ButtonInstall(ttk.Button):
                 )
             )
 
-            message: str = translate_external(
-                self.root.mod_config,
-                self.root.options.language.get(),
-                self.root.mod_config.messages.get("installation_completed", {}).get("text", {})
-            )
-
             messagebox.showinfo(
                 _("TEXT_INSTALLATION_COMPLETED"),
-                f"{_('TEXT_INSTALLATION_FINISHED_SUCCESSFULLY')}" + (
-                    f"\n{_('TEXT_MESSAGE_FROM_AUTHOR')} :\n\n{message}" if message != "" else ""
-                )
+                get_finished_installation_message(self.root.mod_config)
             )
 
         finally:

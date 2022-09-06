@@ -54,7 +54,6 @@ class Window(tkinter.Toplevel):
         # add at the end a message from the mod creator where he can put some additional note about the settings.
         if text := translate_external(
                 self.mod_config,
-                self.options.language.get(),
                 self.mod_config.messages.get("settings_description", {}).get("text", {})
         ):
             self.label_description = ttk.Label(self, text=text, foreground="gray")
@@ -91,8 +90,8 @@ class FrameSettings(ttk.Frame):
         language = self.root.options.language.get()
 
         for index, (settings_name, settings_data) in enumerate(settings.items()):
-            text = translate_external(self.root.mod_config, language, settings_data.text)
-            description = translate_external(self.root.mod_config, language, settings_data.description)
+            text = translate_external(self.root.mod_config, settings_data.text)
+            description = translate_external(self.root.mod_config, settings_data.description)
 
             enabled_variable = tkinter.BooleanVar(value=False)
             checkbox = ttk.Checkbutton(self, text=f"{text} {settings_data.suffix}", variable=enabled_variable)
