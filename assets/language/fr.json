@@ -74,6 +74,8 @@
         "ERROR_SEE_LOGS": "Voir le fichier error.log pour plus d'information",
         "ERROR_INVALID_SOURCE_GAME": "Jeu source invalide : \"%s\"",
         "ERROR_INVALID_GAME_DESTINATION": "Destination de jeu invalide : \"%s\"",
+        "ERROR_INVALID_MOD": "Mod invalide : \"%s\"",
+        "ERROR_INVALID_OUTPUT_TYPE": "type de sortie invalide : \"%s\"",
         "ERROR_MYSTUFF_PROFILE_ALREADY_EXIST": "Le profil MyStuff \"%s\" existe déjà !",
         "ERROR_MYSTUFF_PROFILE_FORBIDDEN_NAME": "Le nom de profil MyStuff \"%s\" est interdit !",
         "ERROR_NOT_MKW_GAME": "Ce jeu n'est pas un jeu Mario Kart Wii : \"%s\"",

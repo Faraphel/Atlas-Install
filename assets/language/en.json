@@ -74,6 +74,8 @@
         "ERROR_SEE_LOGS": "See error.log for more information",
         "ERROR_INVALID_SOURCE_GAME": "Invalid source game : \"%s\"",
         "ERROR_INVALID_GAME_DESTINATION": "Invalid game destination : \"%s\"",
+        "ERROR_INVALID_MOD": "Invalid mod : \"%s\"",
+        "ERROR_INVALID_OUTPUT_TYPE": "Invalid output type : \"%s\"",
         "ERROR_MYSTUFF_PROFILE_ALREADY_EXIST": "The MyStuff profile \"%s\" already exist !",
         "ERROR_MYSTUFF_PROFILE_FORBIDDEN_NAME": "The MyStuff profile name \"%s\" is forbidden !",
         "ERROR_NOT_MKW_GAME": "This game is not a Mario Kart Wii game : \"%s\"",
