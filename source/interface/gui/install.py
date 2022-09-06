@@ -387,11 +387,11 @@ class ButtonInstall(ttk.Button):
                     _("WARNING_LOW_SPACE_CONTINUE") % (destination_path.resolve().drive, available_space_destination/Go)
                 ): return
 
-            if is_user_root():
+            if not is_user_root():
                 if not messagebox.askokcancel(_("WARNING"), _("WARNING_NOT_ROOT")):
                     return
 
-            if are_permissions_enabled():
+            if not are_permissions_enabled():
                 # check if writing (for the /.cache/) and execution (for /tools/) are allowed
                 if not messagebox.askokcancel(_("WARNING"), _("WARNING_INSTALLER_PERMISSION")):
                     return
