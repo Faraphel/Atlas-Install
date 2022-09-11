@@ -139,7 +139,7 @@ class ExtractedGame:
         :param cache_directory: Path to the cache
         :param mod_config: mod configuration
         """
-        yield Progress(description=_("TEXT_PATCHING_LECODE"))
+        yield Progress(description=_("TEXT_PATCHING_LECODE"), determinate=False)
         cache_directory = Path(cache_directory)
         cttracks_directory = Path(cttracks_directory)
         ogtracks_directory = Path(ogtracks_directory)
