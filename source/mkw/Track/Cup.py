@@ -13,7 +13,7 @@ class Cup:
     """
 
     __slots__ = ["_tracks", "cup_name", "cup_id", "mod_config"]
-    _last_cup_id = 0
+    _last_cup_id = 1
     mod_config: "ModConfig"
 
     def __init__(self, mod_config: "ModConfig", tracks: list["Track | TrackGroup"], cup_name: str | None = None):
