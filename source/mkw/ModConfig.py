@@ -266,7 +266,7 @@ class ModConfig:
             for track in filter(lambda track: tag_cup in getattr(track, "tags", []), self.get_tracks()):
                 track_buffer.append(track)
 
-                if len(track_buffer) > 4:
+                if len(track_buffer) >= 4:
                     current_tag_count += 1
                     yield Cup(mod_config=self, tracks=track_buffer, cup_name=f"{current_tag_name}/{current_tag_count}")
                     track_buffer = []
@@ -289,7 +289,7 @@ class ModConfig:
         ):
             track_buffer.append(track)
 
-            if len(track_buffer) > 4:
+            if len(track_buffer) >= 4:
                 yield Cup(mod_config=self, tracks=track_buffer)
                 track_buffer = []
 
