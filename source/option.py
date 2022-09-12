@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 from source.utils import restart_program
@@ -50,7 +51,7 @@ class Options:
 
         self._options: dict[str, Option] = {
             "language": Option(self, value="en", reboot_on_change=True),
-            "threads": Option(self, value=8),
+            "threads": Option(self, value=os.cpu_count()),
             "mystuff_pack_selected": Option(self, value=None),
             "mystuff_packs": Option(self, value={}),
             "extension": Option(self, value="WBFS"),
