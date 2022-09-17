@@ -4,17 +4,17 @@ from source.option import Options
 from source.translation import load_language
 
 
-# this allows every variable to be accessible from other files, useful for the plugins
-self = __import__(__name__)
-
 options = Options.from_file("./option.json")
 translater = load_language(options.language.get())
+window = None
 
 
 def main_gui():
+    global window
+
     from source.interface.gui import install
-    self.window = install.Window(options)
-    self.window.run()
+    window = install.Window(options)
+    window.run()
 
 
 def main_cli(argparser: argparse.ArgumentParser):

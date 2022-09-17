@@ -1,11 +1,11 @@
+import os
+
 # metadata
 __version__ = (0, 12, 0)
 __author__ = 'Faraphel'
 
 
 # external links
-import os
-
 discord_url = "https://discord.gg/HEYW5v8ZCd"
 github_wiki_url = "https://github.com/Faraphel/MKWF-Install/wiki/help"
 readthedocs_url = "https://mkwf-install.readthedocs.io/"

@@ -6,9 +6,8 @@ if TYPE_CHECKING:
     from source.mkw.ModConfig import ModConfig
 
 
-self = __import__(__name__)
-self._language = None
-self._language_data = {}
+_language: str | None = None
+_language_data: dict = {}
 
 
 def load_language(language: str):
@@ -17,8 +16,10 @@ def load_language(language: str):
     :param language: language code to load
     :return:
     """
-    self._language = language
-    self._language_data = json.loads(Path(f"./assets/language/{language}.json").read_text(encoding="utf8"))
+    global _language, _language_data
+
+    _language = language
+    _language_data = json.loads(Path(f"./assets/language/{language}.json").read_text(encoding="utf8"))
 
 
 def translate(text) -> str:
@@ -27,7 +28,7 @@ def translate(text) -> str:
     :param text: list of text to translate
     :return: translated text
     """
-    return self._language_data.get("translation", {}).get(text, text)
+    return _language_data.get("translation", {}).get(text, text)
 
 
 def translate_external(mod_config: "ModConfig", message_texts: dict[str, str], default: str = "") -> str:
@@ -38,9 +39,9 @@ def translate_external(mod_config: "ModConfig", message_texts: dict[str, str], d
     :param default: the default message if no translation are found
     :return: the translated message
     """
-    message = message_texts.get(self._language)
+    message = message_texts.get(_language)
     if message is None: message = message_texts.get("*")
     if message is None: message = default
-    return mod_config.multiple_safe_eval(message, args=["language"])(language=self._language)
+    return mod_config.multiple_safe_eval(message, args=["language"])(language=_language)
 
 

@@ -11,8 +11,7 @@ if TYPE_CHECKING:
     from source import TemplateSafeEval, Env
 
 
-self = __import__(__name__)
-self.safe_eval_cache = {}
+safe_eval_cache: dict[hash, Callable] = {}
 
 
 class SafeEvalException(Exception):
@@ -38,6 +37,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
 
     :return: the lambda expression
     """
+    global safe_eval_cache
 
     if len(template) == 0: return lambda *_, **__: ""
     if env is None: env = {}
@@ -46,7 +46,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
 
     template_key: hash = hash((template, args, tuple(env.items())))  # unique identifiant for every template
     # if the safe_eval return a callable and have already been called, return the cached callable
-    if template_key in self.safe_eval_cache: return self.safe_eval_cache[template_key]
+    if template_key in safe_eval_cache: return safe_eval_cache[template_key]
 
     # replace the macro in the template
     template = replace_macro(template=template, macros=macros)
@@ -138,5 +138,5 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
 
     # return the evaluated formula
     lambda_template = eval(compile(expression, "<safe_eval>", "eval"), globals_, locals_)
-    self.safe_eval_cache[template_key] = lambda_template  # cache the callable for potential latter call
+    safe_eval_cache[template_key] = lambda_template  # cache the callable for potential latter call
     return better_safe_eval_error(lambda_template, template=template)
