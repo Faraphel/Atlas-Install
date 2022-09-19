@@ -1,7 +1,7 @@
 {
-    "name": "Deutsch",
+    "name": "Deutsch [BETA]",
     "translation": {
-        "TITLE_INSTALL": "MKWF Installieren",
+        "TITLE_INSTALL": "MKWF-Install",
         "TITLE_MOD_SETTINGS": "Mod Einstellungen",
         "TITLE_MYSTUFF_SETTINGS": "MyStuff Einstellungen",
 
@@ -18,7 +18,7 @@
         "PART_PRE_RIIVOLUTION": "Vorgänger-Riivolution",
         "PART_MYSTUFF": "MyStuff",
         "PART_PREPARING_FILES": "Dateien vorbereiten",
-        "PART_PREPATCH": "Vorganger-Patch",
+        "PART_PREPATCH": "Pre-Patche",
         "PART_LECODE": "LE-CODE",
         "PART_PATCH": "Patche",
         "PART_RIIVOLUTION": "Riivolution",
@@ -80,7 +80,7 @@
         "ERROR_MYSTUFF_PROFILE_FORBIDDEN_NAME": "Das MyStuff Profilname \"%s\" ist verboten !",
         "ERROR_NOT_MKW_GAME": "Das Spiel ist kein Mario Kart Wii Spiel : \"%s\"",
         "ERROR_GAME_ALREADY_MODDED": "Dieses Spiel ist bereits modifiziert : \"%s\"",
-        "ERROR_PATH_OUTSIDE_RANGE": "Der Pfad \"%s\" ist außerhalb der erlaubten Länge : \"%s\"",
+        "ERROR_PATH_OUTSIDE_RANGE": "Der Pfad \"%s\" ist außerhalb der erlaubten Bereich : \"%s\"",
         "ERROR_PREVIEW_WINDOW_NOT_FOUND": "Vorschau Fenster \"%s\" nicht gefunden",
         "ERROR_CANNOT_FIND_COLOR": "Kann Farbe folgende Farbe nicht finden : \"%s\"",
         "ERROR_CANNOT_FIND_SLOT": "Kann folgenden Slot nicht finden : \"%s\"",
@@ -93,7 +93,7 @@
         "ERROR_INVALID_AST_TYPE": "Ungültiger AST Typ : \"%s\"",
         "ERROR_FORBIDDEN_MAGIC_ATTRIBUTE": "Magische Attribute sind verboten : \"%s\"",
         "ERROR_FORBIDDEN_MAGIC_METHOD": "Magische Methoden sind verboten : \"%s\"",
-        "ERROR_GETTING_METHOD_FORBIDDEN": "Bekomm-Methode ist verboten : \"%s\"",
+        "ERROR_GETTING_METHOD_FORBIDDEN": "Die get-Methode ist verboten : \"%s\"",
         "ERROR_CANNOT_SET_ATTRIBUTE": "Das Einstellungs-Attribut ist verboten : \"%s\"",
         "ERROR_CANNOT_SET_ENVIRONMENT": "Umgebunseinstellung ist verboten : \"%s\"",
         "ERROR_CANNOT_SET_ARGUMENT": "Die Einstllung Argument Variable ist verboten : \"%s\"",
@@ -102,18 +102,13 @@
         "ERROR_FORBIDDEN_SYNTAX": "Verbotener Syntax : \"%s\"",
         "ERROR_FUNCTION_COPY_FORBIDDEN": "Das Kopieren einer Funktion ist verboten",
         "ERROR_CANNOT_GET_ERROR_MESSAGE": "Es konnte keine Fehlernachricht erhalten werden",
-        "ERROR_WT": "%s raised %i :\n%s",
+        "ERROR_WT": "%s ausgelöster %i :\n%s",
         "ERROR_CANNOT_FIND_TOOL": "Kann das Tool \"%s\" nicht in diesem Ordner finden",
         "ERROR_CANNOT_EXTRACT_DIRECTORY": "Es konnte nicht in dieses Verzeichnis extrahiert werden",
         "ERROR_PATCH_MODE_NOT_IMPLEMENTED": "Patchmodus \"%s\" ist nicht implementiert (in patch : \"%s\")",
         "ERROR_SOURCE_NOT_IMPLEMENTED": "Source \"%s\" is not implemented (in patch : \"%s\")",
         "ERROR_OPERATION_NOT_IMPLEMENTED": "Operation \"%s\" ist nicht implementiert",
         "ERROR_BMG_LAYER_MODE_NOT_IMPLEMENTED": "Bmg Layer Monus \"%s\" ist noch nicht abgeschlossen",
-        "ERROR_IMAGE_LAYER_TYPE_NOT_IMPLEMENTED": "Image Player Typ \"%s\" ist nicht implementiert",
-
-        "TEXT_INPUT_MOD_NAME": "Name der zu installierenden Mod %s : ",
-        "TEXT_INPUT_SOURCE_PATH": "Füge hier das Verzeichnis zum original Spiel ein : ",
-        "TEXT_INPUT_DESTINATION_DIRECTORY": "Füge das Verzeichnis ein, wo die Mod installiert werden soll, ein : ",
-        "TEXT_INPUT_OUPUT_TYPE": "Gebe den Nachrichten Typ ein %s : "
+        "ERROR_IMAGE_LAYER_TYPE_NOT_IMPLEMENTED": "Image Player Typ \"%s\" ist nicht implementiert"
     }
 }
