@@ -1,4 +1,6 @@
 {
+    "source": "game",
+    "operation": {
         "bmg-decode": {},
         "bmgtxt-edit": {
             "layers": [{
