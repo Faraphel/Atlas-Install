@@ -109,11 +109,6 @@
         "ERROR_SOURCE_NOT_IMPLEMENTED": "Source \"%s\" is not implemented (in patch : \"%s\")",
         "ERROR_OPERATION_NOT_IMPLEMENTED": "Operation \"%s\" is not implemented",
         "ERROR_BMG_LAYER_MODE_NOT_IMPLEMENTED": "Bmg layer mode \"%s\" not implemented",
-        "ERROR_IMAGE_LAYER_TYPE_NOT_IMPLEMENTED": "Image layer type \"%s\" not implemented",
-
-        "TEXT_INPUT_MOD_NAME": "Name of the mod to install %s : ",
-        "TEXT_INPUT_SOURCE_PATH": "Enter the path to the source game : ",
-        "TEXT_INPUT_DESTINATION_DIRECTORY": "Enter the path to the destination directory : ",
-        "TEXT_INPUT_OUPUT_TYPE": "Enter output type %s : "
+        "ERROR_IMAGE_LAYER_TYPE_NOT_IMPLEMENTED": "Image layer type \"%s\" not implemented"
     }
 }
