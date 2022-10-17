@@ -3,7 +3,7 @@ import sys
 import source
 
 include_files = [
-    "./LICENSE",
+    "./LICENSE.md",
     "./README.md",
 
     "./assets",
