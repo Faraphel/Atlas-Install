@@ -58,7 +58,7 @@ def safe_eval(template: "TemplateSafeEval", env: "Env" = None, macros: dict[str,
     locals_ = {}
 
     # convert the template to an ast expression
-    stmt: ast.stmt = ast.parse(template).body[0]
+    stmt: ast.stmt = ast.parse(template, feature_version=(3, 10)).body[0]
     if not isinstance(stmt, ast.Expr):
         raise SafeEvalException(_("ERROR_INVALID_AST_TYPE") % type(stmt).__name__)
 
