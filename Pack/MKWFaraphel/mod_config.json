@@ -71,15 +71,13 @@
             "Tour": "{{ get_color(name='dark orange') @ tag }}",
             "GP": "{{ get_color(name='dark red') @ tag }}",
             "MSRDS": "{{ get_color(name='green') @ tag }}",
+            "MSUSA": "{{ get_color(name='green') @ tag }}",
             "CTR": "{{ get_color(name='orange') @ tag }}",
-            "CTTR": "{{ get_color(name='dark orange') @ tag }}",
             "CNR": "{{ get_color(name='orange') @ tag }}",
             "DKR": "{{ get_color(name='dark red') @ tag }}",
             "LCP": "{{ get_color(name='green') @ tag }}",
             "LEGO-R": "{{ get_color(name='light red') @ tag }}",
-            "MP9": "{{ get_color(name='neon yellow') @ tag }}",
-            "MSUSA": "{{ get_color(name='green') @ tag }}",
-            "FZMV": "{{ get_color(name='yellow') @ tag }}",
+            "MP": "{{ get_color(name='neon yellow') @ tag }}",
             "KAR": "{{ get_color(name='green') @ tag }}",
             "KO": "{{ get_color(name='dark orange') @ tag }}",
             "FZ": "{{ get_color(name='yellow') @ tag }}",
@@ -88,26 +86,21 @@
             "SCR": "{{ get_color(name='yellow') @ tag }}",
             "SH": "{{ get_color(name='pink') @ tag }}",
             "SM64": "{{ get_color(name='pink') @ tag }}",
-            "SMB1": "{{ get_color(name='light red') @ tag }}",
-            "SMB2": "{{ get_color(name='red') @ tag }}",
+            "SMB": "{{ get_color(name='light red') @ tag }}",
             "SSBB": "{{ get_color(name='vivid red') @ tag }}",
             "SMS": "{{ get_color(name='dark red') @ tag }}",
             "SMO": "{{ get_color(name='apple red') @ tag }}",
             "VVVVVV": "{{ get_color(name='azure') @ tag }}",
             "WF": "{{ get_color(name='green') @ tag }}",
             "WP": "{{ get_color(name='neon yellow 2') @ tag }}",
-            "Zelda OoT": "{{ get_color(name='green') @ tag }}",
-            "Zelda TP": "{{ get_color(name='green') @ tag }}",
-            "Zelda WW": "{{ get_color(name='green') @ tag }}",
+            "Zelda": "{{ get_color(name='green') @ tag }}",
             "PMWR": "{{ get_color(name='neon yellow 2') @ tag }}",
             "SHR": "{{ get_color(name='green') @ tag }}",
             "SK64": "{{ get_color(name='green') @ tag }}",
             "SMG": "{{ get_color(name='light red') @ tag }}",
-            "Spyro 1": "{{ get_color(name='azure') @ tag }}",
+            "Spyro": "{{ get_color(name='azure') @ tag }}",
             "UT": "{{ get_color(name='red') @ tag }}",
-            "GK2": "{{ get_color(name='green') @ tag }}",
-            "GK3": "{{ get_color(name='green') @ tag }}",
-            "GK7": "{{ get_color(name='green') @ tag }}",
+            "GK": "{{ get_color(name='green') @ tag }}",
             "FGKR": "{{ get_color(name='dark orange') @ tag }}"
         },
         "suffix": {
@@ -6219,7 +6212,7 @@
             "version": "v3.1",
             "family": 1854,
             "tags": [
-                "GK7"
+                "GK"
             ]
         },
         {
@@ -6569,7 +6562,7 @@
             "since_version": "0.11",
             "score": 5,
             "tags": [
-                "CTTR"
+                "CTR"
             ]
         },
         {
@@ -7039,7 +7032,7 @@
             "version": "RC2",
             "family": 1373,
             "tags": [
-                "Zelda WW"
+                "Zelda"
             ]
         },
         {
@@ -7278,7 +7271,7 @@
             "version": "v1",
             "family": 5759,
             "tags": [
-                "SMB1"
+                "SMB"
             ]
         },
         {
@@ -7612,7 +7605,7 @@
             "version": "Beta2",
             "family": 2924,
             "tags": [
-                "Spyro 1"
+                "Spyro"
             ]
         },
         {
@@ -8368,7 +8361,7 @@
             "version": "v2.beta4",
             "family": 1205,
             "tags": [
-                "Zelda WW"
+                "Zelda"
             ]
         },
         {
@@ -9050,7 +9043,7 @@
             "version": "RC1",
             "family": 1697,
             "tags": [
-                "Zelda TP"
+                "Zelda"
             ]
         },
         {
@@ -9270,7 +9263,7 @@
             "version": "v2",
             "family": 2019,
             "tags": [
-                "GK3"
+                "GK"
             ]
         },
         {
@@ -9284,7 +9277,7 @@
             "version": "v1",
             "family": 3168,
             "tags": [
-                "GK3"
+                "GK"
             ]
         },
         {
@@ -9809,7 +9802,7 @@
             "version": "v1",
             "family": 4825,
             "tags": [
-                "Zelda OoT"
+                "Zelda"
             ]
         },
         {
@@ -9940,7 +9933,7 @@
             "version": "v2",
             "family": 2815,
             "tags": [
-                "SMB2"
+                "SMB"
             ]
         },
         {
@@ -11846,7 +11839,7 @@
             "version": "v1",
             "family": 1612,
             "tags": [
-                "Zelda WW"
+                "Zelda"
             ]
         },
         {
@@ -12825,7 +12818,7 @@
             "version": "v2.2a",
             "family": 2131,
             "tags": [
-                "GK2"
+                "GK"
             ]
         },
         {
@@ -12839,7 +12832,7 @@
             "version": "v2.1",
             "family": 3993,
             "tags": [
-                "GK7"
+                "GK"
             ]
         },
         {
@@ -12903,7 +12896,7 @@
             "version": "v1",
             "family": 1882,
             "tags": [
-                "GK2"
+                "GK"
             ]
         },
         {
@@ -14619,7 +14612,7 @@
             "version": "v1.alt",
             "family": 6392,
             "tags": [
-                "MP9"
+                "MP"
             ]
         },
         {
@@ -14983,7 +14976,7 @@
             "version": "v0.6",
             "family": 2929,
             "tags": [
-                "SMB1"
+                "SMB"
             ]
         },
         {
@@ -15102,7 +15095,7 @@
             "family": 3916
         },
         {
-            "name": "Spyro The Dragon Toasty",
+            "name": "The Dragon Toasty",
             "author": "Zappg",
             "special": "T81",
             "music": "T81",
@@ -15113,7 +15106,7 @@
             "note": "bad minimap, bad IA, bad spawn",
             "version": "v1",
             "family": 9490,
-            "tags": []
+            "tags": ["Spyro"]
         },
         {
             "name": "Stadium Arena",
@@ -15214,7 +15207,7 @@
             "version": "v1",
             "family": 5539,
             "tags": [
-                "SMB2"
+                "SMB"
             ]
         },
         {
@@ -15349,7 +15342,7 @@
             "version": "v1",
             "family": 2835,
             "tags": [
-                "SMB2"
+                "SMB"
             ]
         },
         {
@@ -16347,7 +16340,7 @@
             "version": "v1.3.1",
             "family": 2726,
             "tags": [
-                "MP9"
+                "MP"
             ]
         },
         {
@@ -16599,7 +16592,7 @@
             "version": "v1",
             "family": 7426,
             "tags": [
-                "CTTR"
+                "CTR"
             ]
         },
         {
@@ -19667,36 +19660,36 @@
             "score": 1
         },
         {
-            "name": "CTR Hot Air Skyway",
+            "name": "Hot Air Skyway",
             "version": "v1",
             "since_version": "0.12",
             "author": "MysterE99",
             "special": "T13",
             "music": "T13",
             "sha1": "e45083c80c062bc7fc2ea6cf5e32b9d49638eafe",
-            "tags": [],
+            "tags": ["CTR"],
             "score": 5
         },
         {
-            "name": "CTR Roo's Tubes",
+            "name": "Roo's Tubes",
             "version": "v1",
             "since_version": "0.12",
             "author": "tasrhys",
             "special": "T32",
             "music": "T32",
             "sha1": "49da2322ee711f3ce72c9ad964da9a856d5be06c",
-            "tags": [],
+            "tags": ["CTR"],
             "score": 4
         },
         {
-            "name": "CTTR Track and the Beanstalk",
+            "name": "Track and the Beanstalk",
             "version": "v1.2",
             "since_version": "0.12",
             "author": "razero",
             "special": "T11",
             "music": "T11",
             "sha1": "31f12aa937daa1fd4b05f71c58850042e0697cb1",
-            "tags": [],
+            "tags": ["CTR"],
             "score": 4
         },
         {
@@ -20142,14 +20135,14 @@
             "score": 1
         },
         {
-            "name": "FZC Silence Nightmare Fear",
+            "name": "Silence Nightmare Fear",
             "version": "v1",
             "since_version": "0.12",
             "author": "Kozakura",
             "special": "T73",
             "music": "T73",
             "sha1": "ec9fda001b8939e84b96e03df59633c37cf85b0f",
-            "tags": [],
+            "tags": ["FZ"],
             "score": 2
         },
         {
@@ -21625,7 +21618,7 @@
             "music": "T11",
             "sha1": "b520a3394348550024ca92df067c9aa1f74eea4c",
             "tags": [
-                "MP8"
+                "MP"
             ],
             "score": 2
         },
@@ -21638,7 +21631,7 @@
             "music": "T54",
             "sha1": "2f9446b93350ac4b7c8e9d54581b07d5370c6a8a",
             "tags": [
-                "MP8"
+                "MP"
             ],
             "score": 4
         },
@@ -21651,7 +21644,7 @@
             "music": "T11",
             "sha1": "e039008f48e6ea6dca46acad950b2a7aaab08a3f",
             "tags": [
-                "MPDS"
+                "MP"
             ],
             "score": 1
         },
