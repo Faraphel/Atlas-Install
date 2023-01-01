@@ -132,17 +132,6 @@
     },
     "tracks": [
         {
-            "name": "Backyard Garden",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T33",
-            "music": "T33",
-            "sha1": "0d2f9caa61a478b2600e31d82a234e53edf4ea71",
-            "tags": ["3DURCR"],
-            "score": 4
-        },
-        {
             "name": "4IT Clown's Road",
             "author": [
                 "4IT★Lecce",
@@ -1255,6 +1244,19 @@
             "sha1": "3b7a5d2917c25d87443f8519f14e387b57cf8b32",
             "tags": [],
             "score": 2
+        },
+        {
+            "name": "Backyard Garden",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T33",
+            "music": "T33",
+            "sha1": "0d2f9caa61a478b2600e31d82a234e53edf4ea71",
+            "tags": [
+                "3DURCR"
+            ],
+            "score": 4
         },
         {
             "name": "Bandit Plains",
