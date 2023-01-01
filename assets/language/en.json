@@ -64,7 +64,7 @@
         "TEXT_PATCHING": "Patching \"%s\"",
 
         "WARNING": "Warning",
-        "WARNING_EMPTY_CACHE": "By emptying the cache, you will gain %.2fGB, but reinstalling a mod will be take way longer. Continue ?",
+        "WARNING_EMPTY_CACHE": "By emptying the cache, you will gain %.2fGB, but reinstalling a mod will take way longer. Continue ?",
         "WARNING_DESTINATION_NOT_WRITABLE": "The game destination directory is not writable. Continue anyway ?",
         "WARNING_LOW_SPACE_CONTINUE": "Low space remaining on disk %s (%.2fGB). Continue anyway ?",
         "WARNING_NOT_ROOT": "Root permissions are required. You should start the application with 'sudo'. Continue anyway ?",
