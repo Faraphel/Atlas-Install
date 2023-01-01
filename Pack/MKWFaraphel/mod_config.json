@@ -19229,17 +19229,6 @@
             "score": 2
         },
         {
-            "name": "C.A.V.E.",
-            "version": "v2",
-            "since_version": "0.12",
-            "author": "Potatoman44",
-            "special": "T32",
-            "music": "T32",
-            "sha1": "8e09d41ac37c176238ec64716a07cb822501f39a",
-            "tags": [],
-            "score": -2
-        },
-        {
             "name": "Camp Kartigan",
             "version": "v1.3",
             "since_version": "0.12",
@@ -21669,17 +21658,6 @@
             "score": 4
         },
         {
-            "name": "Mushroom Mountain Oasis",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "BillyNoodles",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "d058423835ab5fce3ccf8514ce086159cdc9345b",
-            "tags": [],
-            "score": -2
-        },
-        {
             "name": "Mushroom Park",
             "version": "v2.04",
             "since_version": "0.12",
@@ -21946,17 +21924,6 @@
             "sha1": "0e126b0d4085e5ac2e716f5d55d458894e4a51a2",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Peppermint Peaks",
-            "version": "v2",
-            "since_version": "0.12",
-            "author": "Drybonesbxbe",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "80a91a3b7d22bdc248a98179b0b8a22d67aafb11",
-            "tags": [],
-            "score": -2
         },
         {
             "name": "Petite City",
@@ -22888,19 +22855,6 @@
                 "SNES"
             ],
             "score": 4
-        },
-        {
-            "name": "Ghost Valley 1",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Wacker",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "e576fc9d514103bbe14ca05847f349055980d1ca",
-            "tags": [
-                "SNES"
-            ],
-            "score": -2
         },
         {
             "name": "Ghost Valley 1",
@@ -24479,17 +24433,6 @@
                 "WP"
             ],
             "score": 3
-        },
-        {
-            "name": "WS Baseball",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Wacker",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "cc0e14ea4a305b3e01a1cc1220d8197651858a63",
-            "tags": [],
-            "score": -2
         },
         {
             "name": "Yoshi's Tropical Trek",
