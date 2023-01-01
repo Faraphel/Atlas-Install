@@ -18699,18 +18699,8 @@
             "special": "T43",
             "music": "T43",
             "sha1": "763f35c69dda350ba2c0c61ba1b74d03b3194380",
-            "tags": [],"score": 5
-        },
-        {
-            "name": "3DS Daisy Hills {night}",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "4eaf4d1f765b55932efbb82ed4e53127d9c5ac0e",
             "tags": [],
-            "score": -1
+            "score": 5
         },
         {
             "name": "3DS DK Jungle",
@@ -18733,18 +18723,7 @@
             "sha1": "0400002e48bc38eba478ae4564939a48344a8ef8",
             "tags": [],
             "score": 5,
-	    "warning": 3
-        },
-        {
-            "name": "3DS Rainbow Road",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Diego Vapy",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "36247d4e76eae62840e335d19cfefdda990ec522",
-            "tags": [],
-            "score": -1
+            "warning": 3
         },
         {
             "name": "3DS Rainbow Road",
@@ -18779,28 +18758,6 @@
             "sha1": "0d2f9caa61a478b2600e31d82a234e53edf4ea71",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "A Really Big Circle",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "LQwerty",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "e307580199a6b89f33721fe037f4e76ff8c1f177",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Abandoned Festival Streets",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Luigi Story",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "766382801d4065ec04734d01f6b6ef4933d21e2a",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Abandoned Laboratory",
@@ -18869,17 +18826,6 @@
             "sha1": "656efdbaa16ffa9145031f5a87cd3c7ea2aa740e",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Air-Ramp Circuit",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T21",
-            "music": "T21",
-            "sha1": "18b987cfe97af1618b3dc3f105645ec4bb9db139",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Alpha Desert Valley",
@@ -18955,17 +18901,6 @@
             "warning": 1
         },
         {
-            "name": "Antigravity Road",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "b98ad1d6d45b05bc5b72478a2d949e7bf58cc059",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Apollo Planet",
             "version": "v1",
             "since_version": "0.12",
@@ -19008,17 +18943,6 @@
             "sha1": "d42d8fe92c6ed831a4f3723523ec39a1a8b41b1f",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Arrow Course",
-            "version": "RC3.5",
-            "since_version": "0.12",
-            "author": "EC2Baned",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "6260409ffa5cb777e73eb587454f78cd53fbe2fd",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Artificial Plains",
@@ -19065,17 +18989,6 @@
             "score": 2
         },
         {
-            "name": "Banana Split {April 1.}",
-            "version": "?",
-            "since_version": "0.12",
-            "author": "Bear",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "ff37b7d72dde29f387533d4f97cac46492e6e495",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Banished Keep",
             "version": "v1.4.1.1.1",
             "since_version": "0.12",
@@ -19085,20 +18998,6 @@
             "sha1": "2279318c5819d576630c44d13ad46eef898e4f44",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Baseplate Raceway",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": [
-                "XanderKartWii",
-                "Wacker"
-            ],
-            "special": "T11",
-            "music": "T11",
-            "sha1": "4669ce7d3a020e84951cbc455ea7330717dcc940",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Beach Gardens",
@@ -19169,20 +19068,6 @@
             "score": 4
         },
         {
-            "name": "Blobfish Circuit",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": [
-                "XanderKartWii",
-                "Wacker"
-            ],
-            "special": "T11",
-            "music": "T11",
-            "sha1": "fcd4e7da5244fe392756dbcfa2d8bfa861954f0f",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Blue Loop",
             "version": "v2.1",
             "since_version": "0.12",
@@ -19212,7 +19097,9 @@
             "special": "T52",
             "music": "T52",
             "sha1": "cf0746ab597c0e73ffcd92192b684883e5558a3b",
-            "tags": ["SM64"],
+            "tags": [
+                "SM64"
+            ],
             "score": 4
         },
         {
@@ -19353,17 +19240,6 @@
             "score": -2
         },
         {
-            "name": "Cake",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "d0cdc9b051ef76fd3490be6cc379ac9aee6ef3cd",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Camp Kartigan",
             "version": "v1.3",
             "since_version": "0.12",
@@ -19460,28 +19336,6 @@
             "sha1": "ab016f2e61a49863144e4cc5be4526138e35a35a",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "Castle Roadway",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "Luigids",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "9965b20cec9f806cb486d7c3282e7e4df1513124",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Castle with No Lava",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "eb56c427503999af40bb12f12ba2eaa6cbf677b8",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Cataquack Beach {night}",
@@ -19615,17 +19469,6 @@
             "score": 3
         },
         {
-            "name": "Christmas Way",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "7918bb102a64e6ed66e53833ac8f80ea916c5a9b",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Circle Circuit",
             "version": "v1.1",
             "since_version": "0.12",
@@ -19679,160 +19522,6 @@
             "sha1": "fccc5f293708ec85a6582a73234fe05eb04e9c7c",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "CNK Android Alley",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "c44f25c9817cd5fa608bf50d2c81fceae1960d82",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Assembly Lane",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T24",
-            "music": "T24",
-            "sha1": "65b80b4b59178047906a1dbe314f0fc6b70f2160",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Barin Ruins",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T23",
-            "music": "T23",
-            "sha1": "dd96416e235221e5a0c9f611ea33d082f6818eb4",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Clockwork Wumpa",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "217acefb994d847445f6ba8ebf425da482171101",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Deep Sea Driving",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T32",
-            "music": "T32",
-            "sha1": "f718740d28b577d6cbfbff0a5aa59466ed69a35b",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Electron Avenue",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T14",
-            "music": "T14",
-            "sha1": "5faeed12bd7f3e2498b54aa8cd43066d5c11958e",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Inferno Island",
-            "version": "Beta1",
-            "since_version": "0.12",
-            "author": "LucioWins",
-            "special": "T52",
-            "music": "T52",
-            "sha1": "49ef544909c6290561dd17a83e1bbc36c240f650",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Inferno Island",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T14",
-            "music": "T14",
-            "sha1": "9c5ec3e9850c8311176fdffd9abcd2de9e5f83a5",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Jungle Boogie",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T52",
-            "music": "T52",
-            "sha1": "2398ed69a0f9350013806afaa66a9f57d79c0a43",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Meteor Gorge",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "062a549f21df22961e89b948683d1cb9a531ee74",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Out of Time",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T41",
-            "music": "T41",
-            "sha1": "b3654844b3e6e0c048b6e37756097ca02d29f136",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Thunder Struck",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T14",
-            "music": "T14",
-            "sha1": "3395c66d651a96d089c5b7cd87aab19352235d5f",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Tiny Temple",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T64",
-            "music": "T64",
-            "sha1": "dd787577bb2427d6ec539a78597d6bd44da15474",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "CNK Velo's Challenge",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Warwick92xD",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "78af15db74158045d15246fca4d0a8a7f8f3a919",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Coconut Beach",
@@ -19939,50 +19628,6 @@
             "score": 3
         },
         {
-            "name": "Crap Course 2",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "7ec61c292a18692b7871f7ef5c56db5ac5f5e8ff",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Crap Course 3",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "a8610173d1729d7f55882246a1097bcbf57d7e60",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Crap Course",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "835f56ddb0a8510cbe7347d8562197d585265e75",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Crazy Town",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "TeddolchGaming",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "6c7c94409f19a2b88537c638de3d44931357bed7",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Crazy-8 Circuit",
             "version": "Alpha2",
             "since_version": "0.12",
@@ -20071,17 +19716,6 @@
             "score": 4
         },
         {
-            "name": "Daisy Garden",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "7906075a29ce4c2048091c8ef7504da1d92c5aa5",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Daisy's Palace",
             "version": "v1.4",
             "since_version": "0.12",
@@ -20093,17 +19727,6 @@
             "score": 5
         },
         {
-            "name": "Dark City",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "b33daea0c297f0e92b9b93a74df5b764cac34e18",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Dark Matter Fortress",
             "version": "v1.7.3",
             "since_version": "0.12",
@@ -20113,17 +19736,6 @@
             "sha1": "33763610ea82956af1af3106d986d84df0dec8e2",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Dark Valley",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Luigids",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "c705e4aaacc3df730a8aac338422c06572e9e9fe",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Darkness Temple",
@@ -20196,20 +19808,6 @@
         },
         {
             "name": "Desert Cross",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": [
-                "Kozakura",
-                "Mystora"
-            ],
-            "special": "T23",
-            "music": "T23",
-            "sha1": "ca4bd92cf79f9ce21680933cc797a47e84f77478",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Desert Cross",
             "version": "v1.2",
             "since_version": "0.12",
             "author": "FunkyDude15",
@@ -20227,20 +19825,9 @@
             "special": "T41",
             "music": "T41",
             "sha1": "ed862d41bca724a847ded0816972e7e486e7997c",
-            "tags": [],	
+            "tags": [],
             "score": 2,
             "note": "Some jump can make you fall into the void"
-        },
-        {
-            "name": "Detailed Poo Trackː The Boiling Finale",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Potatoman44",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "2de9b06b9c28b40b99bb468280b6c089390c3506",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Diddy Kong's Summit",
@@ -20361,7 +19948,9 @@
             "special": "T72",
             "music": "T72",
             "sha1": "559481cadf2d5f23b710f72f4b583c587a4c224d",
-            "tags": ["DS"],
+            "tags": [
+                "DS"
+            ],
             "score": 5
         },
         {
@@ -20372,7 +19961,9 @@
             "special": "T72",
             "music": "T72",
             "sha1": "fff674eed3f496cb8902996d583f93a4bc80d437",
-            "tags": ["DS"],
+            "tags": [
+                "DS"
+            ],
             "score": 5
         },
         {
@@ -20383,19 +19974,10 @@
             "special": "T23",
             "music": "T23",
             "sha1": "6f1ea070458972b5c09db8f386956c8430658135",
-            "tags": ["DS"],
+            "tags": [
+                "DS"
+            ],
             "score": 5
-        },
-        {
-            "name": "DS Donkey Course",
-            "version": "v1.3",
-            "since_version": "0.12",
-            "author": "wg93589",
-            "special": "T83",
-            "music": "T83",
-            "sha1": "7319a515b810523589a9319d4575a9da1ac09e1b",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Mario Circuit",
@@ -20405,19 +19987,10 @@
             "special": "T21",
             "music": "T21",
             "sha1": "bdf752649175e5ac674d643235fc37da9a720ec3",
-            "tags": ["DS"],
+            "tags": [
+                "DS"
+            ],
             "score": 4
-        },
-        {
-            "name": "Shroom Ridge",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "SquireTurnbolt",
-            "special": "T42",
-            "music": "T42",
-            "sha1": "02f4688fa8286f7ea568f4101ac60a8f92a6f08f",
-            "tags": ["DS"],
-            "score": -1
         },
         {
             "name": "Shroom Ridge",
@@ -20427,7 +20000,9 @@
             "special": "T21",
             "music": "T21",
             "sha1": "869fe045b4483bc9dcc7086782a1ca0ec9931b64",
-            "tags": ["DS"],
+            "tags": [
+                "DS"
+            ],
             "score": 5
         },
         {
@@ -20442,18 +20017,6 @@
             "score": 5
         },
         {
-            "name": "DS Waluigi Pinball",
-            "version": "v1.3",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T64",
-            "music": "T64",
-            "sha1": "6d0063706bcab695c67484b6d335b48e46fe330a",
-            "tags": [],
-            "score": -1,
-            "note": "nice aesthenic but need polishing"
-        },
-        {
             "name": "Wario Stadium",
             "version": "v1.1",
             "since_version": "0.12",
@@ -20461,7 +20024,9 @@
             "special": "T64",
             "music": "T64",
             "sha1": "93c8b68e1d008eb836e78d130484b0499381504d",
-            "tags": ["DS"],
+            "tags": [
+                "DS"
+            ],
             "score": 5
         },
         {
@@ -20476,28 +20041,6 @@
             "score": 1
         },
         {
-            "name": "E Circuit",
-            "version": "v1e",
-            "since_version": "0.12",
-            "author": "Potatoman44",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "cb26b2d67b48cfcce94d2f599ebebc88db2324a9",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Eagle Island",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Aggthelegoman",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "ecfe4a9cf8d8081293f2d567249773bfb7e1ea01",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Elemental Solstice",
             "version": "v1",
             "since_version": "0.12",
@@ -20507,7 +20050,7 @@
             "sha1": "2779b5f2873e314d47219dcd9a3ad50e80a50023",
             "tags": [],
             "score": 5,
-            "note": "if I had a 6th star category, this track would be part of it" 
+            "note": "if I had a 6th star category, this track would be part of it"
         },
         {
             "name": "Empty Space",
@@ -20521,72 +20064,6 @@
             "score": 4
         },
         {
-            "name": "Escape from Cataquack Castle",
-            "version": "Beta2.fix",
-            "since_version": "0.12",
-            "author": "Citrus",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "f60996b76b71b1ca45d49f2ade0b9111417d860a",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Escape the Villa",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "5422d054539d7d3f53ee198ef071c3a6466e7268",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Factory Island",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "G-Force",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "4801ca82d993f9eeccdaa9eb344ce0bf589f4de6",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Family Beach",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Mr perfect mkwii",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "1172d8c10bb1a4ec0fabe62c31bcdf1643054cc3",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Familyside Townville",
-            "version": "v1.3",
-            "since_version": "0.12",
-            "author": "Mr perfect mkwii",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "7abfe95583d39bbbe41c2b170f40629c5fb89649",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Final Destination",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Saiveeon",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "c100a95c5ffc24ba1e4725ecfd37ed8279dbf056",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Forest in a Canyon",
             "version": "Beta",
             "since_version": "0.12",
@@ -20596,28 +20073,6 @@
             "sha1": "9d317f3f8c3afff9a570f5644f28a0f4a1cf4e52",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "Forest Path",
-            "version": "RC3",
-            "since_version": "0.12",
-            "author": "Ugotowned35000vr",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "51565b011c985158203a9268aa2796faf074bfdd",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Forgotten Universes",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "4634dee03342682947e023b07f611a67c621887d",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Forsaken Desert",
@@ -20667,20 +20122,6 @@
             "score": 2
         },
         {
-            "name": "Fun City Run",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": [
-                "SeaPowerBlue",
-                "Mystora"
-            ],
-            "special": "T11",
-            "music": "T11",
-            "sha1": "afdba7a251fcf7de49eccc578c34b992d8e346b1",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Fungi Falls",
             "version": "v1",
             "since_version": "0.12",
@@ -20702,7 +20143,9 @@
             "special": "T81",
             "music": "T81",
             "sha1": "7caa4657953d02eec91b0a1ac7e1ae5544e3cd93",
-            "tags": ["FZ"],
+            "tags": [
+                "FZ"
+            ],
             "score": 1
         },
         {
@@ -20735,7 +20178,9 @@
             "special": "T53",
             "music": "T53",
             "sha1": "d18feaa96e63b81526f8a33c8fa63ae3118ca5a6",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 4
         },
         {
@@ -20746,7 +20191,9 @@
             "special": "T72",
             "music": "T72",
             "sha1": "38bedefdda3ae957f4214fae437db319cac9c788",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 5
         },
         {
@@ -20757,7 +20204,9 @@
             "special": "T53",
             "music": "T53",
             "sha1": "fe6a0605165e0e91740647ec9c5ce45123af813f",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 5
         },
         {
@@ -20771,19 +20220,10 @@
             "special": "T31",
             "music": "T31",
             "sha1": "0c092a6d8c04c613d6816befbac1288bc0c42394",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 5
-        },
-        {
-            "name": "GBA Cheese Land {MK8}",
-            "version": "v1.11",
-            "since_version": "0.12",
-            "author": "Saiveeon",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "b173c54e8c5c14f57eea9eee8114d49bce70d03d",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Lakeside Park",
@@ -20793,7 +20233,9 @@
             "special": "T12",
             "music": "T12",
             "sha1": "3eb8f7cfe670045e66d5eb13e10c92668cdc48fc",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 3
         },
         {
@@ -20804,7 +20246,9 @@
             "special": "T81",
             "music": "T81",
             "sha1": "26eb153aba38cf62419dd73e28db1c05ca0fe607",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 2
         },
         {
@@ -20815,7 +20259,9 @@
             "special": "T44",
             "music": "T44",
             "sha1": "20c295285bddcb4ea44471543670cc1af9d5d122",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 4
         },
         {
@@ -20826,7 +20272,9 @@
             "special": "T81",
             "music": "T81",
             "sha1": "70ef9d693665764b436a1933497da2f6bdab6864",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 5
         },
         {
@@ -20837,7 +20285,9 @@
             "special": "T73",
             "music": "T73",
             "sha1": "70584efd00377e54d5c4c8baa27061a025eeb91e",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 5
         },
         {
@@ -20848,41 +20298,10 @@
             "special": "T62",
             "music": "T62",
             "sha1": "0cf227bee0274597a6d113eff586d9860eeb7514",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 3
-        },
-        {
-            "name": "GBA Sky Garden",
-            "version": "Alpha2",
-            "since_version": "0.12",
-            "author": "TK",
-            "special": "T82",
-            "music": "T82",
-            "sha1": "425254c75c93542a11c1ee34a3a685b7000e11ff",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "GBA Sky Garden",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Cats4Life",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "40da9a99173b296853273f24e80d3c6014c0bab8",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "GBA Sky Garden",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "tZ",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "c7643867c7163a38affff08408e33c24199bc22f",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "GBA Sky Garden",
@@ -20894,39 +20313,6 @@
             "sha1": "24e7aa799a291491ccd0c975245b8770c38f86cc",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "GBA Sky Garden",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Bri",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "d7d0891323df54275ef64c8012798190f919b57e",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "GBA Sky Garden",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Squadaloo",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "f1403e1c478bda2295f23dc7ee887088ec492c6b",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "GBA Sky Garden {April 1.}",
-            "version": "RC1.1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "6bcdbee945801e374d9d1158e30471215c0fadeb",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "GBA Sky Garden {Tour}",
@@ -20941,24 +20327,15 @@
         },
         {
             "name": "Snow Land",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Floyd",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "dbd8f4fdb28e4f741c40c93fa29816d6c849eba1",
-            "tags": ["GBA"],
-            "score": -1
-        },
-        {
-            "name": "Snow Land",
             "version": "v1.opt",
             "since_version": "0.12",
             "author": "SquireTurnbolt",
             "special": "T61",
             "music": "T61",
             "sha1": "f637cfd854b48704e2310eee6a1c6efdd40806ec",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 5
         },
         {
@@ -20969,7 +20346,9 @@
             "special": "T23",
             "music": "T23",
             "sha1": "62b1dbef38ca118d5d904abba6a2bebfed4fd680",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 4
         },
         {
@@ -20980,7 +20359,9 @@
             "special": "T41",
             "music": "T41",
             "sha1": "03e2123085d55d5a95b6b354157ea5e84331df1b",
-            "tags": ["GBA"],
+            "tags": [
+                "GBA"
+            ],
             "score": 5
         },
         {
@@ -20991,19 +20372,10 @@
             "special": "T43",
             "music": "T43",
             "sha1": "e12226127ebca6fb9afc47b9bfa6e580f47b53b7",
-            "tags": ["GCN"],
+            "tags": [
+                "GCN"
+            ],
             "score": 5
-        },
-        {
-            "name": "Dino Dino Jungle",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T83",
-            "music": "T83",
-            "sha1": "d7f7ac7bfe520a6f746c62f2f4d449d604d79782",
-            "tags": ["GCN"],
-            "score": -1
         },
         {
             "name": "Dino Dino Jungle",
@@ -21013,22 +20385,10 @@
             "special": "T83",
             "music": "T83",
             "sha1": "bd5b111927d6f5b7138d526353531e1c7ba1961f",
-            "tags": ["GCN"],
-            "score": 5
-        },
-        {
-            "name": "GCN Dry Dry Desert",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": [
-                "CrisDark64",
-                "NullifyFiery"
+            "tags": [
+                "GCN"
             ],
-            "special": "T71",
-            "music": "T71",
-            "sha1": "529bbf9b01e0b74e1d35fb2e5d18c4faec65526b",
-            "tags": [],
-            "score": -1
+            "score": 5
         },
         {
             "name": "Dry Dry Desert",
@@ -21038,7 +20398,9 @@
             "special": "T41",
             "music": "T41",
             "sha1": "4290d5c9f8e46ebdb44b9eaa2d78ebcf450f7ca9",
-            "tags": ["GCN"],
+            "tags": [
+                "GCN"
+            ],
             "score": 3
         },
         {
@@ -21049,7 +20411,9 @@
             "special": "T44",
             "music": "T44",
             "sha1": "dc709cbb94cc5e759a8df09a26e0995dee345720",
-            "tags": ["GCN"],
+            "tags": [
+                "GCN"
+            ],
             "score": 5,
             "note": "look really good, maybe keep both the original and this one ?"
         },
@@ -21061,7 +20425,9 @@
             "special": "T61",
             "music": "T61",
             "sha1": "e71769de980beaae7d403c3d2dc2db20cb04e81d",
-            "tags": ["GCN"],
+            "tags": [
+                "GCN"
+            ],
             "score": 4
         },
         {
@@ -21072,7 +20438,9 @@
             "special": "T64",
             "music": "T64",
             "sha1": "28fec4bea17c5ff92eda0dab9724ed5db8272dd4",
-            "tags": ["GCN"],
+            "tags": [
+                "GCN"
+            ],
             "score": 5
         },
         {
@@ -21107,28 +20475,6 @@
             "sha1": "995fe85ab092432e39a1c36cce362090e23fae36",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "Gift Factory",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T14",
-            "music": "T14",
-            "sha1": "8837fd0130a7097fe45cc624bbe6b59de41ba93b",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Global Raceway",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "ChisSilver64",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "ab5e034e890180d718cf0d97d39b6cf659073134",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Global Raceway",
@@ -21183,7 +20529,9 @@
             "special": "T22",
             "music": "T22",
             "sha1": "811d09ac0af6e1c23bf598cd266ef3eb3c42ca0e",
-            "tags": ["GP"],
+            "tags": [
+                "GP"
+            ],
             "score": 5
         },
         {
@@ -21194,7 +20542,9 @@
             "special": "T44",
             "music": "T44",
             "sha1": "68ad671c2f4cf51101f0ef6ae95f79111c455ade",
-            "tags": ["GP"],
+            "tags": [
+                "GP"
+            ],
             "score": 5
         },
         {
@@ -21205,30 +20555,10 @@
             "special": "T21",
             "music": "T21",
             "sha1": "895927d2686f09a4a55db31fdaf1f49711b1dfde",
-            "tags": ["GP"],
+            "tags": [
+                "GP"
+            ],
             "score": 3
-        },
-        {
-            "name": "Grass and Cannons",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T74",
-            "music": "T74",
-            "sha1": "05b97bb1f62af421e759b23b59208ed8a911fcb7",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Grass Circuit",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Luigids",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "526e82d67e169cd54b9f553b0b3fdff4cba56f0b",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Grassland Excitebike",
@@ -21251,28 +20581,6 @@
             "sha1": "ff240d06689dceda3dfd1b378642337cae3fb43e",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "Gravity Castle",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T43",
-            "music": "T43",
-            "sha1": "0073066e2773035c8a61a0df06038a8cf5346011",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Grease Beach",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "Mr perfect mkwii",
-            "special": "T32",
-            "music": "T32",
-            "sha1": "e9bdfb8e68cfafa709ee0f7639ffc2ffae225d30",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Green Plains",
@@ -21320,28 +20628,6 @@
             "sha1": "870c8efa37d3d7ed8ded9d17c8faf7304401c70e",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "Hacked Jungle",
-            "version": "v1.boost",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "ec2ee23ec020109854f0015ce0b189df2a784ebe",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Hacked Treeway",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T33",
-            "music": "T33",
-            "sha1": "051b72839825e28868ab687bf15757cd081405ac",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Harvest Harbor",
@@ -21459,17 +20745,6 @@
             "warning": 1
         },
         {
-            "name": "Horror Valley",
-            "version": "v1.5",
-            "since_version": "0.12",
-            "author": "4TLPati",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "d7a455986448782d04bfdfbaf88e774f5504c8dc",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Hot Field",
             "version": "v1",
             "since_version": "0.12",
@@ -21504,17 +20779,6 @@
             "sha1": "1f18b7f371ff155c752f6f85062f3ab7cc4a0b83",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "i8u",
-            "version": "v0.2",
-            "since_version": "0.12",
-            "author": "Wixboy",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "a0f1046ef12f14b875f9ad127b3b0d178ed26003",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Ice Cream Fortress",
@@ -21590,17 +20854,6 @@
             "score": 5
         },
         {
-            "name": "Island of the Two Routes",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T43",
-            "music": "T43",
-            "sha1": "878b059ff0f1716ae229f064540a24b62f58ce3c",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Island Town",
             "version": "v1",
             "since_version": "0.12",
@@ -21612,17 +20865,6 @@
             "score": 3
         },
         {
-            "name": "Jaden's Jumping Jam Dreams",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Shorky",
-            "special": "T22",
-            "music": "T22",
-            "sha1": "a29208a252c7cf57b26b293aed16d1a8d6d812e5",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Japan Highway",
             "version": "v1",
             "since_version": "0.12",
@@ -21630,7 +20872,9 @@
             "special": "T12",
             "music": "T12",
             "sha1": "a4736202a75476f018f5d50dd37f5f10712b6b30",
-            "tags": ["Boost"],
+            "tags": [
+                "Boost"
+            ],
             "score": 1
         },
         {
@@ -21654,17 +20898,6 @@
             "sha1": "6fe743a58dc8c75eb0ea866951dfa54d7f3badaa",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Jetski Driving",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Kratzean",
-            "special": "T32",
-            "music": "T32",
-            "sha1": "43f902d58c9f4771dbd9a7498efcd3538c5948ed",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Jungle Caverns",
@@ -21769,17 +21002,6 @@
             "score": 2
         },
         {
-            "name": "Kiwi's GBA Castle",
-            "version": "RC1c",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "6ae6debaad3b038d18be6f3e122c7e4694634fd1",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "KKW Darkness Dungeon",
             "version": "v1",
             "since_version": "0.12",
@@ -21833,17 +21055,6 @@
             "sha1": "ff484c0e5acbad83667c0d82d44e5206319eb341",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "Knog Cave",
-            "version": "v2.fix",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "9cb63814793536ce671210a4a74c84c75081673a",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Koopa Troopa Polluta",
@@ -21901,17 +21112,6 @@
             "score": 4
         },
         {
-            "name": "Lava Castle 1",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "F.K",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "b6a3fb6d5fe84b772601ab0732872e33f3e0a9d9",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Lava Loop",
             "version": "v1.alt",
             "since_version": "0.12",
@@ -21923,17 +21123,6 @@
             "score": 2
         },
         {
-            "name": "Leafy Beach",
-            "version": "Beta2",
-            "since_version": "0.12",
-            "author": "Luigi Story",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "d1725eeef720afb754257762ede13139552dcd99",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Lecce's Rainbow Road",
             "version": "v1.2",
             "since_version": "0.12",
@@ -21943,17 +21132,6 @@
             "sha1": "0c99cd351ceaf45d21f7e269e8ab217fc5268bb0",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Lethal Lava Land",
-            "version": "RC2",
-            "since_version": "0.12",
-            "author": "TB 358",
-            "special": "T34",
-            "music": "T34",
-            "sha1": "adcb4aaa61d255d7b1e42805f46ca89e052943af",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Lia's Feverdream Frenzy",
@@ -22010,7 +21188,9 @@
             "special": "T32",
             "music": "T32",
             "sha1": "33823f7fd52607b361273d9fabc51a9d827be906",
-            "tags": ["SMG"],
+            "tags": [
+                "SMG"
+            ],
             "score": 4
         },
         {
@@ -22062,17 +21242,6 @@
             "score": 1
         },
         {
-            "name": "Luigi Hack Fan's Old Track Design",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T21",
-            "music": "T21",
-            "sha1": "017befb65e69944c9769e984d11202537fd49f27",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Luigi's Garden",
             "version": "v1",
             "since_version": "0.12",
@@ -22082,28 +21251,6 @@
             "sha1": "abe1cdd824b8a38c72ee7f57dde940dfe6479661",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Luigi's Rainbow Road",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "ffa093b11fc57bd1c656380bfe1cfdd4e2f907ab",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Luigi's Skyland",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Elemental",
-            "special": "T54",
-            "music": "T54",
-            "sha1": "3d7562bda401742b1a71380b0c34f1e9e6aaf717",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Luminous Clouds",
@@ -22164,17 +21311,6 @@
             "score": 5
         },
         {
-            "name": "Magical Sanctuary",
-            "version": "RC2",
-            "since_version": "0.12",
-            "author": "Luigi Story",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "dd4d6e1b6e06c4b9689d57ebfa2fc0853b37671f",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Magma Chamber",
             "version": "v1.7",
             "since_version": "0.12",
@@ -22198,17 +21334,6 @@
             "sha1": "22f9503868484e5018395184a18dc7443288f9d2",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Mario's New Circuit",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T21",
-            "music": "T21",
-            "sha1": "87289a956e64a24698f7dd8a7440601023080cf3",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Meep's Mansion",
@@ -22275,17 +21400,6 @@
             "sha1": "86a46b99864b8d2af7f7a0cda01420fb932013fb",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "Midnight Dance",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Rubicmaster",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "ddbca6fe9ce9f8419574dcbead6adbe4750436db",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Midnight Forest",
@@ -22490,7 +21604,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "b520a3394348550024ca92df067c9aa1f74eea4c",
-            "tags": ["MP8"],
+            "tags": [
+                "MP8"
+            ],
             "score": 2
         },
         {
@@ -22501,7 +21617,9 @@
             "special": "T54",
             "music": "T54",
             "sha1": "2f9446b93350ac4b7c8e9d54581b07d5370c6a8a",
-            "tags": ["MP8"],
+            "tags": [
+                "MP8"
+            ],
             "score": 4
         },
         {
@@ -22512,7 +21630,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "e039008f48e6ea6dca46acad950b2a7aaab08a3f",
-            "tags": ["MPDS"],
+            "tags": [
+                "MPDS"
+            ],
             "score": 1
         },
         {
@@ -22549,17 +21669,6 @@
             "score": 4
         },
         {
-            "name": "Mushroom Loop",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Bryceplayer108",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "ea1db5a40a4a26b4b0c70a5c69f34474f9ecece2",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Mushroom Mountain Oasis",
             "version": "v1.1",
             "since_version": "0.12",
@@ -22580,17 +21689,6 @@
             "sha1": "820119e6e7add9177b2ca54ff72ad6f4e304ee58",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "Mushroom Peaks 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Kratzean",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "45ea8c26b9304a693f44dc73b4c180496e480abd",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Mushroom Raceway",
@@ -22655,7 +21753,9 @@
             "special": "T53",
             "music": "T53",
             "sha1": "8bcb2a9baabfde738ccc89375e580a91057540dc",
-            "tags": ["N64"],
+            "tags": [
+                "N64"
+            ],
             "score": 5
         },
         {
@@ -22666,7 +21766,9 @@
             "special": "T23",
             "music": "T23",
             "sha1": "e7891ba3f511b76d4d05f2faafff1e22ec7ce2e3",
-            "tags": ["N64"],
+            "tags": [
+                "N64"
+            ],
             "score": 4
         },
         {
@@ -22677,19 +21779,10 @@
             "special": "T51",
             "music": "T51",
             "sha1": "c0159f2251a6fe6312f56e66cf94d6cd09e1d0bf",
-            "tags": ["N64"],
+            "tags": [
+                "N64"
+            ],
             "score": 4
-        },
-        {
-            "name": "N64 Rainbow Road",
-            "version": "v0",
-            "since_version": "0.12",
-            "author": "._.",
-            "special": "T22",
-            "music": "T22",
-            "sha1": "e91f34315420cc0fcfdcd54fb320fc55340a5e48",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Rainbow Road",
@@ -22699,19 +21792,10 @@
             "special": "T44",
             "music": "T44",
             "sha1": "58ce8fa898bbb5d28e553abf4501b64e18694220",
-            "tags": ["N64"],
+            "tags": [
+                "N64"
+            ],
             "score": 5
-        },
-        {
-            "name": "N64 Rainbow Road",
-            "version": "v1.2.mkd",
-            "since_version": "0.12",
-            "author": "Torran",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "43ec5d3e974a1cba52cc86a81e05c5f5e16c3edf",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Town",
@@ -22724,7 +21808,9 @@
             "special": "T63",
             "music": "T63",
             "sha1": "421a1084db5eb234a5e929b3325dfb2f1ef47b95",
-            "tags": ["N64"],
+            "tags": [
+                "N64"
+            ],
             "score": 3
         },
         {
@@ -22735,7 +21821,9 @@
             "special": "T52",
             "music": "T52",
             "sha1": "48ab5343b5d01eea299d680bc21d2b640cde7b40",
-            "tags": ["N64"],
+            "tags": [
+                "N64"
+            ],
             "score": 5
         },
         {
@@ -22759,18 +21847,6 @@
             "sha1": "d02b018eece9a75dab74427fc0ec62e2ae3af8c9",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "Northern Heights Demake",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Lovelifeandtpose024",
-            "special": "T23",
-            "music": "T23",
-            "sha1": "bb699596e742f75b85ec8b2b0b5cdd4ee0f7494b",
-            "tags": [],
-            "score": -1,
-            "warning": 1
         },
         {
             "name": "Northern Heights",
@@ -22817,17 +21893,6 @@
             "score": 3
         },
         {
-            "name": "One Dimension",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Shorky",
-            "special": "T84",
-            "music": "T84",
-            "sha1": "f527a0d9c9e9691774758619beb58cb08735e388",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Oryx's Castle",
             "version": "v1.1",
             "since_version": "0.12",
@@ -22870,17 +21935,6 @@
             "sha1": "934d66dc28252d90082e78c4e1ed8ddf4dd440cf",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Paris Promenade",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "7b588ba5052b519e3056387676712bf75d2704ba",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Parkway Boogie",
@@ -23157,17 +22211,6 @@
             "score": 3
         },
         {
-            "name": "Rainbow Mountain",
-            "version": "RC2.1",
-            "since_version": "0.12",
-            "author": "Red Flame",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "97c45c509c81826a87f2924da422a6841d0aaa5b",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Rainbow River 2",
             "version": "v2.7",
             "since_version": "0.12",
@@ -23331,7 +22374,9 @@
             "special": "T72",
             "music": "T72",
             "sha1": "a9aab25dc1d6afdac2ced5b0e33c0350d695d808",
-            "tags": ["RMX"],
+            "tags": [
+                "RMX"
+            ],
             "score": 3
         },
         {
@@ -23342,7 +22387,9 @@
             "special": "T44",
             "music": "T44",
             "sha1": "5daedd9a90a9d3baf3ba2152aac2b4d557607135",
-            "tags": ["RMX"],
+            "tags": [
+                "RMX"
+            ],
             "score": 3
         },
         {
@@ -23445,17 +22492,6 @@
             "score": 5
         },
         {
-            "name": "Rushed Rainbow Road",
-            "version": "beta",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "4de3a8f205c41ea3ee090c89d936b1ea650dc4b6",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Rooftops",
             "version": "Alpha2",
             "since_version": "0.12",
@@ -23463,7 +22499,9 @@
             "special": "T21",
             "music": "T21",
             "sha1": "4dbd4f454b23156ad8143fa643ce228c5ba9874c",
-            "tags": ["RV"],
+            "tags": [
+                "RV"
+            ],
             "score": 4,
             "note": "bad minimap"
         },
@@ -23545,28 +22583,6 @@
             "score": 3
         },
         {
-            "name": "Schity",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "SlipperyMac",
-            "special": "T41",
-            "music": "T41",
-            "sha1": "521a4cbed058a5bbfdd89ef5ae66622a577adca9",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Scrubby Stupidway",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "e1cead4995f6e32ab3ba25bf693c7690a2ea2370",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Sea Roadside Station",
             "version": "Beta2",
             "since_version": "0.12",
@@ -23601,17 +22617,6 @@
             "sha1": "d14929613e407b225a6087715a2f00974fc2b754",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "Sephiroth",
-            "version": "Beta.fix",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T84",
-            "music": "T84",
-            "sha1": "67a6d1bb36eb42ab856f8c4a43bb1d96db3947ff",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Serene Swampland",
@@ -23669,17 +22674,6 @@
             "score": 4
         },
         {
-            "name": "Shroom Solar Eclipse",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "d0fd4ef837854027aed8f13bca1e0ccea067dd2f",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Shroom Underpass",
             "version": "RC2",
             "since_version": "0.12",
@@ -23734,7 +22728,9 @@
             "special": "T84",
             "music": "T84",
             "sha1": "4b04fbd8c02671f405518bdbfe2cd15ac3d62e77",
-            "tags": ["SM64"],
+            "tags": [
+                "SM64"
+            ],
             "score": 1
         },
         {
@@ -23745,7 +22741,9 @@
             "special": "T21",
             "music": "T21",
             "sha1": "9c4f05fca641088410e6ef3aaa47313b2b3d0a34",
-            "tags": ["SM64"],
+            "tags": [
+                "SM64"
+            ],
             "score": 3
         },
         {
@@ -23760,17 +22758,6 @@
             "score": 1
         },
         {
-            "name": "SMB2 Cannonball Circuit",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Jo Seph GD",
-            "special": "T34",
-            "music": "T34",
-            "sha1": "651deabe8572cedd91ff9f1204bc04552ff6b3be",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Comet Observatory",
             "version": "Beta2",
             "since_version": "0.12",
@@ -23778,9 +22765,11 @@
             "special": "T44",
             "music": "T44",
             "sha1": "d57570e92500ff0c05f457f187eb6e23cd6f09ef",
-            "tags": ["SMG"],
+            "tags": [
+                "SMG"
+            ],
             "score": 2,
-		"warning": 1,
+            "warning": 1,
             "note": "bad minimap, hard to understand, not sure about the collision, ..."
         },
         {
@@ -23791,7 +22780,9 @@
             "special": "T32",
             "music": "T32",
             "sha1": "cda1a6a50cd2329cdccdf694a814f2f1bae6c80a",
-            "tags": ["SMG"],
+            "tags": [
+                "SMG"
+            ],
             "score": 5
         },
         {
@@ -23802,7 +22793,9 @@
             "special": "T44",
             "music": "T44",
             "sha1": "b28cc75c59fec01bd47343b6e57f2e0c41f963d2",
-            "tags": ["SMG"],
+            "tags": [
+                "SMG"
+            ],
             "score": 3
         },
         {
@@ -23813,7 +22806,9 @@
             "special": "T72",
             "music": "T72",
             "sha1": "4d355d9aacc874d267fcf0a33a6a8c2619a083c8",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 5
         },
         {
@@ -23824,19 +22819,10 @@
             "special": "T84",
             "music": "T84",
             "sha1": "0dd53004f04b10815aec74b44647bd215258a6dc",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 3
-        },
-        {
-            "name": "Bowser Castle 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Kozakura",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "3cfdad8f888eb36fdee9a485874c52a86bd3b240",
-            "tags": ["SNES"],
-            "score": -1
         },
         {
             "name": "Bowser Castle 3",
@@ -23846,41 +22832,10 @@
             "special": "T72",
             "music": "T72",
             "sha1": "c92c05fd425a808372774eec4885d9cae9958c6b",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 4
-        },
-        {
-            "name": "Bowser Castle 3",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "655cd8d97bf174599a7b93a5191a3990eaa5a412",
-            "tags": ["SNES"],
-            "score": -1
-        },
-        {
-            "name": "Bowser Castle 3",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "6ebcedee9e504fd6ab74cc0b06fc72ef3bdbe03a",
-            "tags": ["SNES"],
-            "score": -1
-        },
-        {
-            "name": "Bowser Castle 3",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "ScyHigh",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "c62ebda0ef53ef92c1fec1f6d876d8b8106c4146",
-            "tags": ["SNES"],
-            "score": -1
         },
         {
             "name": "Choco Island 1",
@@ -23890,7 +22845,9 @@
             "special": "T81",
             "music": "T81",
             "sha1": "293df3c33298b6483df36c521e52347fd9363495",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 3
         },
         {
@@ -23901,30 +22858,10 @@
             "special": "T73",
             "music": "T73",
             "sha1": "6510b925d15ddabddcf8902c942404b484df9acb",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 5
-        },
-        {
-            "name": "Choco Island 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Slimeserver",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "06cf9b15a34263ef645b1b5c6450d8b99a90456e",
-            "tags": ["SNES"],
-            "score": -1
-        },
-        {
-            "name": "Choco Island 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "3b031e1e72143e288755c21a3a91cb1f164d9422",
-            "tags": ["SNES"],
-            "score": -1
         },
         {
             "name": "Donut Plains 1",
@@ -23934,19 +22871,10 @@
             "special": "T12",
             "music": "T12",
             "sha1": "ea55cf47df1bdb1e6bf288457b65c2cc9ab8182c",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 4
-        },
-        {
-            "name": "Donut Plains 1",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "Wacker",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "1c2233513efb2cec0ca9cc06a8584714f9e2793d",
-            "tags": ["SNES"],
-            "score": -1
         },
         {
             "name": "Donut Plains 2",
@@ -23956,7 +22884,9 @@
             "special": "T81",
             "music": "T81",
             "sha1": "6342eb5d86b95c6c460c9fe2f7c45d6f12fa93a1",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 4
         },
         {
@@ -23967,7 +22897,9 @@
             "special": "T53",
             "music": "T53",
             "sha1": "e576fc9d514103bbe14ca05847f349055980d1ca",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": -2
         },
         {
@@ -23978,7 +22910,9 @@
             "special": "T53",
             "music": "T53",
             "sha1": "14b74b2635b9efe6f3d702d46397f0960f660034",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 3
         },
         {
@@ -23989,22 +22923,10 @@
             "special": "T53",
             "music": "T53",
             "sha1": "94143c90346d09a8a0d718903c3dbea614d57445",
-            "tags": ["SNES"],
-            "score": 3
-        },
-        {
-            "name": "Ghost Valley 3",
-            "version": "v1.beta",
-            "since_version": "0.12",
-            "author": [
-                "Davidslane",
-                "Kozakura"
+            "tags": [
+                "SNES"
             ],
-            "special": "T53",
-            "music": "T53",
-            "sha1": "87f568fc17c3707540173aa49e489bf57d773928",
-            "tags": ["SNES"],
-            "score": -1
+            "score": 3
         },
         {
             "name": "Koopa Beach 1",
@@ -24014,7 +22936,9 @@
             "special": "T51",
             "music": "T51",
             "sha1": "36b5044686782467ff928940bc6e21ba0ececad8",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 5
         },
         {
@@ -24025,7 +22949,9 @@
             "special": "T51",
             "music": "T51",
             "sha1": "a6df8eff399180c78124de9aadeae0c9f087416d",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 4
         },
         {
@@ -24036,7 +22962,9 @@
             "special": "T81",
             "music": "T81",
             "sha1": "79ab4a24345b9797c0b0b7de329996428daee92d",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 2
         },
         {
@@ -24047,52 +22975,10 @@
             "special": "T81",
             "music": "T81",
             "sha1": "497e5a8fef2078d71695f140667ca341d2b51e35",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 3
-        },
-        {
-            "name": "Mario Circuit 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "TL",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "e5dec630402a683e10a92dfdd2dd1203fda1e6eb",
-            "tags": ["SNES"],
-            "score": -1
-        },
-        {
-            "name": "Mario Circuit 2",
-            "version": "v1.01.fix",
-            "since_version": "0.12",
-            "author": "Cats4Life",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "c3078e7d34c62603147d065e22ef2cd0c2a676aa",
-            "tags": ["SNES"],
-            "score": -1	
-        },
-        {
-            "name": "Mario Circuit 2",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Bubby64",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "f2b03a78cd90db04da4ab561051431433a19abbd",
-            "tags": ["SNES"],
-            "score": -1
-        },
-        {
-            "name": "Mario Circuit 4",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Brawlboxgaming",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "926c07d8b91f0060f8837dbab1bad2f320ccf1df",
-            "tags": ["SNES"],
-            "score": -1
         },
         {
             "name": "Mario Circuit 4",
@@ -24102,41 +22988,10 @@
             "special": "T81",
             "music": "T81",
             "sha1": "0210fc3ea890069784240131343aec27dacfae9d",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 4
-        },
-        {
-            "name": "Rainbow Road",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "ALPHAMARIOX",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "3ffb468abefdc73433d4d633ba52ca789113ff1b",
-            "tags": ["SNES"],
-            "score": -1
-        },
-        {
-            "name": "Rainbow Road",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "e7a443d24f4b0d91393cce45e96520f549eb46a3",
-            "tags": ["SNES"],
-            "score": -1
-        },
-        {
-            "name": "Rainbow Road",
-            "version": "v0",
-            "since_version": "0.12",
-            "author": "Wixboy",
-            "special": "T22",
-            "music": "T22",
-            "sha1": "04b627aff7af67b44f2a0b6e7bdd959fdcbe82a4",
-            "tags": ["SNES"],
-            "score": -1
         },
         {
             "name": "Vanilla Lake 1",
@@ -24146,7 +23001,9 @@
             "special": "T61",
             "music": "T61",
             "sha1": "c7461cef1e8e2103af438f312cdea6d0b6cbc7d9",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 4
         },
         {
@@ -24157,19 +23014,10 @@
             "special": "T61",
             "music": "T61",
             "sha1": "63697be8e82601de4a6e0037ab8e60f08a232374",
-            "tags": ["SNES"],
+            "tags": [
+                "SNES"
+            ],
             "score": 5
-        },
-        {
-            "name": "Vanilla Lake 2",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "igorseabra4",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "c66a16c1b5df2ac7c36bfc6f38462fb57eeb7f9a",
-            "tags": ["SNES"],
-            "score": -1
         },
         {
             "name": "Snifit Station",
@@ -24258,17 +23106,6 @@
             "score": 2
         },
         {
-            "name": "Spring Ban Festival {April 1.}",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "varemi",
-            "special": "T74",
-            "music": "T74",
-            "sha1": "78a7e46e0da0d0d547c6acb03a57538a0594a91e",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Sprinkle Circuit",
             "version": "v2.1",
             "since_version": "0.12",
@@ -24290,7 +23127,9 @@
             "special": "T72",
             "music": "T72",
             "sha1": "e5c0f983d3f99831fc1391cfcdc3e1c54214f7ab",
-            "tags": ["SSASR"],
+            "tags": [
+                "SSASR"
+            ],
             "score": 3
         },
         {
@@ -24301,7 +23140,9 @@
             "special": "T21",
             "music": "T21",
             "sha1": "7f13b43b4485b9fc85c3c0c8f0389637d0757414",
-            "tags": ["SSBB"],
+            "tags": [
+                "SSBB"
+            ],
             "score": 3
         },
         {
@@ -24374,17 +23215,6 @@
             "score": 3
         },
         {
-            "name": "Starry Space Station",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Potatoman44",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "429d5948ac822f9ac2219339f9b4629b70163b15",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Stereoscopic Circuit",
             "version": "?",
             "since_version": "0.12",
@@ -24407,17 +23237,6 @@
             "score": 4
         },
         {
-            "name": "Subterranean Palace",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Kotanien",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "43eb26f9a1ac78937ace2b651457c47811be9dac",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Sugar Sweet Skerry",
             "version": "v1",
             "since_version": "0.12",
@@ -24438,17 +23257,6 @@
             "sha1": "f0b161b7e4a1ed4cb0d5ac9852ea692b5b46d3b5",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "Sunset Bridge",
-            "version": "RC3",
-            "since_version": "0.12",
-            "author": "TB 358",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "cc166c2594a57171396c47818c12217106e1f045",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Sunset Harbor",
@@ -24517,17 +23325,6 @@
             "score": 5
         },
         {
-            "name": "Sussy Circuit",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "XeoKoopa",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "ae3e8fc4ebf7bb3c713deb85331b8a0bb5cb8469",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Suzuka Circuit",
             "version": "v1.3",
             "since_version": "0.12",
@@ -24551,17 +23348,6 @@
             "sha1": "2d575d2b5b64f53caf8b8b8418ac0219e21a6927",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "Swag Rock",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "hyphenHoik",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "6b8c0f634c5b83e7a12a9944010e3285db30211d",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Sweet Plateau",
@@ -24600,28 +23386,6 @@
             "score": 2
         },
         {
-            "name": "SYTI Rosalina's RampSire",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "SeaPowerBlue",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "64504368ec7b3ed9052141c8a6c82d673188c04a",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "SYTI Western Rainbow Cannons",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "SeaPowerBlue",
-            "special": "T24",
-            "music": "T24",
-            "sha1": "dd3acc5ba0abd51615533297ddda4b7ae831a446",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Taiga Base",
             "version": "Beta",
             "since_version": "0.12",
@@ -24631,17 +23395,6 @@
             "sha1": "ab0d97e07473551fb325f2fb1edc492cf5d35c9c",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "Test Track",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "3c31776abf981557d9ace9a0b3f5305409729f3b",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "The Backrooms",
@@ -24681,20 +23434,6 @@
             "sha1": "a8ab81394fb2bbdde54b0aa9ef2eda79e0c73745",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "The Rexkip Inator",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": [
-                "Davidslane",
-                "YoshTaku"
-            ],
-            "special": "T81",
-            "music": "T81",
-            "sha1": "5377121682484ad40e10671d8204a22874af9ec7",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Thump Bump Forest",
@@ -24795,7 +23534,9 @@
             "special": "T12",
             "music": "T12",
             "sha1": "80815a00b700725a510f97fb1d88678683467b65",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
         },
         {
@@ -24806,7 +23547,9 @@
             "special": "T12",
             "music": "T12",
             "sha1": "e946aa99932d392add1c7012a19565408390b736",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
         },
         {
@@ -24820,85 +23563,10 @@
             "special": "T31",
             "music": "T31",
             "sha1": "fc79e166cf841fcaef12804f734ed8f8bd35cdc4",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
-        },
-        {
-            "name": "Berlin Byways 2",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "5055b1a36d678c5794aedcf8656c8de38ced15eb",
-            "tags": ["Tour"],
-            "score": -1
-        },
-        {
-            "name": "London Loop 2",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "00cdc6c8a86f9207e2370f0f1d95305fc2ea0fed",
-            "tags": ["Tour"],
-            "score": -1
-        },
-        {
-            "name": "London Loop 3",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "55c317f3ed0e367f3155cfab48df6fa8983538d4",
-            "tags": ["Tour"],
-            "score": -1
-        },
-        {
-            "name": "London Loop",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "9e642035a31bf5c7160ca0d1313c6b0abfdb35e0",
-            "tags": ["Tour"],
-            "score": -1
-        },
-        {
-            "name": "Los Angeles Laps 2",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "f5515f95cbab09b5376e1bdbe9cd911964b5d26b",
-            "tags": ["Tour"],
-            "score": -1
-        },
-        {
-            "name": "Tour Los Angeles Laps 3",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "15c8187c97fa72aeeb7b15fb94e83dd2eaf7ee03",
-            "tags": [],
-            "score": -1
-        },
-        {
-            "name": "Tour Los Angeles Laps",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "bcbfe9e029e7e72cb33f69f9b592a1d1ebb3e52b",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "New York Minute 2",
@@ -24908,7 +23576,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "ec08224af5b465013871ac0e38ab0ec4483a1b30",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
         },
         {
@@ -24919,7 +23589,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "866541ce816b57ddb9458d7de19abce5074f30b5",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
         },
         {
@@ -24930,7 +23602,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "a49560026c77329884e328c8277b8bd82c60277a",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
         },
         {
@@ -24941,19 +23615,10 @@
             "special": "T11",
             "music": "T11",
             "sha1": "1ed39b5f6cfac9338cc9e3c551f35a73d195669a",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
-        },
-        {
-            "name": "Ninja Hideaway",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T33",
-            "music": "T33",
-            "sha1": "439916f586f4a26935e32fd22abc427dba2129eb",
-            "tags": ["Tour"],
-            "score": -1
         },
         {
             "name": "Ninja Hideaway",
@@ -24963,19 +23628,10 @@
             "special": "T33",
             "music": "T33",
             "sha1": "676494213ce0a0a4adeb2a33d84c91edfb5af6f1",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 4
-        },
-        {
-            "name": "Paris Promenade 2",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "f5f79fe87192bebd7df6d948a2964e92089f69c4",
-            "tags": ["Tour"],
-            "score": -1
         },
         {
             "name": "Paris Promenade 2",
@@ -24985,19 +23641,10 @@
             "special": "T82",
             "music": "T82",
             "sha1": "5953dc8acd8582078ff94480180327eea933f517",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 5
-        },
-        {
-            "name": "Paris Promenade 3",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "e26e9f4192c4840999cc45de9ccaddd724543931",
-            "tags": ["Tour"],
-            "score": -1
         },
         {
             "name": "Paris Promenade 3",
@@ -25007,19 +23654,10 @@
             "special": "T31",
             "music": "T31",
             "sha1": "c7ff81b3c77f07d5d7d742c1c5cb68905f367598",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 5
-        },
-        {
-            "name": "Paris Promenade",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "8c76b7d58e9f166c09b47d2080fc6433cb81429c",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Paris Promenade",
@@ -25029,7 +23667,9 @@
             "special": "T31",
             "music": "T31",
             "sha1": "21a7c377620abf7ab9abb011e640af65cb2edee4",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 5
         },
         {
@@ -25040,7 +23680,9 @@
             "special": "T31",
             "music": "T31",
             "sha1": "927114044608afd412afac7cb12c673235527804",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 5
         },
         {
@@ -25051,7 +23693,9 @@
             "special": "T31",
             "music": "T31",
             "sha1": "f7a7c5260831b964bbf06c6b6cbeeae0c3d30feb",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 5
         },
         {
@@ -25062,7 +23706,9 @@
             "special": "T63",
             "music": "T63",
             "sha1": "1a68e886e4415a5bacb400888d44faa6c931a461",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 1
         },
         {
@@ -25073,7 +23719,9 @@
             "special": "T63",
             "music": "T63",
             "sha1": "49dd6e700b76b667477e0067b5d0cdb0b3488176",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 1
         },
         {
@@ -25084,7 +23732,9 @@
             "special": "T63",
             "music": "T63",
             "sha1": "5cf1f6efd85fd3a59d70d8d2707379ea09b7be2b",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 1
         },
         {
@@ -25095,7 +23745,9 @@
             "special": "T63",
             "music": "T63",
             "sha1": "4c7d142d4710c753569601cbf3df4b4b042fa603",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 1
         },
         {
@@ -25106,7 +23758,9 @@
             "special": "T44",
             "music": "T44",
             "sha1": "b6f7346e305fb1b6a68f36db58f05bcb09ee40d0",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 3
         },
         {
@@ -25117,19 +23771,10 @@
             "special": "T54",
             "music": "T54",
             "sha1": "6bcd7385680d47bba32a6cd27fea85500cb04208",
-            "tags": ["Tour"],
+            "tags": [
+                "Tour"
+            ],
             "score": 5
-        },
-        {
-            "name": "Vancouver Velocity",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "7bfd5543dedfd3443fc8cd9f883626b26ebb568e",
-            "tags": ["Tour"],
-            "score": -1
         },
         {
             "name": "Toxi City",
@@ -25202,20 +23847,6 @@
             "sha1": "df3721bdd523a33bfede1bdf5042065bf924f8b9",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Unsatisfactory Fortification",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": [
-                "Bear",
-                "tZ"
-            ],
-            "special": "T11",
-            "music": "T11",
-            "sha1": "33babd23e5aca6796e7a36cf32228a1a686423ea",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Vacay Bay",
@@ -25490,17 +24121,6 @@
             "score": 3
         },
         {
-            "name": "Whoops You Slipped on Ice",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "7b9844a80ccc42336fed27b05b88300abfef4c30",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Wiggler Wetlands",
             "version": "v1.2",
             "since_version": "0.12",
@@ -25519,30 +24139,10 @@
             "special": "T23",
             "music": "T23",
             "sha1": "397f77378c4bdf654e3642c0d81864d70cbb1cc6",
-            "tags": ["Wii"],
+            "tags": [
+                "Wii"
+            ],
             "score": 5
-        },
-        {
-            "name": "DK Summit",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Potatoman44",
-            "special": "T23",
-            "music": "T23",
-            "sha1": "3df0c7721d693c1989818b9ec864a6c09fe8539f",
-            "tags": ["Wii"],
-            "score": -1
-        },
-        {
-            "name": "WiiU Animal Crossing",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Hollend",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "fd95f056134a8ac65170146b93e1ddc1c4a82576",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Animal Crossing",
@@ -25552,7 +24152,9 @@
             "special": "T33",
             "music": "T33",
             "sha1": "5d8bad951eac618bc300be9d3723e86db46cb3f2",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 5
         },
         {
@@ -25563,7 +24165,9 @@
             "special": "T44",
             "music": "T44",
             "sha1": "3b78d9430f94d72405c7ee3a09f9b798b66afea5",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25574,19 +24178,10 @@
             "special": "T33",
             "music": "T33",
             "sha1": "237c129c899feb989e795ad6f5e6a7899eb8dbc2",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 5
-        },
-        {
-            "name": "Bone-Dry Dunes",
-            "version": "v1.5",
-            "since_version": "0.12",
-            "author": "Diego Vapy",
-            "special": "T62",
-            "music": "T62",
-            "sha1": "fc2d70810753036b8f1108493c6a335640b8e868",
-            "tags": ["Switch"],
-            "score": -1
         },
         {
             "name": "Bowser's Castle",
@@ -25596,7 +24191,9 @@
             "special": "T43",
             "music": "T43",
             "sha1": "e213f48375d2820f343ed749d994d70835bdcd70",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25607,7 +24204,9 @@
             "special": "T13",
             "music": "T13",
             "sha1": "52f1a2e71cfba3a90351c02d1412b514962a3f9c",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 3,
             "warning": 1,
             "note": "collision"
@@ -25620,7 +24219,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "4f3f20d40751f1b162a278d54214ef32d5f2a4e5",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25631,7 +24232,9 @@
             "special": "T14",
             "music": "T14",
             "sha1": "d557dc055b7583423bf990e17dead6d6879311fb",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 5
         },
         {
@@ -25642,7 +24245,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "c0a63cfd9830a0dc95d1c229e813e000245e7305",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25653,7 +24258,9 @@
             "special": "T61",
             "music": "T61",
             "sha1": "93916d9e61cbed97e3f17424835ffaccb5f84089",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25664,7 +24271,9 @@
             "special": "T74",
             "music": "T74",
             "sha1": "bbd30872fe3ec2f93df88f339b6f8afd0afd86ea",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25675,19 +24284,10 @@
             "special": "T31",
             "music": "T31",
             "sha1": "88fe31b5f565238e5fb29d087ca335a24ea908a0",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
-        },
-        {
-            "name": "Mount Wario",
-            "version": "Alpha",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T23",
-            "music": "T23",
-            "sha1": "562ae008039ae56f5e4e67eb9864e7a17df9bfdf",
-            "tags": ["Switch"],
-            "score": -1
         },
         {
             "name": "Mount Wario",
@@ -25697,7 +24297,9 @@
             "special": "T23",
             "music": "T23",
             "sha1": "066f37f9f93bf6b7e6e70cc4f6b8f9ff267349e8",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25708,7 +24310,9 @@
             "special": "T54",
             "music": "T54",
             "sha1": "0848ad8124ea161254bccc4915fdc1ca38abc882",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25719,7 +24323,9 @@
             "special": "T24",
             "music": "T24",
             "sha1": "7a5f4592ff574c2c65bf5f4ffef99f67c18420a5",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25730,7 +24336,9 @@
             "special": "T11",
             "music": "T11",
             "sha1": "58ec4cd88e136c0b0d8ccedd96dd8b32f3b09ea4",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25741,7 +24349,9 @@
             "special": "T23",
             "music": "T23",
             "sha1": "5d13a84b54b3d3387912b0efbbae0990c423034a",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25752,7 +24362,9 @@
             "special": "T13",
             "music": "T13",
             "sha1": "6357fbc0c4133f55c73cd02e2d431557169bd54c",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25763,7 +24375,9 @@
             "special": "T31",
             "music": "T31",
             "sha1": "dc0dde8a30c0783036168e0c4fae6da73863e10b",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25774,7 +24388,9 @@
             "special": "T53",
             "music": "T53",
             "sha1": "7d54bd9f48d32ee12d53392b9d2564f469e4dd17",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 5
         },
         {
@@ -25785,7 +24401,9 @@
             "special": "T32",
             "music": "T32",
             "sha1": "9d44fc4b48f461752e69e7a3ac3ae9a9c07b0077",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25796,7 +24414,9 @@
             "special": "T33",
             "music": "T33",
             "sha1": "d3617169e6e15202d88b4bf6aa4ef6dd2f09acce",
-            "tags": ["Switch"],
+            "tags": [
+                "Switch"
+            ],
             "score": 4
         },
         {
@@ -25822,17 +24442,6 @@
             "score": 4
         },
         {
-            "name": "World's Hardest Game",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Rubicmaster",
-            "special": "T54",
-            "music": "T54",
-            "sha1": "666a40afebe015afda303d092976bc8db4e5d6a1",
-            "tags": [],
-            "score": -1
-        },
-        {
             "name": "Charge!",
             "version": "v1.3",
             "since_version": "0.12",
@@ -25840,7 +24449,9 @@
             "special": "T12",
             "music": "T12",
             "sha1": "fb72a0e2f00aa61d9bbffd96b6a0365712b19652",
-            "tags": ["WP"],
+            "tags": [
+                "WP"
+            ],
             "score": 3
         },
         {
@@ -25851,7 +24462,9 @@
             "special": "T83",
             "music": "T83",
             "sha1": "57c0a5d066a1f543eb2a5abf27c07cdb61042ef6",
-            "tags": ["WP"],
+            "tags": [
+                "WP"
+            ],
             "score": 1
         },
         {
@@ -25862,7 +24475,9 @@
             "special": "T42",
             "music": "T42",
             "sha1": "9f24d506519552ee44a598a7a80753dd533e5738",
-            "tags": ["WP"],
+            "tags": [
+                "WP"
+            ],
             "score": 3
         },
         {
@@ -25875,17 +24490,6 @@
             "sha1": "cc0e14ea4a305b3e01a1cc1220d8197651858a63",
             "tags": [],
             "score": -2
-        },
-        {
-            "name": "Yoshi's Deserted Home",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "Potatoman44",
-            "special": "T41",
-            "music": "T41",
-            "sha1": "438f6d4f9d9914d2cbe19c0d0467a1ed592881a2",
-            "tags": [],
-            "score": -1
         },
         {
             "name": "Yoshi's Tropical Trek",
