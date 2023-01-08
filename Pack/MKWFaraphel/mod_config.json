@@ -83,8 +83,7 @@
             "FZ": "{{ get_color(name='yellow') @ tag }}",
             "RV": "{{ get_color(name='white') @ tag }}",
             "SADX": "{{ get_color(name='dark blue') @ tag }}",
-            "SCR": "{{ get_color(name='yellow') @ tag }}",
-            "SH": "{{ get_color(name='pink') @ tag }}",
+            "Sonic": "{{ get_color(name='yellow') @ tag }}",
             "SM64": "{{ get_color(name='pink') @ tag }}",
             "SMB": "{{ get_color(name='light red') @ tag }}",
             "SSBB": "{{ get_color(name='vivid red') @ tag }}",
@@ -639,23 +638,6 @@
             "since_version": "0.10",
             "sha1": "4a9ba88bce7d5ecc53268355caf75076d9e63a2a",
             "tags": []
-        },
-        {
-            "name": "Ancient Lake",
-            "music": "T83",
-            "special": "T83",
-            "score": 5,
-            "author": [
-                "DJ Lowgey",
-                "Mewtwo2000"
-            ],
-            "since_version": "0.1",
-            "sha1": "2a19d661bd2f6184208965ae93d0ad241185a8e5",
-            "version": "v2.1",
-            "family": 1079,
-            "tags": [
-                "DKR"
-            ]
         },
         {
             "name": "Ancient Ruins",
@@ -4699,14 +4681,14 @@
             "note": "maybe remove ?"
         },
         {
-            "name": "DKR Ancient Lake",
+            "name": "Ancient Lake",
             "version": "v1",
             "since_version": "0.12",
             "author": "Squadaloo",
             "special": "T81",
             "music": "T81",
             "sha1": "aa9f1271d5c21f4369cec6427d1042d169806fc3",
-            "tags": [],
+            "tags": ["DKR"],
             "score": 5
         },
         {
@@ -7154,7 +7136,7 @@
             "version": "v1",
             "family": 7280,
             "tags": [
-                "SCR"
+                "Sonic"
             ]
         },
         {
@@ -7676,7 +7658,7 @@
             "version": "v1.1",
             "family": 2725,
             "tags": [
-                "SH"
+                "Sonic"
             ]
         },
         {
@@ -10400,7 +10382,7 @@
             "sha1": "5d631868a85665a902af170124b8f33409a23727",
             "tags": [],
             "score": 5,
-            "note": "changer la musique pour un truc moins joyeux"
+            "note": "set music to something less happy"
         },
         {
             "name": "Love Beach",
@@ -11925,7 +11907,7 @@
             "version": "v0.4",
             "family": 6252,
             "tags": [
-                "SCR"
+                "Sonic"
             ]
         },
         {
@@ -12836,7 +12818,7 @@
             "score": 1,
             "since_version": "0.8",
             "sha1": "bc28dd3321acd7e5c6b47d98a5b595a86069ce4e",
-            "note": "IA buggé",
+            "note": "IA bug",
             "warning": 1,
             "version": "Beta2",
             "family": 2685,
@@ -14598,8 +14580,7 @@
                 "Retro",
                 "GCN"
             ],
-            "score": 5,
-            "note": "look really good, maybe keep both the original and this one ?"
+            "score": 5
         },
         {
             "name": "Rainbow Road",
@@ -14782,7 +14763,7 @@
             "sha1": "6762963eeb41ade1475c1d0dbf1e821bea48e9fe",
             "tags": [],
             "score": 2,
-            "note": "changer la musique pour la ville de nuit avec les voitures"
+            "note": "change the music for the night city"
         },
         {
             "name": "Rainy Rainbow Raceway",
@@ -16635,7 +16616,7 @@
             "version": "v1",
             "family": 7281,
             "tags": [
-                "SCR"
+                "Sonic"
             ]
         },
         {
