@@ -83,8 +83,7 @@
             "FZ": "{{ get_color(name='yellow') @ tag }}",
             "RV": "{{ get_color(name='white') @ tag }}",
             "SADX": "{{ get_color(name='dark blue') @ tag }}",
-            "SCR": "{{ get_color(name='yellow') @ tag }}",
-            "SH": "{{ get_color(name='pink') @ tag }}",
+            "Sonic": "{{ get_color(name='yellow') @ tag }}",
             "SM64": "{{ get_color(name='pink') @ tag }}",
             "SMB": "{{ get_color(name='light red') @ tag }}",
             "SSBB": "{{ get_color(name='vivid red') @ tag }}",
@@ -454,6 +453,7 @@
             "sha1": "91a46e83b86026bb31ad1a96080abd3b207fbc24",
             "version": "RC1+.boost",
             "family": 75,
+            "warning": 1,
             "tags": [
                 "Boost",
                 "_DS"
@@ -638,23 +638,6 @@
             "since_version": "0.10",
             "sha1": "4a9ba88bce7d5ecc53268355caf75076d9e63a2a",
             "tags": []
-        },
-        {
-            "name": "Ancient Lake",
-            "music": "T83",
-            "special": "T83",
-            "score": 5,
-            "author": [
-                "DJ Lowgey",
-                "Mewtwo2000"
-            ],
-            "since_version": "0.1",
-            "sha1": "2a19d661bd2f6184208965ae93d0ad241185a8e5",
-            "version": "v2.1",
-            "family": 1079,
-            "tags": [
-                "DKR"
-            ]
         },
         {
             "name": "Ancient Ruins",
@@ -3741,7 +3724,7 @@
             "sha1": "0e2564fb27abfcaf3f744034369cd40a3f538239",
             "version": "v1",
             "family": 2820,
-            "tags": []
+            "tags": ["SMB"]
         },
         {
             "name": "Cloud Carpet",
@@ -4394,16 +4377,6 @@
             "score": 4
         },
         {
-            "name": "Creepy Mausoleum",
-            "author": "Warwick92xD",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "e4cfe4ceca01ac43514bf7c1b8e1f8351f06e80d",
-            "version": "PoC",
-            "since_version": "0.11",
-            "score": 2
-        },
-        {
             "name": "Crepuscular Crossover",
             "author": "JadenMKW",
             "special": "T44",
@@ -4708,14 +4681,14 @@
             "note": "maybe remove ?"
         },
         {
-            "name": "DKR Ancient Lake",
+            "name": "Ancient Lake",
             "version": "v1",
             "since_version": "0.12",
             "author": "Squadaloo",
             "special": "T81",
             "music": "T81",
             "sha1": "aa9f1271d5c21f4369cec6427d1042d169806fc3",
-            "tags": [],
+            "tags": ["DKR"],
             "score": 5
         },
         {
@@ -4820,6 +4793,7 @@
             "sha1": "ba8482ac7d6c037c138fc69dba344cd9243f12cc",
             "version": "Beta",
             "family": 7493,
+            "warning": 1,
             "tags": []
         },
         {
@@ -4913,18 +4887,6 @@
             "sha1": "bdc5ab3d14d40979a535c9c988372ccb58b6e72e",
             "tags": [],
             "score": 2
-        },
-        {
-            "name": "Darky Cliff",
-            "author": "kHacker35000vr",
-            "special": "T13",
-            "music": "T13",
-            "score": 1,
-            "since_version": "0.7",
-            "sha1": "fd244e182fbf716b2bcfecf8e983f9f64ac1c340",
-            "version": "RC1.alt2",
-            "family": 77,
-            "tags": []
         },
         {
             "name": "Dash Cannon Woods",
@@ -6271,7 +6233,9 @@
             "sha1": "4a415decd4b7b2b9511a10169f34a8fc72bad86e",
             "version": "v1.1",
             "family": 3588,
-            "tags": []
+            "warning": 2,
+            "tags": [],
+            "note": "the laps does not always count"
         },
         {
             "name": "Escalator Action",
@@ -6846,20 +6810,6 @@
             "score": 1
         },
         {
-            "name": "Forest of Fairies",
-            "music": "T33",
-            "special": "T33",
-            "score": 1,
-            "author": "Rukasudo90",
-            "since_version": "0.1",
-            "sha1": "d1f4b715bd0d5248d94cf49ea52250e5faee9d26",
-            "version": "RC2",
-            "family": 1373,
-            "tags": [
-                "Zelda"
-            ]
-        },
-        {
             "name": "Forest of Magic",
             "music": "T13",
             "special": "T13",
@@ -6945,18 +6895,6 @@
             "version": "RC2a",
             "family": 2412,
             "tags": []
-        },
-        {
-            "name": "Fr33ze Circuit",
-            "author": "Skipper93653",
-            "special": "T21",
-            "music": "T21",
-            "sha1": "286d8c715d4480c6a0e708e6f25069f23e639dbe",
-            "version": "Alpha3.1",
-            "since_version": "0.11",
-            "score": 1,
-            "warning": 1,
-            "note": "bugged IA, some weird collission"
         },
         {
             "name": "Frantic Funyard",
@@ -7198,7 +7136,7 @@
             "version": "v1",
             "family": 7280,
             "tags": [
-                "SCR"
+                "Sonic"
             ]
         },
         {
@@ -7720,7 +7658,7 @@
             "version": "v1.1",
             "family": 2725,
             "tags": [
-                "SH"
+                "Sonic"
             ]
         },
         {
@@ -8265,16 +8203,6 @@
             "tags": []
         },
         {
-            "name": "Hill Loop",
-            "author": "Trollllerz",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "dfe4f4c5d9e024a441ee5cef9439788938424f83",
-            "version": "v1.1",
-            "since_version": "0.11",
-            "score": 1
-        },
-        {
             "name": "Hillside Circuit",
             "music": "T11",
             "special": "T11",
@@ -8792,21 +8720,6 @@
             "score": 5
         },
         {
-            "name": "Incendia Castle",
-            "music": "T34",
-            "special": "T34",
-            "score": 3,
-            "author": [
-                "MrBean35000vr",
-                "Chadderz"
-            ],
-            "since_version": "0.1",
-            "sha1": "a631b7d037fe4d114f602f6931125adb3af09560",
-            "version": "RC1.1",
-            "family": 17,
-            "tags": []
-        },
-        {
             "name": "Indianapolis",
             "music": "T11",
             "special": "T11",
@@ -9089,17 +9002,6 @@
             "score": 5
         },
         {
-            "name": "Joke Shortcuts",
-            "author": "Warwick92xD",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "8471cbf51c9ab43207f636a1fdb6d156de2d3894",
-            "version": "PoC",
-            "since_version": "0.11",
-            "score": 1,
-            "warning": 2
-        },
-        {
             "name": "Journey Across Maps",
             "author": "Rex",
             "special": "T24",
@@ -9218,18 +9120,6 @@
             "sha1": "99d44aa3e54606b3758699b818895cb79bd34f9c",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "Jungle Jamble",
-            "music": "T11",
-            "special": "T11",
-            "score": 1,
-            "author": "Torran",
-            "since_version": "0.1",
-            "sha1": "0927de889959b6fb47bc1142f26aa669b7e0cbfb",
-            "version": "v1.5+",
-            "family": 3073,
-            "tags": []
         },
         {
             "name": "Jungle Jives",
@@ -9650,18 +9540,6 @@
             "tags": []
         },
         {
-            "name": "Kioh Katach",
-            "author": "TAS Rhys",
-            "special": "T33",
-            "music": "T33",
-            "score": 2,
-            "since_version": "0.7",
-            "sha1": "b5e3292deeb665eeb647d79ad54e91764b45b883",
-            "version": "v1.1",
-            "family": 3161,
-            "tags": []
-        },
-        {
             "name": "Kirio Raceway",
             "music": "T11",
             "special": "T11",
@@ -9800,6 +9678,7 @@
             "sha1": "e66c7aaecba153d88700ff2fdc6b3b72acf74f45",
             "version": "RC1",
             "family": 3887,
+            "warning": 1,
             "tags": []
         },
         {
@@ -10489,7 +10368,7 @@
             "sha1": "5d631868a85665a902af170124b8f33409a23727",
             "tags": [],
             "score": 5,
-            "note": "changer la musique pour un truc moins joyeux"
+            "note": "set music to something less happy"
         },
         {
             "name": "Love Beach",
@@ -10736,7 +10615,9 @@
             "sha1": "fea2f5373b532d8a21c1d9d1dc9555c26a65a331",
             "version": "v1",
             "family": 2863,
-            "tags": []
+            "warning": 1,
+            "tags": [],
+            "note": "some jump are very hard"
         },
         {
             "name": "Luma Park",
@@ -11314,18 +11195,6 @@
             "sha1": "15f4986ea0bda84ceb7b7e7f8e4a2fda935a6b8f",
             "version": "v1.1",
             "family": 7386,
-            "tags": []
-        },
-        {
-            "name": "Mario Valley 3",
-            "author": "Retrostyle12",
-            "special": "T21",
-            "music": "T21",
-            "score": 2,
-            "since_version": "0.8",
-            "sha1": "cab74ff0eabc9cc448baf3f58016161c2521e1af",
-            "version": "v1",
-            "family": 2865,
             "tags": []
         },
         {
@@ -12024,7 +11893,7 @@
             "version": "v0.4",
             "family": 6252,
             "tags": [
-                "SCR"
+                "Sonic"
             ]
         },
         {
@@ -12935,7 +12804,7 @@
             "score": 1,
             "since_version": "0.8",
             "sha1": "bc28dd3321acd7e5c6b47d98a5b595a86069ce4e",
-            "note": "IA buggé",
+            "note": "IA bug",
             "warning": 1,
             "version": "Beta2",
             "family": 2685,
@@ -13740,18 +13609,6 @@
             "sha1": "332f8d4dfedbe698376f065e66c46639ec007b3c",
             "version": "v1.1",
             "family": 8334,
-            "tags": []
-        },
-        {
-            "name": "Pianta's Lagoon",
-            "author": "Rukasudo90",
-            "special": "T32",
-            "music": "T32",
-            "score": 1,
-            "since_version": "0.7",
-            "sha1": "ee1ec1c158ea1544c204cad5360406ec5df9c6c9",
-            "version": "Beta2",
-            "family": 1670,
             "tags": []
         },
         {
@@ -14709,8 +14566,7 @@
                 "Retro",
                 "GCN"
             ],
-            "score": 5,
-            "note": "look really good, maybe keep both the original and this one ?"
+            "score": 5
         },
         {
             "name": "Rainbow Road",
@@ -14893,7 +14749,7 @@
             "sha1": "6762963eeb41ade1475c1d0dbf1e821bea48e9fe",
             "tags": [],
             "score": 2,
-            "note": "changer la musique pour la ville de nuit avec les voitures"
+            "note": "change the music for the night city"
         },
         {
             "name": "Rainy Rainbow Raceway",
@@ -16746,7 +16602,7 @@
             "version": "v1",
             "family": 7281,
             "tags": [
-                "SCR"
+                "Sonic"
             ]
         },
         {
@@ -17946,8 +17802,7 @@
             "author": "HelloImYourMind",
             "special": "T72",
             "music": "T72",
-            "score": 2,
-            "note": "Warning Dolphin",
+            "score": 3,
             "since_version": "0.7",
             "sha1": "7c45f8b03c1705f602bde1548f6b596a310b8edc",
             "version": "RC2",
@@ -18637,7 +18492,7 @@
             "version": "RC1",
             "family": 24,
             "tags": [
-                "KO"
+                "Edit"
             ]
         },
         {
@@ -18778,22 +18633,6 @@
             "score": 4
         },
         {
-            "name": "The Dragon Toasty",
-            "author": "Zappg",
-            "special": "T81",
-            "music": "T81",
-            "score": 4,
-            "since_version": "0.9",
-            "sha1": "c15b4c52d0f00189e12f98d6d4fca4cc65c43fdd",
-            "warning": 2,
-            "note": "bad minimap, bad IA, bad spawn",
-            "version": "v1",
-            "family": 9490,
-            "tags": [
-                "Spyro"
-            ]
-        },
-        {
             "name": "The Elfin",
             "music": "T62",
             "special": "T62",
@@ -18864,18 +18703,6 @@
             "sha1": "867b173c814fefbbbbd171f951c03160e8c3b3ca",
             "version": "v1",
             "family": 8740,
-            "tags": []
-        },
-        {
-            "name": "The Nether Fortress",
-            "author": "Doumdoum",
-            "special": "T11",
-            "music": "T11",
-            "score": 1,
-            "since_version": "0.9",
-            "sha1": "6389d56d8d4e680de3d2a0fe1070577fedefde98",
-            "version": "Alpha1",
-            "family": 8868,
             "tags": []
         },
         {
@@ -19768,20 +19595,6 @@
             "score": 3
         },
         {
-            "name": "Trek of Shapes",
-            "author": "Yosh",
-            "special": "T44",
-            "music": "T44",
-            "score": 1,
-            "note": "Texture missing",
-            "since_version": "0.7",
-            "sha1": "8d407546e4bc9e8086c48a5062a9dbedf9f3278f",
-            "warning": 1,
-            "version": "v3",
-            "family": 4973,
-            "tags": []
-        },
-        {
             "name": "Trick Mountain",
             "author": "Man-O-Wii",
             "special": "T73",
@@ -20170,7 +19983,7 @@
             "tags": []
         },
         {
-            "name": "Underground Sky (Caron)",
+            "name": "Underground Sky",
             "music": "T74",
             "special": "T74",
             "score": 5,
@@ -20180,17 +19993,6 @@
             "version": "v1.5",
             "family": 3941,
             "tags": []
-        },
-        {
-            "name": "Underground Sky (EC2Joshi)",
-            "author": "EC2Joshi",
-            "special": "T74",
-            "music": "T74",
-            "sha1": "7ad7accfbdfb88efc20e74ad23080a59ce3246c8",
-            "version": "v0.8",
-            "since_version": "0.11",
-            "score": 2,
-            "note": "cool map, but oob area is too low in the map, and some colission are bugged"
         },
         {
             "name": "Underpass & Highway",
@@ -21487,18 +21289,6 @@
             "tags": []
         },
         {
-            "name": "Waterfall Terrain",
-            "author": "Warwick92xD",
-            "special": "T82",
-            "music": "T82",
-            "score": 2,
-            "since_version": "0.10",
-            "sha1": "339743f9a0214a34f9f0d013c2290bcc26f1e459",
-            "version": "v1",
-            "family": 6695,
-            "tags": []
-        },
-        {
             "name": "Waterlake Raceway",
             "music": "T51",
             "special": "T51",
@@ -21957,18 +21747,6 @@
             "sha1": "d2f813d7b0833e30040a1451362003f0f6ff64b9",
             "version": "v1",
             "family": 3182,
-            "tags": []
-        },
-        {
-            "name": "Wooden Skyroad",
-            "music": "T33",
-            "special": "T33",
-            "score": 3,
-            "author": "Skipper93653",
-            "since_version": "0.1",
-            "sha1": "65d6e4920a9fdc81eee6a75464f274e74433b1e5",
-            "version": "Beta",
-            "family": 3833,
             "tags": []
         },
         {
