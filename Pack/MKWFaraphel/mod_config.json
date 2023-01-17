@@ -8737,7 +8737,7 @@
             "tags": []
         },
         {
-            "name": "Inside the Ancient Pyramid",
+            "name": "Inside Ancient Pyramid",
             "music": "T11",
             "special": "T11",
             "score": 1,
@@ -10984,20 +10984,6 @@
                 "Retro",
                 "GBA"
             ]
-        },
-        {
-            "name": "Mario Circuit",
-            "author": "Diego Vapy",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "8db98910d4048022faaa46dae9fb9503a01cde3f",
-            "version": "v1.fix",
-            "since_version": "0.11",
-            "score": 3,
-            "tags": [
-                "SSBB"
-            ],
-            "note": "out of bounds near the walls and the ramp is a bit buggy."
         },
         {
             "name": "Mario Circuit",
@@ -14455,7 +14441,7 @@
             ]
         },
         {
-            "name": "Rainbow Road",
+            "name": "Rainbow Road (GK2)",
             "author": "Kinopiokuppa",
             "special": "T44",
             "music": "T44",
@@ -14469,7 +14455,7 @@
             ]
         },
         {
-            "name": "Rainbow Road",
+            "name": "Rainbow Road (GK7)",
             "author": "Kinopiokuppa",
             "special": "T44",
             "music": "T44",
