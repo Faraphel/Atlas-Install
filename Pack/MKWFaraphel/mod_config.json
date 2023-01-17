@@ -2849,7 +2849,7 @@
             "sha1": "ece38208d9f46c5b28efcaee7dbb1edc7ae53c92",
             "version": "v1",
             "family": 6575,
-            "tags": []
+            "tags": ["SMO"]
         },
         {
             "name": "Casino Park",
@@ -3089,17 +3089,6 @@
             "version": "v1.5",
             "since_version": "0.11",
             "score": 5
-        },
-        {
-            "name": "Celestial Summit",
-            "author": "ScyHigh",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "9fc5a59071e9cf3d64cc4596d5dabbdc8eee3dfb",
-            "version": "v1",
-            "since_version": "0.11",
-            "score": 2,
-            "warning": 3
         },
         {
             "name": "Chain Chomp Skatepark",
@@ -3418,6 +3407,7 @@
             "sha1": "bf00406241513ffe48222e25f4bdb15f35013d43",
             "version": "v2",
             "since_version": "0.11",
+            "warning": 1,
             "score": 4
         },
         {
@@ -3562,18 +3552,6 @@
             "sha1": "bda21910e1ca9b2869c06360dce513299e688b6d",
             "version": "v1.3",
             "family": 2841,
-            "tags": []
-        },
-        {
-            "name": "Circuit 3",
-            "music": "T72",
-            "special": "T72",
-            "score": 3,
-            "author": "TheZACAtac",
-            "since_version": "0.1",
-            "sha1": "96c9a17ecd815b9b6c3e981aec094b5e26f6a3d1",
-            "version": "Beta2",
-            "family": 2936,
             "tags": []
         },
         {
@@ -6072,7 +6050,7 @@
             "sha1": "ca7cdde57a2a3445d5f0427dbc536e98d1550480",
             "version": "v1",
             "family": 1903,
-            "tags": []
+            "tags": ["Edit"]
         },
         {
             "name": "Electrodrome",
@@ -6120,7 +6098,8 @@
             "sha1": "23173a7135549040dd843f8f6a6ba64a7e599602",
             "version": "v1.0.1",
             "since_version": "0.11",
-            "score": 5
+            "score": 5,
+            "tags": ["Sonic"],
         },
         {
             "name": "Emerald Isle",
@@ -8494,18 +8473,6 @@
             "sha1": "8794860f60eb3de8a96af1cf43289cd094bfdf1f",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Ice Creek",
-            "music": "T11",
-            "special": "T11",
-            "score": 2,
-            "author": "Purple X",
-            "since_version": "0.1",
-            "sha1": "ab3ce46420345eea45d6a87bb62a3d5217d5996d",
-            "version": "v1",
-            "family": 2073,
-            "tags": []
         },
         {
             "name": "Ice Ice Outpost",
@@ -13504,7 +13471,7 @@
             "sha1": "2f1336cd6e9bbf0733ddae6af7e572c66b01f544",
             "version": "v1",
             "family": 9448,
-            "tags": []
+            "tags": ["Edit"]
         },
         {
             "name": "Perplexus",
@@ -14261,6 +14228,7 @@
             "sha1": "88133b7e461ba46d774285d07f55e78f23b5a123",
             "version": "v1.pre1",
             "family": 8537,
+            "warning": 1,
             "tags": []
         },
         {
@@ -14310,18 +14278,6 @@
             "sha1": "bcb4e07665d5dff30d616174390591782b6e581b",
             "version": "v1.1",
             "family": 4136,
-            "tags": []
-        },
-        {
-            "name": "Rainbow Galaxy",
-            "author": "ANoob",
-            "special": "T44",
-            "music": "T44",
-            "score": 3,
-            "since_version": "0.7",
-            "sha1": "700e46f6a1fb8df22ec4397f8740315b455785f9",
-            "version": "v1.3",
-            "family": 4109,
             "tags": []
         },
         {
@@ -19085,6 +19041,7 @@
             "since_version": "0.1",
             "sha1": "2da12d0aab27b63efab236e8b017954c115029fb",
             "version": "v1",
+            "warning": 3,
             "tags": [
                 "Retro",
                 "3DS"
@@ -19604,6 +19561,7 @@
             "sha1": "f5bee4e9099059bfaa474e15e72443ce5c68cd76",
             "version": "v1",
             "family": 7779,
+            "warning": 1,
             "tags": []
         },
         {
@@ -20189,14 +20147,15 @@
             ]
         },
         {
-            "name": "VVVVVV Circuit 3",
+            "name": "Circuit 3",
             "author": "TheZACAtac",
             "special": "T72",
             "music": "T72",
             "sha1": "ac25029e0b50f12e70c0495c852faef9e7f1695c",
             "version": "v1.1",
             "since_version": "0.11",
-            "score": 2
+            "score": 2,
+            "tags": ["VVVVVV"]
         },
         {
             "name": "Vacay Bay",
@@ -20388,6 +20347,7 @@
             "sha1": "e53bae05fe007a899d7d2effbf5545e45b317a16",
             "version": "v1",
             "family": 8068,
+            "warning": 1,
             "tags": [
                 "CT Jam"
             ]
@@ -21606,7 +21566,7 @@
             "sha1": "77fcd297fa1381198475de3cf6fb9d62cfb245e6",
             "version": "v1",
             "family": 1255,
-            "tags": []
+            "tags": ["Sonic"]
         },
         {
             "name": "Windmill Village",
