@@ -413,7 +413,7 @@
             "tags": [],
             "score": 4,
             "warning": 1,
-            "note": "bad IA, try to fix it"
+            "note":  "bad IA"
         },
         {
             "name": "Across Surreal Skies",
@@ -2361,7 +2361,7 @@
             "sha1": "7dfe35df0a82d0229b1042b2dc8b3793e648460f",
             "tags": [],
             "score": 5,
-            "note": "some IA are having a bad time"
+            "note": "bad IA"
         },
         {
             "name": "Bowsers Challenge",
@@ -4655,8 +4655,7 @@
             "music": "T83",
             "sha1": "1c32058c99c9027010c9671d4df7c31c9be26711",
             "tags": [],
-            "score": 1,
-            "note": "maybe remove ?"
+            "score": 1
         },
         {
             "name": "Ancient Lake",
@@ -5274,7 +5273,8 @@
             "sha1": "ed862d41bca724a847ded0816972e7e486e7997c",
             "tags": [],
             "score": 2,
-            "note": "Some jump can make you fall into the void"
+            "warning": 1,
+            "note": "hard jump, missing skybox"
         },
         {
             "name": "Desert Raceway",
@@ -6075,8 +6075,7 @@
             "music": "T61",
             "sha1": "2779b5f2873e314d47219dcd9a3ad50e80a50023",
             "tags": [],
-            "score": 5,
-            "note": "if I had a 6th star category, this track would be part of it"
+            "score": 5
         },
         {
             "name": "Ember Coast",
@@ -7461,8 +7460,7 @@
             "music": "T31",
             "sha1": "b4c378108a8cf54216c190a23558072348636405",
             "tags": [],
-            "score": 3,
-            "note": "with more polishing, this map could be really good"
+            "score": 3
         },
         {
             "name": "Gloomy Castle",
@@ -10331,11 +10329,10 @@
             "since_version": "0.12",
             "author": "JorisMKW",
             "special": "T11",
-            "music": "T11",
+            "music": "T53",
             "sha1": "5d631868a85665a902af170124b8f33409a23727",
             "tags": [],
-            "score": 5,
-            "note": "set music to something less happy"
+            "score": 5
         },
         {
             "name": "Love Beach",
@@ -14687,11 +14684,10 @@
             "since_version": "0.12",
             "author": "Diego Vapy",
             "special": "T11",
-            "music": "T11",
+            "music": "T42",
             "sha1": "6762963eeb41ade1475c1d0dbf1e821bea48e9fe",
             "tags": [],
-            "score": 2,
-            "note": "change the music for the night city"
+            "score": 2
         },
         {
             "name": "Rainy Rainbow Raceway",
