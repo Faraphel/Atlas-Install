@@ -241,7 +241,8 @@
                 "Switch"
             ],
             "score": 4
-        },{
+        },
+        {
             "name": "Sunshine Airport",
             "author": "Diego Vapy",
             "special": "T21",
@@ -297,7 +298,8 @@
                 "Switch"
             ],
             "score": 4
-        },{
+        },
+        {
             "name": "Cloudtop Cruise",
             "version": "v1.1",
             "since_version": "0.12",
