@@ -131,6 +131,2221 @@
     },
     "tracks": [
         {
+            "name": "Animal Crossing",
+            "version": "?",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T33",
+            "music": "T33",
+            "sha1": "5d8bad951eac618bc300be9d3723e86db46cb3f2",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Big Blue",
+            "version": "v1.2",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "3b78d9430f94d72405c7ee3a09f9b798b66afea5",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Bone-Dry Dunes",
+            "version": "Beta",
+            "since_version": "0.12",
+            "author": "Luca",
+            "special": "T33",
+            "music": "T33",
+            "sha1": "237c129c899feb989e795ad6f5e6a7899eb8dbc2",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Bowser's Castle",
+            "version": "v2.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T43",
+            "music": "T43",
+            "sha1": "e213f48375d2820f343ed749d994d70835bdcd70",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Cloudtop Cruise",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "Diego Vapy",
+            "special": "T13",
+            "music": "T13",
+            "sha1": "52f1a2e71cfba3a90351c02d1412b514962a3f9c",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 3,
+            "warning": 1,
+            "note": "collision"
+        },
+        {
+            "name": "Dolphin Shoals",
+            "music": "T32",
+            "special": "T32",
+            "score": 4,
+            "author": "MrFluffy",
+            "since_version": "0.1",
+            "sha1": "54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
+            "version": "v1.1",
+            "tags": [
+                "Retro",
+                "Switch"
+            ]
+        },
+        {
+            "name": "Dragon Driftway",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "4f3f20d40751f1b162a278d54214ef32d5f2a4e5",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Electrodrome",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "SquireTurnbolt",
+            "special": "T14",
+            "music": "T14",
+            "sha1": "d557dc055b7583423bf990e17dead6d6879311fb",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Excitebike adventure",
+            "music": "T64",
+            "special": "T64",
+            "score": 4,
+            "author": "Seeky",
+            "since_version": "0.1",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "sha1": "e782de12471731e9bb155eea6872cd5b2303357d",
+            "version": "v1.3"
+        },
+        {
+            "name": "Hyrule Circuit",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "c0a63cfd9830a0dc95d1c229e813e000245e7305",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Ice Ice Outpost",
+            "version": "v1.2",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "93916d9e61cbed97e3f17424835ffaccb5f84089",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Mario Circuit",
+            "version": "v2.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T74",
+            "music": "T74",
+            "sha1": "bbd30872fe3ec2f93df88f339b6f8afd0afd86ea",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Mario Kart Stadium",
+            "version": "v2.5",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T31",
+            "music": "T31",
+            "sha1": "88fe31b5f565238e5fb29d087ca335a24ea908a0",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Mount Wario",
+            "version": "v1.5",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T23",
+            "music": "T23",
+            "sha1": "066f37f9f93bf6b7e6e70cc4f6b8f9ff267349e8",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Mute City",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T54",
+            "music": "T54",
+            "sha1": "0848ad8124ea161254bccc4915fdc1ca38abc882",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Rainbow Road",
+            "author": "Squadaloo",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "d7c7154d1cf88b2b5acb95771e23499468737741",
+            "version": "v1.1.1",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "Switch"
+            ]
+        },
+        {
+            "name": "Shy Guy Falls",
+            "version": "v1.5",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T24",
+            "music": "T24",
+            "sha1": "7a5f4592ff574c2c65bf5f4ffef99f67c18420a5",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Sky-High Sundae",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": [
+                "Wacker",
+                "tasrhys"
+            ],
+            "special": "T22",
+            "music": "T22",
+            "sha1": "2d575d2b5b64f53caf8b8b8418ac0219e21a6927",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Sunshine Airport",
+            "author": "Diego Vapy",
+            "special": "T21",
+            "music": "T21",
+            "sha1": "72aafff8a0e25220372572f757c67cc1eb863531",
+            "version": "v1.1",
+            "since_version": "0.11",
+            "score": 3,
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "note": "some collision (like the plane) are buggy, and the texture feel a bit too dark"
+        },
+        {
+            "name": "Super Bell Subway",
+            "version": "v1.3",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "58ec4cd88e136c0b0d8ccedd96dd8b32f3b09ea4",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Sweet Sweet Canyon",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "score": 4,
+            "since_version": "0.10",
+            "sha1": "ed38125f0a889f0a43e1929d232bc3d1cc80e629",
+            "version": "v1.2b",
+            "tags": [
+                "Retro",
+                "Switch"
+            ]
+        },
+        {
+            "name": "Thwomp Ruins",
+            "author": "TheGamingBram",
+            "special": "T13",
+            "music": "T13",
+            "score": 4,
+            "since_version": "0.10",
+            "sha1": "e098c2657db2449e3ad6dc0e83ddc6cd02bfac8f",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "Switch"
+            ]
+        },
+        {
+            "name": "Toad Harbor",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T31",
+            "music": "T31",
+            "sha1": "dc0dde8a30c0783036168e0c4fae6da73863e10b",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Twisted Mansion",
+            "version": "v2.5",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T53",
+            "music": "T53",
+            "sha1": "7d54bd9f48d32ee12d53392b9d2564f469e4dd17",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Water Park",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T32",
+            "music": "T32",
+            "sha1": "9d44fc4b48f461752e69e7a3ac3ae9a9c07b0077",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Wild Woods",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T33",
+            "music": "T33",
+            "sha1": "d3617169e6e15202d88b4bf6aa4ef6dd2f09acce",
+            "tags": [
+                "Retro",
+                "Switch"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Bowser's Castle",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T43",
+            "music": "T43",
+            "sha1": "763f35c69dda350ba2c0c61ba1b74d03b3194380",
+            "tags": [
+                "Retro",
+                "3DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Cheep Cheep Lagoon",
+            "music": "T32",
+            "special": "T32",
+            "score": 4,
+            "author": "ZPL",
+            "since_version": "0.1",
+            "sha1": "b96e3a2d3d9f149067b95c76f7d2819c5ff5a72b",
+            "version": "v1.1b",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "DK Jungle",
+            "version": "v2.11.fix",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T73",
+            "music": "T73",
+            "sha1": "b7c6b05fdc2aaa6d67229c27f0558cb55e6e2b3e",
+            "tags": [
+                "Retro",
+                "3DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Daisy Hills",
+            "music": "T12",
+            "special": "T12",
+            "score": 5,
+            "author": "Atlas",
+            "since_version": "0.1",
+            "sha1": "6aba6d97c7cdd3ca59b03d0e51dd7edba5179496",
+            "version": "v1.7g",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Maka Wuhu",
+            "music": "T31",
+            "special": "T31",
+            "score": 5,
+            "author": [
+                "FunkyDude15",
+                "Wexos"
+            ],
+            "since_version": "0.1",
+            "sha1": "fcf92af0b9ac3848872fbeb00782924229330da5",
+            "version": "Beta3.1",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Mario Circuit",
+            "music": "T21",
+            "special": "T21",
+            "score": 4,
+            "author": "Bri",
+            "since_version": "0.1",
+            "sha1": "7b13362cb2b947ab56a5269d3ed2f9a3dbd3c9f4",
+            "version": "v2",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Music Park",
+            "version": "v2.1.le",
+            "since_version": "0.12",
+            "author": "Atlas",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "0400002e48bc38eba478ae4564939a48344a8ef8",
+            "tags": [
+                "Retro",
+                "3DS"
+            ],
+            "score": 5,
+            "warning": 3
+        },
+        {
+            "name": "Neo Bowser City",
+            "author": "ZPL",
+            "special": "T21",
+            "music": "T21",
+            "score": 5,
+            "since_version": "0.10",
+            "sha1": "ecdc38493f25083373ca0cea23e67aa4617ebf14",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Piranha Plant Slide",
+            "music": "T32",
+            "special": "T32",
+            "score": 5,
+            "author": "Atlas",
+            "since_version": "0.1",
+            "sha1": "9e594191dfdf1a7a2cda90f7b6b53bd7910aac2f",
+            "version": "v1.3",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Rainbow Road",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "8b530044c78110fcd1a5903d20e29fe67f1908f8",
+            "tags": [
+                "Retro",
+                "3DS"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Rock Rock Mountain",
+            "music": "T31",
+            "special": "T31",
+            "score": 5,
+            "author": [
+                "MrKoeikoei",
+                "zilly"
+            ],
+            "since_version": "0.1",
+            "sha1": "1ec2b9a7c849e4b50b1cd3b45a1fb2ae1809c28f",
+            "version": "v2.alt",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Rosalina's Ice World",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "SquireTurnbolt",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "6c6bff31fda3638fd6e9a305097f139c97038177",
+            "tags": [
+                "Retro",
+                "3DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Shy Guy Bazaar",
+            "music": "T22",
+            "special": "T22",
+            "score": 5,
+            "author": "Atlas",
+            "since_version": "0.1",
+            "sha1": "6c5caeeb9f39eec5e01d4437b805f28175b49140",
+            "version": "v2c",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Toad Circuit",
+            "music": "T11",
+            "special": "T11",
+            "score": 4,
+            "author": "Bri",
+            "since_version": "0.1",
+            "sha1": "2da12d0aab27b63efab236e8b017954c115029fb",
+            "version": "v1",
+            "warning": 3,
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Wario Shipyard",
+            "music": "T32",
+            "special": "T32",
+            "score": 4,
+            "author": "Atlas",
+            "since_version": "0.1",
+            "sha1": "f6e8e7ac22f7932ae62360c2ddba97dd1c4b5e9a",
+            "version": "v1.98+",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Wuhu Loop",
+            "music": "T11",
+            "special": "T11",
+            "score": 5,
+            "author": [
+                "FunkyDude15",
+                "Riidefi",
+                "Zachruff"
+            ],
+            "since_version": "0.1",
+            "sha1": "c05ed31920eb171ba29b85002f3279cad859a740",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "3DS"
+            ]
+        },
+        {
+            "name": "Airship Fortress",
+            "music": "T43",
+            "special": "T43",
+            "score": 5,
+            "author": "Sniki",
+            "since_version": "0.1",
+            "sha1": "e39ef62f51c22f16314fb2f04b5a80d16a80107b",
+            "version": "v1.5c",
+            "tags": [
+                "Retro",
+                "DS"
+            ]
+        },
+        {
+            "name": "Bowser Castle",
+            "version": "v1.2",
+            "since_version": "0.12",
+            "author": "Sniki",
+            "special": "T72",
+            "music": "T72",
+            "sha1": "fff674eed3f496cb8902996d583f93a4bc80d437",
+            "tags": [
+                "Retro",
+                "DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Cheep Cheep Beach",
+            "author": "SquireTurnbolt",
+            "special": "T51",
+            "music": "T51",
+            "sha1": "17e0a2a4678037b3d1feb4b00cbc06e74d06fb6a",
+            "version": "v2.1",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "DS"
+            ]
+        },
+        {
+            "name": "DK Pass",
+            "version": "v3",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T23",
+            "music": "T23",
+            "sha1": "6f1ea070458972b5c09db8f386956c8430658135",
+            "tags": [
+                "Retro",
+                "DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Figure-8 Circuit",
+            "music": "T11",
+            "special": "T11",
+            "score": 5,
+            "author": [
+                "Quajeek99",
+                "Sniki"
+            ],
+            "since_version": "0.1",
+            "sha1": "39ccb7bac833fec77b261f51323bf81478dc295d",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "DS"
+            ]
+        },
+        {
+            "name": "Luigi's Mansion",
+            "music": "T53",
+            "special": "T11",
+            "score": 5,
+            "author": "Tock",
+            "since_version": "0.1",
+            "sha1": "4ece16d05c10c3037ed2b61ce7d9b5e07773f950",
+            "version": "v1.2",
+            "tags": [
+                "Retro",
+                "DS"
+            ]
+        },
+        {
+            "name": "Mario Circuit",
+            "version": "v6.2",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T21",
+            "music": "T21",
+            "sha1": "bdf752649175e5ac674d643235fc37da9a720ec3",
+            "tags": [
+                "Retro",
+                "DS"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Rainbow Road",
+            "author": "ZPL",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "e7a99b2e7b4c54c56ee1a4da45d8a32aa9a8bf6b",
+            "version": "v1.3",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "DS"
+            ]
+        },
+        {
+            "name": "Shroom Ridge",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T21",
+            "music": "T42",
+            "sha1": "869fe045b4483bc9dcc7086782a1ca0ec9931b64",
+            "tags": [
+                "Retro",
+                "DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Tick-Tock Clock",
+            "author": "ZPL",
+            "special": "T14",
+            "music": "T14",
+            "sha1": "f07eb5aeb18e5c19b8adde4931afab95dacca10c",
+            "version": "v1",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "DS"
+            ]
+        },
+        {
+            "name": "Waluigi Pinball",
+            "version": "v1.1.fix",
+            "since_version": "0.12",
+            "author": "Sniki",
+            "special": "T64",
+            "music": "T64",
+            "sha1": "d4673ad06a41bbe4fcc4d2ed61d0dcaa14cc5e09",
+            "tags": [
+                "Retro",
+                "DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Wario Stadium",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "Numerosity",
+            "special": "T64",
+            "music": "T64",
+            "sha1": "93c8b68e1d008eb836e78d130484b0499381504d",
+            "tags": [
+                "Retro",
+                "DS"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Baby Park",
+            "music": "T81",
+            "special": "T81",
+            "score": 5,
+            "author": "maczkopeti",
+            "since_version": "0.1",
+            "sha1": "54bbf431b694d011f3c587f523d0843e113ec63a",
+            "version": "v1.11",
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Bowser's Castle",
+            "version": "v1.6.rot",
+            "since_version": "0.12",
+            "author": "Tock",
+            "special": "T43",
+            "music": "T43",
+            "sha1": "e12226127ebca6fb9afc47b9bfa6e580f47b53b7",
+            "tags": [
+                "Retro",
+                "GCN"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Daisy Cruiser",
+            "music": "T31",
+            "special": "T31",
+            "score": 5,
+            "author": [
+                "FunkyDude15",
+                "Riidefi",
+                "Cotni"
+            ],
+            "since_version": "0.1",
+            "sha1": "1e17656d3c22adaf6e7a194d5617cdfcc0feb478",
+            "version": "v1.2",
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Dino Dino Jungle",
+            "version": "v1.4",
+            "since_version": "0.12",
+            "author": "Tock",
+            "special": "T83",
+            "music": "T83",
+            "sha1": "bd5b111927d6f5b7138d526353531e1c7ba1961f",
+            "tags": [
+                "Retro",
+                "GCN"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Dry Dry Desert",
+            "version": "v1.3",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T41",
+            "music": "T41",
+            "sha1": "4290d5c9f8e46ebdb44b9eaa2d78ebcf450f7ca9",
+            "tags": [
+                "Retro",
+                "GCN"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Luigi Circuit",
+            "music": "T11",
+            "special": "T11",
+            "score": 5,
+            "author": "Tock",
+            "since_version": "0.1",
+            "sha1": "b7ac061f7ab2aef14e042466f68da37aa21f7e68",
+            "version": "v1.7",
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Mario Circuit",
+            "author": "Yoshidude4",
+            "special": "T74",
+            "music": "T74",
+            "sha1": "1f61c545f3364b03732cbc2e4f8c772deb4eb261",
+            "version": "v1.alt",
+            "since_version": "0.11",
+            "score": 2,
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Mushroom Bridge",
+            "music": "T42",
+            "special": "T42",
+            "score": 5,
+            "author": "Tock",
+            "since_version": "0.1",
+            "sha1": "6200a54b48bd47027829c31c2a432eaa588540d4",
+            "version": "v1.5",
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Mushroom City",
+            "music": "T42",
+            "special": "T42",
+            "score": 5,
+            "author": "Tock",
+            "since_version": "0.1",
+            "sha1": "8719c6c193df683f66d94d7c3c2796b638a70edc",
+            "version": "v1.2.le",
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Rainbow Road (Caron)",
+            "music": "T44",
+            "special": "T44",
+            "score": 5,
+            "author": "Caron",
+            "since_version": "0.1",
+            "sha1": "f6c48cad7dc7a029b55078fae3d084474d83bc18",
+            "version": "v1.2",
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Rainbow Road (ZPL)",
+            "version": "Beta",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "dc709cbb94cc5e759a8df09a26e0995dee345720",
+            "tags": [
+                "Retro",
+                "GCN"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Sherbet Land",
+            "version": "v4.20",
+            "since_version": "0.12",
+            "author": "Tock",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "e71769de980beaae7d403c3d2dc2db20cb04e81d",
+            "tags": [
+                "Retro",
+                "GCN"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Wario Colosseum",
+            "version": "v1.9",
+            "since_version": "0.12",
+            "author": "Tock",
+            "special": "T64",
+            "music": "T64",
+            "sha1": "28fec4bea17c5ff92eda0dab9724ed5db8272dd4",
+            "tags": [
+                "Retro",
+                "GCN"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Yoshi Circuit",
+            "author": "ZPL",
+            "special": "T74",
+            "music": "T74",
+            "sha1": "f90136a09929f01c79a0257fc374bcb974735f0f",
+            "version": "v2.02",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "GCN"
+            ]
+        },
+        {
+            "name": "Boo Lake",
+            "version": "v2.3",
+            "since_version": "0.12",
+            "author": "Slimeserver",
+            "special": "T53",
+            "music": "T53",
+            "sha1": "d18feaa96e63b81526f8a33c8fa63ae3118ca5a6",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Bowser Castle 1",
+            "version": "v0.2",
+            "since_version": "0.12",
+            "author": "Cats4Life",
+            "special": "T72",
+            "music": "T72",
+            "sha1": "38bedefdda3ae957f4214fae437db319cac9c788",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Bowser Castle 2",
+            "music": "T72",
+            "special": "T72",
+            "score": 4,
+            "author": "Natani",
+            "since_version": "0.1",
+            "sha1": "9c4994146bf618e54c46338bc754151de04a02b9",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Bowser Castle 4",
+            "music": "T72",
+            "special": "T72",
+            "score": 5,
+            "author": "ChaosShadow23",
+            "since_version": "0.1",
+            "sha1": "cf7b757f4ffc9629896ed1edddcd6fdffdc0dfa3",
+            "version": "v4.1",
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Broken Pier",
+            "version": "v1.04.6",
+            "since_version": "0.12",
+            "author": "xBlue98",
+            "special": "T53",
+            "music": "T53",
+            "sha1": "fe6a0605165e0e91740647ec9c5ce45123af813f",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Cheep-Cheep Island",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": [
+                "SquireTurnbolt",
+                "Kozakura"
+            ],
+            "special": "T31",
+            "music": "T31",
+            "sha1": "0c092a6d8c04c613d6816befbac1288bc0c42394",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Cheese Land",
+            "music": "T71",
+            "special": "T71",
+            "score": 5,
+            "author": "ZPL",
+            "since_version": "0.1",
+            "sha1": "8603aaf33da01fbd7a8a8a36f305f9d39ff7c123",
+            "version": "v2.1",
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Lakeside Park",
+            "author": [
+                "Flint",
+                "Hman6516"
+            ],
+            "special": "T73",
+            "music": "T73",
+            "score": 5,
+            "since_version": "0.10",
+            "sha1": "e068192d272d5151a733ae6b4f85d7a173fecd89",
+            "version": "v1.fix",
+            "family": 9556,
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Luigi Circuit",
+            "author": "ZPL",
+            "special": "T54",
+            "music": "T54",
+            "sha1": "3de6b7e652abb451f9c9342ca438976b91cd63bd",
+            "version": "v1",
+            "since_version": "0.11",
+            "score": 4,
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Mario Circuit",
+            "music": "T31",
+            "special": "T31",
+            "score": 5,
+            "author": "MysterE99",
+            "since_version": "0.1",
+            "sha1": "b75945128e7900110b73264bdf7a06d2ed1ebb2a",
+            "version": "v1.1",
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Peach Circuit",
+            "music": "T51",
+            "special": "T51",
+            "score": 4,
+            "author": "Floyd",
+            "since_version": "0.1",
+            "sha1": "70724fb84722d7e09d7e42972ee444e2dbc9f440",
+            "version": "Beta1.1",
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Rainbow Road (Drea+Turn)",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": [
+                "Dreacastian",
+                "Turnip"
+            ],
+            "special": "T44",
+            "music": "T44",
+            "sha1": "20c295285bddcb4ea44471543670cc1af9d5d122",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Rainbow Road (Squire)",
+            "author": "SquireTurnbolt",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "5b6af106b7a5d4dcb13f1a695ab590a190cf567e",
+            "version": "v1.2",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Ribbon Road",
+            "version": "v2.3r",
+            "since_version": "0.12",
+            "author": "Gabriela",
+            "special": "T81",
+            "music": "T81",
+            "sha1": "70ef9d693665764b436a1933497da2f6bdab6864",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Riverside Park",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T73",
+            "music": "T73",
+            "sha1": "70584efd00377e54d5c4c8baa27061a025eeb91e",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Shy Guy Beach",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T62",
+            "music": "T62",
+            "sha1": "0cf227bee0274597a6d113eff586d9860eeb7514",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Sky Garden",
+            "version": "v1.0.2",
+            "since_version": "0.12",
+            "author": "Luca",
+            "special": "T13",
+            "music": "T13",
+            "sha1": "24e7aa799a291491ccd0c975245b8770c38f86cc",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Snow Land",
+            "version": "v1.opt",
+            "since_version": "0.12",
+            "author": "SquireTurnbolt",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "f637cfd854b48704e2310eee6a1c6efdd40806ec",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Sunset Wilds",
+            "music": "T71",
+            "special": "T71",
+            "score": 4,
+            "author": "ChaosShadow23",
+            "since_version": "0.1",
+            "sha1": "1facce912d6ff27719e700df5f45db9e2f63f78b",
+            "version": "v1.1b",
+            "tags": [
+                "Retro",
+                "GBA"
+            ]
+        },
+        {
+            "name": "Yoshi Desert",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T41",
+            "music": "T41",
+            "sha1": "03e2123085d55d5a95b6b354157ea5e84331df1b",
+            "tags": [
+                "Retro",
+                "GBA"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Banshee Boardwalk",
+            "version": "v2",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T53",
+            "music": "T53",
+            "sha1": "8bcb2a9baabfde738ccc89375e580a91057540dc",
+            "tags": [
+                "Retro",
+                "N64"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Choco Mountain",
+            "author": "TacoJosh",
+            "special": "T83",
+            "music": "T83",
+            "score": 5,
+            "since_version": "0.10",
+            "sha1": "7a7da2d0f10441fa8b4df0e8a7683ed17b220b79",
+            "version": "v1.11",
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Frappe Snowland (Cats4Life)",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "Cats4Life",
+            "special": "T23",
+            "music": "T23",
+            "sha1": "e7891ba3f511b76d4d05f2faafff1e22ec7ce2e3",
+            "tags": [
+                "Retro",
+                "N64"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Frappe Snowland (NintenYoshi)",
+            "author": "NintenYoshi",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "b8d6d9f9b3d8ed74a956050e8aa8e59b2e0e95c2",
+            "version": "v1.3.1",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Kalimari Desert",
+            "music": "T71",
+            "special": "T42",
+            "score": 5,
+            "author": "Sniki",
+            "since_version": "0.1",
+            "sha1": "1a8736dc6578b00335ce24ceade2b95be1594cca",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Koopa Troopa Beach",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T51",
+            "music": "T51",
+            "sha1": "c0159f2251a6fe6312f56e66cf94d6cd09e1d0bf",
+            "tags": [
+                "Retro",
+                "N64"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Luigi Raceway",
+            "music": "T54",
+            "special": "T54",
+            "score": 5,
+            "author": [
+                "ZPL",
+                "Skipper93653"
+            ],
+            "since_version": "0.1",
+            "sha1": "4444119e3b94a542bb2d3cd45d28569f9fd98f01",
+            "version": "v1.1",
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Moo Moo Farm",
+            "author": "ZPL",
+            "special": "T12",
+            "music": "T12",
+            "sha1": "84d9296242d48ce75445cd752d51a1430e384dfc",
+            "version": "v1",
+            "since_version": "0.11",
+            "score": 4,
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Rainbow Road",
+            "version": "v1.2",
+            "since_version": "0.12",
+            "author": "cpfusion",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "58ce8fa898bbb5d28e553abf4501b64e18694220",
+            "tags": [
+                "Retro",
+                "N64"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Royal Raceway",
+            "author": "ZPL",
+            "special": "T54",
+            "music": "T54",
+            "sha1": "e97ae30fd0c16596dabb4d127e067a1c9bdf31f5",
+            "version": "v1.2",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Toad's Turnpike",
+            "music": "T42",
+            "special": "T42",
+            "score": 5,
+            "author": "NintenYoshi",
+            "since_version": "0.1",
+            "sha1": "6ce8c730d4353cf525c9e47d0b6a4e23b063db41",
+            "version": "v2.2",
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Town",
+            "version": "RC1.mk64r",
+            "since_version": "0.12",
+            "author": [
+                "Kozakura",
+                "Bruh de la Boi"
+            ],
+            "special": "T63",
+            "music": "T63",
+            "sha1": "421a1084db5eb234a5e929b3325dfb2f1ef47b95",
+            "tags": [
+                "Retro",
+                "N64"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Wario Stadium",
+            "music": "T64",
+            "special": "T64",
+            "score": 5,
+            "author": "zilly",
+            "since_version": "0.1",
+            "sha1": "b4b793423fc005637a266cfc6c47a53f1e3e1750",
+            "version": "v1.01",
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Yoshi Valley",
+            "author": "ZPL",
+            "special": "T52",
+            "music": "T52",
+            "sha1": "d39dccace86db37e5532c1e10fae8649a0d7dfaa",
+            "version": "v1.11",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "N64"
+            ]
+        },
+        {
+            "name": "Bowser Castle 1",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T72",
+            "music": "T72",
+            "sha1": "4d355d9aacc874d267fcf0a33a6a8c2619a083c8",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Bowser Castle 2",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "KawaiiDawn",
+            "special": "T84",
+            "music": "T84",
+            "sha1": "0dd53004f04b10815aec74b44647bd215258a6dc",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Bowser Castle 3",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "._.",
+            "special": "T72",
+            "music": "T72",
+            "sha1": "c92c05fd425a808372774eec4885d9cae9958c6b",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Choco Island 1",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T81",
+            "music": "T81",
+            "sha1": "293df3c33298b6483df36c521e52347fd9363495",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Choco Island 2",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "Cats4Life",
+            "special": "T73",
+            "music": "T73",
+            "sha1": "6510b925d15ddabddcf8902c942404b484df9acb",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Donut Plains 1",
+            "music": "T81",
+            "special": "T81",
+            "score": 5,
+            "author": "ZPL",
+            "since_version": "0.1",
+            "sha1": "d34826c73d49c58c297224f30fb5930bf7c46a92",
+            "version": "v1.beta",
+            "tags": [
+                "Retro",
+                "SNES"
+            ]
+        },
+        {
+            "name": "Donut Plains 2",
+            "version": "v2.01",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T81",
+            "music": "T81",
+            "sha1": "6342eb5d86b95c6c460c9fe2f7c45d6f12fa93a1",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Donut Plains 3",
+            "author": [
+                "Bear",
+                "ZPL"
+            ],
+            "special": "T81",
+            "music": "T81",
+            "sha1": "3dbd5e5e3084972aa3fefc0ffc06d7d02253cde9",
+            "version": "v2.11",
+            "since_version": "0.11",
+            "score": 5,
+            "tags": [
+                "Retro",
+                "SNES"
+            ]
+        },
+        {
+            "name": "Ghost Valley 1",
+            "author": "Slimeserver",
+            "special": "T53",
+            "music": "T53",
+            "score": 4,
+            "since_version": "0.10",
+            "sha1": "60170ac752b2b18024ba1495a5d4edc733272aff",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "SNES"
+            ]
+        },
+        {
+            "name": "Ghost Valley 3",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T53",
+            "music": "T53",
+            "sha1": "94143c90346d09a8a0d718903c3dbea614d57445",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Koopa Beach 1",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T51",
+            "music": "T51",
+            "sha1": "36b5044686782467ff928940bc6e21ba0ececad8",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Koopa Beach 2",
+            "version": "v1.0",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T51",
+            "music": "T51",
+            "sha1": "a6df8eff399180c78124de9aadeae0c9f087416d",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Mario Circuit 1",
+            "music": "T81",
+            "special": "T81",
+            "score": 4,
+            "author": [
+                "ZPL",
+                "Jasperr"
+            ],
+            "since_version": "0.1",
+            "sha1": "0232b0dfb16d0d2e8a2e477509d820084a6bff5d",
+            "version": "v2.5",
+            "tags": [
+                "Retro",
+                "SNES"
+            ]
+        },
+        {
+            "name": "Mario Circuit 2",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "Kozakura",
+            "special": "T81",
+            "music": "T81",
+            "sha1": "497e5a8fef2078d71695f140667ca341d2b51e35",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Mario Circuit 4",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T81",
+            "music": "T81",
+            "sha1": "0210fc3ea890069784240131343aec27dacfae9d",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Rainbow Road",
+            "music": "T44",
+            "special": "T44",
+            "score": 5,
+            "author": [
+                "Bear",
+                "ZPL"
+            ],
+            "since_version": "0.1",
+            "sha1": "31b6e5260dc9ef4de8691685b636d6d8fb7254e5",
+            "version": "v2.6",
+            "tags": [
+                "Retro",
+                "SNES"
+            ]
+        },
+        {
+            "name": "Vanilla Lake 1",
+            "version": "Beta",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "c7461cef1e8e2103af438f312cdea6d0b6cbc7d9",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Vanilla Lake 2",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "63697be8e82601de4a6e0037ab8e60f08a232374",
+            "tags": [
+                "Retro",
+                "SNES"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Amsterdam Drift",
+            "version": "v1.6",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T12",
+            "music": "T12",
+            "sha1": "e946aa99932d392add1c7012a19565408390b736",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Amsterdam Drift 2",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T12",
+            "music": "T12",
+            "sha1": "80815a00b700725a510f97fb1d88678683467b65",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Bangkok Rush",
+            "version": "v0.9",
+            "since_version": "0.12",
+            "author": [
+                "Numerosity",
+                "Luigi Hack Fan"
+            ],
+            "special": "T31",
+            "music": "T31",
+            "sha1": "fc79e166cf841fcaef12804f734ed8f8bd35cdc4",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Bowser's Castle",
+            "version": "v1.1.fix v1",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T72",
+            "music": "T72",
+            "sha1": "a9aab25dc1d6afdac2ced5b0e33c0350d695d808",
+            "tags": [
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Choco Island 1",
+            "music": "T73",
+            "special": "T73",
+            "score": 4,
+            "author": "Toxic Prime",
+            "since_version": "0.1",
+            "sha1": "baa2abc97532270efa6b3f57f83c3f1188bd0d91",
+            "version": "v1.4",
+            "tags": [
+                "Retro",
+                "Tour"
+            ]
+        },
+        {
+            "name": "Ghost Valley 1",
+            "author": "Bruh de la Boi",
+            "special": "T53",
+            "music": "T53",
+            "sha1": "fc775943493edb42b78f50124309b1b3363c1ac0",
+            "version": "v1.2",
+            "since_version": "0.11",
+            "score": 4,
+            "tags": [
+                "Retro",
+                "Tour"
+            ]
+        },
+        {
+            "name": "Kalimari Desert 2",
+            "music": "T42",
+            "special": "T42",
+            "score": 4,
+            "author": "Bruh de la Boi",
+            "since_version": "0.1",
+            "sha1": "f1ac60b0d1dce916d1f7473f1a8b79136f0929b6",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "Tour"
+            ]
+        },
+        {
+            "name": "Mario Circuit 1",
+            "music": "T81",
+            "special": "T81",
+            "score": 3,
+            "author": "Atlas",
+            "since_version": "0.1",
+            "sha1": "e0abfca9806fa979ab5ca0d04ba79e1875e69172",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "Tour"
+            ]
+        },
+        {
+            "name": "Merry Mountain",
+            "author": [
+                "Luca",
+                "NintenYoshi"
+            ],
+            "special": "T23",
+            "music": "T23",
+            "score": 5,
+            "since_version": "0.10",
+            "sha1": "3e8538fd1229e578786deec1a0d96851e6370e23",
+            "version": "v1",
+            "family": 9093,
+            "tags": [
+                "Retro",
+                "Tour"
+            ]
+        },
+        {
+            "name": "New York Minute",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "1ed39b5f6cfac9338cc9e3c551f35a73d195669a",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "New York Minute 2",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "ec08224af5b465013871ac0e38ab0ec4483a1b30",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "New York Minute 3",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "866541ce816b57ddb9458d7de19abce5074f30b5",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "New York Minute 4",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "a49560026c77329884e328c8277b8bd82c60277a",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Ninja Hideaway",
+            "version": "v1.5",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T33",
+            "music": "T33",
+            "sha1": "676494213ce0a0a4adeb2a33d84c91edfb5af6f1",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 4
+        },
+        {
+            "name": "Paris Promenade",
+            "version": "v1.mkt",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T31",
+            "music": "T31",
+            "sha1": "21a7c377620abf7ab9abb011e640af65cb2edee4",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Paris Promenade 2",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T82",
+            "music": "T82",
+            "sha1": "5953dc8acd8582078ff94480180327eea933f517",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Paris Promenade 3",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T31",
+            "music": "T31",
+            "sha1": "c7ff81b3c77f07d5d7d742c1c5cb68905f367598",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Rainbow Road 1",
+            "music": "T44",
+            "special": "T44",
+            "score": 4,
+            "author": [
+                "Luca",
+                "Toxic Prime"
+            ],
+            "since_version": "0.1",
+            "sha1": "c931319d959eccabf97b0dfc56cc87f1abf0aec8",
+            "version": "v1",
+            "tags": [
+                "Retro",
+                "Tour"
+            ]
+        },
+        {
+            "name": "Rainbow Road 2",
+            "version": "v1.02",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "5daedd9a90a9d3baf3ba2152aac2b4d557607135",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Sydney Sprint",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T31",
+            "music": "T31",
+            "sha1": "f7a7c5260831b964bbf06c6b6cbeeae0c3d30feb",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Sydney Sprint 2",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T31",
+            "music": "T31",
+            "sha1": "927114044608afd412afac7cb12c673235527804",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Tokyo Blur",
+            "version": "RC2",
+            "since_version": "0.12",
+            "author": "Luigi Hack Fan",
+            "special": "T63",
+            "music": "T63",
+            "sha1": "4c7d142d4710c753569601cbf3df4b4b042fa603",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 1
+        },
+        {
+            "name": "Tokyo Blur 2",
+            "version": "RC2",
+            "since_version": "0.12",
+            "author": "Luigi Hack Fan",
+            "special": "T63",
+            "music": "T63",
+            "sha1": "1a68e886e4415a5bacb400888d44faa6c931a461",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 1
+        },
+        {
+            "name": "Tokyo Blur 3",
+            "version": "RC1",
+            "since_version": "0.12",
+            "author": "Luigi Hack Fan",
+            "special": "T63",
+            "music": "T63",
+            "sha1": "49dd6e700b76b667477e0067b5d0cdb0b3488176",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 1
+        },
+        {
+            "name": "Tokyo Blur 4",
+            "version": "RC1",
+            "since_version": "0.12",
+            "author": "Luigi Hack Fan",
+            "special": "T63",
+            "music": "T63",
+            "sha1": "5cf1f6efd85fd3a59d70d8d2707379ea09b7be2b",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 1
+        },
+        {
+            "name": "Vancouver Velocity",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "ZPL",
+            "special": "T54",
+            "music": "T54",
+            "sha1": "6bcd7385680d47bba32a6cd27fea85500cb04208",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Vancouver Velocity 2",
+            "version": "v1.1",
+            "since_version": "0.12",
+            "author": "TheGamingBram",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "b6f7346e305fb1b6a68f36db58f05bcb09ee40d0",
+            "tags": [
+                "Retro",
+                "Tour"
+            ],
+            "score": 3
+        },
+        {
+            "name": "Vanilla Lake 1",
+            "author": "Luca",
+            "special": "T61",
+            "music": "T61",
+            "sha1": "d0e1aebdb7b69c0e5a14b4dfae49bae52ca647d9",
+            "version": "v1.1",
+            "since_version": "0.11",
+            "score": 4,
+            "tags": [
+                "Retro",
+                "Tour"
+            ]
+        },
+        {
+            "name": "DK Jungle",
+            "music": "T73",
+            "special": "T73",
+            "score": 3,
+            "author": "Pointy Pighead Games",
+            "since_version": "0.1",
+            "sha1": "4ff26bff4093ce7e4e27d8e6ab0cdabd103c5406",
+            "version": "RC2b",
+            "tags": [
+                "Retro",
+                "GP"
+            ]
+        },
+        {
+            "name": "Diamond City",
+            "version": "v1.3",
+            "since_version": "0.12",
+            "author": "Atlas",
+            "special": "T22",
+            "music": "T22",
+            "sha1": "811d09ac0af6e1c23bf598cd266ef3eb3c42ca0e",
+            "tags": [
+                "Retro",
+                "GP"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Mario Beach",
+            "music": "T74",
+            "special": "T74",
+            "score": 4,
+            "author": "SuperMario64DS",
+            "since_version": "0.1",
+            "sha1": "e2b0e46314657ccb9de1a5f9e6c708512b857354",
+            "version": "v2.alpha1c",
+            "tags": [
+                "Retro",
+                "GP"
+            ]
+        },
+        {
+            "name": "Pac Mountain",
+            "music": "T12",
+            "special": "T12",
+            "score": 5,
+            "author": "Riidefi",
+            "since_version": "0.1",
+            "sha1": "7ec47388391e9c055f7bcf823f66976e86e29616",
+            "version": "Beta3",
+            "tags": [
+                "Retro",
+                "GP"
+            ]
+        },
+        {
+            "name": "Rainbow Downhill",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "Diego Vapy",
+            "special": "T44",
+            "music": "T44",
+            "sha1": "68ad671c2f4cf51101f0ef6ae95f79111c455ade",
+            "tags": [
+                "Retro",
+                "GP"
+            ],
+            "score": 5
+        },
+        {
+            "name": "Stadium Arena",
+            "version": "v1.5",
+            "since_version": "0.12",
+            "author": "Diego Vapy",
+            "special": "T21",
+            "music": "T21",
+            "sha1": "895927d2686f09a4a55db31fdaf1f49711b1dfde",
+            "tags": [
+                "Retro",
+                "GP"
+            ],
+            "score": 3
+        },
+        {
             "name": "4IT Clown's Road",
             "author": [
                 "4IT★Lecce",
@@ -413,7 +2628,7 @@
             "tags": [],
             "score": 4,
             "warning": 1,
-            "note":  "bad IA"
+            "note": "bad IA"
         },
         {
             "name": "Across Surreal Skies",
@@ -425,20 +2640,6 @@
             "sha1": "656efdbaa16ffa9145031f5a87cd3c7ea2aa740e",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Airship Fortress",
-            "music": "T43",
-            "special": "T43",
-            "score": 5,
-            "author": "Sniki",
-            "since_version": "0.1",
-            "sha1": "e39ef62f51c22f16314fb2f04b5a80d16a80107b",
-            "version": "v1.5c",
-            "tags": [
-                "Retro",
-                "DS"
-            ]
         },
         {
             "name": "Airship Fortress",
@@ -602,34 +2803,6 @@
             "score": 5
         },
         {
-            "name": "Amsterdam Drift",
-            "version": "v1.6",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "e946aa99932d392add1c7012a19565408390b736",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
-            "name": "Amsterdam Drift 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "80815a00b700725a510f97fb1d88678683467b65",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
             "name": "Anatomical Excursion",
             "author": "Man-O-Wii",
             "special": "T72",
@@ -638,6 +2811,19 @@
             "since_version": "0.10",
             "sha1": "4a9ba88bce7d5ecc53268355caf75076d9e63a2a",
             "tags": []
+        },
+        {
+            "name": "Ancient Lake",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "Squadaloo",
+            "special": "T81",
+            "music": "T81",
+            "sha1": "aa9f1271d5c21f4369cec6427d1042d169806fc3",
+            "tags": [
+                "DKR"
+            ],
+            "score": 5
         },
         {
             "name": "Ancient Ruins",
@@ -662,20 +2848,6 @@
             "version": "RC1",
             "family": 5711,
             "tags": []
-        },
-        {
-            "name": "Animal Crossing",
-            "version": "?",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T33",
-            "music": "T33",
-            "sha1": "5d8bad951eac618bc300be9d3723e86db46cb3f2",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 5
         },
         {
             "name": "Anthro Valley",
@@ -1092,20 +3264,6 @@
             "tags": []
         },
         {
-            "name": "Baby Park",
-            "music": "T81",
-            "special": "T81",
-            "score": 5,
-            "author": "maczkopeti",
-            "since_version": "0.1",
-            "sha1": "54bbf431b694d011f3c587f523d0843e113ec63a",
-            "version": "v1.11",
-            "tags": [
-                "Retro",
-                "GCN"
-            ]
-        },
-        {
             "name": "Back to the 80s",
             "author": "WiiLuigi",
             "special": "T44",
@@ -1154,23 +3312,6 @@
             "tags": []
         },
         {
-            "name": "Bangkok Rush",
-            "version": "v0.9",
-            "since_version": "0.12",
-            "author": [
-                "Numerosity",
-                "Luigi Hack Fan"
-            ],
-            "special": "T31",
-            "music": "T31",
-            "sha1": "fc79e166cf841fcaef12804f734ed8f8bd35cdc4",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
             "name": "Banished Keep",
             "version": "v1.4.1.1.1",
             "since_version": "0.12",
@@ -1206,20 +3347,6 @@
             "tags": [
                 "Boost"
             ]
-        },
-        {
-            "name": "Banshee Boardwalk",
-            "version": "v2",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "8bcb2a9baabfde738ccc89375e580a91057540dc",
-            "tags": [
-                "Retro",
-                "N64"
-            ],
-            "score": 5
         },
         {
             "name": "Banshee Boardwalk 2",
@@ -1419,21 +3546,9 @@
             "sha1": "7d2b154b852cba9fa503202c96df95b73b783828",
             "version": "v1.4",
             "family": 455,
-            "tags": ["FZ"]
-        },
-        {
-            "name": "Big Blue",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "3b78d9430f94d72405c7ee3a09f9b798b66afea5",
             "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
+                "FZ"
+            ]
         },
         {
             "name": "Big Express City",
@@ -1829,20 +3944,6 @@
             ]
         },
         {
-            "name": "Bone-Dry Dunes",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "Luca",
-            "special": "T33",
-            "music": "T33",
-            "sha1": "237c129c899feb989e795ad6f5e6a7899eb8dbc2",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 5
-        },
-        {
             "name": "Bonita Harbor",
             "author": "NintenYoshi",
             "special": "T31",
@@ -1877,20 +3978,6 @@
             "version": "RC1",
             "family": 7783,
             "tags": []
-        },
-        {
-            "name": "Boo Lake",
-            "version": "v2.3",
-            "since_version": "0.12",
-            "author": "Slimeserver",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "d18feaa96e63b81526f8a33c8fa63ae3118ca5a6",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
         },
         {
             "name": "Boshi Skatepark",
@@ -1952,104 +4039,6 @@
             "tags": []
         },
         {
-            "name": "Bowser Castle",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "Sniki",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "fff674eed3f496cb8902996d583f93a4bc80d437",
-            "tags": [
-                "Retro",
-                "DS"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Bowser Castle 1",
-            "version": "v0.2",
-            "since_version": "0.12",
-            "author": "Cats4Life",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "38bedefdda3ae957f4214fae437db319cac9c788",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Bowser Castle 1",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "4d355d9aacc874d267fcf0a33a6a8c2619a083c8",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Bowser Castle 2",
-            "music": "T72",
-            "special": "T72",
-            "score": 4,
-            "author": "Natani",
-            "since_version": "0.1",
-            "sha1": "9c4994146bf618e54c46338bc754151de04a02b9",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
-        },
-        {
-            "name": "Bowser Castle 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "KawaiiDawn",
-            "special": "T84",
-            "music": "T84",
-            "sha1": "0dd53004f04b10815aec74b44647bd215258a6dc",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 3
-        },
-        {
-            "name": "Bowser Castle 3",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "._.",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "c92c05fd425a808372774eec4885d9cae9958c6b",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 4
-        },
-        {
-            "name": "Bowser Castle 4",
-            "music": "T72",
-            "special": "T72",
-            "score": 5,
-            "author": "ChaosShadow23",
-            "since_version": "0.1",
-            "sha1": "cf7b757f4ffc9629896ed1edddcd6fdffdc0dfa3",
-            "version": "v4.1",
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
-        },
-        {
             "name": "Bowser Jr.'s Fort",
             "version": "v1.1",
             "since_version": "0.12",
@@ -2097,61 +4086,6 @@
                 "_GCN",
                 "Boost"
             ]
-        },
-        {
-            "name": "Bowser's Castle",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T43",
-            "music": "T43",
-            "sha1": "763f35c69dda350ba2c0c61ba1b74d03b3194380",
-            "tags": [
-                "Retro",
-                "3DS"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Bowser's Castle",
-            "version": "v1.6.rot",
-            "since_version": "0.12",
-            "author": "Tock",
-            "special": "T43",
-            "music": "T43",
-            "sha1": "e12226127ebca6fb9afc47b9bfa6e580f47b53b7",
-            "tags": [
-                "Retro",
-                "GCN"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Bowser's Castle",
-            "version": "v1.1.fix v1",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "a9aab25dc1d6afdac2ced5b0e33c0350d695d808",
-            "tags": [
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
-            "name": "Bowser's Castle",
-            "version": "v2.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T43",
-            "music": "T43",
-            "sha1": "e213f48375d2820f343ed749d994d70835bdcd70",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Bowser's Castle 1",
@@ -2361,7 +4295,7 @@
             "sha1": "7dfe35df0a82d0229b1042b2dc8b3793e648460f",
             "tags": [],
             "score": 5,
-            "note": "bad IA"
+            "note": "some IA are having a bad time"
         },
         {
             "name": "Bowsers Challenge",
@@ -2436,20 +4370,6 @@
             "version": "v1",
             "family": 4368,
             "tags": []
-        },
-        {
-            "name": "Broken Pier",
-            "version": "v1.04.6",
-            "since_version": "0.12",
-            "author": "xBlue98",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "fe6a0605165e0e91740647ec9c5ce45123af813f",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
         },
         {
             "name": "Bullet Bill Chill",
@@ -2849,7 +4769,9 @@
             "sha1": "ece38208d9f46c5b28efcaee7dbb1edc7ae53c92",
             "version": "v1",
             "family": 6575,
-            "tags": ["SMO"]
+            "tags": [
+                "SMO"
+            ]
         },
         {
             "name": "Casino Park",
@@ -3022,7 +4944,9 @@
             "special": "T32",
             "music": "T32",
             "sha1": "04d9c0eb88d57c761ba46d28436b01d930bb3523",
-            "tags": ["Night"],
+            "tags": [
+                "Night"
+            ],
             "score": 4
         },
         {
@@ -3141,34 +5065,6 @@
             "score": 2
         },
         {
-            "name": "Cheep Cheep Beach",
-            "author": "SquireTurnbolt",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "17e0a2a4678037b3d1feb4b00cbc06e74d06fb6a",
-            "version": "v2.1",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "DS"
-            ]
-        },
-        {
-            "name": "Cheep Cheep Lagoon",
-            "music": "T32",
-            "special": "T32",
-            "score": 4,
-            "author": "ZPL",
-            "since_version": "0.1",
-            "sha1": "b96e3a2d3d9f149067b95c76f7d2819c5ff5a72b",
-            "version": "v1.1b",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
             "name": "Cheep Cheep Resort",
             "version": "Beta",
             "since_version": "0.12",
@@ -3178,37 +5074,6 @@
             "sha1": "f16d9d92489b68ebd68c0fcfd337f49716036d34",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "Cheep-Cheep Island",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": [
-                "SquireTurnbolt",
-                "Kozakura"
-            ],
-            "special": "T31",
-            "music": "T31",
-            "sha1": "0c092a6d8c04c613d6816befbac1288bc0c42394",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Cheese Land",
-            "music": "T71",
-            "special": "T71",
-            "score": 5,
-            "author": "ZPL",
-            "since_version": "0.1",
-            "sha1": "8603aaf33da01fbd7a8a8a36f305f9d39ff7c123",
-            "version": "v2.1",
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
         },
         {
             "name": "Cheese Moon Fortress",
@@ -3287,62 +5152,6 @@
             "sha1": "e0b6ba5d1ded0404796264cf70280c1c38240a5d",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "Choco Island 1",
-            "music": "T73",
-            "special": "T73",
-            "score": 4,
-            "author": "Toxic Prime",
-            "since_version": "0.1",
-            "sha1": "baa2abc97532270efa6b3f57f83c3f1188bd0d91",
-            "version": "v1.4",
-            "tags": [
-                "Retro",
-                "Tour"
-            ]
-        },
-        {
-            "name": "Choco Island 1",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "293df3c33298b6483df36c521e52347fd9363495",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 4
-        },
-        {
-            "name": "Choco Island 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Cats4Life",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "6510b925d15ddabddcf8902c942404b484df9acb",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Choco Mountain",
-            "author": "TacoJosh",
-            "special": "T83",
-            "music": "T83",
-            "score": 5,
-            "since_version": "0.10",
-            "sha1": "7a7da2d0f10441fa8b4df0e8a7683ed17b220b79",
-            "version": "v1.11",
-            "tags": [
-                "Retro",
-                "N64"
-            ]
         },
         {
             "name": "Choco Test Island",
@@ -3555,6 +5364,19 @@
             "tags": []
         },
         {
+            "name": "Circuit 3",
+            "author": "TheZACAtac",
+            "special": "T72",
+            "music": "T72",
+            "sha1": "ac25029e0b50f12e70c0495c852faef9e7f1695c",
+            "version": "v1.1",
+            "since_version": "0.11",
+            "score": 2,
+            "tags": [
+                "VVVVVV"
+            ]
+        },
+        {
             "name": "Circuit Boardway",
             "author": [
                 "Aidan190903",
@@ -3649,7 +5471,9 @@
             "special": "T13",
             "music": "T13",
             "sha1": "dc771cbcb7afae5931d26461bea262e6338e9237",
-            "tags": ["Night"],
+            "tags": [
+                "Night"
+            ],
             "score": 4
         },
         {
@@ -3702,7 +5526,9 @@
             "sha1": "0e2564fb27abfcaf3f744034369cd40a3f538239",
             "version": "v1",
             "family": 2820,
-            "tags": ["SMB"]
+            "tags": [
+                "SMB"
+            ]
         },
         {
             "name": "Cloud Carpet",
@@ -3727,22 +5553,6 @@
             "version": "v1.08",
             "family": 2549,
             "tags": []
-        },
-        {
-            "name": "Cloudtop Cruise",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Diego Vapy",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "52f1a2e71cfba3a90351c02d1412b514962a3f9c",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 3,
-            "warning": 1,
-            "note": "collision"
         },
         {
             "name": "Cloudy Courtway",
@@ -4558,34 +6368,6 @@
             "tags": []
         },
         {
-            "name": "DK Jungle",
-            "music": "T73",
-            "special": "T73",
-            "score": 3,
-            "author": "Pointy Pighead Games",
-            "since_version": "0.1",
-            "sha1": "4ff26bff4093ce7e4e27d8e6ab0cdabd103c5406",
-            "version": "RC2b",
-            "tags": [
-                "Retro",
-                "GP"
-            ]
-        },
-        {
-            "name": "DK Jungle",
-            "version": "v2.11.fix",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "b7c6b05fdc2aaa6d67229c27f0558cb55e6e2b3e",
-            "tags": [
-                "Retro",
-                "3DS"
-            ],
-            "score": 5
-        },
-        {
             "name": "DK Jungle Run",
             "author": "HackerCop",
             "special": "T73",
@@ -4620,20 +6402,6 @@
             "tags": []
         },
         {
-            "name": "DK Pass",
-            "version": "v3",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T23",
-            "music": "T23",
-            "sha1": "6f1ea070458972b5c09db8f386956c8430658135",
-            "tags": [
-                "Retro",
-                "DS"
-            ],
-            "score": 5
-        },
-        {
             "name": "DK Summit",
             "version": "v1",
             "since_version": "0.12",
@@ -4658,35 +6426,6 @@
             "score": 1
         },
         {
-            "name": "Ancient Lake",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Squadaloo",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "aa9f1271d5c21f4369cec6427d1042d169806fc3",
-            "tags": ["DKR"],
-            "score": 5
-        },
-        {
-            "name": "Daisy Cruiser",
-            "music": "T31",
-            "special": "T31",
-            "score": 5,
-            "author": [
-                "FunkyDude15",
-                "Riidefi",
-                "Cotni"
-            ],
-            "since_version": "0.1",
-            "sha1": "1e17656d3c22adaf6e7a194d5617cdfcc0feb478",
-            "version": "v1.2",
-            "tags": [
-                "Retro",
-                "GCN"
-            ]
-        },
-        {
             "name": "Daisy Gardens",
             "music": "T82",
             "special": "T82",
@@ -4697,20 +6436,6 @@
             "version": "v2.2e",
             "family": 1704,
             "tags": []
-        },
-        {
-            "name": "Daisy Hills",
-            "music": "T12",
-            "special": "T12",
-            "score": 5,
-            "author": "Atlas",
-            "since_version": "0.1",
-            "sha1": "6aba6d97c7cdd3ca59b03d0e51dd7edba5179496",
-            "version": "v1.7g",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
         },
         {
             "name": "Daisy's Garden",
@@ -4838,6 +6563,17 @@
             "tags": [
                 "DKR"
             ]
+        },
+        {
+            "name": "Darkness Dungeon",
+            "version": "v1",
+            "since_version": "0.12",
+            "author": "Mystora",
+            "special": "T84",
+            "music": "T84",
+            "sha1": "459a8740cb65447c0a6f34e92e2c647625fb38c4",
+            "tags": [],
+            "score": 3
         },
         {
             "name": "Darkness Power Plant",
@@ -5360,20 +7096,6 @@
             "score": 4
         },
         {
-            "name": "Diamond City",
-            "version": "v1.3",
-            "since_version": "0.12",
-            "author": "Atlas",
-            "special": "T22",
-            "music": "T22",
-            "sha1": "811d09ac0af6e1c23bf598cd266ef3eb3c42ca0e",
-            "tags": [
-                "Retro",
-                "GP"
-            ],
-            "score": 5
-        },
-        {
             "name": "Diddy Kong's Summit",
             "version": "v1",
             "since_version": "0.12",
@@ -5406,7 +7128,9 @@
             "special": "T41",
             "music": "T41",
             "sha1": "cf3e400bb0cd12375745b478abf54a7c92b099c7",
-            "tags": ["Night"],
+            "tags": [
+                "Night"
+            ],
             "score": 2
         },
         {
@@ -5430,20 +7154,6 @@
             "version": "v1.1",
             "family": 4232,
             "tags": []
-        },
-        {
-            "name": "Dino Dino Jungle",
-            "version": "v1.4",
-            "since_version": "0.12",
-            "author": "Tock",
-            "special": "T83",
-            "music": "T83",
-            "sha1": "bd5b111927d6f5b7138d526353531e1c7ba1961f",
-            "tags": [
-                "Retro",
-                "GCN"
-            ],
-            "score": 5
         },
         {
             "name": "Disco Fever",
@@ -5546,20 +7256,6 @@
             ]
         },
         {
-            "name": "Dolphin Shoals",
-            "music": "T32",
-            "special": "T32",
-            "score": 4,
-            "author": "MrFluffy",
-            "since_version": "0.1",
-            "sha1": "54a1621fef2b137adcbe20b6dd710b5bc5f981a1",
-            "version": "v1.1",
-            "tags": [
-                "Retro",
-                "Switch"
-            ]
-        },
-        {
             "name": "Dolphin's Beach",
             "author": [
                 "CrisDark64",
@@ -5594,51 +7290,6 @@
             "sha1": "97802fa4a50b5fa8e6eb67931e7614aa2bc3772a",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Donut Plains 1",
-            "music": "T81",
-            "special": "T81",
-            "score": 5,
-            "author": "ZPL",
-            "since_version": "0.1",
-            "sha1": "d34826c73d49c58c297224f30fb5930bf7c46a92",
-            "version": "v1.beta",
-            "tags": [
-                "Retro",
-                "SNES"
-            ]
-        },
-        {
-            "name": "Donut Plains 2",
-            "version": "v2.01",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "6342eb5d86b95c6c460c9fe2f7c45d6f12fa93a1",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Donut Plains 3",
-            "author": [
-                "Bear",
-                "ZPL"
-            ],
-            "special": "T81",
-            "music": "T81",
-            "sha1": "3dbd5e5e3084972aa3fefc0ffc06d7d02253cde9",
-            "version": "v2.11",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "SNES"
-            ]
         },
         {
             "name": "Donut Steppe 1",
@@ -5723,20 +7374,6 @@
             "version": "v2.4",
             "family": 4143,
             "tags": []
-        },
-        {
-            "name": "Dragon Driftway",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "4f3f20d40751f1b162a278d54214ef32d5f2a4e5",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Dragon's Den",
@@ -5871,20 +7508,6 @@
             "version": "v3.1e",
             "family": 3010,
             "tags": []
-        },
-        {
-            "name": "Dry Dry Desert",
-            "version": "v1.3",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T41",
-            "music": "T41",
-            "sha1": "4290d5c9f8e46ebdb44b9eaa2d78ebcf450f7ca9",
-            "tags": [
-                "Retro",
-                "GCN"
-            ],
-            "score": 3
         },
         {
             "name": "Dry Dry Fortress",
@@ -6050,21 +7673,9 @@
             "sha1": "ca7cdde57a2a3445d5f0427dbc536e98d1550480",
             "version": "v1",
             "family": 1903,
-            "tags": ["Edit"]
-        },
-        {
-            "name": "Electrodrome",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "SquireTurnbolt",
-            "special": "T14",
-            "music": "T14",
-            "sha1": "d557dc055b7583423bf990e17dead6d6879311fb",
             "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 5
+                "Edit"
+            ]
         },
         {
             "name": "Elemental Solstice",
@@ -6098,7 +7709,9 @@
             "version": "v1.0.1",
             "since_version": "0.11",
             "score": 5,
-            "tags": ["Sonic"]
+            "tags": [
+                "Sonic"
+            ]
         },
         {
             "name": "Emerald Isle",
@@ -6263,20 +7876,6 @@
             ]
         },
         {
-            "name": "Excitebike adventure",
-            "music": "T64",
-            "special": "T64",
-            "score": 4,
-            "author": "Seeky",
-            "since_version": "0.1",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "sha1": "e782de12471731e9bb155eea6872cd5b2303357d",
-            "version": "v1.3"
-        },
-        {
             "name": "Exiled Campsite",
             "music": "T41",
             "special": "T41",
@@ -6425,23 +8024,6 @@
             "version": "Beta",
             "family": 6015,
             "tags": []
-        },
-        {
-            "name": "Figure-8 Circuit",
-            "music": "T11",
-            "special": "T11",
-            "score": 5,
-            "author": [
-                "Quajeek99",
-                "Sniki"
-            ],
-            "since_version": "0.1",
-            "sha1": "39ccb7bac833fec77b261f51323bf81478dc295d",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "DS"
-            ]
         },
         {
             "name": "Figure-8 Madness",
@@ -6886,34 +8468,6 @@
             "score": 5
         },
         {
-            "name": "Frappe Snowland (NintenYoshi)",
-            "author": "NintenYoshi",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "b8d6d9f9b3d8ed74a956050e8aa8e59b2e0e95c2",
-            "version": "v1.3.1",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "N64"
-            ]
-        },
-        {
-            "name": "Frappe Snowland (Cats4Life)",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Cats4Life",
-            "special": "T23",
-            "music": "T23",
-            "sha1": "e7891ba3f511b76d4d05f2faafff1e22ec7ce2e3",
-            "tags": [
-                "Retro",
-                "N64"
-            ],
-            "score": 4
-        },
-        {
             "name": "Freezeflame Mountain",
             "version": "v1.1",
             "since_version": "0.12",
@@ -7264,48 +8818,6 @@
             "tags": [
                 "CT Jam"
             ]
-        },
-        {
-            "name": "Ghost Valley 1",
-            "author": "Slimeserver",
-            "special": "T53",
-            "music": "T53",
-            "score": 4,
-            "since_version": "0.10",
-            "sha1": "60170ac752b2b18024ba1495a5d4edc733272aff",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "SNES"
-            ]
-        },
-        {
-            "name": "Ghost Valley 1",
-            "author": "Bruh de la Boi",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "fc775943493edb42b78f50124309b1b3363c1ac0",
-            "version": "v1.2",
-            "since_version": "0.11",
-            "score": 4,
-            "tags": [
-                "Retro",
-                "Tour"
-            ]
-        },
-        {
-            "name": "Ghost Valley 3",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "94143c90346d09a8a0d718903c3dbea614d57445",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 3
         },
         {
             "name": "Ghost Valley 4",
@@ -8414,20 +9926,6 @@
             ]
         },
         {
-            "name": "Hyrule Circuit",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "c0a63cfd9830a0dc95d1c229e813e000245e7305",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
-        },
-        {
             "name": "I Had to Hurry to Make This",
             "author": "JadenMKW",
             "special": "T44",
@@ -8471,20 +9969,6 @@
             "sha1": "8794860f60eb3de8a96af1cf43289cd094bfdf1f",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Ice Ice Outpost",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "93916d9e61cbed97e3f17424835ffaccb5f84089",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Ice Moon Galaxy",
@@ -9156,71 +10640,6 @@
             "score": 1
         },
         {
-            "name": "Darkness Dungeon",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T84",
-            "music": "T84",
-            "sha1": "459a8740cb65447c0a6f34e92e2c647625fb38c4",
-            "tags": [],
-            "score": 3
-        },
-        {
-            "name": "Raceway Lakeside",
-            "version": "v1.0.1",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "6e0eee4caff7a870c1d0a4ed76ebaafbcff2bf08",
-            "tags": [],
-            "score": 1
-        },
-        {
-            "name": "Peach's Cargo Ship",
-            "author": "KiwiPowerGreen",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "d4ebe3b7f5e062bad304e9ea3686b34798de481b",
-            "version": "v1.1",
-            "since_version": "0.11",
-            "score": 2
-        },
-        {
-            "name": "Prismatic Parkway",
-            "version": "Beta3.fix",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "647b03c961c42868a5599b7479086a08bdd030df",
-            "tags": [],
-            "score": 2
-        },
-        {
-            "name": "Trick Stadium",
-            "version": "?",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T64",
-            "music": "T64",
-            "sha1": "4d683903b87d7a5466ea2655eb5ae132afe456c2",
-            "tags": [],
-            "score": 3
-        },
-        {
-            "name": "Yoshi's Cookie",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "Mystora",
-            "special": "T22",
-            "music": "T22",
-            "sha1": "ff484c0e5acbad83667c0d82d44e5206319eb341",
-            "tags": [],
-            "score": 2
-        },
-        {
             "name": "Kakariko Village",
             "author": "Jopojelly",
             "special": "T11",
@@ -9234,34 +10653,6 @@
             "family": 1697,
             "tags": [
                 "Zelda"
-            ]
-        },
-        {
-            "name": "Kalimari Desert",
-            "music": "T71",
-            "special": "T42",
-            "score": 5,
-            "author": "Sniki",
-            "since_version": "0.1",
-            "sha1": "1a8736dc6578b00335ce24ceade2b95be1594cca",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "N64"
-            ]
-        },
-        {
-            "name": "Kalimari Desert 2",
-            "music": "T42",
-            "special": "T42",
-            "score": 4,
-            "author": "Bruh de la Boi",
-            "since_version": "0.1",
-            "sha1": "f1ac60b0d1dce916d1f7473f1a8b79136f0929b6",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "Tour"
             ]
         },
         {
@@ -9517,34 +10908,6 @@
             "tags": []
         },
         {
-            "name": "Koopa Beach 1",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "36b5044686782467ff928940bc6e21ba0ececad8",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Koopa Beach 2",
-            "version": "v1.0",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "a6df8eff399180c78124de9aadeae0c9f087416d",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 4
-        },
-        {
             "name": "Koopa Canyon",
             "author": "XLR8MKWii",
             "special": "T32",
@@ -9607,20 +10970,6 @@
             "version": "v1.1",
             "family": 4779,
             "tags": []
-        },
-        {
-            "name": "Koopa Troopa Beach",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "c0159f2251a6fe6312f56e66cf94d6cd09e1d0bf",
-            "tags": [
-                "Retro",
-                "N64"
-            ],
-            "score": 4
         },
         {
             "name": "Koopa Troopa Polluta",
@@ -9693,24 +11042,6 @@
             "version": "v2.hp",
             "family": 804,
             "tags": []
-        },
-        {
-            "name": "Lakeside Park",
-            "author": [
-                "Flint",
-                "Hman6516"
-            ],
-            "special": "T73",
-            "music": "T73",
-            "score": 5,
-            "since_version": "0.10",
-            "sha1": "e068192d272d5151a733ae6b4f85d7a173fecd89",
-            "version": "v1.fix",
-            "family": 9556,
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
         },
         {
             "name": "Lakeside Pier",
@@ -10383,34 +11714,6 @@
         },
         {
             "name": "Luigi Circuit",
-            "music": "T11",
-            "special": "T11",
-            "score": 5,
-            "author": "Tock",
-            "since_version": "0.1",
-            "sha1": "b7ac061f7ab2aef14e042466f68da37aa21f7e68",
-            "version": "v1.7",
-            "tags": [
-                "Retro",
-                "GCN"
-            ]
-        },
-        {
-            "name": "Luigi Circuit",
-            "author": "ZPL",
-            "special": "T54",
-            "music": "T54",
-            "sha1": "3de6b7e652abb451f9c9342ca438976b91cd63bd",
-            "version": "v1",
-            "since_version": "0.11",
-            "score": 4,
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
-        },
-        {
-            "name": "Luigi Circuit",
             "music": "T21",
             "special": "T21",
             "score": 3,
@@ -10465,23 +11768,6 @@
             "version": "Beta2",
             "family": 604,
             "tags": []
-        },
-        {
-            "name": "Luigi Raceway",
-            "music": "T54",
-            "special": "T54",
-            "score": 5,
-            "author": [
-                "ZPL",
-                "Skipper93653"
-            ],
-            "since_version": "0.1",
-            "sha1": "4444119e3b94a542bb2d3cd45d28569f9fd98f01",
-            "version": "v1.1",
-            "tags": [
-                "Retro",
-                "N64"
-            ]
         },
         {
             "name": "Luigi's Garden",
@@ -10539,20 +11825,6 @@
             "version": "v1.01",
             "family": 7208,
             "tags": []
-        },
-        {
-            "name": "Luigi's Mansion",
-            "music": "T53",
-            "special": "T11",
-            "score": 5,
-            "author": "Tock",
-            "since_version": "0.1",
-            "sha1": "4ece16d05c10c3037ed2b61ce7d9b5e07773f950",
-            "version": "v1.2",
-            "tags": [
-                "Retro",
-                "DS"
-            ]
         },
         {
             "name": "Luigi's Mansion",
@@ -10839,23 +12111,6 @@
             "tags": []
         },
         {
-            "name": "Maka Wuhu",
-            "music": "T31",
-            "special": "T31",
-            "score": 5,
-            "author": [
-                "FunkyDude15",
-                "Wexos"
-            ],
-            "since_version": "0.1",
-            "sha1": "fcf92af0b9ac3848872fbeb00782924229330da5",
-            "version": "Beta3.1",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
             "name": "Mallon's Circuit",
             "author": "Kinopiokuppa",
             "special": "T31",
@@ -10927,76 +12182,6 @@
             "score": 5
         },
         {
-            "name": "Mario Beach",
-            "music": "T74",
-            "special": "T74",
-            "score": 4,
-            "author": "SuperMario64DS",
-            "since_version": "0.1",
-            "sha1": "e2b0e46314657ccb9de1a5f9e6c708512b857354",
-            "version": "v2.alpha1c",
-            "tags": [
-                "Retro",
-                "GP"
-            ]
-        },
-        {
-            "name": "Mario Circuit",
-            "music": "T21",
-            "special": "T21",
-            "score": 4,
-            "author": "Bri",
-            "since_version": "0.1",
-            "sha1": "7b13362cb2b947ab56a5269d3ed2f9a3dbd3c9f4",
-            "version": "v2",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
-            "name": "Mario Circuit",
-            "author": "Yoshidude4",
-            "special": "T74",
-            "music": "T74",
-            "sha1": "1f61c545f3364b03732cbc2e4f8c772deb4eb261",
-            "version": "v1.alt",
-            "since_version": "0.11",
-            "score": 2,
-            "tags": [
-                "Retro",
-                "GCN"
-            ]
-        },
-        {
-            "name": "Mario Circuit",
-            "music": "T31",
-            "special": "T31",
-            "score": 5,
-            "author": "MysterE99",
-            "since_version": "0.1",
-            "sha1": "b75945128e7900110b73264bdf7a06d2ed1ebb2a",
-            "version": "v1.1",
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
-        },
-        {
-            "name": "Mario Circuit",
-            "version": "v6.2",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T21",
-            "music": "T21",
-            "sha1": "bdf752649175e5ac674d643235fc37da9a720ec3",
-            "tags": [
-                "Retro",
-                "DS"
-            ],
-            "score": 4
-        },
-        {
             "name": "Mario Circuit",
             "version": "v1.1",
             "since_version": "0.12",
@@ -11008,20 +12193,6 @@
                 "SSBB"
             ],
             "score": 3
-        },
-        {
-            "name": "Mario Circuit",
-            "version": "v2.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T74",
-            "music": "T74",
-            "sha1": "bbd30872fe3ec2f93df88f339b6f8afd0afd86ea",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Mario Circuit - RTX On",
@@ -11039,65 +12210,6 @@
             ]
         },
         {
-            "name": "Mario Circuit 1",
-            "music": "T81",
-            "special": "T81",
-            "score": 4,
-            "author": [
-                "ZPL",
-                "Jasperr"
-            ],
-            "since_version": "0.1",
-            "sha1": "0232b0dfb16d0d2e8a2e477509d820084a6bff5d",
-            "version": "v2.5",
-            "tags": [
-                "Retro",
-                "SNES"
-            ]
-        },
-        {
-            "name": "Mario Circuit 1",
-            "music": "T81",
-            "special": "T81",
-            "score": 3,
-            "author": "Atlas",
-            "since_version": "0.1",
-            "sha1": "e0abfca9806fa979ab5ca0d04ba79e1875e69172",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "Tour"
-            ]
-        },
-        {
-            "name": "Mario Circuit 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Kozakura",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "497e5a8fef2078d71695f140667ca341d2b51e35",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 3
-        },
-        {
-            "name": "Mario Circuit 4",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "0210fc3ea890069784240131343aec27dacfae9d",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 4
-        },
-        {
             "name": "Mario Circuit 5",
             "author": "Retrostyle12",
             "special": "T81",
@@ -11108,20 +12220,6 @@
             "version": "v3",
             "family": 4891,
             "tags": []
-        },
-        {
-            "name": "Mario Kart Stadium",
-            "version": "v2.5",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "88fe31b5f565238e5fb29d087ca335a24ea908a0",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 5
         },
         {
             "name": "Mario Kart World",
@@ -11259,24 +12357,6 @@
             "sha1": "cbc3e058f940b94a3f13d82aafc16481ef2e73ef",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Merry Mountain",
-            "author": [
-                "Luca",
-                "NintenYoshi"
-            ],
-            "special": "T23",
-            "music": "T23",
-            "score": 5,
-            "since_version": "0.10",
-            "sha1": "3e8538fd1229e578786deec1a0d96851e6370e23",
-            "version": "v1",
-            "family": 9093,
-            "tags": [
-                "Retro",
-                "Tour"
-            ]
         },
         {
             "name": "Mesa Township",
@@ -11647,20 +12727,6 @@
             "score": 3
         },
         {
-            "name": "Moo Moo Farm",
-            "author": "ZPL",
-            "special": "T12",
-            "music": "T12",
-            "sha1": "84d9296242d48ce75445cd752d51a1430e384dfc",
-            "version": "v1",
-            "since_version": "0.11",
-            "score": 4,
-            "tags": [
-                "Retro",
-                "N64"
-            ]
-        },
-        {
             "name": "Moo Moo Island",
             "author": "ζρεar",
             "special": "T33",
@@ -11794,20 +12860,6 @@
             "version": "Beta3",
             "family": 8860,
             "tags": []
-        },
-        {
-            "name": "Mount Wario",
-            "version": "v1.5",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T23",
-            "music": "T23",
-            "sha1": "066f37f9f93bf6b7e6e70cc4f6b8f9ff267349e8",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Mountain Adventure",
@@ -11970,20 +13022,6 @@
             "name": "Mushroom Bridge",
             "music": "T42",
             "special": "T42",
-            "score": 5,
-            "author": "Tock",
-            "since_version": "0.1",
-            "sha1": "6200a54b48bd47027829c31c2a432eaa588540d4",
-            "version": "v1.5",
-            "tags": [
-                "Retro",
-                "GCN"
-            ]
-        },
-        {
-            "name": "Mushroom Bridge",
-            "music": "T42",
-            "special": "T42",
             "score": 4,
             "author": "Torran",
             "since_version": "0.1",
@@ -11993,20 +13031,6 @@
             "tags": [
                 "_GCN",
                 "Boost"
-            ]
-        },
-        {
-            "name": "Mushroom City",
-            "music": "T42",
-            "special": "T42",
-            "score": 5,
-            "author": "Tock",
-            "since_version": "0.1",
-            "sha1": "8719c6c193df683f66d94d7c3c2796b638a70edc",
-            "version": "v1.2.le",
-            "tags": [
-                "Retro",
-                "GCN"
             ]
         },
         {
@@ -12209,21 +13233,6 @@
             "score": 1
         },
         {
-            "name": "Music Park",
-            "version": "v2.1.le",
-            "since_version": "0.12",
-            "author": "Atlas",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "0400002e48bc38eba478ae4564939a48344a8ef8",
-            "tags": [
-                "Retro",
-                "3DS"
-            ],
-            "score": 5,
-            "warning": 3
-        },
-        {
             "name": "Musical Cliff",
             "author": "Luca",
             "special": "T33",
@@ -12236,20 +13245,6 @@
             "tags": [
                 "CT Jam"
             ]
-        },
-        {
-            "name": "Mute City",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T54",
-            "music": "T54",
-            "sha1": "0848ad8124ea161254bccc4915fdc1ca38abc882",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Mute City I",
@@ -12430,20 +13425,6 @@
             "score": 4
         },
         {
-            "name": "Neo Bowser City",
-            "author": "ZPL",
-            "special": "T21",
-            "music": "T21",
-            "score": 5,
-            "since_version": "0.10",
-            "sha1": "ecdc38493f25083373ca0cea23e67aa4617ebf14",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
             "name": "Neon Dimension",
             "music": "T44",
             "special": "T44",
@@ -12504,62 +13485,6 @@
             "tags": []
         },
         {
-            "name": "New York Minute",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "1ed39b5f6cfac9338cc9e3c551f35a73d195669a",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
-            "name": "New York Minute 2",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "ec08224af5b465013871ac0e38ab0ec4483a1b30",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
-            "name": "New York Minute 3",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "866541ce816b57ddb9458d7de19abce5074f30b5",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
-            "name": "New York Minute 4",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "a49560026c77329884e328c8277b8bd82c60277a",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
             "name": "Nexuz Road",
             "author": "4IT★Lecce",
             "special": "T21",
@@ -12598,6 +13523,17 @@
             "tags": []
         },
         {
+            "name": "Night Factory (Bruh)",
+            "version": "Beta",
+            "since_version": "0.12",
+            "author": "Bruh de la Boi",
+            "special": "T14",
+            "music": "T14",
+            "sha1": "d02b018eece9a75dab74427fc0ec62e2ae3af8c9",
+            "tags": [],
+            "score": 4
+        },
+        {
             "name": "Night Factory (Gito)",
             "music": "T14",
             "special": "T14",
@@ -12608,17 +13544,6 @@
             "version": "v1.2.hp",
             "family": 2576,
             "tags": []
-        },
-        {
-            "name": "Night Factory (Bruh)",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T14",
-            "music": "T14",
-            "sha1": "d02b018eece9a75dab74427fc0ec62e2ae3af8c9",
-            "tags": [],
-            "score": 4
         },
         {
             "name": "Night Fortress",
@@ -12717,20 +13642,6 @@
             "tags": [
                 "CTR"
             ]
-        },
-        {
-            "name": "Ninja Hideaway",
-            "version": "v1.5",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T33",
-            "music": "T33",
-            "sha1": "676494213ce0a0a4adeb2a33d84c91edfb5af6f1",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 4
         },
         {
             "name": "Ninja Land",
@@ -13123,20 +14034,6 @@
             "score": 3
         },
         {
-            "name": "Pac Mountain",
-            "music": "T12",
-            "special": "T12",
-            "score": 5,
-            "author": "Riidefi",
-            "since_version": "0.1",
-            "sha1": "7ec47388391e9c055f7bcf823f66976e86e29616",
-            "version": "Beta3",
-            "tags": [
-                "Retro",
-                "GP"
-            ]
-        },
-        {
             "name": "Pac-Track",
             "author": "ANoob",
             "special": "T32",
@@ -13276,48 +14173,6 @@
             "score": 4
         },
         {
-            "name": "Paris Promenade",
-            "version": "v1.mkt",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "21a7c377620abf7ab9abb011e640af65cb2edee4",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Paris Promenade 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T82",
-            "music": "T82",
-            "sha1": "5953dc8acd8582078ff94480180327eea933f517",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Paris Promenade 3",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "c7ff81b3c77f07d5d7d742c1c5cb68905f367598",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 5
-        },
-        {
             "name": "Park Cruise",
             "music": "T82",
             "special": "T82",
@@ -13352,18 +14207,14 @@
             "score": 4
         },
         {
-            "name": "Peach Circuit",
-            "music": "T51",
+            "name": "Peach's Cargo Ship",
+            "author": "KiwiPowerGreen",
             "special": "T51",
-            "score": 4,
-            "author": "Floyd",
-            "since_version": "0.1",
-            "sha1": "70724fb84722d7e09d7e42972ee444e2dbc9f440",
-            "version": "Beta1.1",
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
+            "music": "T51",
+            "sha1": "d4ebe3b7f5e062bad304e9ea3686b34798de481b",
+            "version": "v1.1",
+            "since_version": "0.11",
+            "score": 2
         },
         {
             "name": "Peach's Castle Raceway",
@@ -13454,7 +14305,9 @@
             "sha1": "2f1336cd6e9bbf0733ddae6af7e572c66b01f544",
             "version": "v1",
             "family": 9448,
-            "tags": ["Edit"]
+            "tags": [
+                "Edit"
+            ]
         },
         {
             "name": "Perplexus",
@@ -13695,20 +14548,6 @@
             "tags": []
         },
         {
-            "name": "Piranha Plant Slide",
-            "music": "T32",
-            "special": "T32",
-            "score": 5,
-            "author": "Atlas",
-            "since_version": "0.1",
-            "sha1": "9e594191dfdf1a7a2cda90f7b6b53bd7910aac2f",
-            "version": "v1.3",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
             "name": "Pirate Bay Town",
             "version": "Beta",
             "since_version": "0.12",
@@ -13926,6 +14765,17 @@
             "version": "v1",
             "family": 8510,
             "tags": []
+        },
+        {
+            "name": "Prismatic Parkway",
+            "version": "Beta3.fix",
+            "since_version": "0.12",
+            "author": "Mystora",
+            "special": "T73",
+            "music": "T73",
+            "sha1": "647b03c961c42868a5599b7479086a08bdd030df",
+            "tags": [],
+            "score": 2
         },
         {
             "name": "Prison Block",
@@ -14202,6 +15052,17 @@
             ]
         },
         {
+            "name": "Raceway Lakeside",
+            "version": "v1.0.1",
+            "since_version": "0.12",
+            "author": "Mystora",
+            "special": "T11",
+            "music": "T11",
+            "sha1": "6e0eee4caff7a870c1d0a4ed76ebaafbcff2bf08",
+            "tags": [],
+            "score": 1
+        },
+        {
             "name": "Rainbow Bridge",
             "music": "T11",
             "special": "T11",
@@ -14225,20 +15086,6 @@
             "version": "RC2",
             "family": 407,
             "tags": []
-        },
-        {
-            "name": "Rainbow Downhill",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "Diego Vapy",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "68ad671c2f4cf51101f0ef6ae95f79111c455ade",
-            "tags": [
-                "Retro",
-                "GP"
-            ],
-            "score": 5
         },
         {
             "name": "Rainbow Fantasy Starway",
@@ -14365,79 +15212,6 @@
             "score": 5
         },
         {
-            "name": "Rainbow Road",
-            "author": "Squadaloo",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "d7c7154d1cf88b2b5acb95771e23499468737741",
-            "version": "v1.1.1",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "Switch"
-            ]
-        },
-        {
-            "name": "Rainbow Road",
-            "author": "ZPL",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "e7a99b2e7b4c54c56ee1a4da45d8a32aa9a8bf6b",
-            "version": "v1.3",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "DS"
-            ]
-        },
-        {
-            "name": "Rainbow Road (Caron)",
-            "music": "T44",
-            "special": "T44",
-            "score": 5,
-            "author": "Caron",
-            "since_version": "0.1",
-            "sha1": "f6c48cad7dc7a029b55078fae3d084474d83bc18",
-            "version": "v1.2",
-            "tags": [
-                "Retro",
-                "GCN"
-            ]
-        },
-        {
-            "name": "Rainbow Road (Squire)",
-            "author": "SquireTurnbolt",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "5b6af106b7a5d4dcb13f1a695ab590a190cf567e",
-            "version": "v1.2",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
-        },
-        {
-            "name": "Rainbow Road",
-            "music": "T44",
-            "special": "T44",
-            "score": 5,
-            "author": [
-                "Bear",
-                "ZPL"
-            ],
-            "since_version": "0.1",
-            "sha1": "31b6e5260dc9ef4de8691685b636d6d8fb7254e5",
-            "version": "v2.6",
-            "tags": [
-                "Retro",
-                "SNES"
-            ]
-        },
-        {
             "name": "Rainbow Road (GK2)",
             "author": "Kinopiokuppa",
             "special": "T44",
@@ -14464,93 +15238,6 @@
             "tags": [
                 "GK"
             ]
-        },
-        {
-            "name": "Rainbow Road",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "8b530044c78110fcd1a5903d20e29fe67f1908f8",
-            "tags": [
-                "Retro",
-                "3DS"
-            ],
-            "score": 4
-        },
-        {
-            "name": "Rainbow Road (Drea+Turn)",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": ["Dreacastian", "Turnip"],
-            "special": "T44",
-            "music": "T44",
-            "sha1": "20c295285bddcb4ea44471543670cc1af9d5d122",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 4
-        },
-        {
-            "name": "Rainbow Road (ZPL)",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "dc709cbb94cc5e759a8df09a26e0995dee345720",
-            "tags": [
-                "Retro",
-                "GCN"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Rainbow Road",
-            "version": "v1.2",
-            "since_version": "0.12",
-            "author": "cpfusion",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "58ce8fa898bbb5d28e553abf4501b64e18694220",
-            "tags": [
-                "Retro",
-                "N64"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Rainbow Road 1",
-            "music": "T44",
-            "special": "T44",
-            "score": 4,
-            "author": [
-                "Luca",
-                "Toxic Prime"
-            ],
-            "since_version": "0.1",
-            "sha1": "c931319d959eccabf97b0dfc56cc87f1abf0aec8",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "Tour"
-            ]
-        },
-        {
-            "name": "Rainbow Road 2",
-            "version": "v1.02",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "5daedd9a90a9d3baf3ba2152aac2b4d557607135",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 5
         },
         {
             "name": "Rainbow Road DX",
@@ -14885,20 +15572,6 @@
             ]
         },
         {
-            "name": "Ribbon Road",
-            "version": "v2.3r",
-            "since_version": "0.12",
-            "author": "Gabriela",
-            "special": "T81",
-            "music": "T81",
-            "sha1": "70ef9d693665764b436a1933497da2f6bdab6864",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
-        },
-        {
             "name": "Rich House",
             "author": "Flohrianmkw",
             "special": "T22",
@@ -15048,20 +15721,6 @@
             "tags": []
         },
         {
-            "name": "Riverside Park",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T73",
-            "music": "T73",
-            "sha1": "70584efd00377e54d5c4c8baa27061a025eeb91e",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
-        },
-        {
             "name": "Riverview Square",
             "author": [
                 "Florian",
@@ -15102,23 +15761,6 @@
             "score": 1,
             "family": 86,
             "note": "impossible jump if the player don't know how to tricks"
-        },
-        {
-            "name": "Rock Rock Mountain",
-            "music": "T31",
-            "special": "T31",
-            "score": 5,
-            "author": [
-                "MrKoeikoei",
-                "zilly"
-            ],
-            "since_version": "0.1",
-            "sha1": "1ec2b9a7c849e4b50b1cd3b45a1fb2ae1809c28f",
-            "version": "v2.alt",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
         },
         {
             "name": "Rockside River",
@@ -15338,6 +15980,19 @@
             ]
         },
         {
+            "name": "Rooster Island",
+            "version": "v2b",
+            "since_version": "0.12",
+            "author": "Jefe",
+            "special": "T51",
+            "music": "T51",
+            "sha1": "95cca7ebd7f4a4929e40805518f0215262fc8662",
+            "tags": [
+                "Night"
+            ],
+            "score": 5
+        },
+        {
             "name": "Rooster Island 2",
             "version": "v2.2",
             "since_version": "0.12",
@@ -15347,31 +16002,6 @@
             "sha1": "9556d1b4722c81142c66182e9ba306dffd505e22",
             "tags": [],
             "score": 3
-        },
-        {
-            "name": "Rooster Island",
-            "version": "v2b",
-            "since_version": "0.12",
-            "author": "Jefe",
-            "special": "T51",
-            "music": "T51",
-            "sha1": "95cca7ebd7f4a4929e40805518f0215262fc8662",
-            "tags": ["Night"],
-            "score": 5
-        },
-        {
-            "name": "Rosalina's Ice World",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "SquireTurnbolt",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "6c6bff31fda3638fd6e9a305097f139c97038177",
-            "tags": [
-                "Retro",
-                "3DS"
-            ],
-            "score": 5
         },
         {
             "name": "Rosalina's Purple Fortress",
@@ -15461,20 +16091,6 @@
             "version": "v1.1c",
             "family": 1287,
             "tags": []
-        },
-        {
-            "name": "Royal Raceway",
-            "author": "ZPL",
-            "special": "T54",
-            "music": "T54",
-            "sha1": "e97ae30fd0c16596dabb4d127e067a1c9bdf31f5",
-            "version": "v1.2",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "N64"
-            ]
         },
         {
             "name": "Royal Rainbow",
@@ -15640,20 +16256,6 @@
             "sha1": "df1352e0b7573cd63825a1c95cb8efc7487d56f8",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "Sky-High Sundae",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": [
-                "Wacker",
-                "tasrhys"
-            ],
-            "special": "T22",
-            "music": "T22",
-            "sha1": "2d575d2b5b64f53caf8b8b8418ac0219e21a6927",
-            "tags": ["Retro", "Switch"],
-            "score": 4
         },
         {
             "name": "SYTI IKEA Canyon",
@@ -16201,20 +16803,6 @@
             ]
         },
         {
-            "name": "Sherbet Land",
-            "version": "v4.20",
-            "since_version": "0.12",
-            "author": "Tock",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "e71769de980beaae7d403c3d2dc2db20cb04e81d",
-            "tags": [
-                "Retro",
-                "GCN"
-            ],
-            "score": 4
-        },
-        {
             "name": "Sherbet Ocean",
             "author": [
                 "Scye",
@@ -16324,20 +16912,6 @@
             "tags": []
         },
         {
-            "name": "Shroom Ridge",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T21",
-            "music": "T42",
-            "sha1": "869fe045b4483bc9dcc7086782a1ca0ec9931b64",
-            "tags": [
-                "Retro",
-                "DS"
-            ],
-            "score": 5
-        },
-        {
             "name": "Shroom Shores",
             "version": "v1",
             "since_version": "0.12",
@@ -16393,48 +16967,6 @@
             "version": "v1.2",
             "family": 2847,
             "tags": []
-        },
-        {
-            "name": "Shy Guy Bazaar",
-            "music": "T22",
-            "special": "T22",
-            "score": 5,
-            "author": "Atlas",
-            "since_version": "0.1",
-            "sha1": "6c5caeeb9f39eec5e01d4437b805f28175b49140",
-            "version": "v2c",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
-            "name": "Shy Guy Beach",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T62",
-            "music": "T62",
-            "sha1": "0cf227bee0274597a6d113eff586d9860eeb7514",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 3
-        },
-        {
-            "name": "Shy Guy Falls",
-            "version": "v1.5",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T24",
-            "music": "T24",
-            "sha1": "7a5f4592ff574c2c65bf5f4ffef99f67c18420a5",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Shy Guy Pass",
@@ -16643,20 +17175,6 @@
             "sha1": "c154d56f8cd7d8b08a54b5005737887a0dc0d53b",
             "tags": [],
             "score": 1
-        },
-        {
-            "name": "Sky Garden",
-            "version": "v1.0.2",
-            "since_version": "0.12",
-            "author": "Luca",
-            "special": "T13",
-            "music": "T13",
-            "sha1": "24e7aa799a291491ccd0c975245b8770c38f86cc",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 4
         },
         {
             "name": "Sky Grove",
@@ -16876,20 +17394,6 @@
             "tags": [
                 "MP"
             ]
-        },
-        {
-            "name": "Snow Land",
-            "version": "v1.opt",
-            "since_version": "0.12",
-            "author": "SquireTurnbolt",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "f637cfd854b48704e2310eee6a1c6efdd40806ec",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
         },
         {
             "name": "Snowbound Slopes",
@@ -17444,20 +17948,6 @@
             "sha1": "f604940e063f3fdf28e06266f91574b39a92da19",
             "tags": [],
             "score": 4
-        },
-        {
-            "name": "Stadium Arena",
-            "version": "v1.5",
-            "since_version": "0.12",
-            "author": "Diego Vapy",
-            "special": "T21",
-            "music": "T21",
-            "sha1": "895927d2686f09a4a55db31fdaf1f49711b1dfde",
-            "tags": [
-                "Retro",
-                "GP"
-            ],
-            "score": 3
         },
         {
             "name": "Stadium Scramble",
@@ -18039,35 +18529,6 @@
             "score": 1
         },
         {
-            "name": "Sunset Wilds",
-            "music": "T71",
-            "special": "T71",
-            "score": 4,
-            "author": "ChaosShadow23",
-            "since_version": "0.1",
-            "sha1": "1facce912d6ff27719e700df5f45db9e2f63f78b",
-            "version": "v1.1b",
-            "tags": [
-                "Retro",
-                "GBA"
-            ]
-        },
-        {
-            "name": "Sunshine Airport",
-            "author": "Diego Vapy",
-            "special": "T21",
-            "music": "T21",
-            "sha1": "72aafff8a0e25220372572f757c67cc1eb863531",
-            "version": "v1.1",
-            "since_version": "0.11",
-            "score": 3,
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "note": "some collision (like the plane) are buggy, and the texture feel a bit too dark"
-        },
-        {
             "name": "Sunshine City",
             "author": "Okin",
             "special": "T11",
@@ -18114,20 +18575,6 @@
             "sha1": "f96f98a7605de85537b9fd1b7f1ee45a2b235232",
             "tags": [],
             "score": 5
-        },
-        {
-            "name": "Super Bell Subway",
-            "version": "v1.3",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "sha1": "58ec4cd88e136c0b0d8ccedd96dd8b32f3b09ea4",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
         },
         {
             "name": "Super Blooper Circuit",
@@ -18286,20 +18733,6 @@
             "score": 3
         },
         {
-            "name": "Sweet Sweet Canyon",
-            "author": "TheGamingBram",
-            "special": "T11",
-            "music": "T11",
-            "score": 4,
-            "since_version": "0.10",
-            "sha1": "ed38125f0a889f0a43e1929d232bc3d1cc80e629",
-            "version": "v1.2b",
-            "tags": [
-                "Retro",
-                "Switch"
-            ]
-        },
-        {
             "name": "Sweet Sweet Universe",
             "author": "Zai",
             "special": "T33",
@@ -18324,34 +18757,6 @@
             "version": "Beta",
             "family": 2631,
             "tags": []
-        },
-        {
-            "name": "Sydney Sprint",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "f7a7c5260831b964bbf06c6b6cbeeae0c3d30feb",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Sydney Sprint 2",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Bruh de la Boi",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "927114044608afd412afac7cb12c673235527804",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 5
         },
         {
             "name": "Taiga Base",
@@ -18867,20 +19272,6 @@
             "score": 3
         },
         {
-            "name": "Thwomp Ruins",
-            "author": "TheGamingBram",
-            "special": "T13",
-            "music": "T13",
-            "score": 4,
-            "since_version": "0.10",
-            "sha1": "e098c2657db2449e3ad6dc0e83ddc6cd02bfac8f",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "Switch"
-            ]
-        },
-        {
             "name": "Thwomp Swamp",
             "music": "T53",
             "special": "T53",
@@ -18903,20 +19294,6 @@
             "version": "v2",
             "family": 1805,
             "tags": []
-        },
-        {
-            "name": "Tick-Tock Clock",
-            "author": "ZPL",
-            "special": "T14",
-            "music": "T14",
-            "sha1": "f07eb5aeb18e5c19b8adde4931afab95dacca10c",
-            "version": "v1",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "DS"
-            ]
         },
         {
             "name": "Tilted Altar",
@@ -19015,35 +19392,6 @@
             "tags": []
         },
         {
-            "name": "Toad Circuit",
-            "music": "T11",
-            "special": "T11",
-            "score": 4,
-            "author": "Bri",
-            "since_version": "0.1",
-            "sha1": "2da12d0aab27b63efab236e8b017954c115029fb",
-            "version": "v1",
-            "warning": 3,
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
-            "name": "Toad Harbor",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T31",
-            "music": "T31",
-            "sha1": "dc0dde8a30c0783036168e0c4fae6da73863e10b",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
-        },
-        {
             "name": "Toad Road",
             "music": "T11",
             "special": "T11",
@@ -19132,20 +19480,6 @@
             "score": 4
         },
         {
-            "name": "Toad's Turnpike",
-            "music": "T42",
-            "special": "T42",
-            "score": 5,
-            "author": "NintenYoshi",
-            "since_version": "0.1",
-            "sha1": "6ce8c730d4353cf525c9e47d0b6a4e23b063db41",
-            "version": "v2.2",
-            "tags": [
-                "Retro",
-                "N64"
-            ]
-        },
-        {
             "name": "Toadette's Castle",
             "version": "RC1",
             "since_version": "0.12",
@@ -19176,62 +19510,6 @@
             "music": "T81",
             "sha1": "48e4d6a9414becff040c6357088d154f7756ceb5",
             "tags": [],
-            "score": 1
-        },
-        {
-            "name": "Tokyo Blur",
-            "version": "RC2",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "4c7d142d4710c753569601cbf3df4b4b042fa603",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 1
-        },
-        {
-            "name": "Tokyo Blur 2",
-            "version": "RC2",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "1a68e886e4415a5bacb400888d44faa6c931a461",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 1
-        },
-        {
-            "name": "Tokyo Blur 3",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "49dd6e700b76b667477e0067b5d0cdb0b3488176",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 1
-        },
-        {
-            "name": "Tokyo Blur 4",
-            "version": "RC1",
-            "since_version": "0.12",
-            "author": "Luigi Hack Fan",
-            "special": "T63",
-            "music": "T63",
-            "sha1": "5cf1f6efd85fd3a59d70d8d2707379ea09b7be2b",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
             "score": 1
         },
         {
@@ -19312,23 +19590,6 @@
             "version": "v1.1b",
             "family": 655,
             "tags": []
-        },
-        {
-            "name": "Town",
-            "version": "RC1.mk64r",
-            "since_version": "0.12",
-            "author": [
-                "Kozakura",
-                "Bruh de la Boi"
-            ],
-            "special": "T63",
-            "music": "T63",
-            "sha1": "421a1084db5eb234a5e929b3325dfb2f1ef47b95",
-            "tags": [
-                "Retro",
-                "N64"
-            ],
-            "score": 3
         },
         {
             "name": "Toxi City",
@@ -19545,6 +19806,17 @@
             "family": 7779,
             "warning": 1,
             "tags": []
+        },
+        {
+            "name": "Trick Stadium",
+            "version": "?",
+            "since_version": "0.12",
+            "author": "Mystora",
+            "special": "T64",
+            "music": "T64",
+            "sha1": "4d683903b87d7a5466ea2655eb5ae132afe456c2",
+            "tags": [],
+            "score": 3
         },
         {
             "name": "Tricky Trees",
@@ -19849,20 +20121,6 @@
             ]
         },
         {
-            "name": "Twisted Mansion",
-            "version": "v2.5",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T53",
-            "music": "T53",
-            "sha1": "7d54bd9f48d32ee12d53392b9d2564f469e4dd17",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 5
-        },
-        {
             "name": "Umbreon's Rollercoaster CE",
             "version": "v1",
             "since_version": "0.12",
@@ -20129,17 +20387,6 @@
             ]
         },
         {
-            "name": "Circuit 3",
-            "author": "TheZACAtac",
-            "special": "T72",
-            "music": "T72",
-            "sha1": "ac25029e0b50f12e70c0495c852faef9e7f1695c",
-            "version": "v1.1",
-            "since_version": "0.11",
-            "score": 2,
-            "tags": ["VVVVVV"]
-        },
-        {
             "name": "Vacay Bay",
             "version": "v1",
             "since_version": "0.12",
@@ -20148,76 +20395,6 @@
             "music": "T51",
             "sha1": "30cfc3f9d02d39c45be1d4a7faab036cb3d140d9",
             "tags": [],
-            "score": 5
-        },
-        {
-            "name": "Vancouver Velocity",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T54",
-            "music": "T54",
-            "sha1": "6bcd7385680d47bba32a6cd27fea85500cb04208",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Vancouver Velocity 2",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T44",
-            "music": "T44",
-            "sha1": "b6f7346e305fb1b6a68f36db58f05bcb09ee40d0",
-            "tags": [
-                "Retro",
-                "Tour"
-            ],
-            "score": 3
-        },
-        {
-            "name": "Vanilla Lake 1",
-            "author": "Luca",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "d0e1aebdb7b69c0e5a14b4dfae49bae52ca647d9",
-            "version": "v1.1",
-            "since_version": "0.11",
-            "score": 4,
-            "tags": [
-                "Retro",
-                "Tour"
-            ]
-        },
-        {
-            "name": "Vanilla Lake 1",
-            "version": "Beta",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "c7461cef1e8e2103af438f312cdea6d0b6cbc7d9",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
-            "score": 4
-        },
-        {
-            "name": "Vanilla Lake 2",
-            "version": "v1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T61",
-            "music": "T61",
-            "sha1": "63697be8e82601de4a6e0037ab8e60f08a232374",
-            "tags": [
-                "Retro",
-                "SNES"
-            ],
             "score": 5
         },
         {
@@ -20794,20 +20971,6 @@
             "note": "bad IA"
         },
         {
-            "name": "Waluigi Pinball",
-            "version": "v1.1.fix",
-            "since_version": "0.12",
-            "author": "Sniki",
-            "special": "T64",
-            "music": "T64",
-            "sha1": "d4673ad06a41bbe4fcc4d2ed61d0dcaa14cc5e09",
-            "tags": [
-                "Retro",
-                "DS"
-            ],
-            "score": 5
-        },
-        {
             "name": "Waluigi's Choco Factory",
             "music": "T21",
             "special": "T21",
@@ -20902,62 +21065,6 @@
                 "_GCN",
                 "Boost"
             ]
-        },
-        {
-            "name": "Wario Colosseum",
-            "version": "v1.9",
-            "since_version": "0.12",
-            "author": "Tock",
-            "special": "T64",
-            "music": "T64",
-            "sha1": "28fec4bea17c5ff92eda0dab9724ed5db8272dd4",
-            "tags": [
-                "Retro",
-                "GCN"
-            ],
-            "score": 5
-        },
-        {
-            "name": "Wario Shipyard",
-            "music": "T32",
-            "special": "T32",
-            "score": 4,
-            "author": "Atlas",
-            "since_version": "0.1",
-            "sha1": "f6e8e7ac22f7932ae62360c2ddba97dd1c4b5e9a",
-            "version": "v1.98+",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
-            "name": "Wario Stadium",
-            "music": "T64",
-            "special": "T64",
-            "score": 5,
-            "author": "zilly",
-            "since_version": "0.1",
-            "sha1": "b4b793423fc005637a266cfc6c47a53f1e3e1750",
-            "version": "v1.01",
-            "tags": [
-                "Retro",
-                "N64"
-            ]
-        },
-        {
-            "name": "Wario Stadium",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "Numerosity",
-            "special": "T64",
-            "music": "T64",
-            "sha1": "93c8b68e1d008eb836e78d130484b0499381504d",
-            "tags": [
-                "Retro",
-                "DS"
-            ],
-            "score": 5
         },
         {
             "name": "Wario's Abandoned Casino",
@@ -21142,20 +21249,6 @@
             "music": "T32",
             "sha1": "604a41d004946aa3ca0a6502504a8272383e8d47",
             "tags": [],
-            "score": 4
-        },
-        {
-            "name": "Water Park",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T32",
-            "music": "T32",
-            "sha1": "9d44fc4b48f461752e69e7a3ac3ae9a9c07b0077",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
             "score": 4
         },
         {
@@ -21525,20 +21618,6 @@
             "tags": []
         },
         {
-            "name": "Wild Woods",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "TheGamingBram",
-            "special": "T33",
-            "music": "T33",
-            "sha1": "d3617169e6e15202d88b4bf6aa4ef6dd2f09acce",
-            "tags": [
-                "Retro",
-                "Switch"
-            ],
-            "score": 4
-        },
-        {
             "name": "Windmill Isle",
             "music": "T31",
             "special": "T31",
@@ -21548,7 +21627,9 @@
             "sha1": "77fcd297fa1381198475de3cf6fb9d62cfb245e6",
             "version": "v1",
             "family": 1255,
-            "tags": ["Sonic"]
+            "tags": [
+                "Sonic"
+            ]
         },
         {
             "name": "Windmill Village",
@@ -21706,24 +21787,6 @@
             ]
         },
         {
-            "name": "Wuhu Loop",
-            "music": "T11",
-            "special": "T11",
-            "score": 5,
-            "author": [
-                "FunkyDude15",
-                "Riidefi",
-                "Zachruff"
-            ],
-            "since_version": "0.1",
-            "sha1": "c05ed31920eb171ba29b85002f3279cad859a740",
-            "version": "v1",
-            "tags": [
-                "Retro",
-                "3DS"
-            ]
-        },
-        {
             "name": "Wuthering Castle Canyon",
             "author": "Toxic Amaranth",
             "special": "T33",
@@ -21795,20 +21858,6 @@
         },
         {
             "name": "Yoshi Circuit",
-            "author": "ZPL",
-            "special": "T74",
-            "music": "T74",
-            "sha1": "f90136a09929f01c79a0257fc374bcb974735f0f",
-            "version": "v2.02",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "GCN"
-            ]
-        },
-        {
-            "name": "Yoshi Circuit",
             "music": "T11",
             "special": "T11",
             "score": 1,
@@ -21821,20 +21870,6 @@
                 "_GCN",
                 "Boost"
             ]
-        },
-        {
-            "name": "Yoshi Desert",
-            "version": "v1.1",
-            "since_version": "0.12",
-            "author": "ZPL",
-            "special": "T41",
-            "music": "T41",
-            "sha1": "03e2123085d55d5a95b6b354157ea5e84331df1b",
-            "tags": [
-                "Retro",
-                "GBA"
-            ],
-            "score": 5
         },
         {
             "name": "Yoshi Jungle",
@@ -21877,18 +21912,15 @@
             "tags": []
         },
         {
-            "name": "Yoshi Valley",
-            "author": "ZPL",
-            "special": "T52",
-            "music": "T52",
-            "sha1": "d39dccace86db37e5532c1e10fae8649a0d7dfaa",
-            "version": "v1.11",
-            "since_version": "0.11",
-            "score": 5,
-            "tags": [
-                "Retro",
-                "N64"
-            ]
+            "name": "Yoshi's Cookie",
+            "version": "v1.2",
+            "since_version": "0.12",
+            "author": "Mystora",
+            "special": "T22",
+            "music": "T22",
+            "sha1": "ff484c0e5acbad83667c0d82d44e5206319eb341",
+            "tags": [],
+            "score": 2
         },
         {
             "name": "Yoshi's Island",
