@@ -517,7 +517,10 @@ class SelectPack(ttk.Frame):
         """
         self.packs = []
 
-        for pack in filter(lambda pack: self.is_valid_pack(pack), Path("./Pack/").iterdir()):
+        pack_directory: Path = Path("./Pack/")
+        pack_directory.mkdir(exist_ok=True)
+
+        for pack in filter(lambda pack: self.is_valid_pack(pack), pack_directory.iterdir()):
             self.packs.append(pack)
 
         self.combobox["values"] = [pack.name for pack in self.packs]
@@ -529,7 +532,10 @@ class SelectPack(ttk.Frame):
         :return:
         """
         index = index if index is not None else self.combobox.current()
+
+        if len(self.packs) <= index: return
         pack = self.packs[index]
+
         self.set_path(pack)
         self.combobox.set(pack.name)
 

@@ -25,7 +25,7 @@ options = {
 setup(
     options=options,
     name='MKWF-Install',
-    version=".".join(source.__version__),
+    version=".".join([str(v) for v in source.__version__]),
     url='https://github.com/Faraphel/MKWF-Install',
     license='Apache-2.0',
     author='Faraphel',
@@ -33,7 +33,7 @@ setup(
     description='Mario Kart Wii Mod Installer.',
     executables=[
         Executable(
-            "./main.pyw",
+            "main.py",
             icon="./assets/icon.ico",
             base="win32gui",
             target_name="MKWF-Install.exe",
