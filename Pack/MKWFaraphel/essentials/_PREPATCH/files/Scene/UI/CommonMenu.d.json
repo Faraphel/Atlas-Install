@@ -1,0 +1,4 @@
+{
+  "mode": "match",
+  "match_regex": "[!F]*[!_]?.szs"
+}

@@ -1,13 +1,10 @@
 from cx_Freeze import setup, Executable
 import sys
-import json
+import source
 
 include_files = [
-    "./icon.ico",
-    "./LICENSE",
+    "./LICENSE.md",
     "./README.md",
-    "./version",
-    "./translation.json",
 
     "./assets",
     "./tools",
@@ -19,19 +16,16 @@ include_files = [
 options = {
     "build_exe": {
         "include_files": include_files,
-        "includes": ["tkinter", "requests", "PIL", "distutils"],
+        "includes": ["tkinter", "PIL"],
         "include_msvcr": True,
-        "packages": ["tkinter", "distutils"],
+        "packages": ["tkinter"],
     }
 }
-
-with open("./version") as f:
-    version = json.load(f)
 
 setup(
     options=options,
     name='MKWF-Install',
-    version=version["version"],
+    version=".".join([str(v) for v in source.__version__]),
     url='https://github.com/Faraphel/MKWF-Install',
     license='Apache-2.0',
     author='Faraphel',
@@ -39,8 +33,8 @@ setup(
     description='Mario Kart Wii Mod Installer.',
     executables=[
         Executable(
-            "./main.pyw",
-            icon="./icon.ico",
+            "main.py",
+            icon="./assets/icon.ico",
             base="win32gui",
             target_name="MKWF-Install.exe",
             shortcut_name="MKWF-Install",

@@ -1,0 +1,24 @@
+{
+    "mode": "replace",
+    "operation": {
+        "img-edit": {
+            "layers": [
+                {"type": "color", "color": [0, 0, 0, 255]},
+                {"type": "image", "image_path": "files/Boot/Strap/bootscreen-base.png"},
+                {"type": "text", "x": 0.01, "y": 0.00, "text": "{{ mod_config.name }}", "font_size": 0.04, "color": [100, 100, 100], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.10, "y": 0.06, "text": "Every track has a score between 1 and 5 stars", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.12, "text": "   playable", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.35, "y": 0.12, "text": "   perfect", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.18, "text": "   minor issue", "font_size": 0.045, "color": [255, 130, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.18, "text": "   major issue", "font_size": 0.045, "color": [255, 50, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.17, "y": 0.24, "text": "   dolphin only", "font_size": 0.045, "color": [70, 130, 255], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.25, "text": "\"Boost\" mean that you will be constantly\nbe accelerating on this track", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.40, "text": "The track's author is credited while\nthe track presentation", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.45, "y": 0.67, "text": "The original track's game if shown\nwith the prefix", "font_size": 0.045, "color": [255, 180, 0], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.88, "text": "All score are not always correct, you can contribute to the mod", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"},
+                {"type": "text", "x": 0.02, "y": 0.93, "text": "by giving your opinion on the discord : https://discord.gg/C66cfHBb7S", "font_size": 0.04, "color": [128, 128, 128], "font_path": "files/Boot/Strap/CenturyGothicBold.ttf"}
+            ]
+        },
+        "img-encode": {"encoding": "TEX.RGB565"}
+    }
+}

@@ -1,13 +1,5 @@
-/file/
-/venv/
-/icon.png
 /.idea/
-/test/
-/build/
-/distribution.txt
-/error.log
+/.cache/
+/.pytest_cache/
 /option.json
-/scripts/tmp/
-/Pack/MKWFaraphel/file/generated/
-/Pack/UltraDupraMegaSupraMKW/
-/.github/
+/error.log

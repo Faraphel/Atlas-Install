@@ -1,0 +1,23 @@
+{
+  "source": "game",
+  "operation": {
+    "bmg-decode": {},
+    "bmgtxt-edit": {
+      "layers": [
+        {
+          "mode": "ctfile",
+          "template": "{{ ## TRACK_TEXT_SCORE ## }}{{ ## TRACK_TEXT_PREFIX ## }}{{ ## TRACK_TEXT_NAME ## }}{{ ## TRACK_TEXT_SUFFIX ## }}\n{{ ## TRACK_TEXT_AUTHORS ## }}"
+        },
+        {
+          "mode": "format-original-track",
+          "template": "{{ ## TRACK_TEXT_SCORE ## }}{{ ## TRACK_TEXT_PREFIX ## }}{{ ## TRACK_TEXT_NAME ## }}{{ ## TRACK_TEXT_SUFFIX ## }}\nNintendo"
+        },
+        {
+          "mode": "patch",
+          "patchs": ["LE-COPY"]
+        }
+      ]
+    },
+    "bmg-encode": {}
+  }
+}

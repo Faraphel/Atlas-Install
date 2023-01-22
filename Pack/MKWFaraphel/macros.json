@@ -1,0 +1,17 @@
+{
+  "GAME_REGION": "str(extracted_game.original_game.wit_path.region)",
+
+  "TRACK_TEXT_SCORE": "get_color(name=['yellow', 'orange', 'dark red', 'azure'][track.warning]) @ f'\\\\x{65296+track.score:x} ' if track.score else ''",
+  "TRACK_TEXT_PREFIX": "f'{prefix} ' if (prefix := get_tag_template(track, 'prefix')) else ''",
+  "TRACK_TEXT_SUFFIX": "f' ({suffix})' if (suffix := get_tag_template(track, 'suffix')) else ''",
+  "TRACK_TEXT_NAME": "track.name",
+  "TRACK_TEXT_AUTHORS": "', '.join(track.author) if isinstance(track.author, list) else track.author",
+  "TRACK_TEXT_WARNING_IF_DISABLED": "get_color(name='red') @ '/' if track.warning != 0 else ''",
+  "TRACK_TEXT_HIGHLIGHT_START": "get_color(name='azure').raw if eval(highlight_if if (highlight_if := mod_config.specific_settings['highlight_if'].value) is not None else 'False', env={'track': track, 'mod_config': mod_config}) is True else ''",
+  "TRACK_TEXT_HIGHLIGHT_END": "get_color(name='off').raw",
+
+  "SETTINGS_MODE": "mod_config.specific_settings['mode'].value",
+  "SETTINGS_BALANCING": "mod_config.specific_settings['balancing'].value",
+
+  "IF_NO_WARNING": "if track.warning == 0 else ''"
+}

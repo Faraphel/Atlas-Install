@@ -1,0 +1,6 @@
+{
+  "mode": "replace",
+  "operation": {
+    "img-encode": {"encoding": "TPL.RGB5A3"}
+  }
+}

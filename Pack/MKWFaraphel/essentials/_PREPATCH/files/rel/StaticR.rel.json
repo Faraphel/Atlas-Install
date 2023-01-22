@@ -1,0 +1,8 @@
+{
+  "source": "game",
+  "operation": {
+    "str-edit": {
+      "region": "5500"
+    }
+  }
+}

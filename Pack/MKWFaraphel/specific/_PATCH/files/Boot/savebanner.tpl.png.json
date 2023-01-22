@@ -1,0 +1,7 @@
+{
+  "operation": {
+    "img-encode": {
+      "encoding": "TPL.RGB565"
+    }
+  }
+}
