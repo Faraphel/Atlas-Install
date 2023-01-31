@@ -33,7 +33,7 @@ class StrEditor(AbstractPatchOperation):
             if not section_path.is_relative_to(patch.path):
                 raise PathOutsideAllowedRange(section_path, patch.path)
 
-            checked_sections += section_path
+            checked_sections.append(section_path)
         # for every file in the sections, check if they are inside the patch.
 
         patch_content = BytesIO(

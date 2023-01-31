@@ -25,7 +25,9 @@ def patch_data(dol_data: bytes, region: int = None, https: str = None, domain: s
     for section in sections if sections is not None else []:
         args.extend(["--add-section", section])
 
-    process = _tools_run_popen("PATCH", "-", "--DEST", "-", *args)
+    # force is used for cheatcode to overlap code
+    process = _tools_run_popen("PATCH", "--force", "-", "--DEST", "-", *args)
+
     stdout, _ = process.communicate(input=dol_data)
     if process.returncode != 0:
         raise WTError(tools_path, process.returncode)
