@@ -1,0 +1,6 @@
+[submodule "external/nodeeditor"]
+	path = external/nodeeditor
+	url = https://github.com/paceholder/nodeeditor.git
+[submodule "external/wiimms-szs-tools"]
+	path = external/wiimms-szs-tools
+	url = https://github.com/Wiimm/wiimms-szs-tools

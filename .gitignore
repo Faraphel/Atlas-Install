@@ -1,7 +1,2 @@
-/.idea/
-/.cache/
-/.pytest_cache/
-/option.json
-/error.log
-/build/
-/Pack/
+cmake-build-debug/
+.idea/
