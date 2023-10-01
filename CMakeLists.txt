@@ -25,36 +25,57 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/external)
 # compile the program
 add_executable(Atlas_Install
         source/main.cpp
-        source/Atlas/nodes/decimal/data.cpp
-        include/Atlas/nodes/decimal/data.h
 
-        source/Atlas/nodes/decimal/model/constant.cpp
-        include/Atlas/nodes/decimal/model/constant.h
+        include/Atlas/nodes/node/register.h
+        source/Atlas/nodes/node/register.cpp
 
-        include/Atlas/nodes/common/model/reduce.h
-        source/Atlas/nodes/common/model/reduce.cpp
+        include/Atlas/nodes/node/base/model/reduce.h
+        source/Atlas/nodes/node/base/model/reduce.cpp
+        include/Atlas/nodes/node/base/data.h
+        source/Atlas/nodes/node/base/data.cpp
 
-        include/Atlas/nodes/decimal/model/addition.h
-        source/Atlas/nodes/decimal/model/addition.cpp
-        include/Atlas/nodes/decimal/model/subtraction.h
-        source/Atlas/nodes/decimal/model/subtraction.cpp
-        include/Atlas/nodes/decimal/model/multiplication.h
-        source/Atlas/nodes/decimal/model/multiplication.cpp
-        include/Atlas/nodes/decimal/model/division.h
-        source/Atlas/nodes/decimal/model/division.cpp
-        include/Atlas/nodes/variant/data.h
-        source/Atlas/nodes/variant/data.cpp
-        include/Atlas/nodes/common/data.h
-        source/Atlas/nodes/common/data.cpp
-        include/Atlas/nodes/variant/model/display.h
-        source/Atlas/nodes/variant/model/display.cpp
-        include/Atlas/nodes/variant/model/to_variant.h
-        include/Atlas/nodes/variant/model/from_variant.h
-        source/Atlas/nodes/variant/model/to_variant.cpp
-        source/Atlas/nodes/variant/model/from_variant.cpp
-        source/Atlas/nodes/decimal/model/to_variant.cpp
-        include/Atlas/nodes/decimal/model/to_variant.h
+        source/Atlas/nodes/node/decimal/data.cpp
+        include/Atlas/nodes/node/decimal/data.h
+        source/Atlas/nodes/node/decimal/model/constant.cpp
+        include/Atlas/nodes/node/decimal/model/constant.h
+        include/Atlas/nodes/node/decimal/model/addition.h
+        source/Atlas/nodes/node/decimal/model/addition.cpp
+        include/Atlas/nodes/node/decimal/model/subtraction.h
+        source/Atlas/nodes/node/decimal/model/subtraction.cpp
+        include/Atlas/nodes/node/decimal/model/multiplication.h
+        source/Atlas/nodes/node/decimal/model/multiplication.cpp
+        include/Atlas/nodes/node/decimal/model/division.h
+        source/Atlas/nodes/node/decimal/model/division.cpp
+        source/Atlas/nodes/node/decimal/model/to_variant.cpp
+        include/Atlas/nodes/node/decimal/model/to_variant.h
+        include/Atlas/nodes/node/decimal/model/absolute.h
+        source/Atlas/nodes/node/decimal/model/absolute.cpp
+        include/Atlas/nodes/node/decimal/register.h
+        source/Atlas/nodes/node/decimal/register.cpp
+
+        include/Atlas/nodes/node/variant/data.h
+        source/Atlas/nodes/node/variant/data.cpp
+        include/Atlas/nodes/node/variant/model/display.h
+        source/Atlas/nodes/node/variant/model/display.cpp
+        include/Atlas/nodes/node/variant/model/to_variant.h
+        include/Atlas/nodes/node/variant/model/from_variant.h
+        source/Atlas/nodes/node/variant/model/to_variant.cpp
+        source/Atlas/nodes/node/variant/model/from_variant.cpp
+        source/Atlas/nodes/node/variant/model/to_variant.cpp
+        include/Atlas/nodes/node/variant/model/to_variant.h
+        include/Atlas/nodes/node/variant/model/from_variant.h
+        source/Atlas/nodes/node/variant/model/from_variant.cpp
+        source/Atlas/nodes/node/variant/model/from_variant.cpp
+        source/Atlas/nodes/node/variant/register.cpp
+        include/Atlas/nodes/node/variant/register.h
+        source/Atlas/nodes/node/string/register.cpp
+        source/Atlas/nodes/node/string/data.cpp
+        include/Atlas/nodes/node/string/model/constant.h
+        source/Atlas/nodes/node/string/model/constant.cpp
+        include/utils/string.h
+        source/utils/string.cpp
 )
+
 target_link_libraries(Atlas_Install
         # Qt
         Qt::Core

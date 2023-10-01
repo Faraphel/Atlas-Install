@@ -8,14 +8,7 @@
 #include "QtNodes/DataFlowGraphicsScene"
 #include "QtNodes/DataFlowGraphModel"
 
-#include "Atlas/nodes/decimal/data.h"
-#include "Atlas/nodes/decimal/model/constant.h"
-#include "Atlas/nodes/decimal/model/addition.h"
-#include "Atlas/nodes/decimal/model/subtraction.h"
-#include "Atlas/nodes/decimal/model/multiplication.h"
-#include "Atlas/nodes/decimal/model/division.h"
-#include "Atlas/nodes/variant/model/display.h"
-#include "Atlas/nodes/decimal/model/to_variant.h"
+#include "Atlas/nodes/node/register.h"
 
 
 using namespace Atlas;
@@ -24,15 +17,13 @@ using namespace Atlas;
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
-    // initialise the registry
+    // set up the registry
     std::shared_ptr<QtNodes::NodeDelegateModelRegistry> registry = std::make_shared<QtNodes::NodeDelegateModelRegistry>();
-    registry->registerModel<Nodes::Decimal::Model::Constant>(QStringLiteral("Decimal"));
-    registry->registerModel<Nodes::Decimal::Model::Addition>(QStringLiteral("Decimal"));
-    registry->registerModel<Nodes::Decimal::Model::Subtraction>(QStringLiteral("Decimal"));
-    registry->registerModel<Nodes::Decimal::Model::Multiplication>(QStringLiteral("Decimal"));
-    registry->registerModel<Nodes::Decimal::Model::Division>(QStringLiteral("Decimal"));
-    registry->registerModel<Nodes::Decimal::Model::ToVariant>(QStringLiteral("Decimal"));
-    registry->registerModel<Nodes::Variant::Model::Display>(QStringLiteral("Variant"));
+    // register all the models
+    Nodes::register_all(registry);
+
+    // set up the graph
+    QtNodes::DataFlowGraphModel dataFlowGraphModel(registry);
 
     // TEST
     QWidget mainWidget;
@@ -43,8 +34,6 @@ int main(int argc, char *argv[]) {
     auto loadAction = menu->addAction("Load Scene");
 
     auto *layout = new QVBoxLayout(&mainWidget);
-
-    QtNodes::DataFlowGraphModel dataFlowGraphModel(registry);
 
     layout->addWidget(menuBar);
     auto scene = new QtNodes::DataFlowGraphicsScene(dataFlowGraphModel, &mainWidget);
