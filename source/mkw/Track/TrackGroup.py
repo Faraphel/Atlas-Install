@@ -52,6 +52,7 @@ class TrackGroup:
 
         if "group" not in group_dict: return CustomTrack.from_dict(mod_config, group_dict)
         return cls(
+            mod_config,
             tracks=[CustomTrack.from_dict(mod_config, track) for track in group_dict["group"]],
             **group_dict,
         )
